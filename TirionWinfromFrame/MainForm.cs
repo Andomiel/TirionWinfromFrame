@@ -24,23 +24,23 @@ namespace TirionWinfromFrame
             for (int i = 1; i <= 100; i++)
             {
                 SplashScreenManager.Default.SendCommand(LoadForm.SplashScreenCommand.SetProgress, i);
-                SplashScreenManager.Default.SendCommand(LoadForm.SplashScreenCommand.Command2, "正在加载.." + i+"%");
+                SplashScreenManager.Default.SendCommand(LoadForm.SplashScreenCommand.Command2, "正在加载.." + i + "%");
                 //To process commands, override the SplashScreen.ProcessCommand method.
-                Thread.Sleep(new Random().Next(1,20));
+                Thread.Sleep(new Random().Next(1, 20));
             }
             SplashScreenManager.CloseForm(false);
         }
 
         private void InitData()
         {
-            using (var db=new MESDB())
+            using (var db = new MESDB())
             {
                 AppInfo.FunctionList = db.Database.SqlQuery<string>(string.Format(@"SELECT  a.functionCode
                 FROM[dbo].[sysFunction] a
                     left join[dbo].[sysRoleFunction] b on a.id = b.functionId
                     left join[dbo].[sysUserRole] c on b.roleId = c.roleId
                     left join[dbo].[sysUser] d on d.id = c.userId
-                where d.account = '{0}'",AppInfo.LoginUserInfo.account)).ToListAsync().Result;
+                where d.account = '{0}'", AppInfo.LoginUserInfo.account)).ToListAsync().Result;
             }
         }
 
@@ -65,8 +65,8 @@ namespace TirionWinfromFrame
 
         private void navBarItem1_LinkClicked(object sender, NavBarLinkEventArgs e)
         {
-            NavBarItem navBarItem =sender as NavBarItem;
-            ChildWinManagement.LoadShowForm(this, typeof(FrmShowForm), navBarItem.Caption,1);
+            NavBarItem navBarItem = sender as NavBarItem;
+            ChildWinManagement.LoadShowForm(this, typeof(FrmShowForm), navBarItem.Caption, 1);
         }
 
         private void Init()
@@ -81,11 +81,11 @@ namespace TirionWinfromFrame
             List<sysMenuInfo> menusList = new List<sysMenuInfo>();
             using (var db = new MESDB())
             {
-                menusList=db.sysMenuInfo.Where(p=>p.isEnabled).ToList();
+                menusList = db.sysMenuInfo.Where(p => p.isEnabled).ToList();
             }
             foreach (var item in menusList)
             {
-                if (item.pid == 0&&AppInfo.FunctionList.Contains(item.functionCode))
+                if (item.pid == 0 && AppInfo.FunctionList.Contains(item.functionCode))
                 {
                     NavBarGroup gNavBarGroup = new NavBarGroup(item.name);
                     foreach (var itemInfo in menusList)
@@ -112,8 +112,13 @@ namespace TirionWinfromFrame
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //使用QQ开放平台的发邮件界面
-            string mailUrl = string.Format("tirion@passioniot.com");
-            Process.Start(mailUrl);
+            string mailUrl = string.Format("mailto:tirion@passioniot.com");
+
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {mailUrl}")
+            {
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
         }
 
         private void navBarControl1_Click(object sender, EventArgs e)
@@ -126,7 +131,7 @@ namespace TirionWinfromFrame
             if ("您确定要注销登录吗？".ShowYesNoAndTips() == DialogResult.Yes)
             {
                 Application.Exit();
-                System.Diagnostics.Process.Start(Application.StartupPath+ "\\TirionWinfromFrame.Start.exe");
+                System.Diagnostics.Process.Start(Application.StartupPath + "\\TirionWinfromFrame.Start.exe");
             }
         }
     }
