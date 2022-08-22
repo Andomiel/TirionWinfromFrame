@@ -66,11 +66,10 @@
             this.User.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.User.Font = new System.Drawing.Font("Tahoma", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.User.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(60)))), ((int)(((byte)(84)))));
-            this.User.Location = new System.Drawing.Point(225, 183);
+            this.User.Location = new System.Drawing.Point(240, 183);
             this.User.Name = "User";
             this.User.Size = new System.Drawing.Size(215, 17);
             this.User.TabIndex = 30;
-            this.User.Text = "0010498";
             this.User.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.User.WaterFont = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.User.WaterText = "请输入账号";
@@ -83,22 +82,22 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.label2.Location = new System.Drawing.Point(244, 408);
+            this.label2.Location = new System.Drawing.Point(250, 408);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 14);
+            this.label2.Size = new System.Drawing.Size(170, 14);
             this.label2.TabIndex = 29;
-            this.label2.Text = "648428741@qq.com";
+            this.label2.Text = "© 2019-2022 Passioniot.com ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
-            this.label1.Location = new System.Drawing.Point(264, 384);
+            this.label1.Location = new System.Drawing.Point(308, 383);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 14);
+            this.label1.Size = new System.Drawing.Size(55, 14);
             this.label1.TabIndex = 28;
-            this.label1.Text = "果源电子商务";
+            this.label1.Text = "派迅智能";
             // 
             // Exit
             // 
@@ -114,7 +113,7 @@
             this.Exit.GlowColor = System.Drawing.Color.Empty;
             this.Exit.InnerBorderColor = System.Drawing.Color.Transparent;
             this.Exit.IsDrawGlass = false;
-            this.Exit.Location = new System.Drawing.Point(318, 280);
+            this.Exit.Location = new System.Drawing.Point(333, 280);
             this.Exit.MouseBack = null;
             this.Exit.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(139)))), ((int)(((byte)(146)))));
             this.Exit.Name = "Exit";
@@ -131,7 +130,7 @@
             // 
             this.skinPictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.skinPictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("skinPictureBox3.BackgroundImage")));
-            this.skinPictureBox3.Location = new System.Drawing.Point(282, 57);
+            this.skinPictureBox3.Location = new System.Drawing.Point(287, 57);
             this.skinPictureBox3.Name = "skinPictureBox3";
             this.skinPictureBox3.Size = new System.Drawing.Size(96, 96);
             this.skinPictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -152,7 +151,7 @@
             this.Login.GlowColor = System.Drawing.Color.Empty;
             this.Login.InnerBorderColor = System.Drawing.Color.Transparent;
             this.Login.IsDrawGlass = false;
-            this.Login.Location = new System.Drawing.Point(195, 280);
+            this.Login.Location = new System.Drawing.Point(210, 280);
             this.Login.MouseBack = null;
             this.Login.MouseBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(139)))), ((int)(((byte)(146)))));
             this.Login.Name = "Login";
@@ -169,7 +168,7 @@
             // 
             this.skinPictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.skinPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("skinPictureBox2.Image")));
-            this.skinPictureBox2.Location = new System.Drawing.Point(195, 240);
+            this.skinPictureBox2.Location = new System.Drawing.Point(210, 240);
             this.skinPictureBox2.Name = "skinPictureBox2";
             this.skinPictureBox2.Size = new System.Drawing.Size(24, 24);
             this.skinPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -180,7 +179,7 @@
             // 
             this.skinPictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.skinPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("skinPictureBox1.Image")));
-            this.skinPictureBox1.Location = new System.Drawing.Point(195, 183);
+            this.skinPictureBox1.Location = new System.Drawing.Point(210, 183);
             this.skinPictureBox1.Name = "skinPictureBox1";
             this.skinPictureBox1.Size = new System.Drawing.Size(24, 24);
             this.skinPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -218,12 +217,11 @@
             this.Password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Password.Font = new System.Drawing.Font("Tahoma", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Password.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(60)))), ((int)(((byte)(84)))));
-            this.Password.Location = new System.Drawing.Point(225, 242);
+            this.Password.Location = new System.Drawing.Point(240, 242);
             this.Password.Name = "Password";
             this.Password.PasswordChar = '*';
             this.Password.Size = new System.Drawing.Size(215, 17);
             this.Password.TabIndex = 20;
-            this.Password.Text = "123456";
             this.Password.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.Password.WaterFont = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Password.WaterText = "请输入密码";

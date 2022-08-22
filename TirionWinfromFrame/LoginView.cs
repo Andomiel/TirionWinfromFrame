@@ -16,6 +16,7 @@ using System.IO;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using Update;
+using Commons;
 
 namespace Login
 {
@@ -52,10 +53,10 @@ namespace Login
 
         private void LoginView_Load(object sender, EventArgs e)
         {
-            updateWorker = new BackgroundWorker();
-            updateWorker.DoWork += new DoWorkEventHandler(updateWorker_DoWork);
-            updateWorker.RunWorkerAsync();
-            
+            //updateWorker = new BackgroundWorker();
+            //updateWorker.DoWork += new DoWorkEventHandler(updateWorker_DoWork);
+            //updateWorker.RunWorkerAsync();
+
         }
         private void updateWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -75,7 +76,8 @@ namespace Login
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message);
+                //XtraMessageBox.Show(ex.Message);
+                ex.GetDeepException().ShowError();
             }
         }
         private void User_MouseEnter(object sender, EventArgs e)
@@ -90,7 +92,7 @@ namespace Login
 
         private void Password_MouseHover(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Password_MouseEnter(object sender, EventArgs e)
@@ -133,14 +135,15 @@ namespace Login
         {
             if (CheckInput())
             {
-                using (var db=new MESDB())
+                using (var db = new MESDB())
                 {
                     sysUserInfo user = db.sysUserInfo.Where(p => p.account == User.Text).FirstOrDefault();
                     if (user == null)
                     {
                         "账号不存在！".ShowTips();
                         return;
-                    }else if (!user.password.Equals(MD5Utils.GetMD5_32(Password.Text)))
+                    }
+                    else if (!user.password.Equals(MD5Utils.GetMD5_32(Password.Text)))
                     {
                         "密码错误！！".ShowTips();
                         return;
