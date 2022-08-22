@@ -55,7 +55,7 @@ namespace iWms.Form
             }
             catch (Exception ex)
             {
-                ex.Message.ShowError();
+                ex.GetDeepException().ShowError();
             }
         }
 
@@ -74,7 +74,7 @@ namespace iWms.Form
             }
             catch (Exception ex)
             {
-                ex.Message.ShowError();
+                ex.GetDeepException().ShowError();
             }
         }
 
