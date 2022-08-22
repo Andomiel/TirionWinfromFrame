@@ -62,13 +62,14 @@
     <Compile Include="Encrypt\EncodeHelper.cs" />
     <Compile Include="Encrypt\QQEncryptUtil.cs" />
     <Compile Include="Encrypt\RSASecurityHelper.cs" />
-    <Compile Include="ExceptionExtension.cs" />
+    <Compile Include="Exception\ExceptionExtension.cs" />
     <Compile Include="ExtensionMethod.cs" />
     <Compile Include="FileDialogHelper.cs" />
     <Compile Include="FileUtil.cs" />
     <Compile Include="GetDataTableUtils.cs" />
     <Compile Include="Encrypt\MD5Utils.cs" />
     <Compile Include="ModelBindControlAttribute.cs" />
+    <Compile Include="Exception\OppoCoreException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionUtil.cs" />
     <Compile Include="SqlserverDataTypeToModelDataType.cs" />

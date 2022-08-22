@@ -112,7 +112,7 @@ namespace WinformGeneralDeveloperFrame
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //使用QQ开放平台的发邮件界面
-            string mailUrl = string.Format("http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=648428741@qq.com");
+            string mailUrl = string.Format("tirion@passioniot.com");
             Process.Start(mailUrl);
         }
 

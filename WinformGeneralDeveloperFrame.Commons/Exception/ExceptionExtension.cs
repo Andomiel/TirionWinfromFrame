@@ -10,10 +10,10 @@ namespace Commons
     {
         public static string GetDeepException(this Exception ex)
         {
-            //if (ex is OppoCoreException)
-            //{
-            //    return ex.Message;
-            //}
+            if (ex is OppoCoreException)
+            {
+                return ex.Message;
+            }
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine(ex.Message);
