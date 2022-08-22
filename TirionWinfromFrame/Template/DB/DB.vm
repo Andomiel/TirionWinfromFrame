@@ -1,0 +1,20 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Linq;
+using MES.Entity;
+
+namespace ${NameSpace}
+{
+    public partial class ${NameSpace}DB : DbContext
+    {
+        public ${NameSpace}DB()
+            : base("name=DB")
+        {
+        }
+
+#foreach($info in $EntityList)
+        public virtual DbSet<${info}Info> ${info}Info { get; set; }
+#end
+    }
+}

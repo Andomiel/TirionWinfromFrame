@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TirionWinfromFrame;
+
+namespace ${NameSpace}.Form
+{
+    public partial class FrmEdit${tableName} : FrmBaseEdit
+    {
+        public FrmEdit${tableName}()
+        {
+            InitializeComponent();
+        }
+
+        public override bool Save()
+        {
+            return false;
+        }
+    }
+}

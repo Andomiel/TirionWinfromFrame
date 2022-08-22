@@ -1,0 +1,253 @@
+﻿
+namespace ${NameSpace}.Form
+{
+    partial class Frm${tableName}
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();                
+            this.btnOK=new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel=new DevExpress.XtraEditors.SimpleButton();
+#set($count = 0)
+#foreach($info in $EntityList)	
+#if(true)
+#set($count = $count + 1)
+             this.${info.controlName}=new  DevExpress.XtraEditors.${info.controlType}();
+             this.layoutControlItem$count = new DevExpress.XtraLayout.LayoutControlItem();
+#end ##endif
+#end    
+            
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
+
+            this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();            
+#set($count = 0)
+#foreach($info in $EntityList)	
+#if(true)
+#set($count = $count + 1)
+#if(${info.controlType}=="DateEdit")
+            ((System.ComponentModel.ISupportInitialize)(this.${info.controlName}.Properties.CalendarTimeProperties)).BeginInit();
+#end
+            ((System.ComponentModel.ISupportInitialize)(this.${info.controlName}.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem$count)).BeginInit();
+#end ##endif
+#end  
+            
+            this.SuspendLayout();
+            // 
+            // btnOK
+            // 
+            this.btnOK.Location = new System.Drawing.Point(438, 392);
+            this.btnOK.Text="保存";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(537, 392);
+            this.btnCancel.Text="取消";
+            // layoutControl1
+            //             
+            this.layoutControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.layoutControl1.Location = new System.Drawing.Point(12, 8);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.Root = this.layoutControlGroup1;
+            this.layoutControl1.Size = new System.Drawing.Size(605, 363);
+            this.layoutControl1.TabIndex = 6;
+            this.layoutControl1.Text = "layoutControl1";
+
+#set($count = 0)
+#foreach($info in $EntityList)	
+#if(true)
+#set($count = $count + 1)
+            this.layoutControl1.Controls.Add(this.${info.controlName});
+#end ##endif
+#end
+//TextEdit
+//DateEdit
+//SimpleButton
+//CheckEdit
+//MemoEdit
+//PictureEdit
+//LookUpEdit
+//ComboBoxEdit
+#set($count = 0)
+#set($ylocation = 12)
+#set($ylocation2 = 0)
+#foreach($info in $EntityList)	
+#if(true)
+#set($count = $count + 1)
+#if(${info.controlType}=="DateEdit")
+            // 
+            // txt${ColumnInfo.Name.Alias.ToCapit()}
+            // 
+            this.${info.controlName}.EditValue = null;
+            this.${info.controlName}.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.${info.controlName}.Location = new System.Drawing.Point(112, $ylocation);
+            this.${info.controlName}.Name = "${info.controlName}";
+            this.${info.controlName}.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.${info.controlName}.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.${info.controlName}.Size = new System.Drawing.Size(481, 20);
+            this.${info.controlName}.StyleController = this.layoutControl1;
+            this.${info.controlName}.TabIndex = $count;
+#elseif(${info.controlType}=="ComboBoxEdit") 
+            // 
+            // txt${ColumnInfo.Name.Alias.ToCapit()}
+            // 
+             this.${info.controlName}.Location = new System.Drawing.Point(112, $ylocation);
+             this.${info.controlName}.Name = "${info.controlName}";
+             this.${info.controlName}.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+             this.${info.controlName}.Size = new System.Drawing.Size(481, 20);
+             this.${info.controlName}.StyleController = this.layoutControl1;
+             this.${info.controlName}.TabIndex = $count;
+#elseif(${info.controlType}=="CheckEdit") 
+            // 
+            // txt${ColumnInfo.Name.Alias.ToCapit()}
+            // 
+            this.${info.controlName}.EditValue = null;
+            this.${info.controlName}.Location = new System.Drawing.Point(112, $ylocation);
+            this.${info.controlName}.Name = "${info.controlName}";
+            this.${info.controlName}.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+            this.${info.controlName}.Properties.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            this.${info.controlName}.Size = new System.Drawing.Size(481, 20);
+            this.${info.controlName}.StyleController = this.layoutControl1;
+            this.${info.controlName}.TabIndex = $count;
+#else
+            // 
+            // txt${ColumnInfo.Name.Alias.ToCapit()}
+            // 
+            this.${info.controlName}.Location = new System.Drawing.Point(112, $ylocation);
+            this.${info.controlName}.Name = "this.${info.controlName}";
+            this.${info.controlName}.Size = new System.Drawing.Size(481, 20);
+            this.${info.controlName}.StyleController = this.layoutControl1;
+            this.${info.controlName}.TabIndex = $count;
+#end
+            // 
+            // layoutControlItem$count
+            // 
+            this.layoutControlItem${count}.Control = this.${info.controlName};
+            this.layoutControlItem${count}.CustomizationFormText = "${info.controlLabelName}";
+            this.layoutControlItem${count}.Location = new System.Drawing.Point(0, $ylocation2);
+            this.layoutControlItem${count}.Name = "layoutControlItem${count}";
+            this.layoutControlItem${count}.Size = new System.Drawing.Size(585, 24);
+            this.layoutControlItem${count}.Text = "${info.controlLabelName}";
+            this.layoutControlItem${count}.TextSize = new System.Drawing.Size(96, 14);  
+#if(${info.controlType}=="CheckEdit") 
+            this.layoutControlItem${count}.TextToControlDistance = 0;
+            this.layoutControlItem${count}.TextVisible = false;
+#end
+
+#set($ylocation = $ylocation + 24)
+#set($ylocation2 = $ylocation2 + 24)
+#end ##endif
+#end                          
+
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.CustomizationFormText = "layoutControlGroup1";
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+#set($count = 0)
+#set($itemString="")
+#foreach($info in $EntityList)	
+#if(true)
+#set($count = $count + 1)
+	#if($count == 1)
+        this.layoutControlItem$count
+	#else
+       ,this.layoutControlItem$count
+	#end
+#end ##endif
+#end              
+       });
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(605, 363);
+            this.layoutControlGroup1.Text = "layoutControlGroup1";
+            this.layoutControlGroup1.TextVisible = false;          
+
+            // 
+            // FrmEdit${ClassName}
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(624, 427);
+            this.Controls.Add(this.layoutControl1);
+            this.Name = "FrmEdit${tableName}";
+            this.Text = "FrmEdit${tableName}";
+            this.Controls.SetChildIndex(this.layoutControl1, 0);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOK);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
+            this.layoutControl1.ResumeLayout(false);            
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+
+#set($count = 0)
+#foreach($info in $EntityList)		
+#if(true)
+#set($count = $count + 1)
+            ((System.ComponentModel.ISupportInitialize)(this.${info.controlName}.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem$count)).EndInit();            
+#end ##endif
+#end            
+
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnOK;
+        private DevExpress.XtraEditors.SimpleButton btnAdd;
+#set($count = 0)
+#foreach($info in $EntityList)	
+#if(true )
+#set($count = $count + 1) 
+        private DevExpress.XtraEditors.${info.controlType} ${info.controlName};
+##enddatetime
+#end ##endif
+#end
+
+#set($count = 0)
+#foreach($info in $EntityList)	
+#if(true)
+#set($count = $count + 1)
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem$count;
+#end ##endif
+#end           
+
+    }
+}
