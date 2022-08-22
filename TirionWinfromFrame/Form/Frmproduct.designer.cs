@@ -492,10 +492,10 @@ namespace ERP.Form
             // xtraTabControl1
             // 
             this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 34);
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.tabDataList;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1129, 625);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1129, 659);
             this.xtraTabControl1.TabIndex = 1;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabDataList,
@@ -505,7 +505,7 @@ namespace ERP.Form
             // 
             this.tabDataList.Controls.Add(this.grdList);
             this.tabDataList.Name = "tabDataList";
-            this.tabDataList.Size = new System.Drawing.Size(1123, 596);
+            this.tabDataList.Size = new System.Drawing.Size(1127, 633);
             this.tabDataList.Text = "数据列表";
             // 
             // grdList
@@ -514,7 +514,7 @@ namespace ERP.Form
             this.grdList.Location = new System.Drawing.Point(0, 0);
             this.grdList.MainView = this.grdListView;
             this.grdList.Name = "grdList";
-            this.grdList.Size = new System.Drawing.Size(1123, 596);
+            this.grdList.Size = new System.Drawing.Size(1127, 633);
             this.grdList.TabIndex = 0;
             this.grdList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdListView});
@@ -551,7 +551,7 @@ namespace ERP.Form
             // 
             this.tabDataDetail.Controls.Add(this.panelControl2);
             this.tabDataDetail.Name = "tabDataDetail";
-            this.tabDataDetail.Size = new System.Drawing.Size(1123, 596);
+            this.tabDataDetail.Size = new System.Drawing.Size(1127, 599);
             this.tabDataDetail.Text = "数据编辑";
             // 
             // panelControl2
@@ -560,7 +560,7 @@ namespace ERP.Form
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1123, 596);
+            this.panelControl2.Size = new System.Drawing.Size(1127, 599);
             this.panelControl2.TabIndex = 0;
             // 
             // layoutControl1
@@ -590,7 +590,7 @@ namespace ERP.Form
             this.layoutControl1.Location = new System.Drawing.Point(2, 2);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1119, 592);
+            this.layoutControl1.Size = new System.Drawing.Size(1123, 595);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -599,7 +599,7 @@ namespace ERP.Form
             this.xtraTabControl2.Location = new System.Drawing.Point(12, 276);
             this.xtraTabControl2.Name = "xtraTabControl2";
             this.xtraTabControl2.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl2.Size = new System.Drawing.Size(1095, 304);
+            this.xtraTabControl2.Size = new System.Drawing.Size(1099, 307);
             this.xtraTabControl2.TabIndex = 21;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -610,7 +610,7 @@ namespace ERP.Form
             // 
             this.xtraTabPage1.Controls.Add(this.gridControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1089, 275);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1097, 281);
             this.xtraTabPage1.Text = "生产入库";
             // 
             // gridControl1
@@ -624,7 +624,7 @@ namespace ERP.Form
             this.repositoryItemLookUpEditproductid,
             this.repositoryItemLookUpEditunit,
             this.repositoryItemLookUpEditwarehouse});
-            this.gridControl1.Size = new System.Drawing.Size(1089, 275);
+            this.gridControl1.Size = new System.Drawing.Size(1097, 281);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -837,7 +837,7 @@ namespace ERP.Form
             // 
             this.xtraTabPage2.Controls.Add(this.gridControl2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1089, 275);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1097, 281);
             this.xtraTabPage2.Text = "销售出库";
             // 
             // gridControl2
@@ -851,7 +851,7 @@ namespace ERP.Form
             this.repositoryItemLookUpEdit2,
             this.repositoryItemLookUpEdit3,
             this.repositoryItemTextEditsaledeliverdetailcode});
-            this.gridControl2.Size = new System.Drawing.Size(1089, 275);
+            this.gridControl2.Size = new System.Drawing.Size(1097, 281);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -1054,7 +1054,7 @@ namespace ERP.Form
             // 
             this.xtraTabPage3.Controls.Add(this.gridControl3);
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1089, 275);
+            this.xtraTabPage3.Size = new System.Drawing.Size(1097, 281);
             this.xtraTabPage3.Text = "客户退货";
             // 
             // gridControl3
@@ -1068,7 +1068,7 @@ namespace ERP.Form
             this.repositoryItemLookUpEdit5,
             this.repositoryItemLookUpEdit6,
             this.repositoryItemTextEditreturnsaledetailcode});
-            this.gridControl3.Size = new System.Drawing.Size(1089, 275);
+            this.gridControl3.Size = new System.Drawing.Size(1097, 281);
             this.gridControl3.TabIndex = 2;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -1263,7 +1263,7 @@ namespace ERP.Form
             // 
             this.txtid.Location = new System.Drawing.Point(87, 12);
             this.txtid.Name = "txtid";
-            this.txtid.Size = new System.Drawing.Size(1020, 20);
+            this.txtid.Size = new System.Drawing.Size(1024, 20);
             this.txtid.StyleController = this.layoutControl1;
             this.txtid.TabIndex = 1;
             // 
@@ -1271,7 +1271,7 @@ namespace ERP.Form
             // 
             this.txtproductname.Location = new System.Drawing.Point(87, 36);
             this.txtproductname.Name = "txtproductname";
-            this.txtproductname.Size = new System.Drawing.Size(468, 20);
+            this.txtproductname.Size = new System.Drawing.Size(470, 20);
             this.txtproductname.StyleController = this.layoutControl1;
             this.txtproductname.TabIndex = 2;
             // 
@@ -1279,7 +1279,7 @@ namespace ERP.Form
             // 
             this.txtspec.Location = new System.Drawing.Point(87, 60);
             this.txtspec.Name = "txtspec";
-            this.txtspec.Size = new System.Drawing.Size(468, 20);
+            this.txtspec.Size = new System.Drawing.Size(470, 20);
             this.txtspec.StyleController = this.layoutControl1;
             this.txtspec.TabIndex = 3;
             // 
@@ -1287,14 +1287,14 @@ namespace ERP.Form
             // 
             this.txtdefaultprice.Location = new System.Drawing.Point(87, 84);
             this.txtdefaultprice.Name = "txtdefaultprice";
-            this.txtdefaultprice.Size = new System.Drawing.Size(468, 20);
+            this.txtdefaultprice.Size = new System.Drawing.Size(470, 20);
             this.txtdefaultprice.StyleController = this.layoutControl1;
             this.txtdefaultprice.TabIndex = 4;
             // 
             // txtunit
             // 
             this.txtunit.EditValue = "";
-            this.txtunit.Location = new System.Drawing.Point(634, 84);
+            this.txtunit.Location = new System.Drawing.Point(636, 84);
             this.txtunit.Name = "txtunit";
             this.txtunit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1302,7 +1302,7 @@ namespace ERP.Form
             this.txtunit.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txtunit.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txtunit.Properties.ValueMember = "ID";
-            this.txtunit.Size = new System.Drawing.Size(473, 20);
+            this.txtunit.Size = new System.Drawing.Size(475, 20);
             this.txtunit.StyleController = this.layoutControl1;
             this.txtunit.TabIndex = 5;
             // 
@@ -1317,14 +1317,14 @@ namespace ERP.Form
             this.txtwarehouse.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txtwarehouse.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txtwarehouse.Properties.ValueMember = "ID";
-            this.txtwarehouse.Size = new System.Drawing.Size(468, 20);
+            this.txtwarehouse.Size = new System.Drawing.Size(470, 20);
             this.txtwarehouse.StyleController = this.layoutControl1;
             this.txtwarehouse.TabIndex = 6;
             // 
             // txtproducttype
             // 
             this.txtproducttype.EditValue = "";
-            this.txtproducttype.Location = new System.Drawing.Point(634, 60);
+            this.txtproducttype.Location = new System.Drawing.Point(636, 60);
             this.txtproducttype.Name = "txtproducttype";
             this.txtproducttype.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1332,15 +1332,15 @@ namespace ERP.Form
             this.txtproducttype.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txtproducttype.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txtproducttype.Properties.ValueMember = "ID";
-            this.txtproducttype.Size = new System.Drawing.Size(473, 20);
+            this.txtproducttype.Size = new System.Drawing.Size(475, 20);
             this.txtproducttype.StyleController = this.layoutControl1;
             this.txtproducttype.TabIndex = 7;
             // 
             // txtproductcode
             // 
-            this.txtproductcode.Location = new System.Drawing.Point(634, 36);
+            this.txtproductcode.Location = new System.Drawing.Point(636, 36);
             this.txtproductcode.Name = "txtproductcode";
-            this.txtproductcode.Size = new System.Drawing.Size(473, 20);
+            this.txtproductcode.Size = new System.Drawing.Size(475, 20);
             this.txtproductcode.StyleController = this.layoutControl1;
             this.txtproductcode.TabIndex = 8;
             // 
@@ -1348,7 +1348,7 @@ namespace ERP.Form
             // 
             this.txtstocknumber.Location = new System.Drawing.Point(87, 180);
             this.txtstocknumber.Name = "txtstocknumber";
-            this.txtstocknumber.Size = new System.Drawing.Size(468, 20);
+            this.txtstocknumber.Size = new System.Drawing.Size(470, 20);
             this.txtstocknumber.StyleController = this.layoutControl1;
             this.txtstocknumber.TabIndex = 9;
             // 
@@ -1356,23 +1356,23 @@ namespace ERP.Form
             // 
             this.txtstartnumber.Location = new System.Drawing.Point(87, 108);
             this.txtstartnumber.Name = "txtstartnumber";
-            this.txtstartnumber.Size = new System.Drawing.Size(468, 20);
+            this.txtstartnumber.Size = new System.Drawing.Size(470, 20);
             this.txtstartnumber.StyleController = this.layoutControl1;
             this.txtstartnumber.TabIndex = 10;
             // 
             // txtstartprice
             // 
-            this.txtstartprice.Location = new System.Drawing.Point(634, 108);
+            this.txtstartprice.Location = new System.Drawing.Point(636, 108);
             this.txtstartprice.Name = "txtstartprice";
-            this.txtstartprice.Size = new System.Drawing.Size(473, 20);
+            this.txtstartprice.Size = new System.Drawing.Size(475, 20);
             this.txtstartprice.StyleController = this.layoutControl1;
             this.txtstartprice.TabIndex = 11;
             // 
             // txtproductinnumber
             // 
-            this.txtproductinnumber.Location = new System.Drawing.Point(634, 132);
+            this.txtproductinnumber.Location = new System.Drawing.Point(636, 132);
             this.txtproductinnumber.Name = "txtproductinnumber";
-            this.txtproductinnumber.Size = new System.Drawing.Size(473, 20);
+            this.txtproductinnumber.Size = new System.Drawing.Size(475, 20);
             this.txtproductinnumber.StyleController = this.layoutControl1;
             this.txtproductinnumber.TabIndex = 12;
             // 
@@ -1380,23 +1380,23 @@ namespace ERP.Form
             // 
             this.txtsaleoutnumber.Location = new System.Drawing.Point(87, 156);
             this.txtsaleoutnumber.Name = "txtsaleoutnumber";
-            this.txtsaleoutnumber.Size = new System.Drawing.Size(468, 20);
+            this.txtsaleoutnumber.Size = new System.Drawing.Size(470, 20);
             this.txtsaleoutnumber.StyleController = this.layoutControl1;
             this.txtsaleoutnumber.TabIndex = 13;
             // 
             // txtcustomerreturnnumber
             // 
-            this.txtcustomerreturnnumber.Location = new System.Drawing.Point(634, 156);
+            this.txtcustomerreturnnumber.Location = new System.Drawing.Point(636, 156);
             this.txtcustomerreturnnumber.Name = "txtcustomerreturnnumber";
-            this.txtcustomerreturnnumber.Size = new System.Drawing.Size(473, 20);
+            this.txtcustomerreturnnumber.Size = new System.Drawing.Size(475, 20);
             this.txtcustomerreturnnumber.StyleController = this.layoutControl1;
             this.txtcustomerreturnnumber.TabIndex = 14;
             // 
             // txtstockwarnnumber
             // 
-            this.txtstockwarnnumber.Location = new System.Drawing.Point(634, 180);
+            this.txtstockwarnnumber.Location = new System.Drawing.Point(636, 180);
             this.txtstockwarnnumber.Name = "txtstockwarnnumber";
-            this.txtstockwarnnumber.Size = new System.Drawing.Size(473, 20);
+            this.txtstockwarnnumber.Size = new System.Drawing.Size(475, 20);
             this.txtstockwarnnumber.StyleController = this.layoutControl1;
             this.txtstockwarnnumber.TabIndex = 15;
             // 
@@ -1411,7 +1411,7 @@ namespace ERP.Form
             this.txtcreatorId.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txtcreatorId.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txtcreatorId.Properties.ValueMember = "ID";
-            this.txtcreatorId.Size = new System.Drawing.Size(468, 20);
+            this.txtcreatorId.Size = new System.Drawing.Size(470, 20);
             this.txtcreatorId.StyleController = this.layoutControl1;
             this.txtcreatorId.TabIndex = 16;
             // 
@@ -1419,7 +1419,7 @@ namespace ERP.Form
             // 
             this.txtcreateTime.EditValue = null;
             this.txtcreateTime.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txtcreateTime.Location = new System.Drawing.Point(634, 204);
+            this.txtcreateTime.Location = new System.Drawing.Point(636, 204);
             this.txtcreateTime.Name = "txtcreateTime";
             this.txtcreateTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1428,7 +1428,7 @@ namespace ERP.Form
             this.txtcreateTime.Properties.DisplayFormat.FormatString = "G";
             this.txtcreateTime.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtcreateTime.Properties.Mask.EditMask = "G";
-            this.txtcreateTime.Size = new System.Drawing.Size(473, 20);
+            this.txtcreateTime.Size = new System.Drawing.Size(475, 20);
             this.txtcreateTime.StyleController = this.layoutControl1;
             this.txtcreateTime.TabIndex = 17;
             // 
@@ -1443,7 +1443,7 @@ namespace ERP.Form
             this.txteditorId.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txteditorId.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txteditorId.Properties.ValueMember = "ID";
-            this.txteditorId.Size = new System.Drawing.Size(468, 20);
+            this.txteditorId.Size = new System.Drawing.Size(470, 20);
             this.txteditorId.StyleController = this.layoutControl1;
             this.txteditorId.TabIndex = 18;
             // 
@@ -1451,7 +1451,7 @@ namespace ERP.Form
             // 
             this.txteditTime.EditValue = null;
             this.txteditTime.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txteditTime.Location = new System.Drawing.Point(634, 228);
+            this.txteditTime.Location = new System.Drawing.Point(636, 228);
             this.txteditTime.Name = "txteditTime";
             this.txteditTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1460,7 +1460,7 @@ namespace ERP.Form
             this.txteditTime.Properties.DisplayFormat.FormatString = "G";
             this.txteditTime.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txteditTime.Properties.Mask.EditMask = "G";
-            this.txteditTime.Size = new System.Drawing.Size(473, 20);
+            this.txteditTime.Size = new System.Drawing.Size(475, 20);
             this.txteditTime.StyleController = this.layoutControl1;
             this.txteditTime.TabIndex = 19;
             // 
@@ -1468,7 +1468,7 @@ namespace ERP.Form
             // 
             this.txtremark.Location = new System.Drawing.Point(87, 252);
             this.txtremark.Name = "txtremark";
-            this.txtremark.Size = new System.Drawing.Size(1020, 20);
+            this.txtremark.Size = new System.Drawing.Size(1024, 20);
             this.txtremark.StyleController = this.layoutControl1;
             this.txtremark.TabIndex = 20;
             // 
@@ -1499,7 +1499,7 @@ namespace ERP.Form
             this.layoutControlItem19,
             this.layoutControlItem21});
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1119, 592);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1123, 595);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -1508,7 +1508,7 @@ namespace ERP.Form
             this.layoutControlItem1.CustomizationFormText = "id";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1099, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1103, 24);
             this.layoutControlItem1.Text = "id";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1518,7 +1518,7 @@ namespace ERP.Form
             this.layoutControlItem2.CustomizationFormText = "产品名称";
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem2.Text = "产品名称";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1528,7 +1528,7 @@ namespace ERP.Form
             this.layoutControlItem3.CustomizationFormText = "规格";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem3.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem3.Text = "规格";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1538,7 +1538,7 @@ namespace ERP.Form
             this.layoutControlItem4.CustomizationFormText = "默认单价";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem4.Text = "默认单价";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1548,7 +1548,7 @@ namespace ERP.Form
             this.layoutControlItem6.CustomizationFormText = "仓库";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem6.Text = "仓库";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1558,7 +1558,7 @@ namespace ERP.Form
             this.layoutControlItem9.CustomizationFormText = "库存";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 168);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem9.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem9.Text = "库存";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1568,7 +1568,7 @@ namespace ERP.Form
             this.layoutControlItem16.CustomizationFormText = "创建人";
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 192);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem16.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem16.Text = "创建人";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1578,7 +1578,7 @@ namespace ERP.Form
             this.layoutControlItem18.CustomizationFormText = "编辑人";
             this.layoutControlItem18.Location = new System.Drawing.Point(0, 216);
             this.layoutControlItem18.Name = "layoutControlItem18";
-            this.layoutControlItem18.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem18.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem18.Text = "编辑人";
             this.layoutControlItem18.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1588,7 +1588,7 @@ namespace ERP.Form
             this.layoutControlItem20.CustomizationFormText = "备注";
             this.layoutControlItem20.Location = new System.Drawing.Point(0, 240);
             this.layoutControlItem20.Name = "layoutControlItem20";
-            this.layoutControlItem20.Size = new System.Drawing.Size(1099, 24);
+            this.layoutControlItem20.Size = new System.Drawing.Size(1103, 24);
             this.layoutControlItem20.Text = "备注";
             this.layoutControlItem20.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1596,9 +1596,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem8.Control = this.txtproductcode;
             this.layoutControlItem8.CustomizationFormText = "产品编号";
-            this.layoutControlItem8.Location = new System.Drawing.Point(547, 24);
+            this.layoutControlItem8.Location = new System.Drawing.Point(549, 24);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem8.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem8.Text = "产品编号";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1606,9 +1606,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem7.Control = this.txtproducttype;
             this.layoutControlItem7.CustomizationFormText = "产品类别";
-            this.layoutControlItem7.Location = new System.Drawing.Point(547, 48);
+            this.layoutControlItem7.Location = new System.Drawing.Point(549, 48);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem7.Text = "产品类别";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1616,9 +1616,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem5.Control = this.txtunit;
             this.layoutControlItem5.CustomizationFormText = "计量单位";
-            this.layoutControlItem5.Location = new System.Drawing.Point(547, 72);
+            this.layoutControlItem5.Location = new System.Drawing.Point(549, 72);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem5.Text = "计量单位";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1626,9 +1626,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem12.Control = this.txtproductinnumber;
             this.layoutControlItem12.CustomizationFormText = "生产入库数量";
-            this.layoutControlItem12.Location = new System.Drawing.Point(547, 120);
+            this.layoutControlItem12.Location = new System.Drawing.Point(549, 120);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem12.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem12.Text = "生产入库数量";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1638,7 +1638,7 @@ namespace ERP.Form
             this.layoutControlItem13.CustomizationFormText = "销售出库数量";
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem13.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem13.Text = "销售出库数量";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1646,9 +1646,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem14.Control = this.txtcustomerreturnnumber;
             this.layoutControlItem14.CustomizationFormText = "客户退货数量";
-            this.layoutControlItem14.Location = new System.Drawing.Point(547, 144);
+            this.layoutControlItem14.Location = new System.Drawing.Point(549, 144);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem14.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem14.Text = "客户退货数量";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1656,9 +1656,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem15.Control = this.txtstockwarnnumber;
             this.layoutControlItem15.CustomizationFormText = "库存预警数量";
-            this.layoutControlItem15.Location = new System.Drawing.Point(547, 168);
+            this.layoutControlItem15.Location = new System.Drawing.Point(549, 168);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem15.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem15.Text = "库存预警数量";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1668,7 +1668,7 @@ namespace ERP.Form
             this.layoutControlItem10.CustomizationFormText = "期初数量";
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 96);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(547, 24);
+            this.layoutControlItem10.Size = new System.Drawing.Size(549, 24);
             this.layoutControlItem10.Text = "期初数量";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1676,9 +1676,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem11.Control = this.txtstartprice;
             this.layoutControlItem11.CustomizationFormText = "期初总价";
-            this.layoutControlItem11.Location = new System.Drawing.Point(547, 96);
+            this.layoutControlItem11.Location = new System.Drawing.Point(549, 96);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem11.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem11.Text = "期初总价";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1686,9 +1686,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem17.Control = this.txtcreateTime;
             this.layoutControlItem17.CustomizationFormText = "创建时间";
-            this.layoutControlItem17.Location = new System.Drawing.Point(547, 192);
+            this.layoutControlItem17.Location = new System.Drawing.Point(549, 192);
             this.layoutControlItem17.Name = "layoutControlItem17";
-            this.layoutControlItem17.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem17.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem17.Text = "创建时间";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1696,9 +1696,9 @@ namespace ERP.Form
             // 
             this.layoutControlItem19.Control = this.txteditTime;
             this.layoutControlItem19.CustomizationFormText = "编辑时间";
-            this.layoutControlItem19.Location = new System.Drawing.Point(547, 216);
+            this.layoutControlItem19.Location = new System.Drawing.Point(549, 216);
             this.layoutControlItem19.Name = "layoutControlItem19";
-            this.layoutControlItem19.Size = new System.Drawing.Size(552, 24);
+            this.layoutControlItem19.Size = new System.Drawing.Size(554, 24);
             this.layoutControlItem19.Text = "编辑时间";
             this.layoutControlItem19.TextSize = new System.Drawing.Size(72, 14);
             // 
@@ -1707,7 +1707,7 @@ namespace ERP.Form
             this.layoutControlItem21.Control = this.xtraTabControl2;
             this.layoutControlItem21.Location = new System.Drawing.Point(0, 264);
             this.layoutControlItem21.Name = "layoutControlItem21";
-            this.layoutControlItem21.Size = new System.Drawing.Size(1099, 308);
+            this.layoutControlItem21.Size = new System.Drawing.Size(1103, 311);
             this.layoutControlItem21.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem21.TextVisible = false;
             // 
@@ -1720,6 +1720,7 @@ namespace ERP.Form
             this.Name = "Frmproduct";
             this.Text = "产品信息";
             this.Load += new System.EventHandler(this.Frmproduct_Load);
+            this.Controls.SetChildIndex(this.xtraTabControl1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemtxtunit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemtxtwarehouse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemtxtproducttype)).EndInit();

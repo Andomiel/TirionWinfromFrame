@@ -8,6 +8,7 @@ using DevExpress.LookAndFeel;
 using Login;
 using TirionWinfromFrame.Commons;
 using Commons;
+using TirionWinfromFrame.Profiles;
 
 namespace TirionWinfromFrame.Start
 {
@@ -27,6 +28,7 @@ namespace TirionWinfromFrame.Start
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            MapperProfile.ConfigGlobalMapper();
             LoginView dlg = new LoginView();
             if (DialogResult.OK == dlg.ShowDialog())
             {

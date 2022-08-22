@@ -101,6 +101,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Mapster, Version=7.3.0.0, Culture=neutral, PublicKeyToken=2f39883af23c29a8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mapster.7.3.0\lib\netstandard2.0\Mapster.dll</HintPath>
+    </Reference>
+    <Reference Include="Mapster.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e64997d676a9c1d3, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mapster.Core.1.2.0\lib\net45\Mapster.Core.dll</HintPath>
+    </Reference>
     <Reference Include="NVelocity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\NVelocity.1.2.0\lib\netstandard2.0\NVelocity.dll</HintPath>
     </Reference>
@@ -468,6 +474,12 @@
     <Compile Include="FrmSystemSetup.Designer.cs">
       <DependentUpon>FrmSystemSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\FrmLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\FrmLogs.designer.cs">
+      <DependentUpon>FrmLogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -486,6 +498,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Profiles\MapperProfile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FrmShowForm.cs">
@@ -654,6 +667,9 @@
     <EmbeddedResource Include="FrmSystemSetup.resx">
       <DependentUpon>FrmSystemSetup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\FrmLogs.resx">
+      <DependentUpon>FrmLogs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoadForm.resx">
       <DependentUpon>LoadForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -741,6 +757,14 @@
     <None Include="Resources\102.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{3a1fd334-a7fd-4815-a745-acc07a7c367f}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{524a09b1-52ee-49c6-acd2-cec2aeb8d2f6}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Update.Core\Update.Core.csproj">
       <Project>{4903D5F5-FF01-426D-B5BB-AADF7C4232FA}</Project>
       <Name>Update.Core</Name>
