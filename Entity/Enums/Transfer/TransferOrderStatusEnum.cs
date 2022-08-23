@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BLL.Common
+namespace Entity.Enums.Transfer
 {
     //状态,0 已创单，1 执行中，2 已执行，3 已取消
     public enum TransferOrderStatusEnum

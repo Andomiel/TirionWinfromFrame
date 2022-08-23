@@ -44,7 +44,7 @@ namespace iWms.Form
                     Logs.Clear();
                     if (logs == null || logs.List == null)
                     {
-                        MessageBox.Show("未查询到当前条件下的日志信息");
+                        "未查询到当前条件下的日志信息".ShowTips();
                         return;
                     }
                     foreach (var item in logs.List)

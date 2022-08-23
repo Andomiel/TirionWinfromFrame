@@ -1,0 +1,599 @@
+﻿
+namespace iWms.Form
+{
+    partial class FrmInventoryOrders
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.gbConditions = new System.Windows.Forms.GroupBox();
+            this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnOutstock = new System.Windows.Forms.Button();
+            this.btnFinish = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.tbOrderNo = new System.Windows.Forms.TextBox();
+            this.cbOrderStatus = new System.Windows.Forms.ComboBox();
+            this.tbMaterialNo = new System.Windows.Forms.TextBox();
+            this.dtOrderTime = new System.Windows.Forms.DateTimePicker();
+            this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
+            this.tbUpn = new System.Windows.Forms.TextBox();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.btnQuery = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.tlbTables = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvUpns = new System.Windows.Forms.DataGridView();
+            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActualQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSource = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tlpLayout.SuspendLayout();
+            this.gbConditions.SuspendLayout();
+            this.tlpConditions.SuspendLayout();
+            this.tlbTables.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // tlpLayout
+            // 
+            this.tlpLayout.ColumnCount = 1;
+            this.tlpLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpLayout.Controls.Add(this.gbConditions, 0, 0);
+            this.tlpLayout.Controls.Add(this.tlbTables, 0, 1);
+            this.tlpLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpLayout.Location = new System.Drawing.Point(0, 0);
+            this.tlpLayout.Name = "tlpLayout";
+            this.tlpLayout.RowCount = 2;
+            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLayout.Size = new System.Drawing.Size(1031, 606);
+            this.tlpLayout.TabIndex = 0;
+            // 
+            // gbConditions
+            // 
+            this.gbConditions.Controls.Add(this.tlpConditions);
+            this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbConditions.Location = new System.Drawing.Point(3, 3);
+            this.gbConditions.Name = "gbConditions";
+            this.gbConditions.Size = new System.Drawing.Size(1025, 114);
+            this.gbConditions.TabIndex = 0;
+            this.gbConditions.TabStop = false;
+            // 
+            // tlpConditions
+            // 
+            this.tlpConditions.ColumnCount = 12;
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConditions.Controls.Add(this.label8, 2, 2);
+            this.tlpConditions.Controls.Add(this.label7, 0, 2);
+            this.tlpConditions.Controls.Add(this.label6, 2, 1);
+            this.tlpConditions.Controls.Add(this.label5, 2, 0);
+            this.tlpConditions.Controls.Add(this.label4, 0, 1);
+            this.tlpConditions.Controls.Add(this.label3, 4, 0);
+            this.tlpConditions.Controls.Add(this.label1, 0, 0);
+            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 2);
+            this.tlpConditions.Controls.Add(this.btnFinish, 10, 2);
+            this.tlpConditions.Controls.Add(this.btnExport, 7, 2);
+            this.tlpConditions.Controls.Add(this.tbOrderNo, 1, 0);
+            this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
+            this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 0);
+            this.tlpConditions.Controls.Add(this.dtOrderTime, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinishedTime, 3, 2);
+            this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
+            this.tlpConditions.Controls.Add(this.cbType, 3, 1);
+            this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
+            this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
+            this.tlpConditions.Controls.Add(this.btnCancel, 9, 0);
+            this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpConditions.Location = new System.Drawing.Point(3, 17);
+            this.tlpConditions.Name = "tlpConditions";
+            this.tlpConditions.RowCount = 4;
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConditions.Size = new System.Drawing.Size(1019, 94);
+            this.tlpConditions.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Location = new System.Drawing.Point(203, 60);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 30);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "完成日期";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Location = new System.Drawing.Point(3, 60);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 30);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "创建日期";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(203, 30);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 30);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "盘点类型";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(203, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 30);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "物料代码";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(3, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 30);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "UPN";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(403, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 30);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "单据状态";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 30);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "盘点单号";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnOutstock
+            // 
+            this.btnOutstock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOutstock.Location = new System.Drawing.Point(803, 63);
+            this.btnOutstock.Name = "btnOutstock";
+            this.btnOutstock.Size = new System.Drawing.Size(74, 24);
+            this.btnOutstock.TabIndex = 9;
+            this.btnOutstock.Text = "执行盘点";
+            this.btnOutstock.UseVisualStyleBackColor = true;
+            this.btnOutstock.Click += new System.EventHandler(this.BtnTransfer_Click);
+            // 
+            // btnFinish
+            // 
+            this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFinish.Location = new System.Drawing.Point(883, 63);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(74, 24);
+            this.btnFinish.TabIndex = 12;
+            this.btnFinish.Text = "盘点完成";
+            this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.Visible = false;
+            this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnExport.Location = new System.Drawing.Point(643, 63);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(74, 24);
+            this.btnExport.TabIndex = 13;
+            this.btnExport.Text = "导出明细";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
+            // 
+            // tbOrderNo
+            // 
+            this.tbOrderNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOrderNo.Location = new System.Drawing.Point(83, 3);
+            this.tbOrderNo.Name = "tbOrderNo";
+            this.tbOrderNo.Size = new System.Drawing.Size(114, 21);
+            this.tbOrderNo.TabIndex = 14;
+            // 
+            // cbOrderStatus
+            // 
+            this.cbOrderStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbOrderStatus.FormattingEnabled = true;
+            this.cbOrderStatus.Location = new System.Drawing.Point(483, 3);
+            this.cbOrderStatus.Name = "cbOrderStatus";
+            this.cbOrderStatus.Size = new System.Drawing.Size(114, 20);
+            this.cbOrderStatus.TabIndex = 16;
+            // 
+            // tbMaterialNo
+            // 
+            this.tbMaterialNo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMaterialNo.Location = new System.Drawing.Point(283, 3);
+            this.tbMaterialNo.Name = "tbMaterialNo";
+            this.tbMaterialNo.Size = new System.Drawing.Size(114, 21);
+            this.tbMaterialNo.TabIndex = 18;
+            // 
+            // dtOrderTime
+            // 
+            this.dtOrderTime.CustomFormat = "yyyy-MM-dd";
+            this.dtOrderTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtOrderTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtOrderTime.Location = new System.Drawing.Point(83, 63);
+            this.dtOrderTime.Name = "dtOrderTime";
+            this.dtOrderTime.Size = new System.Drawing.Size(114, 21);
+            this.dtOrderTime.TabIndex = 20;
+            this.dtOrderTime.Value = new System.DateTime(2022, 2, 22, 12, 4, 52, 0);
+            this.dtOrderTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
+            // 
+            // dtFinishedTime
+            // 
+            this.dtFinishedTime.CustomFormat = "yyyy-MM-dd";
+            this.dtFinishedTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinishedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFinishedTime.Location = new System.Drawing.Point(283, 63);
+            this.dtFinishedTime.Name = "dtFinishedTime";
+            this.dtFinishedTime.Size = new System.Drawing.Size(114, 21);
+            this.dtFinishedTime.TabIndex = 21;
+            this.dtFinishedTime.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
+            this.dtFinishedTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
+            // 
+            // tbUpn
+            // 
+            this.tbUpn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbUpn.Location = new System.Drawing.Point(83, 33);
+            this.tbUpn.Name = "tbUpn";
+            this.tbUpn.Size = new System.Drawing.Size(114, 21);
+            this.tbUpn.TabIndex = 23;
+            // 
+            // cbType
+            // 
+            this.cbType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(283, 33);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(114, 20);
+            this.cbType.TabIndex = 25;
+            // 
+            // btnQuery
+            // 
+            this.btnQuery.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnQuery.Location = new System.Drawing.Point(643, 3);
+            this.btnQuery.Name = "btnQuery";
+            this.btnQuery.Size = new System.Drawing.Size(74, 24);
+            this.btnQuery.TabIndex = 10;
+            this.btnQuery.Text = "查询";
+            this.btnQuery.UseVisualStyleBackColor = true;
+            this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClear.Location = new System.Drawing.Point(643, 33);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(74, 24);
+            this.btnClear.TabIndex = 24;
+            this.btnClear.Text = "清空";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCancel.Location = new System.Drawing.Point(803, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(74, 24);
+            this.btnCancel.TabIndex = 26;
+            this.btnCancel.Text = "取消盘点";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // tlbTables
+            // 
+            this.tlbTables.ColumnCount = 2;
+            this.tlbTables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tlbTables.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tlbTables.Controls.Add(this.dgvUpns, 1, 0);
+            this.tlbTables.Controls.Add(this.dgvOrders, 0, 0);
+            this.tlbTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlbTables.Location = new System.Drawing.Point(3, 123);
+            this.tlbTables.Name = "tlbTables";
+            this.tlbTables.RowCount = 1;
+            this.tlbTables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlbTables.Size = new System.Drawing.Size(1025, 480);
+            this.tlbTables.TabIndex = 3;
+            // 
+            // dgvUpns
+            // 
+            this.dgvUpns.AllowUserToAddRows = false;
+            this.dgvUpns.AllowUserToDeleteRows = false;
+            this.dgvUpns.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUpns.ColumnHeadersHeight = 20;
+            this.dgvUpns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvUpns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMaterialNo,
+            this.colUpn,
+            this.colQty,
+            this.colActualQuantity,
+            this.colResult});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvUpns.Location = new System.Drawing.Point(566, 3);
+            this.dgvUpns.MultiSelect = false;
+            this.dgvUpns.Name = "dgvUpns";
+            this.dgvUpns.ReadOnly = true;
+            this.dgvUpns.RowHeadersWidth = 40;
+            this.dgvUpns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvUpns.RowTemplate.Height = 23;
+            this.dgvUpns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvUpns.Size = new System.Drawing.Size(456, 474);
+            this.dgvUpns.TabIndex = 2;
+            this.dgvUpns.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.Dgv_DataBindingComplete);
+            // 
+            // colMaterialNo
+            // 
+            this.colMaterialNo.DataPropertyName = "MaterialNo";
+            this.colMaterialNo.HeaderText = "物料代码";
+            this.colMaterialNo.MinimumWidth = 9;
+            this.colMaterialNo.Name = "colMaterialNo";
+            this.colMaterialNo.ReadOnly = true;
+            // 
+            // colUpn
+            // 
+            this.colUpn.DataPropertyName = "Barcode";
+            this.colUpn.HeaderText = "UPN";
+            this.colUpn.MinimumWidth = 9;
+            this.colUpn.Name = "colUpn";
+            this.colUpn.ReadOnly = true;
+            // 
+            // colQty
+            // 
+            this.colQty.DataPropertyName = "Qty";
+            this.colQty.HeaderText = "账面数量";
+            this.colQty.MinimumWidth = 9;
+            this.colQty.Name = "colQty";
+            this.colQty.ReadOnly = true;
+            // 
+            // colActualQuantity
+            // 
+            this.colActualQuantity.HeaderText = "实际数量";
+            this.colActualQuantity.Name = "colActualQuantity";
+            this.colActualQuantity.ReadOnly = true;
+            // 
+            // colResult
+            // 
+            this.colResult.HeaderText = "盘点结论";
+            this.colResult.Name = "colResult";
+            this.colResult.ReadOnly = true;
+            // 
+            // dgvOrders
+            // 
+            this.dgvOrders.AllowUserToAddRows = false;
+            this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrders.ColumnHeadersHeight = 20;
+            this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOrderNo,
+            this.colOrderStatus,
+            this.colSource,
+            this.colDestination,
+            this.colOrderTime,
+            this.colCreateUser});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvOrders.Location = new System.Drawing.Point(3, 3);
+            this.dgvOrders.MultiSelect = false;
+            this.dgvOrders.Name = "dgvOrders";
+            this.dgvOrders.ReadOnly = true;
+            this.dgvOrders.RowHeadersWidth = 40;
+            this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvOrders.RowTemplate.Height = 23;
+            this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvOrders.Size = new System.Drawing.Size(557, 474);
+            this.dgvOrders.TabIndex = 1;
+            this.dgvOrders.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.Dgv_DataBindingComplete);
+            this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
+            // 
+            // colOrderNo
+            // 
+            this.colOrderNo.DataPropertyName = "OrderNo";
+            this.colOrderNo.FillWeight = 57.44501F;
+            this.colOrderNo.HeaderText = "盘点单号";
+            this.colOrderNo.MinimumWidth = 9;
+            this.colOrderNo.Name = "colOrderNo";
+            this.colOrderNo.ReadOnly = true;
+            // 
+            // colOrderStatus
+            // 
+            this.colOrderStatus.DataPropertyName = "OrderStatus";
+            this.colOrderStatus.FillWeight = 57.44501F;
+            this.colOrderStatus.HeaderText = "单据状态";
+            this.colOrderStatus.MinimumWidth = 9;
+            this.colOrderStatus.Name = "colOrderStatus";
+            this.colOrderStatus.ReadOnly = true;
+            // 
+            // colSource
+            // 
+            this.colSource.DataPropertyName = "Source";
+            this.colSource.FillWeight = 57.44501F;
+            this.colSource.HeaderText = "盘点库区";
+            this.colSource.MinimumWidth = 9;
+            this.colSource.Name = "colSource";
+            this.colSource.ReadOnly = true;
+            // 
+            // colDestination
+            // 
+            this.colDestination.DataPropertyName = "Destination";
+            this.colDestination.FillWeight = 56F;
+            this.colDestination.HeaderText = "二级区域";
+            this.colDestination.MinimumWidth = 9;
+            this.colDestination.Name = "colDestination";
+            this.colDestination.ReadOnly = true;
+            // 
+            // colOrderTime
+            // 
+            this.colOrderTime.DataPropertyName = "OrderTime";
+            this.colOrderTime.FillWeight = 57.44501F;
+            this.colOrderTime.HeaderText = "创建时间";
+            this.colOrderTime.MinimumWidth = 9;
+            this.colOrderTime.Name = "colOrderTime";
+            this.colOrderTime.ReadOnly = true;
+            // 
+            // colCreateUser
+            // 
+            this.colCreateUser.DataPropertyName = "CreateUser";
+            this.colCreateUser.FillWeight = 57.44501F;
+            this.colCreateUser.HeaderText = "制单人";
+            this.colCreateUser.MinimumWidth = 9;
+            this.colCreateUser.Name = "colCreateUser";
+            this.colCreateUser.ReadOnly = true;
+            // 
+            // FrmInventoryOrders
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1031, 606);
+            this.Controls.Add(this.tlpLayout);
+            this.Name = "FrmInventoryOrders";
+            this.Text = "盘点单列表";
+            this.Load += new System.EventHandler(this.FrmOutstocks_Load);
+            this.tlpLayout.ResumeLayout(false);
+            this.gbConditions.ResumeLayout(false);
+            this.tlpConditions.ResumeLayout(false);
+            this.tlpConditions.PerformLayout();
+            this.tlbTables.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TableLayoutPanel tlpLayout;
+        private System.Windows.Forms.GroupBox gbConditions;
+        private System.Windows.Forms.DataGridView dgvOrders;
+        private System.Windows.Forms.TableLayoutPanel tlpConditions;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnOutstock;
+        private System.Windows.Forms.Button btnQuery;
+        private System.Windows.Forms.Button btnFinish;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.TextBox tbOrderNo;
+        private System.Windows.Forms.ComboBox cbOrderStatus;
+        private System.Windows.Forms.TextBox tbMaterialNo;
+        private System.Windows.Forms.DateTimePicker dtOrderTime;
+        private System.Windows.Forms.DateTimePicker dtFinishedTime;
+        private System.Windows.Forms.DataGridView dgvUpns;
+        private System.Windows.Forms.TextBox tbUpn;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TableLayoutPanel tlbTables;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActualQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colResult;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDestination;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUser;
+    }
+}

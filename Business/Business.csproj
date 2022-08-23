@@ -48,10 +48,15 @@
     <Compile Include="BaseDeliveryBll.cs" />
     <Compile Include="CallMesWmsApiBll.cs" />
     <Compile Include="DeliveryBll.cs" />
+    <Compile Include="FrozenPolicyBll.cs" />
     <Compile Include="InOutStockStorageData.cs" />
     <Compile Include="InventoryBll.cs" />
+    <Compile Include="ManualCounting.cs" />
+    <Compile Include="OrderReviewCallApi.cs" />
+    <Compile Include="OutStockReview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferBll.cs" />
+    <Compile Include="TransferStoregeBll.cs" />
     <Compile Include="WareHouseBLL.cs" />
   </ItemGroup>
   <ItemGroup>

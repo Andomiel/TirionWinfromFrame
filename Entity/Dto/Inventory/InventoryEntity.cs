@@ -1,5 +1,4 @@
-﻿using BLL.Common;
-using Entity.Enums;
+﻿using Entity.Enums;
 using System;
 
 namespace Entity.Dto

@@ -107,6 +107,9 @@
     <Reference Include="Mapster.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e64997d676a9c1d3, processorArchitecture=MSIL">
       <HintPath>..\packages\Mapster.Core.1.2.0\lib\net45\Mapster.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NVelocity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\NVelocity.1.2.0\lib\netstandard2.0\NVelocity.dll</HintPath>
     </Reference>
@@ -140,6 +143,7 @@
     </Compile>
     <Compile Include="ChildWinManagement.cs" />
     <Compile Include="Commons\AppInfo.cs" />
+    <Compile Include="Commons\BuildComboxHelper.cs" />
     <Compile Include="ControlInfo.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="DBAdapter.cs" />
@@ -480,6 +484,24 @@
     <Compile Include="FrmSystemSetup.Designer.cs">
       <DependentUpon>FrmSystemSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmOutstocks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmOutstocks.designer.cs">
+      <DependentUpon>FrmOutstocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmReview.designer.cs">
+      <DependentUpon>FrmReview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmReviewResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmReviewResult.designer.cs">
+      <DependentUpon>FrmReviewResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\ErrorHandle\FrmLogs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -498,6 +520,12 @@
     <Compile Include="iWmsForm\Instock\FrmInstocks.designer.cs">
       <DependentUpon>FrmInstocks.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Instock\FrmManualCounting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmManualCounting.designer.cs">
+      <DependentUpon>FrmManualCounting.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Instock\FrmWareHouseDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -509,6 +537,48 @@
     </Compile>
     <Compile Include="iWmsForm\Instock\FrmWareHouseWarn.designer.cs">
       <DependentUpon>FrmWareHouseWarn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmBuildRemind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmBuildRemind.designer.cs">
+      <DependentUpon>FrmBuildRemind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmFrozenPolicy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmFrozenPolicy.designer.cs">
+      <DependentUpon>FrmFrozenPolicy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmMaterialInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmMaterialInfo.designer.cs">
+      <DependentUpon>FrmMaterialInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmInventoryOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmInventoryOrder.designer.cs">
+      <DependentUpon>FrmInventoryOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmInventoryOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmInventoryOrders.designer.cs">
+      <DependentUpon>FrmInventoryOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Transfer\FrmTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Transfer\FrmTransfer.designer.cs">
+      <DependentUpon>FrmTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Transfer\FrmTransfers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Transfer\FrmTransfers.designer.cs">
+      <DependentUpon>FrmTransfers.cs</DependentUpon>
     </Compile>
     <Compile Include="LoadForm.cs">
       <SubType>Form</SubType>
@@ -542,6 +612,12 @@
     <Compile Include="Test.cs" />
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserComponent\RowMergeDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserComponent\RowMergeDataGridView.Designer.cs">
+      <DependentUpon>RowMergeDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="WaitForm1.cs">
       <SubType>Form</SubType>
@@ -700,6 +776,15 @@
     <EmbeddedResource Include="FrmSystemSetup.resx">
       <DependentUpon>FrmSystemSetup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Delivery\FrmOutstocks.resx">
+      <DependentUpon>FrmOutstocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Delivery\FrmReview.resx">
+      <DependentUpon>FrmReview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Delivery\FrmReviewResult.resx">
+      <DependentUpon>FrmReviewResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\ErrorHandle\FrmLogs.resx">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </EmbeddedResource>
@@ -709,11 +794,35 @@
     <EmbeddedResource Include="iWmsForm\Instock\FrmInstocks.resx">
       <DependentUpon>FrmInstocks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmManualCounting.resx">
+      <DependentUpon>FrmManualCounting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmWareHouseDetail.resx">
       <DependentUpon>FrmWareHouseDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmWareHouseWarn.resx">
       <DependentUpon>FrmWareHouseWarn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Inventory\FrmBuildRemind.resx">
+      <DependentUpon>FrmBuildRemind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Inventory\FrmFrozenPolicy.resx">
+      <DependentUpon>FrmFrozenPolicy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Inventory\FrmMaterialInfo.resx">
+      <DependentUpon>FrmMaterialInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventoryOrder.resx">
+      <DependentUpon>FrmInventoryOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventoryOrders.resx">
+      <DependentUpon>FrmInventoryOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Transfer\FrmTransfer.resx">
+      <DependentUpon>FrmTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Transfer\FrmTransfers.resx">
+      <DependentUpon>FrmTransfers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoadForm.resx">
       <DependentUpon>LoadForm.cs</DependentUpon>
@@ -744,6 +853,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserComponent\RowMergeDataGridView.resx">
+      <DependentUpon>RowMergeDataGridView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WaitForm1.resx">
       <DependentUpon>WaitForm1.cs</DependentUpon>
@@ -827,10 +939,6 @@
     <None Include="Resources\Image1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="iWmsForm\Delivery\" />
-    <Folder Include="iWmsForm\Inventory\" />
-    <Folder Include="iWmsForm\StockTaking\" />
-    <Folder Include="iWmsForm\Transfer\" />
     <Folder Include="Template\BLL\" />
     <Folder Include="Template\WEB\" />
   </ItemGroup>

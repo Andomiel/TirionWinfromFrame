@@ -26,7 +26,7 @@ namespace iWms.Form
         {
             if (string.IsNullOrWhiteSpace(txtRemark.Text) || txtRemark.Text == DEFAULT_TEXT)
             {
-                MessageBox.Show("完成入库，备注信息必填");
+                "完成入库，备注信息必填".ShowTips();
                 return;
             }
             //保存填写的信息，然后执行接下来的完成逻辑

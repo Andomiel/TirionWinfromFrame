@@ -1,5 +1,4 @@
-﻿using BLL.Common;
-using DataBase;
+﻿using DataBase;
 using Entity.DataContext;
 using Entity.Enums;
 using Entity.Enums.Transfer;

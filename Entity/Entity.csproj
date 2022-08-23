@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext\Cfg_SortingConfig.cs" />
+    <Compile Include="DataContext\FrozenPolicy.cs" />
+    <Compile Include="DataContext\FrozenPolicyDetail.cs" />
+    <Compile Include="DataContext\MaterialFrozen.cs" />
     <Compile Include="DataContext\SMTBake.cs" />
     <Compile Include="DataContext\SMTInStockOrder.cs" />
     <Compile Include="DataContext\SMTInStockOrderFeedback.cs" />
@@ -63,6 +66,13 @@
     <Compile Include="DataContext\Wms_LightColorRecord.cs" />
     <Compile Include="DataContext\Wms_TransferBarcode.cs" />
     <Compile Include="DataContext\Wms_TransferOrder.cs" />
+    <Compile Include="Dto\Delivery\DeliveryBarcodeDto.cs" />
+    <Compile Include="Dto\Delivery\DeliveryDetailDto.cs" />
+    <Compile Include="Dto\Delivery\DeliveryOrderDto.cs" />
+    <Compile Include="Dto\Frozen\FrozenNoUpnRelation.cs" />
+    <Compile Include="Dto\Frozen\FrozenQueryItem.cs" />
+    <Compile Include="Dto\InstockTaking\InventoryBarcodeDto.cs" />
+    <Compile Include="Dto\InstockTaking\InventoryOrderDto.cs" />
     <Compile Include="Dto\Instock\InstockAreaDto.cs" />
     <Compile Include="Dto\Instock\InstockBarcodeDto.cs" />
     <Compile Include="Dto\Instock\InstockDetailDto.cs" />
@@ -71,12 +81,19 @@
     <Compile Include="Dto\Inventory\MaterialQueryCondition.cs" />
     <Compile Include="Dto\Inventory\QueryConditionConvert.cs" />
     <Compile Include="Dto\LogDto.cs" />
+    <Compile Include="Dto\Frozen\PolicyCreateResult.cs" />
+    <Compile Include="Dto\Frozen\PolicyView.cs" />
+    <Compile Include="Dto\Transfer\TransferBarcodeDto.cs" />
+    <Compile Include="Dto\Transfer\TransferOrderDto.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="Enums\Delivery\DeliveryBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryDetailStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryOrderStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryOrderTypeEnum.cs" />
     <Compile Include="Enums\Delivery\OutOrderTypeEnum.cs" />
+    <Compile Include="Enums\Delivery\PrepareReviewMatchEnum.cs" />
+    <Compile Include="Enums\Delivery\PrepareSourceEnum.cs" />
+    <Compile Include="Enums\Frozen\FrozenEnums.cs" />
     <Compile Include="Enums\General\BakeStateEnum.cs" />
     <Compile Include="Enums\General\BarcodeStatusEnum.cs" />
     <Compile Include="Enums\General\LightRecordStatusEnum.cs" />

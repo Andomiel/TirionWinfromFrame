@@ -10,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Oppo.iWms.Common
+namespace TirionWinfromFrame.Commons
 {
-    public class NPOIHelper
+    public class NpoiHelper
     {
         private static IWorkbook workbook = null;
         private static FileStream fs = null;

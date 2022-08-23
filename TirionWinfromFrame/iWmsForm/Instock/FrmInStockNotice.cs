@@ -1,6 +1,4 @@
 ﻿using Business;
-using Commons;
-using Oppo.iWms.Common;
 using System;
 using System.Data;
 using System.IO;
@@ -38,7 +36,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    DataTable dtFromExcel = NPOIHelper.ExcelToDataTable(txtPath.Text, "入库通知单", 0);
+                    DataTable dtFromExcel = NpoiHelper.ExcelToDataTable(txtPath.Text, "入库通知单", 0);
                     if (dtFromExcel == null || dtFromExcel.Rows.Count == 0)
                     {
                         "表格为空或者表格未关闭！".ShowTips();
@@ -60,7 +58,7 @@ namespace iWms.Form
             }
             catch (Exception ex)
             {
-                ex.GetDeepException().ShowTips();
+                ex.GetDeepException().ShowError();
             }
         }
 
@@ -92,7 +90,7 @@ namespace iWms.Form
                 }
                 //if (string.IsNullOrWhiteSpace(lot))
                 //{
-                //    sb.AppendLine("批次号不能为空");
+                //    sb.AppendLine("批次号不能为空.ShowTips();
                 //}
                 string msg = sb.ToString();
                 if (!string.IsNullOrWhiteSpace(msg))
@@ -138,7 +136,7 @@ namespace iWms.Form
         {
             if (txtPath.Text != "")
             {
-                DataTable dtFromExcel = NPOIHelper.ExcelToDataTable(txtPath.Text, "入库通知单", 0);
+                DataTable dtFromExcel = NpoiHelper.ExcelToDataTable(txtPath.Text, "入库通知单", 0);
                 if (dtFromExcel == null || dtFromExcel.Rows.Count == 0)
                 {
                     "表格为空或者表格未关闭！".ShowTips();

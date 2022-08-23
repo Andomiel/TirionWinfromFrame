@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarcodeFormatter.cs" />
     <Compile Include="ConvertHelper.cs" />
     <Compile Include="Encrypt\Base64Util.cs" />
     <Compile Include="Encrypt\EncodeHelper.cs" />
@@ -92,7 +93,7 @@
     <Compile Include="Encrypt\MD5Utils.cs" />
     <Compile Include="ModelBindControlAttribute.cs" />
     <Compile Include="Exception\OppoCoreException.cs" />
-    <Compile Include="NPOIHelper.cs" />
+    <Compile Include="NpoiHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionUtil.cs" />
     <Compile Include="SqlserverDataTypeToModelDataType.cs" />

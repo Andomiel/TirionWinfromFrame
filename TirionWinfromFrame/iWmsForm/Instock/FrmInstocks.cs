@@ -1,11 +1,9 @@
 ﻿using Business;
-using Commons;
 using Entity;
 using Entity.DataContext;
 using Entity.Dto;
 using Entity.Enums;
 using Mapster;
-using Oppo.iWms.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -215,7 +213,7 @@ namespace iWms.Form
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.GetDeepException(), "提示");
+                ex.GetDeepException().ShowError();
             }
         }
 
@@ -266,7 +264,7 @@ namespace iWms.Form
                 {
                     if (WorkOrderDetails.Count == 0)
                     {
-                        MessageBox.Show("暂无数据可导出，请查询后导出", "提示");
+                        "暂无数据可导出，请查询后导出".ShowTips();
                         return;
                     }
 
@@ -275,7 +273,7 @@ namespace iWms.Form
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.GetDeepException(), "提示");
+                ex.GetDeepException().ShowError();
             }
         }
 
@@ -325,7 +323,7 @@ namespace iWms.Form
                 new HeadColumn("InnerCount","盘内数量", 2200),
                 new HeadColumn("DeliveryOperator","操作人", 3000),
             };
-            string fileFullName = NPOIHelper.ExportToExcel(dialog.FileName, data, headColumns);
+            string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, data, headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
             {
                 System.Diagnostics.Process.Start("explorer", "/select," + fileFullName);

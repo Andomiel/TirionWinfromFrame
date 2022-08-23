@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Commons
+namespace TirionWinfromFrame.Commons
 {
     /// <summary>
     /// Oppo异常
