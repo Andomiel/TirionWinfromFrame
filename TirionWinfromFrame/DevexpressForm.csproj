@@ -426,6 +426,12 @@
     <Compile Include="FrmBaseForm.Designer.cs">
       <DependentUpon>FrmBaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmChangePwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangePwd.Designer.cs">
+      <DependentUpon>FrmChangePwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCreateDataBaseConn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -642,6 +648,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBaseForm.resx">
       <DependentUpon>FrmBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangePwd.resx">
+      <DependentUpon>FrmChangePwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCreateDataBaseConn.resx">
       <DependentUpon>FrmCreateDataBaseConn.cs</DependentUpon>

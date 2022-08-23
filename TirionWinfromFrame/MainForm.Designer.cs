@@ -54,6 +54,7 @@ namespace TirionWinfromFrame
             this.bsi_UserName = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.barBtnChangePwd = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTimeEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -82,8 +83,9 @@ namespace TirionWinfromFrame
             this.barButtonItem1,
             this.barButtonItem2,
             this.barStaticItem2,
-            this.barButtonItem3});
-            this.ribbonControl1.MaxItemId = 13;
+            this.barButtonItem3,
+            this.barBtnChangePwd});
+            this.ribbonControl1.MaxItemId = 14;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -239,6 +241,7 @@ namespace TirionWinfromFrame
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnabout);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barBtnChangePwd);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem3);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
@@ -296,6 +299,18 @@ namespace TirionWinfromFrame
             // 
             this.defaultLookAndFeel1.LookAndFeel.SkinName = "DevExpress Style";
             // 
+            // barBtnChangePwd
+            // 
+            resources.ApplyResources(this.barBtnChangePwd, "barBtnChangePwd");
+            this.barBtnChangePwd.Id = 13;
+            this.barBtnChangePwd.ImageOptions.Image = global::TirionWinfromFrame.Properties.Resources.bocustomer_16x16;
+            this.barBtnChangePwd.ImageOptions.ImageIndex = ((int)(resources.GetObject("barButtonItem4.ImageOptions.ImageIndex")));
+            this.barBtnChangePwd.ImageOptions.LargeImage = global::TirionWinfromFrame.Properties.Resources.bocustomer_32x32;
+            this.barBtnChangePwd.ImageOptions.LargeImageIndex = ((int)(resources.GetObject("barButtonItem4.ImageOptions.LargeImageIndex")));
+            this.barBtnChangePwd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.barBtnChangePwd.Name = "barBtnChangePwd";
+            this.barBtnChangePwd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBtnChangePwd_ItemClick);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -347,6 +362,7 @@ namespace TirionWinfromFrame
         private DevExpress.XtraBars.BarStaticItem barStaticItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
+        private DevExpress.XtraBars.BarButtonItem barBtnChangePwd;
     }
 }
 

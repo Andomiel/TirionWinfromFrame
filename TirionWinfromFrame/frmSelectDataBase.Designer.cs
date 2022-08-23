@@ -109,7 +109,7 @@ namespace TirionWinfromFrame
             // 
             this.completionWizardPage1.Controls.Add(this.layoutControl1);
             this.completionWizardPage1.Name = "completionWizardPage1";
-            this.completionWizardPage1.Size = new System.Drawing.Size(712, 383);
+            this.completionWizardPage1.Size = new System.Drawing.Size(712, 349);
             this.completionWizardPage1.Text = "明细设置";
             // 
             // layoutControl1
@@ -125,7 +125,7 @@ namespace TirionWinfromFrame
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(712, 383);
+            this.layoutControl1.Size = new System.Drawing.Size(712, 349);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -166,7 +166,7 @@ namespace TirionWinfromFrame
             this.repositoryItemCheckEdit2,
             this.repositoryItemComboBox1,
             this.repositoryItemComboBox2});
-            this.gridControl1.Size = new System.Drawing.Size(688, 333);
+            this.gridControl1.Size = new System.Drawing.Size(688, 299);
             this.gridControl1.TabIndex = 7;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -376,7 +376,7 @@ namespace TirionWinfromFrame
             this.layoutControlItem3,
             this.layoutControlItem6});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(712, 383);
+            this.Root.Size = new System.Drawing.Size(712, 349);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -402,7 +402,7 @@ namespace TirionWinfromFrame
             this.layoutControlItem4.Control = this.gridControl1;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(692, 337);
+            this.layoutControlItem4.Size = new System.Drawing.Size(692, 303);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
@@ -447,7 +447,7 @@ namespace TirionWinfromFrame
             // 
             this.wizardPage1.Controls.Add(this.cmbtablelist);
             this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(712, 383);
+            this.wizardPage1.Size = new System.Drawing.Size(712, 349);
             this.wizardPage1.Text = "选择要生成的数据库表";
             // 
             // cmbtablelist
@@ -467,7 +467,7 @@ namespace TirionWinfromFrame
             this.welcomeWizardPage1.Controls.Add(this.cmbDataBaseList);
             this.welcomeWizardPage1.Controls.Add(this.label1);
             this.welcomeWizardPage1.Name = "welcomeWizardPage1";
-            this.welcomeWizardPage1.Size = new System.Drawing.Size(712, 383);
+            this.welcomeWizardPage1.Size = new System.Drawing.Size(712, 349);
             this.welcomeWizardPage1.Text = "选择您的数据连接";
             // 
             // txtConnurl
@@ -525,7 +525,7 @@ namespace TirionWinfromFrame
             this.wizardPage1,
             this.completionWizardPage1});
             this.wizardControl1.PreviousText = "后退";
-            this.wizardControl1.Size = new System.Drawing.Size(772, 551);
+            this.wizardControl1.Size = new System.Drawing.Size(772, 517);
             this.wizardControl1.Text = "后退";
             this.wizardControl1.WizardStyle = DevExpress.XtraWizard.WizardStyle.WizardAero;
             this.wizardControl1.CancelClick += new System.ComponentModel.CancelEventHandler(this.wizardControl1_CancelClick);

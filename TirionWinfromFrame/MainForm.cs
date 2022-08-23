@@ -134,5 +134,10 @@ namespace TirionWinfromFrame
                 System.Diagnostics.Process.Start(Application.StartupPath + "\\TirionWinfromFrame.Start.exe");
             }
         }
+
+        private void barBtnChangePwd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
     }
 }
