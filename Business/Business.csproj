@@ -45,10 +45,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDeliveryBll.cs" />
     <Compile Include="CallMesWmsApiBll.cs" />
+    <Compile Include="DeliveryBll.cs" />
+    <Compile Include="InOutStockStorageData.cs" />
+    <Compile Include="InventoryBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransferBll.cs" />
+    <Compile Include="WareHouseBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataBase\DataBase.csproj">
+      <Project>{86b089fd-a7c4-47a6-8c3b-0819586caeb0}</Project>
+      <Name>DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{524a09b1-52ee-49c6-acd2-cec2aeb8d2f6}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TirionWinfromFrame.Commons\Commons.csproj">
       <Project>{6f2b061d-6116-45a4-9649-49ae4981c496}</Project>
       <Name>Commons</Name>

@@ -486,6 +486,30 @@
     <Compile Include="iWmsForm\ErrorHandle\FrmLogs.designer.cs">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Instock\FrmInStockNotice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmInStockNotice.designer.cs">
+      <DependentUpon>FrmInStockNotice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmInstocks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmInstocks.designer.cs">
+      <DependentUpon>FrmInstocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmWareHouseDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmWareHouseDetail.designer.cs">
+      <DependentUpon>FrmWareHouseDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmWareHouseWarn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmWareHouseWarn.designer.cs">
+      <DependentUpon>FrmWareHouseWarn.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoadForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -679,6 +703,18 @@
     <EmbeddedResource Include="iWmsForm\ErrorHandle\FrmLogs.resx">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmInStockNotice.resx">
+      <DependentUpon>FrmInStockNotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmInstocks.resx">
+      <DependentUpon>FrmInstocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmWareHouseDetail.resx">
+      <DependentUpon>FrmWareHouseDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmWareHouseWarn.resx">
+      <DependentUpon>FrmWareHouseWarn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoadForm.resx">
       <DependentUpon>LoadForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -791,6 +827,10 @@
     <None Include="Resources\Image1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="iWmsForm\Delivery\" />
+    <Folder Include="iWmsForm\Inventory\" />
+    <Folder Include="iWmsForm\StockTaking\" />
+    <Folder Include="iWmsForm\Transfer\" />
     <Folder Include="Template\BLL\" />
     <Folder Include="Template\WEB\" />
   </ItemGroup>

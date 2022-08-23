@@ -17,80 +17,80 @@ namespace TirionWinfromFrame.Commons
 {
     public static class ExtensionMethod
     {
-        public static void SetComboxEditDataSource<T>(this ComboBoxEdit cmb,IEnumerable<T> dataSource,string textFileName,string valueFileName)
+        public static void SetComboxEditDataSource<T>(this ComboBoxEdit cmb, IEnumerable<T> dataSource, string textFileName, string valueFileName)
         {
             foreach (var item in dataSource)
             {
                 //cmb.Properties.Items.Add();
             }
         }
-		/// <summary>
-		/// 显示一般的提示信息
-		/// </summary>
-		/// <param name="message">提示信息</param>
-		public static DialogResult ShowTips(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("提示信息"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
+        /// <summary>
+        /// 显示一般的提示信息
+        /// </summary>
+        /// <param name="message">提示信息</param>
+        public static DialogResult ShowTips(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("提示信息"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
-		/// <summary>
-		/// 显示警告信息
-		/// </summary>
-		/// <param name="message">警告信息</param>
-		public static DialogResult ShowWarning(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("警告信息"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-		}
+        /// <summary>
+        /// 显示警告信息
+        /// </summary>
+        /// <param name="message">警告信息</param>
+        public static DialogResult ShowWarning(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("警告信息"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
 
-		/// <summary>
-		/// 显示错误信息
-		/// </summary>
-		/// <param name="message">错误信息</param>
-		public static DialogResult ShowError(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("错误信息"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
+        /// <summary>
+        /// 显示错误信息
+        /// </summary>
+        /// <param name="message">错误信息</param>
+        public static DialogResult ShowError(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("错误信息"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-		/// <summary>
-		/// 显示询问用户信息，并显示错误标志
-		/// </summary>
-		/// <param name="message">错误信息</param>
-		public static DialogResult ShowYesNoAndError(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("错误信息"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-		}
+        /// <summary>
+        /// 显示询问用户信息，并显示错误标志
+        /// </summary>
+        /// <param name="message">错误信息</param>
+        public static DialogResult ShowYesNoAndError(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("错误信息"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+        }
 
-		/// <summary>
-		/// 显示询问用户信息，并显示提示标志
-		/// </summary>
-		/// <param name="message">错误信息</param>
-		public static DialogResult ShowYesNoAndTips(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("提示信息"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-		}
+        /// <summary>
+        /// 显示询问用户信息，并显示提示标志
+        /// </summary>
+        /// <param name="message">错误信息</param>
+        public static DialogResult ShowYesNoAndTips(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("提示信息"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+        }
 
-		/// <summary>
-		/// 显示询问用户信息，并显示警告标志
-		/// </summary>
-		/// <param name="message">警告信息</param>
-		public static DialogResult ShowYesNoAndWarning(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("警告信息"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-		}
+        /// <summary>
+        /// 显示询问用户信息，并显示警告标志
+        /// </summary>
+        /// <param name="message">警告信息</param>
+        public static DialogResult ShowYesNoAndWarning(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("警告信息"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        }
 
-		/// <summary>
-		/// 显示询问用户信息，并显示提示标志
-		/// </summary>
-		/// <param name="message">错误信息</param>
-		public static DialogResult ShowYesNoCancelAndTips(this string message)
-		{
-			return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("提示信息"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-		}
-		//public static string language(this string message)
-		//{
-		//    return message;
-		//}
-		public static bool ToBoolean(this string str)
+        /// <summary>
+        /// 显示询问用户信息，并显示提示标志
+        /// </summary>
+        /// <param name="message">错误信息</param>
+        public static DialogResult ShowYesNoCancelAndTips(this string message)
+        {
+            return DevExpress.XtraEditors.XtraMessageBox.Show((message), ("提示信息"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+        }
+        //public static string language(this string message)
+        //{
+        //    return message;
+        //}
+        public static bool ToBoolean(this string str)
         {
             bool result = false;
             bool.TryParse(str, out result);
@@ -185,11 +185,11 @@ namespace TirionWinfromFrame.Commons
                     Control control = getControl(con, pro.GetCustomAttribute<ModelBindControlAttribute>().GetModelName());
                     if (control != null)
                     {
-                        
+
                         if (control is ComboBoxEdit)
                         {
                             ComboBoxEdit txt = (ComboBoxEdit)control;
-                            txt.EditValue = pro.GetValue(data) ;
+                            txt.EditValue = pro.GetValue(data);
                         }
                         else if (control is DateEdit)
                         {
@@ -212,7 +212,7 @@ namespace TirionWinfromFrame.Commons
                             CheckedComboBoxEdit txt = (CheckedComboBoxEdit)control;
                             txt.SetEditValue(pro.GetValue(data));
                         }
-                        else 
+                        else
                         {
                             TextEdit txt = (TextEdit)control;
                             txt.Text = pro.GetValue(data) == null ? "" : pro.GetValue(data).ToString();
@@ -234,7 +234,7 @@ namespace TirionWinfromFrame.Commons
             }
         }
 
-        public static object ControlDataToModel(this Control con,object data)
+        public static object ControlDataToModel(this Control con, object data)
         {
             Type type = data.GetType();
             object t = Activator.CreateInstance(type);
@@ -268,7 +268,7 @@ namespace TirionWinfromFrame.Commons
                         else if (control is LookUpEditBase)
                         {
                             LookUpEditBase txt = (LookUpEditBase)control;
-                            if(!string.IsNullOrEmpty(txt.EditValue.ToString()))
+                            if (!string.IsNullOrEmpty(txt.EditValue.ToString()))
                                 pro.SetValue(t, Convert.ChangeType(txt.EditValue, pro.PropertyType));
                         }
                         else if (control is CheckedComboBoxEdit)
@@ -283,7 +283,7 @@ namespace TirionWinfromFrame.Commons
                             {
                                 txt.Text = "0";
                             }
-                            pro.SetValue(t, Convert.ChangeType(txt.Text,pro.PropertyType));
+                            pro.SetValue(t, Convert.ChangeType(txt.Text, pro.PropertyType));
                         }
                     }
                 }
@@ -327,7 +327,7 @@ namespace TirionWinfromFrame.Commons
             }
             return dt;
         }
-         public static DataTable ToDataTable2<T>(this IEnumerable<T> varlist)
+        public static DataTable ToDataTable2<T>(this IEnumerable<T> varlist)
         {
             DataTable dtReturn = new DataTable();
             // column names
@@ -357,14 +357,14 @@ namespace TirionWinfromFrame.Commons
             }
             return (dtReturn);
         }
-    public delegate object[] CreateRowDelegate<T>(T t);
+        public delegate object[] CreateRowDelegate<T>(T t);
 
         /// <summary>
         /// 获取datatable数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="dt"></param>
-        public static Dictionary<string, List<T>> GetDataTableData<T>(this DataTable dt)where T:class,new()
+        public static Dictionary<string, List<T>> GetDataTableData<T>(this DataTable dt) where T : class, new()
         {
             Dictionary<string, List<T>> data = new Dictionary<string, List<T>>();
             List<T> listAdd = new List<T>();
@@ -372,14 +372,15 @@ namespace TirionWinfromFrame.Commons
             List<T> listDel = new List<T>();
             foreach (DataRow item in dt.Rows)
             {
-                if (item.RowState == DataRowState.Added )
+                if (item.RowState == DataRowState.Added)
                 {
                     T t = item.RowToModel<T>();
                     if (t != null)
                     {
                         listAdd.Add(t);
                     }
-                }else if (item.RowState == DataRowState.Modified)
+                }
+                else if (item.RowState == DataRowState.Modified)
                 {
                     T t = item.RowToModel<T>();
                     if (t != null)
@@ -402,8 +403,8 @@ namespace TirionWinfromFrame.Commons
                     }
                 }
             }
-            data.Add("Add",listAdd);
-            data.Add("Del",listDel);
+            data.Add("Add", listAdd);
+            data.Add("Del", listDel);
             data.Add("Edit", listEdit);
             return data;
         }
@@ -416,32 +417,44 @@ namespace TirionWinfromFrame.Commons
         {
             // 定义集合 
             List<T> ts = new List<T>();
-            //定义一个临时变量 
-            string tempName = string.Empty;
-            //遍历DataTable中所有的数据行 
-            foreach (DataRow dr in dt.Rows)
+            if (dt == null || dt.Rows.Count == 0)
             {
-                T t = new T();
-                // 获得此模型的公共属性 
-                PropertyInfo[] propertys = t.GetType().GetProperties();
-                //遍历该对象的所有属性 
-                foreach (PropertyInfo pi in propertys)
+                return ts;
+            }
+            var plist = new List<PropertyInfo>(typeof(T).GetProperties());
+            foreach (DataRow item in dt.Rows)
+            {
+                T s = Activator.CreateInstance<T>();
+                for (int i = 0; i < dt.Columns.Count; i++)
                 {
-                    tempName = pi.Name;//将属性名称赋值给临时变量 
-                    //检查DataTable是否包含此列（列名==对象的属性名）  
-                    if (dt.Columns.Contains(tempName))
+                    PropertyInfo info = plist.Find(p => p.Name == dt.Columns[i].ColumnName);
+                    if (info == null || !info.CanWrite)
                     {
-                        //取值 
-                        object value = dr[tempName];
-                        //如果非空，则赋给对象的属性 
-                        if (value != DBNull.Value)
+                        continue;
+                    }
+                    try
+                    {
+                        if (Convert.IsDBNull(item[i]))
                         {
-                            pi.SetValue(t, value, null);
+                            continue;
                         }
+                        object v = null;
+                        if (info.PropertyType.ToString().Contains("System.Nullable"))
+                        {
+                            v = Convert.ChangeType(item[i], Nullable.GetUnderlyingType(info.PropertyType));
+                        }
+                        else
+                        {
+                            v = Convert.ChangeType(item[i], info.PropertyType);
+                        }
+                        info.SetValue(s, v, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"字段[{info.Name}]转换出错:{ex.Message}");
                     }
                 }
-                //对象添加到泛型集合中 
-                ts.Add(t);
+                ts.Add(s);
             }
             return ts;
         }
