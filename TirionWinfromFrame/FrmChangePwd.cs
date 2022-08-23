@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Commons;
 using DevExpress.XtraEditors;
 using MES;
 using MES.Entity;
@@ -49,7 +50,7 @@ namespace TirionWinfromFrame
             }
             catch (Exception ex)
             {
-                ex.Message.ShowError();
+                ex.GetDeepException().ShowError();
             }
 
         }
