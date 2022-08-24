@@ -265,7 +265,7 @@
             this.Controls.Add(this.skinPanel1);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.User10086);
-            this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("LoginView.IconOptions.SvgImage")));
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("LoginView.IconOptions.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginView";

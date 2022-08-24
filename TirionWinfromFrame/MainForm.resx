@@ -207,8 +207,9 @@
   <data name="&gt;&gt;ribbonStatusBar1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ribbonPage1.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.Ribbon.RibbonPage, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bsi_UserName.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="barStaticItem2.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
@@ -216,12 +217,8 @@
   <data name="&gt;&gt;navBarControl1.Type" xml:space="preserve">
     <value>DevExpress.XtraNavBar.NavBarControl, DevExpress.XtraNavBar.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
-  <data name="barButtonItem1.Caption" xml:space="preserve">
-    <value>bug反馈           </value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bsi_UserName.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;barStaticItem2.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.BarStaticItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;barButtonItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
@@ -347,9 +344,6 @@
   <data name="barButtonItem4.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
-  <data name="&gt;&gt;barStaticItem2.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.BarStaticItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
   <data name="barStaticItem1.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
@@ -368,8 +362,8 @@
   <data name="bsi_Date.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
-  <data name="barStaticItem3.Caption" xml:space="preserve">
-    <value>barStaticItem3</value>
+  <data name="barListItem1.Caption" xml:space="preserve">
+    <value>barListItem1</value>
   </data>
   <data name="barListItem1.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
@@ -401,8 +395,8 @@
   <data name="ribbonControl1.ExpandCollapseItem.SearchTags" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="resource.ExpandedWidth" type="System.Int32, mscorlib">
-    <value>184</value>
+  <data name="&gt;&gt;ribbonPageGroup1.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.RibbonPageGroup, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="ribbonControl1.ExpandCollapseItem.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
@@ -500,9 +494,6 @@
   <data name="barEditItem1.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="barStaticItem1.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
-    <value>-1</value>
-  </data>
   <data name="&gt;&gt;bsi_UserName.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarStaticItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
@@ -515,7 +506,7 @@
   <data name="barButtonItem4.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="btnabout.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
+  <data name="barStaticItem1.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
   <data name="barUserName.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
@@ -539,6 +530,9 @@
   <data name="&gt;&gt;btnabout.Name" xml:space="preserve">
     <value>btnabout</value>
   </data>
+  <data name="btnabout.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
   <data name="&gt;&gt;barButtonItem1.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
@@ -548,8 +542,8 @@
   <data name="barStaticItem3.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
-  <data name="barListItem1.Caption" xml:space="preserve">
-    <value>barListItem1</value>
+  <data name="barButtonItem1.Caption" xml:space="preserve">
+    <value>bug反馈           </value>
   </data>
   <data name="barBtnChangePwd.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -563,11 +557,90 @@
   <data name="barButtonItem1.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
-  <data name="&gt;&gt;ribbonPageGroup1.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.Ribbon.RibbonPageGroup, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
   <data name="&gt;&gt;barBtnChangePwd.Name" xml:space="preserve">
     <value>barBtnChangePwd</value>
+  </data>
+  <data name="MainForm.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA
+        AAA4XPiMN1341Tdd+N83XfjaN1342zdd+Ns3XfjbN1342zdd+Ns3XfjbN1342zdd+Ns3XfjbN1342zdd
+        +Ns3XfjbN1342zdd+Ns3XfjbN1342zdd+Ns3XfjbN1342zdd+Ns3XfjbN1342zdd+Ns3XfjbN1342jdd
+        +N83XfjVN1z4izhc+NU4XPiQOFz4Uzhc+Ek4XPhKOFz4Sjhc+Eo4XPhKOFz4Sjhc+Eo4XPhKOFz4Sjhc
+        +Eo4XPhKOFz4Sjhc+Eo4XPhKOFz4Sjhc+Eo4XPhKOFz4Sjhc+Eo4XPhKOFz4Sjhc+Eo4XPhKOFz4Sjhc
+        +Eo4XPhJOFz4Uzhc+JE4XPjVOlv44Dlb91Y4WfcJPVj8AztZ+gQ7WfoEO1n6BDtZ+gQ7WfoEO1n6BDtZ
+        +gQ7WfoEO1n6BDtZ+gQ7WfoEO1n6BDtZ+gQ7WfoEO1n6BDtZ+gQ7WfoEO1n6BDtZ+gQ7WfoEO1n6BDtZ
+        +gQ7WfoEO1n6BDxY/AM6WvYKOlv3Vzpb+OE8WvjcPFr3TTta8QQ6WvcAOVv5ADlb+QA5W/kAOVv5ADlb
+        +QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb
+        +QA5W/kAOVv5ADlb+QA5W/kAOln3ADpV8QQ7WfdOPFr43D1Z+Nw9WfdOO1ryBTxZ9AA7WvcAOVv5ADlb
+        +QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb+QA5W/kAOVv5ADlb
+        +QA5W/kAOVv5ADlb+QA5W/kAOVv5ADxZ9wA+V/QAP1XyBT5Y9089WfjcP1f43D5X9047VfIFPFb1AD1W
+        9QAAAAAARFP4AERT+ABEU/gARFP4AENU+ABDVPgAQ1T4AENU+AAAAAAAAAAAAAAAAAAAAAAARFL4AERS
+        +ABEUvgARFL4AERT+ABDVPgAOFn4AD9V+ABAVfgAP1f1AD9X9QA/V/IFP1f3Tz9X+NxAVvjcQFX3TkBU
+        8gVAVfUAQFX1AAAAAABEU/gARFP4AERT+ABEU/gAQ1T4AENU+ABDVPgAQ1T4AAAAAAAAAAAAAAAAAAAA
+        AABEUvgARFL4AERS+ABEUvgARFP4AEJU+AA3WfgAP1X4AEBV+AA/V/UAP1f1AD5Y8gVAVvdPQFb43EJU
+        +NxCVfdOQFbyBUFV9QBBVfUAAAAAAERT+ABEU/gARFP4B0RT+CFDVPgbQ1T4BUNU+ABDVPgAAAAAAAAA
+        AAAAAAAAAAAAAERS+ABEUvgARFL4BURS+B9EU/gjQlT4CjZZ+AA+VfgAP1X4AEBW9QA/V/UAPljyBUFV
+        909CVPjcRFP43ENU905AVfIFQVT1AEJU9QAAAAAARFP4AERT+ABEU/gjRFP4rkRT+JBDVPgYQ1T4AERU
+        +AAAAAAAAAAAAAAAAAAAAAAARVL4AEVS+ABFUvgcRFL4okRT+LhDVPg3O1r4AkFW+ABBVfgAQlP1AEJT
+        9QBBU/MFQ1P3T0RT+NxGUvfcRlH2TkRQ8wVFUfUARVH1AAAAAABGUvcARlL3AEZS9ypGUvfSRlL3r0ZS
+        9x1GUvcARlL3AAAAAAAAAAAAAAAAAAAAAABHUfcAR1H3AEdR9yJHUffDRlL33kZT90NFWPoCRlT4AEZU
+        +ABEUvUARFL1AEJS8wVFUvZPRlL33ElQ99xIUPZOQ1DzBUZQ9QBGUPUAAAAAAElQ9wBJUPcASVD3KklQ
+        985JUfesSVH3HElR9wBJUfcAAAAAAAAAAAAAAAAAAAAAAElQ9wBJUPcASVD3IklQ98BJUPfaSVD3QkdN
+        +gJIT/gASE/4AEdR9QBHUfUARlLzBUhR9k9JUPfcS0/33ElP9k5DUfMFRlD1AEdQ9QAAAAAAS0/3AEtP
+        9wBLT/cqS0/3z0tQ96xKUPccSlD3AE5M9wBRSvcAUUr2AFBL9wBVR+wASk/3AEpP9wBKT/ciSk/3wEtP
+        99pMTvdCUUz6Ak1O+ABNTvgASE71AEhO9QBFTfMFSk72T0tP99xNTffcTE72TklR8wVLUPUAS0/1AAAA
+        AABNTfcATU33AE1N9ypNTffOTU73qkxP9xhPTPcAUUr3AFFK9wBRSvYAUEv4AFRH8gBMTfcATE73AExO
+        9yJMTvfATU332k1N90JQUPoCTk74AE5O+ABJTPUASEz1AEVL8wVLTfZPTU333E9M99xPS/ZOT0rzBU9L
+        9QBPS/UAAAAAAE9M9wBPTPcAT0z3Kk9M99BQS/e7UEv3Q1FK9ylRSvcrUUr3KVFK9hxNTfgDU0f1AFcF
+        /wBPS/cAT0v3Ik9L98BPTPfaT033Qk9T+gJPT/gAT074AE1J9QBNSPUAS0bzBU5K9k9PTPfcUUr33FFJ
+        9k5RQ/MFUUb1AFFH9QAAAAAAUUr3AFFK9wBRSvcpUUr31FFK9+xRSvfCUUr3ulFK98JRSvfNUUr2p1JK
+        9z5RSPgKTkH1AVFK9wBRSvciUUr3wFFK99pSS/dCWlP6AlVO+ABUTfgAUUj1AFFI9QBRRvMFUUn2T1FK
+        99xTSffcU0j2TlVD8wVURvUAVEb1AAAAAABTSfcAU0n3AFNJ9ylTSffRU0j4zFJJ+G9TSfheUkn3e1JJ
+        97BTSffSU0j3xVNH91tTRvcKU0j3AFNJ9yJTSffAU0n32lRJ90JaR/oCVkj4AFVI+ABTR/UAU0f1AFNG
+        8wVTSPZPU0n33FVG99xVRvZOV0TzBVZF9QBWRfUAAAAAAFVG9wBVRvcAVUb3KlVG989WRveuVkb3I1ZG
+        +QZUSPgQU0r3G1VI90hVRvfRVUb3xFVF9ypWR/cAVkf3IlZH98BVRvfaVUb3QlRF+gJVRvgAVUb4AFZE
+        9QBWQ/UAV0LzBVZF9k9VRvfcWET33FlD9k5aQPMFWUH1AFlC9QAAAAAAWET3AFhE9wBYRPcqWET3zlhF
+        96tYRfcbV0b3AFNJ+ABUR/cAWkb3DlhF94FYRPfRWET3V1VA9wNYRPchWET3wFhE99pXQ/dCUjv6AlZA
+        +ABWQfgAWEP1AFhD9QBXQvMFWET2T1hE99xbQ/fcWkL2Tlk/8wVaQfUAWkH1AAAAAABbQ/cAW0P3AFtD
+        9ypbQ/fPWkP3rFpD9xxaQ/cAWkP3AFpF+ABaRfgHW0P3VVtD98xaQ/d3WkP3DFpD9yBaQ/fAW0P32ltC
+        90JbOvoCWz/4AFtA+ABaQvUAWkL1AFpC8wVbQ/ZPW0P33F1B99xcQfZOWT/zBVpA9QBbQPUAAAAAAF1B
+        9wBdQfcAXUH3Kl1B985dQverXUL3G15A9wBhPfYAYD/3AFtB9g1dQfZ6XUH30l1C92VbQ/YHXUL3IF1C
+        98BdQffaXUH3Qlo++gJcQPgAXED4AFtA9QBbP/UAWT7zBVxA9k9dQffcX0D33F8+9k5dOvMFXjz1AF49
+        9QAAAAAAX0D3AF9A9wBfQPcqX0D3z19A969fP/cmXzr3CWA99hFhPvcbXz/3Rl9A99FfQPfRXj/1M2FC
+        /ABfP/ciXz/3wF9A99peQPdCWUH6Al1A+ABdQPgAXD/1AFs/9QBZPvMFXj/2T19A99xhPvfcYT32Tl86
+        8wVgPPUAYDz1AAAAAABhPvcAYT73AGE+9yphPvfVYT7302E993thPPZqYj32gGI+97BhPvfWYT732GA/
+        94tfP/YXYD/4AGA+9yJhPvfDYT733WE+90NkQPoCYj/4AGI/+ABfPvUAXz71AF0+8wVgPvZPYT733GM9
+        9txjPfZOYzv0BWM89QBjPPUAAAAAAGM99gBjPfYAYz32ImM99rNjPfbRYz32wGM99r5jPfbDYz320GI9
+        9r1iPvZcYD/3G2BA+ANiPPcAYjz3HWM896ZjPfa9Yzz3OWQ0/AJjOfkAYzr4AGE79QBhOvUAXzn0BWI8
+        9k9jPfbcZTz23GU89k5jO/QFZDv1AGQ79QAAAAAAYz32AGM99gBjPfYGYz32ImM99ipjPfYrYz32K2M9
+        9itjPfYqYz32IWI99gphP/gAYD/3AGM79ABjO/QJYzv1MWQ89jdkOvgRZCv/AWQ1/ABkNvsAZDr1AGQ6
+        9QBjOPQFZTv2T2U89txnOvbcZjn2TmM29AVkN/UAZTj1AAAAAABjPfYAYz32AGM99gBjPfYAYz32AGM9
+        9gBjPfYAYz32AGM99gBjPfYAYj32AF8+9ABgPvYAYjffAGI23ABlNuUCazP3Am0u/wBsDv8AbSP/AG0m
+        /wBmOvUAZjr1AGU69AVmOvZPZzr23Gg49txoOPZOaDb0BWg39QBoN/UAAAAAAGM99gBjPfYAYz32AGM9
+        9gBjPfYAYz32AGM99gBjPfYAYz32AGM99gBiPvYAYD/2AGE98wBjOu0AYzrsAGQ68ABmOfcAZzb8AGci
+        /wBnMP8AZzL/AGk59QBpOfUAajr0BWk59k9oOPbcajf23Gk39k5oN/QFaTf1AGk39QAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYzrvAGM67wBjOu4AZDrxAGU6
+        9wBmN/sAZiX/AGYx/wBmM/8Aajb1AGo29QBqNfQFajb2T2o39txrNvbcazb2Tmk29AVpNvUAbDP2AG0x
+        9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x
+        9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBsM/YAajX1AGk09AVrNvZPazb23G019txtNPZMbTDzBG0y
+        9gBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x
+        9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBtMfcAbTH3AG0x9wBsM/YAZzbzBGw19k5tNfbcbzT24W8z
+        9lhtMfYNajD4Bmow+AdqMPgHajD4B2ow+AdqMPgHajD4B2ow+AdqMPgHajD4B2ow+AdqMPgHajD4B2ow
+        +AdqMPgHajD4B2ow+AdqMPgHajD4B2ow+AdqMPgHajD4B2ow+AdqMPgHajD4B2ow+AZtMvYNbzT2WW80
+        9uFwM/bVcDP2mG8y9l9vMfdVbzL2Vm8y9lZvMvZWbzL2Vm8y9lZvMvZWbzL2Vm8y9lZvMvZWbzL2Vm8y
+        9lZvMvZWbzL2Vm8y9lZvMvZWbzL2Vm8y9lZvMvZWbzL2Vm8y9lZvMvZWbzL2Vm8y9lZvMvZWbzH3VXAy
+        9l9wMvaZcDP21XAy9oRxMvbVcTL243Ey9t5xMvbecTL23nEy9t5xMvbecTL23nEy9t5xMvbecTL23nEy
+        9t5xMvbecTL23nEy9t5xMvbecTL23nEy9t5xMvbecTL23nEy9t5xMvbecTL23nEy9t5xMvbecTL23nEy
+        9t5xMvbecTL243Ey9tVwMfaDAAAAAAAAAAAAAAAAAAAAAAAAAAAEA8AABAPAAAQDwAAEA8AABAPAAAQD
+        wAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQA
+        AAAH/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+</value>
+  </data>
+  <data name="resource.ExpandedWidth" type="System.Int32, mscorlib">
+    <value>184</value>
+  </data>
+  <data name="barStaticItem3.Caption" xml:space="preserve">
+    <value>barStaticItem3</value>
   </data>
   <data name="&gt;&gt;barStaticItem3.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarStaticItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
@@ -580,6 +653,9 @@
   </data>
   <data name="&gt;&gt;xtraTabbedMdiManager1.Type" xml:space="preserve">
     <value>DevExpress.XtraTabbedMdi.XtraTabbedMdiManager, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;ribbonPage1.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.RibbonPage, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1165, 798</value>
@@ -651,13 +727,13 @@
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>zh-CN</value>
   </metadata>
-  <metadata name="defaultLookAndFeel1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>309, 17</value>
-  </metadata>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>219, 17</value>
   </metadata>
   <metadata name="xtraTabbedMdiManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="defaultLookAndFeel1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>309, 17</value>
   </metadata>
 </root>

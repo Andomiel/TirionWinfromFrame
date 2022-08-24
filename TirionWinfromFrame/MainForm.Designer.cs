@@ -48,6 +48,7 @@ namespace TirionWinfromFrame
             this.barBtnChangePwd = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
@@ -55,7 +56,6 @@ namespace TirionWinfromFrame
             this.bsi_UserName = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTimeEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
@@ -257,6 +257,12 @@ namespace TirionWinfromFrame
             this.ribbonPageGroup1.ItemLinks.Add(this.btnabout);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barBtnChangePwd);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            // 
             // ribbonStatusBar1
             // 
             resources.ApplyResources(this.ribbonStatusBar1, "ribbonStatusBar1");
@@ -311,12 +317,6 @@ namespace TirionWinfromFrame
             // 
             this.defaultLookAndFeel1.LookAndFeel.SkinName = "DevExpress Style";
             // 
-            // ribbonPageGroup2
-            // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.barBtnChangePwd);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem3);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -328,6 +328,7 @@ namespace TirionWinfromFrame
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("MainForm.IconOptions.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MainForm";
             this.Ribbon = this.ribbonControl1;
