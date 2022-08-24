@@ -116,6 +116,7 @@
     <Compile Include="Facade\LightShelfResponse.cs" />
     <Compile Include="Facade\ReformShelfRequest.cs" />
     <Compile Include="Facade\ReformShelfResponse.cs" />
+    <Compile Include="Facade\WMSInventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
