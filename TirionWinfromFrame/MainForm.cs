@@ -35,7 +35,7 @@ namespace TirionWinfromFrame
         {
             using (var db = new MESDB())
             {
-                AppInfo.FunctionList = db.Database.SqlQuery<string>(string.Format(@"SELECT  a.functionCode
+                AppInfo.FunctionList = db.Database.SqlQuery<string>(string.Format(@"SELECT distinct a.functionCode
                 FROM[dbo].[sysFunction] a
                     left join[dbo].[sysRoleFunction] b on a.id = b.functionId
                     left join[dbo].[sysUserRole] c on b.roleId = c.roleId
