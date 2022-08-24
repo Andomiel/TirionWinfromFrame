@@ -332,7 +332,7 @@ namespace iWms.Form
 
                     new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivering;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.SelectedCells[0].OwningRow.Index);
+                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
                     "出库任务下达成功！".ShowTips();
                 }
@@ -450,7 +450,7 @@ namespace iWms.Form
 
                     new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.SelectedCells[0].OwningRow.Index);
+                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
                     $"出库单:{selectedOrder.DeliveryNo}捡料完成".ShowTips();
                 }
@@ -637,7 +637,7 @@ namespace iWms.Form
                     CancelDeliveryOrderBarcodes((int)DeliveryOrderStatusEnum.Closed);
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Closed;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.SelectedCells[0].OwningRow.Index);
+                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
                     _ = "工单取消成功".ShowTips();
                 }
             }
@@ -696,7 +696,7 @@ namespace iWms.Form
                     BuildDeliveryFromWorkOrder(isContainSorting);
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Calculated;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.SelectedCells[0].OwningRow.Index);
+                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
                     _ = "工单计算发料成功".ShowTips();
                 }
             }
@@ -789,7 +789,7 @@ namespace iWms.Form
 
                     new DeliveryBll().SpecialFinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).ToList());
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.SelectedCells[0].OwningRow.Index);
+                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
                 }
             }
             catch (Exception ex)
