@@ -39,8 +39,9 @@ namespace TirionWinfromFrame
                 {
                     using (var con = new MESDB())
                     {
-                        AppInfo.LoginUserInfo.password = MD5Utils.GetMD5_32(txtOriginPwd.Text.Trim());
-                        con.sysUserInfo.AddOrUpdate(AppInfo.LoginUserInfo);
+                        sysUserInfo user = con.sysUserInfo.Where(p => p.account == AppInfo.LoginUserInfo.account).FirstOrDefault();
+                        user.password = MD5Utils.GetMD5_32(txtNewPwd.Text.Trim());
+                        con.sysUserInfo.AddOrUpdate(user);
                         con.SaveChanges();
                         "保存成功".ShowTips();
                         this.DialogResult = DialogResult.OK;

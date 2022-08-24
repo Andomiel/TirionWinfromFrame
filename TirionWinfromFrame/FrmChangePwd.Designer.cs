@@ -32,7 +32,6 @@ namespace TirionWinfromFrame
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnCanel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOk = new DevExpress.XtraEditors.SimpleButton();
-            this.btnTestConn = new DevExpress.XtraEditors.SimpleButton();
             this.txtConfirmPwd = new DevExpress.XtraEditors.TextEdit();
             this.txtNewPwd = new DevExpress.XtraEditors.TextEdit();
             this.txtOriginPwd = new DevExpress.XtraEditors.TextEdit();
@@ -43,7 +42,6 @@ namespace TirionWinfromFrame
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -58,7 +56,6 @@ namespace TirionWinfromFrame
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.SuspendLayout();
@@ -67,7 +64,6 @@ namespace TirionWinfromFrame
             // 
             this.layoutControl1.Controls.Add(this.btnCanel);
             this.layoutControl1.Controls.Add(this.btnOk);
-            this.layoutControl1.Controls.Add(this.btnTestConn);
             this.layoutControl1.Controls.Add(this.txtConfirmPwd);
             this.layoutControl1.Controls.Add(this.txtNewPwd);
             this.layoutControl1.Controls.Add(this.txtOriginPwd);
@@ -83,9 +79,9 @@ namespace TirionWinfromFrame
             // 
             // btnCanel
             // 
-            this.btnCanel.Location = new System.Drawing.Point(305, 225);
+            this.btnCanel.Location = new System.Drawing.Point(208, 225);
             this.btnCanel.Name = "btnCanel";
-            this.btnCanel.Size = new System.Drawing.Size(95, 22);
+            this.btnCanel.Size = new System.Drawing.Size(192, 22);
             this.btnCanel.StyleController = this.layoutControl1;
             this.btnCanel.TabIndex = 12;
             this.btnCanel.Text = "取消";
@@ -93,23 +89,13 @@ namespace TirionWinfromFrame
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(207, 225);
+            this.btnOk.Location = new System.Drawing.Point(12, 225);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(94, 22);
+            this.btnOk.Size = new System.Drawing.Size(192, 22);
             this.btnOk.StyleController = this.layoutControl1;
             this.btnOk.TabIndex = 11;
             this.btnOk.Text = "确定";
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btnTestConn
-            // 
-            this.btnTestConn.Location = new System.Drawing.Point(12, 225);
-            this.btnTestConn.Name = "btnTestConn";
-            this.btnTestConn.Size = new System.Drawing.Size(191, 22);
-            this.btnTestConn.StyleController = this.layoutControl1;
-            this.btnTestConn.TabIndex = 10;
-            this.btnTestConn.Text = "测试连接";
-            this.btnTestConn.Visible = false;
             // 
             // txtConfirmPwd
             // 
@@ -154,7 +140,6 @@ namespace TirionWinfromFrame
             this.layoutControlItem2,
             this.layoutControlItem3,
             this.layoutControlItem4,
-            this.layoutControlItem7,
             this.layoutControlItem8,
             this.layoutControlItem9});
             this.Root.Name = "Root";
@@ -206,30 +191,21 @@ namespace TirionWinfromFrame
             this.layoutControlItem4.Text = "确认新密码：";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(72, 14);
             // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.Control = this.btnTestConn;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 213);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(195, 26);
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem7.TextVisible = false;
-            // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.btnOk;
-            this.layoutControlItem8.Location = new System.Drawing.Point(195, 213);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 213);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(98, 26);
+            this.layoutControlItem8.Size = new System.Drawing.Size(196, 26);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnCanel;
-            this.layoutControlItem9.Location = new System.Drawing.Point(293, 213);
+            this.layoutControlItem9.Location = new System.Drawing.Point(196, 213);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(99, 26);
+            this.layoutControlItem9.Size = new System.Drawing.Size(196, 26);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
@@ -254,7 +230,6 @@ namespace TirionWinfromFrame
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.ResumeLayout(false);
@@ -278,7 +253,5 @@ namespace TirionWinfromFrame
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private DevExpress.XtraEditors.SimpleButton btnTestConn;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
     }
 }

@@ -137,7 +137,8 @@ namespace TirionWinfromFrame
 
         private void barBtnChangePwd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            FrmChangePwd pwdFrm = new FrmChangePwd();
+            pwdFrm.ShowDialog();
         }
     }
 }
