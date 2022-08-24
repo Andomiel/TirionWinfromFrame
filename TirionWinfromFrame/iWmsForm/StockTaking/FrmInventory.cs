@@ -1,4 +1,5 @@
-﻿using Entity.Facade;
+﻿using DevExpress.XtraSplashScreen;
+using Entity.Facade;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -42,7 +43,6 @@ namespace iWms.Form
         /// </summary>
         private void LoadInventory(string sku = "")
         {
-
             string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetWMSInventory";
             if (!string.IsNullOrWhiteSpace(sku))
             {
@@ -69,7 +69,16 @@ namespace iWms.Form
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            LoadInventory(txtPartNumber.Text);
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                LoadInventory(txtPartNumber.Text);
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            SplashScreenManager.CloseForm();
         }
 
         /// <summary>
