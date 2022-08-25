@@ -119,7 +119,7 @@ namespace iWms.Form
             {
                 wave = "Success.wav";
             }
-            player.SoundLocation = $"{Application.StartupPath}/Waves/{wave}";
+            player.SoundLocation = $"{Application.StartupPath}\\Waves\\{wave}";
             player.Load();//同步播放，可使用异步
             player.Play();
         }
