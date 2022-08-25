@@ -35,14 +35,14 @@ namespace iWms.Form
             this.label1 = new System.Windows.Forms.Label();
             this.tbKey = new System.Windows.Forms.TextBox();
             this.btnQuery = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.dgvLogs = new System.Windows.Forms.DataGridView();
             this.colTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pgLog = new System.Windows.Forms.PropertyGrid();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.tlpLoayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
@@ -58,12 +58,12 @@ namespace iWms.Form
             this.tlpLoayout.Controls.Add(this.dgvLogs, 0, 1);
             this.tlpLoayout.Controls.Add(this.pgLog, 1, 1);
             this.tlpLoayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLoayout.Location = new System.Drawing.Point(0, 0);
+            this.tlpLoayout.Location = new System.Drawing.Point(0, 34);
             this.tlpLoayout.Name = "tlpLoayout";
             this.tlpLoayout.RowCount = 2;
-            this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLoayout.Size = new System.Drawing.Size(1037, 539);
+            this.tlpLoayout.Size = new System.Drawing.Size(1210, 595);
             this.tlpLoayout.TabIndex = 0;
             // 
             // gbConditions
@@ -73,22 +73,22 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1031, 114);
+            this.gbConditions.Size = new System.Drawing.Size(1204, 134);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
             // tlpConditions
             // 
             this.tlpConditions.ColumnCount = 10;
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpConditions.Controls.Add(this.label1, 1, 1);
             this.tlpConditions.Controls.Add(this.tbKey, 2, 1);
@@ -96,22 +96,22 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.label2, 4, 1);
             this.tlpConditions.Controls.Add(this.dtpTime, 5, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpConditions.Location = new System.Drawing.Point(3, 17);
+            this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
             this.tlpConditions.RowCount = 3;
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpConditions.Size = new System.Drawing.Size(1025, 94);
+            this.tlpConditions.Size = new System.Drawing.Size(1198, 113);
             this.tlpConditions.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(43, 32);
+            this.label1.Location = new System.Drawing.Point(50, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 30);
+            this.label1.Size = new System.Drawing.Size(87, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "查询条件";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -120,21 +120,43 @@ namespace iWms.Form
             // 
             this.tlpConditions.SetColumnSpan(this.tbKey, 2);
             this.tbKey.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbKey.Location = new System.Drawing.Point(123, 35);
+            this.tbKey.Location = new System.Drawing.Point(143, 44);
             this.tbKey.Name = "tbKey";
-            this.tbKey.Size = new System.Drawing.Size(234, 21);
+            this.tbKey.Size = new System.Drawing.Size(274, 22);
             this.tbKey.TabIndex = 1;
             // 
             // btnQuery
             // 
             this.btnQuery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnQuery.Location = new System.Drawing.Point(603, 35);
+            this.btnQuery.Location = new System.Drawing.Point(703, 44);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(114, 24);
+            this.btnQuery.Size = new System.Drawing.Size(134, 24);
             this.btnQuery.TabIndex = 2;
             this.btnQuery.Text = "查询日志";
             this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(423, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 30);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "日期";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dtpTime
+            // 
+            this.dtpTime.CustomFormat = "yyyy-MM-dd";
+            this.dtpTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTime.Location = new System.Drawing.Point(516, 44);
+            this.dtpTime.MinDate = new System.DateTime(2022, 1, 1, 0, 0, 0, 0);
+            this.dtpTime.Name = "dtpTime";
+            this.dtpTime.Size = new System.Drawing.Size(134, 22);
+            this.dtpTime.TabIndex = 4;
             // 
             // dgvLogs
             // 
@@ -149,13 +171,13 @@ namespace iWms.Form
             this.colRequest,
             this.colResult});
             this.dgvLogs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLogs.Location = new System.Drawing.Point(3, 123);
+            this.dgvLogs.Location = new System.Drawing.Point(3, 143);
             this.dgvLogs.MultiSelect = false;
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.ReadOnly = true;
             this.dgvLogs.RowTemplate.Height = 23;
             this.dgvLogs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLogs.Size = new System.Drawing.Size(616, 413);
+            this.dgvLogs.Size = new System.Drawing.Size(720, 449);
             this.dgvLogs.TabIndex = 1;
             this.dgvLogs.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvLogs_RowPostPaint);
             this.dgvLogs.SelectionChanged += new System.EventHandler(this.DgvLogs_SelectionChanged);
@@ -191,41 +213,20 @@ namespace iWms.Form
             // pgLog
             // 
             this.pgLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pgLog.Location = new System.Drawing.Point(625, 123);
+            this.pgLog.Location = new System.Drawing.Point(729, 143);
             this.pgLog.Name = "pgLog";
-            this.pgLog.Size = new System.Drawing.Size(409, 413);
+            this.pgLog.Size = new System.Drawing.Size(478, 449);
             this.pgLog.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(363, 32);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 30);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "日期";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dtpTime
-            // 
-            this.dtpTime.CustomFormat = "yyyy-MM-dd";
-            this.dtpTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTime.Location = new System.Drawing.Point(443, 35);
-            this.dtpTime.MinDate = new System.DateTime(2022, 1, 1, 0, 0, 0, 0);
-            this.dtpTime.Name = "dtpTime";
-            this.dtpTime.Size = new System.Drawing.Size(114, 21);
-            this.dtpTime.TabIndex = 4;
             // 
             // FrmLogs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1037, 539);
+            this.ClientSize = new System.Drawing.Size(1210, 629);
             this.Controls.Add(this.tlpLoayout);
             this.Name = "FrmLogs";
             this.Text = "FrmLogs";
+            this.Controls.SetChildIndex(this.tlpLoayout, 0);
             this.tlpLoayout.ResumeLayout(false);
             this.gbConditions.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);

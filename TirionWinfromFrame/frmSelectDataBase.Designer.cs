@@ -109,7 +109,7 @@ namespace TirionWinfromFrame
             // 
             this.completionWizardPage1.Controls.Add(this.layoutControl1);
             this.completionWizardPage1.Name = "completionWizardPage1";
-            this.completionWizardPage1.Size = new System.Drawing.Size(712, 349);
+            this.completionWizardPage1.Size = new System.Drawing.Size(712, 350);
             this.completionWizardPage1.Text = "明细设置";
             // 
             // layoutControl1
@@ -125,34 +125,34 @@ namespace TirionWinfromFrame
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(712, 349);
+            this.layoutControl1.Size = new System.Drawing.Size(712, 350);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // isEntity
             // 
-            this.isEntity.Location = new System.Drawing.Point(466, 12);
+            this.isEntity.Location = new System.Drawing.Point(463, 12);
             this.isEntity.Name = "isEntity";
             this.isEntity.Properties.Caption = "生成实体类";
-            this.isEntity.Size = new System.Drawing.Size(82, 19);
+            this.isEntity.Size = new System.Drawing.Size(83, 20);
             this.isEntity.StyleController = this.layoutControl1;
             this.isEntity.TabIndex = 10;
             // 
             // isDB
             // 
-            this.isDB.Location = new System.Drawing.Point(626, 12);
+            this.isDB.Location = new System.Drawing.Point(625, 12);
             this.isDB.Name = "isDB";
             this.isDB.Properties.Caption = "生成EFDB";
-            this.isDB.Size = new System.Drawing.Size(74, 19);
+            this.isDB.Size = new System.Drawing.Size(75, 20);
             this.isDB.StyleController = this.layoutControl1;
             this.isDB.TabIndex = 9;
             // 
             // isWinform
             // 
-            this.isWinform.Location = new System.Drawing.Point(552, 12);
+            this.isWinform.Location = new System.Drawing.Point(550, 12);
             this.isWinform.Name = "isWinform";
             this.isWinform.Properties.Caption = "生成界面";
-            this.isWinform.Size = new System.Drawing.Size(70, 19);
+            this.isWinform.Size = new System.Drawing.Size(71, 20);
             this.isWinform.StyleController = this.layoutControl1;
             this.isWinform.TabIndex = 9;
             // 
@@ -166,7 +166,7 @@ namespace TirionWinfromFrame
             this.repositoryItemCheckEdit2,
             this.repositoryItemComboBox1,
             this.repositoryItemComboBox2});
-            this.gridControl1.Size = new System.Drawing.Size(688, 299);
+            this.gridControl1.Size = new System.Drawing.Size(688, 300);
             this.gridControl1.TabIndex = 7;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -340,7 +340,7 @@ namespace TirionWinfromFrame
             // 
             this.simpleButton1.Location = new System.Drawing.Point(388, 12);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(74, 22);
+            this.simpleButton1.Size = new System.Drawing.Size(71, 22);
             this.simpleButton1.StyleController = this.layoutControl1;
             this.simpleButton1.TabIndex = 6;
             this.simpleButton1.Text = "浏览";
@@ -376,7 +376,7 @@ namespace TirionWinfromFrame
             this.layoutControlItem3,
             this.layoutControlItem6});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(712, 349);
+            this.Root.Size = new System.Drawing.Size(712, 350);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -402,25 +402,25 @@ namespace TirionWinfromFrame
             this.layoutControlItem4.Control = this.gridControl1;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(692, 303);
+            this.layoutControlItem4.Size = new System.Drawing.Size(692, 304);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.isWinform;
-            this.layoutControlItem5.Location = new System.Drawing.Point(540, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(538, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(74, 26);
+            this.layoutControlItem5.Size = new System.Drawing.Size(75, 26);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.isEntity;
-            this.layoutControlItem7.Location = new System.Drawing.Point(454, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(451, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(86, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(87, 26);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
@@ -429,7 +429,7 @@ namespace TirionWinfromFrame
             this.layoutControlItem3.Control = this.simpleButton1;
             this.layoutControlItem3.Location = new System.Drawing.Point(376, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(78, 26);
+            this.layoutControlItem3.Size = new System.Drawing.Size(75, 26);
             this.layoutControlItem3.Text = "浏览";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
@@ -437,9 +437,9 @@ namespace TirionWinfromFrame
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.isDB;
-            this.layoutControlItem6.Location = new System.Drawing.Point(614, 0);
+            this.layoutControlItem6.Location = new System.Drawing.Point(613, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(78, 26);
+            this.layoutControlItem6.Size = new System.Drawing.Size(79, 26);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
@@ -447,7 +447,7 @@ namespace TirionWinfromFrame
             // 
             this.wizardPage1.Controls.Add(this.cmbtablelist);
             this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(712, 349);
+            this.wizardPage1.Size = new System.Drawing.Size(712, 350);
             this.wizardPage1.Text = "选择要生成的数据库表";
             // 
             // cmbtablelist
@@ -467,7 +467,7 @@ namespace TirionWinfromFrame
             this.welcomeWizardPage1.Controls.Add(this.cmbDataBaseList);
             this.welcomeWizardPage1.Controls.Add(this.label1);
             this.welcomeWizardPage1.Name = "welcomeWizardPage1";
-            this.welcomeWizardPage1.Size = new System.Drawing.Size(712, 349);
+            this.welcomeWizardPage1.Size = new System.Drawing.Size(712, 350);
             this.welcomeWizardPage1.Text = "选择您的数据连接";
             // 
             // txtConnurl

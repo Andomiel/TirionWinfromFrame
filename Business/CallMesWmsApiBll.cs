@@ -203,25 +203,18 @@ namespace Business
 
         public static PagedList<RequestLog> GetLogs(string requestKey, DateTime dt)
         {
-            try
+            var request = new LogModel()
             {
-                var request = new LogModel()
-                {
-                    RequestBody = requestKey,
-                    Level = "Info",
-                    StartDate = dt.Date.ToString("yyyy-MM-dd"),
-                    EndDate = dt.Date.AddDays(1).ToString("yyyy-MM-dd"),
-                    Pagination = new Pagination() { ItemsPerPage = 30, Page = 1 },
-                };
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/GetPagedList";
-                string requestJson = JsonConvert.SerializeObject(request);
-                string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
-                return JsonConvert.DeserializeObject<PagedList<RequestLog>>(strResponse);
-            }
-            catch
-            {
-                return null;
-            }
+                RequestBody = requestKey,
+                Level = "Info",
+                StartDate = dt.Date.ToString("yyyy-MM-dd"),
+                EndDate = dt.Date.AddDays(1).ToString("yyyy-MM-dd"),
+                Pagination = new Pagination() { ItemsPerPage = 30, Page = 1 },
+            };
+            string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/GetPagedList";
+            string requestJson = JsonConvert.SerializeObject(request);
+            string strResponse = WebClientHelper.Post(requestJson, url, null);
+            return JsonConvert.DeserializeObject<PagedList<RequestLog>>(strResponse);
         }
     }
     /// <summary>
