@@ -95,6 +95,7 @@ namespace iWms.Form
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -783,6 +784,7 @@ namespace iWms.Form
             this.dgvUpns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colUpn,
             this.colInnerCount,
+            this.colTower,
             this.colOperator});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -820,6 +822,13 @@ namespace iWms.Form
             this.colInnerCount.MinimumWidth = 9;
             this.colInnerCount.Name = "colInnerCount";
             this.colInnerCount.ReadOnly = true;
+            // 
+            // colTower
+            // 
+            this.colTower.DataPropertyName = "TowerDisplay";
+            this.colTower.HeaderText = "出库库区";
+            this.colTower.Name = "colTower";
+            this.colTower.ReadOnly = true;
             // 
             // colOperator
             // 
@@ -909,9 +918,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.Button btnSpecial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
@@ -920,5 +926,9 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colSortingId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
     }
 }
