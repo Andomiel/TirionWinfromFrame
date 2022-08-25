@@ -1,5 +1,6 @@
 ﻿using Business;
 using Commons;
+using DevExpress.XtraSplashScreen;
 using Entity.Dto;
 using Mapster;
 using System;
@@ -29,6 +30,7 @@ namespace iWms.Form
 
         private void BtnQuery_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
                 lock (lockButtonObj)
@@ -57,6 +59,7 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
+            SplashScreenManager.CloseForm();
         }
 
         private void DgvLogs_SelectionChanged(object sender, EventArgs e)
