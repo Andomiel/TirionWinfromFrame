@@ -220,162 +220,6 @@
     <Compile Include="Entity\sysToolButtonInfo.cs" />
     <Compile Include="Entity\sysUserInfo.cs" />
     <Compile Include="Entity\workorderInfo.cs" />
-    <Compile Include="Form\Frmbuyer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmbuyer.designer.cs">
-      <DependentUpon>Frmbuyer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmbuyerInWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmbuyerInWarehouse.designer.cs">
-      <DependentUpon>FrmbuyerInWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmbuyerOutWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmbuyerOutWarehouse.designer.cs">
-      <DependentUpon>FrmbuyerOutWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmbuyerreturn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmbuyerreturn.designer.cs">
-      <DependentUpon>Frmbuyerreturn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmcompletionProductInWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmcompletionProductInWarehouse.designer.cs">
-      <DependentUpon>FrmcompletionProductInWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmcustomer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmcustomer.designer.cs">
-      <DependentUpon>Frmcustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmdeliversale.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmdeliversale.designer.cs">
-      <DependentUpon>Frmdeliversale.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmfinishProductInInWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmfinishProductInInWarehouse.designer.cs">
-      <DependentUpon>FrmfinishProductInInWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmGupiao.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmGupiao.Designer.cs">
-      <DependentUpon>FrmGupiao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmmaterial.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmmaterial.designer.cs">
-      <DependentUpon>Frmmaterial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmproduct.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmproduct.designer.cs">
-      <DependentUpon>Frmproduct.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmproductBOM.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmproductBOM.designer.cs">
-      <DependentUpon>FrmproductBOM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmproductionBOM.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmproductionBOM.designer.cs">
-      <DependentUpon>FrmproductionBOM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmproductionMaterialReturn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmproductionMaterialReturn.designer.cs">
-      <DependentUpon>FrmproductionMaterialReturn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmproductionRequisition.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmproductionRequisition.designer.cs">
-      <DependentUpon>FrmproductionRequisition.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmproductMaterialInWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmproductMaterialInWarehouse.designer.cs">
-      <DependentUpon>FrmproductMaterialInWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmproductMaterialOutWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmproductMaterialOutWarehouse.designer.cs">
-      <DependentUpon>FrmproductMaterialOutWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmquotation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmquotation.designer.cs">
-      <DependentUpon>Frmquotation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmrequisition.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmrequisition.designer.cs">
-      <DependentUpon>Frmrequisition.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmreturnsale.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmreturnsale.designer.cs">
-      <DependentUpon>Frmreturnsale.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmsale.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmsale.designer.cs">
-      <DependentUpon>Frmsale.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmsaleInWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmsaleInWarehouse.designer.cs">
-      <DependentUpon>FrmsaleInWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmsaleOutWarehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmsaleOutWarehouse.designer.cs">
-      <DependentUpon>FrmsaleOutWarehouse.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmstock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmstock.designer.cs">
-      <DependentUpon>Frmstock.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmStockShow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\FrmStockShow.Designer.cs">
-      <DependentUpon>FrmStockShow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmsupplier.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmsupplier.designer.cs">
-      <DependentUpon>Frmsupplier.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form\FrmsysDept.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -429,12 +273,6 @@
     </Compile>
     <Compile Include="Form\FrmTest.Designer.cs">
       <DependentUpon>FrmTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form\Frmworkorder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\Frmworkorder.designer.cs">
-      <DependentUpon>Frmworkorder.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmBaseEdit.cs">
       <SubType>Form</SubType>
@@ -659,84 +497,6 @@
     <EmbeddedResource Include="BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmbuyer.resx">
-      <DependentUpon>Frmbuyer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmbuyerInWarehouse.resx">
-      <DependentUpon>FrmbuyerInWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmbuyerOutWarehouse.resx">
-      <DependentUpon>FrmbuyerOutWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmbuyerreturn.resx">
-      <DependentUpon>Frmbuyerreturn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmcompletionProductInWarehouse.resx">
-      <DependentUpon>FrmcompletionProductInWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmcustomer.resx">
-      <DependentUpon>Frmcustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmdeliversale.resx">
-      <DependentUpon>Frmdeliversale.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmfinishProductInInWarehouse.resx">
-      <DependentUpon>FrmfinishProductInInWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmGupiao.resx">
-      <DependentUpon>FrmGupiao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmmaterial.resx">
-      <DependentUpon>Frmmaterial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmproduct.resx">
-      <DependentUpon>Frmproduct.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmproductBOM.resx">
-      <DependentUpon>FrmproductBOM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmproductionBOM.resx">
-      <DependentUpon>FrmproductionBOM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmproductionMaterialReturn.resx">
-      <DependentUpon>FrmproductionMaterialReturn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmproductionRequisition.resx">
-      <DependentUpon>FrmproductionRequisition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmproductMaterialInWarehouse.resx">
-      <DependentUpon>FrmproductMaterialInWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmproductMaterialOutWarehouse.resx">
-      <DependentUpon>FrmproductMaterialOutWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmquotation.resx">
-      <DependentUpon>Frmquotation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmrequisition.resx">
-      <DependentUpon>Frmrequisition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmreturnsale.resx">
-      <DependentUpon>Frmreturnsale.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmsale.resx">
-      <DependentUpon>Frmsale.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmsaleInWarehouse.resx">
-      <DependentUpon>FrmsaleInWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmsaleOutWarehouse.resx">
-      <DependentUpon>FrmsaleOutWarehouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmstock.resx">
-      <DependentUpon>Frmstock.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\FrmStockShow.resx">
-      <DependentUpon>FrmStockShow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmsupplier.resx">
-      <DependentUpon>Frmsupplier.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmsysDept.resx">
       <DependentUpon>FrmsysDept.cs</DependentUpon>
     </EmbeddedResource>
@@ -763,9 +523,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FrmTest.resx">
       <DependentUpon>FrmTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\Frmworkorder.resx">
-      <DependentUpon>Frmworkorder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmBaseEdit.resx">
       <DependentUpon>FrmBaseEdit.cs</DependentUpon>
