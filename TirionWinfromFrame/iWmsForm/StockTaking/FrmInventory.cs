@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraSplashScreen;
+﻿using Business;
+using DevExpress.XtraSplashScreen;
 using Entity.Facade;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -55,10 +57,28 @@ namespace iWms.Form
             {
                 response = new List<WMSInventory>();
             }
+
+            var materials = WareHouseBLL.CensusMaterials();
             foreach (var item in response)
             {
-                item.Difference = $"{int.Parse(item.QTY) - int.Parse(item.IWMS_QTY)}";
+                var material = materials.FirstOrDefault(p => p.MaterialNo == item.SKU);
+                int iwmsCount = 0;
+                if (material != null)
+                {
+                    iwmsCount = material.TotalCount;
+                    materials.Remove(material);
+                }
+                item.IWMS_QTY = iwmsCount.ToString();
+                item.Difference = $"{TypeParse.StrToInt(item.QTY, 0) - iwmsCount}";
                 CompareResults.Add(item);
+            }
+            foreach (var item in materials)
+            {
+                CompareResults.Add(new WMSInventory()
+                {
+                    Difference = (-item.TotalCount).ToString(),
+                    SKU = item.MaterialNo
+                });
             }
         }
 

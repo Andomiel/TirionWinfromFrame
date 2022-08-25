@@ -196,5 +196,13 @@ namespace Business
                     WHERE  wia.DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<InstockAreaDto>();
         }
+
+        public static List<MaterialCensusDto> CensusMaterials()
+        {
+            string sql = @"select Part_Number as MaterialNo,SUM(qty) as TotalCount from smt_zd_material
+                where Status>0 and Status<3
+                group by Part_Number";
+            return DbHelper.GetDataTable(sql).DataTableToList<MaterialCensusDto>();
+        }
     }
 }

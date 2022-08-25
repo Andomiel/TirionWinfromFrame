@@ -83,6 +83,7 @@
     <Compile Include="Dto\LogDto.cs" />
     <Compile Include="Dto\Frozen\PolicyCreateResult.cs" />
     <Compile Include="Dto\Frozen\PolicyView.cs" />
+    <Compile Include="Dto\MaterialCensusDto.cs" />
     <Compile Include="Dto\Transfer\TransferBarcodeDto.cs" />
     <Compile Include="Dto\Transfer\TransferOrderDto.cs" />
     <Compile Include="EnumHelper.cs" />

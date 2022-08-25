@@ -29,9 +29,10 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
+            this.txtPartNumber = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.gridInventory = new System.Windows.Forms.DataGridView();
@@ -44,7 +45,6 @@ namespace iWms.Form
             this.IWMS_QTY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Difference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtPartNumber = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridInventory)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +72,15 @@ namespace iWms.Form
             this.btnExport.Text = "导出";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // txtPartNumber
+            // 
+            this.txtPartNumber.Location = new System.Drawing.Point(87, 7);
+            this.txtPartNumber.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtPartNumber.Name = "txtPartNumber";
+            this.txtPartNumber.Size = new System.Drawing.Size(202, 22);
+            this.txtPartNumber.TabIndex = 1;
+            this.txtPartNumber.Visible = false;
             // 
             // btnSearch
             // 
@@ -113,24 +122,24 @@ namespace iWms.Form
             this.IWMS_QTY,
             this.Difference,
             this.Unit});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridInventory.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridInventory.DefaultCellStyle = dataGridViewCellStyle1;
             this.gridInventory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridInventory.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.gridInventory.Location = new System.Drawing.Point(0, 31);
+            this.gridInventory.Location = new System.Drawing.Point(0, 65);
             this.gridInventory.Name = "gridInventory";
             this.gridInventory.ReadOnly = true;
             this.gridInventory.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.gridInventory.RowTemplate.Height = 23;
             this.gridInventory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridInventory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridInventory.Size = new System.Drawing.Size(1334, 684);
+            this.gridInventory.Size = new System.Drawing.Size(1334, 650);
             this.gridInventory.TabIndex = 10;
             // 
             // WAREHOUSE_ID
@@ -207,15 +216,6 @@ namespace iWms.Form
             this.Unit.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Unit.Visible = false;
             // 
-            // txtPartNumber
-            // 
-            this.txtPartNumber.Location = new System.Drawing.Point(87, 7);
-            this.txtPartNumber.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txtPartNumber.Name = "txtPartNumber";
-            this.txtPartNumber.Size = new System.Drawing.Size(202, 22);
-            this.txtPartNumber.TabIndex = 1;
-            this.txtPartNumber.Visible = false;
-            // 
             // FrmInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -223,6 +223,7 @@ namespace iWms.Form
             this.Controls.Add(this.gridInventory);
             this.Controls.Add(this.panel1);
             this.Name = "FrmInventory";
+            this.Text = "库存比对";
             this.Load += new System.EventHandler(this.FrmInventory_Load);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.gridInventory, 0);
