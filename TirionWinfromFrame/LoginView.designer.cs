@@ -69,7 +69,7 @@
             this.User.Location = new System.Drawing.Point(240, 183);
             this.User.Name = "User";
             this.User.Size = new System.Drawing.Size(215, 17);
-            this.User.TabIndex = 30;
+            this.User.TabIndex = 1;
             this.User.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.User.WaterFont = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.User.WaterText = "请输入账号";
@@ -121,7 +121,7 @@
             this.Exit.Radius = 20;
             this.Exit.RoundStyle = CCWin.SkinClass.RoundStyle.Right;
             this.Exit.Size = new System.Drawing.Size(122, 41);
-            this.Exit.TabIndex = 27;
+            this.Exit.TabIndex = 4;
             this.Exit.Text = "退 出";
             this.Exit.UseVisualStyleBackColor = false;
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
@@ -159,7 +159,7 @@
             this.Login.Radius = 20;
             this.Login.RoundStyle = CCWin.SkinClass.RoundStyle.Left;
             this.Login.Size = new System.Drawing.Size(122, 41);
-            this.Login.TabIndex = 25;
+            this.Login.TabIndex = 3;
             this.Login.Text = "登 录";
             this.Login.UseVisualStyleBackColor = false;
             this.Login.Click += new System.EventHandler(this.Login_Click);
@@ -221,7 +221,7 @@
             this.Password.Name = "Password";
             this.Password.PasswordChar = '*';
             this.Password.Size = new System.Drawing.Size(215, 17);
-            this.Password.TabIndex = 20;
+            this.Password.TabIndex = 2;
             this.Password.WaterColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.Password.WaterFont = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Password.WaterText = "请输入密码";
