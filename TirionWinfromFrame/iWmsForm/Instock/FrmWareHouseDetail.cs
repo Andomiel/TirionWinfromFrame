@@ -1,5 +1,6 @@
 ﻿using Business;
 using Commons;
+using DevExpress.XtraEditors;
 using Entity;
 using Entity.DataContext;
 using Entity.Dto;
@@ -18,7 +19,7 @@ using TirionWinfromFrame.Commons;
 
 namespace iWms.Form
 {
-    public partial class FrmWareHouseDetail : FrmBaseForm
+    public partial class FrmWareHouseDetail : XtraForm
     {
         public FrmWareHouseDetail()
         {

@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using Entity.DataContext;
 using Entity.Enums;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using TirionWinfromFrame.Commons;
 
 namespace iWms.Form
 {
-    public partial class FrmReviewResult : FrmBaseForm
+    public partial class FrmReviewResult : XtraForm
     {
         public FrmReviewResult(string orderNo)
         {

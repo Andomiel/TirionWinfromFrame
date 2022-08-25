@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,7 +8,7 @@ using TirionWinfromFrame.Commons;
 
 namespace iWms.Form
 {
-    public partial class FrmWareHouseWarn : FrmBaseForm
+    public partial class FrmWareHouseWarn : XtraForm
     {
         public string OrderNo { get; set; } = string.Empty;
 

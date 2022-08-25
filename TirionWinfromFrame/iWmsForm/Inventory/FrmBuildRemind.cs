@@ -1,4 +1,5 @@
-﻿using Entity.Enums;
+﻿using DevExpress.XtraEditors;
+using Entity.Enums;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,7 +8,7 @@ using TirionWinfromFrame.Commons;
 
 namespace iWms.Form
 {
-    public partial class FrmBuildRemind : FrmBaseForm
+    public partial class FrmBuildRemind : XtraForm
     {
         public string txtRemark { get; set; }
 

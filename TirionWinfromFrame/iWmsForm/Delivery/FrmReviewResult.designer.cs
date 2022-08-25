@@ -31,7 +31,7 @@ namespace iWms.Form
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReviewResult));
-            this.rowMergeDataGridView1 = new RowMergeDataGridView();
+            this.rowMergeDataGridView1 = new iWms.Form.RowMergeDataGridView();
             this.OrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PartNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,22 +67,22 @@ namespace iWms.Form
             this.TowerNo});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.rowMergeDataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.rowMergeDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.rowMergeDataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.rowMergeDataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rowMergeDataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.rowMergeDataGridView1.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
             this.rowMergeDataGridView1.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("rowMergeDataGridView1.MergeColumnNames")));
             this.rowMergeDataGridView1.MergeFocusNames = ((System.Collections.Generic.List<string>)(resources.GetObject("rowMergeDataGridView1.MergeFocusNames")));
             this.rowMergeDataGridView1.Name = "rowMergeDataGridView1";
             this.rowMergeDataGridView1.RowHeadersWidth = 25;
             this.rowMergeDataGridView1.RowTemplate.Height = 30;
-            this.rowMergeDataGridView1.Size = new System.Drawing.Size(872, 368);
+            this.rowMergeDataGridView1.Size = new System.Drawing.Size(1017, 429);
             this.rowMergeDataGridView1.TabIndex = 18;
             this.rowMergeDataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.rowMergeDataGridView1_RowPostPaint);
             this.rowMergeDataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.rowMergeDataGridView1_RowPrePaint);
@@ -179,11 +179,11 @@ namespace iWms.Form
             // 
             // FrmReviewResult
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(872, 408);
+            this.ClientSize = new System.Drawing.Size(1017, 476);
             this.Controls.Add(this.rowMergeDataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmReviewResult";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "复核结果";

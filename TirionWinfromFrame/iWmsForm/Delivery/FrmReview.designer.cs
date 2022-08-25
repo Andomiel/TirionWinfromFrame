@@ -53,7 +53,7 @@ namespace iWms.Form
             this.btnAlarm = new System.Windows.Forms.Button();
             this.btnNotify = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.gridViewRecord = new RowMergeDataGridView();
+            this.gridViewRecord = new iWms.Form.RowMergeDataGridView();
             this.rUPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BoxNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OriginalCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,7 +61,7 @@ namespace iWms.Form
             this.rStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.gridViewSummary = new RowMergeDataGridView();
+            this.gridViewSummary = new iWms.Form.RowMergeDataGridView();
             this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PartNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NeedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,11 +92,11 @@ namespace iWms.Form
             // 
             this.btnComplete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnComplete.Enabled = false;
-            this.btnComplete.Location = new System.Drawing.Point(925, 29);
+            this.btnComplete.Location = new System.Drawing.Point(1080, 33);
             this.btnComplete.Margin = new System.Windows.Forms.Padding(2);
             this.btnComplete.Name = "btnComplete";
             this.tlpConditions.SetRowSpan(this.btnComplete, 3);
-            this.btnComplete.Size = new System.Drawing.Size(116, 77);
+            this.btnComplete.Size = new System.Drawing.Size(136, 89);
             this.btnComplete.TabIndex = 10;
             this.btnComplete.Text = "完成";
             this.btnComplete.UseVisualStyleBackColor = true;
@@ -106,11 +106,11 @@ namespace iWms.Form
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCancel.Enabled = false;
-            this.btnCancel.Location = new System.Drawing.Point(685, 29);
+            this.btnCancel.Location = new System.Drawing.Point(800, 33);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.tlpConditions.SetRowSpan(this.btnCancel, 3);
-            this.btnCancel.Size = new System.Drawing.Size(116, 77);
+            this.btnCancel.Size = new System.Drawing.Size(136, 89);
             this.btnCancel.TabIndex = 26;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -120,11 +120,11 @@ namespace iWms.Form
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExport.Enabled = false;
-            this.btnExport.Location = new System.Drawing.Point(565, 29);
+            this.btnExport.Location = new System.Drawing.Point(660, 33);
             this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
             this.tlpConditions.SetRowSpan(this.btnExport, 3);
-            this.btnExport.Size = new System.Drawing.Size(116, 77);
+            this.btnExport.Size = new System.Drawing.Size(136, 89);
             this.btnExport.TabIndex = 27;
             this.btnExport.Text = "复核汇总导出";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@ namespace iWms.Form
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 414F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.62745F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.37255F));
             this.tableLayoutPanel1.Controls.Add(this.tlpConditions, 0, 0);
@@ -145,27 +145,27 @@ namespace iWms.Form
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.gbAlert, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 34);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 34, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 163F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1049, 606);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1224, 673);
             this.tableLayoutPanel1.TabIndex = 35;
             // 
             // tlpConditions
             // 
             this.tlpConditions.ColumnCount = 7;
             this.tableLayoutPanel1.SetColumnSpan(this.tlpConditions, 3);
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 350F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.Controls.Add(this.btnComplete, 6, 1);
             this.tlpConditions.Controls.Add(this.label1, 0, 0);
             this.tlpConditions.Controls.Add(this.btnCancel, 4, 1);
@@ -181,13 +181,13 @@ namespace iWms.Form
             this.tlpConditions.Location = new System.Drawing.Point(3, 3);
             this.tlpConditions.Name = "tlpConditions";
             this.tlpConditions.RowCount = 6;
-            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.Size = new System.Drawing.Size(1043, 134);
+            this.tlpConditions.Size = new System.Drawing.Size(1218, 157);
             this.tlpConditions.TabIndex = 42;
             // 
             // label1
@@ -195,10 +195,10 @@ namespace iWms.Form
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(4, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 6, 0, 4);
+            this.label1.Location = new System.Drawing.Point(5, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 7, 0, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 17);
+            this.label1.Size = new System.Drawing.Size(112, 19);
             this.label1.TabIndex = 37;
             this.label1.Text = "单据类型";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -209,9 +209,9 @@ namespace iWms.Form
             this.cbOrderNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrderNo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbOrderNo.FormattingEnabled = true;
-            this.cbOrderNo.Location = new System.Drawing.Point(103, 30);
+            this.cbOrderNo.Location = new System.Drawing.Point(120, 34);
             this.cbOrderNo.Name = "cbOrderNo";
-            this.cbOrderNo.Size = new System.Drawing.Size(170, 20);
+            this.cbOrderNo.Size = new System.Drawing.Size(198, 20);
             this.cbOrderNo.TabIndex = 11;
             this.cbOrderNo.SelectionChangeCommitted += new System.EventHandler(this.CbOrderNo_SelectionChangeCommitted);
             // 
@@ -220,10 +220,10 @@ namespace iWms.Form
             this.lblOrderOrder.AutoSize = true;
             this.lblOrderOrder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblOrderOrder.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblOrderOrder.Location = new System.Drawing.Point(4, 33);
-            this.lblOrderOrder.Margin = new System.Windows.Forms.Padding(4, 6, 0, 4);
+            this.lblOrderOrder.Location = new System.Drawing.Point(5, 38);
+            this.lblOrderOrder.Margin = new System.Windows.Forms.Padding(5, 7, 0, 5);
             this.lblOrderOrder.Name = "lblOrderOrder";
-            this.lblOrderOrder.Size = new System.Drawing.Size(96, 17);
+            this.lblOrderOrder.Size = new System.Drawing.Size(112, 19);
             this.lblOrderOrder.TabIndex = 12;
             this.lblOrderOrder.Text = "出库单号";
             this.lblOrderOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -232,9 +232,9 @@ namespace iWms.Form
             // 
             this.cbOrderType.Dock = System.Windows.Forms.DockStyle.Left;
             this.cbOrderType.FormattingEnabled = true;
-            this.cbOrderType.Location = new System.Drawing.Point(103, 3);
+            this.cbOrderType.Location = new System.Drawing.Point(120, 3);
             this.cbOrderType.Name = "cbOrderType";
-            this.cbOrderType.Size = new System.Drawing.Size(170, 20);
+            this.cbOrderType.Size = new System.Drawing.Size(198, 22);
             this.cbOrderType.TabIndex = 38;
             this.cbOrderType.SelectedValueChanged += new System.EventHandler(this.cbOrderType_SelectedValueChanged);
             // 
@@ -242,9 +242,9 @@ namespace iWms.Form
             // 
             this.lblDestination.AutoSize = true;
             this.lblDestination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDestination.Location = new System.Drawing.Point(403, 27);
+            this.lblDestination.Location = new System.Drawing.Point(470, 31);
             this.lblDestination.Name = "lblDestination";
-            this.lblDestination.Size = new System.Drawing.Size(157, 27);
+            this.lblDestination.Size = new System.Drawing.Size(185, 31);
             this.lblDestination.TabIndex = 39;
             this.lblDestination.Text = "目的地";
             this.lblDestination.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -259,21 +259,21 @@ namespace iWms.Form
             this.flowLayoutPanel1.Controls.Add(this.cbOriginal);
             this.flowLayoutPanel1.Controls.Add(this.tbOriginal);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 54);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 62);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.tlpConditions.SetRowSpan(this.flowLayoutPanel1, 3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(400, 81);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(467, 93);
             this.flowLayoutPanel1.TabIndex = 40;
             // 
             // cbBoxScan
             // 
             this.cbBoxScan.AutoSize = true;
-            this.cbBoxScan.Location = new System.Drawing.Point(48, 6);
-            this.cbBoxScan.Margin = new System.Windows.Forms.Padding(48, 6, 0, 4);
+            this.cbBoxScan.Location = new System.Drawing.Point(56, 7);
+            this.cbBoxScan.Margin = new System.Windows.Forms.Padding(56, 7, 0, 5);
             this.cbBoxScan.Name = "cbBoxScan";
             this.cbBoxScan.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbBoxScan.Size = new System.Drawing.Size(48, 16);
+            this.cbBoxScan.Size = new System.Drawing.Size(50, 18);
             this.cbBoxScan.TabIndex = 35;
             this.cbBoxScan.Text = "箱号";
             this.cbBoxScan.UseVisualStyleBackColor = true;
@@ -284,10 +284,10 @@ namespace iWms.Form
             this.txtBoxScan.Enabled = false;
             this.txtBoxScan.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtBoxScan.ImeMode = System.Windows.Forms.ImeMode.Close;
-            this.txtBoxScan.Location = new System.Drawing.Point(99, 3);
+            this.txtBoxScan.Location = new System.Drawing.Point(109, 3);
             this.txtBoxScan.Name = "txtBoxScan";
             this.txtBoxScan.ShortcutsEnabled = false;
-            this.txtBoxScan.Size = new System.Drawing.Size(279, 21);
+            this.txtBoxScan.Size = new System.Drawing.Size(325, 21);
             this.txtBoxScan.TabIndex = 30;
             this.txtBoxScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxScan_KeyPress);
             // 
@@ -295,8 +295,8 @@ namespace iWms.Form
             // 
             this.lblScan.AutoSize = true;
             this.lblScan.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblScan.Location = new System.Drawing.Point(55, 33);
-            this.lblScan.Margin = new System.Windows.Forms.Padding(55, 6, 0, 4);
+            this.lblScan.Location = new System.Drawing.Point(64, 37);
+            this.lblScan.Margin = new System.Windows.Forms.Padding(64, 7, 0, 5);
             this.lblScan.Name = "lblScan";
             this.lblScan.Size = new System.Drawing.Size(41, 12);
             this.lblScan.TabIndex = 1;
@@ -308,21 +308,21 @@ namespace iWms.Form
             this.tbScan.Enabled = false;
             this.tbScan.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbScan.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.tbScan.Location = new System.Drawing.Point(99, 30);
+            this.tbScan.Location = new System.Drawing.Point(108, 33);
             this.tbScan.Name = "tbScan";
             this.tbScan.ShortcutsEnabled = false;
-            this.tbScan.Size = new System.Drawing.Size(279, 21);
+            this.tbScan.Size = new System.Drawing.Size(325, 21);
             this.tbScan.TabIndex = 0;
             this.tbScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScan_KeyPress);
             // 
             // cbOriginal
             // 
             this.cbOriginal.AutoSize = true;
-            this.cbOriginal.Location = new System.Drawing.Point(24, 60);
-            this.cbOriginal.Margin = new System.Windows.Forms.Padding(24, 6, 0, 4);
+            this.cbOriginal.Location = new System.Drawing.Point(28, 64);
+            this.cbOriginal.Margin = new System.Windows.Forms.Padding(28, 7, 0, 5);
             this.cbOriginal.Name = "cbOriginal";
             this.cbOriginal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbOriginal.Size = new System.Drawing.Size(72, 16);
+            this.cbOriginal.Size = new System.Drawing.Size(74, 18);
             this.cbOriginal.TabIndex = 36;
             this.cbOriginal.Text = "原厂条码";
             this.cbOriginal.UseVisualStyleBackColor = true;
@@ -332,17 +332,17 @@ namespace iWms.Form
             // 
             this.tbOriginal.Enabled = false;
             this.tbOriginal.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbOriginal.Location = new System.Drawing.Point(99, 57);
+            this.tbOriginal.Location = new System.Drawing.Point(105, 60);
             this.tbOriginal.Name = "tbOriginal";
-            this.tbOriginal.Size = new System.Drawing.Size(279, 21);
+            this.tbOriginal.Size = new System.Drawing.Size(325, 21);
             this.tbOriginal.TabIndex = 32;
             this.tbOriginal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOriginal_KeyPress);
             // 
             // btnAlarm
             // 
-            this.btnAlarm.Location = new System.Drawing.Point(806, 111);
+            this.btnAlarm.Location = new System.Drawing.Point(941, 127);
             this.btnAlarm.Name = "btnAlarm";
-            this.btnAlarm.Size = new System.Drawing.Size(75, 21);
+            this.btnAlarm.Size = new System.Drawing.Size(87, 24);
             this.btnAlarm.TabIndex = 41;
             this.btnAlarm.Text = "button1";
             this.btnAlarm.UseVisualStyleBackColor = true;
@@ -353,10 +353,10 @@ namespace iWms.Form
             // 
             this.btnNotify.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnNotify.Enabled = false;
-            this.btnNotify.Location = new System.Drawing.Point(806, 30);
+            this.btnNotify.Location = new System.Drawing.Point(941, 34);
             this.btnNotify.Name = "btnNotify";
             this.tlpConditions.SetRowSpan(this.btnNotify, 3);
-            this.btnNotify.Size = new System.Drawing.Size(114, 75);
+            this.btnNotify.Size = new System.Drawing.Size(134, 87);
             this.btnNotify.TabIndex = 42;
             this.btnNotify.Text = "反馈MES/WMS";
             this.btnNotify.UseVisualStyleBackColor = true;
@@ -367,11 +367,11 @@ namespace iWms.Form
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox1, 2);
             this.groupBox1.Controls.Add(this.gridViewRecord);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(2, 142);
+            this.groupBox1.Location = new System.Drawing.Point(2, 165);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(827, 229);
+            this.groupBox1.Size = new System.Drawing.Size(965, 251);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "扫描记录";
@@ -392,15 +392,15 @@ namespace iWms.Form
             this.Barcode});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle1;
             this.gridViewRecord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridViewRecord.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.gridViewRecord.Location = new System.Drawing.Point(2, 16);
+            this.gridViewRecord.Location = new System.Drawing.Point(2, 17);
             this.gridViewRecord.Margin = new System.Windows.Forms.Padding(2);
             this.gridViewRecord.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
             this.gridViewRecord.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("gridViewRecord.MergeColumnNames")));
@@ -408,7 +408,7 @@ namespace iWms.Form
             this.gridViewRecord.Name = "gridViewRecord";
             this.gridViewRecord.RowHeadersWidth = 25;
             this.gridViewRecord.RowTemplate.Height = 30;
-            this.gridViewRecord.Size = new System.Drawing.Size(823, 211);
+            this.gridViewRecord.Size = new System.Drawing.Size(961, 232);
             this.gridViewRecord.TabIndex = 22;
             this.gridViewRecord.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridViewRecord_RowPrePaint);
             // 
@@ -468,11 +468,11 @@ namespace iWms.Form
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox2, 3);
             this.groupBox2.Controls.Add(this.gridViewSummary);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(2, 375);
+            this.groupBox2.Location = new System.Drawing.Point(2, 420);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(1045, 229);
+            this.groupBox2.Size = new System.Drawing.Size(1220, 251);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "复核汇总";
@@ -498,15 +498,15 @@ namespace iWms.Form
             this.QRCode});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridViewSummary.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridViewSummary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridViewSummary.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.gridViewSummary.Location = new System.Drawing.Point(2, 16);
+            this.gridViewSummary.Location = new System.Drawing.Point(2, 17);
             this.gridViewSummary.Margin = new System.Windows.Forms.Padding(2);
             this.gridViewSummary.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
             this.gridViewSummary.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("gridViewSummary.MergeColumnNames")));
@@ -515,7 +515,7 @@ namespace iWms.Form
             this.gridViewSummary.ReadOnly = true;
             this.gridViewSummary.RowHeadersWidth = 25;
             this.gridViewSummary.RowTemplate.Height = 30;
-            this.gridViewSummary.Size = new System.Drawing.Size(1041, 211);
+            this.gridViewSummary.Size = new System.Drawing.Size(1216, 232);
             this.gridViewSummary.TabIndex = 23;
             this.gridViewSummary.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.gridViewSummary_RowPrePaint);
             // 
@@ -631,11 +631,11 @@ namespace iWms.Form
             // 
             this.gbAlert.Controls.Add(this.panel2);
             this.gbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbAlert.Location = new System.Drawing.Point(833, 142);
+            this.gbAlert.Location = new System.Drawing.Point(971, 165);
             this.gbAlert.Margin = new System.Windows.Forms.Padding(2);
             this.gbAlert.Name = "gbAlert";
             this.gbAlert.Padding = new System.Windows.Forms.Padding(2);
-            this.gbAlert.Size = new System.Drawing.Size(214, 229);
+            this.gbAlert.Size = new System.Drawing.Size(251, 251);
             this.gbAlert.TabIndex = 40;
             this.gbAlert.TabStop = false;
             // 
@@ -644,10 +644,10 @@ namespace iWms.Form
             this.panel2.Controls.Add(this.lblWarning);
             this.panel2.Controls.Add(this.lblWarningTitle);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(2, 16);
+            this.panel2.Location = new System.Drawing.Point(2, 17);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(210, 211);
+            this.panel2.Size = new System.Drawing.Size(247, 232);
             this.panel2.TabIndex = 39;
             // 
             // lblWarning
@@ -655,10 +655,10 @@ namespace iWms.Form
             this.lblWarning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblWarning.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblWarning.ForeColor = System.Drawing.Color.White;
-            this.lblWarning.Location = new System.Drawing.Point(16, 31);
+            this.lblWarning.Location = new System.Drawing.Point(19, 36);
             this.lblWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarning.Name = "lblWarning";
-            this.lblWarning.Size = new System.Drawing.Size(212, 108);
+            this.lblWarning.Size = new System.Drawing.Size(247, 126);
             this.lblWarning.TabIndex = 24;
             this.lblWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblWarning.Visible = false;
@@ -668,10 +668,10 @@ namespace iWms.Form
             this.lblWarningTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblWarningTitle.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblWarningTitle.ForeColor = System.Drawing.Color.White;
-            this.lblWarningTitle.Location = new System.Drawing.Point(16, 7);
+            this.lblWarningTitle.Location = new System.Drawing.Point(19, 8);
             this.lblWarningTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarningTitle.Name = "lblWarningTitle";
-            this.lblWarningTitle.Size = new System.Drawing.Size(212, 26);
+            this.lblWarningTitle.Size = new System.Drawing.Size(247, 30);
             this.lblWarningTitle.TabIndex = 25;
             this.lblWarningTitle.Text = "警告";
             this.lblWarningTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -679,14 +679,15 @@ namespace iWms.Form
             // 
             // FrmReview
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 606);
+            this.ClientSize = new System.Drawing.Size(1224, 707);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmReview";
             this.Text = "出库复核";
             this.Load += new System.EventHandler(this.FrmReview_Load);
+            this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
             this.tlpConditions.PerformLayout();

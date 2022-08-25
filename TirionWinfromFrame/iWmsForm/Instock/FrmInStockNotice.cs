@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using System.IO;
@@ -9,7 +10,7 @@ using TirionWinfromFrame.Commons;
 
 namespace iWms.Form
 {
-    public partial class FrmInStockNotice : FrmBaseForm
+    public partial class FrmInStockNotice : XtraForm
     {
         public FrmInStockNotice()
         {
