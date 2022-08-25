@@ -20,7 +20,7 @@ namespace Entity.Enums
         /// <summary>
         /// 锁定（移库或出库或盘点锁定）
         /// </summary>
-        [Description("锁定")]
+        [Description("已分配")]
         Locked = 2,
 
         /// <summary>
