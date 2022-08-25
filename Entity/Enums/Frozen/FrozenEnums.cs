@@ -30,9 +30,9 @@ namespace Entity.Enums
 
     public enum FrozenOperateType
     {
-        [Description("启用")]
+        [Description("冻结")]
         Enable = 1,
-        [Description("禁用")]
+        [Description("未冻结")]
         Unable = 0,
         [Description("删除")]
         Del = -1
