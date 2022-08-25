@@ -10,7 +10,7 @@ namespace DataBase
 {
     public static class DbHelper
     {
-        static readonly string constr = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
+        static readonly string constr = ConfigurationManager.AppSettings["connectionString"];
 
         //执行非查询的sql语句，返回受影响的行数
         public static int ExecuteNonQuery(string cmdText, params SqlParameter[] parameters)
