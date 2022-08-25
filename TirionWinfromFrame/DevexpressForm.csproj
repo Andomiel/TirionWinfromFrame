@@ -7967,6 +7967,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\CSkin.dll" />
+    <Content Include="Waves\Error.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Waves\Success.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\bocountry_32x32.png" />
     <None Include="Resources\removepivotfield_16x16.png" />
     <None Include="Resources\removepivotfield_32x32.png" />
