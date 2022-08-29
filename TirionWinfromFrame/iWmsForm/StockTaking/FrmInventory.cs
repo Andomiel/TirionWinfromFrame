@@ -108,64 +108,51 @@ namespace iWms.Form
         /// <param name="e"></param>
         private void btnExport_Click(object sender, EventArgs e)
         {
-            //Creating DataTable.
-            DataTable dt = new DataTable();
-
-            //Adding the Columns.
-            foreach (DataGridViewColumn column in gridInventory.Columns)
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
             {
-                dt.Columns.Add(column.HeaderText, column.ValueType);
+                ExportToExcel();
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            SplashScreenManager.CloseForm();
+        }
+
+        public void ExportToExcel()
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx",
+                FilterIndex = 0,
+                OverwritePrompt = true,
+                RestoreDirectory = true,
+                CreatePrompt = true,
+                Title = "Export Excel File To"
+            };
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
             }
 
-            //Adding the Rows.
-            foreach (DataGridViewRow row in gridInventory.Rows)
+            List<HeadColumn> headColumns = new List<HeadColumn>
             {
-                dt.Rows.Add();
-
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    dt.Rows[dt.Rows.Count - 1][cell.ColumnIndex] = cell.Value.ToString();
-                }
-            }
-
-            string fileName = $"{DateTime.Now.ToString("yyyyMMddHHmmss")}";
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.DefaultExt = "xls";
-            fileDialog.Filter = "Excel文件|*.xls";
-            fileDialog.FileName = fileName;
-            fileDialog.ShowDialog();
-            fileName = fileDialog.FileName;
-
-            using (var fs = new FileStream(fileName, FileMode.Append, FileAccess.Write))
+                new HeadColumn("WAREHOUSE_ID","仓库号", 2200),
+                new HeadColumn("LOT02","库存组织", 2200),
+                new HeadColumn("LOT03","状态", 2200),
+                new HeadColumn("SKU","物料代码", 2200),
+                new HeadColumn("MATERIAL_NAME","物料名称", 4000),
+                new HeadColumn("QTY","Wms数量", 2200),
+                new HeadColumn("IWMS_QTY","iWms", 2200),
+                new HeadColumn("Difference","差异", 2200)
+            };
+            string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, CompareResults.ToList(), headColumns);
+            if (!string.IsNullOrWhiteSpace(fileFullName))
             {
-                IWorkbook workbook = new XSSFWorkbook();
-                ISheet excelSheet = workbook.CreateSheet();
-                List<string> columns = new List<string>();
-                IRow row = excelSheet.CreateRow(0);
-                int columnIndex = 0;
-
-                foreach (DataColumn column in dt.Columns)
-                {
-                    columns.Add(column.ColumnName);
-                    row.CreateCell(columnIndex).SetCellValue(column.ColumnName);
-                    columnIndex++;
-                }
-
-                int rowIndex = 1;
-                foreach (DataRow dsrow in dt.Rows)
-                {
-                    row = excelSheet.CreateRow(rowIndex);
-                    int cellIndex = 0;
-                    foreach (string col in columns)
-                    {
-                        row.CreateCell(cellIndex).SetCellValue(dsrow[col].ToString());
-                        cellIndex++;
-                    }
-
-                    rowIndex++;
-                }
-                workbook.Write(fs);
+                System.Diagnostics.Process.Start("explorer", "/select," + fileFullName);
             }
         }
+
     }
 }
