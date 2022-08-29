@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -86,7 +88,7 @@
     <Compile Include="Dto\MaterialCensusDto.cs" />
     <Compile Include="Dto\Transfer\TransferBarcodeDto.cs" />
     <Compile Include="Dto\Transfer\TransferOrderDto.cs" />
-    <Compile Include="EnumHelper.cs" />
+    <Compile Include="Common\EnumHelper.cs" />
     <Compile Include="Enums\Delivery\DeliveryBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryDetailStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryOrderStatusEnum.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Facade\ReformShelfResponse.cs" />
     <Compile Include="Facade\WMSInventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\PropertyGridRichText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Profiles\" />

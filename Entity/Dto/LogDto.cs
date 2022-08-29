@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,19 +26,19 @@ namespace Entity.Dto
         [CategoryAttribute("请求")]
         [DisplayNameAttribute("请求")]
         [DescriptionAttribute("日志记录的请求体，可能包含完整的url和request。")]
-        [BrowsableAttribute(false)]
+        [Editor(typeof(PropertyGridRichText), typeof(UITypeEditor))]
         public string RequestBody { get; set; }
 
         [CategoryAttribute("响应")]
         [DisplayNameAttribute("响应")]
         [DescriptionAttribute("日志发生的所有响应，可能有多条。")]
-        [BrowsableAttribute(false)]
+        [Editor(typeof(PropertyGridRichText), typeof(UITypeEditor))]
         public string ResponseBody { get; set; }
 
-        [BrowsableAttribute(false)]
+        //[BrowsableAttribute(false)]
         public string RequestLimit => RequestBody.Length > 20 ? $"{RequestBody.Substring(0, 20)}..." : RequestBody;
 
-        [BrowsableAttribute(false)]
+        //[BrowsableAttribute(false)]
         public string ResponseLimit => ResponseBody.Length > 20 ? $"{ResponseBody.Substring(0, 20)}..." : ResponseBody;
 
 

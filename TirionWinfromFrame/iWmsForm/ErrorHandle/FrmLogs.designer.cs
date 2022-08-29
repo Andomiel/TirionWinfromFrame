@@ -225,7 +225,7 @@ namespace iWms.Form
             this.ClientSize = new System.Drawing.Size(1210, 629);
             this.Controls.Add(this.tlpLoayout);
             this.Name = "FrmLogs";
-            this.Text = "FrmLogs";
+            this.Text = "日志查询";
             this.Controls.SetChildIndex(this.tlpLoayout, 0);
             this.tlpLoayout.ResumeLayout(false);
             this.gbConditions.ResumeLayout(false);
