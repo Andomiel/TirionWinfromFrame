@@ -68,5 +68,10 @@ namespace Entity.Dto.Delivery
         /// 最后更新人
         /// </summary>
         public string LastUpdateUser { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 发料位置
+        /// </summary>
+        public string DeliveryLocation { get; set; } = string.Empty;
     }
 }

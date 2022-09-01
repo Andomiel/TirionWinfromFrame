@@ -80,6 +80,11 @@ namespace Entity.DataContext
         /// </summary>
         public string LastUpdateUser { get; set; } = string.Empty;
 
+        /// <summary>
+        /// 发料位置
+        /// </summary>
+        public string DeliveryLocation { get; set; } = string.Empty;
+
         #endregion
 
         #region 公共方法
@@ -97,7 +102,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_DeliveryBarcode WHERE 1=1 ";
+            return "SELECT Id, BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryLocation, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_DeliveryBarcode WHERE 1=1 ";
         }
 
         #endregion

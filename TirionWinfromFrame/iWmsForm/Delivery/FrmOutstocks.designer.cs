@@ -96,6 +96,7 @@ namespace iWms.Form
             this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -785,6 +786,7 @@ namespace iWms.Form
             this.colUpn,
             this.colInnerCount,
             this.colTower,
+            this.colLocation,
             this.colOperator});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -829,6 +831,13 @@ namespace iWms.Form
             this.colTower.HeaderText = "出库库区";
             this.colTower.Name = "colTower";
             this.colTower.ReadOnly = true;
+            // 
+            // colLocation
+            // 
+            this.colLocation.DataPropertyName = "DeliveryLocation";
+            this.colLocation.HeaderText = "出库库位";
+            this.colLocation.Name = "colLocation";
+            this.colLocation.ReadOnly = true;
             // 
             // colOperator
             // 
@@ -929,6 +938,7 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
     }
 }

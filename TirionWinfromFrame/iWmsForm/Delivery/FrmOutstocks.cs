@@ -740,7 +740,8 @@ namespace iWms.Form
                         OrderStatus = (int)DeliveryBarcodeStatusEnum.Undeliver,
                         DeliveryAreaId = barcode.LockTowerNo,
                         DeliveryId = selectedOrder.BusinessId,
-                        DeliveryQuantity = (int)barcode.Qty
+                        DeliveryQuantity = (int)barcode.Qty,
+                        DeliveryLocation = barcode.LockLocation
                     };
                     alreadyInBarcodes.Add(barcode.ReelID);
 
