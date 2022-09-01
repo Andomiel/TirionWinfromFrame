@@ -304,7 +304,7 @@ namespace Business
                         LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE OrderId = '{deliveryId}';";
         }
 
-        private static string LightOffReformShelf(string deliveryId, string userName, List<DeliveryBarcodeLocation> barcodes)
+        protected static string LightOffReformShelf(string deliveryId, string userName, List<DeliveryBarcodeLocation> barcodes)
         {
             string colorConfig = ConfigurationManager.AppSettings["ColorsForTransformation"];
             if (string.IsNullOrWhiteSpace(colorConfig))
@@ -345,7 +345,7 @@ namespace Business
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
         }
 
-        private static string LightOffLightShelf(string deliveryId, string userName, List<DeliveryBarcodeLocation> barcodes)
+        protected static string LightOffLightShelf(string deliveryId, string userName, List<DeliveryBarcodeLocation> barcodes)
         {
             string colorConfig = ConfigurationManager.AppSettings["ColorsForInductive"];
             if (string.IsNullOrWhiteSpace(colorConfig))

@@ -127,12 +127,46 @@ namespace Business
 
         public bool ReleaseExistedDeliveryBarcode(string deliveryId, int targetStatus, string userName, List<string> barcodes)
         {
+            try
+            {
+                var unfinishedBarcodes = GetDeliveryBarcodesDetail(deliveryId, GetFinishedStatus());
+
+                var group = unfinishedBarcodes.GroupBy(p => p.DeliveryAreaId);
+                foreach (var item in group)
+                {
+                    switch (item.Key)
+                    {
+                        case (int)TowerEnum.SortingArea:
+                            //do nothing
+                            break;
+                        case (int)TowerEnum.ASRS:
+                            //do nothing
+                            break;
+                        case (int)TowerEnum.LightShelf:
+                            LightOffLightShelf(deliveryId, userName, item.ToList());
+                            break;
+                        case (int)TowerEnum.PalletArea:
+                            //do nothing
+                            break;
+                        case (int)TowerEnum.ReformShelf:
+                            LightOffReformShelf(deliveryId, userName, item.ToList());
+                            break;
+                        default:
+                            throw new OppoCoreException("发料物料中存在不在预定义库区的物料");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FileLog.Log($"取消灭灯时报错：{ex.GetDeepException()}");
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"update Wms_DeliveryOrder set OrderStatus = {targetStatus}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' where BusinessId = '{deliveryId}'; ");
 
             sb.AppendLine(GetReleaseBarcodeSql(deliveryId, userName, barcodes));
 
-            return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _) > 0;
+            return DbHelper.ExcuteWithTransaction(sb.ToString(), out _) > 0;
         }
 
         protected override string GetReleaseBarcodeSql(string deliveryId, string userName, List<string> barcodes)

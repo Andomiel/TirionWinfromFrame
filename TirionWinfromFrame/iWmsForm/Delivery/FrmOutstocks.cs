@@ -628,9 +628,14 @@ namespace iWms.Form
                         return;
                     }
 
-                    if (selectedOrder.OrderStatus > (int)DeliveryOrderStatusEnum.Delivering)
+                    if (selectedOrder.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
                     {
-                        "工单已开始发料，无法取消".ShowTips();
+                        "工单在发料中，无法取消，可以在发料完成后取消出库，释放物料".ShowTips();
+                        return;
+                    }
+                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    {
+                        "工单已复核或关闭，无法取消".ShowTips();
                         return;
                     }
                     //TODO:取消出库，关闭单据，同时，将所有占用的料全部释放
