@@ -33,12 +33,15 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_LightColorRecord>().FirstOrDefault();
         }
 
-        public bool DeliveryCalculatedBarcodes(string deliveryId, string deliveryNo, int deliveryType, string userName)
+        public bool DeliveryCalculatedBarcodes(string deliveryId, string deliveryNo, int deliveryType, int defaultSort, string userName)
         {
             StringBuilder sb = new StringBuilder();
 
-            int sortingNo = GetSortNo(deliveryType);
-
+            int sortingNo = defaultSort;
+            if (sortingNo == -1)
+            {
+                GetSortNo(deliveryType);
+            }
             var barcodes = GetDeliveryBarcodesDetail(deliveryId, GetExecuteStatus());
 
             var group = barcodes.GroupBy(p => p.DeliveryAreaId);

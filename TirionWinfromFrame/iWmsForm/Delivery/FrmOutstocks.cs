@@ -322,6 +322,11 @@ namespace iWms.Form
                         "请至少选中一行数据！".ShowTips();
                         return;
                     }
+                    if (selectedOrder.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
+                    {
+                        "当前单据尚未计算，没有要出库的物料信息！".ShowTips();
+                        return;
+                    }
                     if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "不可重复执行出库！".ShowTips();
@@ -330,7 +335,11 @@ namespace iWms.Form
                     ValidateDeliveryOrderLimit();
                     ValidateInstockOrderLimit();
 
-                    new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, AppInfo.LoginUserInfo.account);
+                    FrmSortNo sortDiag = new FrmSortNo();
+                    if (sortDiag.ShowDialog() != DialogResult.OK)
+                    { return; }
+
+                    new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, sortDiag.SortNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivering;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 

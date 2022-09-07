@@ -181,7 +181,7 @@ namespace iWms.Form
                         ValidateInstockOrderForTransferIn();
                     }
 
-                    new TransferBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.TransferNo, -1, AppInfo.LoginUserInfo.account);
+                    new TransferBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.TransferNo, -1, -1, AppInfo.LoginUserInfo.account);
 
                     "移库任务下达成功！".ShowTips();
                 }

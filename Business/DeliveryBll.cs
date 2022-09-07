@@ -300,6 +300,12 @@ namespace Business
             string sql = $"SELECT * FROM Wms_DeliveryOrder wdo WHERE wdo.OrderStatus = {(int)DeliveryOrderStatusEnum.Delivered} AND DeliveryType = {deliveryType}";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
         }
+
+        public static List<Wms_DeliveryOrder> GetDeliveringOrders()
+        {
+            string sql = $@" SELECT TOP 2 * FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering}; ";
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
+        }
     }
 
     public class DeliveryQueryCondition
