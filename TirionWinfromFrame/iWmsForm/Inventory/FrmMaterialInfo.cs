@@ -231,7 +231,7 @@ namespace iWms.Form
             //DateTimePickerReset(dtpCycleEnd);
             DateTimePickerReset(dtpStart);
             DateTimePickerReset(dtpEnd);
-            dataGridViewX1.DataSource = null;
+            Barcodes.Clear();
         }
 
         private void DateTimePickerReset(DateTimePicker dtpicker)
