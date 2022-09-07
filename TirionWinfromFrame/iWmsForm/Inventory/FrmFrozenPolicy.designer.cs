@@ -695,7 +695,7 @@ namespace iWms.Form
             this.btnEnable.Name = "btnEnable";
             this.btnEnable.Size = new System.Drawing.Size(52, 27);
             this.btnEnable.TabIndex = 64;
-            this.btnEnable.Text = "启用";
+            this.btnEnable.Text = "冻结";
             this.btnEnable.UseVisualStyleBackColor = true;
             this.btnEnable.Click += new System.EventHandler(this.btnPolicyOperate_Click);
             // 
@@ -707,7 +707,7 @@ namespace iWms.Form
             this.btnUnable.Name = "btnUnable";
             this.btnUnable.Size = new System.Drawing.Size(52, 27);
             this.btnUnable.TabIndex = 65;
-            this.btnUnable.Text = "禁用";
+            this.btnUnable.Text = "解冻";
             this.btnUnable.UseVisualStyleBackColor = true;
             this.btnUnable.Click += new System.EventHandler(this.btnPolicyOperate_Click);
             // 

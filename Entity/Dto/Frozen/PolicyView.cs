@@ -11,6 +11,6 @@ namespace Entity.Dto
     {
         public bool SelectFlag { get; set; }
         public string PolicyDetail { get; set; }
-        public string EnableDes => Enable ? "启用" : "禁用";
+        public string EnableDes => Enable ? "冻结" : "未冻结";
     }
 }
