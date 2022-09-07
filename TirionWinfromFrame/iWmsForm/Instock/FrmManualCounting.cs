@@ -36,8 +36,8 @@ namespace iWms.Form
                     }
                     if (!tbScan.Text.EndsWith("*"))
                     {
-                        "当前料盘二维码不以*号结束，请检查二维码".ShowTips();
-                        tbScan.Text = string.Empty;
+                        "二维码结尾不是*号，请确认二维码完整性".ShowTips();
+                        //tbScan.Text = string.Empty;
                         return;
                     }
                     tbScan.Text = BarcodeFormatter.FormatBarcode(tbScan.Text.Trim());
