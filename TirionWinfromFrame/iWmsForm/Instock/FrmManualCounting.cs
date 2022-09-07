@@ -28,19 +28,7 @@ namespace iWms.Form
             {
                 try
                 {
-                    if (!tbScan.Text.Contains("*"))
-                    {
-                        "请扫二维码".ShowTips();
-                        tbScan.Text = string.Empty;
-                        return;
-                    }
-                    if (!tbScan.Text.EndsWith("*"))
-                    {
-                        "二维码结尾不是*号，请确认二维码完整性".ShowTips();
-                        //tbScan.Text = string.Empty;
-                        return;
-                    }
-                    tbScan.Text = BarcodeFormatter.FormatBarcode(tbScan.Text.Trim());
+                    ValidateBarcode();
                     txtMaterialInfo.Text = string.Empty;
                     var result = CallMesWmsApiBll.CallMaterialInfoByUPN(tbScan.Text);
                     if (result != null && !string.IsNullOrWhiteSpace(result.InvQty))
@@ -62,9 +50,26 @@ namespace iWms.Form
                 catch (Exception ex)
                 {
                     ex.GetDeepException().ShowError();
-                    tbScan.Text = string.Empty;
+                    ClearAndRefreshInput();
                 }
             }
+        }
+
+        private void ValidateBarcode()
+        {
+            if (!tbScan.Text.Contains("*"))
+            {
+                "请扫二维码".ShowTips();
+                tbScan.Text = string.Empty;
+                return;
+            }
+            if (!tbScan.Text.EndsWith("*"))
+            {
+                "二维码结尾不是*号，请确认二维码完整性".ShowTips();
+                //tbScan.Text = string.Empty;
+                return;
+            }
+            tbScan.Text = BarcodeFormatter.FormatBarcode(tbScan.Text.Trim());
         }
 
         //需要删除的重写
@@ -93,6 +98,10 @@ namespace iWms.Form
             {
                 lock (lockSubmitObj)
                 {
+                    if (e != null)
+                    {
+                        ValidateBarcode();
+                    }
                     if (string.IsNullOrWhiteSpace(tbScan.Text))
                     {
                         return;
@@ -172,6 +181,7 @@ namespace iWms.Form
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+                ClearAndRefreshInput();
             }
         }
 
@@ -179,6 +189,7 @@ namespace iWms.Form
         {
             tbScan.Text = string.Empty;
             tbQty.Text = string.Empty;
+            txtMaterialInfo.Text = string.Empty;
             cbIsTypeT.Checked = false;
             tbScan.Focus();
         }
