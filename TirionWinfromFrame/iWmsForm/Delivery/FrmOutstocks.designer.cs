@@ -127,7 +127,7 @@ namespace iWms.Form
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tlpLayout.Size = new System.Drawing.Size(1203, 673);
+            this.tlpLayout.Size = new System.Drawing.Size(1227, 673);
             this.tlpLayout.TabIndex = 0;
             // 
             // statusStrip2
@@ -269,25 +269,29 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1197, 134);
+            this.gbConditions.Size = new System.Drawing.Size(1221, 134);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
             // tlpConditions
             // 
-            this.tlpConditions.ColumnCount = 13;
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnCount = 17;
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpConditions.Controls.Add(this.label9, 4, 2);
             this.tlpConditions.Controls.Add(this.label8, 2, 2);
@@ -298,9 +302,9 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.label3, 4, 0);
             this.tlpConditions.Controls.Add(this.label2, 2, 0);
             this.tlpConditions.Controls.Add(this.label1, 0, 0);
-            this.tlpConditions.Controls.Add(this.btnOutstock, 11, 0);
-            this.tlpConditions.Controls.Add(this.btnFinish, 9, 2);
-            this.tlpConditions.Controls.Add(this.btnExport, 7, 2);
+            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 2);
+            this.tlpConditions.Controls.Add(this.btnFinish, 11, 2);
+            this.tlpConditions.Controls.Add(this.btnExport, 11, 0);
             this.tlpConditions.Controls.Add(this.tbOrderNo, 1, 0);
             this.tlpConditions.Controls.Add(this.cbOrderType, 3, 0);
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
@@ -310,10 +314,10 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.dtFinishedTime, 3, 2);
             this.tlpConditions.Controls.Add(this.tbOperator, 5, 2);
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
-            this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
+            this.tlpConditions.Controls.Add(this.btnClear, 9, 0);
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
-            this.tlpConditions.Controls.Add(this.btnCancel, 11, 2);
-            this.tlpConditions.Controls.Add(this.btnCalculate, 9, 0);
+            this.tlpConditions.Controls.Add(this.btnCancel, 13, 2);
+            this.tlpConditions.Controls.Add(this.btnCalculate, 7, 2);
             this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
@@ -323,16 +327,16 @@ namespace iWms.Form
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.Size = new System.Drawing.Size(1191, 113);
+            this.tlpConditions.Size = new System.Drawing.Size(1215, 113);
             this.tlpConditions.TabIndex = 0;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(469, 70);
+            this.label9.Location = new System.Drawing.Point(443, 70);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 35);
+            this.label9.Size = new System.Drawing.Size(74, 35);
             this.label9.TabIndex = 8;
             this.label9.Text = "操作人";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -341,9 +345,9 @@ namespace iWms.Form
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(236, 70);
+            this.label8.Location = new System.Drawing.Point(223, 70);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 35);
+            this.label8.Size = new System.Drawing.Size(74, 35);
             this.label8.TabIndex = 7;
             this.label8.Text = "完成日期";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -354,7 +358,7 @@ namespace iWms.Form
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Location = new System.Drawing.Point(3, 70);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 35);
+            this.label7.Size = new System.Drawing.Size(74, 35);
             this.label7.TabIndex = 6;
             this.label7.Text = "下达日期";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -363,9 +367,9 @@ namespace iWms.Form
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(469, 35);
+            this.label6.Location = new System.Drawing.Point(443, 35);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 35);
+            this.label6.Size = new System.Drawing.Size(74, 35);
             this.label6.TabIndex = 5;
             this.label6.Text = "目的地";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -374,9 +378,9 @@ namespace iWms.Form
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(236, 35);
+            this.label5.Location = new System.Drawing.Point(223, 35);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 35);
+            this.label5.Size = new System.Drawing.Size(74, 35);
             this.label5.TabIndex = 4;
             this.label5.Text = "物料代码";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -387,7 +391,7 @@ namespace iWms.Form
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(3, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 35);
+            this.label4.Size = new System.Drawing.Size(74, 35);
             this.label4.TabIndex = 3;
             this.label4.Text = "UPN";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -396,9 +400,9 @@ namespace iWms.Form
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(469, 0);
+            this.label3.Location = new System.Drawing.Point(443, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 35);
+            this.label3.Size = new System.Drawing.Size(74, 35);
             this.label3.TabIndex = 2;
             this.label3.Text = "单据状态";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -407,9 +411,9 @@ namespace iWms.Form
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(236, 0);
+            this.label2.Location = new System.Drawing.Point(223, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 35);
+            this.label2.Size = new System.Drawing.Size(74, 35);
             this.label2.TabIndex = 1;
             this.label2.Text = "单据类型";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -420,7 +424,7 @@ namespace iWms.Form
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 35);
+            this.label1.Size = new System.Drawing.Size(74, 35);
             this.label1.TabIndex = 0;
             this.label1.Text = "出库单号";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -428,9 +432,9 @@ namespace iWms.Form
             // btnOutstock
             // 
             this.btnOutstock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOutstock.Location = new System.Drawing.Point(1005, 3);
+            this.btnOutstock.Location = new System.Drawing.Point(810, 73);
             this.btnOutstock.Name = "btnOutstock";
-            this.btnOutstock.Size = new System.Drawing.Size(87, 29);
+            this.btnOutstock.Size = new System.Drawing.Size(74, 29);
             this.btnOutstock.TabIndex = 9;
             this.btnOutstock.Text = "执行出库";
             this.btnOutstock.UseVisualStyleBackColor = true;
@@ -439,9 +443,9 @@ namespace iWms.Form
             // btnFinish
             // 
             this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFinish.Location = new System.Drawing.Point(877, 73);
+            this.btnFinish.Location = new System.Drawing.Point(910, 73);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(87, 29);
+            this.btnFinish.Size = new System.Drawing.Size(74, 29);
             this.btnFinish.TabIndex = 12;
             this.btnFinish.Text = "拣料完成";
             this.btnFinish.UseVisualStyleBackColor = true;
@@ -450,9 +454,9 @@ namespace iWms.Form
             // btnExport
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExport.Location = new System.Drawing.Point(749, 73);
+            this.btnExport.Location = new System.Drawing.Point(910, 3);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(87, 29);
+            this.btnExport.Size = new System.Drawing.Size(74, 29);
             this.btnExport.TabIndex = 13;
             this.btnExport.Text = "导出明细";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -461,7 +465,7 @@ namespace iWms.Form
             // tbOrderNo
             // 
             this.tbOrderNo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbOrderNo.Location = new System.Drawing.Point(96, 3);
+            this.tbOrderNo.Location = new System.Drawing.Point(83, 3);
             this.tbOrderNo.Name = "tbOrderNo";
             this.tbOrderNo.Size = new System.Drawing.Size(134, 22);
             this.tbOrderNo.TabIndex = 14;
@@ -470,7 +474,7 @@ namespace iWms.Form
             // 
             this.cbOrderType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbOrderType.FormattingEnabled = true;
-            this.cbOrderType.Location = new System.Drawing.Point(329, 3);
+            this.cbOrderType.Location = new System.Drawing.Point(303, 3);
             this.cbOrderType.Name = "cbOrderType";
             this.cbOrderType.Size = new System.Drawing.Size(134, 22);
             this.cbOrderType.TabIndex = 15;
@@ -479,7 +483,7 @@ namespace iWms.Form
             // 
             this.cbOrderStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbOrderStatus.FormattingEnabled = true;
-            this.cbOrderStatus.Location = new System.Drawing.Point(562, 3);
+            this.cbOrderStatus.Location = new System.Drawing.Point(523, 3);
             this.cbOrderStatus.Name = "cbOrderStatus";
             this.cbOrderStatus.Size = new System.Drawing.Size(134, 22);
             this.cbOrderStatus.TabIndex = 16;
@@ -487,7 +491,7 @@ namespace iWms.Form
             // tbDestination
             // 
             this.tbDestination.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDestination.Location = new System.Drawing.Point(562, 38);
+            this.tbDestination.Location = new System.Drawing.Point(523, 38);
             this.tbDestination.Name = "tbDestination";
             this.tbDestination.Size = new System.Drawing.Size(134, 22);
             this.tbDestination.TabIndex = 17;
@@ -495,7 +499,7 @@ namespace iWms.Form
             // tbMaterialNo
             // 
             this.tbMaterialNo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMaterialNo.Location = new System.Drawing.Point(329, 38);
+            this.tbMaterialNo.Location = new System.Drawing.Point(303, 38);
             this.tbMaterialNo.Name = "tbMaterialNo";
             this.tbMaterialNo.Size = new System.Drawing.Size(134, 22);
             this.tbMaterialNo.TabIndex = 18;
@@ -505,7 +509,7 @@ namespace iWms.Form
             this.dtOrderTime.CustomFormat = "yyyy-MM-dd";
             this.dtOrderTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtOrderTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderTime.Location = new System.Drawing.Point(96, 73);
+            this.dtOrderTime.Location = new System.Drawing.Point(83, 73);
             this.dtOrderTime.Name = "dtOrderTime";
             this.dtOrderTime.Size = new System.Drawing.Size(134, 22);
             this.dtOrderTime.TabIndex = 20;
@@ -517,7 +521,7 @@ namespace iWms.Form
             this.dtFinishedTime.CustomFormat = "yyyy-MM-dd";
             this.dtFinishedTime.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtFinishedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishedTime.Location = new System.Drawing.Point(329, 73);
+            this.dtFinishedTime.Location = new System.Drawing.Point(303, 73);
             this.dtFinishedTime.Name = "dtFinishedTime";
             this.dtFinishedTime.Size = new System.Drawing.Size(134, 22);
             this.dtFinishedTime.TabIndex = 21;
@@ -527,7 +531,7 @@ namespace iWms.Form
             // tbOperator
             // 
             this.tbOperator.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbOperator.Location = new System.Drawing.Point(562, 73);
+            this.tbOperator.Location = new System.Drawing.Point(523, 73);
             this.tbOperator.Name = "tbOperator";
             this.tbOperator.Size = new System.Drawing.Size(134, 22);
             this.tbOperator.TabIndex = 22;
@@ -535,7 +539,7 @@ namespace iWms.Form
             // tbUpn
             // 
             this.tbUpn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbUpn.Location = new System.Drawing.Point(96, 38);
+            this.tbUpn.Location = new System.Drawing.Point(83, 38);
             this.tbUpn.Name = "tbUpn";
             this.tbUpn.Size = new System.Drawing.Size(134, 22);
             this.tbUpn.TabIndex = 23;
@@ -543,9 +547,9 @@ namespace iWms.Form
             // btnClear
             // 
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Location = new System.Drawing.Point(749, 38);
+            this.btnClear.Location = new System.Drawing.Point(810, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(87, 29);
+            this.btnClear.Size = new System.Drawing.Size(74, 29);
             this.btnClear.TabIndex = 24;
             this.btnClear.Text = "清空";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -554,9 +558,9 @@ namespace iWms.Form
             // btnQuery
             // 
             this.btnQuery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnQuery.Location = new System.Drawing.Point(749, 3);
+            this.btnQuery.Location = new System.Drawing.Point(710, 3);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(87, 29);
+            this.btnQuery.Size = new System.Drawing.Size(74, 29);
             this.btnQuery.TabIndex = 10;
             this.btnQuery.Text = "查询";
             this.btnQuery.UseVisualStyleBackColor = true;
@@ -565,9 +569,9 @@ namespace iWms.Form
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.Location = new System.Drawing.Point(1005, 73);
+            this.btnCancel.Location = new System.Drawing.Point(1010, 73);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(87, 29);
+            this.btnCancel.Size = new System.Drawing.Size(74, 29);
             this.btnCancel.TabIndex = 25;
             this.btnCancel.Text = "取消出库";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -576,9 +580,9 @@ namespace iWms.Form
             // btnCalculate
             // 
             this.btnCalculate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCalculate.Location = new System.Drawing.Point(877, 3);
+            this.btnCalculate.Location = new System.Drawing.Point(710, 73);
             this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(87, 29);
+            this.btnCalculate.Size = new System.Drawing.Size(74, 29);
             this.btnCalculate.TabIndex = 26;
             this.btnCalculate.Text = "出库计算";
             this.btnCalculate.UseVisualStyleBackColor = true;
@@ -587,9 +591,9 @@ namespace iWms.Form
             // btnSpecial
             // 
             this.btnSpecial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSpecial.Location = new System.Drawing.Point(1005, 38);
+            this.btnSpecial.Location = new System.Drawing.Point(910, 38);
             this.btnSpecial.Name = "btnSpecial";
-            this.btnSpecial.Size = new System.Drawing.Size(87, 29);
+            this.btnSpecial.Size = new System.Drawing.Size(74, 29);
             this.btnSpecial.TabIndex = 27;
             this.btnSpecial.Text = "有料出库";
             this.btnSpecial.UseVisualStyleBackColor = true;
@@ -627,7 +631,7 @@ namespace iWms.Form
             this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(1197, 195);
+            this.dgvOrders.Size = new System.Drawing.Size(1221, 195);
             this.dgvOrders.TabIndex = 1;
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
@@ -698,7 +702,7 @@ namespace iWms.Form
             this.gbDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDetails.Location = new System.Drawing.Point(3, 374);
             this.gbDetails.Name = "gbDetails";
-            this.gbDetails.Size = new System.Drawing.Size(1197, 296);
+            this.gbDetails.Size = new System.Drawing.Size(1221, 296);
             this.gbDetails.TabIndex = 2;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "出库明细";
@@ -716,7 +720,7 @@ namespace iWms.Form
             this.tlpDetails.Name = "tlpDetails";
             this.tlpDetails.RowCount = 1;
             this.tlpDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDetails.Size = new System.Drawing.Size(1191, 275);
+            this.tlpDetails.Size = new System.Drawing.Size(1215, 275);
             this.tlpDetails.TabIndex = 0;
             // 
             // dgvDetails
@@ -747,7 +751,7 @@ namespace iWms.Form
             this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.RowTemplate.Height = 23;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDetails.Size = new System.Drawing.Size(586, 269);
+            this.dgvDetails.Size = new System.Drawing.Size(598, 269);
             this.dgvDetails.TabIndex = 1;
             this.dgvDetails.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDetails_RowPostPaint);
             this.dgvDetails.SelectionChanged += new System.EventHandler(this.DgvDetails_SelectionChanged);
@@ -798,7 +802,7 @@ namespace iWms.Form
             this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvUpns.Location = new System.Drawing.Point(601, 3);
+            this.dgvUpns.Location = new System.Drawing.Point(613, 3);
             this.dgvUpns.MultiSelect = false;
             this.dgvUpns.Name = "dgvUpns";
             this.dgvUpns.ReadOnly = true;
@@ -806,7 +810,7 @@ namespace iWms.Form
             this.dgvUpns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvUpns.RowTemplate.Height = 23;
             this.dgvUpns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvUpns.Size = new System.Drawing.Size(587, 269);
+            this.dgvUpns.Size = new System.Drawing.Size(599, 269);
             this.dgvUpns.TabIndex = 2;
             // 
             // colUpn
@@ -851,7 +855,7 @@ namespace iWms.Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 707);
+            this.ClientSize = new System.Drawing.Size(1227, 707);
             this.Controls.Add(this.tlpLayout);
             this.Name = "FrmOutstocks";
             this.Text = "出库单列表";

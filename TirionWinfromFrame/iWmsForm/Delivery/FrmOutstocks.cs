@@ -787,7 +787,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    if (selectedOrder.OrderStatus > (int)DeliveryOrderStatusEnum.Delivering)
+                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单已开始发料，无法进行有料出库".ShowTips();
                         return;
