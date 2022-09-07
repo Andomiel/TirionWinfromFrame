@@ -188,7 +188,11 @@ namespace iWms.Form
                     }
                     reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
                     reviewRecord.ScanTime = DateTime.Now;
-                    gridViewRecord.Rows[records.IndexOf(reviewRecord)].DefaultCellStyle.BackColor = Color.LightGreen;
+                    int index = records.FindIndex(p => p.UPN == reviewRecord.UPN);
+                    if (index >= 0 && index < records.Count)
+                    {
+                        gridViewRecord.Rows[index].DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
                 }
             }
 
@@ -606,7 +610,7 @@ namespace iWms.Form
                     lblWarning.Text = $"本出库单无该料号，不准出库，请拿走，（复核总表将不汇总）\r\n\r\nUPN:{upn}";
                     break;
                 case 2:
-                    lblWarning.Text = $"本出库单该料号已超发过最小包装数超发原则，不准出库（复核总表将不汇总）\r\n\r\nUPN:{upn}";
+                    lblWarning.Text = $"该料号已超发，此盘物料不能出库（复核总表将不汇总）\r\n\r\nUPN:{upn}";
                     break;
                 case 3:
                     lblWarning.Text = $"{upn}\r\n重复扫码";

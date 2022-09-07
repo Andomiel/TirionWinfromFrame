@@ -13,7 +13,12 @@ namespace Business
         {
             ReviewCheckResult checkResult = new ReviewCheckResult();
             MaterialInfoResponse response = CallMesWmsApiBll.CallMaterialInfoByUPN(qrcode);
-            if (response.StoreId != null && response.StoreId.Equals("365"))
+            if (response == null)
+            {
+                checkResult.IsPass = false;
+                checkResult.Msg = $"查询物料信息失败:{qrcode}";
+            }
+            else if (response.StoreId != null && response.StoreId.Equals("365"))
             {
                 checkResult.IsPass = false;
                 checkResult.Msg = "站位是365";
