@@ -59,7 +59,10 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
-            SplashScreenManager.CloseForm();
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
         }
 
         private void DgvLogs_SelectionChanged(object sender, EventArgs e)
