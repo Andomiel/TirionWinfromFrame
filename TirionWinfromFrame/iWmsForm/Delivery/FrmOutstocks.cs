@@ -224,35 +224,40 @@ namespace iWms.Form
         {
             try
             {
-                if (dgvOrders.SelectedCells.Count == 0)
-                {
-                    return;
-                }
-                var row = dgvOrders.SelectedCells[0].OwningRow;
-                var order = row.DataBoundItem as DeliveryOrderDto;
-                selectedOrder = order;
-
-                var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
-                OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
-
-                WorkOrderDetails.Clear();
-                WorkOrderBarcodes.Clear();
-
-                foreach (Wms_DeliveryDetail item in details)
-                {
-                    if (WorkOrderDetails.Any(p => p.BusinessId == item.BusinessId))
-                    {
-                        continue;
-                    }
-                    var detail = item.Adapt<DeliveryDetailDto>();
-                    detail.OrderStatus = selectedOrder.OrderStatus;
-                    detail.Barcodes = OrderBarcodes.Where(p => p.DeliveryDetailId == detail.BusinessId).ToList();
-                    WorkOrderDetails.Add(detail);
-                }
+                LoadOrderDetails();
             }
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void LoadOrderDetails()
+        {
+            if (dgvOrders.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            var row = dgvOrders.SelectedCells[0].OwningRow;
+            var order = row.DataBoundItem as DeliveryOrderDto;
+            selectedOrder = order;
+
+            var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
+            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+
+            WorkOrderDetails.Clear();
+            WorkOrderBarcodes.Clear();
+
+            foreach (Wms_DeliveryDetail item in details)
+            {
+                if (WorkOrderDetails.Any(p => p.BusinessId == item.BusinessId))
+                {
+                    continue;
+                }
+                var detail = item.Adapt<DeliveryDetailDto>();
+                detail.OrderStatus = selectedOrder.OrderStatus;
+                detail.Barcodes = OrderBarcodes.Where(p => p.DeliveryDetailId == detail.BusinessId).ToList();
+                WorkOrderDetails.Add(detail);
             }
         }
 
@@ -805,6 +810,41 @@ namespace iWms.Form
                     new DeliveryBll().SpecialFinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).ToList());
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                {
+                    return;
+                }
+                if (dgvOrders.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+                {
+                    return;
+                }
+                string action = dgvOrders.Columns[e.ColumnIndex].Name;//操作类型
+                if (action == "colReview")
+                {
+                    var row = dgvOrders.SelectedCells[0].OwningRow;
+                    var order = row.DataBoundItem as DeliveryOrderDto;
+                    if (string.IsNullOrWhiteSpace(order.OperationText))
+                    {
+                        return;
+                    }
+
+                    FrmReviewNew reviewNew = new FrmReviewNew(order);
+                    if (reviewNew.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadOrderDetails();
+                    }
                 }
             }
             catch (Exception ex)

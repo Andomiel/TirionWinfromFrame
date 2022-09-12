@@ -75,5 +75,7 @@ namespace Entity.Dto.Delivery
         /// 最后更新人
         /// </summary>
         public string LastUpdateUser { get; set; } = string.Empty;
+
+        public string OperationText => OrderStatus == (int)DeliveryOrderStatusEnum.Delivered ? "复核" : string.Empty;
     }
 }

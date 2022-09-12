@@ -79,13 +79,6 @@ namespace iWms.Form
             this.btnCalculate = new System.Windows.Forms.Button();
             this.btnSpecial = new System.Windows.Forms.Button();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
-            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSortingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
@@ -98,6 +91,14 @@ namespace iWms.Form
             this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSortingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReview = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -613,7 +614,8 @@ namespace iWms.Form
             this.colDestinationNo,
             this.colSortingId,
             this.colOrderTime,
-            this.colFinishedTime});
+            this.colFinishedTime,
+            this.colReview});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
@@ -633,68 +635,9 @@ namespace iWms.Form
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1221, 195);
             this.dgvOrders.TabIndex = 1;
+            this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
-            // 
-            // colOrderNo
-            // 
-            this.colOrderNo.DataPropertyName = "DeliveryNo";
-            this.colOrderNo.FillWeight = 39.68357F;
-            this.colOrderNo.HeaderText = "出库单号";
-            this.colOrderNo.MinimumWidth = 9;
-            this.colOrderNo.Name = "colOrderNo";
-            this.colOrderNo.ReadOnly = true;
-            // 
-            // colOrderType
-            // 
-            this.colOrderType.DataPropertyName = "DeliveryTypeDisplay";
-            this.colOrderType.FillWeight = 39.68357F;
-            this.colOrderType.HeaderText = "单据类型";
-            this.colOrderType.MinimumWidth = 9;
-            this.colOrderType.Name = "colOrderType";
-            this.colOrderType.ReadOnly = true;
-            // 
-            // colOrderStatus
-            // 
-            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
-            this.colOrderStatus.FillWeight = 39.68357F;
-            this.colOrderStatus.HeaderText = "单据状态";
-            this.colOrderStatus.MinimumWidth = 9;
-            this.colOrderStatus.Name = "colOrderStatus";
-            this.colOrderStatus.ReadOnly = true;
-            // 
-            // colDestinationNo
-            // 
-            this.colDestinationNo.DataPropertyName = "LineId";
-            this.colDestinationNo.FillWeight = 38.68534F;
-            this.colDestinationNo.HeaderText = "目的地";
-            this.colDestinationNo.MinimumWidth = 9;
-            this.colDestinationNo.Name = "colDestinationNo";
-            // 
-            // colSortingId
-            // 
-            this.colSortingId.DataPropertyName = "SortingId";
-            this.colSortingId.FillWeight = 40F;
-            this.colSortingId.HeaderText = "分拣口";
-            this.colSortingId.Name = "colSortingId";
-            // 
-            // colOrderTime
-            // 
-            this.colOrderTime.DataPropertyName = "CreateTime";
-            this.colOrderTime.FillWeight = 39.68357F;
-            this.colOrderTime.HeaderText = "下达时间";
-            this.colOrderTime.MinimumWidth = 9;
-            this.colOrderTime.Name = "colOrderTime";
-            this.colOrderTime.ReadOnly = true;
-            // 
-            // colFinishedTime
-            // 
-            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
-            this.colFinishedTime.FillWeight = 39.68357F;
-            this.colFinishedTime.HeaderText = "完成时间";
-            this.colFinishedTime.MinimumWidth = 9;
-            this.colFinishedTime.Name = "colFinishedTime";
-            this.colFinishedTime.ReadOnly = true;
             // 
             // gbDetails
             // 
@@ -851,6 +794,67 @@ namespace iWms.Form
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
             // 
+            // colOrderNo
+            // 
+            this.colOrderNo.DataPropertyName = "DeliveryNo";
+            this.colOrderNo.HeaderText = "出库单号";
+            this.colOrderNo.MinimumWidth = 120;
+            this.colOrderNo.Name = "colOrderNo";
+            this.colOrderNo.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "DeliveryTypeDisplay";
+            this.colOrderType.HeaderText = "单据类型";
+            this.colOrderType.MinimumWidth = 100;
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            // 
+            // colOrderStatus
+            // 
+            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
+            this.colOrderStatus.HeaderText = "单据状态";
+            this.colOrderStatus.MinimumWidth = 100;
+            this.colOrderStatus.Name = "colOrderStatus";
+            this.colOrderStatus.ReadOnly = true;
+            // 
+            // colDestinationNo
+            // 
+            this.colDestinationNo.DataPropertyName = "LineId";
+            this.colDestinationNo.HeaderText = "目的地";
+            this.colDestinationNo.MinimumWidth = 100;
+            this.colDestinationNo.Name = "colDestinationNo";
+            // 
+            // colSortingId
+            // 
+            this.colSortingId.DataPropertyName = "SortingId";
+            this.colSortingId.HeaderText = "分拣口";
+            this.colSortingId.MinimumWidth = 80;
+            this.colSortingId.Name = "colSortingId";
+            // 
+            // colOrderTime
+            // 
+            this.colOrderTime.DataPropertyName = "CreateTime";
+            this.colOrderTime.HeaderText = "下达时间";
+            this.colOrderTime.MinimumWidth = 120;
+            this.colOrderTime.Name = "colOrderTime";
+            this.colOrderTime.ReadOnly = true;
+            // 
+            // colFinishedTime
+            // 
+            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
+            this.colFinishedTime.HeaderText = "完成时间";
+            this.colFinishedTime.MinimumWidth = 120;
+            this.colFinishedTime.Name = "colFinishedTime";
+            this.colFinishedTime.ReadOnly = true;
+            // 
+            // colReview
+            // 
+            this.colReview.DataPropertyName = "OperationText";
+            this.colReview.HeaderText = "复核";
+            this.colReview.MinimumWidth = 60;
+            this.colReview.Name = "colReview";
+            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -932,6 +936,11 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
         private System.Windows.Forms.Button btnSpecial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTower;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
@@ -939,10 +948,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colSortingId;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTower;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
+        private System.Windows.Forms.DataGridViewLinkColumn colReview;
     }
 }

@@ -346,6 +346,12 @@
     <Compile Include="iWmsForm\Delivery\FrmOutstocks.designer.cs">
       <DependentUpon>FrmOutstocks.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmReviewNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmReviewNew.designer.cs">
+      <DependentUpon>FrmReviewNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Delivery\FrmReview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -565,6 +571,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Delivery\FrmOutstocks.resx">
       <DependentUpon>FrmOutstocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Delivery\FrmReviewNew.resx">
+      <DependentUpon>FrmReviewNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Delivery\FrmReview.resx">
       <DependentUpon>FrmReview.cs</DependentUpon>

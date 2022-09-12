@@ -247,6 +247,51 @@ namespace Business
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
+
+        public static int TempDeliveyOrderReview(string deliveryNo, string userName, List<ReviewSummary> barcodes)
+        {
+            var allBarcodes = GetDeliveryBarcodes(deliveryNo);
+            var details = GetDeliveryDetails(deliveryNo);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in barcodes)
+            {
+                var originBarcode = allBarcodes.FirstOrDefault(p => p.Barcode == item.UPN);
+                if (originBarcode == null)
+                {
+                    var detail = details.FirstOrDefault(p => p.MaterialNo == item.PartNumber && p.RowNum == TypeParse.StrToInt(item.LineNumber, 0));
+                    if (detail == null)
+                    {
+                        throw new OppoCoreException($"复核的物料{item.UPN}对应的料号{item.PartNumber}和行号{item.LineNumber}在出库单明细中找不到对应项");
+                    }
+                    sb.AppendLine($@"INSERT INTO Wms_DeliveryBarcode
+                        (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+                        VALUES('{Guid.NewGuid():D}', '{detail.DeliveryId}', '{detail.BusinessId}', '{item.ContainerNo}', '{item.UPN}', '', {item.TowerNo}, {item.RealQty}, {(int)DeliveryBarcodeStatusEnum.Reviewed}, getdate(), '{userName}', getdate(), '{userName}');");
+                }
+                else
+                {
+                    sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Reviewed}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{originBarcode.BusinessId}' ;");
+
+                    allBarcodes.Remove(originBarcode);
+                }
+                sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =0, isReturnCheck = 0,
+                        isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Locked}' where reelid = '{item.UPN}'; ");
+            }
+            //以前复核的，本次暂存，不在列表里了，那么要去除
+            var removeBarcodes = allBarcodes.Where(p => p.OrderStatus == (int)DeliveryBarcodeStatusEnum.Reviewed).ToList();
+            List<string> upns = removeBarcodes.Select(p => $"'{p.Barcode}'").ToList();
+            string joinCondition = string.Join(",", upns);
+
+            sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE Barcode IN ({joinCondition}) ;");
+            sb.AppendLine($@"update smt_zd_material set istake=0, isTakeCheck =0, isReturnCheck = 0,
+                        isSave = 1, taketime = '', LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Saved}' where reelid IN ({joinCondition}) ; ");
+
+
+            return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
+        }
+
         private static List<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryNo)
         {
             string sql = $@"SELECT wdb.* FROM Wms_DeliveryBarcode wdb 
