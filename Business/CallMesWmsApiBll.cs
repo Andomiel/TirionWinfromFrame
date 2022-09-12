@@ -27,6 +27,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return response;
         }
         #endregion
@@ -48,6 +49,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return result;
         }
         #endregion
@@ -76,6 +78,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return result;
         }
         #endregion
@@ -108,6 +111,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return result;
         }
         #endregion
@@ -129,6 +133,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return result;
         }
         #endregion
@@ -152,6 +157,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return result;
         }
         #endregion
@@ -176,6 +182,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return response;
         }
         #endregion
@@ -197,6 +204,7 @@ namespace Business
             {
                 sb.AppendLine($"异常:{ex.Message}");
             }
+            FileLog.Log(sb.ToString());
             return result;
         }
         #endregion
