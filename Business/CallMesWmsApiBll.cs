@@ -217,18 +217,62 @@ namespace Business
 
         public static PagedList<RequestLog> GetLogs(string requestKey, DateTime dt)
         {
-            var request = new LogModel()
+            StringBuilder sb = new StringBuilder("获取日志");
+            try
             {
-                RequestBody = requestKey,
-                Level = "Info",
-                StartDate = dt.Date.ToString("yyyy-MM-dd"),
-                EndDate = dt.Date.AddDays(1).ToString("yyyy-MM-dd"),
-                Pagination = new Pagination() { ItemsPerPage = 30, Page = 1 },
-            };
-            string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/GetPagedList";
-            string requestJson = JsonConvert.SerializeObject(request);
-            string strResponse = WebClientHelper.Post(requestJson, url, null);
-            return JsonConvert.DeserializeObject<PagedList<RequestLog>>(strResponse);
+                var request = new LogModel()
+                {
+                    RequestBody = requestKey,
+                    Level = "Info",
+                    StartDate = dt.Date.ToString("yyyy-MM-dd"),
+                    EndDate = dt.Date.AddDays(1).ToString("yyyy-MM-dd"),
+                    Pagination = new Pagination() { ItemsPerPage = 30, Page = 1 },
+                };
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/GetPagedList";
+                string requestJson = JsonConvert.SerializeObject(request);
+                string strResponse = WebClientHelper.Post(requestJson, url, null);
+                return JsonConvert.DeserializeObject<PagedList<RequestLog>>(strResponse);
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine($"ex:{ex.GetDeepException()}");
+                return null;
+            }
+            finally
+            {
+                FileLog.Log(sb.ToString());
+            }
+        }
+
+        public static FeedbackResponse FeedbackOrder(string deliveryNo, string deliveryType, string lineId)
+        {
+            StringBuilder sb = new StringBuilder("出库复核反馈");
+            try
+            {
+                var request = new DeliveryOrderFeedback()
+                {
+                    DeliveryNo = deliveryNo,
+                    DeliveryType = deliveryType,
+                    LineId = lineId
+                };
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Review/FeedbackOrder";
+                sb.AppendLine($"url:{url}");
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string strResponse = WebClientHelper.Post(requestJson, url, null);
+                sb.AppendLine($"response:{strResponse}");
+                return JsonConvert.DeserializeObject<FeedbackResponse>(strResponse);
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine($"ex:{ex.GetDeepException()}");
+                return new FeedbackResponse() { Message = ex.Message };
+            }
+            finally
+            {
+                FileLog.Log(sb.ToString());
+            }
+
         }
     }
     /// <summary>

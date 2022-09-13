@@ -1,5 +1,6 @@
 ﻿using Business;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.DataContext;
 using Entity.Dto.Delivery;
@@ -581,9 +582,20 @@ namespace iWms.Form
                         }
                         else
                         {
-                            "复核完成".ShowTips();
+                            "复核完成，即将进行单据回传".ShowTips();
                             //出库完成后，插入mes反馈队列
-                            OutStockReview.InsertOutStockFeedBack(orderNo);
+                            //OutStockReview.InsertOutStockFeedBack(orderNo);
+
+                            SplashScreenManager.ShowForm(typeof(WaitForm1));
+                            try
+                            {
+                                var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.DeliveryNo, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId);
+                                feedback.Message.ShowTips();
+                            }
+                            finally
+                            {
+                                SplashScreenManager.CloseForm();
+                            }
 
                             this.DialogResult = DialogResult.OK;
                             this.Close();
