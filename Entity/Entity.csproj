@@ -115,6 +115,7 @@
     <Compile Include="Enums\Transfer\TransferBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferOrderStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferTypeEnum.cs" />
+    <Compile Include="Facade\CheckResultResponse.cs" />
     <Compile Include="Facade\LightShelfRequest.cs" />
     <Compile Include="Facade\LightShelfResponse.cs" />
     <Compile Include="Facade\ReformShelfRequest.cs" />

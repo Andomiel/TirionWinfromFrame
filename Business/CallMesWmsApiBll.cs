@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Entity.Facade;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -33,21 +34,22 @@ namespace Business
         #endregion
 
         #region MSD物料是否过期 校验
-        public static bool CallMSDExpired(string upn)
+        public static CheckResultResponse CallMSDExpired(string upn)
         {
             StringBuilder sb = new StringBuilder("请求MSDExpired");
-            bool result = false;
+            var result = new CheckResultResponse();
             try
             {
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/CheckUpnMsdExpired/{upn}";
                 sb.AppendLine($"地址:{url}");
                 string responseStr = WebClientHelper.Get(url);
                 sb.AppendLine($"返回:{responseStr}");
-                result = Convert.ToBoolean(responseStr);
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(responseStr);
             }
             catch (Exception ex)
             {
                 sb.AppendLine($"异常:{ex.Message}");
+                result.ErrMessage = ex.Message;
             }
             FileLog.Log(sb.ToString());
             return result;
@@ -55,10 +57,10 @@ namespace Business
         #endregion
 
         #region 总装MES物料退料接口 验证
-        public static bool CallMesMaterialBack(string upn, int quantity)
+        public static CheckResultResponse CallMesMaterialBack(string upn, int quantity)
         {
             StringBuilder sb = new StringBuilder("请求MesMaterialBack");
-            bool result = false;
+            var result = new CheckResultResponse();
             try
             {
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/MESMaterialBack";
@@ -72,11 +74,12 @@ namespace Business
                 sb.AppendLine($"请求参数:{requestJson}");
                 string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
                 sb.AppendLine($"返回:{strResponse}");
-                result = Convert.ToBoolean(strResponse);
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(strResponse);
             }
             catch (Exception ex)
             {
                 sb.AppendLine($"异常:{ex.Message}");
+                result.ErrMessage = ex.Message;
             }
             FileLog.Log(sb.ToString());
             return result;
@@ -84,14 +87,14 @@ namespace Business
         #endregion
 
         #region 请求总装mes iqc比对接口  验证
-        public static bool CallMesIqcCompare(string barcode, string original)
+        public static CheckResultResponse CallMesIqcCompare(string barcode, string original)
         {
             if (string.IsNullOrWhiteSpace(barcode))
             {
-                return true;
+                return new CheckResultResponse() { Result = true };
             }
             StringBuilder sb = new StringBuilder("请求MesIqcCompare");
-            bool result = false;
+            var result = new CheckResultResponse();
             try
             {
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/MESIQCCompare";
@@ -105,11 +108,12 @@ namespace Business
                 sb.AppendLine($"请求参数:{requestJson}");
                 string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
                 sb.AppendLine($"返回:{strResponse}");
-                result = Convert.ToBoolean(strResponse);
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(strResponse);
             }
             catch (Exception ex)
             {
                 sb.AppendLine($"异常:{ex.Message}");
+                result.ErrMessage = ex.Message;
             }
             FileLog.Log(sb.ToString());
             return result;
@@ -117,21 +121,22 @@ namespace Business
         #endregion
 
         #region 请求MES校验UPN接口 验证
-        public static bool CallMesCheckUpn(string barcode, string orderNo)
+        public static CheckResultResponse CallMesCheckUpn(string barcode, string orderNo)
         {
             StringBuilder sb = new StringBuilder("请求MesCheckUpn");
-            bool result = false;
+            var result = new CheckResultResponse();
             try
             {
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/CheckUpn/{WebUtility.UrlEncode(barcode)}?pickOrderId={orderNo}";
                 sb.AppendLine($"地址:{url}");
                 string strResponse = WebClientHelper.Get(url);
                 sb.AppendLine($"返回:{strResponse}");
-                result = Convert.ToBoolean(strResponse);
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(strResponse);
             }
             catch (Exception ex)
             {
                 sb.AppendLine($"异常:{ex.Message}");
+                result.ErrMessage = ex.Message;
             }
             FileLog.Log(sb.ToString());
             return result;
@@ -188,21 +193,22 @@ namespace Business
         #endregion
 
         #region 根据upn获取散料校验结果接口
-        public static bool CallMatStatusAccordingUpn(string upn)
+        public static CheckResultResponse CallMatStatusAccordingUpn(string upn)
         {
             StringBuilder sb = new StringBuilder("请求MatStatusAccordingUpn");
-            bool result = false;
+            var result = new CheckResultResponse();
             try
             {
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMatStatusAccordingUpn/{upn}";
                 sb.AppendLine($"地址:{url}");
                 string strResponse = WebClientHelper.Get(url);
                 sb.AppendLine($"返回:{strResponse}");
-                result = Convert.ToBoolean(strResponse);
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(strResponse);
             }
             catch (Exception ex)
             {
                 sb.AppendLine($"异常:{ex.Message}");
+                result.ErrMessage = ex.Message;
             }
             FileLog.Log(sb.ToString());
             return result;

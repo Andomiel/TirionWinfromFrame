@@ -2,6 +2,7 @@
 using Entity;
 using Entity.DataContext;
 using Entity.Enums;
+using Entity.Facade;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -260,12 +261,13 @@ namespace iWms.Form
             }
 
             //调用若干MES和WMS接口
-            ReviewCheckResult checkResult = CheckByApi(reviewRecord.Qty);
-            if (!checkResult.IsPass)
+            CheckResultResponse checkResult = CheckByApi(reviewRecord.Qty);
+            if (!checkResult.Result)
             {
-                reviewRecord.Status = checkResult.Msg;
+                reviewRecord.Status = checkResult.ErrMessage;
                 reviewRecord.ScanTime = DateTime.Now;
                 AddBindRecord(reviewRecord);
+                ShowWarning(reviewRecord.UPN, 4, checkResult.ErrMessage);
                 ResetBarcodeText();
                 PlayResultWaves(false);
                 return;
@@ -332,7 +334,7 @@ namespace iWms.Form
             tbScan.Focus();
         }
 
-        private ReviewCheckResult CheckByApi(int quantity)
+        private CheckResultResponse CheckByApi(int quantity)
         {
             var selectItem = (OutStockDdlItem)cbOrderNo.SelectedItem;
             string orderNo = selectItem.OrderNo;
@@ -340,7 +342,7 @@ namespace iWms.Form
             FileLog.Log($"CheckByApi[{orderType}]");
             string upn = tbScan.Text.Split('*')[0];
 
-            ReviewCheckResult result = new ReviewCheckResult();
+            CheckResultResponse result = new CheckResultResponse();
             if (orderType != (int)OutOrderTypeEnum.FLCK)
             {
                 //UPN同步接口
@@ -352,7 +354,7 @@ namespace iWms.Form
                 result = OrderReviewCallApi.CheckFromMesCheckUpn(tbScan.Text, orderNo);
             }
 
-            if (!result.IsPass)
+            if (!result.Result)
             {
                 return result;
             }
@@ -362,7 +364,7 @@ namespace iWms.Form
                 //MSD过期校验
                 result = OrderReviewCallApi.CheckFromMSDExpired(upn);
             }
-            if (!result.IsPass)
+            if (!result.Result)
             {
                 return result;
             }
@@ -373,7 +375,7 @@ namespace iWms.Form
                 result = OrderReviewCallApi.CheckFromMesMaterialBack(upn, quantity);
             }
 
-            if (!result.IsPass)
+            if (!result.Result)
             {
                 return result;
             }
@@ -391,7 +393,7 @@ namespace iWms.Form
                 }
             }
 
-            if (!result.IsPass)
+            if (!result.Result)
             {
                 return result;
             }
@@ -400,7 +402,7 @@ namespace iWms.Form
                 //总装MES-IQC比对接口
                 result = OrderReviewCallApi.CheckFromMesIqcCompare(upn, tbOriginal.Text);
             }
-            if (!result.IsPass)
+            if (!result.Result)
             {
                 return result;
             }
@@ -555,8 +557,8 @@ namespace iWms.Form
                         //辅料出库，MES接口校验执行发料（单号+所有UPN）
                         var mesCheckList = summaryList.Where(p => p.Match == 1).ToList();
 
-                        ReviewCheckResult result = OrderReviewCallApi.CheckFromMesExecuteDispatch(mesCheckList, AppInfo.LoginUserInfo.account, AppInfo.LoginUserInfo.account);
-                        canOperate = result.IsPass;
+                        CheckResultResponse result = OrderReviewCallApi.CheckFromMesExecuteDispatch(mesCheckList, AppInfo.LoginUserInfo.account, AppInfo.LoginUserInfo.account);
+                        canOperate = result.Result;
                     }
 
                     if (canOperate)
@@ -602,7 +604,7 @@ namespace iWms.Form
             }
         }
 
-        private void ShowWarning(string upn, int type)
+        private void ShowWarning(string upn, int type, string waringContent = "")
         {
             switch (type)
             {
@@ -614,6 +616,9 @@ namespace iWms.Form
                     break;
                 case 3:
                     lblWarning.Text = $"{upn}\r\n重复扫码";
+                    break;
+                case 4:
+                    lblWarning.Text = waringContent;
                     break;
             }
             lblWarning.Visible = true;
