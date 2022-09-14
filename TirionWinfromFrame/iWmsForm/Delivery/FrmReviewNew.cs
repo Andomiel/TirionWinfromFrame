@@ -639,8 +639,8 @@ namespace iWms.Form
         private void CollapseWarning()
         {
             lblWarning.Text = string.Empty;
-            lblWarning.Visible = true;
-            lblWarningTitle.Visible = true;
+            lblWarning.Visible = false;
+            lblWarningTitle.Visible = false;
         }
 
 
