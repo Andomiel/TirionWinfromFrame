@@ -289,7 +289,7 @@ namespace iWms.Form
                         }
                     }
 
-                    bool result = new TransferBll().FinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account);
+                    bool result = new TransferBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.TransferNo, AppInfo.LoginUserInfo.account);
                     if (result)
                     {
                         $"【{selectedOrder.TransferNo}】移库完成".ShowTips();

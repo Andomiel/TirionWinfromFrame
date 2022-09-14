@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TirionWinfromFrame.Commons;
 
 namespace Business
@@ -127,7 +128,7 @@ namespace Business
             }
 
             int targetColor = GetLightColor((int)TowerEnum.LightShelf, allColors);
-            LightShelfColor(true, url, targetColor, barcodes);
+            LightShelfColor(deliveryNo, true, url, targetColor, barcodes);
 
             return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName);
         }
@@ -155,7 +156,7 @@ namespace Business
             return allColors.First();
         }
 
-        private static void LightShelfColor(bool isOn, string url, int targetColor, List<DeliveryBarcodeLocation> barcodes)
+        private static void LightShelfColor(string deliveryNo, bool isOn, string url, int targetColor, List<DeliveryBarcodeLocation> barcodes)
         {
             string onOrOff = "亮灯";
             LightShelfRequest request = new LightShelfRequest(targetColor);
@@ -187,6 +188,8 @@ namespace Business
 
             FileLog.Log($"操作亮灯货架{onOrOff}:{JsonConvert.SerializeObject(logDict)}");
             LightShelfResponse response = JsonConvert.DeserializeObject<LightShelfResponse>(strResponse);
+
+            Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
             if (response == null || response.Code != 1)
             {
@@ -254,7 +257,7 @@ namespace Business
             }
         }
 
-        public bool FinishDeliveryOrder(string deliveryId, string userName)
+        public bool FinishDeliveryOrder(string deliveryId, string deliveryNo, string userName)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -272,7 +275,7 @@ namespace Business
                         //do nothing
                         break;
                     case (int)TowerEnum.LightShelf:
-                        sb.AppendLine(LightOffLightShelf(deliveryId, userName, item.ToList()));
+                        sb.AppendLine(LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList()));
                         break;
                     case (int)TowerEnum.PalletArea:
                         //do nothing
@@ -348,7 +351,7 @@ namespace Business
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
         }
 
-        protected static string LightOffLightShelf(string deliveryId, string userName, List<DeliveryBarcodeLocation> barcodes)
+        protected static string LightOffLightShelf(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
         {
             string colorConfig = ConfigurationManager.AppSettings["ColorsForInductive"];
             if (string.IsNullOrWhiteSpace(colorConfig))
@@ -375,7 +378,7 @@ namespace Business
             int targetColor = currentRecord.LightColor;
             try
             {
-                LightShelfColor(false, url, targetColor, barcodes);
+                LightShelfColor(deliveryNo, false, url, targetColor, barcodes);
             }
             catch
             {

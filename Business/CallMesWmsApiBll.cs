@@ -229,14 +229,49 @@ namespace Business
                     Pagination = new Pagination() { ItemsPerPage = 30, Page = 1 },
                 };
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/GetPagedList";
+                sb.AppendLine($"url:{url}");
                 string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
                 string strResponse = WebClientHelper.Post(requestJson, url, null);
+                sb.AppendLine($"response:{strResponse}");
                 return JsonConvert.DeserializeObject<PagedList<RequestLog>>(strResponse);
             }
             catch (Exception ex)
             {
                 sb.AppendLine($"ex:{ex.GetDeepException()}");
                 return null;
+            }
+            finally
+            {
+                FileLog.Log(sb.ToString());
+            }
+        }
+
+        public static void SaveLogs(string requestKey, string message, string requestBody, string responseBody)
+        {
+            StringBuilder sb = new StringBuilder("添加日志");
+            try
+            {
+                var request = new RequestLog()
+                {
+                    LogKey = requestKey,
+                    Level = "Info",
+                    Date = DateTime.Now,
+                    Message = message,
+                    RequestBody = requestBody,
+                    ResponseBody = responseBody,
+                    Timestamp = DateTime.Now.ToFileTime(),
+                };
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/AddLog";
+                sb.AppendLine($"url:{url}");
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string strResponse = WebClientHelper.Post(requestJson, url, null);
+                sb.AppendLine($"response:{strResponse}");
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine($"ex:{ex.GetDeepException()}");
             }
             finally
             {
@@ -333,6 +368,8 @@ namespace Business
         /// 时间戳
         /// </summary>
         public long Timestamp { get; set; } = 0;
+
+        public string LogKey { get; set; }
     }
 
     /// <summary>

@@ -462,7 +462,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account);
+                    new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
@@ -668,7 +668,7 @@ namespace iWms.Form
 
         private void CancelDeliveryOrderBarcodes(int targetStatus)
         {
-            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, targetStatus, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).Distinct().ToList());
+            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).Distinct().ToList());
             OrderBarcodes.Clear();
             foreach (var item in WorkOrderDetails)
             {

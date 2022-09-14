@@ -125,7 +125,7 @@ namespace Business
             return orders.DataTableToList<Wms_DeliveryOrder>();
         }
 
-        public bool ReleaseExistedDeliveryBarcode(string deliveryId, int targetStatus, string userName, List<string> barcodes)
+        public bool ReleaseExistedDeliveryBarcode(string deliveryId, string deliveryNo, int targetStatus, string userName, List<string> barcodes)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace Business
                             //do nothing
                             break;
                         case (int)TowerEnum.LightShelf:
-                            LightOffLightShelf(deliveryId, userName, item.ToList());
+                            LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList());
                             break;
                         case (int)TowerEnum.PalletArea:
                             //do nothing
