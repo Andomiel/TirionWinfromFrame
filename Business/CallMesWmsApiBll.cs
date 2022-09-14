@@ -222,7 +222,7 @@ namespace Business
             {
                 var request = new LogModel()
                 {
-                    RequestBody = requestKey,
+                    LogKey = requestKey,
                     Level = "Info",
                     StartDate = dt.Date.ToString("yyyy-MM-dd"),
                     EndDate = dt.Date.AddDays(1).ToString("yyyy-MM-dd"),
@@ -370,6 +370,8 @@ namespace Business
         /// 请求消息
         /// </summary>
         public string RequestBody { get; set; }
+
+        public string LogKey { get; set; }
     }
 
     /// <summary>
