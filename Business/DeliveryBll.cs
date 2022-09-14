@@ -99,6 +99,7 @@ namespace Business
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Wms_DeliveryDetail.GetSelectSql());
             sb.AppendLine(" AND DeliveryId = @DeliveryId ");
+            sb.AppendLine(" ORDER BY RowNum ");
 
             var details = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@DeliveryId", deliveryId));
 

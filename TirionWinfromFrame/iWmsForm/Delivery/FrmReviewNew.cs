@@ -520,6 +520,7 @@ namespace iWms.Form
             {
                 tbScan.Focus();
             }
+            CollapseWarning();
         }
 
         private readonly object lockFinishObj = new object();
