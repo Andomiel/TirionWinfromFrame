@@ -43,6 +43,7 @@
             this.skinPanel1 = new CCWin.SkinControl.SkinPanel();
             this.Password = new CCWin.SkinControl.SkinAlphaWaterTextBox();
             this.User10086 = new CCWin.SkinControl.SkinAlphaWaterTextBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.skinPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skinPictureBox1)).BeginInit();
@@ -245,6 +246,17 @@
             this.User10086.WaterFont = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.User10086.WaterText = "";
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.BackColor = System.Drawing.Color.Transparent;
+            this.lblVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
+            this.lblVersion.Location = new System.Drawing.Point(544, 430);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(44, 14);
+            this.lblVersion.TabIndex = 32;
+            this.lblVersion.Text = "V1.0.0";
+            // 
             // LoginView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -252,6 +264,7 @@
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Stretch;
             this.BackgroundImageStore = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImageStore")));
             this.ClientSize = new System.Drawing.Size(644, 453);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.User);
             this.Controls.Add(this.label2);
@@ -295,6 +308,7 @@
         private CCWin.SkinControl.SkinPanel skinPanel1;
         private CCWin.SkinControl.SkinAlphaWaterTextBox Password;
         private CCWin.SkinControl.SkinAlphaWaterTextBox User10086;
+        private System.Windows.Forms.Label lblVersion;
     }
 }
 

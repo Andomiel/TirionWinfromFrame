@@ -27,6 +27,8 @@ namespace Login
         public LoginView()
         {
             InitializeComponent();
+
+            lblVersion.Text = $"V{Application.ProductVersion}";
             #region 解决闪烁问题
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
