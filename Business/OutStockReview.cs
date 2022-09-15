@@ -282,13 +282,16 @@ namespace Business
             //以前复核的，本次暂存，不在列表里了，那么要去除
             var removeBarcodes = allBarcodes.Where(p => p.OrderStatus == (int)DeliveryBarcodeStatusEnum.Reviewed).ToList();
             List<string> upns = removeBarcodes.Select(p => $"'{p.Barcode}'").ToList();
-            string joinCondition = string.Join(",", upns);
+            if (upns.Count > 0)
+            {
+                string joinCondition = string.Join(",", upns);
 
-            sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
                         SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE Barcode IN ({joinCondition}) ;");
-            sb.AppendLine($@"update smt_zd_material set istake=0, isTakeCheck =0, isReturnCheck = 0,
+                sb.AppendLine($@"update smt_zd_material set istake=0, isTakeCheck =0, isReturnCheck = 0,
                         isSave = 1, taketime = '', LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Saved}' where reelid IN ({joinCondition}) ; ");
 
+            }
 
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
