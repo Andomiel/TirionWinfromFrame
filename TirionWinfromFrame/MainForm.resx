@@ -198,6 +198,10 @@
         YzbnA2IOwfwxv8w/S5gS57g/AGl5Af+OTEZOAAAAAElFTkSuQmCC
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bsi_UserName.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="barListItem1.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
@@ -207,9 +211,11 @@
   <data name="&gt;&gt;ribbonStatusBar1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bsi_UserName.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;btnUpdates.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;ribbonPage1.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.RibbonPage, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="barStaticItem2.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
@@ -220,6 +226,9 @@
   <data name="&gt;&gt;barStaticItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarStaticItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="&gt;&gt;btnUpdates.Name" xml:space="preserve">
+    <value>btnUpdates</value>
+  </data>
   <data name="&gt;&gt;barButtonItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
@@ -228,6 +237,9 @@
   </data>
   <data name="&gt;&gt;bsi_UserName.Name" xml:space="preserve">
     <value>bsi_UserName</value>
+  </data>
+  <data name="&gt;&gt;barButtonItem4.Name" xml:space="preserve">
+    <value>barButtonItem4</value>
   </data>
   <data name="barButtonItem1.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -348,6 +360,9 @@
     <value>-1</value>
   </data>
   <data name="&gt;&gt;btnabout.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;barButtonItem4.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;ribbonGalleryBarItem1.Type" xml:space="preserve">
@@ -497,6 +512,9 @@
   <data name="&gt;&gt;bsi_UserName.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.BarStaticItem, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="barButtonItem5.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="barBtnChangePwd.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
@@ -538,6 +556,9 @@
   </data>
   <data name="barButtonItem2.Caption" xml:space="preserve">
     <value>barButtonItem2</value>
+  </data>
+  <data name="barButtonItem5.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
   </data>
   <data name="barStaticItem3.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
@@ -648,14 +669,14 @@
   <data name="barEditItem1.Caption" xml:space="preserve">
     <value>barEditItem1</value>
   </data>
+  <data name="barButtonItem5.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
   <data name="bsi_UserName.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
   <data name="&gt;&gt;xtraTabbedMdiManager1.Type" xml:space="preserve">
     <value>DevExpress.XtraTabbedMdi.XtraTabbedMdiManager, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;ribbonPage1.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.Ribbon.RibbonPage, DevExpress.XtraBars.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1165, 798</value>
@@ -727,13 +748,13 @@
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>zh-CN</value>
   </metadata>
+  <metadata name="defaultLookAndFeel1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>309, 17</value>
+  </metadata>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>219, 17</value>
   </metadata>
   <metadata name="xtraTabbedMdiManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="defaultLookAndFeel1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>309, 17</value>
   </metadata>
 </root>
