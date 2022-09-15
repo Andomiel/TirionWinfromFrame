@@ -806,7 +806,20 @@ namespace iWms.Form
                         "当前条目不是已复核的记录，无法删除".ShowTips();
                         return;
                     }
-                    ReviewSummaries.Remove(record);
+                    var otherRecords = ReviewSummaries.Where(p => p.PartNumber == record.PartNumber && p.LineNumber == record.LineNumber).ToList();
+                    if (otherRecords.Count > 1)
+                    {
+                        ReviewSummaries.Remove(record);
+                    }
+                    else
+                    {
+                        record.UPN = string.Empty;
+                        record.Match = (int)PrepareReviewMatchEnum.Not;
+                        record.RealQty = 0;
+                        record.ContainerNo = txtBoxScan.Text;
+                        record.QRCode = string.Empty;
+                        record.AllocateQty = 0;
+                    }
                 };
                 contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
 
@@ -818,7 +831,7 @@ namespace iWms.Form
                 //};
                 //contextMenuStrip.Items.Add(tsmiRemoveAll);
 
-                contextMenuStrip.Show(gridViewSummary, e.Location);
+                contextMenuStrip.Show(MousePosition.X, MousePosition.Y);
             }
             catch (Exception ex)
             {

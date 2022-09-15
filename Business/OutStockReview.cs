@@ -546,14 +546,42 @@ namespace Business
         /// 需求数量
         /// </summary>
         public int NeedQty { get; set; }
+
+        private string _upn = string.Empty;
         /// <summary>
         /// 已分配UPN
         /// </summary>
-        public string UPN { get; set; }
+        public string UPN
+        {
+            get { return _upn; }
+            set
+            {
+                if (_upn != value)
+                {
+                    _upn = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UPN)));
+                }
+            }
+        }
+
+        private int _allocateQty = 0;
         /// <summary>
         /// 待分配数量
         /// </summary>
-        public int AllocateQty { get; set; }
+        public int AllocateQty
+        {
+            get { return _allocateQty; }
+            set
+            {
+                if (_allocateQty != value)
+                {
+                    _allocateQty = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AllocateQty)));
+                }
+            }
+        }
 
         private int _match = 0;
         /// <summary>
@@ -611,10 +639,24 @@ namespace Business
             }
         }
         public string SourceDes => EnumHelper.GetDescription(typeof(PrepareSourceEnum), Source);
+
+        private string _qrCode = string.Empty;
         /// <summary>
         /// 二维码
         /// </summary>
-        public string QRCode { get; set; }
+        public string QRCode
+        {
+            get { return _qrCode; }
+            set
+            {
+                if (_qrCode != value)
+                {
+                    _qrCode = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(QRCode)));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
