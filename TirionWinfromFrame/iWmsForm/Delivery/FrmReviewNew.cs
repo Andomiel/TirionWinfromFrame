@@ -179,47 +179,30 @@ namespace iWms.Form
             }
             tbScan.SelectAll();
 
-            ReviewRecord reviewRecord = null;
-            if (ReviewRecords != null)
+            //重复扫码验证
+            ReviewRecord reviewRecord = ReviewRecords.FirstOrDefault(p => p.UPN.Equals(upn));
+            if (reviewRecord != null && reviewRecord.Status.Equals("正常出库"))
             {
-                //重复扫码验证
-                reviewRecord = ReviewRecords.FirstOrDefault(p => p.UPN.Equals(upn));
-
-                if (reviewRecord != null)
-                {
-                    //匹配到了扫码记录，需要重新查询，更新状态
-                    if (reviewRecord.Status.Equals("正常出库"))
-                    {
-                        ShowWarning(upn, 3);
-                        ResetBarcodeText();
-                        PlayResultWaves(false);
-                        return;
-                    }
-                    reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
-                    reviewRecord.ScanTime = DateTime.Now;
-
-                    AddBindRecord(reviewRecord);
-                }
+                ShowWarning(upn, 3);
+                ResetBarcodeText();
+                PlayResultWaves(false);
+                return;
             }
 
-            if (reviewRecord == null)
+            reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
+            reviewRecord.BoxNo = txtBoxScan.Text;
+            reviewRecord.OriginalCode = tbOriginal.Text;
+            reviewRecord.ScanTime = DateTime.Now;
+            if (!reviewRecord.IsOk)
             {
-                reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
-                reviewRecord.BoxNo = txtBoxScan.Text;
-                reviewRecord.OriginalCode = tbOriginal.Text;
-                if (!reviewRecord.IsOk)
-                {
-                    AddBindRecord(reviewRecord);
-                    ResetBarcodeText();
-                    PlayResultWaves(false);
-                    return;
-                }
+                AddBindRecord(reviewRecord);
+                ResetBarcodeText();
+                PlayResultWaves(false);
+                return;
             }
 
-            List<OrderNeedMaterial> needMaterials = OutStockReview.GetMaterialsByOutOrderNo(SelectedOrder.DeliveryNo);
-            List<OrderNeedMaterial> needAndThisPn = needMaterials.Where(p => p.PartNumber == reviewRecord.Part_Number).ToList();
-            var needMaterial = needAndThisPn.FirstOrDefault();
-            if (needMaterial == null)
+            var needMaterials = ReviewSummaries.Where(p => p.PartNumber == reviewRecord.Part_Number).ToList();
+            if (needMaterials == null || needMaterials.Count == 0)
             {
                 reviewRecord.Status = "无此料号";
                 AddBindRecord(reviewRecord);
@@ -230,33 +213,32 @@ namespace iWms.Form
             }
 
             //备料和扫码的比较 及 构建数据
-            var allSamePnList = ReviewSummaries.Where(p => p.PartNumber.Equals(reviewRecord.Part_Number)).ToList();
             string lineNumber = string.Empty;
             string slotNo = string.Empty;
-            if (needAndThisPn.Count > 0)
+
+            int doneStatus = (int)PrepareReviewMatchEnum.Done;
+            var maxValidateGroup = needMaterials
+                .GroupBy(p => new { p.LineNumber, p.SlotNo, p.NeedQty })
+                .ToDictionary(p => p.Key, p => p.Where(c => c.Match == doneStatus).Sum(c => c.RealQty));
+
+            foreach (var item in maxValidateGroup)
             {
-                foreach (var pnByLineNumber in needAndThisPn)
+                bool exceeded = item.Key.NeedQty >= item.Value;
+                if (exceeded)
                 {
-                    int nowSum = allSamePnList.Where(p => p.LineNumber == pnByLineNumber.LineNumber
-                                                       && p.Match == (int)PrepareReviewMatchEnum.Done)
-                                              .Sum(p => p.RealQty);
-                    bool exceeded = nowSum >= pnByLineNumber.NeedQty;
-                    if (!exceeded)
-                    {
-                        lineNumber = pnByLineNumber.LineNumber;
-                        slotNo = pnByLineNumber.SlotNo;
-                        break;
-                    }
+                    lineNumber = item.Key.LineNumber;
+                    slotNo = item.Key.SlotNo;
+                    break;
                 }
-                if (string.IsNullOrWhiteSpace(lineNumber))
-                {
-                    reviewRecord.Status = "已超发过最小包装数";
-                    AddBindRecord(reviewRecord);
-                    ShowWarning(reviewRecord.UPN, 2);
-                    ResetBarcodeText();
-                    PlayResultWaves(false);
-                    return;
-                }
+            }
+            if (string.IsNullOrWhiteSpace(lineNumber))
+            {
+                reviewRecord.Status = "已超发过最小包装数";
+                AddBindRecord(reviewRecord);
+                ShowWarning(reviewRecord.UPN, 2);
+                ResetBarcodeText();
+                PlayResultWaves(false);
+                return;
             }
 
             //调用若干MES和WMS接口
@@ -301,22 +283,13 @@ namespace iWms.Form
                     QRCode = reviewRecord.QRCode
                 };
 
-                if (allSamePnList?.Count > 0)
-                {
-                    newReview.OrderNo = allSamePnList[0].OrderNo;
-                    newReview.PartNumber = allSamePnList[0].PartNumber;
-                    newReview.NeedQty = allSamePnList[0].NeedQty;
-                    newReview.LineNumber = lineNumber;
-                    newReview.SlotNo = slotNo;
-                }
-                else
-                {
-                    newReview.OrderNo = needMaterial.OrderNo;
-                    newReview.PartNumber = needMaterial.PartNumber;
-                    newReview.NeedQty = needMaterial.NeedQty;
-                    newReview.LineNumber = needMaterial.LineNumber;
-                    newReview.SlotNo = needMaterial.SlotNo;
-                }
+                var currentMaterial = needMaterials.FirstOrDefault(p => p.LineNumber == lineNumber);
+                newReview.OrderNo = currentMaterial.OrderNo;
+                newReview.PartNumber = currentMaterial.PartNumber;
+                newReview.NeedQty = currentMaterial.NeedQty;
+                newReview.LineNumber = currentMaterial.LineNumber;
+                newReview.SlotNo = currentMaterial.SlotNo;
+
                 var removeItems = ReviewSummaries.Where(p => p.PartNumber == newReview.PartNumber && p.LineNumber == newReview.LineNumber && string.IsNullOrWhiteSpace(p.UPN)).ToList();
                 foreach (var item in removeItems)
                 {
@@ -340,7 +313,7 @@ namespace iWms.Form
         {
             string orderNo = SelectedOrder.DeliveryNo;
             int orderType = SelectedOrder.DeliveryType;
-            FileLog.Log($"CheckByApi[{orderType}]");
+            FileLog.Log($"CheckByApi[{orderNo}][{tbScan.Text}][{orderType}]");
             string upn = tbScan.Text.Split('*')[0];
 
             CheckResultResponse result = new CheckResultResponse();
@@ -828,7 +801,11 @@ namespace iWms.Form
                 {
                     var row = gridViewSummary.Rows[e.RowIndex];
                     var record = row.DataBoundItem as ReviewSummary;
-
+                    if (string.IsNullOrWhiteSpace(record.UPN))
+                    {
+                        "当前条目不是已复核的记录，无法删除".ShowTips();
+                        return;
+                    }
                     ReviewSummaries.Remove(record);
                 };
                 contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
@@ -841,7 +818,7 @@ namespace iWms.Form
                 //};
                 //contextMenuStrip.Items.Add(tsmiRemoveAll);
 
-                contextMenuStrip.Show(gridViewSummary, new Point(e.X, e.Y));
+                contextMenuStrip.Show(gridViewSummary, e.Location);
             }
             catch (Exception ex)
             {

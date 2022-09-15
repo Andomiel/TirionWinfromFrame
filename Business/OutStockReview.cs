@@ -4,6 +4,7 @@ using Entity.DataContext;
 using Entity.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -519,7 +520,7 @@ namespace Business
         public string OriginalCode { get; set; } = string.Empty;
     }
 
-    public class ReviewSummary
+    public class ReviewSummary : INotifyPropertyChanged
     {
         public string OrderNo { get; set; }
         public int TowerNo { get; set; }
@@ -553,21 +554,68 @@ namespace Business
         /// 待分配数量
         /// </summary>
         public int AllocateQty { get; set; }
+
+        private int _match = 0;
         /// <summary>
         /// 是否复核
         /// </summary>
-        public int Match { get; set; }
+        public int Match
+        {
+            get { return _match; }
+            set
+            {
+                if (_match != value)
+                {
+                    _match = value;
+
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Match)));
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(MatchDes)));
+                }
+            }
+        }
+
         public string MatchDes => Match == 1 ? "已复核" : "未复核";
+
+        private int _realQty = 0;
         /// <summary>
         /// 实际数量
         /// </summary>
-        public int RealQty { get; set; }
+        public int RealQty
+        {
+            get { return _realQty; }
+            set
+            {
+                if (_realQty != value)
+                {
+                    _realQty = value;
+
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(RealQty)));
+                }
+            }
+        }
         public int Source { get; set; }
-        public string ContainerNo { get; set; } = string.Empty;
+
+        private string _containerNo = string.Empty;
+
+        public string ContainerNo
+        {
+            get { return _containerNo; }
+            set
+            {
+                if (_containerNo != value)
+                {
+                    _containerNo = value;
+
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(ContainerNo)));
+                }
+            }
+        }
         public string SourceDes => EnumHelper.GetDescription(typeof(PrepareSourceEnum), Source);
         /// <summary>
         /// 二维码
         /// </summary>
         public string QRCode { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -230,8 +230,8 @@ namespace Business
             foreach (var item in barcodes)
             {
                 sb.AppendLine($@" INSERT INTO Wms_DeliveryBarcode
-                    (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-                    VALUES('{item.BusinessId}', '{item.DeliveryId}', '{item.DeliveryDetailId}', '', '{item.Barcode}', '', {item.DeliveryAreaId}, {item.DeliveryQuantity}, {item.OrderStatus}, getdate(), '{item.CreateUser}', getdate(), '{item.LastUpdateUser}');");
+                    (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, DeliveryLocation)
+                    VALUES('{item.BusinessId}', '{item.DeliveryId}', '{item.DeliveryDetailId}', '', '{item.Barcode}', '', {item.DeliveryAreaId}, {item.DeliveryQuantity}, {item.OrderStatus}, getdate(), '{item.CreateUser}', getdate(), '{item.LastUpdateUser}', '{item.DeliveryLocation}');");
 
                 sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Locked}, Work_Order_No = '{deliveryId}', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
             }

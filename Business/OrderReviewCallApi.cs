@@ -12,7 +12,7 @@ namespace Business
         #region Mes物料信息接口 验证
         public static CheckResultResponse CheckFromMaterialInfo(string qrcode)
         {
-            CheckResultResponse checkResult = new CheckResultResponse();
+            CheckResultResponse checkResult = new CheckResultResponse() { Result = true };
             MaterialInfoResponse response = CallMesWmsApiBll.CallMaterialInfoByUPN(qrcode);
             if (response == null)
             {
@@ -28,6 +28,10 @@ namespace Business
             {
                 checkResult.Result = false;
                 checkResult.ErrMessage = "锁定料";
+            }
+            else
+            {
+                checkResult.Result = true;
             }
             FileLog.Log($"Mes物料信息接口 验证【{JsonConvert.SerializeObject(checkResult)}】");
             return checkResult;
