@@ -568,8 +568,8 @@ namespace Business
                 {
                     _match = value;
 
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Match)));
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(MatchDes)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Match)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MatchDes)));
                 }
             }
         }
@@ -589,7 +589,7 @@ namespace Business
                 {
                     _realQty = value;
 
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(RealQty)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RealQty)));
                 }
             }
         }
@@ -606,7 +606,7 @@ namespace Business
                 {
                     _containerNo = value;
 
-                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(ContainerNo)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ContainerNo)));
                 }
             }
         }

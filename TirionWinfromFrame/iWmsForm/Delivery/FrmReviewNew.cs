@@ -242,7 +242,7 @@ namespace iWms.Form
             }
 
             //调用若干MES和WMS接口
-            CheckResultResponse checkResult = CheckByApi(reviewRecord.Qty);
+            CheckResultResponse checkResult = CheckByApi(reviewRecord);
             if (!checkResult.Result)
             {
                 reviewRecord.Status = checkResult.ErrMessage;
@@ -309,12 +309,11 @@ namespace iWms.Form
             tbScan.Focus();
         }
 
-        private CheckResultResponse CheckByApi(int quantity)
+        private CheckResultResponse CheckByApi(ReviewRecord record)
         {
             string orderNo = SelectedOrder.DeliveryNo;
             int orderType = SelectedOrder.DeliveryType;
-            FileLog.Log($"CheckByApi[{orderNo}][{tbScan.Text}][{orderType}]");
-            string upn = tbScan.Text.Split('*')[0];
+            FileLog.Log($"CheckByApi[{orderNo}][{record.UPN}][{orderType}]");
 
             CheckResultResponse result = new CheckResultResponse();
             if (orderType != (int)OutOrderTypeEnum.FLCK)
@@ -336,7 +335,7 @@ namespace iWms.Form
             if (orderType == (int)OutOrderTypeEnum.JLDCK || orderType == (int)OutOrderTypeEnum.SCLL)
             {
                 //MSD过期校验
-                result = OrderReviewCallApi.CheckFromMSDExpired(upn);
+                result = OrderReviewCallApi.CheckFromMSDExpired(record.UPN);
             }
             if (!result.Result)
             {
@@ -346,7 +345,7 @@ namespace iWms.Form
             if (orderType == (int)OutOrderTypeEnum.DBCK || orderType == (int)OutOrderTypeEnum.ZF)
             {
                 //总装MES物料退料接口
-                result = OrderReviewCallApi.CheckFromMesMaterialBack(upn, quantity);
+                result = OrderReviewCallApi.CheckFromMesMaterialBack(record.UPN, record.Qty);
             }
 
             if (!result.Result)
@@ -357,13 +356,13 @@ namespace iWms.Form
             if (orderType == (int)OutOrderTypeEnum.JLDCK || orderType == (int)OutOrderTypeEnum.DBCK)
             {
                 //验证物料是否散料测试
-                if (orderType == (int)OutOrderTypeEnum.JLDCK && upn.StartsWith("96"))
+                if (orderType == (int)OutOrderTypeEnum.JLDCK && record.UPN.StartsWith("96"))
                 {
-                    FileLog.Log($"当前UPN{{{upn}}}为96开头的物料，不做散料测试");
+                    FileLog.Log($"当前UPN{{{record.UPN}}}为96开头的物料，不做散料测试");
                 }
                 else
                 {
-                    result = OrderReviewCallApi.CheckMatStatusAccordingUpn(upn);
+                    result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
                 }
             }
 
@@ -374,7 +373,7 @@ namespace iWms.Form
             if (orderType == (int)OutOrderTypeEnum.DBCK && cbOriginal.Checked)
             {
                 //总装MES-IQC比对接口
-                result = OrderReviewCallApi.CheckFromMesIqcCompare(upn, tbOriginal.Text);
+                result = OrderReviewCallApi.CheckFromMesIqcCompare(record.UPN, tbOriginal.Text);
             }
             if (!result.Result)
             {
@@ -563,7 +562,8 @@ namespace iWms.Form
                             SplashScreenManager.ShowForm(typeof(WaitForm1));
                             try
                             {
-                                var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.DeliveryNo, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId);
+                                //尤其注意，这里使用的是出库单的Id
+                                var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.BusinessId, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId);
                                 feedback.Message.ShowTips();
                             }
                             finally
