@@ -30,8 +30,8 @@ namespace iWms.Form
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
@@ -41,7 +41,6 @@ namespace iWms.Form
             this.cbAsrs = new System.Windows.Forms.CheckBox();
             this.cbLightShelf = new System.Windows.Forms.CheckBox();
             this.cbReform = new System.Windows.Forms.CheckBox();
-            this.cbPallet = new System.Windows.Forms.CheckBox();
             this.lblTypeName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblLock = new System.Windows.Forms.Label();
@@ -74,7 +73,7 @@ namespace iWms.Form
             this.btnPause.Location = new System.Drawing.Point(1, 1);
             this.btnPause.Margin = new System.Windows.Forms.Padding(1);
             this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(98, 28);
+            this.btnPause.Size = new System.Drawing.Size(114, 33);
             this.btnPause.TabIndex = 0;
             this.btnPause.Text = "暂停入库";
             this.btnPause.UseVisualStyleBackColor = true;
@@ -82,10 +81,10 @@ namespace iWms.Form
             // 
             // btnFinish
             // 
-            this.btnFinish.Location = new System.Drawing.Point(121, 1);
+            this.btnFinish.Location = new System.Drawing.Point(141, 1);
             this.btnFinish.Margin = new System.Windows.Forms.Padding(1);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(98, 28);
+            this.btnFinish.Size = new System.Drawing.Size(114, 33);
             this.btnFinish.TabIndex = 1;
             this.btnFinish.Text = "完成入库";
             this.btnFinish.UseVisualStyleBackColor = true;
@@ -110,7 +109,7 @@ namespace iWms.Form
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1070, 73);
+            this.panel1.Size = new System.Drawing.Size(1248, 85);
             this.panel1.TabIndex = 10;
             // 
             // flowLayoutPanel1
@@ -119,10 +118,9 @@ namespace iWms.Form
             this.flowLayoutPanel1.Controls.Add(this.cbAsrs);
             this.flowLayoutPanel1.Controls.Add(this.cbLightShelf);
             this.flowLayoutPanel1.Controls.Add(this.cbReform);
-            this.flowLayoutPanel1.Controls.Add(this.cbPallet);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(71, 35);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(83, 41);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(931, 28);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1086, 33);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // cbSorting
@@ -130,7 +128,7 @@ namespace iWms.Form
             this.cbSorting.AutoSize = true;
             this.cbSorting.Location = new System.Drawing.Point(3, 3);
             this.cbSorting.Name = "cbSorting";
-            this.cbSorting.Size = new System.Drawing.Size(60, 16);
+            this.cbSorting.Size = new System.Drawing.Size(62, 18);
             this.cbSorting.TabIndex = 13;
             this.cbSorting.Text = "理料区";
             this.cbSorting.UseVisualStyleBackColor = true;
@@ -139,9 +137,9 @@ namespace iWms.Form
             // cbAsrs
             // 
             this.cbAsrs.AutoSize = true;
-            this.cbAsrs.Location = new System.Drawing.Point(69, 3);
+            this.cbAsrs.Location = new System.Drawing.Point(71, 3);
             this.cbAsrs.Name = "cbAsrs";
-            this.cbAsrs.Size = new System.Drawing.Size(60, 16);
+            this.cbAsrs.Size = new System.Drawing.Size(62, 18);
             this.cbAsrs.TabIndex = 14;
             this.cbAsrs.Text = "智能仓";
             this.cbAsrs.UseVisualStyleBackColor = true;
@@ -150,9 +148,9 @@ namespace iWms.Form
             // cbLightShelf
             // 
             this.cbLightShelf.AutoSize = true;
-            this.cbLightShelf.Location = new System.Drawing.Point(135, 3);
+            this.cbLightShelf.Location = new System.Drawing.Point(139, 3);
             this.cbLightShelf.Name = "cbLightShelf";
-            this.cbLightShelf.Size = new System.Drawing.Size(72, 16);
+            this.cbLightShelf.Size = new System.Drawing.Size(74, 18);
             this.cbLightShelf.TabIndex = 15;
             this.cbLightShelf.Text = "亮灯料架";
             this.cbLightShelf.UseVisualStyleBackColor = true;
@@ -161,80 +159,69 @@ namespace iWms.Form
             // cbReform
             // 
             this.cbReform.AutoSize = true;
-            this.cbReform.Location = new System.Drawing.Point(213, 3);
+            this.cbReform.Location = new System.Drawing.Point(219, 3);
             this.cbReform.Name = "cbReform";
-            this.cbReform.Size = new System.Drawing.Size(72, 16);
+            this.cbReform.Size = new System.Drawing.Size(74, 18);
             this.cbReform.TabIndex = 16;
             this.cbReform.Text = "改造货架";
             this.cbReform.UseVisualStyleBackColor = true;
             this.cbReform.CheckedChanged += new System.EventHandler(this.cbReform_CheckedChanged);
             // 
-            // cbPallet
-            // 
-            this.cbPallet.AutoSize = true;
-            this.cbPallet.Location = new System.Drawing.Point(291, 3);
-            this.cbPallet.Name = "cbPallet";
-            this.cbPallet.Size = new System.Drawing.Size(60, 16);
-            this.cbPallet.TabIndex = 17;
-            this.cbPallet.Text = "栈板区";
-            this.cbPallet.UseVisualStyleBackColor = true;
-            this.cbPallet.CheckedChanged += new System.EventHandler(this.cbReform_CheckedChanged);
-            // 
             // lblTypeName
             // 
             this.lblTypeName.AutoSize = true;
-            this.lblTypeName.Location = new System.Drawing.Point(75, 9);
+            this.lblTypeName.Location = new System.Drawing.Point(87, 10);
             this.lblTypeName.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblTypeName.Name = "lblTypeName";
-            this.lblTypeName.Size = new System.Drawing.Size(53, 12);
+            this.lblTypeName.Size = new System.Drawing.Size(55, 14);
             this.lblTypeName.TabIndex = 12;
             this.lblTypeName.Text = "调拨入库";
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(0, 73);
+            this.panel2.Location = new System.Drawing.Point(0, 85);
             this.panel2.Margin = new System.Windows.Forms.Padding(1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(947, 381);
+            this.panel2.Size = new System.Drawing.Size(1105, 444);
             this.panel2.TabIndex = 11;
             // 
             // lblLock
             // 
             this.lblLock.AutoSize = true;
-            this.lblLock.Location = new System.Drawing.Point(6, 39);
+            this.lblLock.Location = new System.Drawing.Point(7, 45);
             this.lblLock.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblLock.Name = "lblLock";
-            this.lblLock.Size = new System.Drawing.Size(65, 12);
+            this.lblLock.Size = new System.Drawing.Size(67, 14);
             this.lblLock.TabIndex = 7;
             this.lblLock.Text = "仓储锁定：";
             // 
             // lblOrderNo
             // 
             this.lblOrderNo.AutoSize = true;
-            this.lblOrderNo.Location = new System.Drawing.Point(260, 9);
+            this.lblOrderNo.Location = new System.Drawing.Point(303, 10);
             this.lblOrderNo.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblOrderNo.Name = "lblOrderNo";
-            this.lblOrderNo.Size = new System.Drawing.Size(65, 12);
+            this.lblOrderNo.Size = new System.Drawing.Size(78, 14);
             this.lblOrderNo.TabIndex = 3;
             this.lblOrderNo.Text = "CN20210202";
             // 
             // lblOrderNoTitle
             // 
             this.lblOrderNoTitle.AutoSize = true;
-            this.lblOrderNoTitle.Location = new System.Drawing.Point(191, 9);
+            this.lblOrderNoTitle.Location = new System.Drawing.Point(223, 10);
             this.lblOrderNoTitle.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblOrderNoTitle.Name = "lblOrderNoTitle";
-            this.lblOrderNoTitle.Size = new System.Drawing.Size(65, 12);
+            this.lblOrderNoTitle.Size = new System.Drawing.Size(67, 14);
             this.lblOrderNoTitle.TabIndex = 2;
             this.lblOrderNoTitle.Text = "工单编号：";
             // 
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(159, 9);
+            this.lblType.Location = new System.Drawing.Point(185, 10);
             this.lblType.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(29, 12);
+            this.lblType.Size = new System.Drawing.Size(36, 14);
             this.lblType.TabIndex = 1;
             this.lblType.Text = "DBRK";
             this.lblType.Visible = false;
@@ -242,10 +229,10 @@ namespace iWms.Form
             // lblTypeTitle
             // 
             this.lblTypeTitle.AutoSize = true;
-            this.lblTypeTitle.Location = new System.Drawing.Point(6, 9);
+            this.lblTypeTitle.Location = new System.Drawing.Point(7, 10);
             this.lblTypeTitle.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblTypeTitle.Name = "lblTypeTitle";
-            this.lblTypeTitle.Size = new System.Drawing.Size(65, 12);
+            this.lblTypeTitle.Size = new System.Drawing.Size(67, 14);
             this.lblTypeTitle.TabIndex = 0;
             this.lblTypeTitle.Text = "工单类型：";
             // 
@@ -261,14 +248,14 @@ namespace iWms.Form
             this.WZ_BM,
             this.RK_RKSL,
             this.State});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridWMS.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridWMS.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridWMS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridWMS.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridWMS.Location = new System.Drawing.Point(3, 3);
@@ -278,7 +265,7 @@ namespace iWms.Form
             this.gridWMS.RowTemplate.Height = 23;
             this.gridWMS.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridWMS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridWMS.Size = new System.Drawing.Size(422, 609);
+            this.gridWMS.Size = new System.Drawing.Size(493, 712);
             this.gridWMS.TabIndex = 11;
             this.gridWMS.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridWMS_CellFormatting);
             this.gridWMS.SelectionChanged += new System.EventHandler(this.gridWMS_SelectionChanged);
@@ -320,24 +307,24 @@ namespace iWms.Form
             this.Qty,
             this.TowerNo,
             this.CreateTime});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridIWMS.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridIWMS.DefaultCellStyle = dataGridViewCellStyle4;
             this.gridIWMS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridIWMS.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.gridIWMS.Location = new System.Drawing.Point(431, 3);
+            this.gridIWMS.Location = new System.Drawing.Point(502, 3);
             this.gridIWMS.Name = "gridIWMS";
             this.gridIWMS.ReadOnly = true;
             this.gridIWMS.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.gridIWMS.RowTemplate.Height = 23;
             this.gridIWMS.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridIWMS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridIWMS.Size = new System.Drawing.Size(636, 609);
+            this.gridIWMS.Size = new System.Drawing.Size(743, 712);
             this.gridIWMS.TabIndex = 12;
             // 
             // ReelID
@@ -374,10 +361,10 @@ namespace iWms.Form
             // 
             // btnForceFinish
             // 
-            this.btnForceFinish.Location = new System.Drawing.Point(341, 1);
+            this.btnForceFinish.Location = new System.Drawing.Point(398, 1);
             this.btnForceFinish.Margin = new System.Windows.Forms.Padding(1);
             this.btnForceFinish.Name = "btnForceFinish";
-            this.btnForceFinish.Size = new System.Drawing.Size(98, 28);
+            this.btnForceFinish.Size = new System.Drawing.Size(114, 33);
             this.btnForceFinish.TabIndex = 13;
             this.btnForceFinish.Text = "强制入库";
             this.btnForceFinish.UseVisualStyleBackColor = true;
@@ -393,40 +380,40 @@ namespace iWms.Form
             this.tlpLayout.Controls.Add(this.gridIWMS, 1, 0);
             this.tlpLayout.Controls.Add(this.tableLayoutPanel1, 1, 1);
             this.tlpLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLayout.Location = new System.Drawing.Point(0, 73);
+            this.tlpLayout.Location = new System.Drawing.Point(0, 85);
             this.tlpLayout.Name = "tlpLayout";
             this.tlpLayout.RowCount = 2;
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpLayout.Size = new System.Drawing.Size(1070, 645);
+            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tlpLayout.Size = new System.Drawing.Size(1248, 753);
             this.tlpLayout.TabIndex = 14;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.btnPause, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnForceFinish, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnFinish, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(428, 615);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(499, 718);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(642, 30);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(749, 35);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // FrmWareHouseDetail
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 718);
+            this.ClientSize = new System.Drawing.Size(1248, 838);
             this.Controls.Add(this.tlpLayout);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(1);
@@ -472,7 +459,6 @@ namespace iWms.Form
         private System.Windows.Forms.CheckBox cbLightShelf;
         private System.Windows.Forms.CheckBox cbAsrs;
         private System.Windows.Forms.CheckBox cbSorting;
-        private System.Windows.Forms.CheckBox cbPallet;
         private System.Windows.Forms.CheckBox cbReform;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReelID;

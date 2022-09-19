@@ -59,10 +59,6 @@ namespace Business
                     case (int)TowerEnum.LightShelf:
                         sb.AppendLine(DeliveryLightShelfBarcodes(deliveryId, deliveryNo, userName, item.ToList()));
                         break;
-                    case (int)TowerEnum.PalletArea:
-                        //do nothing
-                        sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, item.Key, 99, userName));
-                        break;
                     case (int)TowerEnum.ReformShelf:
                         sb.AppendLine(DeliveryReformShelfBarcodes(deliveryId, deliveryNo, userName, item.ToList()));
                         break;
@@ -276,9 +272,6 @@ namespace Business
                         break;
                     case (int)TowerEnum.LightShelf:
                         sb.AppendLine(LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList()));
-                        break;
-                    case (int)TowerEnum.PalletArea:
-                        //do nothing
                         break;
                     case (int)TowerEnum.ReformShelf:
                         sb.AppendLine(LightOffReformShelf(deliveryId, userName, item.ToList()));

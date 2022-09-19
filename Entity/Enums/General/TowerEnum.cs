@@ -27,11 +27,11 @@ namespace Entity.Enums
         [Description("亮灯料架")]
         LightShelf = 2,
 
-        /// <summary>
-        /// 栈板区
-        /// </summary>
-        [Description("栈板区")]
-        PalletArea = 3,
+        ///// <summary>
+        ///// 栈板区
+        ///// </summary>
+        //[Description("栈板区")]
+        //PalletArea = 3,
 
         /// <summary>
         /// 改造货架

@@ -146,9 +146,6 @@ namespace Business
                         case (int)TowerEnum.LightShelf:
                             LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList());
                             break;
-                        case (int)TowerEnum.PalletArea:
-                            //do nothing
-                            break;
                         case (int)TowerEnum.ReformShelf:
                             LightOffReformShelf(deliveryId, userName, item.ToList());
                             break;

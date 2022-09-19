@@ -139,7 +139,6 @@ namespace iWms.Form
             switch (condition.TowerNo)
             {
                 case (int)TowerEnum.SortingArea:
-                case (int)TowerEnum.PalletArea:
                 default:
                     break;
                 case (int)TowerEnum.ASRS:

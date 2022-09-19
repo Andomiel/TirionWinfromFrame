@@ -66,108 +66,6 @@ namespace Business
             }
         }
 
-        public static int UpdateAndInsertSpareMaterial(string orderNo, List<ReviewSummary> summaryList)
-        {
-            DateTime now = DateTime.Now;
-            List<string> updatePrepareComplete = new List<string>();
-            List<string> insertValues = new List<string>();
-            List<ReviewSummary> updateReviewOks = new List<ReviewSummary>();
-            List<string> resetZdUpns = new List<string>();
-            List<string> needLockUpns = new List<string>();
-
-            StringBuilder log = new StringBuilder();
-            //拿到备料表中，所有栈板区的数据
-            string exemptSql = $" SELECT UPN,Source FROM smt_prepare_material WHERE OrderNo='{orderNo}' AND Match=-1 ";
-            var allArea3Data = DbHelper.GetDataTable(exemptSql).AsEnumerable();
-            if (allArea3Data.Count() > 0)
-            {
-                var exemptUpns = allArea3Data.Select(p => p.Field<string>("UPN")).ToList();
-                //备料表需要完结
-                updatePrepareComplete.AddRange(exemptUpns);
-                //其中，箱子需要重置库存状态
-                var boxUpns = allArea3Data.Where(p => p.Field<int>("Source") == 1)?.Select(p => p.Field<string>("UPN")).ToList();
-                if (boxUpns != null && boxUpns.Count > 0)
-                {
-                    resetZdUpns.AddRange(boxUpns);
-                }
-            }
-            log.AppendLine($"1、栈板区操作{exemptSql}");
-
-            foreach (ReviewSummary item in summaryList)
-            {
-                //复核时未扫码ReelID，需要直接完结prepare_Material表，并重置zd_material表
-                if (item.Match == 0)
-                {
-                    updatePrepareComplete.Add(item.UPN);
-
-                    string workOrderNo = GetBindOrderByUpn(item.UPN);
-                    if (workOrderNo.Equals(orderNo))
-                    {
-                        resetZdUpns.Add(item.UPN);
-                    }
-                }
-                ////不用复核的ReelID，直接完结prepare_Material表
-                //else if (match == -1)
-                //{
-                //    updatePrepareComplete.Add(upn);
-                //}
-                //复核时扫码成功的，如果来源于 拣料和系统分配，prepare_Material表Match更新并完结，zd_material表状态更新
-                //如果来源于 复核，prepare_Material表新增，zd_material表绑定工单，并状态更新
-                else if (item.Match == 1)
-                {
-                    if (item.Source == 1 || item.Source == 3)
-                    {
-                        updateReviewOks.Add(item);
-                    }
-                    else if (item.Source == 2)
-                    {
-                        insertValues.Add($@"('{Guid.NewGuid()}','{item.UPN}','{item.PartNumber}','{orderNo}',{item.RealQty},{item.TowerNo},1,'{now}',2,1,'{item.ContainerNo}','{item.LineNumber}','{item.SlotNo}','{item.QRCode}')");
-                        needLockUpns.Add(item.UPN);
-                    }
-                    else { }
-                }
-                else { }
-            }
-
-            StringBuilder sb = new StringBuilder();
-            if (updatePrepareComplete.Count > 0)
-            {
-                sb.Append($@" UPDATE smt_prepare_material set IsComplete = 1, CompleteTime = '{now}' WHERE OrderNo='{orderNo}' AND UPN IN ('{string.Join("','", updatePrepareComplete)}');");
-            }
-            if (insertValues.Count > 0)
-            {
-                sb.Append($@" INSERT INTO smt_prepare_material(
-                                               Id,UPN,PartNumber,OrderNo,Qty,
-                                               TowerNo,IsComplete,CompleteTime,Source,
-                                               Match,ContainerNo,LineNumber,SlotNo,QRCode) 
-                                        VALUES {string.Join(",", insertValues)};");
-            }
-            if (updateReviewOks.Count > 0)
-            {
-                sb.Append($" UPDATE smt_zd_material SET isTakeCheck=1, isTake=1 WHERE ReelId in ('{string.Join("','", updateReviewOks.Select(p => p.UPN).ToList())}');");
-                var group = updateReviewOks.GroupBy(p => p.ContainerNo).ToList();
-                foreach (var gpItem in group)
-                {
-                    sb.Append($@" UPDATE smt_prepare_material set Match = 1, IsComplete = 1, CompleteTime = '{now}', ContainerNo='{gpItem.Key}' WHERE OrderNo='{orderNo}' AND UPN IN ('{string.Join("','", gpItem.Select(p => p.UPN).ToList())}');");
-                }
-            }
-            if (resetZdUpns.Count > 0)
-            {
-                sb.Append($@" UPDATE smt_zd_material SET Work_Order_No='',isTake=0,isTakeDelivery=0, LightColor='0' WHERE ReelId in ('{string.Join("','", resetZdUpns)}');");
-            }
-            if (needLockUpns.Count > 0)
-            {
-                sb.Append($@" UPDATE smt_zd_material SET Work_Order_No='{orderNo}', isTakeCheck=1, isTake=1 WHERE ReelId in ('{string.Join("','", needLockUpns)}');");
-            }
-            sb.Append($" UPDATE smt_kanbanOrder SET isComplete=1, FinishedTime='{now}' WHERE wo='{orderNo}';");
-            string error;
-            int rowCount = DbHelper.ExcuteWithTransaction(sb.ToString(), out error);
-
-            log.AppendLine($"2、复核完成整体数据操作{sb}；影响行数：{rowCount}；错误信息：{error}");
-            FileLog.Log($"出库复核数据更新操作日志：{log}");
-            return rowCount;
-        }
-
         public static int FinishDeliveyOrderReview(string deliveryNo, string userName, List<ReviewSummary> barcodes)
         {
             var allBarcodes = GetDeliveryBarcodes(deliveryNo);
@@ -248,7 +146,6 @@ namespace Business
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
-
         public static int TempDeliveyOrderReview(string deliveryNo, string userName, List<ReviewSummary> barcodes)
         {
             var allBarcodes = GetDeliveryBarcodes(deliveryNo);
@@ -310,36 +207,6 @@ namespace Business
               LEFT JOIN Wms_DeliveryOrder wdo ON wdd.DeliveryId = wdo.BusinessId 
               WHERE wdo.DeliveryNo = '{deliveryNo}' ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryDetail>();
-        }
-
-        private static string GetBindOrderByUpn(string upn)
-        {
-            string sql = $" SELECT Work_Order_No FROM smt_zd_material WHERE ReelId = '{upn}' ";
-            return Convert.ToString(DbHelper.ExecuteScalar(sql));
-        }
-
-        public static List<ReviewResultItem> GetResults(string orderNo)
-        {
-            string sql = $@" SELECT spm.OrderNo,spm.PartNumber,kbo.woQty as NeedQty,
-                                    spm.UPN,spm.Qty,spm.TowerNo,st.Description as TowerDes,
-                                    spm.Source,spm.Match,spm.LineNumber
-                               FROM smt_prepare_material spm
-                          LEFT JOIN smt_kanbanOrder kbo
-                                 ON kbo.wo = spm.OrderNo 
-                                AND kbo.LockSeq_ID = spm.PartNumber
-                                AND kbo.LineNumber = spm.LineNumber
-                          LEFT JOIN smt_TowerMap st 
-                                 ON st.TowerNo = spm.TowerNo
-                              WHERE spm.OrderNo = '{orderNo}' AND spm.Match=1 ";
-            DataTable dt = DbHelper.GetDataTable(sql);
-            List<ReviewResultItem> reviewResults = dt.DataTableToList<ReviewResultItem>();
-            var resultGroups = reviewResults.GroupBy(p => new { p.OrderNo, p.PartNumber, p.LineNumber }).ToList();
-            foreach (var group in resultGroups)
-            {
-                int total = group.Sum(p => p.Qty);
-                group.ToList().ForEach(p => p.TotalQty = total);
-            }
-            return reviewResults.OrderBy(p => p.OrderNo).ThenBy(p => p.LineNumber).ToList();
         }
 
         public static void InsertOutStockFeedBack(string orderNo)

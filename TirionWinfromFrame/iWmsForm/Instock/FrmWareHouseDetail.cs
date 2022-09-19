@@ -91,9 +91,6 @@ namespace iWms.Form
                     case (int)TowerEnum.LightShelf:
                         ResetCheckBoxStatus(item, cbLightShelf);
                         break;
-                    case (int)TowerEnum.PalletArea:
-                        ResetCheckBoxStatus(item, cbPallet);
-                        break;
                     case (int)TowerEnum.ReformShelf:
                         ResetCheckBoxStatus(item, cbReform);
                         break;
