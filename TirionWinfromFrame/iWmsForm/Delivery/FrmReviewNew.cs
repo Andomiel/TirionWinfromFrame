@@ -791,6 +791,7 @@ namespace iWms.Form
                 {
                     return;
                 }
+                gridViewSummary.ClearSelection();
                 gridViewSummary.Rows[e.RowIndex].Selected = true;
                 //创建快捷菜单
                 ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
