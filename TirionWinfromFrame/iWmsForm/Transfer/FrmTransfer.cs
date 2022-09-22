@@ -36,8 +36,10 @@ namespace iWms.Form
             dtpEnd.Format = DateTimePickerFormat.Custom;
             dtpEnd.CustomFormat = " ";
             dataGridViewSelect.AutoGenerateColumns = false;
-            dataGridViewTransfer.AutoGenerateColumns = false;
+            dataGridViewSelect.DataSource = TargetBarcodes;
         }
+
+        private BindingList<TransferQueryResult> TargetBarcodes = new BindingList<TransferQueryResult>();
 
         private void BindAreaCombox(ComboBox cb)
         {
@@ -108,7 +110,11 @@ namespace iWms.Form
             condition.Supplier = this.TextSupply.Text;
 
             List<TransferQueryResult> transferQueryResults = TransferStoregeBll.QueryTransferDetail(condition);
-            this.dataGridViewSelect.DataSource = new BindingList<TransferQueryResult>(transferQueryResults);
+            TargetBarcodes.Clear();
+            foreach (var item in transferQueryResults)
+            {
+                TargetBarcodes.Add(item);
+            }
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -130,65 +136,14 @@ namespace iWms.Form
             DateTimePickerReset(dtpCycleEnd);
             DateTimePickerReset(dtpStart);
             DateTimePickerReset(dtpEnd);
-            dataGridViewSelect.DataSource = null;
-            dataGridViewTransfer.DataSource = null;
+
+            TargetBarcodes.Clear();
         }
 
         private void DateTimePickerReset(DateTimePicker dtpicker)
         {
             dtpicker.Format = DateTimePickerFormat.Custom;
             dtpicker.CustomFormat = " ";
-        }
-
-        private void btnSelect_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewSelect.DataSource == null)
-            {
-                return;
-            }
-            var transferQueryResults = new List<TransferQueryResult>(dataGridViewSelect.DataSource as BindingList<TransferQueryResult>);
-            var selectedItems = transferQueryResults.Where(p => p.SelectFlag).ToList();
-            if (selectedItems.Count == 0)
-            {
-                "请至少选中一行数据！".ShowTips();
-                return;
-            }
-            List<TransferItemInOrder> ItemsInOrder = new List<TransferItemInOrder>();
-            foreach (var item in selectedItems)
-            {
-                ItemsInOrder.Add(new TransferItemInOrder
-                {
-                    ReelID = item.ReelID,
-                    PartNumber = item.PartNumber,
-                    Qty = item.Qty,
-                    TowerNo = item.LockTowerNo
-                });
-            }
-            var transferDataSource = this.dataGridViewTransfer.DataSource as BindingList<TransferItemInOrder>;
-            if (transferDataSource == null)
-            {
-                transferDataSource = new BindingList<TransferItemInOrder>();
-            }
-            var have = new List<TransferItemInOrder>(transferDataSource);
-            have.AddRange(ItemsInOrder);
-            have = have.Where((x, i) => have.FindIndex(z => z.ReelID == x.ReelID) == i).ToList();
-            this.dataGridViewTransfer.DataSource = new BindingList<TransferItemInOrder>(have);
-            this.cbTarget.Enabled = false;
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewTransfer.DataSource == null)
-            {
-                return;
-            }
-            var transferItemInOrder = new List<TransferItemInOrder>(dataGridViewTransfer.DataSource as BindingList<TransferItemInOrder>);
-            var notSelectItems = transferItemInOrder.Where(p => !p.SelectFlag).ToList();
-            dataGridViewTransfer.DataSource = new BindingList<TransferItemInOrder>(notSelectItems);
-            if (notSelectItems.Count == 0)
-            {
-                this.cbTarget.Enabled = true;
-            }
         }
 
         private void btnBuildTransfer_Click(object sender, EventArgs e)
@@ -202,16 +157,15 @@ namespace iWms.Form
                     return;
                 }
 
-                if (dataGridViewTransfer.DataSource == null)
+                var selectedItems = TargetBarcodes.Where(p => p.SelectFlag).ToList();
+                if (selectedItems.Count == 0)
                 {
-                    "请选取UPN".ShowTips();
+                    "请至少选中一行数据！".ShowTips();
                     return;
                 }
 
-                var transferItemInOrder = new List<TransferItemInOrder>(dataGridViewTransfer.DataSource as BindingList<TransferItemInOrder>);
-
                 int rowCount = 0;
-                var barcodes = transferItemInOrder.GroupBy(p => p.TowerNo);
+                var barcodes = selectedItems.GroupBy(p => p.LockTowerNo);
                 List<string> orderNos = new List<string>();
                 int sortingArea = (int)TowerEnum.SortingArea;
                 foreach (var item in barcodes)
@@ -229,14 +183,13 @@ namespace iWms.Form
                     }
 
                     orderNos.Add(orderNo);
-                    rowCount += TransferStoregeBll.BuildTransferOrder(orderNo, transferItemInOrder, AppInfo.LoginUserInfo.account, targetArea, item.Key);
+                    rowCount += TransferStoregeBll.BuildTransferOrder(orderNo, item.ToList(), AppInfo.LoginUserInfo.account, targetArea, item.Key);
                 }
 
                 if (rowCount > 0)
                 {
                     $"创建移库单成功:{string.Join(",", orderNos.ToArray())}".ShowTips();
                     dataGridViewSelect.DataSource = null;
-                    dataGridViewTransfer.DataSource = null;
                     this.cbTarget.Enabled = true;
                 }
             }
@@ -248,24 +201,26 @@ namespace iWms.Form
 
         private void btnSelectAll_Click(object sender, EventArgs e)
         {
-            if (dataGridViewSelect.DataSource == null)
+            if (TargetBarcodes.Count == 0)
             {
                 return;
             }
-            var queryInfo = new List<TransferQueryResult>(dataGridViewSelect.DataSource as BindingList<TransferQueryResult>);
-            queryInfo.ForEach(p => p.SelectFlag = true);
-            dataGridViewSelect.DataSource = new BindingList<TransferQueryResult>(queryInfo);
+            foreach (var item in TargetBarcodes)
+            {
+                item.SelectFlag = true;
+            }
         }
 
         private void btnSelectReverse_Click(object sender, EventArgs e)
         {
-            if (dataGridViewSelect.DataSource == null)
+            if (TargetBarcodes.Count == 0)
             {
                 return;
             }
-            var queryInfo = new List<TransferQueryResult>(dataGridViewSelect.DataSource as BindingList<TransferQueryResult>);
-            queryInfo.ForEach(p => p.SelectFlag = p.SelectFlag ? false : true);
-            dataGridViewSelect.DataSource = new BindingList<TransferQueryResult>(queryInfo);
+            foreach (var item in TargetBarcodes)
+            {
+                item.SelectFlag = !item.SelectFlag;
+            }
         }
 
         private void cmbArea_SelectionChangeCommitted(object sender, EventArgs e)
@@ -347,26 +302,11 @@ namespace iWms.Form
                             cbTarget.SelectedItem = "非理料区";
                         }
 
-                        List<TransferItemInOrder> ItemsInOrder = new List<TransferItemInOrder>();
+                        TargetBarcodes.Clear();
                         foreach (var item in existBarcodes)
                         {
-                            ItemsInOrder.Add(new TransferItemInOrder
-                            {
-                                ReelID = item.ReelID,
-                                PartNumber = item.PartNumber,
-                                Qty = item.Qty,
-                                TowerNo = item.LockTowerNo
-                            });
+                            TargetBarcodes.Add(item);
                         }
-                        var transferDataSource = this.dataGridViewTransfer.DataSource as BindingList<TransferItemInOrder>;
-                        if (transferDataSource == null)
-                        {
-                            transferDataSource = new BindingList<TransferItemInOrder>();
-                        }
-                        var have = new List<TransferItemInOrder>(transferDataSource);
-                        have.AddRange(ItemsInOrder);
-                        have = have.Where((x, i) => have.FindIndex(z => z.ReelID == x.ReelID) == i).ToList();
-                        this.dataGridViewTransfer.DataSource = new BindingList<TransferItemInOrder>(have);
 
                         "导入成功，请检查移库明细清单，然后创建移库单!".ShowTips();
                     }

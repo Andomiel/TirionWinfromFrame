@@ -114,27 +114,7 @@ namespace Business
             return queryResult;
         }
 
-        public static int InsertInStockOrder(List<TransferItemInOrder> transferItemInOrders, string user, out string orderNo)
-        {
-            orderNo = $"YKRK{DateTime.Now:yyyyMMddHHmmss}";
-            //操作时间
-            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            List<string> instockDatas = new List<string>();
-            foreach (var item in transferItemInOrders)
-            {
-                instockDatas.Add($@"('{orderNo}','{user}','{time}',
-                            '{item.PartNumber}','{item.ReelID}','{item.Qty}',
-                            '{time}','1','{user}','移库模式')");
-            }
-            string instockSql = $@" INSERT INTO smt_InStockOrder
-                            (RK_RKDH,RK_CZRY,RK_CZSJ,WZ_BM,WZ_TM,
-                            RK_RKSL,ADD_TIME,type,ImName,Type2) 
-                            VALUES {string.Join(",", instockDatas)}";
-            int rowCount = DbHelper.Insert(instockSql);
-            return rowCount;
-        }
-
-        public static int BuildTransferOrder(string orderNo, List<TransferItemInOrder> barcodes, string userName, int targetArea, int sourceArea)
+        public static int BuildTransferOrder(string orderNo, List<TransferQueryResult> barcodes, string userName, int targetArea, int sourceArea)
         {
             StringBuilder sb = new StringBuilder();
             string transferId = Guid.NewGuid().ToString("D");
@@ -152,48 +132,6 @@ namespace Business
             }
 
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out _);
-        }
-
-        /// <summary>
-        /// 盘点出库单生成
-        /// </summary>
-        /// <returns></returns>
-        public static int InsertOutStockOrder(List<PandianItemOrder> pandianItemOrders, string outStockOrderNo, string user)
-        {
-            string orderNo = Guid.NewGuid().ToString();
-
-            if (!string.IsNullOrEmpty(outStockOrderNo))
-            {
-                orderNo = outStockOrderNo;
-            }
-
-            //操作时间
-            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-            List<string> receiveOrderValues = new List<string>();
-            List<string> kanbanOrderValues = new List<string>();
-            List<string> outStockOrderValues = new List<string>();
-            foreach (var item in pandianItemOrders)
-            {
-                receiveOrderValues.Add($"('{orderNo}','{item.PartNumber}','{item.PartNumber}','{item.Qty}','','{time}','{item.ReelID}','{orderNo}','{time}','0','{user}','')");
-                kanbanOrderValues.Add($"('{orderNo}','{item.PartNumber}','{item.Qty}','','{time}','{item.ReelID}','{orderNo}','{time}','{user}','0','','','','','','','{user}','')");
-                outStockOrderValues.Add($@"('{orderNo}','{user}','{time}','{item.PartNumber}','{item.ReelID}','{user}',
-                                            '{time}','{time}','{item.Qty}','','{user}','盘点模式','','','','','','{user}','','','0','')");
-            }
-
-            string sqlReceiveOrder = $@"INSERT INTO smt_receiveOrder (wo,Seq_ID,items_item,items_qty,items_stances_stance,basicStartDate,
-                                        ReelId,OrderNo,req_time,isComplete,CK_LYR,XM_DH) 
-                                        VALUES {string.Join(",", receiveOrderValues)}";
-            string sqlKanbanOrder = $@"INSERT INTO smt_kanbanOrder (wo,LockSeq_ID,woQty,items_stances_stance,basicStartDate,ReelId,OrderNo,sub_time,CK_LYR,
-                                    isCancel,XM_DH,CK_FZMS,WZ_JSZB,ZSBH,PlanCode,BoxNo,NeedPeople,Remark) 
-                                    VALUES {string.Join(",", kanbanOrderValues)}";
-            string sqlOutStockOrder = $@"INSERT INTO SMT_OutStockOrder(CK_CKDH,CK_CZRY,CK_CZSJ,WZ_BM,CK_WZTM,CK_LYR,CK_LYSJ,ADD_TIME,CK_CKSL,XM_DH,ImName,Type2,CK_FZMS,
-                                        WZ_JSZB,ZSBH,PlanCode,BoxNo,NeedPeople,WZ_MC,WZ_GGXH,type,Remark) 
-                                        VALUES {string.Join(",", outStockOrderValues)}";
-            DbHelper.Insert(sqlReceiveOrder);
-            int rowCount = DbHelper.Insert(sqlKanbanOrder);
-            DbHelper.Insert(sqlOutStockOrder);
-            return rowCount;
         }
 
         public static List<TransferQueryResult> GetBarcodesByImportUpns(List<string> barcodes)
