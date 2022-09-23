@@ -97,12 +97,6 @@ namespace iWms.Form
                 if (e.KeyChar == 13)
                 {
                     string scanText = tbScan.Text;
-                    //int starCount = scanText.ToCharArray().Count(p => p.Equals('*'));
-                    //if (starCount < 6 || starCount > 9)
-                    //{
-                    //    tbScan.Text = string.Empty;
-                    //    return;
-                    //}
                     tbScan.Text = BarcodeFormatter.FormatBarcode(scanText);
                     if (cbOriginal.Visible && cbOriginal.Checked)
                     {
@@ -556,8 +550,6 @@ namespace iWms.Form
                         else
                         {
                             "复核完成，即将进行单据回传".ShowTips();
-                            //出库完成后，插入mes反馈队列
-                            //OutStockReview.InsertOutStockFeedBack(orderNo);
 
                             SplashScreenManager.ShowForm(typeof(WaitForm1));
                             try
