@@ -519,7 +519,7 @@ namespace iWms.Form
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
-            dialog.FileName = $"导出出库单{selectedOrder.DeliveryNo}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            dialog.FileName = $"出库单{selectedOrder.DeliveryNo}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
