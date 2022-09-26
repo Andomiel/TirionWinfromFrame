@@ -5,9 +5,10 @@ using System;
 namespace Entity.Dto
 {
     public class InventoryOrderDto
-    {        /// <summary>
-             /// 盘点单业务Id
-             /// </summary>
+    {
+        /// <summary>
+        /// 盘点单业务Id
+        /// </summary>
         public string BusinessId { get; set; } = string.Empty;
 
         /// <summary>

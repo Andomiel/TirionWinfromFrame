@@ -236,7 +236,7 @@ namespace iWms.Form
             this.btnOutstock.TabIndex = 9;
             this.btnOutstock.Text = "执行盘点";
             this.btnOutstock.UseVisualStyleBackColor = true;
-            this.btnOutstock.Click += new System.EventHandler(this.BtnTransfer_Click);
+            this.btnOutstock.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
             // btnFinish
             // 
@@ -428,7 +428,7 @@ namespace iWms.Form
             // 
             // colQty
             // 
-            this.colQty.DataPropertyName = "Qty";
+            this.colQty.DataPropertyName = "OriginQuantity";
             this.colQty.HeaderText = "账面数量";
             this.colQty.MinimumWidth = 9;
             this.colQty.Name = "colQty";
@@ -436,12 +436,14 @@ namespace iWms.Form
             // 
             // colActualQuantity
             // 
+            this.colActualQuantity.DataPropertyName = "RealQuantity";
             this.colActualQuantity.HeaderText = "实际数量";
             this.colActualQuantity.Name = "colActualQuantity";
             this.colActualQuantity.ReadOnly = true;
             // 
             // colResult
             // 
+            this.colResult.DataPropertyName = "InventoryResult";
             this.colResult.HeaderText = "盘点结论";
             this.colResult.Name = "colResult";
             this.colResult.ReadOnly = true;
@@ -485,7 +487,7 @@ namespace iWms.Form
             // 
             // colOrderNo
             // 
-            this.colOrderNo.DataPropertyName = "OrderNo";
+            this.colOrderNo.DataPropertyName = "InventoryNo";
             this.colOrderNo.FillWeight = 57.44501F;
             this.colOrderNo.HeaderText = "盘点单号";
             this.colOrderNo.MinimumWidth = 9;
@@ -494,7 +496,7 @@ namespace iWms.Form
             // 
             // colOrderStatus
             // 
-            this.colOrderStatus.DataPropertyName = "OrderStatus";
+            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
             this.colOrderStatus.FillWeight = 57.44501F;
             this.colOrderStatus.HeaderText = "单据状态";
             this.colOrderStatus.MinimumWidth = 9;
@@ -503,7 +505,7 @@ namespace iWms.Form
             // 
             // colSource
             // 
-            this.colSource.DataPropertyName = "Source";
+            this.colSource.DataPropertyName = "InventoryAreaDisplay";
             this.colSource.FillWeight = 57.44501F;
             this.colSource.HeaderText = "盘点库区";
             this.colSource.MinimumWidth = 9;
@@ -512,7 +514,7 @@ namespace iWms.Form
             // 
             // colDestination
             // 
-            this.colDestination.DataPropertyName = "Destination";
+            this.colDestination.DataPropertyName = "SubArea";
             this.colDestination.FillWeight = 56F;
             this.colDestination.HeaderText = "二级区域";
             this.colDestination.MinimumWidth = 9;
@@ -521,7 +523,7 @@ namespace iWms.Form
             // 
             // colOrderTime
             // 
-            this.colOrderTime.DataPropertyName = "OrderTime";
+            this.colOrderTime.DataPropertyName = "CreateTime";
             this.colOrderTime.FillWeight = 57.44501F;
             this.colOrderTime.HeaderText = "创建时间";
             this.colOrderTime.MinimumWidth = 9;
@@ -586,16 +588,16 @@ namespace iWms.Form
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colActualQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDestination;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCreateUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActualQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colResult;
     }
 }

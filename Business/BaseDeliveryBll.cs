@@ -34,7 +34,7 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_LightColorRecord>().FirstOrDefault();
         }
 
-        public bool DeliveryCalculatedBarcodes(string deliveryId, string deliveryNo, int deliveryType, int defaultSort, string userName)
+        public bool DeliveryCalculatedBarcodes(string deliveryId, string deliveryNo, int deliveryType, int defaultSort, string userName, int operateType = 1)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -54,7 +54,7 @@ namespace Business
                         //do nothing
                         break;
                     case (int)TowerEnum.ASRS:
-                        sb.AppendLine(DeliveryAsrsBarcodes(deliveryId, deliveryNo, sortingNo, userName, item.ToList()));
+                        sb.AppendLine(DeliveryAsrsBarcodes(deliveryId, deliveryNo, sortingNo, userName, item.ToList(), operateType));
                         break;
                     case (int)TowerEnum.LightShelf:
                         sb.AppendLine(DeliveryLightShelfBarcodes(deliveryId, deliveryNo, userName, item.ToList()));
@@ -80,14 +80,14 @@ namespace Business
 
         protected abstract string GetDeliveredUpdateSql(string deliveryId, int sortingNo, string userName);
 
-        protected string DeliveryAsrsBarcodes(string deliveryId, string deliveryNo, int sortNo, string userName, List<DeliveryBarcodeLocation> barcodes)
+        protected string DeliveryAsrsBarcodes(string deliveryId, string deliveryNo, int sortNo, string userName, List<DeliveryBarcodeLocation> barcodes, int operateType = 1)
         {
             StringBuilder sb = new StringBuilder();
 
             foreach (var item in barcodes)
             {
                 sb.AppendLine($@"INSERT INTO tower01{item.ABSide}_smt_materialoperate
-                        (ReelID, MaterialLockTower, OperateType,  Req_Timestamp) VALUES('{item.Barcode}', {item.DeliveryAreaId}, '1', getdate()); ");
+                        (ReelID, MaterialLockTower, OperateType,  Req_Timestamp) VALUES('{item.Barcode}', {item.DeliveryAreaId}, '{operateType}', getdate()); ");
                 //更新分拣口
                 sb.Append($"UPDATE smt_zd_material SET BoxID = '{sortNo}' WHERE reelid = '{item.Barcode}'; ");
             }

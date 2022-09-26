@@ -152,7 +152,7 @@ namespace iWms.Form
 
         private readonly object lockOutstockObj = new object();
 
-        private void BtnTransfer_Click(object sender, EventArgs e)
+        private void BtnExecute_Click(object sender, EventArgs e)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    TransferBll.ModifyTransferOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Executing, AppInfo.LoginUserInfo.account);
+                    new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, 3);
 
                     "盘点任务下达成功！".ShowTips();
                 }
@@ -267,7 +267,7 @@ namespace iWms.Form
                 FilterIndex = 0,
                 OverwritePrompt = true,
                 InitialDirectory = "D:\\",
-                FileName = $"导出盘点单{selectedOrder.InventoryNo}-{DateTime.Now:yyyyMMddHHmmssfff}"
+                FileName = $"盘点单{selectedOrder.InventoryNo}-{DateTime.Now:yyyyMMddHHmmssfff}"
             };
             if (dialog.ShowDialog() != DialogResult.OK)
             {
@@ -336,24 +336,24 @@ namespace iWms.Form
                         return;
                     }
 
-                    if (selectedOrder.OrderStatus < (int)InventoryOrderStatusEnum.Finished)
+                    if (selectedOrder.OrderStatus >= (int)InventoryOrderStatusEnum.Executing)
                     {
-                        "未完成的盘点单才能【取消】！".ShowTips();
+                        "未执行的盘点单才能【取消】！".ShowTips();
                         return;
                     }
 
                     int unfinished = (int)InventoryBarcodeStatusEnum.Waiting;
                     var unfinishedBarcodes = WorkOrderBarcodes.Where(p => p.OrderStatus == unfinished).Select(p => p.Barcode).Distinct().ToList();
-                    if (unfinishedBarcodes.Count > 0)
-                    {
-                        if ("存在未完成盘点的upn，是否确认取消".ShowYesNoAndTips() != DialogResult.Yes)
-                        {
-                            return;
-                        }
-                    }
+                    //if (unfinishedBarcodes.Count > 0)
+                    //{
+                    //    if ("存在未完成盘点的upn，是否确认取消".ShowYesNoAndTips() != DialogResult.Yes)
+                    //    {
+                    //        return;
+                    //    }
+                    //}
 
                     int result = InventoryBll.ModifyInventoryOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Cancelled, AppInfo.LoginUserInfo.account);
-                    InventoryBll.ReleaseInventoryOrderBarcodes(unfinishedBarcodes);
+                    result += InventoryBll.ReleaseInventoryOrderBarcodes(unfinishedBarcodes, AppInfo.LoginUserInfo.account);
                     if (result == 0)
                     {
                         $"【{selectedOrder.InventoryNo}】取消失败".ShowTips();

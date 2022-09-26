@@ -6,6 +6,7 @@ using Entity.Enums.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -61,6 +62,18 @@ namespace iWms.Form
             {
                 lock (lockQueryObj)
                 {
+                    int inventoryType = Convert.ToInt32(this.cbType.SelectedValue);
+                    if (inventoryType < 0)
+                    {
+                        "请选择盘点模式".ShowTips();
+                        return;
+                    }
+                    if (inventoryType == (int)InventoryOrderTypeEnum.Percent && nupPercent.Value == 0)
+                    {
+                        "请填写抽盘比例".ShowTips();
+                        return;
+                    }
+
                     Barcodes = GetBarcodesByCondition();
 
                     currentPage = 1;
@@ -107,7 +120,38 @@ namespace iWms.Form
                     break;
             }
 
-            return InventoryBll.GetAvailableBarcodesForInventory(condition);
+            var allBarcodes = InventoryBll.GetAvailableBarcodesForInventory(condition);
+
+            int orderType = TypeParse.StrToInt(cbType.SelectedValue, -1);
+            if (orderType != (int)InventoryOrderTypeEnum.Percent)
+            {
+                return allBarcodes;
+            }
+            return BuildRandomBarcodes(allBarcodes);
+        }
+
+        private List<AvailableBarcode> BuildRandomBarcodes(List<AvailableBarcode> originBarcodes)
+        {
+            var result = new List<AvailableBarcode>();
+            if (originBarcodes == null || originBarcodes.Count == 0)
+            {
+                return result;
+            }
+            int percent = (int)nupPercent.Value;
+            int pickCount = (percent * originBarcodes.Count / 100) + 1;
+            Random rnd = new Random();
+            List<int> indexList = new List<int>();
+            for (int i = 0; i < pickCount; i++)
+            {
+                int index = rnd.Next(originBarcodes.Count);
+                if (indexList.Contains(index))
+                {
+                    i--;
+                    continue;
+                }
+                result.Add(originBarcodes[index]);
+            }
+            return result;
         }
 
         private void LoadPagedWorkOrder()
@@ -156,23 +200,28 @@ namespace iWms.Form
                         "请填写抽盘比例".ShowTips();
                         return;
                     }
+                    if (Barcodes == null || Barcodes.Count == 0)
+                    {
+                        "当前条件下未计算出需要盘点的物料".ShowTips();
+                        return;
+                    }
 
-                    var barcodes = GetBarcodesByCondition();
+                    string subArea = cbShelfSide.Text;
+                    if (subArea == "全部")
+                    {
+                        subArea = string.Empty;
+                    }
 
                     int rowCount = 0;
-                    //var barcodes = transferItemInOrder.GroupBy(p => p.TowerNo);
+                    var barcodes = Barcodes.GroupBy(p => p.LockTowerNo);
                     List<string> orderNos = new List<string>();
-                    //foreach (var item in barcodes)
-                    //{
-                    //    string orderNo = $"YKRK{DateTime.Now:yyyyMMddHHmmss}{rowCount}";
-                    //    if (inventoryType == (int)TowerEnum.SortingArea)
-                    //    {
-                    //        orderNo = $"YKCK{DateTime.Now:yyyyMMddHHmmss}{rowCount}";
-                    //    }
+                    foreach (var item in barcodes)
+                    {
+                        string orderNo = $"PD{DateTime.Now:yyyyMMddHHmmss}{rowCount}";
 
-                    //    orderNos.Add(orderNo);
-                    //    rowCount += TransferStoregeBll.BuildTransferOrder(orderNo, transferItemInOrder, AppInfo.LoginUserInfo.account, inventoryType, item.Key);
-                    //}
+                        orderNos.Add(orderNo);
+                        rowCount += InventoryBll.BuildInventoryOrder(orderNo, item.ToList(), AppInfo.LoginUserInfo.account, inventoryType, (int)nupPercent.Value, item.Key, subArea);
+                    }
 
                     if (rowCount > 0)
                     {

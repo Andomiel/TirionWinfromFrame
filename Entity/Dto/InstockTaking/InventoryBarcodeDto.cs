@@ -71,6 +71,10 @@ namespace Entity.Dto
         {
             get
             {
+                if (OrderStatus != (int)InventoryBarcodeStatusEnum.Executed && OrderStatus != (int)InventoryBarcodeStatusEnum.Confirmed)
+                {
+                    return EnumHelper.GetDescription(typeof(InventoryBarcodeStatusEnum), OrderStatus);
+                }
                 if (OriginQuantity <= 0)
                 {
                     return "多料";

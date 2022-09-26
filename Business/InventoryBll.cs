@@ -131,20 +131,22 @@ namespace Business
             return DbHelper.ExecuteNonQuery(sql);
         }
 
-        public static int ReleaseInventoryOrderBarcodes(List<string> barcodes)
+        public static int ReleaseInventoryOrderBarcodes(List<string> barcodes, string userName)
         {
             if (barcodes == null || barcodes.Count == 0)
             {
                 return 0;
             }
             string condition = string.Join(",", barcodes.Select(p => $"'{p}'").ToArray());
-            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelID  in({condition}) ";
-            return DbHelper.ExecuteNonQuery(sql);
+            string sql = $@"
+                UPDATE Wms_InventoryBarcode SET OrderStatus = {(int)InventoryBarcodeStatusEnum.Cancelled}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Barcode IN({condition});
+                UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelID  in({condition}); ";
+            return DbHelper.ExcuteWithTransaction(sql, out _);
         }
 
         protected override List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
-            string sql = $@"SELECT wib.Barcode, wib.DeliveryAreaId, szm.LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wib.OriginQuantity as DeliveryQuantity, wib.OrderStatus  as BarcodeStatus
+            string sql = $@"SELECT wib.Barcode, szm.LockTowerNo as DeliveryAreaId, szm.LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wib.OriginQuantity as DeliveryQuantity, wib.OrderStatus  as BarcodeStatus
                         FROM Wms_InventoryBarcode wib 
                         left join smt_zd_material szm  on wib.Barcode = szm.ReelID 
                         WHERE wib.InventoryOrderId = '{deliveryId}' AND wib.OrderStatus <= {targetStatus} ;";
@@ -191,6 +193,25 @@ namespace Business
                 sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
             }
             return sb.ToString();
+        }
+
+        public static int BuildInventoryOrder(string orderNo, List<AvailableBarcode> barcodes, string userName, int inventoryType, int inventoryQuantity, int inventoryArea, string subArea)
+        {
+            StringBuilder sb = new StringBuilder();
+            string inventoryId = Guid.NewGuid().ToString("D");
+            sb.AppendLine($@"INSERT INTO Wms_InventoryOrder
+                (BusinessId, InventoryNo, InventoryType, InventoryQuantity, InventoryArea, SubArea, SortingId, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+                VALUES('{inventoryId}', '{orderNo}', {inventoryType}, {inventoryQuantity}, {inventoryArea}, '{subArea}', '', {(int)InventoryOrderStatusEnum.Saved}, '', getdate(), '{userName}', getdate(), '{userName}');");
+            foreach (var item in barcodes)
+            {
+                sb.AppendLine($@"INSERT INTO Wms_InventoryBarcode
+                    (BusinessId, InventoryOrderId, MaterialNo, Barcode, OriginQuantity, RealQuantity, OriginLocation, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+                    VALUES('{Guid.NewGuid():D}', '{inventoryId}', '{item.MaterialNo}', '{item.Barcode}', {item.Quantity}, 0, '{item.Location}', {(int)InventoryBarcodeStatusEnum.Waiting}, getdate(), '{userName}', getdate(), '{userName}');");
+
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Locked}, Work_Order_No = '{inventoryId}', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
+            }
+
+            return DbHelper.ExcuteWithTransaction(sb.ToString(), out _);
         }
     }
 

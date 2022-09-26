@@ -29,8 +29,8 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInventoryOrder));
             this.btnSearch = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -142,14 +142,14 @@ namespace iWms.Form
             this.dataGridViewSelect.AllowUserToResizeRows = false;
             this.dataGridViewSelect.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewSelect.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSelect.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSelect.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewSelect.ColumnHeadersHeight = 24;
             this.dataGridViewSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewSelect.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -163,14 +163,14 @@ namespace iWms.Form
             this.Location,
             this.料盘类型,
             this.入库时间});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSelect.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSelect.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewSelect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSelect.EnableHeadersVisualStyles = false;
             this.dataGridViewSelect.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -186,7 +186,7 @@ namespace iWms.Form
             // UPN
             // 
             this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UPN.DataPropertyName = "reelid";
+            this.UPN.DataPropertyName = "Barcode";
             this.UPN.FillWeight = 60F;
             this.UPN.HeaderText = "UPN";
             this.UPN.MinimumWidth = 200;
@@ -196,7 +196,7 @@ namespace iWms.Form
             // PartNumber
             // 
             this.PartNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PartNumber.DataPropertyName = "PartNumber";
+            this.PartNumber.DataPropertyName = "MaterialNo";
             this.PartNumber.FillWeight = 40F;
             this.PartNumber.HeaderText = "料号";
             this.PartNumber.MinimumWidth = 80;
@@ -234,7 +234,7 @@ namespace iWms.Form
             // Qty
             // 
             this.Qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Qty.DataPropertyName = "Qty";
+            this.Qty.DataPropertyName = "Quantity";
             this.Qty.HeaderText = "数量";
             this.Qty.MinimumWidth = 100;
             this.Qty.Name = "Qty";
@@ -558,7 +558,7 @@ namespace iWms.Form
             this.Controls.Add(this.tlpLayout);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmInventoryOrder";
-            this.Text = "盘点";
+            this.Text = "创建盘点单";
             this.Controls.SetChildIndex(this.tlpLayout, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelect)).EndInit();
             this.tlpLayout.ResumeLayout(false);
@@ -586,16 +586,6 @@ namespace iWms.Form
         private System.Windows.Forms.TableLayoutPanel tlpConditions;
         private System.Windows.Forms.ComboBox cbShelfSide;
         private System.Windows.Forms.Label lblShelfSide;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UPN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PartNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 供货厂家;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DateCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 库区;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 料盘类型;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 入库时间;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tpsrecordCount;
@@ -616,5 +606,15 @@ namespace iWms.Form
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Label lblPercent;
         private System.Windows.Forms.NumericUpDown nupPercent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UPN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 供货厂家;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DateCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SerialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 库区;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 料盘类型;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 入库时间;
     }
 }
