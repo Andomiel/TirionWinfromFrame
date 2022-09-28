@@ -218,6 +218,11 @@ namespace Business
 
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out _);
         }
+
+        protected override string ExtraBarcodeSql(string deliveryId, string userName, List<string> barcodes)
+        {
+            return GetReleaseBarcodeSql(deliveryId, userName, barcodes);
+        }
     }
 
     public class InventoryQueryCondition
