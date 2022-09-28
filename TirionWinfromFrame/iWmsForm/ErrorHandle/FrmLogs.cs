@@ -86,16 +86,7 @@ namespace iWms.Form
 
         private void DgvLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgvLogs.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgvLogs.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgvLogs.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            ShowRowIndex(dgvLogs, e);
         }
     }
 }

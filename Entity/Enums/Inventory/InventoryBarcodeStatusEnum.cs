@@ -12,22 +12,28 @@ namespace Entity.Enums.Inventory
         Waiting = 0,
 
         /// <summary>
+        /// 盘点中
+        /// </summary>
+        [Description("盘点中")]
+        Executing = 1,
+
+        /// <summary>
         /// 已盘点
         /// </summary>
         [Description("已盘点")]
-        Executed = 1,
+        Executed = 2,
 
         /// <summary>
         /// 已确认
         /// </summary>
         [Description("已确认")]
-        Confirmed = 2,
+        Confirmed = 3,
 
         /// <summary>
         /// 已取消
         /// </summary>
         [Description("已取消")]
-        Cancelled = 3,
+        Cancelled = 4,
 
     }
 }

@@ -37,7 +37,7 @@ namespace TirionWinfromFrame
         /// <summary>
         /// 值自动生成控件name
         /// </summary>
-        private string[] readonlycon=new string[]{};
+        private string[] readonlycon = new string[] { };
         public FrmBaseForm()
         {
             InitializeComponent();
@@ -79,14 +79,14 @@ namespace TirionWinfromFrame
             InitFrom(xtraTab, gridControl, gridView, controlGroups, DataType);
         }
 
-        public void InitFrom(XtraTabControl xtraTab, GridControl gridControl, GridView gridView, LayoutControlGroup[] controlGroups, object DataType,GridControl griddetail,string[] readcontrols)
+        public void InitFrom(XtraTabControl xtraTab, GridControl gridControl, GridView gridView, LayoutControlGroup[] controlGroups, object DataType, GridControl griddetail, string[] readcontrols)
         {
             if (griddetail != null)
             {
                 gridControlDetail = griddetail;
                 gridViewDetail = griddetail.FocusedView as GridView;
                 gridViewDetail.OptionsBehavior.Editable = false;
-                if (gridControlDetail.ContextMenuStrip!=null)
+                if (gridControlDetail.ContextMenuStrip != null)
                     gridControlDetail.ContextMenuStrip.Enabled = false;
             }
             readonlycon = readcontrols;
@@ -96,8 +96,8 @@ namespace TirionWinfromFrame
         {
             xtraTab.SelectedPageChanged += xtraTabControl1_SelectedPageChanged;
             gridControl.MouseDoubleClick += gridControl_MouseDoubleClick;
-            if(gridViewDetail!=null)
-                 gridViewDetail.KeyDown += GridViewDetail_KeyDown;
+            if (gridViewDetail != null)
+                gridViewDetail.KeyDown += GridViewDetail_KeyDown;
         }
 
         private void GridViewDetail_KeyDown(object sender, KeyEventArgs e)
@@ -149,7 +149,7 @@ namespace TirionWinfromFrame
             DateEdit dt = (DateEdit)this.getControl("txtcreateTime");
             if (dt != null)
                 dt.DateTime = DateTime.Now;
-            LookUpEditBase look= (LookUpEditBase)this.getControl("txtcreatorId");
+            LookUpEditBase look = (LookUpEditBase)this.getControl("txtcreatorId");
             DateEdit dt1 = (DateEdit)this.getControl("txteditTime");
             if (dt1 != null)
                 dt1.DateTime = DateTime.Now;
@@ -169,9 +169,9 @@ namespace TirionWinfromFrame
         private void btnEdit_Click(object sender, EventArgs e)
         {
             xtraTab.TabPages[0].PageEnabled = false;
-            DateEdit dt =(DateEdit) this.getControl("txteditTime");
-            if(dt!=null)
-                 dt.DateTime=DateTime.Now;
+            DateEdit dt = (DateEdit)this.getControl("txteditTime");
+            if (dt != null)
+                dt.DateTime = DateTime.Now;
             LookUpEditBase look = (LookUpEditBase)this.getControl("txteditorId");
             if (look != null)
                 look.EditValue = AppInfo.LoginUserInfo.id;
@@ -186,21 +186,21 @@ namespace TirionWinfromFrame
         private void btnSave_Click(object sender, EventArgs e)
         {
             xtraTab.TabPages[0].PageEnabled = true;
-            if (CheckInput()&&SaveFunction())
+            if (CheckInput() && SaveFunction())
             {
                 "保存成功！".ShowTips();
-                
+
                 InitToolBtntatus(EFormStatus.eView);
                 InitgrdListDataSourceFunction();
                 SetControlStatus(controlGroups, true);
             }
-            
+
         }
         public void initTools()
         {
 
             List<sysToolButtonInfo> list = null;
-            using (var db=new MESDB())
+            using (var db = new MESDB())
             {
                 list = db.sysToolButtonInfo.ToList();
             }
@@ -208,14 +208,14 @@ namespace TirionWinfromFrame
             int width = 0;
             foreach (sysToolButtonInfo info in list)
             {
-                if (AppInfo.FunctionList.Contains(menucode+"-"+info.btnCode))
+                if (AppInfo.FunctionList.Contains(menucode + "-" + info.btnCode))
                 {
                     SimpleButton button = new SimpleButton();
                     button.Name = "btn" + info.btnCode;
                     button.Text = info.btnName;
                     button.Location = new Point(width, 5);
                     button.PaintStyle = PaintStyles.Light;
-                    button.AutoSize = true; 
+                    button.AutoSize = true;
                     button.ImageOptions.Image = Image.FromFile(Application.StartupPath + "\\" + info.btnIcon);
                     button.Click += (sender, e) =>
                     {
@@ -232,11 +232,11 @@ namespace TirionWinfromFrame
             string FunctionId = ((SimpleButton)sender).Name;
             switch (FunctionId)
             {
-                case "btnAdd": btnAdd_Click(sender,e); break;
+                case "btnAdd": btnAdd_Click(sender, e); break;
                 case "btnEdit": btnEdit_Click(sender, e); break;
                 case "btnSearch": btnSearch_Click(sender, e); break;
                 case "btnCanle": btnCanel_Click(sender, e); break;
-                case "btnSave": btnSave_Click(sender,e); break;
+                case "btnSave": btnSave_Click(sender, e); break;
                 case "btnDel": btnDel_Click(sender, e); break;
 
             }
@@ -265,7 +265,7 @@ namespace TirionWinfromFrame
         private void btnSearch_Click(object sender, EventArgs e)
         {
             //InitToolBtntatus(EFormStatus.e);
-            
+
             SearchFunction();
         }
         public virtual void SearchFunction()
@@ -304,7 +304,7 @@ namespace TirionWinfromFrame
         {
             return true;
         }
-        public  void SetControlStatus( LayoutControlGroup[] controlGroups, bool flag)
+        public void SetControlStatus(LayoutControlGroup[] controlGroups, bool flag)
         {
             if (controlGroups != null)
             {
@@ -326,7 +326,7 @@ namespace TirionWinfromFrame
                             if (button.GetType().Name == "SimpleButton")
                             {
                                 var btn = (SimpleButton)button;
-                                if (btn.Name == "btnAdd" || btn.Name == "btnSearch" )
+                                if (btn.Name == "btnAdd" || btn.Name == "btnSearch")
                                 {
                                     btn.Enabled = true;
                                 }
@@ -340,7 +340,7 @@ namespace TirionWinfromFrame
                         if (gridControlDetail != null)
                         {
                             gridViewDetail.OptionsBehavior.Editable = false;
-                            if (gridControlDetail.ContextMenuStrip!=null)
+                            if (gridControlDetail.ContextMenuStrip != null)
                                 gridControlDetail.ContextMenuStrip.Enabled = false;
                         }
                         if (treeList != null)
@@ -419,7 +419,7 @@ namespace TirionWinfromFrame
                             if (button.GetType().Name == "SimpleButton")
                             {
                                 var btn = (SimpleButton)button;
-                                if (btn.Name == "btnCanle" || btn.Name == "btnSave" )
+                                if (btn.Name == "btnCanle" || btn.Name == "btnSave")
                                 {
                                     btn.Enabled = true;
                                 }
@@ -450,7 +450,7 @@ namespace TirionWinfromFrame
                             if (button.GetType().Name == "SimpleButton")
                             {
                                 var btn = (SimpleButton)button;
-                                if (btn.Name == "btnAdd" || btn.Name == "btnSearch" )
+                                if (btn.Name == "btnAdd" || btn.Name == "btnSearch")
                                 {
                                     btn.Enabled = true;
                                 }
@@ -512,7 +512,7 @@ namespace TirionWinfromFrame
                             if (button.GetType().Name == "SimpleButton")
                             {
                                 var btn = (SimpleButton)button;
-                                if (btn.Name == "btnAdd" || btn.Name == "btnDel"||btn.Name== "btnEdit")
+                                if (btn.Name == "btnAdd" || btn.Name == "btnDel" || btn.Name == "btnEdit")
                                 {
                                     btn.Enabled = true;
                                 }
@@ -551,7 +551,7 @@ namespace TirionWinfromFrame
                         DevExpress.XtraEditors.BaseEdit d = con.Control as BaseEdit;
                         if (d != null && !string.IsNullOrEmpty(d.Name))
                         {
-                            if (d.Name.Substring(3) == "creatorId" || d.Name.Substring(3) == "createTime" || d.Name.Substring(3) == "editorId" || d.Name.Substring(3) == "editTime" || d.Name.Substring(3) == "id"||readonlycon.Contains(d.Name))
+                            if (d.Name.Substring(3) == "creatorId" || d.Name.Substring(3) == "createTime" || d.Name.Substring(3) == "editorId" || d.Name.Substring(3) == "editTime" || d.Name.Substring(3) == "id" || readonlycon.Contains(d.Name))
                             {
                                 d.ReadOnly = true;
                             }
@@ -564,7 +564,7 @@ namespace TirionWinfromFrame
                 }
             }
         }
-        public  void ClearScreen()
+        public void ClearScreen()
         {
             this.ID = "";////需要设置为空，表示新增
             ClearControlValue(this);
@@ -580,7 +580,7 @@ namespace TirionWinfromFrame
                 }
             }
         }
-        public  void ClearSinglelValue(System.Windows.Forms.Control ctrl)
+        public void ClearSinglelValue(System.Windows.Forms.Control ctrl)
         {
             switch (ctrl.GetType().Name)
             {
@@ -589,8 +589,8 @@ namespace TirionWinfromFrame
                     (ctrl).Text = "";
                     break;
                 case "LookUpEdit":
-                    ((LookUpEdit)ctrl).EditValue="";
-                    ((LookUpEdit) ctrl).Properties.NullText = "";
+                    ((LookUpEdit)ctrl).EditValue = "";
+                    ((LookUpEdit)ctrl).Properties.NullText = "";
                     break;
                 case "CheckEdit":
                     ((CheckEdit)ctrl).Checked = false;
@@ -606,7 +606,7 @@ namespace TirionWinfromFrame
                     ((CheckedComboBoxEdit)ctrl).SetEditValue("");
                     break;
                 case "DateEdit":
-                    ((DateEdit)ctrl).EditValue=null;
+                    ((DateEdit)ctrl).EditValue = null;
                     break;
             }
         }
@@ -614,6 +614,20 @@ namespace TirionWinfromFrame
         private void FrmBaseForm_Load(object sender, EventArgs e)
         {
             InitgrdListDataSourceFunction();
+        }
+
+        protected void ShowRowIndex(DataGridView dgv, DataGridViewRowPostPaintEventArgs e)
+        {
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
+                e.RowBounds.Location.Y,
+                dgv.RowHeadersWidth - 4,
+                e.RowBounds.Height);
+
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+                dgv.RowHeadersDefaultCellStyle.Font,
+                rectangle,
+                dgv.RowHeadersDefaultCellStyle.ForeColor,
+                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
     }
     /// <summary>
@@ -627,6 +641,6 @@ namespace TirionWinfromFrame
         eEdit = 2,//编辑
         eDelete = 3,//删除
         eCanel = 6,//取消
-        eInit=7//初始化
+        eInit = 7//初始化
     }
 }

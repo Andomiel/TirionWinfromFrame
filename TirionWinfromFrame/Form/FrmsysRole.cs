@@ -1,27 +1,19 @@
+using DevExpress.XtraLayout;
+using DevExpress.XtraTreeList.Nodes;
+using MES.Entity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
-using DevExpress.XtraLayout;
-using MES.Entity;
-using System.Data.Entity.Migrations;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
-using DevExpress.XtraPrinting.Export.Text;
-using DevExpress.XtraTreeList.Nodes;
-using TirionWinfromFrame.Commons;
-using DevExpress.XtraGrid;
 
 namespace MES.Form
 {
-	public partial class FrmsysRole : FrmBaseForm
+    public partial class FrmsysRole : FrmBaseForm
 	{
         private Dictionary<string, string> fieldDictionary = new Dictionary<string, string>();
         private List<int> userids = new List<int>();

@@ -101,6 +101,7 @@
     <Compile Include="Enums\General\BarcodeStatusEnum.cs" />
     <Compile Include="Enums\General\LightRecordStatusEnum.cs" />
     <Compile Include="Enums\General\LightRecordTypeEnum.cs" />
+    <Compile Include="Enums\General\OperateTypeEnum.cs" />
     <Compile Include="Enums\General\ReelTypeEnum.cs" />
     <Compile Include="Enums\General\SortNoEnum.cs" />
     <Compile Include="Enums\General\TowerEnum.cs" />

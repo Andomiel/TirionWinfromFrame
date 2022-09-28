@@ -14,15 +14,15 @@ using TirionWinfromFrame.Commons;
 
 namespace MES.Form
 {
-	public partial class FrmsysDataBase : FrmBaseForm
-	{
+    public partial class FrmsysDataBase : FrmBaseForm
+    {
         private string _strConnectionString = "Server={0};Database={1};User Id = {2}; Password={3};Connect Timeout = 2";
         public sysDataBase dbEntity;
 
         public FrmsysDataBase()
-		{
-			InitializeComponent();
-		}
+        {
+            InitializeComponent();
+        }
 
         private void grdList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -104,7 +104,8 @@ namespace MES.Form
         {
             this.Close();
         }
-        private  bool CheckInput()
+
+        public override bool CheckInput()
         {
             if (string.IsNullOrEmpty(txtConnName.Text))
             {

@@ -110,6 +110,10 @@ namespace Business
                 {
                     sb.AppendLine($" AND szm.LockMachineId = '{condition.MachineId}' ");
                 }
+                if (!string.IsNullOrWhiteSpace(condition.PartNumber))
+                {
+                    sb.AppendLine($" AND szm.Part_Number = '{condition.PartNumber}'  ");
+                }
             }
             return DbHelper.GetDataTable(sb.ToString()).DataTableToList<AvailableBarcode>();
         }
@@ -157,7 +161,8 @@ namespace Business
         protected override string GetDeliveredUpdateSql(string deliveryId, int sortingNo, string userName)
         {
             return $@"update Wms_InventoryOrder set OrderStatus = {(int)InventoryOrderStatusEnum.Executing}, 
-                    LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}', SortingId = {sortingNo}  where BusinessId = '{deliveryId}'; ";
+                    LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}', SortingId = {sortingNo}  where BusinessId = '{deliveryId}';
+            update Wms_InventoryBarcode set OrderStatus = { (int)InventoryBarcodeStatusEnum.Executing }, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' where InventoryOrderId = '{deliveryId}'; ";
         }
 
         protected override int GetExecuteStatus()

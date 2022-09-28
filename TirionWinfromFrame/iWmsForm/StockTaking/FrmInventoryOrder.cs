@@ -97,7 +97,8 @@ namespace iWms.Form
             MaterialQueryCondition condition = new MaterialQueryCondition
             {
                 //库区
-                TowerNo = Convert.ToInt32(cmbArea.SelectedValue)
+                TowerNo = Convert.ToInt32(cmbArea.SelectedValue),
+                PartNumber = tbMaterialNo.Text.Trim()
             };
 
             //巷道、货架
@@ -226,6 +227,8 @@ namespace iWms.Form
                     if (rowCount > 0)
                     {
                         $"创建盘点单成功:{string.Join(",", orderNos.ToArray())}".ShowTips();
+                        Barcodes.Clear();
+                        PagedBarcodes.Clear();
                     }
                 }
             }

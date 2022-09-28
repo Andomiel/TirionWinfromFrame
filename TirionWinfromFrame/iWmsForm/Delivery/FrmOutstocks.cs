@@ -203,21 +203,6 @@ namespace iWms.Form
             }
         }
 
-        private void ShowRowIndex(DataGridView dgv, DataGridViewRowPostPaintEventArgs e)
-        {
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X,
-                e.RowBounds.Location.Y,
-                dgv.RowHeadersWidth - 4,
-                e.RowBounds.Height);
-
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
-                dgv.RowHeadersDefaultCellStyle.Font,
-                rectangle,
-                dgv.RowHeadersDefaultCellStyle.ForeColor,
-                TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
-        }
-
-
         private DeliveryOrderDto selectedOrder = null;
 
         private void DgvOrders_SelectionChanged(object sender, EventArgs e)

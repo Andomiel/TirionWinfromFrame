@@ -1,6 +1,7 @@
 ﻿using Business;
 using Entity.DataContext;
 using Entity.Dto;
+using Entity.Enums.General;
 using Entity.Enums.Inventory;
 using Entity.Enums.Transfer;
 using Mapster;
@@ -169,9 +170,10 @@ namespace iWms.Form
                         return;
                     }
 
-                    new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, 3);
+                    new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, (int)OperateTypeEnum.InstockTaking);
 
                     "盘点任务下达成功！".ShowTips();
+                    GetOrders();
                 }
             }
             catch (Exception ex)
@@ -200,21 +202,21 @@ namespace iWms.Form
                         return;
                     }
 
-                    int unfinished = (int)InventoryBarcodeStatusEnum.Waiting;
-                    if (WorkOrderBarcodes.Any(p => p.OrderStatus == unfinished))
+                    int finished = (int)InventoryBarcodeStatusEnum.Executed;
+                    if (WorkOrderBarcodes.Any(p => p.OrderStatus < finished))
                     {
                         "盘点单中存在未盘点的upn，请全部盘点后再完成".ShowTips();
                         return;
                     }
 
-                    int result = InventoryBll.ModifyInventoryOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Finished, AppInfo.LoginUserInfo.account);
-                    if (result == 0)
+                    bool result = new InventoryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.InventoryNo, AppInfo.LoginUserInfo.account);
+                    if (result)
                     {
-                        $"【{selectedOrder.InventoryNo}】完成失败".ShowTips();
+                        $"【{selectedOrder.InventoryNo}】盘点完成".ShowTips();
                     }
                     else
                     {
-                        $"【{selectedOrder.InventoryNo}】盘点完成".ShowTips();
+                        $"【{selectedOrder.InventoryNo}】完成失败".ShowTips();
                     }
                     GetOrders();
                 }
@@ -368,6 +370,16 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
+        }
+
+        private void dgvOrders_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            ShowRowIndex(dgvOrders, e);
+        }
+
+        private void dgvUpns_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            ShowRowIndex(dgvUpns, e);
         }
     }
 }
