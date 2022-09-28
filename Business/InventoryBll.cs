@@ -221,7 +221,12 @@ namespace Business
 
         protected override string ExtraBarcodeSql(string deliveryId, string userName, List<string> barcodes)
         {
-            return GetReleaseBarcodeSql(deliveryId, userName, barcodes);
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in barcodes)
+            {
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+            }
+            return sb.ToString();
         }
     }
 
