@@ -44,8 +44,8 @@ namespace Business
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
             {
-                sb.AppendLine(" AND wto.InstockNo = @InstockNo ");
-                parameters.Add(new SqlParameter("@InstockNo", condition.OrderNo));
+                sb.AppendLine(" AND wto.TransferNo = @TransferNo ");
+                parameters.Add(new SqlParameter("@TransferNo", condition.OrderNo));
             }
             if (condition.TransferType >= 0)
             {
