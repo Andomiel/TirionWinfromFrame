@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -379,6 +380,24 @@ namespace iWms.Form
 
         private void dgvUpns_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
+            var row = dgvOrders.Rows[e.RowIndex];
+            var order = row.DataBoundItem as InventoryBarcodeDto;
+            if (order.InventoryResult == "多料" || order.InventoryResult == "盘盈")
+            {
+                row.Cells["colResult"].Style.BackColor = Color.CornflowerBlue;
+            }
+            else if (order.InventoryResult == "缺料" || order.InventoryResult == "盘亏")
+            {
+                row.Cells["colResult"].Style.BackColor = Color.OrangeRed;
+            }
+            else if (order.InventoryResult == "正常")
+            {
+                row.Cells["colResult"].Style.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                //do nothing
+            }
             ShowRowIndex(dgvUpns, e);
         }
     }
