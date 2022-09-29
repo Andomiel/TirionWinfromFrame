@@ -72,6 +72,11 @@ namespace Business
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _) > 0;
         }
 
+        protected virtual string GetBarcodeLightResultSql(string deliveryId, string deliveryNo, string userName, List<string> succeedBarcodes, List<string> failedBarcodes)
+        {
+            return string.Empty;
+        }
+
         protected abstract int GetSortNo(int deliveryType);
 
         protected abstract int GetExecuteStatus();
@@ -91,6 +96,8 @@ namespace Business
                 //更新分拣口
                 sb.Append($"UPDATE smt_zd_material SET BoxID = '{sortNo}' WHERE reelid = '{item.Barcode}'; ");
             }
+
+            sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, barcodes.Select(p => p.Barcode).Distinct().ToList(), new List<string>()));
 
             //料仓也记录发料库区记录
             sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName));
@@ -124,9 +131,21 @@ namespace Business
             }
 
             int targetColor = GetLightColor((int)TowerEnum.LightShelf, allColors);
-            LightShelfColor(deliveryNo, true, url, targetColor, barcodes);
+            var response = LightShelfColor(deliveryNo, true, url, targetColor, barcodes);
 
-            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName);
+            var failedBarcodes = response?.ErrorPickListID;
+            if (failedBarcodes == null)
+            {
+                failedBarcodes = new List<string>();
+            }
+            var succeedBarcodes = barcodes.Where(p => !failedBarcodes.Contains(p.Barcode)).Select(p => p.Barcode).Distinct().ToList();
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, succeedBarcodes, failedBarcodes));
+
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName));
+
+            return sb.ToString();
         }
 
         private static int GetLightColor(int towerNo, List<int> allColors)
@@ -152,7 +171,7 @@ namespace Business
             return allColors.First();
         }
 
-        private static void LightShelfColor(string deliveryNo, bool isOn, string url, int targetColor, List<DeliveryBarcodeLocation> barcodes)
+        private static LightShelfResponse LightShelfColor(string deliveryNo, bool isOn, string url, int targetColor, List<DeliveryBarcodeLocation> barcodes)
         {
             string onOrOff = "亮灯";
             LightShelfRequest request = new LightShelfRequest(targetColor);
@@ -187,11 +206,12 @@ namespace Business
 
             Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
-            if (response == null || response.Code != 1)
-            {
-                string formattedMessage = Uri.UnescapeDataString(response.Msg);
-                throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
-            }
+            return response;
+            //if (response == null || response.Code != 1)
+            //{
+            //    string formattedMessage = Uri.UnescapeDataString(response.Msg);
+            //    //throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
+            //}
         }
 
         private string DeliveryReformShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -216,12 +236,12 @@ namespace Business
             //改造货架三个灯，1，2，3
             int lightNumber = allColors.IndexOf(targetColor) + 1;
 
-            LightReformShelf(url, targetColor, lightNumber, barcodes);
+            LightReformShelf(deliveryNo, url, targetColor, lightNumber, barcodes);
 
             return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName);
         }
 
-        private static void LightReformShelf(string url, int lightColor, int lightNumber, List<DeliveryBarcodeLocation> barcodes)
+        private static void LightReformShelf(string deliveryNo, string url, int lightColor, int lightNumber, List<DeliveryBarcodeLocation> barcodes)
         {
             var locationGroup = barcodes.GroupBy(p => p.LockLocation);
             List<JsonData> jsonData = new List<JsonData>();
@@ -244,13 +264,15 @@ namespace Business
             logDict.Add("response", strResponse);
 
             string onOrOff = lightColor == 0 ? "灭灯" : "亮灯";
-            FileLog.Log($"操作亮灯货架{onOrOff}:{JsonConvert.SerializeObject(logDict)    }");
+            FileLog.Log($"操作改造货架{onOrOff}:{JsonConvert.SerializeObject(logDict)    }");
             ReformShelfResponse response = JsonConvert.DeserializeObject<ReformShelfResponse>(strResponse);
 
-            if (response == null || !response.success)
-            {
-                throw new OppoCoreException($"改造货架发料{onOrOff}失败:{response.message}");
-            }
+            Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作改造货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
+
+            //if (response == null || !response.success)
+            //{
+            //    throw new OppoCoreException($"改造货架发料{onOrOff}失败:{response.message}");
+            //}
         }
 
         public bool FinishDeliveryOrder(string deliveryId, string deliveryNo, string userName)
@@ -274,7 +296,7 @@ namespace Business
                         sb.AppendLine(LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList()));
                         break;
                     case (int)TowerEnum.ReformShelf:
-                        sb.AppendLine(LightOffReformShelf(deliveryId, userName, item.ToList()));
+                        sb.AppendLine(LightOffReformShelf(deliveryId, deliveryNo, userName, item.ToList()));
                         break;
                     default:
                         throw new OppoCoreException("发料物料中存在不在预定义库区的物料");
@@ -310,7 +332,7 @@ namespace Business
                         LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE OrderId = '{deliveryId}';";
         }
 
-        protected static string LightOffReformShelf(string deliveryId, string userName, List<DeliveryBarcodeLocation> barcodes)
+        protected static string LightOffReformShelf(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
         {
             string colorConfig = ConfigurationManager.AppSettings["ColorsForTransformation"];
             if (string.IsNullOrWhiteSpace(colorConfig))
@@ -340,7 +362,7 @@ namespace Business
 
             try
             {
-                LightReformShelf(url, 0, lightNumber, barcodes);//0 灭灯
+                LightReformShelf(deliveryNo, url, 0, lightNumber, barcodes);//0 灭灯
             }
             catch
             {

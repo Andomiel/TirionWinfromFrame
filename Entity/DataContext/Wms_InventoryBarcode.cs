@@ -75,6 +75,11 @@ namespace Entity.DataContext
         /// </summary>
         public string LastUpdateUser { get; set; } = string.Empty;
 
+        /// <summary>
+        /// 执行结果
+        /// </summary>
+        public int ExecuteResult { get; set; } = 0;
+
         #endregion
 
         #region 公共方法
@@ -92,7 +97,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, BusinessId, InventoryOrderId, MaterialNo, Barcode, OriginQuantity, RealQuantity, OriginLocation, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_InventoryBarcode WHERE 1=1 ";
+            return "SELECT Id, BusinessId, InventoryOrderId, MaterialNo, Barcode, OriginQuantity, RealQuantity, OriginLocation, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult FROM Wms_InventoryBarcode WHERE 1=1 ";
         }
 
         #endregion

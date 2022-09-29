@@ -12,7 +12,7 @@ namespace Entity.Facade
 
         public string Msg { get; set; }
 
-        public List<string> ErrorPickListID { get; set; }
+        public List<string> ErrorPickListID { get; set; } = new List<string>();
 
         public string order_id { get; set; }
     }

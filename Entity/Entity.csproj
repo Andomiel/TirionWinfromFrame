@@ -99,6 +99,7 @@
     <Compile Include="Enums\Frozen\FrozenEnums.cs" />
     <Compile Include="Enums\General\BakeStateEnum.cs" />
     <Compile Include="Enums\General\BarcodeStatusEnum.cs" />
+    <Compile Include="Enums\General\ExecuteResultEnum.cs" />
     <Compile Include="Enums\General\LightRecordStatusEnum.cs" />
     <Compile Include="Enums\General\LightRecordTypeEnum.cs" />
     <Compile Include="Enums\General\OperateTypeEnum.cs" />

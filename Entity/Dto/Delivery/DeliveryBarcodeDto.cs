@@ -73,5 +73,10 @@ namespace Entity.Dto.Delivery
         /// 发料位置
         /// </summary>
         public string DeliveryLocation { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 执行结果
+        /// </summary>
+        public int ExecuteResult { get; set; } = 0;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using Entity.DataContext;
 using Entity.Enums;
+using Entity.Enums.General;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -147,7 +148,7 @@ namespace Business
                             LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList());
                             break;
                         case (int)TowerEnum.ReformShelf:
-                            LightOffReformShelf(deliveryId, userName, item.ToList());
+                            LightOffReformShelf(deliveryId, deliveryNo, userName, item.ToList());
                             break;
                         default:
                             throw new OppoCoreException("发料物料中存在不在预定义库区的物料");
@@ -165,6 +166,19 @@ namespace Business
             sb.AppendLine(GetReleaseBarcodeSql(deliveryId, userName, barcodes));
 
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out _) > 0;
+        }
+
+        protected override string GetBarcodeLightResultSql(string deliveryId, string deliveryNo, string userName, List<string> succeedBarcodes, List<string> failedBarcodes)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string failedCombine = string.Join(",", failedBarcodes.Select(p => $"'{p}'").ToList());
+            sb.AppendLine($"UPDATE Wms_DeliveryBarcode set ExecuteResult = {(int)ExecuteResultEnum.Failed} WHERE DeliveryId = '{deliveryId}' AND Barcode IN ({failedCombine}); ");
+
+            var succeedCombine = string.Join(",", succeedBarcodes.Select(p => $"'{p}'").ToList());
+            sb.AppendLine($"UPDATE Wms_DeliveryBarcode set ExecuteResult = {(int)ExecuteResultEnum.Succeed} WHERE DeliveryId = '{deliveryId}' AND Barcode IN ({failedCombine}); ");
+
+            return sb.ToString();
         }
 
         protected override string GetReleaseBarcodeSql(string deliveryId, string userName, List<string> barcodes)

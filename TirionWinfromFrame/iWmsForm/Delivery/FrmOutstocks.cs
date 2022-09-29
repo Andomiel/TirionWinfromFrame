@@ -3,6 +3,7 @@ using Entity;
 using Entity.DataContext;
 using Entity.Dto.Delivery;
 using Entity.Enums;
+using Entity.Enums.General;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -831,6 +832,28 @@ namespace iWms.Form
                         LoadOrderDetails();
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void dgvUpns_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            try
+            {
+                var row = dgvUpns.Rows[e.RowIndex];
+                var barcodeDto = row.DataBoundItem as DeliveryBarcodeDto;
+                if (barcodeDto.ExecuteResult == (int)ExecuteResultEnum.Failed)
+                {
+                    row.Cells["colInventoryStatus"].Style.BackColor = Color.Orange;
+                }
+                else
+                {
+                    //do nothing
+                }
+                ShowRowIndex(dgvDetails, e);
             }
             catch (Exception ex)
             {
