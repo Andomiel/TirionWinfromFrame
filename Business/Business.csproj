@@ -49,6 +49,7 @@
     <Compile Include="CallMesWmsApiBll.cs" />
     <Compile Include="DeliveryBll.cs" />
     <Compile Include="FrozenPolicyBll.cs" />
+    <Compile Include="GeneralBusiness.cs" />
     <Compile Include="InOutStockStorageData.cs" />
     <Compile Include="InventoryBll.cs" />
     <Compile Include="ManualCounting.cs" />

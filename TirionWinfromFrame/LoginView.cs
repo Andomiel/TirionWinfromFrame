@@ -1,40 +1,37 @@
-﻿using MES;
+﻿using Business;
+using DevExpress.XtraEditors;
+using MES;
+using MES.Entity;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Forms;
-using MES.Entity;
 using TirionWinfromFrame.Commons;
 using Updater.Core;
-using System.Diagnostics;
-using System.IO;
-using DevExpress.Utils;
-using DevExpress.XtraEditors;
-using Update;
-using Commons;
 
 namespace Login
 {
-    public partial class LoginView : DevExpress.XtraEditors.XtraForm
+    public partial class LoginView : XtraForm
     {
-        private BackgroundWorker updateWorker;
+        //private BackgroundWorker updateWorker;
         public bool bLogin = false; //判断用户是否登录
         public LoginView()
         {
             InitializeComponent();
 
             lblVersion.Text = $"V{Application.ProductVersion}";
+
             #region 解决闪烁问题
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
             #endregion
         }
+
         #region 解决闪烁问题
         protected override void WndProc(ref Message m)
         {
@@ -58,8 +55,23 @@ namespace Login
             //updateWorker = new BackgroundWorker();
             //updateWorker.DoWork += new DoWorkEventHandler(updateWorker_DoWork);
             //updateWorker.RunWorkerAsync();
-
+            ValidateVersion();
         }
+
+        private void ValidateVersion()
+        {
+            string currentVersion = Application.ProductVersion;
+
+            if (!GeneralBusiness.CompareVersion(currentVersion))
+            {
+                $"当前版本{currentVersion}低于最新版本，请在打开的页面下载最新版本安装！".ShowTips();
+
+                System.Diagnostics.Process.Start("http://10.21.177.80:8088/VersionLogs.html");
+
+                Application.Exit();
+            }
+        }
+
         private void updateWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -82,6 +94,7 @@ namespace Login
                 ex.GetDeepException().ShowError();
             }
         }
+
         private void User_MouseEnter(object sender, EventArgs e)
         {
             skinPanel2.BackColor = Color.FromArgb(69, 159, 176);
