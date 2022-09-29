@@ -380,17 +380,17 @@ namespace iWms.Form
 
         private void dgvUpns_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            var row = dgvOrders.Rows[e.RowIndex];
-            var order = row.DataBoundItem as InventoryBarcodeDto;
-            if (order.InventoryResult == "多料" || order.InventoryResult == "盘盈")
+            var row = dgvUpns.Rows[e.RowIndex];
+            var barcode = row.DataBoundItem as InventoryBarcodeDto;
+            if (barcode.InventoryResult == "多料" || barcode.InventoryResult == "盘盈")
             {
                 row.Cells["colResult"].Style.BackColor = Color.CornflowerBlue;
             }
-            else if (order.InventoryResult == "缺料" || order.InventoryResult == "盘亏")
+            else if (barcode.InventoryResult == "缺料" || barcode.InventoryResult == "盘亏")
             {
                 row.Cells["colResult"].Style.BackColor = Color.OrangeRed;
             }
-            else if (order.InventoryResult == "正常")
+            else if (barcode.InventoryResult == "正常")
             {
                 row.Cells["colResult"].Style.BackColor = Color.LimeGreen;
             }
