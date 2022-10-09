@@ -172,11 +172,16 @@ namespace Business
         {
             StringBuilder sb = new StringBuilder();
 
-            string failedCombine = string.Join(",", failedBarcodes.Select(p => $"'{p}'").ToList());
-            sb.AppendLine($"UPDATE Wms_DeliveryBarcode set ExecuteResult = {(int)ExecuteResultEnum.Failed} WHERE DeliveryId = '{deliveryId}' AND Barcode IN ({failedCombine}); ");
-
-            var succeedCombine = string.Join(",", succeedBarcodes.Select(p => $"'{p}'").ToList());
-            sb.AppendLine($"UPDATE Wms_DeliveryBarcode set ExecuteResult = {(int)ExecuteResultEnum.Succeed} WHERE DeliveryId = '{deliveryId}' AND Barcode IN ({failedCombine}); ");
+            if (failedBarcodes.Count > 0)
+            {
+                string failedCombine = string.Join(",", failedBarcodes.Select(p => $"'{p}'").ToList());
+                sb.AppendLine($"UPDATE Wms_DeliveryBarcode set ExecuteResult = {(int)ExecuteResultEnum.Failed} WHERE DeliveryId = '{deliveryId}' AND Barcode IN ({failedCombine}); ");
+            }
+            if (succeedBarcodes.Count > 0)
+            {
+                var succeedCombine = string.Join(",", succeedBarcodes.Select(p => $"'{p}'").ToList());
+                sb.AppendLine($"UPDATE Wms_DeliveryBarcode set ExecuteResult = {(int)ExecuteResultEnum.Succeed} WHERE DeliveryId = '{deliveryId}' AND Barcode IN ({succeedCombine}); ");
+            }
 
             return sb.ToString();
         }
