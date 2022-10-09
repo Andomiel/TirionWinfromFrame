@@ -199,7 +199,7 @@ namespace iWms.Form
 
                     if (selectedOrder.OrderStatus != (int)InventoryOrderStatusEnum.Executing)
                     {
-                        "【正在盘点】状态的盘点单才能【完成】！".ShowTips();
+                        "【执行中】状态的盘点单才能【完成】！".ShowTips();
                         return;
                     }
 
