@@ -20,5 +20,8 @@ namespace Entity.Facade
         /// 异常的原始文本
         /// </summary>
         public string ErrMessage { get; set; } = string.Empty;
+
+        public string ApiTitle { get; set; } = string.Empty;
     }
+
 }

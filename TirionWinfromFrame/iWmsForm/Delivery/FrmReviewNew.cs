@@ -239,7 +239,7 @@ namespace iWms.Form
             CheckResultResponse checkResult = CheckByApi(reviewRecord);
             if (!checkResult.Result)
             {
-                reviewRecord.Status = checkResult.ErrMessage;
+                reviewRecord.Status = checkResult.ApiTitle;
                 reviewRecord.ScanTime = DateTime.Now;
                 AddBindRecord(reviewRecord);
                 ShowWarning(reviewRecord.UPN, 4, checkResult.ErrMessage);
@@ -309,16 +309,18 @@ namespace iWms.Form
             int orderType = SelectedOrder.DeliveryType;
             FileLog.Log($"CheckByApi[{orderNo}][{record.UPN}][{orderType}]");
 
-            CheckResultResponse result = new CheckResultResponse();
+            CheckResultResponse result;
             if (orderType != (int)OutOrderTypeEnum.FLCK)
             {
                 //UPN同步接口
                 result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text);
+                result.ApiTitle = $"物料查询校验失败";
             }
             else
             {
                 //MES校验接口
                 result = OrderReviewCallApi.CheckFromMesCheckUpn(tbScan.Text, orderNo);
+                result.ApiTitle = $"MES校验UPN失败";
             }
 
             if (!result.Result)
@@ -330,6 +332,7 @@ namespace iWms.Form
             {
                 //MSD过期校验
                 result = OrderReviewCallApi.CheckFromMSDExpired(record.UPN);
+                result.ApiTitle = $"MSD过期校验失败";
             }
             if (!result.Result)
             {
@@ -340,6 +343,7 @@ namespace iWms.Form
             {
                 //总装MES物料退料接口
                 result = OrderReviewCallApi.CheckFromMesMaterialBack(record.UPN, record.Qty);
+                result.ApiTitle = $"总装MES物料退料失败";
             }
 
             if (!result.Result)
@@ -357,6 +361,7 @@ namespace iWms.Form
                 else
                 {
                     result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
+                    result.ApiTitle = $"散料测试失败";
                 }
             }
 
@@ -368,6 +373,7 @@ namespace iWms.Form
             {
                 //总装MES-IQC比对接口
                 result = OrderReviewCallApi.CheckFromMesIqcCompare(record.UPN, tbOriginal.Text);
+                result.ApiTitle = $"总装MES-IQC比对失败";
             }
             if (!result.Result)
             {
