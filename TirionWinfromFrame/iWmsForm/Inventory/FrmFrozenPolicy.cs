@@ -299,35 +299,42 @@ namespace iWms.Form
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
-            tbExcelFile.Text = openFileDialog1.FileName;
-
-            string filePath = tbExcelFile.Text;
-            if (!string.IsNullOrWhiteSpace(tbExcelFile.Text))
+            try
             {
-                DataTable dtFromExcel = NpoiHelper.ExcelToDataTable(filePath, null, 0);
-                if (dtFromExcel == null || dtFromExcel.Rows.Count == 0)
+                openFileDialog1.ShowDialog();
+                tbExcelFile.Text = openFileDialog1.FileName;
+
+                string filePath = tbExcelFile.Text;
+                if (!string.IsNullOrWhiteSpace(tbExcelFile.Text))
                 {
-                    "表格为空或者表格已被其他应用打开！".ShowTips();
-                    return;
+                    DataTable dtFromExcel = NpoiHelper.ExcelToDataTable(filePath, null, 0);
+                    if (dtFromExcel == null || dtFromExcel.Rows.Count == 0)
+                    {
+                        "表格为空或者表格已被其他应用打开！".ShowTips();
+                        return;
+                    }
+                    List<string> upns = dtFromExcel.AsEnumerable()
+                                                   .Where(p => !string.IsNullOrWhiteSpace(p.Field<string>(0)))
+                                                   .Select(p => p.Field<string>(0)).ToList();
+                    if (upns.Count > 0)
+                    {
+                        FrmBuildRemind frmBuildRemind = new FrmBuildRemind(FrozenRemindBtnType.OnlyUpns);
+                        frmBuildRemind.StartPosition = FormStartPosition.CenterScreen;
+                        var dialogResult = frmBuildRemind.ShowDialog();
+                        if (dialogResult == DialogResult.Cancel)
+                        { return; }
+                        PolicyCreateResult createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                        AfterSavePolicy(createResult);
+                    }
                 }
-                List<string> upns = dtFromExcel.AsEnumerable()
-                                               .Where(p => !string.IsNullOrWhiteSpace(p.Field<string>(0)))
-                                               .Select(p => p.Field<string>(0)).ToList();
-                if (upns.Count > 0)
+                else
                 {
-                    FrmBuildRemind frmBuildRemind = new FrmBuildRemind(FrozenRemindBtnType.OnlyUpns);
-                    frmBuildRemind.StartPosition = FormStartPosition.CenterScreen;
-                    var dialogResult = frmBuildRemind.ShowDialog();
-                    if (dialogResult == DialogResult.Cancel)
-                    { return; }
-                    PolicyCreateResult createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
-                    AfterSavePolicy(createResult);
+                    "请选择正确的Excel文件".ShowTips();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                "请选择正确的Excel文件".ShowTips();
+                ex.GetDeepException().ShowError();
             }
         }
 
