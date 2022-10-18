@@ -180,7 +180,9 @@ namespace Business
             }
             catch (Exception ex)
             {
-                FileLog.Log($"按查询条件创建策略失败【{ex.Message}】");
+                string exString = $"按查询条件创建策略失败{Environment.NewLine}{ex.Message}";
+                FileLog.Log(exString);
+                throw new OppoCoreException(exString);
             }
             return createResult;
         }
@@ -205,7 +207,9 @@ namespace Business
             }
             catch (Exception ex)
             {
-                FileLog.Log($"批量UPN创建策略失败【{ex.Message}】");
+                string exString = $"批量UPN创建策略失败{Environment.NewLine}{ex.Message}";
+                FileLog.Log(exString);
+                throw new OppoCoreException(exString);
             }
             return createResult;
         }
