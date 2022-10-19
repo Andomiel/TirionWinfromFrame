@@ -78,6 +78,7 @@ namespace iWms.Form
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnCalculate = new System.Windows.Forms.Button();
             this.btnSpecial = new System.Windows.Forms.Button();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -320,6 +321,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnCancel, 13, 2);
             this.tlpConditions.Controls.Add(this.btnCalculate, 7, 2);
             this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
+            this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -599,6 +601,16 @@ namespace iWms.Form
             this.btnSpecial.Text = "有料出库";
             this.btnSpecial.UseVisualStyleBackColor = true;
             this.btnSpecial.Click += new System.EventHandler(this.BtnSpecial_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.Location = new System.Drawing.Point(1010, 38);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(74, 29);
+            this.btnReset.TabIndex = 28;
+            this.btnReset.Text = "一键复位";
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // dgvOrders
             // 
@@ -950,5 +962,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
+        private DevExpress.XtraEditors.SimpleButton btnReset;
     }
 }

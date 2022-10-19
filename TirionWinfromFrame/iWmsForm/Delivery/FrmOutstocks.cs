@@ -860,5 +860,56 @@ namespace iWms.Form
                 ex.GetDeepException().ShowError();
             }
         }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (lockSpecialObj)
+                {
+                    if (selectedOrder == null)
+                    {
+                        "请选中一行数据".ShowTips();
+                        return;
+                    }
+
+                    if (selectedOrder.OrderStatus <= (int)DeliveryOrderStatusEnum.Delivering)
+                    {
+                        "工单未发料，无法进行料架复位，请先完成发料".ShowTips();
+                        return;
+                    }
+
+                    //var records = BaseDeliveryBll.GetExecutingRecords();
+                    //var otherNos = new List<string>();
+                    //if (records != null && records.Count > 0)
+                    //{
+                    //    int sortArea = (int)TowerEnum.SortingArea;
+                    //    var recordNos = records.Where(p => p.LightArea > sortArea && p.OrderNo != selectedOrder.DeliveryNo).Select(p => p.OrderNo).Distinct().ToList();
+                    //    string numString = string.Join(",", recordNos);
+                    //    var comfirmResult = $"当前有其他工单{numString}正在执行发料，是否一并复位(不建议)？".ShowYesNoCancelAndTips();
+                    //    if (comfirmResult == DialogResult.Cancel)
+                    //    {
+                    //        return;
+                    //    }
+                    //    else if (comfirmResult == DialogResult.OK)
+                    //    {
+                    //        otherNos = recordNos;
+                    //    }
+                    //    else
+                    //    {
+                    //        //do nothing
+                    //    }
+                    //}
+
+                    new DeliveryBll().ResetDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
+
+                    "复位成功，请检查料架和工单操作日志".ShowTips();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
     }
 }
