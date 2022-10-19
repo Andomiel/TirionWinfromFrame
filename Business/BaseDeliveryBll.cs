@@ -351,10 +351,10 @@ namespace Business
             }
 
             var currentRecord = GetCurrentOrderRecord(deliveryId, (int)TowerEnum.ReformShelf);
-            if (currentRecord == null || currentRecord.RecordStatus != (int)LightRecordStatusEnum.LightOn)
-            {
-                throw new OppoCoreException("当前出库单的改造货架亮灯记录异常，无法关闭");
-            }
+            //if (currentRecord == null || currentRecord.RecordStatus != (int)LightRecordStatusEnum.LightOn)
+            //{
+            //    throw new OppoCoreException("当前出库单的改造货架亮灯记录异常，无法关闭");
+            //}
 
             int targetColor = currentRecord.LightColor;
             //改造货架三个灯，1，2，3
@@ -392,10 +392,10 @@ namespace Business
             }
 
             var currentRecord = GetCurrentOrderRecord(deliveryId, (int)TowerEnum.LightShelf);
-            if (currentRecord == null || currentRecord.RecordStatus != (int)LightRecordStatusEnum.LightOn)
-            {
-                throw new OppoCoreException("当前出库单的亮灯货架亮灯记录异常，无法关闭");
-            }
+            //if (currentRecord == null || currentRecord.RecordStatus != (int)LightRecordStatusEnum.LightOn)
+            //{
+            //    throw new OppoCoreException("当前出库单的亮灯货架亮灯记录异常，无法关闭");
+            //}
 
             int targetColor = currentRecord.LightColor;
             try
