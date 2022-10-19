@@ -253,7 +253,7 @@ namespace iWms.Form
                 // 锁定库区
                 if (cb.Checked)
                 {
-                    if (current.Value != (int)TowerEnum.SortingArea)
+                    if (current.Value > (int)TowerEnum.ASRS)
                     {
                         ValidateDeliveryOrderLimit(current.Value);
                         ValidateTransferOrderLimit(current.Value);

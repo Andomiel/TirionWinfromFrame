@@ -324,7 +324,7 @@ namespace iWms.Form
                         return;
                     }
                     ValidateDeliveryOrderLimit();
-                    ValidateInstockOrderLimit();
+                    //ValidateInstockOrderLimit();
 
                     FrmSortNo sortDiag = new FrmSortNo();
                     if (sortDiag.ShowDialog() != DialogResult.OK)
