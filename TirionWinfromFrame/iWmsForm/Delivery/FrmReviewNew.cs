@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -119,16 +120,35 @@ namespace iWms.Form
 
         private void PlayResultWaves(bool isSuccess)
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
             string wave = "Error.wav";
             if (isSuccess)
             {
                 wave = "Success.wav";
             }
-            player.SoundLocation = $"{Application.StartupPath}\\Waves\\{wave}";
-            player.Load();//同步播放，可使用异步
-            player.Play();
+            string location = $"{Application.StartupPath}\\Waves\\{wave}";
+
+            try
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+                player.SoundLocation = location;
+                player.Load();//同步播放，可使用异步
+                player.Play();
+            }
+            catch { }
+
+            try
+            {
+                PlaySound(location, 0, SND_ASYNC | SND_FILENAME);
+            }
+            catch { }
         }
+
+        [DllImport("winmm.dll")]
+        private static extern bool PlaySound(string pszSound, int hmod, int fdwSound);
+
+        private const int SND_FILENAME = 0x00020000;
+        private const int SND_ASYNC = 0x0001;
+
 
         private void tbOriginal_KeyPress(object sender, KeyPressEventArgs e)
         {
