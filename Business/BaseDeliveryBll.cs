@@ -422,6 +422,39 @@ namespace Business
             string sql = $"{Wms_InstockArea.GetSelectSql()} AND DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InstockArea>();
         }
+
+        public bool ResetDeliveryOrder(string deliveryId, string deliveryNo, string userName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var barcodes = GetDeliveryBarcodesDetail(deliveryId, GetFinishedStatus());
+
+            var group = barcodes.GroupBy(p => p.DeliveryAreaId);
+            foreach (var item in group)
+            {
+                switch (item.Key)
+                {
+                    case (int)TowerEnum.SortingArea:
+                        //do nothing
+                        break;
+                    case (int)TowerEnum.ASRS:
+                        //do nothing
+                        break;
+                    case (int)TowerEnum.LightShelf:
+                        sb.AppendLine(LightOffLightShelf(deliveryId, deliveryNo, userName, item.ToList()));
+                        break;
+                    case (int)TowerEnum.ReformShelf:
+                        sb.AppendLine(LightOffReformShelf(deliveryId, deliveryNo, userName, item.ToList()));
+                        break;
+                    default:
+                        throw new OppoCoreException("发料物料中存在不在预定义库区的物料");
+                }
+            }
+
+            sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));
+
+            return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _) > 0;
+        }
     }
 
     public class DeliveryBarcodeLocation
