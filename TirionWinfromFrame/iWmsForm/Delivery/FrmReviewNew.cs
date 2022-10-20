@@ -549,7 +549,7 @@ namespace iWms.Form
                     var remainBarcodes = ReviewSummaries.Where(p => p.Match == 0 && !string.IsNullOrWhiteSpace(p.UPN)).Select(p => p.UPN).Distinct().ToList();
                     if (remainBarcodes.Count > 0)
                     {
-                        if ($"本工单还有{remainBarcodes.Count}条已出库UPN未复核，这些UPN将会被转移到理料区！".ShowYesNoAndTips() != DialogResult.OK)
+                        if ($"本工单还有{remainBarcodes.Count}条已出库UPN未复核，这些UPN将会被转移到理料区！".ShowYesNoAndTips() != DialogResult.Yes)
                         {
                             return;
                         }
