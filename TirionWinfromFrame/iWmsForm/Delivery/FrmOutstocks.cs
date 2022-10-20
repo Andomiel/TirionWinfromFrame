@@ -1,16 +1,22 @@
 ﻿using Business;
+using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.DataContext;
 using Entity.Dto.Delivery;
 using Entity.Enums;
 using Entity.Enums.General;
+using Entity.Facade;
 using Mapster;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -863,6 +869,7 @@ namespace iWms.Form
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
                 lock (lockSpecialObj)
@@ -902,6 +909,16 @@ namespace iWms.Form
                     //}
 
                     new DeliveryBll().ResetDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
+                    //额外做一次取消报警
+                    string url = ConfigurationManager.AppSettings["lightShelfCancelAlarmUrl"];
+                    if (string.IsNullOrWhiteSpace(url))
+                    {
+                        throw new OppoCoreException("缺少亮灯货架的取消报警服务地址配置");
+                    }
+                    foreach (string shelfNo in ShelfNos)
+                    {
+                        CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
+                    }
 
                     "复位成功，请检查料架和工单操作日志".ShowTips();
                 }
@@ -910,6 +927,55 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+        }
+
+        private List<string> ShelfNos => new List<string>
+            {
+                "01",
+                "02",
+                "03",
+                "04",
+                "05",
+                "06",
+                "07",
+                "08",
+                "09",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21"
+            };
+
+
+        private string CancelAlarm(string deliveryNo, string url, string shelfNo)
+        {
+            Dictionary<string, string> logDict = new Dictionary<string, string>(3);
+            logDict.Add("url", url);
+
+            CancelAlarmRequest request = new CancelAlarmRequest() { shelf_id = $"SWHY0{shelfNo}" };
+            string requestString = JsonConvert.SerializeObject(request);
+            logDict.Add("request", requestString);
+
+            string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+            logDict.Add("response", strResponse);
+
+            FileLog.Log($"操作亮灯货架取消报警:{JsonConvert.SerializeObject(logDict)}");
+
+            Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架取消报警", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
+
+            return strResponse;
         }
     }
 }

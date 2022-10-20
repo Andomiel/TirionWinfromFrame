@@ -117,6 +117,7 @@
     <Compile Include="Enums\Transfer\TransferBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferOrderStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferTypeEnum.cs" />
+    <Compile Include="Facade\CancelAlarmRequest.cs" />
     <Compile Include="Facade\CheckResultResponse.cs" />
     <Compile Include="Facade\DeliveryOrderFeedback.cs" />
     <Compile Include="Facade\FeedbackResponse.cs" />
