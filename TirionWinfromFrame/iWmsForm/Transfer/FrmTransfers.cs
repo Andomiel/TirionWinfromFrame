@@ -173,12 +173,12 @@ namespace iWms.Form
                     if (selectedOrder.TargetAreaId == (int)TowerEnum.SortingArea)//移出判定亮灯
                     {
                         ValidateDeliveryOrderLimit();
-                        ValidateInstockOrderLimit();
+                        //ValidateInstockOrderLimit();
                     }
                     else//移入
                     {
                         ValidateDeliveryOrderForTranferIn();
-                        ValidateInstockOrderForTransferIn();
+                        //ValidateInstockOrderForTransferIn();
                     }
 
                     new TransferBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.TransferNo, -1, -1, AppInfo.LoginUserInfo.account);
