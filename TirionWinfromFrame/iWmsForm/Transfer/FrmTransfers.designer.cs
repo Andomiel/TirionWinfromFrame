@@ -291,7 +291,6 @@ namespace iWms.Form
             this.dtOrderTime.Size = new System.Drawing.Size(134, 22);
             this.dtOrderTime.TabIndex = 20;
             this.dtOrderTime.Value = new System.DateTime(2022, 2, 22, 12, 4, 52, 0);
-            this.dtOrderTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtp_MouseUp);
             // 
             // dtFinishedTime
             // 
@@ -303,7 +302,6 @@ namespace iWms.Form
             this.dtFinishedTime.Size = new System.Drawing.Size(134, 22);
             this.dtFinishedTime.TabIndex = 21;
             this.dtFinishedTime.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtFinishedTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtp_MouseUp);
             // 
             // tbUpn
             // 

@@ -23,6 +23,9 @@ namespace iWms.Form
             InitializeComponent();
             BindCombox();
 
+            dtOrderTime.Value = DateTime.Now.Date;
+            dtFinishedTime.Value = DateTime.Now.Date;
+
             dgvOrders.ScrollBars = ScrollBars.Both;
             dgvOrders.Dock = DockStyle.Fill;
             dgvOrders.AutoGenerateColumns = false;
@@ -32,16 +35,6 @@ namespace iWms.Form
             dgvUpns.Dock = DockStyle.Fill;
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
-
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.CustomFormat = " ";
-        }
-
-
-        private void dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private BindingList<TransferOrderDto> WorkOrders = new BindingList<TransferOrderDto>();
@@ -100,18 +93,13 @@ namespace iWms.Form
             condition.MaterialNo = tbMaterialNo.Text.Trim();
             condition.Upn = tbUpn.Text.Trim();
 
-            if (!string.IsNullOrWhiteSpace(dtOrderTime.CustomFormat))
-            {
-                condition.HaveOrderTimeQuery = true;
-                condition.OrderTimeStart = dtOrderTime.Value.Date;
-                condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
-            }
-            if (!string.IsNullOrWhiteSpace(dtFinishedTime.CustomFormat))
-            {
-                condition.HaveFinishedTimeQuery = true;
-                condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-                condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
-            }
+            condition.HaveOrderTimeQuery = true;
+            condition.OrderTimeStart = dtOrderTime.Value.Date;
+            condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
+
+            condition.HaveFinishedTimeQuery = true;
+            condition.FinishedTimeStart = dtFinishedTime.Value.Date;
+            condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
 
             var orders = TransferBll.GetTransferOrders(condition);
 
@@ -394,9 +382,7 @@ namespace iWms.Form
             tbMaterialNo.Text = string.Empty;
             cbType.SelectedIndex = 0;
             dtOrderTime.Value = DateTime.Today;
-            dtOrderTime.CustomFormat = " ";
             dtFinishedTime.Value = DateTime.Today;
-            dtFinishedTime.CustomFormat = " ";
             GetOrders();
         }
 
