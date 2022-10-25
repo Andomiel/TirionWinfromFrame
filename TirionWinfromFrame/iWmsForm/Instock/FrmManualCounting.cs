@@ -42,7 +42,16 @@ namespace iWms.Form
                         txtMaterialInfo.Text = string.Empty;
                     }
 
-                    if ("是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes)
+                    string upn = result?.InvLotId;
+                    if (string.IsNullOrWhiteSpace(upn))
+                    {
+                        var arr = txtMaterialInfo.Text.Trim().Split('*');
+                        if (arr.Length > 1)
+                        {
+                            upn = arr[0];
+                        }
+                    }
+                    if (RefundRecord.Any(p => p.UPN == upn) || "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes)
                     {
                         BtnSubmit_Click(btnSubmit, null);
                     }
