@@ -133,10 +133,17 @@ namespace Business
             int targetColor = GetLightColor((int)TowerEnum.LightShelf, allColors);
             var response = LightShelfColor(deliveryNo, true, url, targetColor, barcodes);
 
-            var failedBarcodes = response?.ErrorPickListID;
-            if (failedBarcodes == null)
+            //{"code":0,"msg":"failed","ErrorPickListID":["9480022-JW4022-22610-00283,No Mate to Send"],"order_id":""}
+            var failedBarcodes = new List<string>();
+            var errorBarcodes = response?.ErrorPickListID;
+            if (errorBarcodes == null)
             {
-                failedBarcodes = new List<string>();
+                errorBarcodes = new List<string>();
+            }
+            foreach (var item in errorBarcodes)
+            {
+                string upn = item.Split(',')[0];
+                failedBarcodes.Add(upn);
             }
             var succeedBarcodes = barcodes.Where(p => !failedBarcodes.Contains(p.Barcode)).Select(p => p.Barcode).Distinct().ToList();
 
