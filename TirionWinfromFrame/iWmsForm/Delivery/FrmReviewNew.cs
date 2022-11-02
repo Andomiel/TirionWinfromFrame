@@ -106,7 +106,6 @@ namespace iWms.Form
                     else
                     {
                         ScanOperate();
-                        PlayResultWaves(true);
                     }
                 }
             }
@@ -162,7 +161,6 @@ namespace iWms.Form
                         return;
                     }
                     ScanOperate();
-                    PlayResultWaves(true);
                 }
             }
             catch (Exception ex)
@@ -313,6 +311,7 @@ namespace iWms.Form
             }
             AddBindRecord(reviewRecord);
             ResetBarcodeText();
+            PlayResultWaves(true);
         }
 
 
