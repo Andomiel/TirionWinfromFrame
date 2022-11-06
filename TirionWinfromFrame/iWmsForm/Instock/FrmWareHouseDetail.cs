@@ -68,6 +68,7 @@ namespace iWms.Form
         private void Timer_Tick(object sender, EventArgs e)
         {
             CompareMaterialQty();
+            gridWMS.FirstDisplayedScrollingRowIndex = scrollRowIndex;
         }
 
         private void BindDefaultTower()
@@ -89,10 +90,10 @@ namespace iWms.Form
                         ResetCheckBoxStatus(item, cbAsrs);
                         break;
                     case (int)TowerEnum.LightShelf:
-                        ResetCheckBoxStatus(item, cbLightShelf);
+                        //ResetCheckBoxStatus(item, cbLightShelf);
                         break;
                     case (int)TowerEnum.ReformShelf:
-                        ResetCheckBoxStatus(item, cbReform);
+                        //ResetCheckBoxStatus(item, cbReform);
                         break;
                     default:
                         break;
@@ -253,7 +254,7 @@ namespace iWms.Form
                 // 锁定库区
                 if (cb.Checked)
                 {
-                    if (current.Value != (int)TowerEnum.SortingArea)
+                    if (current.Value == (int)TowerEnum.ASRS)
                     {
                         ValidateDeliveryOrderLimit(current.Value);
                         ValidateTransferOrderLimit(current.Value);
@@ -315,6 +316,8 @@ namespace iWms.Form
             }
         }
 
+        int scrollRowIndex = 0;
+
         private void gridWMS_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -324,6 +327,7 @@ namespace iWms.Form
                     return;
                 }
                 var row = gridWMS.SelectedCells[0].OwningRow;
+                scrollRowIndex = row.Index;
                 var orderMaterial = row.DataBoundItem as InstockDetailDto;
 
                 WorkOrderBarcodes.Clear();

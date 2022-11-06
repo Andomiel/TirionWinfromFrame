@@ -1,16 +1,22 @@
 ﻿using Business;
+using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.DataContext;
 using Entity.Dto.Delivery;
 using Entity.Enums;
 using Entity.Enums.General;
+using Entity.Facade;
 using Mapster;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -324,7 +330,7 @@ namespace iWms.Form
                         return;
                     }
                     ValidateDeliveryOrderLimit();
-                    ValidateInstockOrderLimit();
+                    //ValidateInstockOrderLimit();
 
                     FrmSortNo sortDiag = new FrmSortNo();
                     if (sortDiag.ShowDialog() != DialogResult.OK)
@@ -859,6 +865,117 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockSpecialObj)
+                {
+                    if (selectedOrder == null)
+                    {
+                        "请选中一行数据".ShowTips();
+                        return;
+                    }
+
+                    if (selectedOrder.OrderStatus <= (int)DeliveryOrderStatusEnum.Delivering)
+                    {
+                        "工单未发料，无法进行料架复位，请先完成发料".ShowTips();
+                        return;
+                    }
+
+                    //var records = BaseDeliveryBll.GetExecutingRecords();
+                    //var otherNos = new List<string>();
+                    //if (records != null && records.Count > 0)
+                    //{
+                    //    int sortArea = (int)TowerEnum.SortingArea;
+                    //    var recordNos = records.Where(p => p.LightArea > sortArea && p.OrderNo != selectedOrder.DeliveryNo).Select(p => p.OrderNo).Distinct().ToList();
+                    //    string numString = string.Join(",", recordNos);
+                    //    var comfirmResult = $"当前有其他工单{numString}正在执行发料，是否一并复位(不建议)？".ShowYesNoCancelAndTips();
+                    //    if (comfirmResult == DialogResult.Cancel)
+                    //    {
+                    //        return;
+                    //    }
+                    //    else if (comfirmResult == DialogResult.OK)
+                    //    {
+                    //        otherNos = recordNos;
+                    //    }
+                    //    else
+                    //    {
+                    //        //do nothing
+                    //    }
+                    //}
+
+                    new DeliveryBll().ResetDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
+                    //额外做一次取消报警
+                    string url = ConfigurationManager.AppSettings["lightShelfCancelAlarmUrl"];
+                    if (string.IsNullOrWhiteSpace(url))
+                    {
+                        throw new OppoCoreException("缺少亮灯货架的取消报警服务地址配置");
+                    }
+                    foreach (string shelfNo in ShelfNos)
+                    {
+                        CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
+                    }
+
+                    "复位成功，请检查料架和工单操作日志".ShowTips();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+        }
+
+        private List<string> ShelfNos => new List<string>
+            {
+                "01",
+                "02",
+                "03",
+                "04",
+                "05",
+                "06",
+                "07",
+                "08",
+                "09",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "15",
+                "16",
+                "17",
+                "18",
+                "19",
+                "20",
+                "21"
+            };
+
+
+        private string CancelAlarm(string deliveryNo, string url, string shelfNo)
+        {
+            Dictionary<string, string> logDict = new Dictionary<string, string>(3);
+            logDict.Add("url", url);
+
+            CancelAlarmRequest request = new CancelAlarmRequest() { shelf_id = $"SWHY0{shelfNo}" };
+            string requestString = JsonConvert.SerializeObject(request);
+            logDict.Add("request", requestString);
+
+            string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+            logDict.Add("response", strResponse);
+
+            FileLog.Log($"操作亮灯货架取消报警:{JsonConvert.SerializeObject(logDict)}");
+
+            Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架取消报警", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
+
+            return strResponse;
         }
 
         private void BtnReset_Click(object sender, EventArgs e)

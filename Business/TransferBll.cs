@@ -110,7 +110,7 @@ namespace Business
 
         protected override List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
-            string sql = $@"SELECT wtb.Barcode, wto.SourceAreaId as DeliveryAreaId, szm.LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wtb.TransferQuantity as DeliveryQuantity, wtb.OrderStatus as BarcodeStatus 
+            string sql = $@"SELECT wtb.Barcode, wto.SourceAreaId as DeliveryAreaId, wtb.TransferLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wtb.TransferQuantity as DeliveryQuantity, wtb.OrderStatus as BarcodeStatus 
                         FROM Wms_TransferBarcode wtb 
                         LEFT JOIN smt_zd_material szm  on wtb.Barcode = szm.ReelID 
                         LEFT JOIN  Wms_TransferOrder wto on wtb.TransferOrderId = wto.BusinessId 

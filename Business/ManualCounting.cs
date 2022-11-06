@@ -19,11 +19,6 @@ namespace Business
             bool result;
             if (count == 0)
             {
-                string insertSql = $@"INSERT INTO smt_zd_material 
-                                                  (REELID,op_type,issave,LockTowerNo,
-                                                   istake,Qty,Part_Number,LightColor,SerialNo) 
-                                           VALUES('{record.UPN}','0',1,'0','0',{record.Qty},'{record.PartNumber}',0,'{record.SerialNo}')";
-
                 string sql = $@"insert into smt_zd_material(Reelid,Part_Number,Qty,DateCode,Lot,FactoryCode,WZ_SCCJ,MSD,ReelType,SerialNo,QRCode,CameraString, MinPacking, isSave, isTake, isTakeCheck, Status, LockTowerNo) 
                                             values (@rtnID,@partno,@qty,@dc,@lot,@supplier,@supplier,@msd,@materialType,@serialNo,@qrcode,@cameraString,@miniPacking, 1, 0, 0, {(int)BarcodeStatusEnum.Saved}, {(int)TowerEnum.SortingArea})";
                 string partNumber = string.Empty;

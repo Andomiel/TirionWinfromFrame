@@ -72,6 +72,11 @@ namespace Entity.DataContext
         /// </summary>
         public int ExecuteResult { get; set; } = 0;
 
+        /// <summary>
+        /// 移库库位
+        /// </summary>
+        public string TransferLocation { get; set; } = string.Empty;
+
         #endregion
 
         #region 公共方法
@@ -89,7 +94,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, BusinessId, TransferOrderId, Barcode, MaterialNo, TransferQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult FROM Wms_TransferBarcode WHERE 1=1 ";
+            return "SELECT Id, BusinessId, TransferOrderId, Barcode, MaterialNo, TransferQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult, TransferLocation FROM Wms_TransferBarcode WHERE 1=1 ";
         }
 
         #endregion

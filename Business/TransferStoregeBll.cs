@@ -125,8 +125,8 @@ namespace Business
             foreach (var item in barcodes)
             {
                 sb.AppendLine($@"INSERT INTO Wms_TransferBarcode
-                    (BusinessId, TransferOrderId, Barcode, MaterialNo, TransferQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-                    VALUES('{Guid.NewGuid():D}', '{transferId}', '{item.ReelID}', '{item.PartNumber}', {item.Qty}, {(int)TransferBarcodeStatusEnum.Unfinished}, getdate(), '{userName}', getdate(), '{userName}');");
+                    (BusinessId, TransferOrderId, Barcode, MaterialNo, TransferQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, TransferLocation)
+                    VALUES('{Guid.NewGuid():D}', '{transferId}', '{item.ReelID}', '{item.PartNumber}', {item.Qty}, {(int)TransferBarcodeStatusEnum.Unfinished}, getdate(), '{userName}', getdate(), '{userName}', '{item.LockLocation}');");
 
                 sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Locked}, Work_Order_No = '{transferId}', LockRequestID = ''  where  ReelID = '{item.ReelID}'; ");
             }

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
+using TirionWinfromFrame.iWmsForm.StockTaking;
 
 namespace iWms.Form
 {
@@ -174,6 +175,10 @@ namespace iWms.Form
                     new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, (int)OperateTypeEnum.InstockTaking);
 
                     "盘点任务下达成功！".ShowTips();
+
+                    FrmInventoryDetail detail = new FrmInventoryDetail(selectedOrder);
+                    detail.ShowDialog();
+
                     GetOrders();
                 }
             }

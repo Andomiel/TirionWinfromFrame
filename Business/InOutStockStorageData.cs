@@ -190,8 +190,9 @@ namespace Business
                 s.lot,s.XM_DH,s.WZ_SCCJ as Supplier,
                 s.SerialNo, s.ReelType as UpnCate, s.DateCode,
                 s.MinPacking, s.MSD, s.Status,
-                tm.Description as TowerDes,s.ABSide,s.SaveTime,
-                CASE WHEN ISNULL(s.LockMachineID,'')='' OR s.LockTowerNo=4 THEN s.LockLocation ELSE s.LockMachineID+'-'+s.LockLocation END AS Location, 
+                tm.Description as TowerDes,
+                isnull(s.ABSide,'')+isnull(s.LockMachineID,'') as ABSide,s.SaveTime,
+                s.LockLocation AS Location, 
                 CASE WHEN smf.UPN is not null THEN '冻结' ELSE CASE s.BakeState WHEN 0 THEN '正常' WHEN 1 THEN '待烘烤' WHEN 2 THEN '烘烤中' END  END AS HoldState
             FROM smt_zd_material s
                 LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen) smf ON s.ReelID = smf.UPN

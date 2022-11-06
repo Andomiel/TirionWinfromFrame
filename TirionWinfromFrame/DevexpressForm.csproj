@@ -167,47 +167,7 @@
     <Compile Include="DBAdapter.cs" />
     <Compile Include="DB\MESDB.cs" />
     <Compile Include="EntityAdapter.cs" />
-    <Compile Include="Entity\buyerdetailInfo.cs" />
-    <Compile Include="Entity\buyerInfo.cs" />
-    <Compile Include="Entity\buyerInWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\buyerInWarehouseInfo.cs" />
-    <Compile Include="Entity\buyerOutWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\buyerOutWarehouseInfo.cs" />
-    <Compile Include="Entity\buyerreturndetailInfo.cs" />
-    <Compile Include="Entity\buyerreturnInfo.cs" />
-    <Compile Include="Entity\completionProductInWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\completionProductInWarehouseInfo.cs" />
-    <Compile Include="Entity\customerInfo.cs" />
-    <Compile Include="Entity\deliversaledetailInfo.cs" />
-    <Compile Include="Entity\deliversaleInfo.cs" />
-    <Compile Include="Entity\finishProductInInWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\finishProductInInWarehouseInfo.cs" />
     <Compile Include="Entity\lotteryInfo.cs" />
-    <Compile Include="Entity\materialInfo.cs" />
-    <Compile Include="Entity\productBOMdetailInfo.cs" />
-    <Compile Include="Entity\productBOMInfo.cs" />
-    <Compile Include="Entity\productInfo.cs" />
-    <Compile Include="Entity\productionBOMInfo.cs" />
-    <Compile Include="Entity\productionMaterialReturnDetailInfo.cs" />
-    <Compile Include="Entity\productionMaterialReturnInfo.cs" />
-    <Compile Include="Entity\productionRequisitionDetailInfo.cs" />
-    <Compile Include="Entity\productionRequisitionInfo.cs" />
-    <Compile Include="Entity\productMaterialInWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\productMaterialInWarehouseInfo.cs" />
-    <Compile Include="Entity\productMaterialOutWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\productMaterialOutWarehouseInfo.cs" />
-    <Compile Include="Entity\quotationdetailInfo.cs" />
-    <Compile Include="Entity\quotationInfo.cs" />
-    <Compile Include="Entity\requisitiondetailInfo.cs" />
-    <Compile Include="Entity\requisitionInfo.cs" />
-    <Compile Include="Entity\returnsaledetailInfo.cs" />
-    <Compile Include="Entity\returnsaleInfo.cs" />
-    <Compile Include="Entity\saledetailInfo.cs" />
-    <Compile Include="Entity\saleInfo.cs" />
-    <Compile Include="Entity\saleInWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\saleInWarehouseInfo.cs" />
-    <Compile Include="Entity\saleOutWarehouseDetailInfo.cs" />
-    <Compile Include="Entity\saleOutWarehouseInfo.cs" />
     <Compile Include="Entity\stockDataInfo.cs" />
     <Compile Include="Entity\stockInfo.cs" />
     <Compile Include="Entity\supplierInfo.cs" />
@@ -430,6 +390,12 @@
     <Compile Include="iWmsForm\StockTaking\FrmInventory.designer.cs">
       <DependentUpon>FrmInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmInventoryDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmInventoryDetail.Designer.cs">
+      <DependentUpon>FrmInventoryDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\StockTaking\FrmInventoryOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -613,6 +579,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventory.resx">
       <DependentUpon>FrmInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventoryDetail.resx">
+      <DependentUpon>FrmInventoryDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventoryOrder.resx">
       <DependentUpon>FrmInventoryOrder.cs</DependentUpon>
