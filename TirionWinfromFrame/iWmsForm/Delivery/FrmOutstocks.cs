@@ -471,11 +471,6 @@ namespace iWms.Form
             }
         }
 
-        private void Dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-
-        }
-
         private readonly object lockExportObj = new object();
 
         private void BtnExport_Click(object sender, EventArgs e)
@@ -484,13 +479,75 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
+                    if (selectedOrder == null)
+                    {
+                        "请选择要导出明细的出库单".ShowTips();
+                        return;
+                    }
                     if (WorkOrderDetails.Count == 0)
                     {
                         "暂无数据可导出，请查询后导出".ShowTips();
                         return;
                     }
 
-                    ExportToExcel();
+                    var data = OrderBarcodes.Join(WorkOrderDetails, p => p.DeliveryDetailId, p => p.BusinessId, (b, d) => new
+                    {
+                        OrderNo = selectedOrder.DeliveryNo,
+                        OrderTime = selectedOrder.CreateTime,
+                        OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
+                        FinishedTime = selectedOrder.LastUpdateTime,
+                        OrderStatus = selectedOrder.OrderStatusDisplay,
+                        DestinationNo = selectedOrder.LineId,
+                        MaterialNo = d.MaterialNo,
+                        DeliveryCount = d.RequireCount,
+                        MaterialName = string.Empty,
+                        InventoryStatus = d.DeliveryStatusDisplay,
+                        Barcode = b.Barcode,
+                        InnerCount = b.DeliveryQuantity,
+                        DeliveryOperator = b.CreateUser,
+                    }).ToList();
+
+                    var lackDetails = WorkOrderDetails.Where(p => p.Barcodes.Count == 0).ToList();
+                    if (WorkOrderDetails.Any(p => p.Barcodes.Count == 0))
+                    {
+                        foreach (var item in lackDetails)
+                        {
+                            data.Add(new
+                            {
+                                OrderNo = selectedOrder.DeliveryNo,
+                                OrderTime = selectedOrder.CreateTime,
+                                OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
+                                FinishedTime = selectedOrder.LastUpdateTime,
+                                OrderStatus = selectedOrder.OrderStatusDisplay,
+                                DestinationNo = selectedOrder.LineId,
+                                MaterialNo = item.MaterialNo,
+                                DeliveryCount = item.RequireCount,
+                                MaterialName = string.Empty,
+                                InventoryStatus = item.DeliveryStatusDisplay,
+                                Barcode = string.Empty,
+                                InnerCount = 0,
+                                DeliveryOperator = string.Empty,
+                            });
+                        }
+                    }
+
+                    List<HeadColumn> headColumns = new List<HeadColumn>
+                        {
+                            new HeadColumn("OrderNo","出库单号", 4200),
+                            new HeadColumn("OrderTime","下达时间", 4000),
+                            new HeadColumn("OrderTypeDes","单据类型", 3000),
+                            new HeadColumn("FinishedTime","完成时间", 4000),
+                            new HeadColumn("OrderStatus","单据状态", 3000),
+                            new HeadColumn("DestinationNo","目的地", 2200),
+                            new HeadColumn("MaterialNo","物料代码", 2200),
+                            new HeadColumn("MaterialName","物料名称", 4000),
+                            new HeadColumn("DeliveryCount","需求数量", 2200),
+                            new HeadColumn("InventoryStatus","库存状态", 3000),
+                            new HeadColumn("Barcode","UPN", 7168),
+                            new HeadColumn("InnerCount","盘内数量", 2200),
+                            new HeadColumn("DeliveryOperator","操作人", 3000),
+                        };
+                    ExportToExcel(data, headColumns);
                 }
             }
             catch (Exception ex)
@@ -499,13 +556,8 @@ namespace iWms.Form
             }
         }
 
-        public void ExportToExcel()
+        public void ExportToExcel<T>(List<T> data, List<HeadColumn> headColumns) where T : class
         {
-            if (selectedOrder == null)
-            {
-                return;
-            }
-
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
@@ -516,63 +568,6 @@ namespace iWms.Form
             {
                 return;
             }
-            var data = OrderBarcodes.Join(WorkOrderDetails, p => p.DeliveryDetailId, p => p.BusinessId, (b, d) => new
-            {
-                OrderNo = selectedOrder.DeliveryNo,
-                OrderTime = selectedOrder.CreateTime,
-                OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
-                FinishedTime = selectedOrder.LastUpdateTime,
-                OrderStatus = selectedOrder.OrderStatusDisplay,
-                DestinationNo = selectedOrder.LineId,
-                MaterialNo = d.MaterialNo,
-                DeliveryCount = d.RequireCount,
-                MaterialName = string.Empty,
-                InventoryStatus = d.DeliveryStatusDisplay,
-                Barcode = b.Barcode,
-                InnerCount = b.DeliveryQuantity,
-                DeliveryOperator = b.CreateUser,
-            }).ToList();
-
-            var lackDetails = WorkOrderDetails.Where(p => p.Barcodes.Count == 0).ToList();
-            if (WorkOrderDetails.Any(p => p.Barcodes.Count == 0))
-            {
-                foreach (var item in lackDetails)
-                {
-                    data.Add(new
-                    {
-                        OrderNo = selectedOrder.DeliveryNo,
-                        OrderTime = selectedOrder.CreateTime,
-                        OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
-                        FinishedTime = selectedOrder.LastUpdateTime,
-                        OrderStatus = selectedOrder.OrderStatusDisplay,
-                        DestinationNo = selectedOrder.LineId,
-                        MaterialNo = item.MaterialNo,
-                        DeliveryCount = item.RequireCount,
-                        MaterialName = string.Empty,
-                        InventoryStatus = item.DeliveryStatusDisplay,
-                        Barcode = string.Empty,
-                        InnerCount = 0,
-                        DeliveryOperator = string.Empty,
-                    });
-                }
-            }
-
-            List<HeadColumn> headColumns = new List<HeadColumn>
-            {
-                new HeadColumn("OrderNo","出库单号", 4200),
-                new HeadColumn("OrderTime","下达时间", 4000),
-                new HeadColumn("OrderTypeDes","单据类型", 3000),
-                new HeadColumn("FinishedTime","完成时间", 4000),
-                new HeadColumn("OrderStatus","单据状态", 3000),
-                new HeadColumn("DestinationNo","目的地", 2200),
-                new HeadColumn("MaterialNo","物料代码", 2200),
-                new HeadColumn("MaterialName","物料名称", 4000),
-                new HeadColumn("DeliveryCount","需求数量", 2200),
-                new HeadColumn("InventoryStatus","库存状态", 3000),
-                new HeadColumn("Barcode","UPN", 7168),
-                new HeadColumn("InnerCount","盘内数量", 2200),
-                new HeadColumn("DeliveryOperator","操作人", 3000),
-            };
             string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, data, headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
             {
@@ -977,5 +972,70 @@ namespace iWms.Form
 
             return strResponse;
         }
+
+        private void BtnLack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (lockExportObj)
+                {
+                    if (selectedOrder == null)
+                    {
+                        "请选择要导出明细的出库单".ShowTips();
+                        return;
+                    }
+                    if (WorkOrderDetails.Count == 0)
+                    {
+                        "暂无数据可导出，请查询后导出".ShowTips();
+                        return;
+                    }
+
+                    var detailCount = OrderBarcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.Sum(b => b.DeliveryQuantity));
+
+                    var data = WorkOrderDetails.Select(p => new LackDetail()
+                    {
+                        RowNum = p.RowNum,
+                        OrderNo = selectedOrder.DeliveryNo,
+                        MaterialNo = p.MaterialNo,
+                        RequireCount = p.RequireCount,
+                        DeliveryCount = detailCount.ContainsKey(p.BusinessId) ? detailCount[p.BusinessId] : 0,
+                    }).ToList();
+
+                    List<HeadColumn> headColumns = new List<HeadColumn>
+                        {
+                            new HeadColumn("LineNumber","序号", 2200),
+                            new HeadColumn("OrderNo","出库单号", 4200),
+                            new HeadColumn("MaterialNo","物料代码", 2200),
+                            new HeadColumn("RequireCount","需求数量", 2200),
+                            new HeadColumn("DeliveryCount","分配数量", 2200),
+                            new HeadColumn("InventoryStatus","是否充足", 2000),
+                            new HeadColumn("LackCount","欠料数量", 2200),
+                        };
+                    ExportToExcel(data, headColumns);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
+    }
+
+    public class LackDetail
+    {
+        public int RowNum { get; set; } = 0;
+
+        public string OrderNo { get; set; } = string.Empty;
+
+        public string MaterialNo { get; set; } = string.Empty;
+
+        public int RequireCount { get; set; } = 0;
+
+        public int DeliveryCount { get; set; } = 0;
+
+        public string InventoryStatus => DeliveryCount >= RequireCount ? "充足" : "欠料";
+
+        public int LackCount => DeliveryCount >= RequireCount ? 0 : DeliveryCount - RequireCount;
+
     }
 }

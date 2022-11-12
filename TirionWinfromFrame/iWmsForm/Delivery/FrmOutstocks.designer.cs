@@ -100,6 +100,7 @@ namespace iWms.Form
             this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -322,6 +323,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnCalculate, 7, 2);
             this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
             this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
+            this.tlpConditions.Controls.Add(this.btnLack, 13, 0);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -860,6 +862,16 @@ namespace iWms.Form
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
             // 
+            // btnLack
+            // 
+            this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLack.Location = new System.Drawing.Point(1010, 3);
+            this.btnLack.Name = "btnLack";
+            this.btnLack.Size = new System.Drawing.Size(74, 29);
+            this.btnLack.TabIndex = 29;
+            this.btnLack.Text = "欠料分析";
+            this.btnLack.Click += new System.EventHandler(this.BtnLack_Click);
+            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -955,5 +967,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
         private DevExpress.XtraEditors.SimpleButton btnReset;
+        private DevExpress.XtraEditors.SimpleButton btnLack;
     }
 }
