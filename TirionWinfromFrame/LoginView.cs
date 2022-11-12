@@ -97,12 +97,10 @@ namespace Login
 
         private void User_MouseEnter(object sender, EventArgs e)
         {
-            skinPanel2.BackColor = Color.FromArgb(69, 159, 176);
         }
 
         private void User_MouseLeave(object sender, EventArgs e)
         {
-            skinPanel2.BackColor = Color.FromArgb(127, 127, 127);
         }
 
         private void Password_MouseHover(object sender, EventArgs e)
@@ -112,12 +110,10 @@ namespace Login
 
         private void Password_MouseEnter(object sender, EventArgs e)
         {
-            skinPanel1.BackColor = Color.FromArgb(69, 159, 176);
         }
 
         private void Password_MouseLeave(object sender, EventArgs e)
         {
-            skinPanel1.BackColor = Color.FromArgb(127, 127, 127);
         }
 
         private void Login_Click(object sender, EventArgs e)
@@ -150,15 +146,15 @@ namespace Login
         {
             if (CheckInput())
             {
-                using (var db = new MESDB())
+                using (MESDB db = new MESDB())
                 {
-                    sysUserInfo user = db.sysUserInfo.Where(p => p.account == User.Text).FirstOrDefault();
+                    sysUserInfo user = db.sysUserInfo.Where(p => p.account == User.Text.Trim()).FirstOrDefault();
                     if (user == null)
                     {
                         "账号不存在！".ShowTips();
                         return;
                     }
-                    else if (!user.password.Equals(MD5Utils.GetMD5_32(Password.Text)))
+                    else if (!user.password.Equals(MD5Utils.GetMD5_32(Password.Text.Trim())))
                     {
                         "密码错误！！".ShowTips();
                         return;
@@ -175,13 +171,13 @@ namespace Login
 
         private bool CheckInput()
         {
-            if (string.IsNullOrEmpty(User.Text))
+            if (string.IsNullOrEmpty(User.Text.Trim()))
             {
                 User.Focus();
                 "请输入账号！".ShowTips();
                 return false;
             }
-            if (string.IsNullOrEmpty(Password.Text))
+            if (string.IsNullOrEmpty(Password.Text.Trim()))
             {
                 Password.Focus();
                 "请输入密码！".ShowTips();
@@ -193,6 +189,16 @@ namespace Login
         private void LoginView_Shown(object sender, EventArgs e)
         {
             User.Focus();
+        }
+
+        private void User_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void skinPictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
