@@ -362,6 +362,7 @@ namespace iWms.Form
             this.dgvUpns.AllowUserToAddRows = false;
             this.dgvUpns.AllowUserToDeleteRows = false;
             this.dgvUpns.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUpns.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvUpns.ColumnHeadersHeight = 20;
             this.dgvUpns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvUpns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -419,6 +420,7 @@ namespace iWms.Form
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeight = 20;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

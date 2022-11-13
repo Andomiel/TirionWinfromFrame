@@ -532,6 +532,7 @@ namespace iWms.Form
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIsSelected,
@@ -554,7 +555,7 @@ namespace iWms.Form
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
-            this.dgvOrders.RowHeadersWidth = 72;
+            this.dgvOrders.RowHeadersWidth = 50;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1218, 144);
@@ -661,6 +662,7 @@ namespace iWms.Form
             this.dgvMaterials.AllowUserToAddRows = false;
             this.dgvMaterials.AllowUserToDeleteRows = false;
             this.dgvMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMaterials.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMaterials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
@@ -680,7 +682,7 @@ namespace iWms.Form
             this.dgvMaterials.MultiSelect = false;
             this.dgvMaterials.Name = "dgvMaterials";
             this.dgvMaterials.ReadOnly = true;
-            this.dgvMaterials.RowHeadersWidth = 72;
+            this.dgvMaterials.RowHeadersWidth = 50;
             this.dgvMaterials.RowTemplate.Height = 23;
             this.dgvMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterials.Size = new System.Drawing.Size(478, 320);
@@ -717,6 +719,7 @@ namespace iWms.Form
             this.dgvBarcodes.AllowUserToAddRows = false;
             this.dgvBarcodes.AllowUserToDeleteRows = false;
             this.dgvBarcodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBarcodes.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvBarcodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBarcodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colBarcode,
@@ -738,7 +741,7 @@ namespace iWms.Form
             this.dgvBarcodes.MultiSelect = false;
             this.dgvBarcodes.Name = "dgvBarcodes";
             this.dgvBarcodes.ReadOnly = true;
-            this.dgvBarcodes.RowHeadersWidth = 72;
+            this.dgvBarcodes.RowHeadersWidth = 50;
             this.dgvBarcodes.RowTemplate.Height = 23;
             this.dgvBarcodes.Size = new System.Drawing.Size(722, 320);
             this.dgvBarcodes.TabIndex = 1;

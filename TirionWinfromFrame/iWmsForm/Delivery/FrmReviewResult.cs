@@ -23,6 +23,7 @@ namespace iWms.Form
             rowMergeDataGridView1.DataSource = new BindingList<ReviewResultItem>(results);
             rowMergeDataGridView1.MergeColumnNames.AddRange(new List<string> { "LineNumber", "PartNumber", "NeedQty", "TotalQty", "Result" });
             rowMergeDataGridView1.MergeFocusNames.Add("LineNumber");
+            rowMergeDataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private List<ReviewResultItem> BuildReviewItems(string orderNo)

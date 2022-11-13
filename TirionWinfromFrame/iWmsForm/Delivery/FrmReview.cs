@@ -30,9 +30,12 @@ namespace iWms.Form
             lblDestination.Text = string.Empty;
             HideBoxScan();
             gridViewRecord.AutoGenerateColumns = false;
+            gridViewRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
+
             gridViewSummary.AutoGenerateColumns = false;
             gridViewSummary.MergeColumnNames.AddRange(new List<string> { "LineNumber", "PartNumber", "NeedQty" });
             gridViewSummary.MergeFocusNames.AddRange(new List<string> { "LineNumber" });
+            gridViewSummary.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private void ShowBoxScan()

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -37,6 +38,7 @@ namespace iWms.Form
             dtpEnd.CustomFormat = " ";
             dataGridViewSelect.AutoGenerateColumns = false;
             dataGridViewSelect.DataSource = TargetBarcodes;
+            dataGridViewSelect.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private BindingList<TransferQueryResult> TargetBarcodes = new BindingList<TransferQueryResult>();

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -26,6 +27,7 @@ namespace iWms.Form
             gridInventory.Dock = DockStyle.Fill;
             gridInventory.AutoGenerateColumns = false;
             gridInventory.DataSource = CompareResults;
+            gridInventory.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private BindingList<WMSInventory> CompareResults = new BindingList<WMSInventory>();

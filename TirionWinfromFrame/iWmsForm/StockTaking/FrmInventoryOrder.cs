@@ -6,6 +6,7 @@ using Entity.Enums.Inventory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -41,6 +42,7 @@ namespace iWms.Form
             dataGridViewSelect.Dock = DockStyle.Fill;
             dataGridViewSelect.AutoGenerateColumns = false;
             dataGridViewSelect.DataSource = PagedBarcodes;
+            dataGridViewSelect.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private List<AvailableBarcode> Barcodes = new List<AvailableBarcode>();

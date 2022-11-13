@@ -79,6 +79,7 @@ namespace iWms.Form
             this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
             this.btnSpecial = new DevExpress.XtraEditors.SimpleButton();
             this.btnReset = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,7 +101,6 @@ namespace iWms.Form
             this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -606,11 +606,22 @@ namespace iWms.Form
             this.btnReset.Text = "一键复位";
             this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
+            // btnLack
+            // 
+            this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLack.Location = new System.Drawing.Point(1010, 3);
+            this.btnLack.Name = "btnLack";
+            this.btnLack.Size = new System.Drawing.Size(74, 29);
+            this.btnLack.TabIndex = 29;
+            this.btnLack.Text = "欠料分析";
+            this.btnLack.Click += new System.EventHandler(this.BtnLack_Click);
+            // 
             // dgvOrders
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeight = 29;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -738,6 +749,7 @@ namespace iWms.Form
             this.dgvDetails.AllowUserToAddRows = false;
             this.dgvDetails.AllowUserToDeleteRows = false;
             this.dgvDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDetails.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
@@ -795,6 +807,7 @@ namespace iWms.Form
             this.dgvUpns.AllowUserToAddRows = false;
             this.dgvUpns.AllowUserToDeleteRows = false;
             this.dgvUpns.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUpns.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvUpns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUpns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colUpn,
@@ -861,16 +874,6 @@ namespace iWms.Form
             this.colOperator.MinimumWidth = 9;
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
-            // 
-            // btnLack
-            // 
-            this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLack.Location = new System.Drawing.Point(1010, 3);
-            this.btnLack.Name = "btnLack";
-            this.btnLack.Size = new System.Drawing.Size(74, 29);
-            this.btnLack.TabIndex = 29;
-            this.btnLack.Text = "欠料分析";
-            this.btnLack.Click += new System.EventHandler(this.BtnLack_Click);
             // 
             // FrmOutstocks
             // 

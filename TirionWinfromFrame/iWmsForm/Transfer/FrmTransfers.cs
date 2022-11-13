@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -30,11 +31,13 @@ namespace iWms.Form
             dgvOrders.Dock = DockStyle.Fill;
             dgvOrders.AutoGenerateColumns = false;
             dgvOrders.DataSource = WorkOrders;
+            dgvOrders.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             dgvUpns.ScrollBars = ScrollBars.Both;
             dgvUpns.Dock = DockStyle.Fill;
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
+            dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private BindingList<TransferOrderDto> WorkOrders = new BindingList<TransferOrderDto>();

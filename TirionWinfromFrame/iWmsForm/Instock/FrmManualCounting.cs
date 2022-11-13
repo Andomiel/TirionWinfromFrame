@@ -18,6 +18,7 @@ namespace iWms.Form
             InitializeComponent();
             gridViewRecord.AutoGenerateColumns = false;
             gridViewRecord.DataSource = RefundRecord;
+            gridViewRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private readonly BindingList<ManualCountingRecord> RefundRecord = new BindingList<ManualCountingRecord>();
