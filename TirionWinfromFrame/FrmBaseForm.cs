@@ -204,7 +204,7 @@ namespace TirionWinfromFrame
             {
                 list = db.sysToolButtonInfo.ToList();
             }
-            int i = 1;
+            //int i = 1;
             int width = 0;
             foreach (sysToolButtonInfo info in list)
             {

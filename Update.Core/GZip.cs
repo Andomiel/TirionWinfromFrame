@@ -521,7 +521,7 @@ namespace Updater.Core
                     }
                 }
             }
-            catch (Exception ex1)
+            catch
             {
                 result.Errors = true;
             }

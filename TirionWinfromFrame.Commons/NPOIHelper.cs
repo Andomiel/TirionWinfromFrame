@@ -235,7 +235,7 @@ namespace TirionWinfromFrame.Commons
             headCellStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
             headCellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             IFont font = workbook.CreateFont();
-            font.Boldweight = (Int32)FontBoldWeight.Bold;
+            font.IsBold = true;
             headCellStyle.SetFont(font);
 
             ICellStyle normalCellStyle = workbook.CreateCellStyle();
@@ -492,7 +492,7 @@ namespace TirionWinfromFrame.Commons
             headCellStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
             headCellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
             IFont font = workbook.CreateFont();
-            font.Boldweight = (Int32)FontBoldWeight.Bold;
+            font.IsBold = true;
             headCellStyle.SetFont(font);
 
             ICellStyle normalCellStyle = workbook.CreateCellStyle();

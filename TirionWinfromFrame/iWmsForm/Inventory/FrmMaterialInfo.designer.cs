@@ -978,11 +978,6 @@
         #endregion
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 数据导出ToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 物资名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 项目代号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rkdh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 产品批号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 技术指标;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox cbMSD;

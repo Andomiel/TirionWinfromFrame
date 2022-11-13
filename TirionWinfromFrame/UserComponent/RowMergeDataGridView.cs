@@ -90,7 +90,7 @@ namespace iWms.Form
                 }
                 base.OnCellPainting(e);
             }
-            catch (Exception ex)
+            catch
             { }
         }
         protected override void OnCellClick(DataGridViewCellEventArgs e)
