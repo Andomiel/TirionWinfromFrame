@@ -32,10 +32,10 @@ namespace iWms.Form
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInventoryOrder));
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbArea = new System.Windows.Forms.ComboBox();
-            this.btnBuildTransfer = new System.Windows.Forms.Button();
+            this.btnBuildTransfer = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSelect = new System.Windows.Forms.DataGridView();
             this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +91,6 @@ namespace iWms.Form
             this.btnSearch.Size = new System.Drawing.Size(134, 29);
             this.btnSearch.TabIndex = 20;
             this.btnSearch.Text = "查询计算";
-            this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // label12
@@ -124,7 +123,6 @@ namespace iWms.Form
             this.btnBuildTransfer.Size = new System.Drawing.Size(134, 29);
             this.btnBuildTransfer.TabIndex = 45;
             this.btnBuildTransfer.Text = "创建盘点单";
-            this.btnBuildTransfer.UseVisualStyleBackColor = true;
             this.btnBuildTransfer.Click += new System.EventHandler(this.BtnBuildTransfer_Click);
             // 
             // label1
@@ -598,12 +596,12 @@ namespace iWms.Form
         }
 
         #endregion
-        private System.Windows.Forms.Button btnSearch;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridViewSelect;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbArea;
-        private System.Windows.Forms.Button btnBuildTransfer;
+        private DevExpress.XtraEditors.SimpleButton btnBuildTransfer;
         private System.Windows.Forms.TableLayoutPanel tlpLayout;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tlpConditions;

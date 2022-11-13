@@ -32,8 +32,8 @@ namespace iWms.Form
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnPause = new System.Windows.Forms.Button();
-            this.btnFinish = new System.Windows.Forms.Button();
+            this.btnPause = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -57,7 +57,7 @@ namespace iWms.Form
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnForceFinish = new System.Windows.Forms.Button();
+            this.btnForceFinish = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
@@ -76,7 +76,6 @@ namespace iWms.Form
             this.btnPause.Size = new System.Drawing.Size(114, 33);
             this.btnPause.TabIndex = 0;
             this.btnPause.Text = "暂停入库";
-            this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnFinish
@@ -87,7 +86,6 @@ namespace iWms.Form
             this.btnFinish.Size = new System.Drawing.Size(114, 33);
             this.btnFinish.TabIndex = 1;
             this.btnFinish.Text = "完成入库";
-            this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
             // 
             // timer
@@ -367,7 +365,6 @@ namespace iWms.Form
             this.btnForceFinish.Size = new System.Drawing.Size(114, 33);
             this.btnForceFinish.TabIndex = 13;
             this.btnForceFinish.Text = "强制入库";
-            this.btnForceFinish.UseVisualStyleBackColor = true;
             this.btnForceFinish.Visible = false;
             this.btnForceFinish.Click += new System.EventHandler(this.btnForceFinish_Click);
             // 
@@ -437,8 +434,8 @@ namespace iWms.Form
 
         #endregion
 
-        private System.Windows.Forms.Button btnPause;
-        private System.Windows.Forms.Button btnFinish;
+        private DevExpress.XtraEditors.SimpleButton btnPause;
+        private DevExpress.XtraEditors.SimpleButton btnFinish;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTypeTitle;
@@ -450,7 +447,7 @@ namespace iWms.Form
         public System.Windows.Forms.Label lblType;
         public System.Windows.Forms.Label lblOrderNo;
         public System.Windows.Forms.Label lblTypeName;
-        private System.Windows.Forms.Button btnForceFinish;
+        private DevExpress.XtraEditors.SimpleButton btnForceFinish;
         private System.Windows.Forms.DataGridViewTextBoxColumn WZ_BM;
         private System.Windows.Forms.DataGridViewTextBoxColumn RK_RKSL;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;

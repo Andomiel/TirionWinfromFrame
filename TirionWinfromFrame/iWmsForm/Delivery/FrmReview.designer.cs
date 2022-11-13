@@ -32,9 +32,9 @@ namespace iWms.Form
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReview));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnComplete = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.btnComplete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
@@ -50,8 +50,8 @@ namespace iWms.Form
             this.tbScan = new System.Windows.Forms.TextBox();
             this.cbOriginal = new System.Windows.Forms.CheckBox();
             this.tbOriginal = new System.Windows.Forms.TextBox();
-            this.btnAlarm = new System.Windows.Forms.Button();
-            this.btnNotify = new System.Windows.Forms.Button();
+            this.btnAlarm = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNotify = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gridViewRecord = new iWms.Form.RowMergeDataGridView();
             this.rUPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,7 +99,6 @@ namespace iWms.Form
             this.btnComplete.Size = new System.Drawing.Size(136, 89);
             this.btnComplete.TabIndex = 10;
             this.btnComplete.Text = "完成";
-            this.btnComplete.UseVisualStyleBackColor = true;
             this.btnComplete.Click += new System.EventHandler(this.BtnComplete_Click);
             // 
             // btnCancel
@@ -113,7 +112,6 @@ namespace iWms.Form
             this.btnCancel.Size = new System.Drawing.Size(136, 89);
             this.btnCancel.TabIndex = 26;
             this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnExport
@@ -127,7 +125,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(136, 89);
             this.btnExport.TabIndex = 27;
             this.btnExport.Text = "复核汇总导出";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // openFileDialog1
@@ -345,7 +342,6 @@ namespace iWms.Form
             this.btnAlarm.Size = new System.Drawing.Size(87, 24);
             this.btnAlarm.TabIndex = 41;
             this.btnAlarm.Text = "button1";
-            this.btnAlarm.UseVisualStyleBackColor = true;
             this.btnAlarm.Visible = false;
             this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
             // 
@@ -359,7 +355,6 @@ namespace iWms.Form
             this.btnNotify.Size = new System.Drawing.Size(134, 87);
             this.btnNotify.TabIndex = 42;
             this.btnNotify.Text = "反馈MES/WMS";
-            this.btnNotify.UseVisualStyleBackColor = true;
             this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
             // 
             // groupBox1
@@ -704,11 +699,11 @@ namespace iWms.Form
         }
 
         #endregion
-        private System.Windows.Forms.Button btnComplete;
+        private DevExpress.XtraEditors.SimpleButton btnComplete;
         private RowMergeDataGridView gridViewSummary;
         private RowMergeDataGridView gridViewRecord;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -747,7 +742,7 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn TowerDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn QRCode;
-        private System.Windows.Forms.Button btnAlarm;
-        private System.Windows.Forms.Button btnNotify;
+        private DevExpress.XtraEditors.SimpleButton btnAlarm;
+        private DevExpress.XtraEditors.SimpleButton btnNotify;
     }
 }

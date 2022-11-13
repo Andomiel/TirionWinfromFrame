@@ -30,9 +30,9 @@ namespace iWms.Form
         private void InitializeComponent()
         {
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnBuildCondition = new System.Windows.Forms.Button();
-            this.btnBuildUpns = new System.Windows.Forms.Button();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnBuildCondition = new DevExpress.XtraEditors.SimpleButton();
+            this.btnBuildUpns = new DevExpress.XtraEditors.SimpleButton();
             this.lblRemark = new System.Windows.Forms.Label();
             this.tbRemark = new System.Windows.Forms.TextBox();
             this.lblStar = new System.Windows.Forms.Label();
@@ -57,7 +57,6 @@ namespace iWms.Form
             this.btnCancel.Size = new System.Drawing.Size(176, 53);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnBuildCondition
@@ -68,7 +67,6 @@ namespace iWms.Form
             this.btnBuildCondition.Size = new System.Drawing.Size(176, 53);
             this.btnBuildCondition.TabIndex = 3;
             this.btnBuildCondition.Text = "按条件筛选";
-            this.btnBuildCondition.UseVisualStyleBackColor = true;
             this.btnBuildCondition.Click += new System.EventHandler(this.btnBuildCondition_Click);
             // 
             // btnBuildUpns
@@ -79,7 +77,6 @@ namespace iWms.Form
             this.btnBuildUpns.Size = new System.Drawing.Size(176, 53);
             this.btnBuildUpns.TabIndex = 4;
             this.btnBuildUpns.Text = "指定UPN";
-            this.btnBuildUpns.UseVisualStyleBackColor = true;
             this.btnBuildUpns.Click += new System.EventHandler(this.btnBuildUpns_Click);
             // 
             // lblRemark
@@ -135,9 +132,9 @@ namespace iWms.Form
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnBuildCondition;
-        private System.Windows.Forms.Button btnBuildUpns;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnBuildCondition;
+        private DevExpress.XtraEditors.SimpleButton btnBuildUpns;
         private System.Windows.Forms.Label lblRemark;
         private System.Windows.Forms.TextBox tbRemark;
         private System.Windows.Forms.Label lblStar;

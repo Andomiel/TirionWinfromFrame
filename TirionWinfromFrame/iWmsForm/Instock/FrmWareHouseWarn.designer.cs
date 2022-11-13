@@ -31,8 +31,8 @@ namespace iWms.Form
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtRemark = new System.Windows.Forms.TextBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
             this.lblTip = new System.Windows.Forms.Label();
             this.lblOperater = new System.Windows.Forms.Label();
             this.lblRemark = new System.Windows.Forms.Label();
@@ -67,7 +67,6 @@ namespace iWms.Form
             this.btnCancel.Size = new System.Drawing.Size(81, 40);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSubmit
@@ -77,7 +76,6 @@ namespace iWms.Form
             this.btnSubmit.Size = new System.Drawing.Size(81, 40);
             this.btnSubmit.TabIndex = 3;
             this.btnSubmit.Text = "提交";
-            this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // lblTip
@@ -152,8 +150,8 @@ namespace iWms.Form
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txtRemark;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSubmit;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnSubmit;
         private System.Windows.Forms.Label lblTip;
         private System.Windows.Forms.Label lblOperater;
         private System.Windows.Forms.Label lblRemark;

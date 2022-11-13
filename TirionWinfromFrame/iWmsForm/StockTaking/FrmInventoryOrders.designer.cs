@@ -41,9 +41,9 @@ namespace iWms.Form
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnOutstock = new System.Windows.Forms.Button();
-            this.btnFinish = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.btnOutstock = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.tbOrderNo = new System.Windows.Forms.TextBox();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
@@ -51,9 +51,9 @@ namespace iWms.Form
             this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
             this.tbUpn = new System.Windows.Forms.TextBox();
             this.cbType = new System.Windows.Forms.ComboBox();
-            this.btnQuery = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClear = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.tlbTables = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -235,7 +235,6 @@ namespace iWms.Form
             this.btnOutstock.Size = new System.Drawing.Size(87, 29);
             this.btnOutstock.TabIndex = 9;
             this.btnOutstock.Text = "执行盘点";
-            this.btnOutstock.UseVisualStyleBackColor = true;
             this.btnOutstock.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
             // btnFinish
@@ -246,7 +245,6 @@ namespace iWms.Form
             this.btnFinish.Size = new System.Drawing.Size(87, 29);
             this.btnFinish.TabIndex = 12;
             this.btnFinish.Text = "盘点完成";
-            this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
             // 
             // btnExport
@@ -257,7 +255,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(87, 29);
             this.btnExport.TabIndex = 13;
             this.btnExport.Text = "导出明细";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // tbOrderNo
@@ -334,7 +331,6 @@ namespace iWms.Form
             this.btnQuery.Size = new System.Drawing.Size(87, 29);
             this.btnQuery.TabIndex = 10;
             this.btnQuery.Text = "查询";
-            this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
             // 
             // btnClear
@@ -345,7 +341,6 @@ namespace iWms.Form
             this.btnClear.Size = new System.Drawing.Size(87, 29);
             this.btnClear.TabIndex = 24;
             this.btnClear.Text = "清空";
-            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnCancel
@@ -356,7 +351,6 @@ namespace iWms.Form
             this.btnCancel.Size = new System.Drawing.Size(87, 29);
             this.btnCancel.TabIndex = 26;
             this.btnCancel.Text = "取消盘点";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // tlbTables
@@ -575,10 +569,10 @@ namespace iWms.Form
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnOutstock;
-        private System.Windows.Forms.Button btnQuery;
-        private System.Windows.Forms.Button btnFinish;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnOutstock;
+        private DevExpress.XtraEditors.SimpleButton btnQuery;
+        private DevExpress.XtraEditors.SimpleButton btnFinish;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.TextBox tbOrderNo;
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbMaterialNo;
@@ -586,11 +580,11 @@ namespace iWms.Form
         private System.Windows.Forms.DateTimePicker dtFinishedTime;
         private System.Windows.Forms.DataGridView dgvUpns;
         private System.Windows.Forms.TextBox tbUpn;
-        private System.Windows.Forms.Button btnClear;
+        private DevExpress.XtraEditors.SimpleButton btnClear;
         private System.Windows.Forms.TableLayoutPanel tlbTables;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbType;
-        private System.Windows.Forms.Button btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSource;

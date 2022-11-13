@@ -32,11 +32,11 @@ namespace iWms.Form
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReviewNew));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnComplete = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.btnComplete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
-            this.btnPause = new System.Windows.Forms.Button();
+            this.btnPause = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.lblOrderOrder = new System.Windows.Forms.Label();
             this.lblDestination = new System.Windows.Forms.Label();
@@ -47,8 +47,8 @@ namespace iWms.Form
             this.tbScan = new System.Windows.Forms.TextBox();
             this.cbOriginal = new System.Windows.Forms.CheckBox();
             this.tbOriginal = new System.Windows.Forms.TextBox();
-            this.btnAlarm = new System.Windows.Forms.Button();
-            this.btnNotify = new System.Windows.Forms.Button();
+            this.btnAlarm = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNotify = new DevExpress.XtraEditors.SimpleButton();
             this.lblOrderType = new DevExpress.XtraEditors.LabelControl();
             this.lblOrderNo = new DevExpress.XtraEditors.LabelControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -98,7 +98,6 @@ namespace iWms.Form
             this.btnComplete.Size = new System.Drawing.Size(136, 89);
             this.btnComplete.TabIndex = 10;
             this.btnComplete.Text = "完成";
-            this.btnComplete.UseVisualStyleBackColor = true;
             this.btnComplete.Click += new System.EventHandler(this.BtnComplete_Click);
             // 
             // btnExport
@@ -112,7 +111,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(136, 89);
             this.btnExport.TabIndex = 27;
             this.btnExport.Text = "复核汇总导出";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // tableLayoutPanel1
@@ -180,7 +178,6 @@ namespace iWms.Form
             this.btnPause.Size = new System.Drawing.Size(134, 87);
             this.btnPause.TabIndex = 45;
             this.btnPause.Text = "暂存";
-            this.btnPause.UseVisualStyleBackColor = true;
             this.btnPause.Click += new System.EventHandler(this.BtnPause_Click);
             // 
             // label1
@@ -316,7 +313,6 @@ namespace iWms.Form
             this.btnAlarm.Size = new System.Drawing.Size(87, 24);
             this.btnAlarm.TabIndex = 41;
             this.btnAlarm.Text = "声效测试";
-            this.btnAlarm.UseVisualStyleBackColor = true;
             this.btnAlarm.Click += new System.EventHandler(this.btnAlarm_Click);
             // 
             // btnNotify
@@ -329,7 +325,6 @@ namespace iWms.Form
             this.btnNotify.Size = new System.Drawing.Size(134, 87);
             this.btnNotify.TabIndex = 42;
             this.btnNotify.Text = "反馈MES/WMS";
-            this.btnNotify.UseVisualStyleBackColor = true;
             this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
             // 
             // lblOrderType
@@ -694,10 +689,10 @@ namespace iWms.Form
         }
 
         #endregion
-        private System.Windows.Forms.Button btnComplete;
+        private DevExpress.XtraEditors.SimpleButton btnComplete;
         private RowMergeDataGridView gridViewSummary;
         private RowMergeDataGridView gridViewRecord;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -733,10 +728,10 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn TowerDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn QRCode;
-        private System.Windows.Forms.Button btnAlarm;
-        private System.Windows.Forms.Button btnNotify;
+        private DevExpress.XtraEditors.SimpleButton btnAlarm;
+        private DevExpress.XtraEditors.SimpleButton btnNotify;
         private DevExpress.XtraEditors.LabelControl lblOrderType;
         private DevExpress.XtraEditors.LabelControl lblOrderNo;
-        private System.Windows.Forms.Button btnPause;
+        private DevExpress.XtraEditors.SimpleButton btnPause;
     }
 }

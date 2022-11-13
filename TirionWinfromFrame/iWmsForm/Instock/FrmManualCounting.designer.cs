@@ -33,7 +33,7 @@
             this.lblScan = new System.Windows.Forms.Label();
             this.tbScan = new System.Windows.Forms.TextBox();
             this.lblQty = new System.Windows.Forms.Label();
-            this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
             this.txtMaterialInfo = new System.Windows.Forms.TextBox();
             this.tbQty = new System.Windows.Forms.TextBox();
             this.cbIsTypeT = new System.Windows.Forms.CheckBox();
@@ -101,7 +101,6 @@
             this.btnSubmit.Size = new System.Drawing.Size(113, 63);
             this.btnSubmit.TabIndex = 25;
             this.btnSubmit.Text = "点料";
-            this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.BtnSubmit_Click);
             // 
             // txtMaterialInfo
@@ -339,7 +338,7 @@
         private System.Windows.Forms.Label lblScan;
         private System.Windows.Forms.TextBox tbScan;
         private System.Windows.Forms.Label lblQty;
-        private System.Windows.Forms.Button btnSubmit;
+        private DevExpress.XtraEditors.SimpleButton btnSubmit;
         private System.Windows.Forms.TextBox txtMaterialInfo;
         private System.Windows.Forms.TextBox tbQty;
         private System.Windows.Forms.CheckBox cbIsTypeT;

@@ -34,7 +34,7 @@ namespace iWms.Form
             this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tbKey = new System.Windows.Forms.TextBox();
-            this.btnQuery = new System.Windows.Forms.Button();
+            this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
             this.dgvLogs = new System.Windows.Forms.DataGridView();
@@ -133,7 +133,6 @@ namespace iWms.Form
             this.btnQuery.Size = new System.Drawing.Size(134, 24);
             this.btnQuery.TabIndex = 2;
             this.btnQuery.Text = "查询日志";
-            this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
             // 
             // label2
@@ -243,7 +242,7 @@ namespace iWms.Form
         private System.Windows.Forms.TableLayoutPanel tlpConditions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbKey;
-        private System.Windows.Forms.Button btnQuery;
+        private DevExpress.XtraEditors.SimpleButton btnQuery;
         private System.Windows.Forms.DataGridView dgvLogs;
         private System.Windows.Forms.PropertyGrid pgLog;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTitle;

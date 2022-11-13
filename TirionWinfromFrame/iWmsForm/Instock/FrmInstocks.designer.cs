@@ -68,11 +68,11 @@ namespace iWms.Form
             this.tbUser = new System.Windows.Forms.TextBox();
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
             this.dtFinishDate = new System.Windows.Forms.DateTimePicker();
-            this.btnQuery = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnNoSource = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClear = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNoSource = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -483,7 +483,6 @@ namespace iWms.Form
             this.btnQuery.Size = new System.Drawing.Size(86, 27);
             this.btnQuery.TabIndex = 16;
             this.btnQuery.Text = "查询";
-            this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
             // 
             // btnExport
@@ -493,7 +492,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(86, 27);
             this.btnExport.TabIndex = 17;
             this.btnExport.Text = "导出明细";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClear
@@ -504,7 +502,6 @@ namespace iWms.Form
             this.btnClear.Size = new System.Drawing.Size(87, 29);
             this.btnClear.TabIndex = 18;
             this.btnClear.Text = "清空";
-            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnNoSource
@@ -515,7 +512,6 @@ namespace iWms.Form
             this.btnNoSource.Size = new System.Drawing.Size(87, 29);
             this.btnNoSource.TabIndex = 19;
             this.btnNoSource.Text = "无源入库";
-            this.btnNoSource.UseVisualStyleBackColor = true;
             this.btnNoSource.Click += new System.EventHandler(this.btnNoSource_Click);
             // 
             // btnCancel
@@ -525,7 +521,6 @@ namespace iWms.Form
             this.btnCancel.Size = new System.Drawing.Size(86, 27);
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "取消入库";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // dgvOrders
@@ -832,12 +827,12 @@ namespace iWms.Form
         private System.Windows.Forms.TextBox tbUser;
         private System.Windows.Forms.DateTimePicker dtOrderDate;
         private System.Windows.Forms.DateTimePicker dtFinishDate;
-        private System.Windows.Forms.Button btnQuery;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnQuery;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.GroupBox tbDetails;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnNoSource;
+        private DevExpress.XtraEditors.SimpleButton btnClear;
+        private DevExpress.XtraEditors.SimpleButton btnNoSource;
         private System.Windows.Forms.TableLayoutPanel tlpDetails;
         private  System.Windows.Forms.DataGridView dgvMaterials;
         private  System.Windows.Forms.DataGridView dgvBarcodes;
@@ -857,7 +852,7 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton btnPre;
         private System.Windows.Forms.ToolStripSplitButton btnNext;
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
-        private System.Windows.Forms.Button btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;

@@ -31,9 +31,9 @@ namespace iWms.Form
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.txtPartNumber = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.gridInventory = new System.Windows.Forms.DataGridView();
             this.WAREHOUSE_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +70,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(74, 23);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "导出";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // txtPartNumber
@@ -90,7 +89,6 @@ namespace iWms.Form
             this.btnSearch.Size = new System.Drawing.Size(74, 23);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "开始比对";
-            this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label1
@@ -236,10 +234,10 @@ namespace iWms.Form
 
         #endregion
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnSearch;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView gridInventory;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.DataGridViewTextBoxColumn WAREHOUSE_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn LOT02;
         private System.Windows.Forms.DataGridViewTextBoxColumn LOT03;
