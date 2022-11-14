@@ -29,10 +29,12 @@ namespace iWms.Form
             gridWMS.ScrollBars = ScrollBars.Both;
             gridWMS.AutoGenerateColumns = false;
             gridWMS.DataSource = WorkOrderDetails;
+            gridWMS.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             gridIWMS.ScrollBars = ScrollBars.Both;
             gridIWMS.AutoGenerateColumns = false;
             gridIWMS.DataSource = WorkOrderBarcodes;
+            gridIWMS.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         public FrmWareHouseDetail(InstockOrderDto order)

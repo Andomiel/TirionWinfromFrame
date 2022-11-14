@@ -33,17 +33,17 @@ namespace iWms.Form
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.tbUPN = new System.Windows.Forms.TextBox();
             this.tbPartNumber = new System.Windows.Forms.TextBox();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.btnImport = new System.Windows.Forms.Button();
+            this.btnImport = new DevExpress.XtraEditors.SimpleButton();
             this.lblImport = new System.Windows.Forms.Label();
             this.tbExcelFile = new System.Windows.Forms.TextBox();
-            this.btnDlExcelTemp = new System.Windows.Forms.Button();
-            this.btnBuild = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDlExcelTemp = new DevExpress.XtraEditors.SimpleButton();
+            this.btnBuild = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.dtpCycleEnd = new System.Windows.Forms.DateTimePicker();
             this.dtpCycleStart = new System.Windows.Forms.DateTimePicker();
             this.cbMSD = new System.Windows.Forms.ComboBox();
@@ -52,8 +52,8 @@ namespace iWms.Form
             this.TextSupply = new System.Windows.Forms.TextBox();
             this.cbMateType = new System.Windows.Forms.ComboBox();
             this.cmbArea = new System.Windows.Forms.ComboBox();
-            this.btnSelectReverse = new System.Windows.Forms.Button();
-            this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnSelectReverse = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSelectAll = new DevExpress.XtraEditors.SimpleButton();
             this.dataGridViewPolicy = new System.Windows.Forms.DataGridView();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.FrozenNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,14 +79,14 @@ namespace iWms.Form
             this.ReelTypeDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.规格型号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEnable = new System.Windows.Forms.Button();
-            this.btnUnable = new System.Windows.Forms.Button();
-            this.btnDel = new System.Windows.Forms.Button();
+            this.btnEnable = new DevExpress.XtraEditors.SimpleButton();
+            this.btnUnable = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnStrategyQuery = new System.Windows.Forms.Button();
+            this.btnStrategyQuery = new DevExpress.XtraEditors.SimpleButton();
             this.tbReason = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -131,7 +131,6 @@ namespace iWms.Form
             this.btnSearch.Size = new System.Drawing.Size(32, 89);
             this.btnSearch.TabIndex = 20;
             this.btnSearch.Text = "查询";
-            this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbUPN
@@ -183,7 +182,6 @@ namespace iWms.Form
             this.btnImport.Size = new System.Drawing.Size(48, 24);
             this.btnImport.TabIndex = 77;
             this.btnImport.Text = "导入";
-            this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // lblImport
@@ -216,7 +214,6 @@ namespace iWms.Form
             this.btnDlExcelTemp.Size = new System.Drawing.Size(125, 36);
             this.btnDlExcelTemp.TabIndex = 72;
             this.btnDlExcelTemp.Text = "Excel模板下载";
-            this.btnDlExcelTemp.UseVisualStyleBackColor = true;
             this.btnDlExcelTemp.Click += new System.EventHandler(this.btnDlExcelTemp_Click);
             // 
             // btnBuild
@@ -230,7 +227,6 @@ namespace iWms.Form
             this.btnBuild.Size = new System.Drawing.Size(31, 89);
             this.btnBuild.TabIndex = 70;
             this.btnBuild.Text = "创建";
-            this.btnBuild.UseVisualStyleBackColor = true;
             this.btnBuild.Click += new System.EventHandler(this.btnBuild_Click);
             // 
             // btnClear
@@ -244,7 +240,6 @@ namespace iWms.Form
             this.btnClear.Size = new System.Drawing.Size(36, 89);
             this.btnClear.TabIndex = 67;
             this.btnClear.Text = "清空";
-            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // dtpCycleEnd
@@ -348,7 +343,6 @@ namespace iWms.Form
             this.btnSelectReverse.Size = new System.Drawing.Size(52, 27);
             this.btnSelectReverse.TabIndex = 63;
             this.btnSelectReverse.Text = "反选";
-            this.btnSelectReverse.UseVisualStyleBackColor = true;
             this.btnSelectReverse.Click += new System.EventHandler(this.btnSelectReverse_Click);
             // 
             // btnSelectAll
@@ -360,7 +354,6 @@ namespace iWms.Form
             this.btnSelectAll.Size = new System.Drawing.Size(52, 27);
             this.btnSelectAll.TabIndex = 62;
             this.btnSelectAll.Text = "全选";
-            this.btnSelectAll.UseVisualStyleBackColor = true;
             this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
             // 
             // dataGridViewPolicy
@@ -696,7 +689,6 @@ namespace iWms.Form
             this.btnEnable.Size = new System.Drawing.Size(52, 27);
             this.btnEnable.TabIndex = 64;
             this.btnEnable.Text = "冻结";
-            this.btnEnable.UseVisualStyleBackColor = true;
             this.btnEnable.Click += new System.EventHandler(this.btnPolicyOperate_Click);
             // 
             // btnUnable
@@ -708,7 +700,6 @@ namespace iWms.Form
             this.btnUnable.Size = new System.Drawing.Size(52, 27);
             this.btnUnable.TabIndex = 65;
             this.btnUnable.Text = "解冻";
-            this.btnUnable.UseVisualStyleBackColor = true;
             this.btnUnable.Click += new System.EventHandler(this.btnPolicyOperate_Click);
             // 
             // btnDel
@@ -720,7 +711,6 @@ namespace iWms.Form
             this.btnDel.Size = new System.Drawing.Size(52, 27);
             this.btnDel.TabIndex = 66;
             this.btnDel.Text = "删除";
-            this.btnDel.UseVisualStyleBackColor = true;
             this.btnDel.Click += new System.EventHandler(this.btnPolicyOperate_Click);
             // 
             // openFileDialog1
@@ -783,7 +773,6 @@ namespace iWms.Form
             this.btnStrategyQuery.Size = new System.Drawing.Size(88, 27);
             this.btnStrategyQuery.TabIndex = 69;
             this.btnStrategyQuery.Text = "查询";
-            this.btnStrategyQuery.UseVisualStyleBackColor = true;
             this.btnStrategyQuery.Click += new System.EventHandler(this.btnStrategyQuery_Click);
             // 
             // tbReason
@@ -1125,13 +1114,13 @@ namespace iWms.Form
         }
 
         #endregion
-        private System.Windows.Forms.Button btnSearch;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.TextBox tbUPN;
         private System.Windows.Forms.TextBox tbPartNumber;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.DateTimePicker dtpEnd;
-        private System.Windows.Forms.Button btnSelectReverse;
-        private System.Windows.Forms.Button btnSelectAll;
+        private DevExpress.XtraEditors.SimpleButton btnSelectReverse;
+        private DevExpress.XtraEditors.SimpleButton btnSelectAll;
         private System.Windows.Forms.DataGridView dataGridViewPolicy;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -1144,16 +1133,16 @@ namespace iWms.Form
         private System.Windows.Forms.TextBox TextSupply;
         private System.Windows.Forms.DateTimePicker dtpCycleEnd;
         private System.Windows.Forms.DateTimePicker dtpCycleStart;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnEnable;
-        private System.Windows.Forms.Button btnUnable;
-        private System.Windows.Forms.Button btnDel;
-        private System.Windows.Forms.Button btnBuild;
-        private System.Windows.Forms.Button btnDlExcelTemp;
+        private DevExpress.XtraEditors.SimpleButton btnClear;
+        private DevExpress.XtraEditors.SimpleButton btnEnable;
+        private DevExpress.XtraEditors.SimpleButton btnUnable;
+        private DevExpress.XtraEditors.SimpleButton btnDel;
+        private DevExpress.XtraEditors.SimpleButton btnBuild;
+        private DevExpress.XtraEditors.SimpleButton btnDlExcelTemp;
         private System.Windows.Forms.TextBox tbExcelFile;
         private System.Windows.Forms.Label lblImport;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button btnImport;
+        private DevExpress.XtraEditors.SimpleButton btnImport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
@@ -1185,7 +1174,7 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn PolicyDetail;
         private System.Windows.Forms.DataGridViewTextBoxColumn FileSrc;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remark;
-        private System.Windows.Forms.Button btnStrategyQuery;
+        private DevExpress.XtraEditors.SimpleButton btnStrategyQuery;
         private System.Windows.Forms.TextBox tbReason;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewCheckBoxColumn DGVSelect选择;

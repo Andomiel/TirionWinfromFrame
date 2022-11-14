@@ -63,12 +63,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtExceedStart = new System.Windows.Forms.TextBox();
             this.txtExceedEnd = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.button3 = new DevExpress.XtraEditors.SimpleButton();
+            this.button2 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.lblShelfSide = new System.Windows.Forms.Label();
             this.cbShelfSide = new System.Windows.Forms.ComboBox();
-            this.btnSync = new System.Windows.Forms.Button();
+            this.btnSync = new DevExpress.XtraEditors.SimpleButton();
             this.dataGridViewX1 = new System.Windows.Forms.DataGridView();
             this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -538,7 +538,6 @@
             this.button3.Size = new System.Drawing.Size(134, 41);
             this.button3.TabIndex = 19;
             this.button3.Text = "导出";
-            this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
@@ -551,7 +550,6 @@
             this.button2.Size = new System.Drawing.Size(134, 41);
             this.button2.TabIndex = 14;
             this.button2.Text = "清空";
-            this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // btnSearch
@@ -564,7 +562,6 @@
             this.btnSearch.Size = new System.Drawing.Size(134, 41);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "查询";
-            this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
             // lblShelfSide
@@ -599,7 +596,6 @@
             this.btnSync.Size = new System.Drawing.Size(134, 34);
             this.btnSync.TabIndex = 55;
             this.btnSync.Text = "同步MES数量";
-            this.btnSync.UseVisualStyleBackColor = true;
             this.btnSync.Visible = false;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
@@ -978,13 +974,8 @@
         #endregion
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 数据导出ToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 物资名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 项目代号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rkdh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 产品批号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 技术指标;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button3;
+        private DevExpress.XtraEditors.SimpleButton button3;
         private System.Windows.Forms.ComboBox cbMSD;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cbMateType;
@@ -1009,8 +1000,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPn;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnSearch;
+        private DevExpress.XtraEditors.SimpleButton button2;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.DataGridView dataGridViewX1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -1019,7 +1010,7 @@
         private System.Windows.Forms.Label lblShelfSide;
         private System.Windows.Forms.ComboBox cbShelfSide;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnSync;
+        private DevExpress.XtraEditors.SimpleButton btnSync;
         private System.Windows.Forms.StatusStrip statusStrip2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tpsrecordCount;

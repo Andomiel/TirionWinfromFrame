@@ -16,10 +16,10 @@ namespace Update
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
         //主程序传入的参数，系统标示 是否需要重新启动主程序
-        private string[] args;
-        //表示主程序打开时传入的参数
-        private readonly static string OPEN_FLAG = "121";
-        private bool isComplete = true;
+        //private string[] args;
+        ////表示主程序打开时传入的参数
+        //private readonly static string OPEN_FLAG = "121";
+        //private bool isComplete = true;
 
         private UpdateClass updater;
         private List<Manifest> mList = new List<Manifest>();
@@ -31,7 +31,7 @@ namespace Update
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
@@ -74,7 +74,7 @@ namespace Update
         void ActivationCompleted(object sender, ActivationCompletedEventArgs e)
         {
             //安装完成
-            isComplete = true;
+            //isComplete = true;
             lab_filename.Text = "安装完成";
             lab_percent.Text = "100%";
             if (progressBarControl1.Position != 100)
@@ -139,7 +139,7 @@ namespace Update
             if (e.Cancel)
             {
                 lab_filename.Text = "安装已被取消";
-                isComplete = true;
+                //isComplete = true;
             }
         }
         private bool CheckActivation()
@@ -208,7 +208,7 @@ namespace Update
                 string updateDescription = manifests[0].Description;
                 this.lblUpdateLog.Text = string.Format("更新说明：{0}", updateDescription);
 
-                if (args != null && args.Length > 0)
+                //if (args != null && args.Length > 0)
                 {
                     #region 关闭主程序
                     try
@@ -219,11 +219,11 @@ namespace Update
                     catch (Exception ex)
                     {
                         Log.Write(ex.ToString());
-                        
+
                     }
                     #endregion
                 }
-                isComplete = false;
+                //isComplete = false;
                 updater.DownloadAsync(manifests);
             }
             else
@@ -258,9 +258,9 @@ namespace Update
         {
             try
             {
-               // if (args != null && args.Length > 0)
+                // if (args != null && args.Length > 0)
                 {
-                   // if (args[0] == OPEN_FLAG)
+                    // if (args[0] == OPEN_FLAG)
                     {
                         //关闭主程序
                         ExeCommand("taskkill /im " + Path.GetFileName(entryPoint) + " /f ");

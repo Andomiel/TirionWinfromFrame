@@ -41,9 +41,9 @@ namespace iWms.Form
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnOutstock = new System.Windows.Forms.Button();
-            this.btnFinish = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.btnOutstock = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.tbOrderNo = new System.Windows.Forms.TextBox();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
@@ -51,8 +51,8 @@ namespace iWms.Form
             this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
             this.tbUpn = new System.Windows.Forms.TextBox();
             this.cbType = new System.Windows.Forms.ComboBox();
-            this.btnQuery = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
+            this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.tlbTables = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -231,7 +231,6 @@ namespace iWms.Form
             this.btnOutstock.Size = new System.Drawing.Size(87, 29);
             this.btnOutstock.TabIndex = 9;
             this.btnOutstock.Text = "执行移库";
-            this.btnOutstock.UseVisualStyleBackColor = true;
             this.btnOutstock.Click += new System.EventHandler(this.BtnTransfer_Click);
             // 
             // btnFinish
@@ -242,7 +241,6 @@ namespace iWms.Form
             this.btnFinish.Size = new System.Drawing.Size(87, 29);
             this.btnFinish.TabIndex = 12;
             this.btnFinish.Text = "移库完成";
-            this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
             // 
             // btnExport
@@ -253,7 +251,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(87, 29);
             this.btnExport.TabIndex = 13;
             this.btnExport.Text = "导出明细";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // tbOrderNo
@@ -328,7 +325,6 @@ namespace iWms.Form
             this.btnQuery.Size = new System.Drawing.Size(87, 29);
             this.btnQuery.TabIndex = 10;
             this.btnQuery.Text = "查询";
-            this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
             // 
             // btnClear
@@ -339,7 +335,6 @@ namespace iWms.Form
             this.btnClear.Size = new System.Drawing.Size(87, 29);
             this.btnClear.TabIndex = 24;
             this.btnClear.Text = "清空";
-            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // tlbTables
@@ -362,6 +357,7 @@ namespace iWms.Form
             this.dgvUpns.AllowUserToAddRows = false;
             this.dgvUpns.AllowUserToDeleteRows = false;
             this.dgvUpns.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUpns.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvUpns.ColumnHeadersHeight = 20;
             this.dgvUpns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvUpns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -419,6 +415,7 @@ namespace iWms.Form
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeight = 20;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -538,10 +535,10 @@ namespace iWms.Form
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnOutstock;
-        private System.Windows.Forms.Button btnQuery;
-        private System.Windows.Forms.Button btnFinish;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnOutstock;
+        private DevExpress.XtraEditors.SimpleButton btnQuery;
+        private DevExpress.XtraEditors.SimpleButton btnFinish;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.TextBox tbOrderNo;
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbMaterialNo;
@@ -549,7 +546,7 @@ namespace iWms.Form
         private System.Windows.Forms.DateTimePicker dtFinishedTime;
         private System.Windows.Forms.DataGridView dgvUpns;
         private System.Windows.Forms.TextBox tbUpn;
-        private System.Windows.Forms.Button btnClear;
+        private DevExpress.XtraEditors.SimpleButton btnClear;
         private System.Windows.Forms.TableLayoutPanel tlbTables;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbType;

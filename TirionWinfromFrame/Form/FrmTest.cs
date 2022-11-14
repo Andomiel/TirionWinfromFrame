@@ -26,7 +26,7 @@ namespace TirionWinfromFrame
         public FrmTest()
         {
             InitializeComponent();
-           // GetData();
+            // GetData();
 
         }
 
@@ -68,7 +68,7 @@ namespace TirionWinfromFrame
                                 int num1 = 0;
                                 int num2 = 400;
                                 string code = "";
-                                Dictionary<string, stockInfo> stockinfos = null;
+                                //Dictionary<string, stockInfo> stockinfos = null;
                                 List<string> codes = new List<string>();
                                 using (var db = new MESDB())
                                 {
@@ -217,7 +217,7 @@ namespace TirionWinfromFrame
             List<string> codes = new List<string>();
             using (var db = new MESDB())
             {
-                codes = db.stockDataInfo.Select(p=>p.code).ToList();
+                codes = db.stockDataInfo.Select(p => p.code).ToList();
             }
 
             progressBarControl1.Properties.Minimum = 0;
@@ -242,65 +242,65 @@ namespace TirionWinfromFrame
                     StreamReader myStreamReader = new StreamReader(myResponseStream, System.Text.Encoding.Default);
                     string retString = myStreamReader.ReadToEnd();
                     var data = retString.Split('=');
-                        if (data.Length == 2)
+                    if (data.Length == 2)
+                    {
+                        var dd = data[1].Split(',');
+                        if (dd.Length >= 33)
                         {
-                            var dd = data[1].Split(',');
-                            if (dd.Length >= 33)
+                            stockDataInfo info = new stockDataInfo()
                             {
-                                stockDataInfo info = new stockDataInfo()
-                                {
-                                    code = data[0].Split('_')[2],
-                                    name = dd[0].Replace("\"", ""),
-                                    startPrice = decimal.Parse(dd[1]),
-                                    olePrice = decimal.Parse(dd[2]),
-                                    nowPrice = decimal.Parse(dd[3]),
-                                    maxPrice = decimal.Parse(dd[4]),
-                                    minPrice = decimal.Parse(dd[5]),
-                                    bidderPrice = decimal.Parse(dd[6]),
-                                    auctionPrice = decimal.Parse(dd[7]),
-                                    turnover = int.Parse(dd[8]),
-                                    turnoverPrice = decimal.Parse(dd[9]),
-                                    buyOneNum = int.Parse(dd[10]),
-                                    buyOnePrice = decimal.Parse(dd[11]),
-                                    buyTwoNum = int.Parse(dd[12]),
-                                    buyTwoPrice = decimal.Parse(dd[13]),
-                                    buyThreeNum = int.Parse(dd[14]),
-                                    buyThreePrice = decimal.Parse(dd[15]),
-                                    buyFourNum = int.Parse(dd[16]),
-                                    buyFourPrice = decimal.Parse(dd[17]),
-                                    buyFiveNum = int.Parse(dd[18]),
-                                    buyFivePrice = decimal.Parse(dd[19]),
-                                    sellOneNum = int.Parse(dd[20]),
-                                    sellOnePrice = decimal.Parse(dd[21]),
-                                    sellTwoNum = int.Parse(dd[22]),
-                                    sellTwoPrice = decimal.Parse(dd[23]),
-                                    sellThreeNum = int.Parse(dd[24]),
-                                    sellThreePrice = decimal.Parse(dd[25]),
-                                    sellFourNum = int.Parse(dd[26]),
-                                    sellFourPrice = decimal.Parse(dd[27]),
-                                    sellFiveNum = int.Parse(dd[28]),
-                                    sellFivePrice = decimal.Parse(dd[29]),
-                                    timeStr = DateTime.Parse(dd[30] + " " + dd[31])
-                                };
+                                code = data[0].Split('_')[2],
+                                name = dd[0].Replace("\"", ""),
+                                startPrice = decimal.Parse(dd[1]),
+                                olePrice = decimal.Parse(dd[2]),
+                                nowPrice = decimal.Parse(dd[3]),
+                                maxPrice = decimal.Parse(dd[4]),
+                                minPrice = decimal.Parse(dd[5]),
+                                bidderPrice = decimal.Parse(dd[6]),
+                                auctionPrice = decimal.Parse(dd[7]),
+                                turnover = int.Parse(dd[8]),
+                                turnoverPrice = decimal.Parse(dd[9]),
+                                buyOneNum = int.Parse(dd[10]),
+                                buyOnePrice = decimal.Parse(dd[11]),
+                                buyTwoNum = int.Parse(dd[12]),
+                                buyTwoPrice = decimal.Parse(dd[13]),
+                                buyThreeNum = int.Parse(dd[14]),
+                                buyThreePrice = decimal.Parse(dd[15]),
+                                buyFourNum = int.Parse(dd[16]),
+                                buyFourPrice = decimal.Parse(dd[17]),
+                                buyFiveNum = int.Parse(dd[18]),
+                                buyFivePrice = decimal.Parse(dd[19]),
+                                sellOneNum = int.Parse(dd[20]),
+                                sellOnePrice = decimal.Parse(dd[21]),
+                                sellTwoNum = int.Parse(dd[22]),
+                                sellTwoPrice = decimal.Parse(dd[23]),
+                                sellThreeNum = int.Parse(dd[24]),
+                                sellThreePrice = decimal.Parse(dd[25]),
+                                sellFourNum = int.Parse(dd[26]),
+                                sellFourPrice = decimal.Parse(dd[27]),
+                                sellFiveNum = int.Parse(dd[28]),
+                                sellFivePrice = decimal.Parse(dd[29]),
+                                timeStr = DateTime.Parse(dd[30] + " " + dd[31])
+                            };
                             //if (info.nowPrice - info.startPrice >= decimal.Parse(textEdit1.Text))
                             //{
                             //    Show(DateTime.Now + $"{}当前成交量为"+ "\r\n");
                             //}
-                            if (info.turnoverPrice>= decimal.Parse(textEdit1.Text))
+                            if (info.turnoverPrice >= decimal.Parse(textEdit1.Text))
                             {
-                                Show(DateTime.Now + $": {info.code} {info.name} 当前成交额为: {info.turnoverPrice} 当前涨幅为：{Math.Round((info.nowPrice - info.olePrice)/info.olePrice, 4)*100}%" + "\r\n");
-                            }
+                                Show(DateTime.Now + $": {info.code} {info.name} 当前成交额为: {info.turnoverPrice} 当前涨幅为：{Math.Round((info.nowPrice - info.olePrice) / info.olePrice, 4) * 100}%" + "\r\n");
                             }
                         }
+                    }
                 }
                 catch (Exception ex)
-                { 
+                {
                     Show(DateTime.Now + ex.Message + "\r\n");
                 }
                 Application.DoEvents();
                 progressBarControl1.PerformStep();
             }
-            
+
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
@@ -502,7 +502,7 @@ namespace TirionWinfromFrame
                         }
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
                     //Show(DateTime.Now + ex.Message + "\r\n");
                 }

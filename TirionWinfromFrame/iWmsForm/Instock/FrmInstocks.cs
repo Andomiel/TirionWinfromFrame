@@ -28,16 +28,19 @@ namespace iWms.Form
             dgvOrders.Dock = DockStyle.Fill;
             dgvOrders.AutoGenerateColumns = false;
             dgvOrders.DataSource = PagedWorkOrders;
+            dgvOrders.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             dgvMaterials.ScrollBars = ScrollBars.Both;
             dgvMaterials.Dock = DockStyle.Fill;
             dgvMaterials.AutoGenerateColumns = false;
             dgvMaterials.DataSource = WorkOrderDetails;
+            dgvMaterials.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             dgvBarcodes.ScrollBars = ScrollBars.Both;
             dgvBarcodes.Dock = DockStyle.Fill;
             dgvBarcodes.AutoGenerateColumns = false;
             dgvBarcodes.DataSource = WorkOrderBarcodes;
+            dgvBarcodes.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             dtOrderDate.Value = DateTime.Now.AddDays(-2);
             dtFinishDate.Value = DateTime.Now.AddDays(1);

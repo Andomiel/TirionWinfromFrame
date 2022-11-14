@@ -29,13 +29,13 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnImport = new System.Windows.Forms.Button();
+            this.btnImport = new DevExpress.XtraEditors.SimpleButton();
             this.txtPath = new System.Windows.Forms.TextBox();
-            this.btnSelect = new System.Windows.Forms.Button();
+            this.btnSelect = new DevExpress.XtraEditors.SimpleButton();
             this.lblPath = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btnDownload = new System.Windows.Forms.Button();
-            this.btnResharpBarcode = new System.Windows.Forms.Button();
+            this.btnDownload = new DevExpress.XtraEditors.SimpleButton();
+            this.btnResharpBarcode = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
             // btnImport
@@ -45,7 +45,6 @@ namespace iWms.Form
             this.btnImport.Size = new System.Drawing.Size(75, 23);
             this.btnImport.TabIndex = 3;
             this.btnImport.Text = "导入";
-            this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // txtPath
@@ -62,7 +61,6 @@ namespace iWms.Form
             this.btnSelect.Size = new System.Drawing.Size(36, 23);
             this.btnSelect.TabIndex = 1;
             this.btnSelect.Text = "...";
-            this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // lblPath
@@ -85,7 +83,6 @@ namespace iWms.Form
             this.btnDownload.Size = new System.Drawing.Size(131, 23);
             this.btnDownload.TabIndex = 4;
             this.btnDownload.Text = "下载模板";
-            this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnResharpBarcode
@@ -95,7 +92,6 @@ namespace iWms.Form
             this.btnResharpBarcode.Size = new System.Drawing.Size(131, 23);
             this.btnResharpBarcode.TabIndex = 5;
             this.btnResharpBarcode.Text = "重新更新二维码";
-            this.btnResharpBarcode.UseVisualStyleBackColor = true;
             this.btnResharpBarcode.Click += new System.EventHandler(this.btnResharpBarcode_Click);
             // 
             // FrmInStockNotice
@@ -121,12 +117,12 @@ namespace iWms.Form
 
         #endregion
 
-        private System.Windows.Forms.Button btnImport;
+        private DevExpress.XtraEditors.SimpleButton btnImport;
         private System.Windows.Forms.TextBox txtPath;
-        private System.Windows.Forms.Button btnSelect;
+        private DevExpress.XtraEditors.SimpleButton btnSelect;
         private System.Windows.Forms.Label lblPath;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button btnDownload;
-        private System.Windows.Forms.Button btnResharpBarcode;
+        private DevExpress.XtraEditors.SimpleButton btnDownload;
+        private DevExpress.XtraEditors.SimpleButton btnResharpBarcode;
     }
 }

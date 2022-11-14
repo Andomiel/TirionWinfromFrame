@@ -22,6 +22,7 @@ namespace iWms.Form
             dgvLogs.Dock = DockStyle.Fill;
             dgvLogs.AutoGenerateColumns = false;
             dgvLogs.DataSource = Logs;
+            dgvLogs.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
         private BindingList<LogDto> Logs = new BindingList<LogDto>();

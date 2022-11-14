@@ -29,11 +29,13 @@ namespace iWms.Form
             dgvOrders.Dock = DockStyle.Fill;
             dgvOrders.AutoGenerateColumns = false;
             dgvOrders.DataSource = WorkOrders;
+            dgvOrders.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             dgvUpns.ScrollBars = ScrollBars.Both;
             dgvUpns.Dock = DockStyle.Fill;
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
+            dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             dtOrderTime.CustomFormat = " ";
             dtFinishedTime.CustomFormat = " ";

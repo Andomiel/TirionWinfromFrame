@@ -31,7 +31,7 @@ namespace iWms.Form
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.label3 = new System.Windows.Forms.Label();
             this.tbUPN = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -40,7 +40,7 @@ namespace iWms.Form
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button2 = new DevExpress.XtraEditors.SimpleButton();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -61,9 +61,9 @@ namespace iWms.Form
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbTarget = new System.Windows.Forms.ComboBox();
-            this.btnBuildTransfer = new System.Windows.Forms.Button();
-            this.btnSelectReverse = new System.Windows.Forms.Button();
-            this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnBuildTransfer = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSelectReverse = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSelectAll = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewSelect = new System.Windows.Forms.DataGridView();
             this.DGVSelect选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -79,7 +79,7 @@ namespace iWms.Form
             this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnImport = new System.Windows.Forms.Button();
+            this.btnImport = new DevExpress.XtraEditors.SimpleButton();
             this.gbCondition = new System.Windows.Forms.GroupBox();
             this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
             this.txtExceedStart = new System.Windows.Forms.TextBox();
@@ -101,7 +101,6 @@ namespace iWms.Form
             this.btnSearch.Size = new System.Drawing.Size(114, 29);
             this.btnSearch.TabIndex = 20;
             this.btnSearch.Text = "查询";
-            this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label3
@@ -197,7 +196,6 @@ namespace iWms.Form
             this.button2.Size = new System.Drawing.Size(114, 29);
             this.button2.TabIndex = 67;
             this.button2.Text = "清空";
-            this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label20
@@ -424,7 +422,6 @@ namespace iWms.Form
             this.btnBuildTransfer.Size = new System.Drawing.Size(110, 28);
             this.btnBuildTransfer.TabIndex = 45;
             this.btnBuildTransfer.Text = "创建移库单";
-            this.btnBuildTransfer.UseVisualStyleBackColor = true;
             this.btnBuildTransfer.Click += new System.EventHandler(this.btnBuildTransfer_Click);
             // 
             // btnSelectReverse
@@ -435,7 +432,6 @@ namespace iWms.Form
             this.btnSelectReverse.Size = new System.Drawing.Size(52, 27);
             this.btnSelectReverse.TabIndex = 63;
             this.btnSelectReverse.Text = "反选";
-            this.btnSelectReverse.UseVisualStyleBackColor = true;
             this.btnSelectReverse.Click += new System.EventHandler(this.btnSelectReverse_Click);
             // 
             // btnSelectAll
@@ -446,7 +442,6 @@ namespace iWms.Form
             this.btnSelectAll.Size = new System.Drawing.Size(52, 27);
             this.btnSelectAll.TabIndex = 62;
             this.btnSelectAll.Text = "全选";
-            this.btnSelectAll.UseVisualStyleBackColor = true;
             this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
             // 
             // label1
@@ -663,7 +658,6 @@ namespace iWms.Form
             this.btnImport.Size = new System.Drawing.Size(52, 27);
             this.btnImport.TabIndex = 61;
             this.btnImport.Text = "导入";
-            this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // gbCondition
@@ -802,7 +796,7 @@ namespace iWms.Form
         }
 
         #endregion
-        private System.Windows.Forms.Button btnSearch;
+        private DevExpress.XtraEditors.SimpleButton btnSearch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbUPN;
         private System.Windows.Forms.Label label4;
@@ -811,8 +805,8 @@ namespace iWms.Form
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnSelectReverse;
-        private System.Windows.Forms.Button btnSelectAll;
+        private DevExpress.XtraEditors.SimpleButton btnSelectReverse;
+        private DevExpress.XtraEditors.SimpleButton btnSelectAll;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridViewSelect;
         private System.Windows.Forms.ComboBox cbMateType;
@@ -833,10 +827,10 @@ namespace iWms.Form
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Button button2;
+        private DevExpress.XtraEditors.SimpleButton button2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbTarget;
-        private System.Windows.Forms.Button btnBuildTransfer;
+        private DevExpress.XtraEditors.SimpleButton btnBuildTransfer;
         private System.Windows.Forms.TableLayoutPanel tlpLayout;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TableLayoutPanel tlpConditions;
@@ -844,7 +838,7 @@ namespace iWms.Form
         private System.Windows.Forms.Label lblShelfSide;
         private System.Windows.Forms.TextBox txtExceedStart;
         private System.Windows.Forms.TextBox txtExceedEnd;
-        private System.Windows.Forms.Button btnImport;
+        private DevExpress.XtraEditors.SimpleButton btnImport;
         private System.Windows.Forms.GroupBox gbCondition;
         private System.Windows.Forms.DataGridViewCheckBoxColumn DGVSelect选择;
         private System.Windows.Forms.DataGridViewTextBoxColumn UPN;

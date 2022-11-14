@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -35,7 +36,10 @@ namespace iWms.Form
             dtpEnd.Format = DateTimePickerFormat.Custom;
             dtpEnd.CustomFormat = " ";
             dataGridViewSelect.AutoGenerateColumns = false;
+            dataGridViewSelect.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
+
             dataGridViewPolicy.AutoGenerateColumns = false;
+            dataGridViewPolicy.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             QueryPolicies();
         }

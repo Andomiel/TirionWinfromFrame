@@ -68,11 +68,11 @@ namespace iWms.Form
             this.tbUser = new System.Windows.Forms.TextBox();
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
             this.dtFinishDate = new System.Windows.Forms.DateTimePicker();
-            this.btnQuery = new System.Windows.Forms.Button();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnNoSource = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClear = new DevExpress.XtraEditors.SimpleButton();
+            this.btnNoSource = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -483,7 +483,6 @@ namespace iWms.Form
             this.btnQuery.Size = new System.Drawing.Size(86, 27);
             this.btnQuery.TabIndex = 16;
             this.btnQuery.Text = "查询";
-            this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
             // 
             // btnExport
@@ -493,7 +492,6 @@ namespace iWms.Form
             this.btnExport.Size = new System.Drawing.Size(86, 27);
             this.btnExport.TabIndex = 17;
             this.btnExport.Text = "导出明细";
-            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClear
@@ -504,7 +502,6 @@ namespace iWms.Form
             this.btnClear.Size = new System.Drawing.Size(87, 29);
             this.btnClear.TabIndex = 18;
             this.btnClear.Text = "清空";
-            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnNoSource
@@ -515,7 +512,6 @@ namespace iWms.Form
             this.btnNoSource.Size = new System.Drawing.Size(87, 29);
             this.btnNoSource.TabIndex = 19;
             this.btnNoSource.Text = "无源入库";
-            this.btnNoSource.UseVisualStyleBackColor = true;
             this.btnNoSource.Click += new System.EventHandler(this.btnNoSource_Click);
             // 
             // btnCancel
@@ -525,13 +521,13 @@ namespace iWms.Form
             this.btnCancel.Size = new System.Drawing.Size(86, 27);
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "取消入库";
-            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // dgvOrders
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIsSelected,
@@ -554,7 +550,7 @@ namespace iWms.Form
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
-            this.dgvOrders.RowHeadersWidth = 72;
+            this.dgvOrders.RowHeadersWidth = 50;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1218, 144);
@@ -661,6 +657,7 @@ namespace iWms.Form
             this.dgvMaterials.AllowUserToAddRows = false;
             this.dgvMaterials.AllowUserToDeleteRows = false;
             this.dgvMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMaterials.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMaterials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
@@ -680,7 +677,7 @@ namespace iWms.Form
             this.dgvMaterials.MultiSelect = false;
             this.dgvMaterials.Name = "dgvMaterials";
             this.dgvMaterials.ReadOnly = true;
-            this.dgvMaterials.RowHeadersWidth = 72;
+            this.dgvMaterials.RowHeadersWidth = 50;
             this.dgvMaterials.RowTemplate.Height = 23;
             this.dgvMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterials.Size = new System.Drawing.Size(478, 320);
@@ -717,6 +714,7 @@ namespace iWms.Form
             this.dgvBarcodes.AllowUserToAddRows = false;
             this.dgvBarcodes.AllowUserToDeleteRows = false;
             this.dgvBarcodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBarcodes.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvBarcodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBarcodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colBarcode,
@@ -738,7 +736,7 @@ namespace iWms.Form
             this.dgvBarcodes.MultiSelect = false;
             this.dgvBarcodes.Name = "dgvBarcodes";
             this.dgvBarcodes.ReadOnly = true;
-            this.dgvBarcodes.RowHeadersWidth = 72;
+            this.dgvBarcodes.RowHeadersWidth = 50;
             this.dgvBarcodes.RowTemplate.Height = 23;
             this.dgvBarcodes.Size = new System.Drawing.Size(722, 320);
             this.dgvBarcodes.TabIndex = 1;
@@ -829,12 +827,12 @@ namespace iWms.Form
         private System.Windows.Forms.TextBox tbUser;
         private System.Windows.Forms.DateTimePicker dtOrderDate;
         private System.Windows.Forms.DateTimePicker dtFinishDate;
-        private System.Windows.Forms.Button btnQuery;
-        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraEditors.SimpleButton btnQuery;
+        private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.DataGridView dgvOrders;
         private System.Windows.Forms.GroupBox tbDetails;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnNoSource;
+        private DevExpress.XtraEditors.SimpleButton btnClear;
+        private DevExpress.XtraEditors.SimpleButton btnNoSource;
         private System.Windows.Forms.TableLayoutPanel tlpDetails;
         private  System.Windows.Forms.DataGridView dgvMaterials;
         private  System.Windows.Forms.DataGridView dgvBarcodes;
@@ -854,7 +852,7 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton btnPre;
         private System.Windows.Forms.ToolStripSplitButton btnNext;
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
-        private System.Windows.Forms.Button btnCancel;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
