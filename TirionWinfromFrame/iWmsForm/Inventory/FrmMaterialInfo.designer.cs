@@ -240,6 +240,7 @@
             this.BoxStatus.Name = "BoxStatus";
             this.BoxStatus.Size = new System.Drawing.Size(140, 22);
             this.BoxStatus.TabIndex = 20;
+            this.BoxStatus.Visible = false;
             // 
             // TextSupply
             // 
@@ -507,6 +508,7 @@
             this.label6.TabIndex = 19;
             this.label6.Text = "状态：";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label6.Visible = false;
             // 
             // txtExceedStart
             // 

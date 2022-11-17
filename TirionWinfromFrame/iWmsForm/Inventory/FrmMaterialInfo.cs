@@ -31,7 +31,10 @@ namespace iWms.Form
         {
             InitializeComponent();
             var towerMaps = BuildComboxHelper.BuildComboxWithEmptyFromEnum(typeof(TowerEnum));
-            towerMaps.Add(new EnumItem() { Value = 5, Description = "烘烤区" });
+
+            int lightShelf = (int)TowerEnum.LightShelf;
+            towerMaps.RemoveAll(p => p.Value > -1 && p.Value < lightShelf);
+            //towerMaps.Add(new EnumItem() { Value = 5, Description = "烘烤区" });
             cmbArea.DataSource = towerMaps;
             cmbArea.DisplayMember = "Description";
             cmbArea.ValueMember = "Value";
@@ -138,12 +141,12 @@ namespace iWms.Form
             //巷道、货架
             switch (condition.TowerNo)
             {
-                case (int)TowerEnum.SortingArea:
+                //case (int)TowerEnum.SortingArea:
                 default:
                     break;
-                case (int)TowerEnum.ASRS:
-                    condition.ABSide = this.cbShelfSide.Text;
-                    break;
+                //case (int)TowerEnum.ASRS:
+                //    condition.ABSide = this.cbShelfSide.Text;
+                //    break;
                 case (int)TowerEnum.LightShelf:
                     condition.MachineId = string.IsNullOrWhiteSpace(cbShelfSide.Text) ? string.Empty : $"SWHY0{this.cbShelfSide.Text}";
                     break;
@@ -310,7 +313,7 @@ namespace iWms.Form
                     break;
                 case 2:
                     lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "货架：";
+                    lblShelfSide.Text = "料架：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.BuildLightShelf();
                     break;
