@@ -101,6 +101,28 @@ namespace iWms.Form
             this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tlpLight = new System.Windows.Forms.TableLayoutPanel();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.LightFirst = new DevExpress.XtraEditors.LabelControl();
+            this.LightSecond = new DevExpress.XtraEditors.LabelControl();
+            this.LightThird = new DevExpress.XtraEditors.LabelControl();
+            this.LightForth = new DevExpress.XtraEditors.LabelControl();
+            this.LightFifth = new DevExpress.XtraEditors.LabelControl();
+            this.LightSixth = new DevExpress.XtraEditors.LabelControl();
+            this.LightSeventh = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -110,16 +132,19 @@ namespace iWms.Form
             this.tlpDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).BeginInit();
+            this.tlpLight.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpLayout
             // 
-            this.tlpLayout.ColumnCount = 1;
+            this.tlpLayout.ColumnCount = 2;
             this.tlpLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpLayout.Controls.Add(this.statusStrip2, 0, 2);
             this.tlpLayout.Controls.Add(this.gbConditions, 0, 0);
             this.tlpLayout.Controls.Add(this.dgvOrders, 0, 1);
             this.tlpLayout.Controls.Add(this.gbDetails, 0, 3);
+            this.tlpLayout.Controls.Add(this.tlpLight, 1, 0);
             this.tlpLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpLayout.Location = new System.Drawing.Point(0, 34);
             this.tlpLayout.Margin = new System.Windows.Forms.Padding(3, 34, 3, 3);
@@ -129,7 +154,6 @@ namespace iWms.Form
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tlpLayout.Size = new System.Drawing.Size(1227, 673);
             this.tlpLayout.TabIndex = 0;
             // 
@@ -272,7 +296,7 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1221, 134);
+            this.gbConditions.Size = new System.Drawing.Size(1181, 134);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
@@ -332,7 +356,7 @@ namespace iWms.Form
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.Size = new System.Drawing.Size(1215, 113);
+            this.tlpConditions.Size = new System.Drawing.Size(1175, 113);
             this.tlpConditions.TabIndex = 0;
             // 
             // label9
@@ -650,7 +674,7 @@ namespace iWms.Form
             this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(1221, 195);
+            this.dgvOrders.Size = new System.Drawing.Size(1181, 195);
             this.dgvOrders.TabIndex = 1;
             this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
@@ -723,7 +747,7 @@ namespace iWms.Form
             this.gbDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDetails.Location = new System.Drawing.Point(3, 374);
             this.gbDetails.Name = "gbDetails";
-            this.gbDetails.Size = new System.Drawing.Size(1221, 296);
+            this.gbDetails.Size = new System.Drawing.Size(1181, 296);
             this.gbDetails.TabIndex = 2;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "出库明细";
@@ -741,7 +765,7 @@ namespace iWms.Form
             this.tlpDetails.Name = "tlpDetails";
             this.tlpDetails.RowCount = 1;
             this.tlpDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDetails.Size = new System.Drawing.Size(1215, 275);
+            this.tlpDetails.Size = new System.Drawing.Size(1175, 275);
             this.tlpDetails.TabIndex = 0;
             // 
             // dgvDetails
@@ -773,7 +797,7 @@ namespace iWms.Form
             this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.RowTemplate.Height = 23;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDetails.Size = new System.Drawing.Size(598, 269);
+            this.dgvDetails.Size = new System.Drawing.Size(578, 269);
             this.dgvDetails.TabIndex = 1;
             this.dgvDetails.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDetails_RowPostPaint);
             this.dgvDetails.SelectionChanged += new System.EventHandler(this.DgvDetails_SelectionChanged);
@@ -825,7 +849,7 @@ namespace iWms.Form
             this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvUpns.Location = new System.Drawing.Point(613, 3);
+            this.dgvUpns.Location = new System.Drawing.Point(593, 3);
             this.dgvUpns.MultiSelect = false;
             this.dgvUpns.Name = "dgvUpns";
             this.dgvUpns.ReadOnly = true;
@@ -833,7 +857,7 @@ namespace iWms.Form
             this.dgvUpns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvUpns.RowTemplate.Height = 23;
             this.dgvUpns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvUpns.Size = new System.Drawing.Size(599, 269);
+            this.dgvUpns.Size = new System.Drawing.Size(579, 269);
             this.dgvUpns.TabIndex = 2;
             this.dgvUpns.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvUpns_RowPostPaint);
             // 
@@ -875,6 +899,373 @@ namespace iWms.Form
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
             // 
+            // tlpLight
+            // 
+            this.tlpLight.ColumnCount = 1;
+            this.tlpLight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpLight.Controls.Add(this.labelControl21, 0, 16);
+            this.tlpLight.Controls.Add(this.labelControl20, 0, 15);
+            this.tlpLight.Controls.Add(this.labelControl19, 0, 14);
+            this.tlpLight.Controls.Add(this.labelControl18, 0, 13);
+            this.tlpLight.Controls.Add(this.labelControl17, 0, 11);
+            this.tlpLight.Controls.Add(this.labelControl16, 0, 12);
+            this.tlpLight.Controls.Add(this.labelControl15, 0, 10);
+            this.tlpLight.Controls.Add(this.labelControl14, 0, 9);
+            this.tlpLight.Controls.Add(this.labelControl13, 0, 8);
+            this.tlpLight.Controls.Add(this.labelControl12, 0, 7);
+            this.tlpLight.Controls.Add(this.LightSeventh, 0, 6);
+            this.tlpLight.Controls.Add(this.LightSixth, 0, 5);
+            this.tlpLight.Controls.Add(this.LightFifth, 0, 4);
+            this.tlpLight.Controls.Add(this.LightForth, 0, 3);
+            this.tlpLight.Controls.Add(this.LightThird, 0, 2);
+            this.tlpLight.Controls.Add(this.LightSecond, 0, 1);
+            this.tlpLight.Controls.Add(this.LightFirst, 0, 0);
+            this.tlpLight.Controls.Add(this.labelControl4, 0, 17);
+            this.tlpLight.Controls.Add(this.labelControl3, 0, 18);
+            this.tlpLight.Controls.Add(this.labelControl2, 0, 20);
+            this.tlpLight.Controls.Add(this.labelControl1, 0, 19);
+            this.tlpLight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpLight.Location = new System.Drawing.Point(1187, 0);
+            this.tlpLight.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpLight.Name = "tlpLight";
+            this.tlpLight.RowCount = 21;
+            this.tlpLayout.SetRowSpan(this.tlpLight, 4);
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.Size = new System.Drawing.Size(40, 673);
+            this.tlpLight.TabIndex = 8;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseForeColor = true;
+            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl1.Location = new System.Drawing.Point(0, 608);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(40, 32);
+            this.labelControl1.TabIndex = 20;
+            this.labelControl1.Text = "●";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Appearance.Options.UseForeColor = true;
+            this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl2.Location = new System.Drawing.Point(0, 640);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(40, 33);
+            this.labelControl2.TabIndex = 21;
+            this.labelControl2.Text = "●";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Appearance.Options.UseForeColor = true;
+            this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl3.Location = new System.Drawing.Point(0, 576);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(40, 32);
+            this.labelControl3.TabIndex = 22;
+            this.labelControl3.Text = "●";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl4.Appearance.Options.UseFont = true;
+            this.labelControl4.Appearance.Options.UseForeColor = true;
+            this.labelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl4.Location = new System.Drawing.Point(0, 544);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(40, 32);
+            this.labelControl4.TabIndex = 23;
+            this.labelControl4.Text = "●";
+            // 
+            // LightFirst
+            // 
+            this.LightFirst.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFirst.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFirst.Appearance.Options.UseFont = true;
+            this.LightFirst.Appearance.Options.UseForeColor = true;
+            this.LightFirst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFirst.Location = new System.Drawing.Point(0, 0);
+            this.LightFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFirst.Name = "LightFirst";
+            this.LightFirst.Size = new System.Drawing.Size(40, 32);
+            this.LightFirst.TabIndex = 24;
+            this.LightFirst.Text = "●";
+            this.LightFirst.ToolTip = "SWHY001";
+            // 
+            // LightSecond
+            // 
+            this.LightSecond.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSecond.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSecond.Appearance.Options.UseFont = true;
+            this.LightSecond.Appearance.Options.UseForeColor = true;
+            this.LightSecond.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSecond.Location = new System.Drawing.Point(0, 32);
+            this.LightSecond.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSecond.Name = "LightSecond";
+            this.LightSecond.Size = new System.Drawing.Size(40, 32);
+            this.LightSecond.TabIndex = 25;
+            this.LightSecond.Text = "●";
+            this.LightSecond.ToolTip = "SWHY002";
+            // 
+            // LightThird
+            // 
+            this.LightThird.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightThird.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightThird.Appearance.Options.UseFont = true;
+            this.LightThird.Appearance.Options.UseForeColor = true;
+            this.LightThird.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightThird.Location = new System.Drawing.Point(0, 64);
+            this.LightThird.Margin = new System.Windows.Forms.Padding(0);
+            this.LightThird.Name = "LightThird";
+            this.LightThird.Size = new System.Drawing.Size(40, 32);
+            this.LightThird.TabIndex = 26;
+            this.LightThird.Text = "●";
+            this.LightThird.ToolTip = "SWHY003";
+            // 
+            // LightForth
+            // 
+            this.LightForth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightForth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightForth.Appearance.Options.UseFont = true;
+            this.LightForth.Appearance.Options.UseForeColor = true;
+            this.LightForth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightForth.Location = new System.Drawing.Point(0, 96);
+            this.LightForth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightForth.Name = "LightForth";
+            this.LightForth.Size = new System.Drawing.Size(40, 32);
+            this.LightForth.TabIndex = 27;
+            this.LightForth.Text = "●";
+            this.LightForth.ToolTip = "SWHY004";
+            // 
+            // LightFifth
+            // 
+            this.LightFifth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFifth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFifth.Appearance.Options.UseFont = true;
+            this.LightFifth.Appearance.Options.UseForeColor = true;
+            this.LightFifth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFifth.Location = new System.Drawing.Point(0, 128);
+            this.LightFifth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFifth.Name = "LightFifth";
+            this.LightFifth.Size = new System.Drawing.Size(40, 32);
+            this.LightFifth.TabIndex = 28;
+            this.LightFifth.Text = "●";
+            this.LightFifth.ToolTip = "SWHY005";
+            // 
+            // LightSixth
+            // 
+            this.LightSixth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSixth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSixth.Appearance.Options.UseFont = true;
+            this.LightSixth.Appearance.Options.UseForeColor = true;
+            this.LightSixth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSixth.Location = new System.Drawing.Point(0, 160);
+            this.LightSixth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSixth.Name = "LightSixth";
+            this.LightSixth.Size = new System.Drawing.Size(40, 32);
+            this.LightSixth.TabIndex = 29;
+            this.LightSixth.Text = "●";
+            this.LightSixth.ToolTip = "SWHY006";
+            // 
+            // LightSeventh
+            // 
+            this.LightSeventh.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSeventh.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSeventh.Appearance.Options.UseFont = true;
+            this.LightSeventh.Appearance.Options.UseForeColor = true;
+            this.LightSeventh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSeventh.Location = new System.Drawing.Point(0, 192);
+            this.LightSeventh.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSeventh.Name = "LightSeventh";
+            this.LightSeventh.Size = new System.Drawing.Size(40, 32);
+            this.LightSeventh.TabIndex = 30;
+            this.LightSeventh.Text = "●";
+            this.LightSeventh.ToolTip = "SWHY007";
+            // 
+            // labelControl12
+            // 
+            this.labelControl12.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl12.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl12.Appearance.Options.UseFont = true;
+            this.labelControl12.Appearance.Options.UseForeColor = true;
+            this.labelControl12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl12.Location = new System.Drawing.Point(0, 224);
+            this.labelControl12.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl12.Name = "labelControl12";
+            this.labelControl12.Size = new System.Drawing.Size(40, 32);
+            this.labelControl12.TabIndex = 31;
+            this.labelControl12.Text = "●";
+            // 
+            // labelControl13
+            // 
+            this.labelControl13.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl13.Appearance.Options.UseFont = true;
+            this.labelControl13.Appearance.Options.UseForeColor = true;
+            this.labelControl13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl13.Location = new System.Drawing.Point(0, 256);
+            this.labelControl13.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(40, 32);
+            this.labelControl13.TabIndex = 32;
+            this.labelControl13.Text = "●";
+            // 
+            // labelControl14
+            // 
+            this.labelControl14.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl14.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl14.Appearance.Options.UseFont = true;
+            this.labelControl14.Appearance.Options.UseForeColor = true;
+            this.labelControl14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl14.Location = new System.Drawing.Point(0, 288);
+            this.labelControl14.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl14.Name = "labelControl14";
+            this.labelControl14.Size = new System.Drawing.Size(40, 32);
+            this.labelControl14.TabIndex = 33;
+            this.labelControl14.Text = "●";
+            // 
+            // labelControl15
+            // 
+            this.labelControl15.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl15.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl15.Appearance.Options.UseFont = true;
+            this.labelControl15.Appearance.Options.UseForeColor = true;
+            this.labelControl15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl15.Location = new System.Drawing.Point(0, 320);
+            this.labelControl15.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl15.Name = "labelControl15";
+            this.labelControl15.Size = new System.Drawing.Size(40, 32);
+            this.labelControl15.TabIndex = 34;
+            this.labelControl15.Text = "●";
+            // 
+            // labelControl16
+            // 
+            this.labelControl16.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl16.Appearance.Options.UseFont = true;
+            this.labelControl16.Appearance.Options.UseForeColor = true;
+            this.labelControl16.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl16.Location = new System.Drawing.Point(0, 384);
+            this.labelControl16.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl16.Name = "labelControl16";
+            this.labelControl16.Size = new System.Drawing.Size(40, 32);
+            this.labelControl16.TabIndex = 35;
+            this.labelControl16.Text = "●";
+            // 
+            // labelControl17
+            // 
+            this.labelControl17.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl17.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl17.Appearance.Options.UseFont = true;
+            this.labelControl17.Appearance.Options.UseForeColor = true;
+            this.labelControl17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl17.Location = new System.Drawing.Point(0, 352);
+            this.labelControl17.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl17.Name = "labelControl17";
+            this.labelControl17.Size = new System.Drawing.Size(40, 32);
+            this.labelControl17.TabIndex = 36;
+            this.labelControl17.Text = "●";
+            // 
+            // labelControl18
+            // 
+            this.labelControl18.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl18.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl18.Appearance.Options.UseFont = true;
+            this.labelControl18.Appearance.Options.UseForeColor = true;
+            this.labelControl18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl18.Location = new System.Drawing.Point(0, 416);
+            this.labelControl18.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl18.Name = "labelControl18";
+            this.labelControl18.Size = new System.Drawing.Size(40, 32);
+            this.labelControl18.TabIndex = 37;
+            this.labelControl18.Text = "●";
+            // 
+            // labelControl19
+            // 
+            this.labelControl19.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl19.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl19.Appearance.Options.UseFont = true;
+            this.labelControl19.Appearance.Options.UseForeColor = true;
+            this.labelControl19.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl19.Location = new System.Drawing.Point(0, 448);
+            this.labelControl19.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl19.Name = "labelControl19";
+            this.labelControl19.Size = new System.Drawing.Size(40, 32);
+            this.labelControl19.TabIndex = 38;
+            this.labelControl19.Text = "●";
+            // 
+            // labelControl20
+            // 
+            this.labelControl20.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl20.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl20.Appearance.Options.UseFont = true;
+            this.labelControl20.Appearance.Options.UseForeColor = true;
+            this.labelControl20.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl20.Location = new System.Drawing.Point(0, 480);
+            this.labelControl20.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl20.Name = "labelControl20";
+            this.labelControl20.Size = new System.Drawing.Size(40, 32);
+            this.labelControl20.TabIndex = 39;
+            this.labelControl20.Text = "●";
+            // 
+            // labelControl21
+            // 
+            this.labelControl21.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.labelControl21.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.labelControl21.Appearance.Options.UseFont = true;
+            this.labelControl21.Appearance.Options.UseForeColor = true;
+            this.labelControl21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControl21.Location = new System.Drawing.Point(0, 512);
+            this.labelControl21.Margin = new System.Windows.Forms.Padding(0);
+            this.labelControl21.Name = "labelControl21";
+            this.labelControl21.Size = new System.Drawing.Size(40, 32);
+            this.labelControl21.TabIndex = 40;
+            this.labelControl21.Text = "●";
+            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -897,6 +1288,8 @@ namespace iWms.Form
             this.tlpDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).EndInit();
+            this.tlpLight.ResumeLayout(false);
+            this.tlpLight.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -971,5 +1364,27 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.SimpleButton btnLack;
+        private System.Windows.Forms.TableLayoutPanel tlpLight;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl labelControl21;
+        private DevExpress.XtraEditors.LabelControl labelControl20;
+        private DevExpress.XtraEditors.LabelControl labelControl19;
+        private DevExpress.XtraEditors.LabelControl labelControl18;
+        private DevExpress.XtraEditors.LabelControl labelControl17;
+        private DevExpress.XtraEditors.LabelControl labelControl16;
+        private DevExpress.XtraEditors.LabelControl labelControl15;
+        private DevExpress.XtraEditors.LabelControl labelControl14;
+        private DevExpress.XtraEditors.LabelControl labelControl13;
+        private DevExpress.XtraEditors.LabelControl labelControl12;
+        private DevExpress.XtraEditors.LabelControl LightSeventh;
+        private DevExpress.XtraEditors.LabelControl LightSixth;
+        private DevExpress.XtraEditors.LabelControl LightFifth;
+        private DevExpress.XtraEditors.LabelControl LightForth;
+        private DevExpress.XtraEditors.LabelControl LightThird;
+        private DevExpress.XtraEditors.LabelControl LightSecond;
+        private DevExpress.XtraEditors.LabelControl LightFirst;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
     }
 }
