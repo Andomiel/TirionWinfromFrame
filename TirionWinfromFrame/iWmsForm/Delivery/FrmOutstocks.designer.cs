@@ -30,9 +30,9 @@ namespace iWms.Form
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOutstocks));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -102,27 +102,28 @@ namespace iWms.Form
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLight = new System.Windows.Forms.TableLayoutPanel();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.LightFirst = new DevExpress.XtraEditors.LabelControl();
-            this.LightSecond = new DevExpress.XtraEditors.LabelControl();
-            this.LightThird = new DevExpress.XtraEditors.LabelControl();
-            this.LightForth = new DevExpress.XtraEditors.LabelControl();
-            this.LightFifth = new DevExpress.XtraEditors.LabelControl();
-            this.LightSixth = new DevExpress.XtraEditors.LabelControl();
+            this.LightSeventeenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightSixteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightFifteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightForteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightTwelfth = new DevExpress.XtraEditors.LabelControl();
+            this.LightThirteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightEleventh = new DevExpress.XtraEditors.LabelControl();
+            this.LightTenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightNinth = new DevExpress.XtraEditors.LabelControl();
+            this.LightEighth = new DevExpress.XtraEditors.LabelControl();
             this.LightSeventh = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
+            this.LightSixth = new DevExpress.XtraEditors.LabelControl();
+            this.LightFifth = new DevExpress.XtraEditors.LabelControl();
+            this.LightForth = new DevExpress.XtraEditors.LabelControl();
+            this.LightThird = new DevExpress.XtraEditors.LabelControl();
+            this.LightSecond = new DevExpress.XtraEditors.LabelControl();
+            this.LightFirst = new DevExpress.XtraEditors.LabelControl();
+            this.LightEighteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
+            this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
+            this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -348,6 +349,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
             this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
             this.tlpConditions.Controls.Add(this.btnLack, 13, 0);
+            this.tlpConditions.Controls.Add(this.btnClearAlarm, 15, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -657,14 +659,14 @@ namespace iWms.Form
             this.colOrderTime,
             this.colFinishedTime,
             this.colReview});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
@@ -779,14 +781,14 @@ namespace iWms.Form
             this.colMaterialNo,
             this.colDeliveryCount,
             this.colInventoryStatus});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvDetails.Location = new System.Drawing.Point(3, 3);
@@ -839,14 +841,14 @@ namespace iWms.Form
             this.colTower,
             this.colLocation,
             this.colOperator});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvUpns.Location = new System.Drawing.Point(593, 3);
@@ -903,16 +905,16 @@ namespace iWms.Form
             // 
             this.tlpLight.ColumnCount = 1;
             this.tlpLight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLight.Controls.Add(this.labelControl21, 0, 16);
-            this.tlpLight.Controls.Add(this.labelControl20, 0, 15);
-            this.tlpLight.Controls.Add(this.labelControl19, 0, 14);
-            this.tlpLight.Controls.Add(this.labelControl18, 0, 13);
-            this.tlpLight.Controls.Add(this.labelControl17, 0, 11);
-            this.tlpLight.Controls.Add(this.labelControl16, 0, 12);
-            this.tlpLight.Controls.Add(this.labelControl15, 0, 10);
-            this.tlpLight.Controls.Add(this.labelControl14, 0, 9);
-            this.tlpLight.Controls.Add(this.labelControl13, 0, 8);
-            this.tlpLight.Controls.Add(this.labelControl12, 0, 7);
+            this.tlpLight.Controls.Add(this.LightSeventeenth, 0, 16);
+            this.tlpLight.Controls.Add(this.LightSixteenth, 0, 15);
+            this.tlpLight.Controls.Add(this.LightFifteenth, 0, 14);
+            this.tlpLight.Controls.Add(this.LightForteenth, 0, 13);
+            this.tlpLight.Controls.Add(this.LightTwelfth, 0, 11);
+            this.tlpLight.Controls.Add(this.LightThirteenth, 0, 12);
+            this.tlpLight.Controls.Add(this.LightEleventh, 0, 10);
+            this.tlpLight.Controls.Add(this.LightTenth, 0, 9);
+            this.tlpLight.Controls.Add(this.LightNinth, 0, 8);
+            this.tlpLight.Controls.Add(this.LightEighth, 0, 7);
             this.tlpLight.Controls.Add(this.LightSeventh, 0, 6);
             this.tlpLight.Controls.Add(this.LightSixth, 0, 5);
             this.tlpLight.Controls.Add(this.LightFifth, 0, 4);
@@ -920,10 +922,10 @@ namespace iWms.Form
             this.tlpLight.Controls.Add(this.LightThird, 0, 2);
             this.tlpLight.Controls.Add(this.LightSecond, 0, 1);
             this.tlpLight.Controls.Add(this.LightFirst, 0, 0);
-            this.tlpLight.Controls.Add(this.labelControl4, 0, 17);
-            this.tlpLight.Controls.Add(this.labelControl3, 0, 18);
-            this.tlpLight.Controls.Add(this.labelControl2, 0, 20);
-            this.tlpLight.Controls.Add(this.labelControl1, 0, 19);
+            this.tlpLight.Controls.Add(this.LightEighteenth, 0, 17);
+            this.tlpLight.Controls.Add(this.LightNineteenth, 0, 18);
+            this.tlpLight.Controls.Add(this.LightTwentyFirst, 0, 20);
+            this.tlpLight.Controls.Add(this.LightTwentieth, 0, 19);
             this.tlpLight.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpLight.Location = new System.Drawing.Point(1187, 0);
             this.tlpLight.Margin = new System.Windows.Forms.Padding(0);
@@ -965,151 +967,155 @@ namespace iWms.Form
             this.tlpLight.Size = new System.Drawing.Size(40, 673);
             this.tlpLight.TabIndex = 8;
             // 
-            // labelControl1
+            // LightSeventeenth
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(0, 608);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(40, 32);
-            this.labelControl1.TabIndex = 20;
-            this.labelControl1.Text = "●";
+            this.LightSeventeenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSeventeenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSeventeenth.Appearance.Options.UseFont = true;
+            this.LightSeventeenth.Appearance.Options.UseForeColor = true;
+            this.LightSeventeenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSeventeenth.Location = new System.Drawing.Point(0, 512);
+            this.LightSeventeenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSeventeenth.Name = "LightSeventeenth";
+            this.LightSeventeenth.Size = new System.Drawing.Size(40, 32);
+            this.LightSeventeenth.TabIndex = 40;
+            this.LightSeventeenth.Text = "●";
+            this.LightSeventeenth.ToolTip = "SWHY017";
             // 
-            // labelControl2
+            // LightSixteenth
             // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl2.Location = new System.Drawing.Point(0, 640);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(40, 33);
-            this.labelControl2.TabIndex = 21;
-            this.labelControl2.Text = "●";
+            this.LightSixteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSixteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSixteenth.Appearance.Options.UseFont = true;
+            this.LightSixteenth.Appearance.Options.UseForeColor = true;
+            this.LightSixteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSixteenth.Location = new System.Drawing.Point(0, 480);
+            this.LightSixteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSixteenth.Name = "LightSixteenth";
+            this.LightSixteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightSixteenth.TabIndex = 39;
+            this.LightSixteenth.Text = "●";
+            this.LightSixteenth.ToolTip = "SWHY016";
             // 
-            // labelControl3
+            // LightFifteenth
             // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl3.Location = new System.Drawing.Point(0, 576);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(40, 32);
-            this.labelControl3.TabIndex = 22;
-            this.labelControl3.Text = "●";
+            this.LightFifteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFifteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFifteenth.Appearance.Options.UseFont = true;
+            this.LightFifteenth.Appearance.Options.UseForeColor = true;
+            this.LightFifteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFifteenth.Location = new System.Drawing.Point(0, 448);
+            this.LightFifteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFifteenth.Name = "LightFifteenth";
+            this.LightFifteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightFifteenth.TabIndex = 38;
+            this.LightFifteenth.Text = "●";
+            this.LightFifteenth.ToolTip = "SWHY015";
             // 
-            // labelControl4
+            // LightForteenth
             // 
-            this.labelControl4.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Appearance.Options.UseForeColor = true;
-            this.labelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl4.Location = new System.Drawing.Point(0, 544);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(40, 32);
-            this.labelControl4.TabIndex = 23;
-            this.labelControl4.Text = "●";
+            this.LightForteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightForteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightForteenth.Appearance.Options.UseFont = true;
+            this.LightForteenth.Appearance.Options.UseForeColor = true;
+            this.LightForteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightForteenth.Location = new System.Drawing.Point(0, 416);
+            this.LightForteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightForteenth.Name = "LightForteenth";
+            this.LightForteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightForteenth.TabIndex = 37;
+            this.LightForteenth.Text = "●";
+            this.LightForteenth.ToolTip = "SWHY014";
             // 
-            // LightFirst
+            // LightTwelfth
             // 
-            this.LightFirst.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.LightFirst.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.LightFirst.Appearance.Options.UseFont = true;
-            this.LightFirst.Appearance.Options.UseForeColor = true;
-            this.LightFirst.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightFirst.Location = new System.Drawing.Point(0, 0);
-            this.LightFirst.Margin = new System.Windows.Forms.Padding(0);
-            this.LightFirst.Name = "LightFirst";
-            this.LightFirst.Size = new System.Drawing.Size(40, 32);
-            this.LightFirst.TabIndex = 24;
-            this.LightFirst.Text = "●";
-            this.LightFirst.ToolTip = "SWHY001";
+            this.LightTwelfth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTwelfth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTwelfth.Appearance.Options.UseFont = true;
+            this.LightTwelfth.Appearance.Options.UseForeColor = true;
+            this.LightTwelfth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTwelfth.Location = new System.Drawing.Point(0, 352);
+            this.LightTwelfth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTwelfth.Name = "LightTwelfth";
+            this.LightTwelfth.Size = new System.Drawing.Size(40, 32);
+            this.LightTwelfth.TabIndex = 36;
+            this.LightTwelfth.Text = "●";
+            this.LightTwelfth.ToolTip = "SWHY012";
             // 
-            // LightSecond
+            // LightThirteenth
             // 
-            this.LightSecond.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.LightSecond.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.LightSecond.Appearance.Options.UseFont = true;
-            this.LightSecond.Appearance.Options.UseForeColor = true;
-            this.LightSecond.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightSecond.Location = new System.Drawing.Point(0, 32);
-            this.LightSecond.Margin = new System.Windows.Forms.Padding(0);
-            this.LightSecond.Name = "LightSecond";
-            this.LightSecond.Size = new System.Drawing.Size(40, 32);
-            this.LightSecond.TabIndex = 25;
-            this.LightSecond.Text = "●";
-            this.LightSecond.ToolTip = "SWHY002";
+            this.LightThirteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightThirteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightThirteenth.Appearance.Options.UseFont = true;
+            this.LightThirteenth.Appearance.Options.UseForeColor = true;
+            this.LightThirteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightThirteenth.Location = new System.Drawing.Point(0, 384);
+            this.LightThirteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightThirteenth.Name = "LightThirteenth";
+            this.LightThirteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightThirteenth.TabIndex = 35;
+            this.LightThirteenth.Text = "●";
+            this.LightThirteenth.ToolTip = "SWHY013";
             // 
-            // LightThird
+            // LightEleventh
             // 
-            this.LightThird.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.LightThird.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.LightThird.Appearance.Options.UseFont = true;
-            this.LightThird.Appearance.Options.UseForeColor = true;
-            this.LightThird.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightThird.Location = new System.Drawing.Point(0, 64);
-            this.LightThird.Margin = new System.Windows.Forms.Padding(0);
-            this.LightThird.Name = "LightThird";
-            this.LightThird.Size = new System.Drawing.Size(40, 32);
-            this.LightThird.TabIndex = 26;
-            this.LightThird.Text = "●";
-            this.LightThird.ToolTip = "SWHY003";
+            this.LightEleventh.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightEleventh.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightEleventh.Appearance.Options.UseFont = true;
+            this.LightEleventh.Appearance.Options.UseForeColor = true;
+            this.LightEleventh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightEleventh.Location = new System.Drawing.Point(0, 320);
+            this.LightEleventh.Margin = new System.Windows.Forms.Padding(0);
+            this.LightEleventh.Name = "LightEleventh";
+            this.LightEleventh.Size = new System.Drawing.Size(40, 32);
+            this.LightEleventh.TabIndex = 34;
+            this.LightEleventh.Text = "●";
+            this.LightEleventh.ToolTip = "SWHY011";
             // 
-            // LightForth
+            // LightTenth
             // 
-            this.LightForth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.LightForth.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.LightForth.Appearance.Options.UseFont = true;
-            this.LightForth.Appearance.Options.UseForeColor = true;
-            this.LightForth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightForth.Location = new System.Drawing.Point(0, 96);
-            this.LightForth.Margin = new System.Windows.Forms.Padding(0);
-            this.LightForth.Name = "LightForth";
-            this.LightForth.Size = new System.Drawing.Size(40, 32);
-            this.LightForth.TabIndex = 27;
-            this.LightForth.Text = "●";
-            this.LightForth.ToolTip = "SWHY004";
+            this.LightTenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTenth.Appearance.Options.UseFont = true;
+            this.LightTenth.Appearance.Options.UseForeColor = true;
+            this.LightTenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTenth.Location = new System.Drawing.Point(0, 288);
+            this.LightTenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTenth.Name = "LightTenth";
+            this.LightTenth.Size = new System.Drawing.Size(40, 32);
+            this.LightTenth.TabIndex = 33;
+            this.LightTenth.Text = "●";
+            this.LightTenth.ToolTip = "SWHY010";
             // 
-            // LightFifth
+            // LightNinth
             // 
-            this.LightFifth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.LightFifth.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.LightFifth.Appearance.Options.UseFont = true;
-            this.LightFifth.Appearance.Options.UseForeColor = true;
-            this.LightFifth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightFifth.Location = new System.Drawing.Point(0, 128);
-            this.LightFifth.Margin = new System.Windows.Forms.Padding(0);
-            this.LightFifth.Name = "LightFifth";
-            this.LightFifth.Size = new System.Drawing.Size(40, 32);
-            this.LightFifth.TabIndex = 28;
-            this.LightFifth.Text = "●";
-            this.LightFifth.ToolTip = "SWHY005";
+            this.LightNinth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightNinth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightNinth.Appearance.Options.UseFont = true;
+            this.LightNinth.Appearance.Options.UseForeColor = true;
+            this.LightNinth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightNinth.Location = new System.Drawing.Point(0, 256);
+            this.LightNinth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightNinth.Name = "LightNinth";
+            this.LightNinth.Size = new System.Drawing.Size(40, 32);
+            this.LightNinth.TabIndex = 32;
+            this.LightNinth.Text = "●";
+            this.LightNinth.ToolTip = "SWHY009";
             // 
-            // LightSixth
+            // LightEighth
             // 
-            this.LightSixth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.LightSixth.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.LightSixth.Appearance.Options.UseFont = true;
-            this.LightSixth.Appearance.Options.UseForeColor = true;
-            this.LightSixth.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LightSixth.Location = new System.Drawing.Point(0, 160);
-            this.LightSixth.Margin = new System.Windows.Forms.Padding(0);
-            this.LightSixth.Name = "LightSixth";
-            this.LightSixth.Size = new System.Drawing.Size(40, 32);
-            this.LightSixth.TabIndex = 29;
-            this.LightSixth.Text = "●";
-            this.LightSixth.ToolTip = "SWHY006";
+            this.LightEighth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightEighth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightEighth.Appearance.Options.UseFont = true;
+            this.LightEighth.Appearance.Options.UseForeColor = true;
+            this.LightEighth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightEighth.Location = new System.Drawing.Point(0, 224);
+            this.LightEighth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightEighth.Name = "LightEighth";
+            this.LightEighth.Size = new System.Drawing.Size(40, 32);
+            this.LightEighth.TabIndex = 31;
+            this.LightEighth.Text = "●";
+            this.LightEighth.ToolTip = "SWHY008";
             // 
             // LightSeventh
             // 
@@ -1126,145 +1132,165 @@ namespace iWms.Form
             this.LightSeventh.Text = "●";
             this.LightSeventh.ToolTip = "SWHY007";
             // 
-            // labelControl12
+            // LightSixth
             // 
-            this.labelControl12.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl12.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Appearance.Options.UseForeColor = true;
-            this.labelControl12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl12.Location = new System.Drawing.Point(0, 224);
-            this.labelControl12.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl12.Name = "labelControl12";
-            this.labelControl12.Size = new System.Drawing.Size(40, 32);
-            this.labelControl12.TabIndex = 31;
-            this.labelControl12.Text = "●";
+            this.LightSixth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSixth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSixth.Appearance.Options.UseFont = true;
+            this.LightSixth.Appearance.Options.UseForeColor = true;
+            this.LightSixth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSixth.Location = new System.Drawing.Point(0, 160);
+            this.LightSixth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSixth.Name = "LightSixth";
+            this.LightSixth.Size = new System.Drawing.Size(40, 32);
+            this.LightSixth.TabIndex = 29;
+            this.LightSixth.Text = "●";
+            this.LightSixth.ToolTip = "SWHY006";
             // 
-            // labelControl13
+            // LightFifth
             // 
-            this.labelControl13.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.Appearance.Options.UseForeColor = true;
-            this.labelControl13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl13.Location = new System.Drawing.Point(0, 256);
-            this.labelControl13.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(40, 32);
-            this.labelControl13.TabIndex = 32;
-            this.labelControl13.Text = "●";
+            this.LightFifth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFifth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFifth.Appearance.Options.UseFont = true;
+            this.LightFifth.Appearance.Options.UseForeColor = true;
+            this.LightFifth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFifth.Location = new System.Drawing.Point(0, 128);
+            this.LightFifth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFifth.Name = "LightFifth";
+            this.LightFifth.Size = new System.Drawing.Size(40, 32);
+            this.LightFifth.TabIndex = 28;
+            this.LightFifth.Text = "●";
+            this.LightFifth.ToolTip = "SWHY005";
             // 
-            // labelControl14
+            // LightForth
             // 
-            this.labelControl14.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl14.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl14.Appearance.Options.UseFont = true;
-            this.labelControl14.Appearance.Options.UseForeColor = true;
-            this.labelControl14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl14.Location = new System.Drawing.Point(0, 288);
-            this.labelControl14.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl14.Name = "labelControl14";
-            this.labelControl14.Size = new System.Drawing.Size(40, 32);
-            this.labelControl14.TabIndex = 33;
-            this.labelControl14.Text = "●";
+            this.LightForth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightForth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightForth.Appearance.Options.UseFont = true;
+            this.LightForth.Appearance.Options.UseForeColor = true;
+            this.LightForth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightForth.Location = new System.Drawing.Point(0, 96);
+            this.LightForth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightForth.Name = "LightForth";
+            this.LightForth.Size = new System.Drawing.Size(40, 32);
+            this.LightForth.TabIndex = 27;
+            this.LightForth.Text = "●";
+            this.LightForth.ToolTip = "SWHY004";
             // 
-            // labelControl15
+            // LightThird
             // 
-            this.labelControl15.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl15.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl15.Appearance.Options.UseFont = true;
-            this.labelControl15.Appearance.Options.UseForeColor = true;
-            this.labelControl15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl15.Location = new System.Drawing.Point(0, 320);
-            this.labelControl15.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(40, 32);
-            this.labelControl15.TabIndex = 34;
-            this.labelControl15.Text = "●";
+            this.LightThird.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightThird.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightThird.Appearance.Options.UseFont = true;
+            this.LightThird.Appearance.Options.UseForeColor = true;
+            this.LightThird.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightThird.Location = new System.Drawing.Point(0, 64);
+            this.LightThird.Margin = new System.Windows.Forms.Padding(0);
+            this.LightThird.Name = "LightThird";
+            this.LightThird.Size = new System.Drawing.Size(40, 32);
+            this.LightThird.TabIndex = 26;
+            this.LightThird.Text = "●";
+            this.LightThird.ToolTip = "SWHY003";
             // 
-            // labelControl16
+            // LightSecond
             // 
-            this.labelControl16.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl16.Appearance.Options.UseFont = true;
-            this.labelControl16.Appearance.Options.UseForeColor = true;
-            this.labelControl16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl16.Location = new System.Drawing.Point(0, 384);
-            this.labelControl16.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(40, 32);
-            this.labelControl16.TabIndex = 35;
-            this.labelControl16.Text = "●";
+            this.LightSecond.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSecond.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSecond.Appearance.Options.UseFont = true;
+            this.LightSecond.Appearance.Options.UseForeColor = true;
+            this.LightSecond.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSecond.Location = new System.Drawing.Point(0, 32);
+            this.LightSecond.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSecond.Name = "LightSecond";
+            this.LightSecond.Size = new System.Drawing.Size(40, 32);
+            this.LightSecond.TabIndex = 25;
+            this.LightSecond.Text = "●";
+            this.LightSecond.ToolTip = "SWHY002";
             // 
-            // labelControl17
+            // LightFirst
             // 
-            this.labelControl17.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl17.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl17.Appearance.Options.UseFont = true;
-            this.labelControl17.Appearance.Options.UseForeColor = true;
-            this.labelControl17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl17.Location = new System.Drawing.Point(0, 352);
-            this.labelControl17.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl17.Name = "labelControl17";
-            this.labelControl17.Size = new System.Drawing.Size(40, 32);
-            this.labelControl17.TabIndex = 36;
-            this.labelControl17.Text = "●";
+            this.LightFirst.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFirst.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFirst.Appearance.Options.UseFont = true;
+            this.LightFirst.Appearance.Options.UseForeColor = true;
+            this.LightFirst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFirst.Location = new System.Drawing.Point(0, 0);
+            this.LightFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFirst.Name = "LightFirst";
+            this.LightFirst.Size = new System.Drawing.Size(40, 32);
+            this.LightFirst.TabIndex = 24;
+            this.LightFirst.Text = "●";
+            this.LightFirst.ToolTip = "SWHY001";
             // 
-            // labelControl18
+            // LightEighteenth
             // 
-            this.labelControl18.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl18.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl18.Appearance.Options.UseFont = true;
-            this.labelControl18.Appearance.Options.UseForeColor = true;
-            this.labelControl18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl18.Location = new System.Drawing.Point(0, 416);
-            this.labelControl18.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(40, 32);
-            this.labelControl18.TabIndex = 37;
-            this.labelControl18.Text = "●";
+            this.LightEighteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightEighteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightEighteenth.Appearance.Options.UseFont = true;
+            this.LightEighteenth.Appearance.Options.UseForeColor = true;
+            this.LightEighteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightEighteenth.Location = new System.Drawing.Point(0, 544);
+            this.LightEighteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightEighteenth.Name = "LightEighteenth";
+            this.LightEighteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightEighteenth.TabIndex = 23;
+            this.LightEighteenth.Text = "●";
+            this.LightEighteenth.ToolTip = "SWHY018";
             // 
-            // labelControl19
+            // LightNineteenth
             // 
-            this.labelControl19.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl19.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl19.Appearance.Options.UseFont = true;
-            this.labelControl19.Appearance.Options.UseForeColor = true;
-            this.labelControl19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl19.Location = new System.Drawing.Point(0, 448);
-            this.labelControl19.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(40, 32);
-            this.labelControl19.TabIndex = 38;
-            this.labelControl19.Text = "●";
+            this.LightNineteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightNineteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightNineteenth.Appearance.Options.UseFont = true;
+            this.LightNineteenth.Appearance.Options.UseForeColor = true;
+            this.LightNineteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightNineteenth.Location = new System.Drawing.Point(0, 576);
+            this.LightNineteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightNineteenth.Name = "LightNineteenth";
+            this.LightNineteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightNineteenth.TabIndex = 22;
+            this.LightNineteenth.Text = "●";
+            this.LightNineteenth.ToolTip = "SWHY019";
             // 
-            // labelControl20
+            // LightTwentyFirst
             // 
-            this.labelControl20.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl20.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl20.Appearance.Options.UseFont = true;
-            this.labelControl20.Appearance.Options.UseForeColor = true;
-            this.labelControl20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl20.Location = new System.Drawing.Point(0, 480);
-            this.labelControl20.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl20.Name = "labelControl20";
-            this.labelControl20.Size = new System.Drawing.Size(40, 32);
-            this.labelControl20.TabIndex = 39;
-            this.labelControl20.Text = "●";
+            this.LightTwentyFirst.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTwentyFirst.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTwentyFirst.Appearance.Options.UseFont = true;
+            this.LightTwentyFirst.Appearance.Options.UseForeColor = true;
+            this.LightTwentyFirst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTwentyFirst.Location = new System.Drawing.Point(0, 640);
+            this.LightTwentyFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTwentyFirst.Name = "LightTwentyFirst";
+            this.LightTwentyFirst.Size = new System.Drawing.Size(40, 33);
+            this.LightTwentyFirst.TabIndex = 21;
+            this.LightTwentyFirst.Text = "●";
+            this.LightTwentyFirst.ToolTip = "SWHY021";
             // 
-            // labelControl21
+            // LightTwentieth
             // 
-            this.labelControl21.Appearance.Font = new System.Drawing.Font("宋体", 20F);
-            this.labelControl21.Appearance.ForeColor = System.Drawing.Color.Green;
-            this.labelControl21.Appearance.Options.UseFont = true;
-            this.labelControl21.Appearance.Options.UseForeColor = true;
-            this.labelControl21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl21.Location = new System.Drawing.Point(0, 512);
-            this.labelControl21.Margin = new System.Windows.Forms.Padding(0);
-            this.labelControl21.Name = "labelControl21";
-            this.labelControl21.Size = new System.Drawing.Size(40, 32);
-            this.labelControl21.TabIndex = 40;
-            this.labelControl21.Text = "●";
+            this.LightTwentieth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTwentieth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTwentieth.Appearance.Options.UseFont = true;
+            this.LightTwentieth.Appearance.Options.UseForeColor = true;
+            this.LightTwentieth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTwentieth.Location = new System.Drawing.Point(0, 608);
+            this.LightTwentieth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTwentieth.Name = "LightTwentieth";
+            this.LightTwentieth.Size = new System.Drawing.Size(40, 32);
+            this.LightTwentieth.TabIndex = 20;
+            this.LightTwentieth.Text = "●";
+            this.LightTwentieth.ToolTip = "SWHY020";
+            // 
+            // btnClearAlarm
+            // 
+            this.btnClearAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearAlarm.Location = new System.Drawing.Point(1110, 38);
+            this.btnClearAlarm.Name = "btnClearAlarm";
+            this.btnClearAlarm.Size = new System.Drawing.Size(74, 29);
+            this.btnClearAlarm.TabIndex = 30;
+            this.btnClearAlarm.Text = "清除报警";
+            this.btnClearAlarm.Click += new System.EventHandler(this.btnClearAlarm_Click);
             // 
             // FrmOutstocks
             // 
@@ -1365,17 +1391,17 @@ namespace iWms.Form
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.SimpleButton btnLack;
         private System.Windows.Forms.TableLayoutPanel tlpLight;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl21;
-        private DevExpress.XtraEditors.LabelControl labelControl20;
-        private DevExpress.XtraEditors.LabelControl labelControl19;
-        private DevExpress.XtraEditors.LabelControl labelControl18;
-        private DevExpress.XtraEditors.LabelControl labelControl17;
-        private DevExpress.XtraEditors.LabelControl labelControl16;
-        private DevExpress.XtraEditors.LabelControl labelControl15;
-        private DevExpress.XtraEditors.LabelControl labelControl14;
-        private DevExpress.XtraEditors.LabelControl labelControl13;
-        private DevExpress.XtraEditors.LabelControl labelControl12;
+        private DevExpress.XtraEditors.LabelControl LightTwentieth;
+        private DevExpress.XtraEditors.LabelControl LightSeventeenth;
+        private DevExpress.XtraEditors.LabelControl LightSixteenth;
+        private DevExpress.XtraEditors.LabelControl LightFifteenth;
+        private DevExpress.XtraEditors.LabelControl LightForteenth;
+        private DevExpress.XtraEditors.LabelControl LightTwelfth;
+        private DevExpress.XtraEditors.LabelControl LightThirteenth;
+        private DevExpress.XtraEditors.LabelControl LightEleventh;
+        private DevExpress.XtraEditors.LabelControl LightTenth;
+        private DevExpress.XtraEditors.LabelControl LightNinth;
+        private DevExpress.XtraEditors.LabelControl LightEighth;
         private DevExpress.XtraEditors.LabelControl LightSeventh;
         private DevExpress.XtraEditors.LabelControl LightSixth;
         private DevExpress.XtraEditors.LabelControl LightFifth;
@@ -1383,8 +1409,9 @@ namespace iWms.Form
         private DevExpress.XtraEditors.LabelControl LightThird;
         private DevExpress.XtraEditors.LabelControl LightSecond;
         private DevExpress.XtraEditors.LabelControl LightFirst;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl LightEighteenth;
+        private DevExpress.XtraEditors.LabelControl LightNineteenth;
+        private DevExpress.XtraEditors.LabelControl LightTwentyFirst;
+        private DevExpress.XtraEditors.SimpleButton btnClearAlarm;
     }
 }

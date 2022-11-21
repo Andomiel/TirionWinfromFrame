@@ -114,6 +114,7 @@
     <Compile Include="Enums\Inventory\InventoryBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Inventory\InventoryOrderStatusEnum.cs" />
     <Compile Include="Enums\Inventory\InventoryOrderTypeEnum.cs" />
+    <Compile Include="Enums\LightShelfStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferOrderStatusEnum.cs" />
     <Compile Include="Enums\Transfer\TransferTypeEnum.cs" />
@@ -121,8 +122,10 @@
     <Compile Include="Facade\CheckResultResponse.cs" />
     <Compile Include="Facade\DeliveryOrderFeedback.cs" />
     <Compile Include="Facade\FeedbackResponse.cs" />
+    <Compile Include="Facade\LightShelfBaseRequest.cs" />
     <Compile Include="Facade\LightShelfRequest.cs" />
     <Compile Include="Facade\LightShelfResponse.cs" />
+    <Compile Include="Facade\LightShelfStatusResponse.cs" />
     <Compile Include="Facade\ReformShelfRequest.cs" />
     <Compile Include="Facade\ReformShelfResponse.cs" />
     <Compile Include="Facade\WMSInventory.cs" />

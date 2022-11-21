@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.DataContext;
@@ -29,6 +30,8 @@ namespace iWms.Form
         public int recordCount = 0;    //总记录数
         public int pageCount = 0;      //总页数
         public int currentPage = 0;    //当前页
+
+        private Timer statusTimer;
 
         public FrmOutstocks()
         {
@@ -90,8 +93,93 @@ namespace iWms.Form
             cbOrderType.SelectedIndex = 0;
             cbOrderStatus.SelectedIndex = 0;
 
+            ReleaseTimer();
+
+            statusTimer.Interval = 30 * 1000;
+            statusTimer.Tick += StatusTimer_Tick;
+            statusTimer.Start();
+
             GetOrders();
         }
+
+        private void StatusTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                var statusList = GetLightShelfStatus();
+                if (statusList == null || statusList.Count == 0)
+                {
+                    return;
+                }
+
+                foreach (Control item in tlpLight.Controls)
+                {
+                    if (item is LabelControl)
+                    {
+                        var label = item as LabelControl;
+                        var statusItem = statusList.FirstOrDefault(p => p.shelf_id == label.ToolTip);
+                        if (statusItem != null)
+                        {
+                            if (statusItem.state == (int)LightShelfStatusEnum.Normal)
+                            {
+                                label.ForeColor = Color.Green;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                            {
+                                label.ForeColor = Color.Yellow;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Error)
+                            {
+                                label.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                label.ForeColor = Color.Blue;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FileLog.Log($"刷新料架状态出错:{ex.GetDeepException()}");
+            }
+        }
+
+        private List<LightShelfStatus> GetLightShelfStatus()
+        {
+            string url = ConfigurationManager.AppSettings["lightShelfStatusUrl"];
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new OppoCoreException("缺少亮灯货架的状态明细服务地址配置");
+            }
+            Dictionary<string, string> logDict = new Dictionary<string, string>(3);
+            logDict.Add("url", url);
+
+            var request = new LightShelfBaseRequest();
+            string requestString = JsonConvert.SerializeObject(request);
+            logDict.Add("request", requestString);
+
+            string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+            logDict.Add("response", strResponse);
+
+            FileLog.Log($"读取亮灯货架状态:{JsonConvert.SerializeObject(logDict)}");
+
+            LightShelfStatusResponse response = JsonConvert.DeserializeObject<LightShelfStatusResponse>(strResponse);
+            return response?.data;
+        }
+
+        private void ReleaseTimer()
+        {
+            if (statusTimer != null)
+            {
+                statusTimer.Stop();
+                //statusTimer.Tick -= StatusTimer_Tick;
+                statusTimer.Dispose();
+                statusTimer = null;
+            }
+        }
+
 
         private readonly object lockQueryObj = new object();
 
@@ -1020,6 +1108,37 @@ namespace iWms.Form
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void btnClearAlarm_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockSpecialObj)
+                {
+                    //额外做一次取消报警
+                    string url = ConfigurationManager.AppSettings["lightShelfCancelAlarmUrl"];
+                    if (string.IsNullOrWhiteSpace(url))
+                    {
+                        throw new OppoCoreException("缺少亮灯货架的取消报警服务地址配置");
+                    }
+                    foreach (string shelfNo in ShelfNos)
+                    {
+                        CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
+                    }
+
+                    "取消报警成功，请等待30s刷新状态".ShowTips();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
             }
         }
     }
