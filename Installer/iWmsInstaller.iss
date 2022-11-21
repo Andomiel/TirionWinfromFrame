@@ -20,13 +20,13 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\Passioniot
 DefaultGroupName=Passioniot
-LicenseFile=F:\新建文件夹\TirionWinfromFrame\Installer\License.rtf
+LicenseFile=D:\Code\TirionWinfromFrame\Installer\License.rtf
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=F:\新建文件夹\TirionWinfromFrame\Installer
+OutputDir=D:\Code\TirionWinfromFrame\Installer
 OutputBaseFilename=iWmsSetup-1.0.14
-SetupIconFile=F:\新建文件夹\TirionWinfromFrame\Installer\picon.ico
+SetupIconFile=D:\Code\TirionWinfromFrame\Installer\picon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -38,8 +38,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "F:\新建文件夹\TirionWinfromFrame\TirionWinfromFrame.Start\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\新建文件夹\TirionWinfromFrame\TirionWinfromFrame.Start\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Code\TirionWinfromFrame\TirionWinfromFrame.Start\bin\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Code\TirionWinfromFrame\TirionWinfromFrame.Start\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

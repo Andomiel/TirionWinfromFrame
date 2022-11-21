@@ -143,7 +143,7 @@ namespace TirionWinfromFrame
 
         private void btnUpdates_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://10.21.177.80:8088/VersionLogs.html");
+            System.Diagnostics.Process.Start("http://192.168.3.5:8081/VersionLogs.html");
         }
     }
 }

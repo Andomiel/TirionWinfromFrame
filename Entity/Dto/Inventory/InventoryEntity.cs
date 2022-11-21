@@ -84,5 +84,7 @@ namespace Entity.Dto
 
         public int MinPacking { get; set; }
 
+        public string WorkOrderNo { get; set; } = string.Empty;
+
     }
 }

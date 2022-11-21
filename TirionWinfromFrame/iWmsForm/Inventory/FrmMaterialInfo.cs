@@ -3,6 +3,7 @@ using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.Dto;
 using Entity.Enums;
+using Entity.Facade;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -344,58 +345,105 @@ namespace iWms.Form
             }
         }
 
-        private object lockSyncObj = new object();
+        private void LightSingleBarcode(string positionNo)
+        {
+            StringBuilder sb = new StringBuilder("请求发料亮灯");
+            try
+            {
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/midea/api/lightshelf/light";
+                sb.AppendLine($"地址:{url}");
+                LightShelfLocationRequest request = new LightShelfLocationRequest
+                {
+                    ShelfPosition = positionNo
+                };
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"请求参数:{requestJson}");
+                string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+                sb.AppendLine($"返回:{strResponse}");
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine($"异常:{ex.Message}");
+            }
+            FileLog.Log(sb.ToString());
+        }
+
+        private readonly object lockSyncObj = new object();
 
         private void btnSync_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
                 lock (lockSyncObj)
                 {
-                    DataTable dtBarcode = InOutStockStorageData.GetAllMaterial();
-                    foreach (DataRow row in dtBarcode.Rows)
+                    if (dataGridViewX1.SelectedCells.Count == 0)
                     {
-                        string barcode = Convert.ToString(row["ReelID"]);
-                        string qrCode = Convert.ToString(row["QRCode"]);
-                        if (string.IsNullOrWhiteSpace(qrCode))
+                        "请选择需要点亮的物料".ShowTips();
+                        return;
+                    }
+                    List<string> positions = new List<string>();
+                    foreach (DataGridViewCell item in dataGridViewX1.SelectedCells)
+                    {
+                        var row = item.OwningRow;
+                        var barcodeEntity = row.DataBoundItem as InventoryEntity;
+                        if (barcodeEntity == null || positions.Contains(barcodeEntity.Location))
                         {
                             continue;
                         }
-                        int qty = 0;
-                        string materialType = "F";
-                        int miniPackage = 0;
-                        int.TryParse(Convert.ToString(row["MinPacking"]), out miniPackage);
-                        var material = CallMaterialInfoByUPN(qrCode);
-                        if (material != null && int.TryParse(material.InvQty, out qty) && qty > 0)
-                        {
-                            if (miniPackage > 0)
-                            {
-                                decimal offset = miniPackage - qty;
-                                if ((Math.Abs(offset) / miniPackage) * 1000 <= 3)
-                                {
-                                    materialType = "F";
-                                }
-                                else if ((offset / miniPackage) * 1000 > 3)
-                                {
-                                    materialType = "S";
-                                }
-                                else if (offset / miniPackage * 1000 < -3)
-                                {
-                                    materialType = "T";
-                                }
-                                else
-                                {
-                                    //do nothing
-                                }
-                            }
-                            InOutStockStorageData.UpdateQtyFromMes(barcode, qty, materialType);
-                        }
+                        positions.Add(barcodeEntity.Location);
+                        LightSingleBarcode(barcodeEntity.Location);
                     }
+                    "发料亮灯成功！".ShowTips();
+
+                    //DataTable dtBarcode = InOutStockStorageData.GetAllMaterial();
+                    //foreach (DataRow row in dtBarcode.Rows)
+                    //{
+                    //    string barcode = Convert.ToString(row["ReelID"]);
+                    //    string qrCode = Convert.ToString(row["QRCode"]);
+                    //    if (string.IsNullOrWhiteSpace(qrCode))
+                    //    {
+                    //        continue;
+                    //    }
+                    //    int qty = 0;
+                    //    string materialType = "F";
+                    //    int miniPackage = 0;
+                    //    int.TryParse(Convert.ToString(row["MinPacking"]), out miniPackage);
+                    //    var material = CallMaterialInfoByUPN(qrCode);
+                    //    if (material != null && int.TryParse(material.InvQty, out qty) && qty > 0)
+                    //    {
+                    //        if (miniPackage > 0)
+                    //        {
+                    //            decimal offset = miniPackage - qty;
+                    //            if ((Math.Abs(offset) / miniPackage) * 1000 <= 3)
+                    //            {
+                    //                materialType = "F";
+                    //            }
+                    //            else if ((offset / miniPackage) * 1000 > 3)
+                    //            {
+                    //                materialType = "S";
+                    //            }
+                    //            else if (offset / miniPackage * 1000 < -3)
+                    //            {
+                    //                materialType = "T";
+                    //            }
+                    //            else
+                    //            {
+                    //                //do nothing
+                    //            }
+                    //        }
+                    //        InOutStockStorageData.UpdateQtyFromMes(barcode, qty, materialType);
+                    //    }
+                    //}
                 }
             }
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
             }
         }
 
