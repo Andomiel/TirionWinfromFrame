@@ -16,6 +16,9 @@ namespace iWms.Form
         public FrmManualCounting()
         {
             InitializeComponent();
+
+            cbEnable.Checked = true;
+
             gridViewRecord.AutoGenerateColumns = false;
             gridViewRecord.DataSource = RefundRecord;
             gridViewRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
@@ -52,7 +55,7 @@ namespace iWms.Form
                             upn = arr[0];
                         }
                     }
-                    if (RefundRecord.Any(p => p.UPN == upn) || "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes)
+                    if ((!cbEnable.Checked) || RefundRecord.Any(p => p.UPN == upn) || "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes)
                     {
                         BtnSubmit_Click(btnSubmit, null);
                     }
@@ -265,6 +268,18 @@ namespace iWms.Form
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void CbEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEnable.Checked)
+            {
+                tbQty.Enabled = true;
+            }
+            else
+            {
+                tbQty.Enabled = false;
             }
         }
     }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmManualCounting));
             this.lblScan = new System.Windows.Forms.Label();
             this.tbScan = new System.Windows.Forms.TextBox();
@@ -53,6 +53,7 @@
             this.IsSuccess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelData = new System.Windows.Forms.Panel();
+            this.cbEnable = new System.Windows.Forms.CheckBox();
             this.tlpLayout.SuspendLayout();
             this.gbRecord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRecord)).BeginInit();
@@ -74,7 +75,7 @@
             // 
             this.tbScan.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbScan.ImeMode = System.Windows.Forms.ImeMode.Close;
-            this.tbScan.Location = new System.Drawing.Point(85, 29);
+            this.tbScan.Location = new System.Drawing.Point(85, 30);
             this.tbScan.Margin = new System.Windows.Forms.Padding(37, 3, 2, 3);
             this.tbScan.Name = "tbScan";
             this.tbScan.ShortcutsEnabled = false;
@@ -86,7 +87,7 @@
             // 
             this.lblQty.AutoSize = true;
             this.lblQty.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblQty.Location = new System.Drawing.Point(40, 61);
+            this.lblQty.Location = new System.Drawing.Point(38, 64);
             this.lblQty.Margin = new System.Windows.Forms.Padding(5, 7, 0, 5);
             this.lblQty.Name = "lblQty";
             this.lblQty.Size = new System.Drawing.Size(29, 12);
@@ -135,7 +136,7 @@
             // lblTypeT
             // 
             this.lblTypeT.AutoSize = true;
-            this.lblTypeT.Location = new System.Drawing.Point(12, 91);
+            this.lblTypeT.Location = new System.Drawing.Point(12, 90);
             this.lblTypeT.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTypeT.Name = "lblTypeT";
             this.lblTypeT.Size = new System.Drawing.Size(55, 14);
@@ -150,13 +151,13 @@
             this.tlpLayout.Controls.Add(this.gbRecord, 0, 1);
             this.tlpLayout.Controls.Add(this.panelData, 0, 0);
             this.tlpLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLayout.Location = new System.Drawing.Point(0, 0);
+            this.tlpLayout.Location = new System.Drawing.Point(0, 34);
             this.tlpLayout.Margin = new System.Windows.Forms.Padding(3, 34, 3, 3);
             this.tlpLayout.Name = "tlpLayout";
             this.tlpLayout.RowCount = 2;
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLayout.Size = new System.Drawing.Size(1122, 610);
+            this.tlpLayout.Size = new System.Drawing.Size(1122, 576);
             this.tlpLayout.TabIndex = 30;
             // 
             // gbRecord
@@ -165,7 +166,7 @@
             this.gbRecord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbRecord.Location = new System.Drawing.Point(3, 143);
             this.gbRecord.Name = "gbRecord";
-            this.gbRecord.Size = new System.Drawing.Size(1116, 464);
+            this.gbRecord.Size = new System.Drawing.Size(1116, 430);
             this.gbRecord.TabIndex = 0;
             this.gbRecord.TabStop = false;
             this.gbRecord.Text = "点料记录";
@@ -189,14 +190,14 @@
             this.Success,
             this.IsSuccess,
             this.Message});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridViewRecord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridViewRecord.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridViewRecord.Location = new System.Drawing.Point(3, 18);
@@ -207,7 +208,7 @@
             this.gridViewRecord.Name = "gridViewRecord";
             this.gridViewRecord.RowHeadersWidth = 25;
             this.gridViewRecord.RowTemplate.Height = 30;
-            this.gridViewRecord.Size = new System.Drawing.Size(1110, 443);
+            this.gridViewRecord.Size = new System.Drawing.Size(1110, 409);
             this.gridViewRecord.TabIndex = 24;
             this.gridViewRecord.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridViewRecord_RowPostPaint);
             // 
@@ -300,6 +301,7 @@
             // 
             // panelData
             // 
+            this.panelData.Controls.Add(this.cbEnable);
             this.panelData.Controls.Add(this.btnSubmit);
             this.panelData.Controls.Add(this.cbIsTypeT);
             this.panelData.Controls.Add(this.tbScan);
@@ -313,6 +315,18 @@
             this.panelData.Name = "panelData";
             this.panelData.Size = new System.Drawing.Size(1116, 134);
             this.panelData.TabIndex = 1;
+            // 
+            // cbEnable
+            // 
+            this.cbEnable.AutoSize = true;
+            this.cbEnable.Location = new System.Drawing.Point(21, 63);
+            this.cbEnable.Margin = new System.Windows.Forms.Padding(2);
+            this.cbEnable.Name = "cbEnable";
+            this.cbEnable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbEnable.Size = new System.Drawing.Size(15, 14);
+            this.cbEnable.TabIndex = 30;
+            this.cbEnable.UseVisualStyleBackColor = true;
+            this.cbEnable.CheckedChanged += new System.EventHandler(this.CbEnable_CheckedChanged);
             // 
             // FrmManualCounting
             // 
@@ -358,5 +372,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Success;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsSuccess;
         private System.Windows.Forms.DataGridViewTextBoxColumn Message;
+        private System.Windows.Forms.CheckBox cbEnable;
     }
 }
