@@ -80,6 +80,7 @@ namespace iWms.Form
             this.btnSpecial = new DevExpress.XtraEditors.SimpleButton();
             this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.btnLack = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,7 +124,6 @@ namespace iWms.Form
             this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
-            this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -641,6 +641,16 @@ namespace iWms.Form
             this.btnLack.TabIndex = 29;
             this.btnLack.Text = "欠料分析";
             this.btnLack.Click += new System.EventHandler(this.BtnLack_Click);
+            // 
+            // btnClearAlarm
+            // 
+            this.btnClearAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearAlarm.Location = new System.Drawing.Point(1110, 38);
+            this.btnClearAlarm.Name = "btnClearAlarm";
+            this.btnClearAlarm.Size = new System.Drawing.Size(74, 29);
+            this.btnClearAlarm.TabIndex = 30;
+            this.btnClearAlarm.Text = "清除报警";
+            this.btnClearAlarm.Click += new System.EventHandler(this.btnClearAlarm_Click);
             // 
             // dgvOrders
             // 
@@ -1282,16 +1292,6 @@ namespace iWms.Form
             this.LightTwentieth.Text = "●";
             this.LightTwentieth.ToolTip = "SWHY020";
             // 
-            // btnClearAlarm
-            // 
-            this.btnClearAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearAlarm.Location = new System.Drawing.Point(1110, 38);
-            this.btnClearAlarm.Name = "btnClearAlarm";
-            this.btnClearAlarm.Size = new System.Drawing.Size(74, 29);
-            this.btnClearAlarm.TabIndex = 30;
-            this.btnClearAlarm.Text = "清除报警";
-            this.btnClearAlarm.Click += new System.EventHandler(this.btnClearAlarm_Click);
-            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1300,6 +1300,7 @@ namespace iWms.Form
             this.Controls.Add(this.tlpLayout);
             this.Name = "FrmOutstocks";
             this.Text = "出库单列表";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmOutstocks_FormClosing);
             this.Load += new System.EventHandler(this.FrmOutstocks_Load);
             this.Controls.SetChildIndex(this.tlpLayout, 0);
             this.tlpLayout.ResumeLayout(false);

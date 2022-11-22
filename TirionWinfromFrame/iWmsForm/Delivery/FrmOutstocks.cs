@@ -95,7 +95,10 @@ namespace iWms.Form
 
             ReleaseTimer();
 
-            statusTimer.Interval = 30 * 1000;
+            statusTimer = new Timer
+            {
+                Interval = 30 * 1000
+            };
             statusTimer.Tick += StatusTimer_Tick;
             statusTimer.Start();
 
@@ -1140,6 +1143,11 @@ namespace iWms.Form
             {
                 SplashScreenManager.CloseForm();
             }
+        }
+
+        private void FrmOutstocks_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ReleaseTimer();
         }
     }
 
