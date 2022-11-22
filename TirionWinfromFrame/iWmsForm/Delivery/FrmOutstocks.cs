@@ -1097,7 +1097,7 @@ namespace iWms.Form
 
                     List<HeadColumn> headColumns = new List<HeadColumn>
                         {
-                            new HeadColumn("LineNumber","序号", 2200),
+                            new HeadColumn("RowNum","序号", 2200),
                             new HeadColumn("OrderNo","出库单号", 4200),
                             new HeadColumn("MaterialNo","物料代码", 2200),
                             new HeadColumn("RequireCount","需求数量", 2200),
