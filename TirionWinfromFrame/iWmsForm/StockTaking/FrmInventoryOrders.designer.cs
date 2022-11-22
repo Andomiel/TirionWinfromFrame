@@ -68,6 +68,7 @@ namespace iWms.Form
             this.colDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
@@ -139,6 +140,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
             this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
             this.tlpConditions.Controls.Add(this.btnCancel, 10, 1);
+            this.tlpConditions.Controls.Add(this.btnReset, 10, 0);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -536,6 +538,16 @@ namespace iWms.Form
             this.colCreateUser.Name = "colCreateUser";
             this.colCreateUser.ReadOnly = true;
             // 
+            // btnReset
+            // 
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.Location = new System.Drawing.Point(1028, 3);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(87, 29);
+            this.btnReset.TabIndex = 27;
+            this.btnReset.Text = "一键复位";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // FrmInventoryOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -596,5 +608,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActualQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colResult;
+        private DevExpress.XtraEditors.SimpleButton btnReset;
     }
 }

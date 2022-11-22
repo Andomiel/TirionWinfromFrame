@@ -323,6 +323,11 @@ namespace Business
             string sql = $@" SELECT TOP 2 * FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering}; ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
         }
+
+        protected override int GetLargestStatus()
+        {
+            return (int)DeliveryBarcodeStatusEnum.Cancelled;
+        }
     }
 
     public class DeliveryQueryCondition

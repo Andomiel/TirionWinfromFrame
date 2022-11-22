@@ -434,7 +434,7 @@ namespace Business
         {
             StringBuilder sb = new StringBuilder();
 
-            var barcodes = GetDeliveryBarcodesDetail(deliveryId, GetFinishedStatus());
+            var barcodes = GetDeliveryBarcodesDetail(deliveryId, GetLargestStatus());
 
             var group = barcodes.GroupBy(p => p.DeliveryAreaId);
             foreach (var item in group)
@@ -462,6 +462,8 @@ namespace Business
 
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _) > 0;
         }
+
+        protected abstract int GetLargestStatus();
     }
 
     public class DeliveryBarcodeLocation

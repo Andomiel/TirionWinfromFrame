@@ -162,6 +162,11 @@ namespace Business
             string sql = $"{Wms_TransferOrder.GetSelectSql()} AND OrderStatus = {(int)TransferOrderStatusEnum.Executing} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferOrder>();
         }
+
+        protected override int GetLargestStatus()
+        {
+            return (int)TransferBarcodeStatusEnum.Cancelled;
+        }
     }
 
     public class TransferQueryCondition
