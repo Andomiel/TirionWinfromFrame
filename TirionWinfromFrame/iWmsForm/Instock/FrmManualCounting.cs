@@ -55,9 +55,14 @@ namespace iWms.Form
                             upn = arr[0];
                         }
                     }
-                    if ((!cbEnable.Checked) || RefundRecord.Any(p => p.UPN == upn) || "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes)
+                    if ((!cbEnable.Checked) || RefundRecord.Any(p => p.UPN == upn))//|| "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes
                     {
                         BtnSubmit_Click(btnSubmit, null);
+                    }
+                    else
+                    {
+                        tbQty.Text = string.Empty;
+                        tbQty.Focus();
                     }
                 }
                 catch (Exception ex)
@@ -207,11 +212,15 @@ namespace iWms.Form
             tbScan.Focus();
         }
 
-        private void tbQty_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbQty_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+            if (e.KeyChar == 13)
+            {
+                BtnSubmit_Click(btnSubmit, null);
             }
         }
 

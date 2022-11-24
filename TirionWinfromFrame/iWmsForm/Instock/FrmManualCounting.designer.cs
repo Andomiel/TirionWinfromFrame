@@ -120,7 +120,7 @@
             this.tbQty.Name = "tbQty";
             this.tbQty.Size = new System.Drawing.Size(95, 22);
             this.tbQty.TabIndex = 27;
-            this.tbQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQty_KeyPress);
+            this.tbQty.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbQty_KeyPress);
             // 
             // cbIsTypeT
             // 
