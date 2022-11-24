@@ -1127,9 +1127,10 @@ namespace iWms.Form
                     {
                         throw new OppoCoreException("缺少亮灯货架的取消报警服务地址配置");
                     }
+                    string logKey = "clearAlarm";
                     foreach (string shelfNo in ShelfNos)
                     {
-                        CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
+                        CancelAlarm(logKey, url, shelfNo);
                     }
 
                     "取消报警成功，请等待30s刷新状态".ShowTips();
