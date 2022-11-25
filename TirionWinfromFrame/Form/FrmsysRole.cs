@@ -93,11 +93,11 @@ namespace MES.Form
             {
                 using (var db = new MESDB())
                 {
-                    ids = db.Database.SqlQuery<int>($"select functionId from sysRoleFunction where roleId={user.id}").ToListAsync().Result;
+                    ids = db.Database.SqlQuery<int>($"select functionId from sysRoleFunction where roleId={user.id} and functionId is not null").ToListAsync().Result;
                     ///根据角色id获取用户
                     userids = db.Database
                         .SqlQuery<int>(
-                            $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={user.id}").ToListAsync()
+                            $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={user.id} and u.id is not null").ToListAsync()
                         .Result;
                     gridControl1.DataSource = db.sysUserInfo.ToList().Where(p => userids.Contains(p.id));
 
@@ -412,7 +412,7 @@ namespace MES.Form
                 ///根据角色id获取用户
                 userids = db.Database
                     .SqlQuery<int>(
-                        $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text}").ToListAsync()
+                        $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text} and u.id is not null").ToListAsync()
                     .Result;
                // gridControl1.DataSource = db.sysUserInfo.ToList().Exists(p => userids.Contains(p.id));
 
