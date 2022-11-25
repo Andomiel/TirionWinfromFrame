@@ -74,13 +74,6 @@ namespace iWms.Form
             this.btnNoSource = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
-            this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperate = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvMaterials = new System.Windows.Forms.DataGridView();
@@ -93,6 +86,13 @@ namespace iWms.Form
             this.colTowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperate = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -527,6 +527,7 @@ namespace iWms.Form
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -550,7 +551,7 @@ namespace iWms.Form
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
-            this.dgvOrders.RowHeadersWidth = 50;
+            this.dgvOrders.RowHeadersWidth = 40;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1218, 144);
@@ -560,72 +561,6 @@ namespace iWms.Form
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.dgvOrders_SelectionChanged);
             this.dgvOrders.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvOrders_KeyUp);
-            // 
-            // colIsSelected
-            // 
-            this.colIsSelected.DataPropertyName = "IsSelected";
-            this.colIsSelected.FalseValue = "False";
-            this.colIsSelected.FillWeight = 40F;
-            this.colIsSelected.HeaderText = "选择";
-            this.colIsSelected.MinimumWidth = 40;
-            this.colIsSelected.Name = "colIsSelected";
-            this.colIsSelected.ToolTipText = "只在取消入库时生效";
-            this.colIsSelected.TrueValue = "True";
-            // 
-            // colOrderNo
-            // 
-            this.colOrderNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colOrderNo.DataPropertyName = "InstockNo";
-            this.colOrderNo.HeaderText = "入库单号";
-            this.colOrderNo.MinimumWidth = 9;
-            this.colOrderNo.Name = "colOrderNo";
-            this.colOrderNo.ReadOnly = true;
-            // 
-            // colOrderType
-            // 
-            this.colOrderType.DataPropertyName = "OrderTypeDisplay";
-            this.colOrderType.HeaderText = "单据类型";
-            this.colOrderType.MinimumWidth = 9;
-            this.colOrderType.Name = "colOrderType";
-            this.colOrderType.ReadOnly = true;
-            this.colOrderType.Width = 175;
-            // 
-            // colOrderStatus
-            // 
-            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
-            this.colOrderStatus.HeaderText = "单据状态";
-            this.colOrderStatus.MinimumWidth = 9;
-            this.colOrderStatus.Name = "colOrderStatus";
-            this.colOrderStatus.ReadOnly = true;
-            this.colOrderStatus.Width = 175;
-            // 
-            // colOrderTime
-            // 
-            this.colOrderTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colOrderTime.DataPropertyName = "CreateTime";
-            this.colOrderTime.HeaderText = "下达时间";
-            this.colOrderTime.MinimumWidth = 9;
-            this.colOrderTime.Name = "colOrderTime";
-            this.colOrderTime.ReadOnly = true;
-            // 
-            // colFinishedTime
-            // 
-            this.colFinishedTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
-            this.colFinishedTime.HeaderText = "完成时间";
-            this.colFinishedTime.MinimumWidth = 9;
-            this.colFinishedTime.Name = "colFinishedTime";
-            this.colFinishedTime.ReadOnly = true;
-            // 
-            // colOperate
-            // 
-            this.colOperate.DataPropertyName = "OperationText";
-            this.colOperate.HeaderText = "操作";
-            this.colOperate.MinimumWidth = 9;
-            this.colOperate.Name = "colOperate";
-            this.colOperate.ReadOnly = true;
-            this.colOperate.Text = "入库";
-            this.colOperate.Width = 175;
             // 
             // tbDetails
             // 
@@ -679,7 +614,7 @@ namespace iWms.Form
             this.dgvMaterials.MultiSelect = false;
             this.dgvMaterials.Name = "dgvMaterials";
             this.dgvMaterials.ReadOnly = true;
-            this.dgvMaterials.RowHeadersWidth = 50;
+            this.dgvMaterials.RowHeadersWidth = 40;
             this.dgvMaterials.RowTemplate.Height = 23;
             this.dgvMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterials.Size = new System.Drawing.Size(478, 320);
@@ -738,7 +673,7 @@ namespace iWms.Form
             this.dgvBarcodes.MultiSelect = false;
             this.dgvBarcodes.Name = "dgvBarcodes";
             this.dgvBarcodes.ReadOnly = true;
-            this.dgvBarcodes.RowHeadersWidth = 50;
+            this.dgvBarcodes.RowHeadersWidth = 40;
             this.dgvBarcodes.RowTemplate.Height = 23;
             this.dgvBarcodes.Size = new System.Drawing.Size(722, 320);
             this.dgvBarcodes.TabIndex = 1;
@@ -781,6 +716,66 @@ namespace iWms.Form
             this.colOperator.MinimumWidth = 9;
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
+            // 
+            // colIsSelected
+            // 
+            this.colIsSelected.DataPropertyName = "IsSelected";
+            this.colIsSelected.FalseValue = "False";
+            this.colIsSelected.FillWeight = 20F;
+            this.colIsSelected.HeaderText = "选择";
+            this.colIsSelected.MinimumWidth = 40;
+            this.colIsSelected.Name = "colIsSelected";
+            this.colIsSelected.ToolTipText = "只在取消入库时生效";
+            this.colIsSelected.TrueValue = "True";
+            // 
+            // colOrderNo
+            // 
+            this.colOrderNo.DataPropertyName = "InstockNo";
+            this.colOrderNo.HeaderText = "入库单号";
+            this.colOrderNo.MinimumWidth = 180;
+            this.colOrderNo.Name = "colOrderNo";
+            this.colOrderNo.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "OrderTypeDisplay";
+            this.colOrderType.HeaderText = "单据类型";
+            this.colOrderType.MinimumWidth = 100;
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            // 
+            // colOrderStatus
+            // 
+            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
+            this.colOrderStatus.HeaderText = "单据状态";
+            this.colOrderStatus.MinimumWidth = 80;
+            this.colOrderStatus.Name = "colOrderStatus";
+            this.colOrderStatus.ReadOnly = true;
+            // 
+            // colOrderTime
+            // 
+            this.colOrderTime.DataPropertyName = "CreateTime";
+            this.colOrderTime.HeaderText = "下达时间";
+            this.colOrderTime.MinimumWidth = 9;
+            this.colOrderTime.Name = "colOrderTime";
+            this.colOrderTime.ReadOnly = true;
+            // 
+            // colFinishedTime
+            // 
+            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
+            this.colFinishedTime.HeaderText = "完成时间";
+            this.colFinishedTime.MinimumWidth = 9;
+            this.colFinishedTime.Name = "colFinishedTime";
+            this.colFinishedTime.ReadOnly = true;
+            // 
+            // colOperate
+            // 
+            this.colOperate.DataPropertyName = "OperationText";
+            this.colOperate.HeaderText = "操作";
+            this.colOperate.MinimumWidth = 9;
+            this.colOperate.Name = "colOperate";
+            this.colOperate.ReadOnly = true;
+            this.colOperate.Text = "入库";
             // 
             // FrmInstocks
             // 
