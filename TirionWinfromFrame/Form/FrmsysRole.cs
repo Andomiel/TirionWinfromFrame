@@ -59,7 +59,7 @@ namespace MES.Form
                 if(!string.IsNullOrEmpty(txtid.Text))
                      userids = db.Database
                     .SqlQuery<int>(
-                        $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text}").ToListAsync()
+                        $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text} and u.id is not null").ToListAsync()
                     .Result;
             }
             if (treeList2.Nodes.Count > 0)
