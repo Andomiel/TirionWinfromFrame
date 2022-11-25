@@ -1,6 +1,8 @@
 ﻿using DataBase;
+using Entity.Enums;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +50,12 @@ namespace Business
             int currentValue = TypeParse.StrToInt(current, 0);
             int latestValue = TypeParse.StrToInt(latest, 0);
             return currentValue >= latestValue;
+        }
+
+        public static DataTable GetInventoryBarcode(string barcode)
+        {
+            string newBarcodeSql = $"select * from smt_zd_material where ReelID = '{barcode}' and Status < {(int)BarcodeStatusEnum.Delivered}  ";
+            return DbHelper.GetDataTable(newBarcodeSql);
         }
     }
 }

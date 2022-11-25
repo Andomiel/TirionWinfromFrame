@@ -234,6 +234,26 @@ namespace Business
         {
             return (int)InventoryBarcodeStatusEnum.Cancelled;
         }
+
+        public static void MaterialInstockTakingSuccess(string barcode, string location, string userName)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($@"update Wms_InventoryBarcode set RealQuantity=OriginQuantity,OrderStatus={(int)InventoryBarcodeStatusEnum.Executed}, 
+                        LastUpdateTime=GETDATE(), LastUpdateUser='{userName}' where Barcode='{barcode}' and OrderStatus={(int)InventoryBarcodeStatusEnum.Executing};");
+            sb.AppendLine($"insert into tower01_smt_RunLog(RunType, ReelID) values('{location}盘点正常', '{barcode}');");
+
+            DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
+        }
+
+        public static void MaterialInstockTakingNew(string inventoryId, string materialNo, string barcode, int quantity, string location, string userName)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($@"INSERT INTO Wms_InventoryBarcode
+                    (BusinessId, InventoryOrderId, MaterialNo, Barcode, OriginQuantity, RealQuantity, OriginLocation, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+                    VALUES('{Guid.NewGuid():D}', '{inventoryId}', '{materialNo}', '{barcode}', 0, {quantity}, '{location}', {(int)InventoryBarcodeStatusEnum.Executed}, getdate(), '{userName}', getdate(), '{userName}');");
+
+            sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Locked}, Work_Order_No = '{inventoryId}', LockRequestID = ''  where  ReelID = '{barcode}'; ");
+        }
     }
 
     public class InventoryQueryCondition
