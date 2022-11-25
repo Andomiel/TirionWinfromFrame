@@ -30,9 +30,9 @@ namespace iWms.Form
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOutstocks));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -82,14 +82,6 @@ namespace iWms.Form
             this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
-            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSortingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReview = new System.Windows.Forms.DataGridViewLinkColumn();
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
@@ -124,6 +116,15 @@ namespace iWms.Form
             this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
+            this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSortingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReview = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -155,7 +156,7 @@ namespace iWms.Form
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tlpLayout.Size = new System.Drawing.Size(1227, 673);
+            this.tlpLayout.Size = new System.Drawing.Size(1378, 673);
             this.tlpLayout.TabIndex = 0;
             // 
             // statusStrip2
@@ -297,13 +298,13 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1181, 134);
+            this.gbConditions.Size = new System.Drawing.Size(1332, 134);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
             // tlpConditions
             // 
-            this.tlpConditions.ColumnCount = 17;
+            this.tlpConditions.ColumnCount = 19;
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
@@ -321,6 +322,8 @@ namespace iWms.Form
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.Controls.Add(this.label9, 4, 2);
             this.tlpConditions.Controls.Add(this.label8, 2, 2);
             this.tlpConditions.Controls.Add(this.label7, 0, 2);
@@ -349,7 +352,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
             this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
             this.tlpConditions.Controls.Add(this.btnLack, 13, 0);
-            this.tlpConditions.Controls.Add(this.btnClearAlarm, 15, 1);
+            this.tlpConditions.Controls.Add(this.btnClearAlarm, 18, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -358,7 +361,7 @@ namespace iWms.Form
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.Size = new System.Drawing.Size(1175, 113);
+            this.tlpConditions.Size = new System.Drawing.Size(1326, 113);
             this.tlpConditions.TabIndex = 0;
             // 
             // label9
@@ -645,7 +648,7 @@ namespace iWms.Form
             // btnClearAlarm
             // 
             this.btnClearAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearAlarm.Location = new System.Drawing.Point(1110, 38);
+            this.btnClearAlarm.Location = new System.Drawing.Point(1249, 38);
             this.btnClearAlarm.Name = "btnClearAlarm";
             this.btnClearAlarm.Size = new System.Drawing.Size(74, 29);
             this.btnClearAlarm.TabIndex = 30;
@@ -661,6 +664,7 @@ namespace iWms.Form
             this.dgvOrders.ColumnHeadersHeight = 29;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSelect,
             this.colOrderNo,
             this.colOrderType,
             this.colOrderStatus,
@@ -669,14 +673,14 @@ namespace iWms.Form
             this.colOrderTime,
             this.colFinishedTime,
             this.colReview});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
@@ -686,72 +690,11 @@ namespace iWms.Form
             this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(1181, 195);
+            this.dgvOrders.Size = new System.Drawing.Size(1332, 195);
             this.dgvOrders.TabIndex = 1;
             this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
-            // 
-            // colOrderNo
-            // 
-            this.colOrderNo.DataPropertyName = "DeliveryNo";
-            this.colOrderNo.HeaderText = "出库单号";
-            this.colOrderNo.MinimumWidth = 120;
-            this.colOrderNo.Name = "colOrderNo";
-            this.colOrderNo.ReadOnly = true;
-            // 
-            // colOrderType
-            // 
-            this.colOrderType.DataPropertyName = "DeliveryTypeDisplay";
-            this.colOrderType.HeaderText = "单据类型";
-            this.colOrderType.MinimumWidth = 100;
-            this.colOrderType.Name = "colOrderType";
-            this.colOrderType.ReadOnly = true;
-            // 
-            // colOrderStatus
-            // 
-            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
-            this.colOrderStatus.HeaderText = "单据状态";
-            this.colOrderStatus.MinimumWidth = 100;
-            this.colOrderStatus.Name = "colOrderStatus";
-            this.colOrderStatus.ReadOnly = true;
-            // 
-            // colDestinationNo
-            // 
-            this.colDestinationNo.DataPropertyName = "LineId";
-            this.colDestinationNo.HeaderText = "目的地";
-            this.colDestinationNo.MinimumWidth = 100;
-            this.colDestinationNo.Name = "colDestinationNo";
-            // 
-            // colSortingId
-            // 
-            this.colSortingId.DataPropertyName = "SortingId";
-            this.colSortingId.HeaderText = "分拣口";
-            this.colSortingId.MinimumWidth = 80;
-            this.colSortingId.Name = "colSortingId";
-            // 
-            // colOrderTime
-            // 
-            this.colOrderTime.DataPropertyName = "CreateTime";
-            this.colOrderTime.HeaderText = "下达时间";
-            this.colOrderTime.MinimumWidth = 120;
-            this.colOrderTime.Name = "colOrderTime";
-            this.colOrderTime.ReadOnly = true;
-            // 
-            // colFinishedTime
-            // 
-            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
-            this.colFinishedTime.HeaderText = "完成时间";
-            this.colFinishedTime.MinimumWidth = 120;
-            this.colFinishedTime.Name = "colFinishedTime";
-            this.colFinishedTime.ReadOnly = true;
-            // 
-            // colReview
-            // 
-            this.colReview.DataPropertyName = "OperationText";
-            this.colReview.HeaderText = "复核";
-            this.colReview.MinimumWidth = 60;
-            this.colReview.Name = "colReview";
             // 
             // gbDetails
             // 
@@ -759,7 +702,7 @@ namespace iWms.Form
             this.gbDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDetails.Location = new System.Drawing.Point(3, 374);
             this.gbDetails.Name = "gbDetails";
-            this.gbDetails.Size = new System.Drawing.Size(1181, 296);
+            this.gbDetails.Size = new System.Drawing.Size(1332, 296);
             this.gbDetails.TabIndex = 2;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "出库明细";
@@ -777,7 +720,7 @@ namespace iWms.Form
             this.tlpDetails.Name = "tlpDetails";
             this.tlpDetails.RowCount = 1;
             this.tlpDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDetails.Size = new System.Drawing.Size(1175, 275);
+            this.tlpDetails.Size = new System.Drawing.Size(1326, 275);
             this.tlpDetails.TabIndex = 0;
             // 
             // dgvDetails
@@ -791,14 +734,14 @@ namespace iWms.Form
             this.colMaterialNo,
             this.colDeliveryCount,
             this.colInventoryStatus});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvDetails.Location = new System.Drawing.Point(3, 3);
@@ -809,7 +752,7 @@ namespace iWms.Form
             this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.RowTemplate.Height = 23;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDetails.Size = new System.Drawing.Size(578, 269);
+            this.dgvDetails.Size = new System.Drawing.Size(654, 269);
             this.dgvDetails.TabIndex = 1;
             this.dgvDetails.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDetails_RowPostPaint);
             this.dgvDetails.SelectionChanged += new System.EventHandler(this.DgvDetails_SelectionChanged);
@@ -851,17 +794,17 @@ namespace iWms.Form
             this.colTower,
             this.colLocation,
             this.colOperator});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvUpns.Location = new System.Drawing.Point(593, 3);
+            this.dgvUpns.Location = new System.Drawing.Point(669, 3);
             this.dgvUpns.MultiSelect = false;
             this.dgvUpns.Name = "dgvUpns";
             this.dgvUpns.ReadOnly = true;
@@ -869,7 +812,7 @@ namespace iWms.Form
             this.dgvUpns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvUpns.RowTemplate.Height = 23;
             this.dgvUpns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvUpns.Size = new System.Drawing.Size(579, 269);
+            this.dgvUpns.Size = new System.Drawing.Size(654, 269);
             this.dgvUpns.TabIndex = 2;
             this.dgvUpns.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvUpns_RowPostPaint);
             // 
@@ -937,7 +880,7 @@ namespace iWms.Form
             this.tlpLight.Controls.Add(this.LightTwentyFirst, 0, 20);
             this.tlpLight.Controls.Add(this.LightTwentieth, 0, 19);
             this.tlpLight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLight.Location = new System.Drawing.Point(1187, 0);
+            this.tlpLight.Location = new System.Drawing.Point(1338, 0);
             this.tlpLight.Margin = new System.Windows.Forms.Padding(0);
             this.tlpLight.Name = "tlpLight";
             this.tlpLight.RowCount = 21;
@@ -1292,11 +1235,83 @@ namespace iWms.Form
             this.LightTwentieth.Text = "●";
             this.LightTwentieth.ToolTip = "SWHY020";
             // 
+            // colSelect
+            // 
+            this.colSelect.DataPropertyName = "IsSelected";
+            this.colSelect.FalseValue = "False";
+            this.colSelect.FillWeight = 50F;
+            this.colSelect.HeaderText = "选择";
+            this.colSelect.MinimumWidth = 40;
+            this.colSelect.Name = "colSelect";
+            this.colSelect.ToolTipText = "仅用于导出场景";
+            this.colSelect.TrueValue = "True";
+            // 
+            // colOrderNo
+            // 
+            this.colOrderNo.DataPropertyName = "DeliveryNo";
+            this.colOrderNo.HeaderText = "出库单号";
+            this.colOrderNo.MinimumWidth = 120;
+            this.colOrderNo.Name = "colOrderNo";
+            this.colOrderNo.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "DeliveryTypeDisplay";
+            this.colOrderType.HeaderText = "单据类型";
+            this.colOrderType.MinimumWidth = 100;
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            // 
+            // colOrderStatus
+            // 
+            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
+            this.colOrderStatus.HeaderText = "单据状态";
+            this.colOrderStatus.MinimumWidth = 100;
+            this.colOrderStatus.Name = "colOrderStatus";
+            this.colOrderStatus.ReadOnly = true;
+            // 
+            // colDestinationNo
+            // 
+            this.colDestinationNo.DataPropertyName = "LineId";
+            this.colDestinationNo.HeaderText = "目的地";
+            this.colDestinationNo.MinimumWidth = 100;
+            this.colDestinationNo.Name = "colDestinationNo";
+            // 
+            // colSortingId
+            // 
+            this.colSortingId.DataPropertyName = "SortingId";
+            this.colSortingId.HeaderText = "分拣口";
+            this.colSortingId.MinimumWidth = 80;
+            this.colSortingId.Name = "colSortingId";
+            // 
+            // colOrderTime
+            // 
+            this.colOrderTime.DataPropertyName = "CreateTime";
+            this.colOrderTime.HeaderText = "下达时间";
+            this.colOrderTime.MinimumWidth = 120;
+            this.colOrderTime.Name = "colOrderTime";
+            this.colOrderTime.ReadOnly = true;
+            // 
+            // colFinishedTime
+            // 
+            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
+            this.colFinishedTime.HeaderText = "完成时间";
+            this.colFinishedTime.MinimumWidth = 120;
+            this.colFinishedTime.Name = "colFinishedTime";
+            this.colFinishedTime.ReadOnly = true;
+            // 
+            // colReview
+            // 
+            this.colReview.DataPropertyName = "OperationText";
+            this.colReview.HeaderText = "复核";
+            this.colReview.MinimumWidth = 60;
+            this.colReview.Name = "colReview";
+            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 707);
+            this.ClientSize = new System.Drawing.Size(1378, 707);
             this.Controls.Add(this.tlpLayout);
             this.Name = "FrmOutstocks";
             this.Text = "出库单列表";
@@ -1381,14 +1396,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colTower;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDestinationNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSortingId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
-        private System.Windows.Forms.DataGridViewLinkColumn colReview;
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.SimpleButton btnLack;
         private System.Windows.Forms.TableLayoutPanel tlpLight;
@@ -1414,5 +1421,14 @@ namespace iWms.Form
         private DevExpress.XtraEditors.LabelControl LightNineteenth;
         private DevExpress.XtraEditors.LabelControl LightTwentyFirst;
         private DevExpress.XtraEditors.SimpleButton btnClearAlarm;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colSelect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDestinationNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSortingId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
+        private System.Windows.Forms.DataGridViewLinkColumn colReview;
     }
 }

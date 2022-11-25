@@ -283,6 +283,98 @@ namespace TirionWinfromFrame.Commons
             return filePath;
         }
 
+
+        /// <summary>
+        /// 由List导出Excel
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="filePath">导出路径</param>
+        /// <param name="data">在导出的List</param>
+        /// <param name="headerNameDic">表头和属性对应关系</param>
+        /// <param name="sheetName">sheet名称</param>
+        /// <returns></returns>
+        public static string ExportToExcel<T>(string filePath, Dictionary<string, List<T>> data, List<HeadColumn> headColumnList) where T : class
+        {
+            if (data.Count <= 0) return null;
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(filePath)) return null;
+
+            bool isCompatible = filePath.EndsWith(".xls", StringComparison.OrdinalIgnoreCase);
+            if (isCompatible)
+            {
+                workbook = new HSSFWorkbook();
+            }
+            else
+            {
+                workbook = new XSSFWorkbook();
+            }
+
+            ICellStyle headCellStyle = workbook.CreateCellStyle();
+            headCellStyle.FillPattern = FillPattern.SolidForeground;
+            headCellStyle.FillForegroundColor = NPOI.HSSF.Util.HSSFColor.Grey25Percent.Index;
+            headCellStyle.Alignment = NPOI.SS.UserModel.HorizontalAlignment.Center;
+            headCellStyle.VerticalAlignment = VerticalAlignment.Center;
+            headCellStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            headCellStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thin;
+            headCellStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
+            headCellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
+            IFont font = workbook.CreateFont();
+            font.IsBold = true;
+            headCellStyle.SetFont(font);
+
+            ICellStyle normalCellStyle = workbook.CreateCellStyle();
+            normalCellStyle.BorderBottom = NPOI.SS.UserModel.BorderStyle.Thin;
+            normalCellStyle.BorderLeft = NPOI.SS.UserModel.BorderStyle.Thin;
+            normalCellStyle.BorderRight = NPOI.SS.UserModel.BorderStyle.Thin;
+            normalCellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
+
+
+            foreach (var element in data)
+            {
+                ISheet sheet = workbook.CreateSheet(element.Key);
+                IRow headerRow = sheet.CreateRow(0);
+
+                for (int i = 0; i < headColumnList.Count; i++)
+                {
+                    ICell cell = headerRow.CreateCell(i);
+                    cell.SetCellValue(headColumnList[i].ColumnDes);
+                    cell.CellStyle = headCellStyle;
+                    sheet.SetColumnWidth(i, headColumnList[i].ColumnWeight);
+                }
+
+                Type t = typeof(T);
+                int rowIndex = 1;
+                foreach (T item in element.Value)
+                {
+                    IRow dataRow = sheet.CreateRow(rowIndex);
+                    for (int n = 0; n < headColumnList.Count; n++)
+                    {
+                        object pValue = t.GetProperty(headColumnList[n].ColumnKey.Trim()).GetValue(item, null);
+                        ICell cell = dataRow.CreateCell(n);
+                        cell.SetCellValue((pValue ?? "").ToString());
+                        cell.CellStyle = normalCellStyle;
+                    }
+                    rowIndex++;
+                }
+            }
+
+            FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            workbook.Write(fs);
+            fs.Dispose();
+
+            //sheet = null;
+            //headerRow = null;
+            //workbook = null;
+            workbook.Close();
+
+            return filePath;
+        }
+
         /// <summary>
         /// 由List导出Excel--单列行合并
         /// </summary>

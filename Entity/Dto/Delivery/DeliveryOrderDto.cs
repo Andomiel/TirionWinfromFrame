@@ -5,6 +5,9 @@ namespace Entity.Dto.Delivery
 {
     public class DeliveryOrderDto
     {
+
+        public bool IsSelected { get; set; } = false;
+
         /// <summary>
         /// 出库单业务Id
         /// </summary>

@@ -410,7 +410,7 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据！".ShowTips();
+                        "请选中一行数据！".ShowTips();
                         return;
                     }
                     if (selectedOrder.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
@@ -502,24 +502,6 @@ namespace iWms.Form
             }
         }
 
-        private readonly object lockJumpObj = new object();
-
-        private void BtnJump_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                lock (lockJumpObj)
-                {
-
-                    "出库任务下达成功！".ShowTips();
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.GetDeepException().ShowError();
-            }
-        }
-
         private readonly object lockFinishObj = new object();
 
         private void BtnFinish_Click(object sender, EventArgs e)
@@ -530,7 +512,7 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据！".ShowTips();
+                        "请选中一行数据！".ShowTips();
                         return;
                     }
 
@@ -573,56 +555,73 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
-                    if (selectedOrder == null)
+                    var workOrders = PagedWorkOrders.Where(p => p.IsSelected).ToList();
+                    if (workOrders.Count == 0)
                     {
                         "请选择要导出明细的出库单".ShowTips();
                         return;
                     }
-                    if (WorkOrderDetails.Count == 0)
-                    {
-                        "暂无数据可导出，请查询后导出".ShowTips();
-                        return;
-                    }
 
-                    var data = OrderBarcodes.Join(WorkOrderDetails, p => p.DeliveryDetailId, p => p.BusinessId, (b, d) => new
+                    Dictionary<string, List<ExportOrder>> data = new Dictionary<string, List<ExportOrder>>();
+                    foreach (var order in workOrders)
                     {
-                        OrderNo = selectedOrder.DeliveryNo,
-                        OrderTime = selectedOrder.CreateTime,
-                        OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
-                        FinishedTime = selectedOrder.LastUpdateTime,
-                        OrderStatus = selectedOrder.OrderStatusDisplay,
-                        DestinationNo = selectedOrder.LineId,
-                        MaterialNo = d.MaterialNo,
-                        DeliveryCount = d.RequireCount,
-                        MaterialName = string.Empty,
-                        InventoryStatus = d.DeliveryStatusDisplay,
-                        Barcode = b.Barcode,
-                        InnerCount = b.DeliveryQuantity,
-                        DeliveryOperator = b.CreateUser,
-                    }).ToList();
+                        List<ExportOrder> dataItem = new List<ExportOrder>();
 
-                    var lackDetails = WorkOrderDetails.Where(p => p.Barcodes.Count == 0).ToList();
-                    if (WorkOrderDetails.Any(p => p.Barcodes.Count == 0))
-                    {
-                        foreach (var item in lackDetails)
+                        var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
+                        var barcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+                        var barcodesGroup = barcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.ToList());
+                        foreach (var detail in details)
                         {
-                            data.Add(new
+                            var detailDto = detail.Adapt<DeliveryDetailDto>();
+                            detailDto.OrderStatus = order.OrderStatus;
+
+                            if (barcodesGroup.ContainsKey(detail.BusinessId))
                             {
-                                OrderNo = selectedOrder.DeliveryNo,
-                                OrderTime = selectedOrder.CreateTime,
-                                OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
-                                FinishedTime = selectedOrder.LastUpdateTime,
-                                OrderStatus = selectedOrder.OrderStatusDisplay,
-                                DestinationNo = selectedOrder.LineId,
-                                MaterialNo = item.MaterialNo,
-                                DeliveryCount = item.RequireCount,
-                                MaterialName = string.Empty,
-                                InventoryStatus = item.DeliveryStatusDisplay,
-                                Barcode = string.Empty,
-                                InnerCount = 0,
-                                DeliveryOperator = string.Empty,
-                            });
+                                var detailBarcodes = barcodesGroup[detail.BusinessId];
+                                detailDto.Barcodes = detailBarcodes;
+
+                                foreach (var barcode in detailBarcodes)
+                                {
+                                    dataItem.Add(new ExportOrder
+                                    {
+                                        OrderNo = selectedOrder.DeliveryNo,
+                                        OrderTime = selectedOrder.CreateTime,
+                                        OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
+                                        FinishedTime = selectedOrder.LastUpdateTime,
+                                        OrderStatus = selectedOrder.OrderStatusDisplay,
+                                        DestinationNo = selectedOrder.LineId,
+                                        MaterialNo = detail.MaterialNo,
+                                        DeliveryCount = detail.RequireCount,
+                                        MaterialName = string.Empty,
+                                        InventoryStatus = detailDto.DeliveryStatusDisplay,
+                                        Barcode = barcode.Barcode,
+                                        InnerCount = barcode.DeliveryQuantity,
+                                        DeliveryOperator = barcode.CreateUser,
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                dataItem.Add(new ExportOrder
+                                {
+                                    OrderNo = selectedOrder.DeliveryNo,
+                                    OrderTime = selectedOrder.CreateTime,
+                                    OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
+                                    FinishedTime = selectedOrder.LastUpdateTime,
+                                    OrderStatus = selectedOrder.OrderStatusDisplay,
+                                    DestinationNo = selectedOrder.LineId,
+                                    MaterialNo = detail.MaterialNo,
+                                    DeliveryCount = detail.RequireCount,
+                                    MaterialName = string.Empty,
+                                    InventoryStatus = detailDto.DeliveryStatusDisplay,
+                                    Barcode = string.Empty,
+                                    InnerCount = 0,
+                                    DeliveryOperator = string.Empty,
+                                });
+                            }
                         }
+
+                        data.Add(order.DeliveryNo, dataItem);
                     }
 
                     List<HeadColumn> headColumns = new List<HeadColumn>
@@ -650,14 +649,21 @@ namespace iWms.Form
             }
         }
 
-        public void ExportToExcel<T>(List<T> data, List<HeadColumn> headColumns) where T : class
+        public void ExportToExcel<T>(Dictionary<string, List<T>> data, List<HeadColumn> headColumns) where T : class
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
-            dialog.FileName = $"出库单{selectedOrder.DeliveryNo}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            if (data.Count == 1)
+            {
+                dialog.FileName = $"出库单{data.First().Key}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
+            else
+            {
+                dialog.FileName = $"出库单-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -719,7 +725,7 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据".ShowTips();
+                        "请选中一行数据".ShowTips();
                         return;
                     }
 
@@ -767,7 +773,7 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据".ShowTips();
+                        "请选中一行数据".ShowTips();
                         return;
                     }
                     if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
@@ -1073,27 +1079,38 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
-                    if (selectedOrder == null)
+                    var workOrders = PagedWorkOrders.Where(p => p.IsSelected).ToList();
+                    if (workOrders.Count == 0)
                     {
                         "请选择要导出明细的出库单".ShowTips();
                         return;
                     }
-                    if (WorkOrderDetails.Count == 0)
+
+                    Dictionary<string, List<LackDetail>> data = new Dictionary<string, List<LackDetail>>();
+
+                    foreach (var order in workOrders)
                     {
-                        "暂无数据可导出，请查询后导出".ShowTips();
-                        return;
+                        List<LackDetail> dataItem = new List<LackDetail>();
+
+                        var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
+                        var barcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+
+                        var detailCount = barcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.Sum(b => b.DeliveryQuantity));
+
+                        foreach (var detail in details)
+                        {
+                            dataItem.Add(new LackDetail()
+                            {
+                                RowNum = detail.RowNum,
+                                OrderNo = selectedOrder.DeliveryNo,
+                                MaterialNo = detail.MaterialNo,
+                                RequireCount = detail.RequireCount,
+                                DeliveryCount = detailCount.ContainsKey(detail.BusinessId) ? detailCount[detail.BusinessId] : 0,
+                            });
+                        }
+
+                        data.Add(order.DeliveryNo, dataItem);
                     }
-
-                    var detailCount = OrderBarcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.Sum(b => b.DeliveryQuantity));
-
-                    var data = WorkOrderDetails.Select(p => new LackDetail()
-                    {
-                        RowNum = p.RowNum,
-                        OrderNo = selectedOrder.DeliveryNo,
-                        MaterialNo = p.MaterialNo,
-                        RequireCount = p.RequireCount,
-                        DeliveryCount = detailCount.ContainsKey(p.BusinessId) ? detailCount[p.BusinessId] : 0,
-                    }).ToList();
 
                     List<HeadColumn> headColumns = new List<HeadColumn>
                         {
@@ -1168,5 +1185,22 @@ namespace iWms.Form
 
         public int LackCount => DeliveryCount >= RequireCount ? 0 : DeliveryCount - RequireCount;
 
+    }
+
+    public class ExportOrder
+    {
+        public string OrderNo { get; set; } = string.Empty;
+        public DateTime OrderTime { get; set; } = new DateTime(1900, 1, 1);
+        public string OrderTypeDes { get; set; } = string.Empty;
+        public DateTime FinishedTime { get; set; } = new DateTime(1900, 1, 1);
+        public string OrderStatus { get; set; } = string.Empty;
+        public string DestinationNo { get; set; } = string.Empty;
+        public string MaterialNo { get; set; } = string.Empty;
+        public int DeliveryCount { get; set; } = 0;
+        public string MaterialName { get; set; } = string.Empty;
+        public string InventoryStatus { get; set; } = string.Empty;
+        public string Barcode { get; set; } = string.Empty;
+        public int InnerCount { get; set; } = 0;
+        public string DeliveryOperator { get; set; } = string.Empty;
     }
 }
