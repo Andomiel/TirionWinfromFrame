@@ -107,46 +107,50 @@ namespace iWms.Form
 
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
-            try
+            var action1 = new Action(() =>
             {
-                var statusList = GetLightShelfStatus();
-                if (statusList == null || statusList.Count == 0)
+                try
                 {
-                    return;
-                }
-
-                foreach (Control item in tlpLight.Controls)
-                {
-                    if (item is LabelControl)
+                    var statusList = GetLightShelfStatus();
+                    if (statusList == null || statusList.Count == 0)
                     {
-                        var label = item as LabelControl;
-                        var statusItem = statusList.FirstOrDefault(p => p.shelf_id == label.ToolTip);
-                        if (statusItem != null)
+                        return;
+                    }
+
+                    foreach (Control item in tlpLight.Controls)
+                    {
+                        if (item is LabelControl)
                         {
-                            if (statusItem.state == (int)LightShelfStatusEnum.Normal)
+                            var label = item as LabelControl;
+                            var statusItem = statusList.FirstOrDefault(p => p.shelf_id == label.ToolTip);
+                            if (statusItem != null)
                             {
-                                label.ForeColor = Color.Green;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
-                            {
-                                label.ForeColor = Color.Yellow;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.Error)
-                            {
-                                label.ForeColor = Color.Red;
-                            }
-                            else
-                            {
-                                label.ForeColor = Color.Blue;
+                                if (statusItem.state == (int)LightShelfStatusEnum.Normal)
+                                {
+                                    label.ForeColor = Color.Green;
+                                }
+                                else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                                {
+                                    label.ForeColor = Color.Yellow;
+                                }
+                                else if (statusItem.state == (int)LightShelfStatusEnum.Error)
+                                {
+                                    label.ForeColor = Color.Red;
+                                }
+                                else
+                                {
+                                    label.ForeColor = Color.Blue;
+                                }
                             }
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                FileLog.Log($"刷新料架状态出错:{ex.GetDeepException()}");
-            }
+                catch (Exception ex)
+                {
+                    FileLog.Log($"刷新料架状态出错:{ex.GetDeepException()}");
+                }
+            });
+            this.Invoke(action1);
         }
 
         private List<LightShelfStatus> GetLightShelfStatus()
@@ -156,17 +160,17 @@ namespace iWms.Form
             {
                 throw new OppoCoreException("缺少亮灯货架的状态明细服务地址配置");
             }
-            Dictionary<string, string> logDict = new Dictionary<string, string>(3);
-            logDict.Add("url", url);
+            //Dictionary<string, string> logDict = new Dictionary<string, string>(3);
+            //logDict.Add("url", url);
 
             var request = new LightShelfBaseRequest();
             string requestString = JsonConvert.SerializeObject(request);
-            logDict.Add("request", requestString);
+            //logDict.Add("request", requestString);
 
-            string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
-            logDict.Add("response", strResponse);
+            string strResponse = WebClientHelper.Post(requestString, url, null);
+            //logDict.Add("response", strResponse);
 
-            FileLog.Log($"读取亮灯货架状态:{JsonConvert.SerializeObject(logDict)}");
+            //FileLog.Log($"读取亮灯货架状态:{JsonConvert.SerializeObject(logDict)}");
 
             LightShelfStatusResponse response = JsonConvert.DeserializeObject<LightShelfStatusResponse>(strResponse);
             return response?.data;
