@@ -265,13 +265,54 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
-                    if (WorkOrderDetails.Count == 0)
+                    var workOrders = PagedWorkOrders.Where(p => p.IsSelected).ToList();
+                    if (workOrders.Count == 0)
                     {
-                        "暂无数据可导出，请查询后导出".ShowTips();
+                        "请选择要导出明细的入库单".ShowTips();
                         return;
                     }
+                    Dictionary<string, List<InstockBarcode>> data = new Dictionary<string, List<InstockBarcode>>();
+                    foreach (var order in workOrders)
+                    {
+                        var barcodes = WareHouseBLL.GetInstockBarcodes(order.BusinessId);
 
-                    ExportToExcel();
+                        List<InstockBarcode> dataItem = new List<InstockBarcode>();
+                        foreach (DataRow item in barcodes.Rows)
+                        {
+                            dataItem.Add(new InstockBarcode()
+                            {
+                                OrderNo = order.InstockNo,
+                                OrderTime = order.CreateTime,
+                                OrderTypeDes = order.OrderTypeDisplay,
+                                OrderStatus = order.OrderStatusDisplay,
+                                MaterialNo = Convert.ToString(item["MaterialNo"]),
+                                Barcode = Convert.ToString(item["Upn"]),
+                                InnerCount = TypeParse.StrToInt(Convert.ToString(item["InnerQty"]), 0),
+                                DeliveryOperator = order.LastUpdateUser,
+                            });
+                        }
+
+                        data.Add(order.InstockNo, dataItem);
+                    }
+
+                    List<HeadColumn> headColumns = new List<HeadColumn>
+                        {
+                            new HeadColumn("OrderNo","入库单号", 4200),
+                            new HeadColumn("OrderTime","下达时间", 4000),
+                            new HeadColumn("OrderTypeDes","单据类型", 3000),
+                            //new HeadColumn("FinishedTime","完成时间", 4000),
+                            new HeadColumn("OrderStatus","单据状态", 3000),
+                            //new HeadColumn("DestinationNo","目的地", 2200),
+                            new HeadColumn("MaterialNo","物料代码", 2200),
+                            //new HeadColumn("MaterialName","物料名称", 4000),
+                            //new HeadColumn("DeliveryCount","需求数量", 2200),
+                            //new HeadColumn("InventoryStatus","库存状态", 3000),
+                            new HeadColumn("Barcode","UPN", 7168),
+                            new HeadColumn("InnerCount","盘内数量", 2200),
+                            new HeadColumn("DeliveryOperator","操作人", 3000),
+                        };
+
+                    ExportToExcel(data, headColumns);
                 }
             }
             catch (Exception ex)
@@ -280,52 +321,25 @@ namespace iWms.Form
             }
         }
 
-        public void ExportToExcel()
+        public void ExportToExcel<T>(Dictionary<string, List<T>> data, List<HeadColumn> headColumns) where T : class
         {
-            if (selectedOrder == null)
-            {
-                return;
-            }
-
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
-            dialog.FileName = $"导出入库单{selectedOrder.InstockNo}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            if (data.Count == 1)
+            {
+                dialog.FileName = $"入库单{data.First().Key}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
+            else
+            {
+                dialog.FileName = $"入库单-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-
-            var data = OrderBarcodes.Select(p => new
-            {
-                p.OrderNo,
-                OrderTime = selectedOrder.CreateTime,
-                OrderTypeDes = selectedOrder.OrderTypeDisplay,
-                OrderStatus = selectedOrder.OrderStatusDisplay,
-                p.MaterialNo,
-                Barcode = p.Upn,
-                InnerCount = p.InnerQty,
-                DeliveryOperator = selectedOrder.LastUpdateUser,
-            }).ToList();
-
-            List<HeadColumn> headColumns = new List<HeadColumn>
-            {
-                new HeadColumn("OrderNo","入库单号", 4200),
-                new HeadColumn("OrderTime","下达时间", 4000),
-                new HeadColumn("OrderTypeDes","单据类型", 3000),
-                //new HeadColumn("FinishedTime","完成时间", 4000),
-                new HeadColumn("OrderStatus","单据状态", 3000),
-                //new HeadColumn("DestinationNo","目的地", 2200),
-                new HeadColumn("MaterialNo","物料代码", 2200),
-                //new HeadColumn("MaterialName","物料名称", 4000),
-                //new HeadColumn("DeliveryCount","需求数量", 2200),
-                //new HeadColumn("InventoryStatus","库存状态", 3000),
-                new HeadColumn("Barcode","UPN", 7168),
-                new HeadColumn("InnerCount","盘内数量", 2200),
-                new HeadColumn("DeliveryOperator","操作人", 3000),
-            };
             string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, data, headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
             {
@@ -532,5 +546,17 @@ namespace iWms.Form
                 ex.GetDeepException().ShowError();
             }
         }
+    }
+
+    public class InstockBarcode
+    {
+        public string OrderNo { get; set; } = string.Empty;
+        public DateTime OrderTime { get; set; } = new DateTime(1900, 1, 1);
+        public string OrderTypeDes { get; set; } = string.Empty;
+        public string OrderStatus { get; set; } = string.Empty;
+        public string MaterialNo { get; set; } = string.Empty;
+        public string Barcode { get; set; } = string.Empty;
+        public int InnerCount { get; set; } = 0;
+        public string DeliveryOperator { get; set; } = string.Empty;
     }
 }
