@@ -9,6 +9,11 @@ namespace Entity.Enums
 {
     public enum LightShelfStatusEnum
     {
+        /// <summary>
+        /// 离线
+        /// </summary>
+        [Description("离线")]
+        OffLine = -1,
 
         /// <summary>
         /// 正常
@@ -17,15 +22,27 @@ namespace Entity.Enums
         Normal = 1,
 
         /// <summary>
-        /// 取料
+        /// 超时
         /// </summary>
-        [Description("取料")]
-        Delivering = 2,
+        [Description("超时")]
+        TimeOut = 2,
 
         /// <summary>
         /// 报警
         /// </summary>
         [Description("报警")]
         Error = 3,
+
+        /// <summary>
+        /// 续料
+        /// </summary>
+        [Description("续料")]
+        Appending = 4,
+
+        /// <summary>
+        /// 取料
+        /// </summary>
+        [Description("取料")]
+        Delivering = 8,
     }
 }

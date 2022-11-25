@@ -122,14 +122,16 @@ namespace iWms.Form
                         if (item is LabelControl)
                         {
                             var label = item as LabelControl;
-                            var statusItem = statusList.FirstOrDefault(p => p.shelf_id == label.ToolTip);
+                            string labelIndex = Convert.ToString(label.Tag);
+                            var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
                             if (statusItem != null)
                             {
+                                label.ToolTip = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
                                 if (statusItem.state == (int)LightShelfStatusEnum.Normal)
                                 {
                                     label.ForeColor = Color.Green;
                                 }
-                                else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                                else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
                                 {
                                     label.ForeColor = Color.Yellow;
                                 }
@@ -137,9 +139,21 @@ namespace iWms.Form
                                 {
                                     label.ForeColor = Color.Red;
                                 }
-                                else
+                                else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
                                 {
                                     label.ForeColor = Color.Blue;
+                                }
+                                else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                                {
+                                    label.ForeColor = Color.Purple;
+                                }
+                                else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
+                                {
+                                    label.ForeColor = Color.Gray;
+                                }
+                                else
+                                {
+                                    label.ForeColor = Color.Black;
                                 }
                             }
                         }

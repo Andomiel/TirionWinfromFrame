@@ -30,9 +30,9 @@ namespace iWms.Form
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOutstocks));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -82,6 +82,15 @@ namespace iWms.Form
             this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSortingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReview = new System.Windows.Forms.DataGridViewLinkColumn();
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
@@ -116,15 +125,6 @@ namespace iWms.Form
             this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
-            this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSortingId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReview = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -673,14 +673,14 @@ namespace iWms.Form
             this.colOrderTime,
             this.colFinishedTime,
             this.colReview});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle61.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle61.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle61.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle61.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle61.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle61.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle61;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
@@ -695,6 +695,78 @@ namespace iWms.Form
             this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
+            // 
+            // colSelect
+            // 
+            this.colSelect.DataPropertyName = "IsSelected";
+            this.colSelect.FalseValue = "False";
+            this.colSelect.FillWeight = 50F;
+            this.colSelect.HeaderText = "选择";
+            this.colSelect.MinimumWidth = 40;
+            this.colSelect.Name = "colSelect";
+            this.colSelect.ToolTipText = "仅用于导出场景";
+            this.colSelect.TrueValue = "True";
+            // 
+            // colOrderNo
+            // 
+            this.colOrderNo.DataPropertyName = "DeliveryNo";
+            this.colOrderNo.HeaderText = "出库单号";
+            this.colOrderNo.MinimumWidth = 120;
+            this.colOrderNo.Name = "colOrderNo";
+            this.colOrderNo.ReadOnly = true;
+            // 
+            // colOrderType
+            // 
+            this.colOrderType.DataPropertyName = "DeliveryTypeDisplay";
+            this.colOrderType.HeaderText = "单据类型";
+            this.colOrderType.MinimumWidth = 100;
+            this.colOrderType.Name = "colOrderType";
+            this.colOrderType.ReadOnly = true;
+            // 
+            // colOrderStatus
+            // 
+            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
+            this.colOrderStatus.HeaderText = "单据状态";
+            this.colOrderStatus.MinimumWidth = 100;
+            this.colOrderStatus.Name = "colOrderStatus";
+            this.colOrderStatus.ReadOnly = true;
+            // 
+            // colDestinationNo
+            // 
+            this.colDestinationNo.DataPropertyName = "LineId";
+            this.colDestinationNo.HeaderText = "目的地";
+            this.colDestinationNo.MinimumWidth = 100;
+            this.colDestinationNo.Name = "colDestinationNo";
+            // 
+            // colSortingId
+            // 
+            this.colSortingId.DataPropertyName = "SortingId";
+            this.colSortingId.HeaderText = "分拣口";
+            this.colSortingId.MinimumWidth = 80;
+            this.colSortingId.Name = "colSortingId";
+            // 
+            // colOrderTime
+            // 
+            this.colOrderTime.DataPropertyName = "CreateTime";
+            this.colOrderTime.HeaderText = "下达时间";
+            this.colOrderTime.MinimumWidth = 120;
+            this.colOrderTime.Name = "colOrderTime";
+            this.colOrderTime.ReadOnly = true;
+            // 
+            // colFinishedTime
+            // 
+            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
+            this.colFinishedTime.HeaderText = "完成时间";
+            this.colFinishedTime.MinimumWidth = 120;
+            this.colFinishedTime.Name = "colFinishedTime";
+            this.colFinishedTime.ReadOnly = true;
+            // 
+            // colReview
+            // 
+            this.colReview.DataPropertyName = "OperationText";
+            this.colReview.HeaderText = "复核";
+            this.colReview.MinimumWidth = 60;
+            this.colReview.Name = "colReview";
             // 
             // gbDetails
             // 
@@ -734,14 +806,14 @@ namespace iWms.Form
             this.colMaterialNo,
             this.colDeliveryCount,
             this.colInventoryStatus});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle62.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle62.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle62.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle62.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle62.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle62.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetails.DefaultCellStyle = dataGridViewCellStyle62;
             this.dgvDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetails.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvDetails.Location = new System.Drawing.Point(3, 3);
@@ -794,14 +866,14 @@ namespace iWms.Form
             this.colTower,
             this.colLocation,
             this.colOperator});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle63.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle63.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle63.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle63.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle63.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle63.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle63;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvUpns.Location = new System.Drawing.Point(669, 3);
@@ -932,6 +1004,7 @@ namespace iWms.Form
             this.LightSeventeenth.Name = "LightSeventeenth";
             this.LightSeventeenth.Size = new System.Drawing.Size(40, 32);
             this.LightSeventeenth.TabIndex = 40;
+            this.LightSeventeenth.Tag = "SWHY017";
             this.LightSeventeenth.Text = "●";
             this.LightSeventeenth.ToolTip = "SWHY017";
             // 
@@ -947,6 +1020,7 @@ namespace iWms.Form
             this.LightSixteenth.Name = "LightSixteenth";
             this.LightSixteenth.Size = new System.Drawing.Size(40, 32);
             this.LightSixteenth.TabIndex = 39;
+            this.LightSixteenth.Tag = "SWHY016";
             this.LightSixteenth.Text = "●";
             this.LightSixteenth.ToolTip = "SWHY016";
             // 
@@ -962,6 +1036,7 @@ namespace iWms.Form
             this.LightFifteenth.Name = "LightFifteenth";
             this.LightFifteenth.Size = new System.Drawing.Size(40, 32);
             this.LightFifteenth.TabIndex = 38;
+            this.LightFifteenth.Tag = "SWHY015";
             this.LightFifteenth.Text = "●";
             this.LightFifteenth.ToolTip = "SWHY015";
             // 
@@ -977,6 +1052,7 @@ namespace iWms.Form
             this.LightForteenth.Name = "LightForteenth";
             this.LightForteenth.Size = new System.Drawing.Size(40, 32);
             this.LightForteenth.TabIndex = 37;
+            this.LightForteenth.Tag = "SWHY014";
             this.LightForteenth.Text = "●";
             this.LightForteenth.ToolTip = "SWHY014";
             // 
@@ -992,6 +1068,7 @@ namespace iWms.Form
             this.LightTwelfth.Name = "LightTwelfth";
             this.LightTwelfth.Size = new System.Drawing.Size(40, 32);
             this.LightTwelfth.TabIndex = 36;
+            this.LightTwelfth.Tag = "SWHY012";
             this.LightTwelfth.Text = "●";
             this.LightTwelfth.ToolTip = "SWHY012";
             // 
@@ -1007,6 +1084,7 @@ namespace iWms.Form
             this.LightThirteenth.Name = "LightThirteenth";
             this.LightThirteenth.Size = new System.Drawing.Size(40, 32);
             this.LightThirteenth.TabIndex = 35;
+            this.LightThirteenth.Tag = "SWHY013";
             this.LightThirteenth.Text = "●";
             this.LightThirteenth.ToolTip = "SWHY013";
             // 
@@ -1022,6 +1100,7 @@ namespace iWms.Form
             this.LightEleventh.Name = "LightEleventh";
             this.LightEleventh.Size = new System.Drawing.Size(40, 32);
             this.LightEleventh.TabIndex = 34;
+            this.LightEleventh.Tag = "SWHY011";
             this.LightEleventh.Text = "●";
             this.LightEleventh.ToolTip = "SWHY011";
             // 
@@ -1037,6 +1116,7 @@ namespace iWms.Form
             this.LightTenth.Name = "LightTenth";
             this.LightTenth.Size = new System.Drawing.Size(40, 32);
             this.LightTenth.TabIndex = 33;
+            this.LightTenth.Tag = "SWHY010";
             this.LightTenth.Text = "●";
             this.LightTenth.ToolTip = "SWHY010";
             // 
@@ -1052,6 +1132,7 @@ namespace iWms.Form
             this.LightNinth.Name = "LightNinth";
             this.LightNinth.Size = new System.Drawing.Size(40, 32);
             this.LightNinth.TabIndex = 32;
+            this.LightNinth.Tag = "SWHY009";
             this.LightNinth.Text = "●";
             this.LightNinth.ToolTip = "SWHY009";
             // 
@@ -1067,6 +1148,7 @@ namespace iWms.Form
             this.LightEighth.Name = "LightEighth";
             this.LightEighth.Size = new System.Drawing.Size(40, 32);
             this.LightEighth.TabIndex = 31;
+            this.LightEighth.Tag = "SWHY008";
             this.LightEighth.Text = "●";
             this.LightEighth.ToolTip = "SWHY008";
             // 
@@ -1082,6 +1164,7 @@ namespace iWms.Form
             this.LightSeventh.Name = "LightSeventh";
             this.LightSeventh.Size = new System.Drawing.Size(40, 32);
             this.LightSeventh.TabIndex = 30;
+            this.LightSeventh.Tag = "SWHY007";
             this.LightSeventh.Text = "●";
             this.LightSeventh.ToolTip = "SWHY007";
             // 
@@ -1097,6 +1180,7 @@ namespace iWms.Form
             this.LightSixth.Name = "LightSixth";
             this.LightSixth.Size = new System.Drawing.Size(40, 32);
             this.LightSixth.TabIndex = 29;
+            this.LightSixth.Tag = "SWHY006";
             this.LightSixth.Text = "●";
             this.LightSixth.ToolTip = "SWHY006";
             // 
@@ -1112,6 +1196,7 @@ namespace iWms.Form
             this.LightFifth.Name = "LightFifth";
             this.LightFifth.Size = new System.Drawing.Size(40, 32);
             this.LightFifth.TabIndex = 28;
+            this.LightFifth.Tag = "SWHY005";
             this.LightFifth.Text = "●";
             this.LightFifth.ToolTip = "SWHY005";
             // 
@@ -1127,6 +1212,7 @@ namespace iWms.Form
             this.LightForth.Name = "LightForth";
             this.LightForth.Size = new System.Drawing.Size(40, 32);
             this.LightForth.TabIndex = 27;
+            this.LightForth.Tag = "SWHY004";
             this.LightForth.Text = "●";
             this.LightForth.ToolTip = "SWHY004";
             // 
@@ -1142,6 +1228,7 @@ namespace iWms.Form
             this.LightThird.Name = "LightThird";
             this.LightThird.Size = new System.Drawing.Size(40, 32);
             this.LightThird.TabIndex = 26;
+            this.LightThird.Tag = "SWHY003";
             this.LightThird.Text = "●";
             this.LightThird.ToolTip = "SWHY003";
             // 
@@ -1157,6 +1244,7 @@ namespace iWms.Form
             this.LightSecond.Name = "LightSecond";
             this.LightSecond.Size = new System.Drawing.Size(40, 32);
             this.LightSecond.TabIndex = 25;
+            this.LightSecond.Tag = "SWHY002";
             this.LightSecond.Text = "●";
             this.LightSecond.ToolTip = "SWHY002";
             // 
@@ -1172,6 +1260,7 @@ namespace iWms.Form
             this.LightFirst.Name = "LightFirst";
             this.LightFirst.Size = new System.Drawing.Size(40, 32);
             this.LightFirst.TabIndex = 24;
+            this.LightFirst.Tag = "SWHY001";
             this.LightFirst.Text = "●";
             this.LightFirst.ToolTip = "SWHY001";
             // 
@@ -1187,6 +1276,7 @@ namespace iWms.Form
             this.LightEighteenth.Name = "LightEighteenth";
             this.LightEighteenth.Size = new System.Drawing.Size(40, 32);
             this.LightEighteenth.TabIndex = 23;
+            this.LightEighteenth.Tag = "SWHY018";
             this.LightEighteenth.Text = "●";
             this.LightEighteenth.ToolTip = "SWHY018";
             // 
@@ -1202,6 +1292,7 @@ namespace iWms.Form
             this.LightNineteenth.Name = "LightNineteenth";
             this.LightNineteenth.Size = new System.Drawing.Size(40, 32);
             this.LightNineteenth.TabIndex = 22;
+            this.LightNineteenth.Tag = "SWHY019";
             this.LightNineteenth.Text = "●";
             this.LightNineteenth.ToolTip = "SWHY019";
             // 
@@ -1217,6 +1308,7 @@ namespace iWms.Form
             this.LightTwentyFirst.Name = "LightTwentyFirst";
             this.LightTwentyFirst.Size = new System.Drawing.Size(40, 33);
             this.LightTwentyFirst.TabIndex = 21;
+            this.LightTwentyFirst.Tag = "SWHY021";
             this.LightTwentyFirst.Text = "●";
             this.LightTwentyFirst.ToolTip = "SWHY021";
             // 
@@ -1232,80 +1324,9 @@ namespace iWms.Form
             this.LightTwentieth.Name = "LightTwentieth";
             this.LightTwentieth.Size = new System.Drawing.Size(40, 32);
             this.LightTwentieth.TabIndex = 20;
+            this.LightTwentieth.Tag = "SWHY020";
             this.LightTwentieth.Text = "●";
             this.LightTwentieth.ToolTip = "SWHY020";
-            // 
-            // colSelect
-            // 
-            this.colSelect.DataPropertyName = "IsSelected";
-            this.colSelect.FalseValue = "False";
-            this.colSelect.FillWeight = 50F;
-            this.colSelect.HeaderText = "选择";
-            this.colSelect.MinimumWidth = 40;
-            this.colSelect.Name = "colSelect";
-            this.colSelect.ToolTipText = "仅用于导出场景";
-            this.colSelect.TrueValue = "True";
-            // 
-            // colOrderNo
-            // 
-            this.colOrderNo.DataPropertyName = "DeliveryNo";
-            this.colOrderNo.HeaderText = "出库单号";
-            this.colOrderNo.MinimumWidth = 120;
-            this.colOrderNo.Name = "colOrderNo";
-            this.colOrderNo.ReadOnly = true;
-            // 
-            // colOrderType
-            // 
-            this.colOrderType.DataPropertyName = "DeliveryTypeDisplay";
-            this.colOrderType.HeaderText = "单据类型";
-            this.colOrderType.MinimumWidth = 100;
-            this.colOrderType.Name = "colOrderType";
-            this.colOrderType.ReadOnly = true;
-            // 
-            // colOrderStatus
-            // 
-            this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
-            this.colOrderStatus.HeaderText = "单据状态";
-            this.colOrderStatus.MinimumWidth = 100;
-            this.colOrderStatus.Name = "colOrderStatus";
-            this.colOrderStatus.ReadOnly = true;
-            // 
-            // colDestinationNo
-            // 
-            this.colDestinationNo.DataPropertyName = "LineId";
-            this.colDestinationNo.HeaderText = "目的地";
-            this.colDestinationNo.MinimumWidth = 100;
-            this.colDestinationNo.Name = "colDestinationNo";
-            // 
-            // colSortingId
-            // 
-            this.colSortingId.DataPropertyName = "SortingId";
-            this.colSortingId.HeaderText = "分拣口";
-            this.colSortingId.MinimumWidth = 80;
-            this.colSortingId.Name = "colSortingId";
-            // 
-            // colOrderTime
-            // 
-            this.colOrderTime.DataPropertyName = "CreateTime";
-            this.colOrderTime.HeaderText = "下达时间";
-            this.colOrderTime.MinimumWidth = 120;
-            this.colOrderTime.Name = "colOrderTime";
-            this.colOrderTime.ReadOnly = true;
-            // 
-            // colFinishedTime
-            // 
-            this.colFinishedTime.DataPropertyName = "LastUpdateTime";
-            this.colFinishedTime.HeaderText = "完成时间";
-            this.colFinishedTime.MinimumWidth = 120;
-            this.colFinishedTime.Name = "colFinishedTime";
-            this.colFinishedTime.ReadOnly = true;
-            // 
-            // colReview
-            // 
-            this.colReview.DataPropertyName = "OperationText";
-            this.colReview.HeaderText = "复核";
-            this.colReview.MinimumWidth = 60;
-            this.colReview.Name = "colReview";
             // 
             // FrmOutstocks
             // 
