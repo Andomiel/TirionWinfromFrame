@@ -61,7 +61,6 @@ namespace iWms.Form
                     }
                     else
                     {
-                        tbQty.Text = string.Empty;
                         tbQty.Focus();
                     }
                 }
