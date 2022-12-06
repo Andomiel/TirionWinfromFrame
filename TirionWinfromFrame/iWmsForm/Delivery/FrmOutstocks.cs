@@ -361,6 +361,10 @@ namespace iWms.Form
             }
             var row = dgvOrders.SelectedCells[0].OwningRow;
             var order = row.DataBoundItem as DeliveryOrderDto;
+            if (order.DeliveryNo == selectedOrder.DeliveryNo)
+            {
+                return;
+            }
             selectedOrder = order;
 
             var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
