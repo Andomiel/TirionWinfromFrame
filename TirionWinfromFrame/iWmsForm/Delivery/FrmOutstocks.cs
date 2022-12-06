@@ -16,6 +16,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -105,66 +106,75 @@ namespace iWms.Form
             GetOrders();
         }
 
-        private void StatusTimer_Tick(object sender, EventArgs e)
-        {
-            var action1 = new Action(() =>
-            {
-                try
-                {
-                    var statusList = GetLightShelfStatus();
-                    if (statusList == null || statusList.Count == 0)
-                    {
-                        return;
-                    }
+        private delegate void RefreshLightStatusDelegate(List<LightShelfStatus> statusList);
 
-                    foreach (Control item in tlpLight.Controls)
+        private void RefreshLightStatus(List<LightShelfStatus> statusList)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new RefreshLightStatusDelegate(RefreshLightStatus));
+            }
+            else
+            {
+                foreach (Control item in tlpLight.Controls)
+                {
+                    if (item is LabelControl)
                     {
-                        if (item is LabelControl)
+                        var label = item as LabelControl;
+                        string labelIndex = Convert.ToString(label.Tag);
+                        var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
+                        if (statusItem != null)
                         {
-                            var label = item as LabelControl;
-                            string labelIndex = Convert.ToString(label.Tag);
-                            var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
-                            if (statusItem != null)
+                            label.ToolTip = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
+                            if (statusItem.state == (int)LightShelfStatusEnum.Normal)
                             {
-                                label.ToolTip = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
-                                if (statusItem.state == (int)LightShelfStatusEnum.Normal)
-                                {
-                                    label.ForeColor = Color.Green;
-                                }
-                                else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
-                                {
-                                    label.ForeColor = Color.Yellow;
-                                }
-                                else if (statusItem.state == (int)LightShelfStatusEnum.Error)
-                                {
-                                    label.ForeColor = Color.Red;
-                                }
-                                else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
-                                {
-                                    label.ForeColor = Color.Blue;
-                                }
-                                else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
-                                {
-                                    label.ForeColor = Color.Purple;
-                                }
-                                else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
-                                {
-                                    label.ForeColor = Color.Gray;
-                                }
-                                else
-                                {
-                                    label.ForeColor = Color.Black;
-                                }
+                                label.ForeColor = Color.Green;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
+                            {
+                                label.ForeColor = Color.Yellow;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Error)
+                            {
+                                label.ForeColor = Color.Red;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
+                            {
+                                label.ForeColor = Color.Blue;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                            {
+                                label.ForeColor = Color.Purple;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
+                            {
+                                label.ForeColor = Color.Gray;
+                            }
+                            else
+                            {
+                                label.ForeColor = Color.Black;
                             }
                         }
                     }
                 }
-                catch (Exception ex)
+            }
+        }
+
+        private void StatusTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                var statusList = GetLightShelfStatus();
+                if (statusList == null || statusList.Count == 0)
                 {
-                    FileLog.Log($"刷新料架状态出错:{ex.GetDeepException()}");
+                    return;
                 }
-            });
-            this.Invoke(action1);
+                RefreshLightStatus(statusList);
+            }
+            catch (Exception ex)
+            {
+                FileLog.Log($"刷新料架状态出错:{ex.GetDeepException()}");
+            }
         }
 
         private List<LightShelfStatus> GetLightShelfStatus()
@@ -174,6 +184,13 @@ namespace iWms.Form
             {
                 throw new OppoCoreException("缺少亮灯货架的状态明细服务地址配置");
             }
+
+            //Ping pingSender = new Ping();
+            //PingReply reply = pingSender.Send(new Uri(url).Host, 10);//第一个参数为ip地址，第二个参数为ping的时间
+            //if (reply.Status != IPStatus.Success)
+            //{
+            //    return new List<LightShelfStatus>();
+            //}
             //Dictionary<string, string> logDict = new Dictionary<string, string>(3);
             //logDict.Add("url", url);
 
