@@ -274,7 +274,7 @@ namespace iWms.Form
 
                     if (WorkOrderBarcodes.Any(p => p.BarcodeStatus == unfinished))
                     {
-                        if ("移库单中存在未移库的upn，确认完成将未移库的upn释放".ShowYesNoAndTips() != DialogResult.OK)
+                        if ("移库单中存在未移库的upn，确认完成将未移库的upn释放".ShowYesNoAndTips() != DialogResult.Yes)
                         {
                             return;
                         }
