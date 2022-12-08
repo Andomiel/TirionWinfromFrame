@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TirionWinfromFrame.Commons;
 
@@ -206,6 +207,7 @@ namespace Business
             logDict.Add("request", requestString);
 
             string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+            strResponse = Regex.Unescape(strResponse);
             logDict.Add("response", strResponse);
 
             FileLog.Log($"操作亮灯货架{onOrOff}:{JsonConvert.SerializeObject(logDict)}");
@@ -213,12 +215,12 @@ namespace Business
 
             Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
+            if (response == null || response.Code > 1)
+            {
+                string formattedMessage = Regex.Unescape(response.Msg);
+                throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
+            }
             return response;
-            //if (response == null || response.Code != 1)
-            //{
-            //    string formattedMessage = Uri.UnescapeDataString(response.Msg);
-            //    //throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
-            //}
         }
 
         private string DeliveryReformShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
