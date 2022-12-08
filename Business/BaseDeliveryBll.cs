@@ -365,7 +365,7 @@ namespace Business
 
             int targetColor = currentRecord.LightColor;
             //改造货架三个灯，1，2，3
-            int lightNumber = allColors.IndexOf(targetColor) + 1;
+            int lightNumber = allColors.IndexOf(targetColor);
 
             try
             {
