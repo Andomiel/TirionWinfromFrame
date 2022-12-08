@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.Dto
 {
-    public class InstockDetailDto
+    public class InstockDetailDto : INotifyPropertyChanged
     {
         /// <summary>
         /// 主键
@@ -85,6 +86,28 @@ namespace Entity.Dto
             }
         }
 
-        public List<InstockBarcodeDto> Barcodes { get; set; } = new List<InstockBarcodeDto>();
+        private BindingList<InstockBarcodeDto> _barcodes = new BindingList<InstockBarcodeDto>();
+
+        public BindingList<InstockBarcodeDto> Barcodes
+        {
+            get { return _barcodes; }
+            set
+            {
+                if (_barcodes != value)
+                {
+                    _barcodes = value;
+                    RaisePropertyChange(nameof(Barcodes));
+                    RaisePropertyChange(nameof(ReceiveStatusDisplay));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChange(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

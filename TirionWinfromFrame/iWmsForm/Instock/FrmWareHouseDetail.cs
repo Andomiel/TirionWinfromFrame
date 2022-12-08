@@ -1,6 +1,7 @@
 ﻿using Business;
 using Commons;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.DataContext;
 using Entity.Dto;
@@ -56,10 +57,8 @@ namespace iWms.Form
         /// <param name="e"></param>
         private void FrmWareHouseDetail_Load(object sender, EventArgs e)
         {
-            CompareMaterialQty();
             BindDefaultTower();
-
-            gridWMS.ClearSelection();
+            CompareMaterialQty();
         }
 
         /// <summary>
@@ -70,7 +69,6 @@ namespace iWms.Form
         private void Timer_Tick(object sender, EventArgs e)
         {
             CompareMaterialQty();
-            gridWMS.FirstDisplayedScrollingRowIndex = scrollRowIndex;
         }
 
         private void BindDefaultTower()
@@ -118,17 +116,27 @@ namespace iWms.Form
 
         public void CompareMaterialQty()
         {
-            WorkOrderDetails.Clear();
-            WorkOrderBarcodes.Clear();
-
             var materials = WareHouseBLL.GetInstockDetails(CurrentOrder.BusinessId);
-
-            // 加载入库单列表
-            var orderBarcodes = new List<InstockBarcodeDto>();
             var barcodes = WareHouseBLL.GetInstockBarcodes(CurrentOrder.BusinessId);
+
+            Dictionary<string, InstockDetailDto> dict = new Dictionary<string, InstockDetailDto>();
+            foreach (var item in materials)
+            {
+                var detail = WorkOrderDetails.FirstOrDefault(p => p.BusinessId == item.BusinessId);
+                if (detail == null)
+                {
+                    detail = item.Adapt<InstockDetailDto>();
+                    WorkOrderDetails.Add(detail);
+                }
+                if (!dict.ContainsKey(detail.BusinessId))
+                {
+                    dict.Add(detail.BusinessId, detail);
+                }
+            }
+
             foreach (DataRow item in barcodes.Rows)
             {
-                orderBarcodes.Add(new InstockBarcodeDto()
+                var barcode = new InstockBarcodeDto()
                 {
                     OrderNo = CurrentOrder.InstockNo,
                     MaterialNo = Convert.ToString(item["MaterialNo"]),
@@ -137,23 +145,23 @@ namespace iWms.Form
                     TowerNo = TypeParse.StrToInt(Convert.ToString(item["TowerNo"]), -1),
                     CreateTime = TypeParse.StrToDateTime(Convert.ToString(item["CreateTime"]), new DateTime(1900, 1, 1)),
                     InnerQty = TypeParse.StrToInt(Convert.ToString(item["InnerQty"]), 0),
-                    Operator = Convert.ToString(item["Operator"])
-                });
-            }
-
-            foreach (Wms_InstockDetail item in materials)
-            {
-                if (WorkOrderDetails.Any(p => p.BusinessId == item.BusinessId))
+                    Operator = Convert.ToString(item["Operator"]),
+                    InstockDetailId = Convert.ToString(item["InstockDetailId"])
+                };
+                if (!dict.ContainsKey(barcode.InstockDetailId))
                 {
                     continue;
                 }
-                var detail = item.Adapt<InstockDetailDto>();
-                detail.Barcodes = orderBarcodes.Where(p => p.MaterialNo == detail.MaterialNo).ToList();
-                WorkOrderDetails.Add(detail);
+                var detail = dict[barcode.InstockDetailId];
+                if (detail.Barcodes.Any(p => p.Upn == barcode.Upn))
+                {
+                    continue;
+                }
+                detail.Barcodes.Add(barcode);
             }
             CurrentOrder.Details = WorkOrderDetails.ToList();
 
-            gridWMS.ClearSelection();
+            RefreshBarcodes();
         }
 
         /// <summary>
@@ -234,6 +242,7 @@ namespace iWms.Form
         {
             if (timer != null)
             {
+                timer.Stop();
                 timer.Dispose();
             }
             base.OnClosed(e);
@@ -318,9 +327,12 @@ namespace iWms.Form
             }
         }
 
-        int scrollRowIndex = 0;
-
         private void gridWMS_SelectionChanged(object sender, EventArgs e)
+        {
+            RefreshBarcodes();
+        }
+
+        private void RefreshBarcodes()
         {
             try
             {
@@ -329,7 +341,6 @@ namespace iWms.Form
                     return;
                 }
                 var row = gridWMS.SelectedCells[0].OwningRow;
-                scrollRowIndex = row.Index;
                 var orderMaterial = row.DataBoundItem as InstockDetailDto;
 
                 WorkOrderBarcodes.Clear();
@@ -341,6 +352,28 @@ namespace iWms.Form
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+        }
+
+        private readonly object lockButtonObj = new object();
+
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockButtonObj)
+                {
+                    CompareMaterialQty();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
             }
         }
     }

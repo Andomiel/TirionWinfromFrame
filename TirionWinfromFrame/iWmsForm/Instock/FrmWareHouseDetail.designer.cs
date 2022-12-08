@@ -60,6 +60,7 @@ namespace iWms.Form
             this.btnForceFinish = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridWMS)).BeginInit();
@@ -96,6 +97,7 @@ namespace iWms.Form
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Controls.Add(this.lblTypeName);
             this.panel1.Controls.Add(this.panel2);
@@ -118,7 +120,7 @@ namespace iWms.Form
             this.flowLayoutPanel1.Controls.Add(this.cbReform);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(83, 41);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1086, 33);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 33);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // cbSorting
@@ -406,6 +408,15 @@ namespace iWms.Form
             this.tableLayoutPanel1.Size = new System.Drawing.Size(749, 35);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(936, 45);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 19;
+            this.btnRefresh.Text = "刷新";
+            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
+            // 
             // FrmWareHouseDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -462,5 +473,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn TowerNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateTime;
+        private DevExpress.XtraEditors.SimpleButton btnRefresh;
     }
 }
