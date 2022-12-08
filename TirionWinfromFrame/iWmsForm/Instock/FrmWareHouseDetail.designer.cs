@@ -36,6 +36,7 @@ namespace iWms.Form
             this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cbSorting = new System.Windows.Forms.CheckBox();
             this.cbAsrs = new System.Windows.Forms.CheckBox();
@@ -49,9 +50,6 @@ namespace iWms.Form
             this.lblType = new System.Windows.Forms.Label();
             this.lblTypeTitle = new System.Windows.Forms.Label();
             this.gridWMS = new System.Windows.Forms.DataGridView();
-            this.WZ_BM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RK_RKSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridIWMS = new System.Windows.Forms.DataGridView();
             this.ReelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +58,10 @@ namespace iWms.Form
             this.btnForceFinish = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
+            this.WZ_BM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RK_RKSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActualCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridWMS)).BeginInit();
@@ -111,6 +112,15 @@ namespace iWms.Form
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1248, 85);
             this.panel1.TabIndex = 10;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(936, 45);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 19;
+            this.btnRefresh.Text = "刷新";
+            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -247,6 +257,7 @@ namespace iWms.Form
             this.gridWMS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.WZ_BM,
             this.RK_RKSL,
+            this.colActualCount,
             this.State});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -269,30 +280,6 @@ namespace iWms.Form
             this.gridWMS.TabIndex = 11;
             this.gridWMS.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.gridWMS_CellFormatting);
             this.gridWMS.SelectionChanged += new System.EventHandler(this.gridWMS_SelectionChanged);
-            // 
-            // WZ_BM
-            // 
-            this.WZ_BM.DataPropertyName = "MaterialNo";
-            this.WZ_BM.HeaderText = "物料编号";
-            this.WZ_BM.MinimumWidth = 10;
-            this.WZ_BM.Name = "WZ_BM";
-            this.WZ_BM.ReadOnly = true;
-            // 
-            // RK_RKSL
-            // 
-            this.RK_RKSL.DataPropertyName = "RequireCount";
-            this.RK_RKSL.HeaderText = "需求数量";
-            this.RK_RKSL.MinimumWidth = 10;
-            this.RK_RKSL.Name = "RK_RKSL";
-            this.RK_RKSL.ReadOnly = true;
-            // 
-            // State
-            // 
-            this.State.DataPropertyName = "ReceiveStatusDisplay";
-            this.State.HeaderText = "状态";
-            this.State.MinimumWidth = 10;
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
             // 
             // gridIWMS
             // 
@@ -408,14 +395,36 @@ namespace iWms.Form
             this.tableLayoutPanel1.Size = new System.Drawing.Size(749, 35);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // btnRefresh
+            // WZ_BM
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(936, 45);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 19;
-            this.btnRefresh.Text = "刷新";
-            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
+            this.WZ_BM.DataPropertyName = "MaterialNo";
+            this.WZ_BM.HeaderText = "物料编号";
+            this.WZ_BM.MinimumWidth = 10;
+            this.WZ_BM.Name = "WZ_BM";
+            this.WZ_BM.ReadOnly = true;
+            // 
+            // RK_RKSL
+            // 
+            this.RK_RKSL.DataPropertyName = "RequireCount";
+            this.RK_RKSL.HeaderText = "需求数量";
+            this.RK_RKSL.MinimumWidth = 10;
+            this.RK_RKSL.Name = "RK_RKSL";
+            this.RK_RKSL.ReadOnly = true;
+            // 
+            // colActualCount
+            // 
+            this.colActualCount.DataPropertyName = "ActualCount";
+            this.colActualCount.HeaderText = "实收数量";
+            this.colActualCount.Name = "colActualCount";
+            this.colActualCount.ReadOnly = true;
+            // 
+            // State
+            // 
+            this.State.DataPropertyName = "ReceiveStatusDisplay";
+            this.State.HeaderText = "状态";
+            this.State.MinimumWidth = 10;
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
             // 
             // FrmWareHouseDetail
             // 
@@ -459,9 +468,6 @@ namespace iWms.Form
         public System.Windows.Forms.Label lblOrderNo;
         public System.Windows.Forms.Label lblTypeName;
         private DevExpress.XtraEditors.SimpleButton btnForceFinish;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WZ_BM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RK_RKSL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.TableLayoutPanel tlpLayout;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox cbLightShelf;
@@ -474,5 +480,9 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn TowerNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateTime;
         private DevExpress.XtraEditors.SimpleButton btnRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WZ_BM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RK_RKSL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActualCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn State;
     }
 }

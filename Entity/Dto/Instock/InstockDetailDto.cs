@@ -69,7 +69,7 @@ namespace Entity.Dto
                 }
                 else
                 {
-                    int totalCount = Barcodes.Sum(p => p.InnerQty);
+                    int totalCount = ActualCount;
                     if (RequireCount > totalCount)
                     {
                         return "短收";
@@ -86,6 +86,14 @@ namespace Entity.Dto
             }
         }
 
+        public int ActualCount
+        {
+            get
+            {
+                return Barcodes.Sum(p => p.InnerQty);
+            }
+        }
+
         private BindingList<InstockBarcodeDto> _barcodes = new BindingList<InstockBarcodeDto>();
 
         public BindingList<InstockBarcodeDto> Barcodes
@@ -97,6 +105,7 @@ namespace Entity.Dto
                 {
                     _barcodes = value;
                     RaisePropertyChange(nameof(Barcodes));
+                    RaisePropertyChange(nameof(ActualCount));
                     RaisePropertyChange(nameof(ReceiveStatusDisplay));
                 }
             }
