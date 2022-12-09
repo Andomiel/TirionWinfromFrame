@@ -153,7 +153,10 @@ namespace iWms.Form
                     }
                     string[] upnArr = record.UPN.Split('-');
                     record.PartNumber = upnArr[0];
-                    record.SerialNo = upnArr[3];
+                    if (upnArr.Length >= 4)
+                    {
+                        record.SerialNo = upnArr[3];
+                    }
 
                     string[] qrcodeArr = record.QRCode.Split('*');
                     if (qrcodeArr.Length >= 3)
