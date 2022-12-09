@@ -94,9 +94,6 @@ namespace iWms.Form
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
-            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInventoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -125,6 +122,10 @@ namespace iWms.Form
             this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
+            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInventoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -805,6 +806,7 @@ namespace iWms.Form
             this.dgvDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
             this.colDeliveryCount,
+            this.colActual,
             this.colInventoryStatus});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -828,30 +830,6 @@ namespace iWms.Form
             this.dgvDetails.TabIndex = 1;
             this.dgvDetails.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDetails_RowPostPaint);
             this.dgvDetails.SelectionChanged += new System.EventHandler(this.DgvDetails_SelectionChanged);
-            // 
-            // colMaterialNo
-            // 
-            this.colMaterialNo.DataPropertyName = "MaterialNo";
-            this.colMaterialNo.HeaderText = "物料代码";
-            this.colMaterialNo.MinimumWidth = 9;
-            this.colMaterialNo.Name = "colMaterialNo";
-            this.colMaterialNo.ReadOnly = true;
-            // 
-            // colDeliveryCount
-            // 
-            this.colDeliveryCount.DataPropertyName = "RequireCount";
-            this.colDeliveryCount.HeaderText = "需求数量";
-            this.colDeliveryCount.MinimumWidth = 9;
-            this.colDeliveryCount.Name = "colDeliveryCount";
-            this.colDeliveryCount.ReadOnly = true;
-            // 
-            // colInventoryStatus
-            // 
-            this.colInventoryStatus.DataPropertyName = "DeliveryStatusDisplay";
-            this.colInventoryStatus.HeaderText = "库存状态";
-            this.colInventoryStatus.MinimumWidth = 9;
-            this.colInventoryStatus.Name = "colInventoryStatus";
-            this.colInventoryStatus.ReadOnly = true;
             // 
             // dgvUpns
             // 
@@ -1328,6 +1306,37 @@ namespace iWms.Form
             this.LightTwentieth.Text = "●";
             this.LightTwentieth.ToolTip = "SWHY020";
             // 
+            // colMaterialNo
+            // 
+            this.colMaterialNo.DataPropertyName = "MaterialNo";
+            this.colMaterialNo.HeaderText = "物料代码";
+            this.colMaterialNo.MinimumWidth = 9;
+            this.colMaterialNo.Name = "colMaterialNo";
+            this.colMaterialNo.ReadOnly = true;
+            // 
+            // colDeliveryCount
+            // 
+            this.colDeliveryCount.DataPropertyName = "RequireCount";
+            this.colDeliveryCount.HeaderText = "需求数量";
+            this.colDeliveryCount.MinimumWidth = 9;
+            this.colDeliveryCount.Name = "colDeliveryCount";
+            this.colDeliveryCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实际出库";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
+            // 
+            // colInventoryStatus
+            // 
+            this.colInventoryStatus.DataPropertyName = "DeliveryStatusDisplay";
+            this.colInventoryStatus.HeaderText = "库存状态";
+            this.colInventoryStatus.MinimumWidth = 9;
+            this.colInventoryStatus.Name = "colInventoryStatus";
+            this.colInventoryStatus.ReadOnly = true;
+            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1408,9 +1417,6 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnCalculate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
         private DevExpress.XtraEditors.SimpleButton btnSpecial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
@@ -1451,5 +1457,9 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
     }
 }

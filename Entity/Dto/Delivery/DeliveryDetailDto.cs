@@ -124,5 +124,43 @@ namespace Entity.Dto.Delivery
                 return deliveryStatus;
             }
         }
+
+        public int ActualCount
+        {
+            get
+            {
+                int deliveryCount = 0;
+                switch (OrderStatus)
+                {
+                    case (int)DeliveryOrderStatusEnum.Calculating:
+                    case (int)DeliveryOrderStatusEnum.Calculated:
+                        {
+                            int barcodeStatus = (int)DeliveryBarcodeStatusEnum.Undeliver;
+                            deliveryCount = Barcodes.Where(p => p.OrderStatus == barcodeStatus).Sum(p => p.DeliveryQuantity);
+                        }
+                        break;
+                    case (int)DeliveryOrderStatusEnum.Delivering:
+                    case (int)DeliveryOrderStatusEnum.Delivered:
+                        {
+                            int barcodeStatus = (int)DeliveryBarcodeStatusEnum.Reviewed;
+                            deliveryCount = Barcodes.Where(p => p.OrderStatus < barcodeStatus).Sum(p => p.DeliveryQuantity);
+                        }
+                        break;
+                    case (int)DeliveryOrderStatusEnum.Reviewed:
+                        {
+                            int barcodeStatus = (int)DeliveryBarcodeStatusEnum.Reviewed;
+                            deliveryCount = Barcodes.Where(p => p.OrderStatus == barcodeStatus).Sum(p => p.DeliveryQuantity);
+
+                        }
+                        break;
+                    case (int)DeliveryOrderStatusEnum.Received:
+                    case (int)DeliveryOrderStatusEnum.Closed:
+                    default:
+                        deliveryCount = 0;
+                        break;
+                }
+                return deliveryCount;
+            }
+        }
     }
 }
