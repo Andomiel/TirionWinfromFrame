@@ -178,10 +178,12 @@ namespace iWms.Form
                         "当前盘点单状态不可执行".ShowTips();
                         return;
                     }
+                    if (selectedOrder.OrderStatus == (int)TransferOrderStatusEnum.Saved)
+                    {
+                        new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, (int)OperateTypeEnum.InstockTaking);
 
-                    new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, (int)OperateTypeEnum.InstockTaking);
-
-                    "盘点任务下达成功！".ShowTips();
+                        "盘点任务下达成功！".ShowTips();
+                    }
 
                     FrmInventoryDetail detail = new FrmInventoryDetail(selectedOrder);
                     detail.ShowDialog();

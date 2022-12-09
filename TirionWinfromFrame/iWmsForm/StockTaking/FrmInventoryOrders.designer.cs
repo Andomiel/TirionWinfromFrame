@@ -54,6 +54,7 @@ namespace iWms.Form
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.tlbTables = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,7 +69,6 @@ namespace iWms.Form
             this.colDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
@@ -355,6 +355,16 @@ namespace iWms.Form
             this.btnCancel.Text = "取消盘点";
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // btnReset
+            // 
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.Location = new System.Drawing.Point(1028, 3);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(87, 29);
+            this.btnReset.TabIndex = 27;
+            this.btnReset.Text = "一键复位";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // tlbTables
             // 
             this.tlbTables.ColumnCount = 2;
@@ -537,16 +547,6 @@ namespace iWms.Form
             this.colCreateUser.MinimumWidth = 9;
             this.colCreateUser.Name = "colCreateUser";
             this.colCreateUser.ReadOnly = true;
-            // 
-            // btnReset
-            // 
-            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.Location = new System.Drawing.Point(1028, 3);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(87, 29);
-            this.btnReset.TabIndex = 27;
-            this.btnReset.Text = "一键复位";
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // FrmInventoryOrders
             // 

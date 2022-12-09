@@ -1,9 +1,10 @@
 ﻿using Entity.Enums.Inventory;
 using System;
+using System.ComponentModel;
 
 namespace Entity.Dto
 {
-    public class InventoryBarcodeDto
+    public class InventoryBarcodeDto : INotifyPropertyChanged
     {
         /// <summary>
         /// 明细业务Id
@@ -30,10 +31,25 @@ namespace Entity.Dto
         /// </summary>
         public int OriginQuantity { get; set; } = 0;
 
+        private int _realQuantity = 0;
+
         /// <summary>
         /// 盘后数量，盘后数量为0时，标识缺料
         /// </summary>
-        public int RealQuantity { get; set; } = 0;
+        public int RealQuantity
+        {
+            get { return _realQuantity; }
+            set
+            {
+                if (_realQuantity != value)
+                {
+                    _realQuantity = value;
+                    RaisePropertyChange(nameof(RealQuantity));
+                    RaisePropertyChange(nameof(OrderStatusDisplay));
+                    RaisePropertyChange(nameof(InventoryResult));
+                }
+            }
+        };
 
         /// <summary>
         /// 原储位
@@ -99,6 +115,13 @@ namespace Entity.Dto
                     }
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChange(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

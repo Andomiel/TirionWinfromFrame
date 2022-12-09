@@ -57,7 +57,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
         {
             RefreshBarcodes();
 
-            if (order.OrderStatus >= (int)InventoryOrderStatusEnum.Executing)
+            if (order.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
             {
                 this.tbBarcode.Text = string.Empty;
                 this.tbBarcode.Enabled = false;
