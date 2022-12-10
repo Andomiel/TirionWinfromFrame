@@ -221,8 +221,10 @@ namespace iWms.Form
                     int finished = (int)InventoryBarcodeStatusEnum.Executed;
                     if (WorkOrderBarcodes.Any(p => p.OrderStatus < finished))
                     {
-                        "盘点单中存在未盘点的upn，请全部盘点后再完成".ShowTips();
-                        return;
+                        if ("盘点单中存在未盘点的upn，是否结束盘点，未盘点的料盘将会取消盘点".ShowYesNoAndWarning() != DialogResult.Yes)
+                        {
+                            return;
+                        };
                     }
 
                     bool result = new InventoryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.InventoryNo, AppInfo.LoginUserInfo.account);
