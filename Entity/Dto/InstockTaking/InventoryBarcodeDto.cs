@@ -47,7 +47,6 @@ namespace Entity.Dto
                     IsChanged = true;
                     OrderStatus = (int)InventoryBarcodeStatusEnum.Executed;
                     RaisePropertyChange(nameof(RealQuantity));
-                    RaisePropertyChange(nameof(OrderStatusDisplay));
                     RaisePropertyChange(nameof(InventoryResult));
                 }
             }
@@ -60,10 +59,24 @@ namespace Entity.Dto
         /// </summary>
         public string OriginLocation { get; set; } = string.Empty;
 
+        private int _orderStatus = 0;
         /// <summary>
         /// 状态,0 待盘点，1 已盘点，2已确认
         /// </summary>
-        public int OrderStatus { get; set; } = 0;
+        public int OrderStatus
+        {
+            get { return _orderStatus; }
+            set
+            {
+                if (_orderStatus != value)
+                {
+                    _orderStatus = value;
+                    IsChanged = true;
+                    RaisePropertyChange(nameof(OrderStatusDisplay));
+                    RaisePropertyChange(nameof(InventoryResult));
+                }
+            }
+        }
 
         public string OrderStatusDisplay => EnumHelper.GetDescription(typeof(InventoryOrderStatusEnum), OrderStatus);
 

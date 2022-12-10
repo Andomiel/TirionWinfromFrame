@@ -109,6 +109,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             this.gvBarcodes.IndicatorWidth = 50;
             this.gvBarcodes.Name = "gvBarcodes";
             this.gvBarcodes.OptionsView.ShowGroupPanel = false;
+            this.gvBarcodes.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.GvBarcodes_RowCellClick);
             this.gvBarcodes.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.GvBarcodes_CustomDrawRowIndicator);
             this.gvBarcodes.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.GvBarcodes_RowCellStyle);
             // 

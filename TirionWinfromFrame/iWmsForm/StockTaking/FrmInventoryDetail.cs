@@ -36,10 +36,10 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             this.gcGeneral.Text = $"{order.InventoryNo}-{order.InventoryAreaDisplay}-{order.SubArea}";
 
             this.Load += FrmInventoryDetail_Load;
-            this.Disposed += FrmInventoryDetail_Disposed;
+            this.FormClosing += FrmInventoryDetail_FormClosing;
         }
 
-        private void FrmInventoryDetail_Disposed(object sender, EventArgs e)
+        private void FrmInventoryDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (refreshTimer != null)
             {
@@ -104,10 +104,21 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
         {
             var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
 
-            WorkOrderBarcodes.Clear();
             foreach (Wms_InventoryBarcode item in barcodes)
             {
-                WorkOrderBarcodes.Add(item.Adapt<InventoryBarcodeDto>());
+                var barcode = WorkOrderBarcodes.FirstOrDefault(p => p.BusinessId == item.BusinessId);
+                if (barcode == null)
+                {
+                    WorkOrderBarcodes.Add(item.Adapt<InventoryBarcodeDto>());
+                }
+                else if (item.OrderStatus >= barcode.OrderStatus)
+                {
+                    item.Adapt(barcode);
+                }
+                else
+                {
+                    //do nothing;
+                }
             }
         }
 
@@ -234,6 +245,53 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                 return;
             }
             tbBarcode.Text = BarcodeFormatter.FormatBarcode(tbBarcode.Text.Trim());
+        }
+
+        private void GvBarcodes_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            try
+            {    //右键弹出菜单
+                if (e.Button != MouseButtons.Right)
+                {
+                    return;
+                }
+                //容许用户添加行时，最后一行为未实际添加的行，所以不需考虑弹出菜单
+                if (e.RowHandle < 0)
+                {
+                    return;
+                }
+                //只有upn上允许弹窗
+                if (e.Column.AbsoluteIndex != 0)
+                {
+                    return;
+                }
+                //创建快捷菜单
+                ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+                //删除当前行
+                ToolStripMenuItem tsmiRemoveCurrentRow = new ToolStripMenuItem("盘亏");
+                tsmiRemoveCurrentRow.Click += (obj, arg) =>
+                {
+                    var row = WorkOrderBarcodes.ElementAt(e.RowHandle);
+
+                    row.OrderStatus = (int)InventoryBarcodeStatusEnum.Executed;
+                };
+                contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
+
+                ////清空全部数据
+                //ToolStripMenuItem tsmiRemoveAll = new ToolStripMenuItem("清空数据");
+                //tsmiRemoveAll.Click += (obj, arg) =>
+                //{
+                //    gridViewSummary.Rows.Clear();
+                //};
+                //contextMenuStrip.Items.Add(tsmiRemoveAll);
+
+                contextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
         }
     }
 }
