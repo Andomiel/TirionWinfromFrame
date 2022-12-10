@@ -293,7 +293,7 @@ namespace iWms.Form
             bool opearteResult = FrozenPolicyBll.OperatePolicyEnable(selectedItems, operateEnum, AppInfo.LoginUserInfo.account);
             if (opearteResult)
             {
-                $"冻结策略{EnumHelper.GetDescription(operateEnum)}成功".ShowTips();
+                $"冻结策略{btn.Text}成功".ShowTips();
                 QueryPolicies();
             }
             else
