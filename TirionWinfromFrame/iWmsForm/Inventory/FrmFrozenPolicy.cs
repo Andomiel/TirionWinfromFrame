@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using Entity;
 using Entity.Dto;
 using Entity.Enums;
@@ -252,7 +253,7 @@ namespace iWms.Form
             List<PolicyView> items = new List<PolicyView>(dataGridViewPolicy.DataSource as BindingList<PolicyView>);
             var selectedItems = items.Where(p => p.SelectFlag).ToList();
             FrozenOperateType operateEnum = FrozenOperateType.Unable;
-            Button btn = sender as Button;
+            SimpleButton btn = sender as SimpleButton;
             switch (btn.Name)
             {
                 case "btnEnable":
