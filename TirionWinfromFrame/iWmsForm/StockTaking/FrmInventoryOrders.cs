@@ -1,5 +1,6 @@
 ﻿using Business;
 using DevExpress.XtraSplashScreen;
+using Entity;
 using Entity.DataContext;
 using Entity.Dto;
 using Entity.Enums.General;
@@ -353,14 +354,14 @@ namespace iWms.Form
                         return;
                     }
 
-                    if (selectedOrder.OrderStatus >= (int)InventoryOrderStatusEnum.Executing)
+                    if (selectedOrder.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
                     {
-                        "未执行的盘点单才能【取消】！".ShowTips();
+                        $"当前盘点单{EnumHelper.GetDescription(typeof(InventoryOrderStatusEnum), selectedOrder.OrderStatus)}，无法取消！".ShowTips();
                         return;
                     }
 
-                    int unfinished = (int)InventoryBarcodeStatusEnum.Waiting;
-                    var unfinishedBarcodes = WorkOrderBarcodes.Where(p => p.OrderStatus == unfinished).Select(p => p.Barcode).Distinct().ToList();
+                    int unfinished = (int)InventoryBarcodeStatusEnum.Executed;
+                    var unfinishedBarcodes = WorkOrderBarcodes.Where(p => p.OrderStatus < unfinished).Select(p => p.Barcode).Distinct().ToList();
                     //if (unfinishedBarcodes.Count > 0)
                     //{
                     //    if ("存在未完成盘点的upn，是否确认取消".ShowYesNoAndTips() != DialogResult.Yes)
@@ -370,7 +371,8 @@ namespace iWms.Form
                     //}
 
                     int result = InventoryBll.ModifyInventoryOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Cancelled, AppInfo.LoginUserInfo.account);
-                    result += InventoryBll.ReleaseInventoryOrderBarcodes(unfinishedBarcodes, AppInfo.LoginUserInfo.account);
+                    result += InventoryBll.ReleaseInventoryOrderBarcodes(selectedOrder.BusinessId, unfinishedBarcodes, AppInfo.LoginUserInfo.account);
+                    new InventoryBll().ResetDeliveryOrder(selectedOrder.BusinessId, selectedOrder.InventoryNo, AppInfo.LoginUserInfo.account);
                     if (result == 0)
                     {
                         $"【{selectedOrder.InventoryNo}】取消失败".ShowTips();

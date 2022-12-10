@@ -135,7 +135,7 @@ namespace Business
             return DbHelper.ExecuteNonQuery(sql);
         }
 
-        public static int ReleaseInventoryOrderBarcodes(List<string> barcodes, string userName)
+        public static int ReleaseInventoryOrderBarcodes(string stockTakingId, List<string> barcodes, string userName)
         {
             if (barcodes == null || barcodes.Count == 0)
             {
@@ -143,8 +143,10 @@ namespace Business
             }
             string condition = string.Join(",", barcodes.Select(p => $"'{p}'").ToArray());
             string sql = $@"
-                UPDATE Wms_InventoryBarcode SET OrderStatus = {(int)InventoryBarcodeStatusEnum.Cancelled}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Barcode IN({condition});
+                UPDATE Wms_InventoryBarcode SET OrderStatus = {(int)InventoryBarcodeStatusEnum.Cancelled}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' 
+                WHERE InventoryOrderId = '{stockTakingId}' AND OrderStatus < {(int)InventoryBarcodeStatusEnum.Executed} AND Barcode IN({condition});
                 UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelID  in({condition}); ";
+
             return DbHelper.ExcuteWithTransaction(sql, out _);
         }
 
