@@ -127,34 +127,46 @@
     <value>检查更新</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="barButtonItem5.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
+  <data name="btnUpdates.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
-  <data name="barButtonItem5.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
+  <data name="btnUpdates.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
     <value>-1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="barButtonItem5.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="btnUpdates.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="bsiVersion.Caption" xml:space="preserve">
+    <value>1.0.16</value>
+  </data>
+  <data name="barStaticItem4.ImageOptions.ImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="barStaticItem4.ImageOptions.LargeImageIndex" type="System.Int32, mscorlib">
+    <value>-1</value>
+  </data>
+  <data name="barStaticItem4.ImageOptions.SvgImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ribbonControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1147, 147</value>
+    <value>1139, 147</value>
   </data>
   <data name="ribbonStatusBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 759</value>
+    <value>0, 755</value>
   </data>
   <data name="ribbonStatusBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1147, 31</value>
+    <value>1139, 31</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1147, 790</value>
+    <value>1139, 786</value>
   </data>
   <data name="navBarControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 147</value>
   </data>
   <data name="navBarControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 612</value>
+    <value>184, 608</value>
   </data>
   <data name="MainForm.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
