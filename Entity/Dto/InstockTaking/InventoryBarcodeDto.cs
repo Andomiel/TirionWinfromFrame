@@ -49,7 +49,7 @@ namespace Entity.Dto
                     RaisePropertyChange(nameof(InventoryResult));
                 }
             }
-        };
+        }
 
         /// <summary>
         /// 原储位
