@@ -101,16 +101,16 @@ namespace Business
             sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, barcodes.Select(p => p.Barcode).Distinct().ToList(), new List<string>()));
 
             //料仓也记录发料库区记录
-            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName));
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName, 0));
 
             return sb.ToString();
         }
 
-        protected string InsertDeliveryRecord(string deliveryId, string deliveryNo, int towerNo, int targetColor, string userName)
+        protected string InsertDeliveryRecord(string deliveryId, string deliveryNo, int towerNo, int targetColor, string userName, int lightSerialNo)
         {
             return $@"INSERT INTO Wms_LightColorRecord
-                (OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-                VALUES({(int)OrderType}, {towerNo}, {targetColor}, '{deliveryId}', '{deliveryNo}', {(int)LightRecordStatusEnum.LightOn}, '', getdate(), '{userName}', getdate(), '{userName}');";
+                (OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, LightSerialNo)
+                VALUES({(int)OrderType}, {towerNo}, {targetColor}, '{deliveryId}', '{deliveryNo}', {(int)LightRecordStatusEnum.LightOn}, '', getdate(), '{userName}', getdate(), '{userName}', {lightSerialNo});";
         }
 
         private string DeliveryLightShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -151,7 +151,7 @@ namespace Business
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, succeedBarcodes, failedBarcodes));
 
-            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName));
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName, 0));
 
             return sb.ToString();
         }
@@ -247,7 +247,7 @@ namespace Business
 
             LightReformShelf(deliveryNo, url, targetColor, lightNumber, barcodes);
 
-            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName);
+            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName, lightNumber);
         }
 
         private static void LightReformShelf(string deliveryNo, string url, int lightColor, int lightNumber, List<DeliveryBarcodeLocation> barcodes)
@@ -367,7 +367,7 @@ namespace Business
 
             int targetColor = currentRecord.LightColor;
             //改造货架三个灯，1，2，3
-            int lightNumber = allColors.IndexOf(targetColor);
+            int lightNumber = GetLightSerialNo(deliveryId, (int)TowerEnum.ReformShelf);
 
             try
             {
@@ -380,6 +380,13 @@ namespace Business
 
             return $@"UPDATE Wms_LightColorRecord
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
+        }
+
+        private static int GetLightSerialNo(string deliveryId, int areaId)
+        {
+            //AND RecordStatus = {(int)LightRecordStatusEnum.LightOn}
+            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
+            return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), 0);
         }
 
         protected static string LightOffLightShelf(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
