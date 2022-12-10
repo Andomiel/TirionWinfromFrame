@@ -185,7 +185,7 @@ namespace iWms.Form
 
                     record.IsTypeT = cbIsTypeT.Checked;
                     //直接同步
-                    var syncResult = ManualCounting.SyncCounting(record);
+                    var syncResult = ManualCounting.SyncCounting(record, AppInfo.LoginUserInfo.account);
                     ManualCounting.SaveCounting(record);
                     record.MSD = syncResult.MSD;
                     record.MsdOverdue = syncResult.MsdOverdue == "Y" ? "Y" : "N";
