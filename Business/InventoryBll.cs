@@ -256,6 +256,7 @@ namespace Business
 
             sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Locked}, Work_Order_No = '{inventoryId}', LockRequestID = ''  where  ReelID = '{barcode}'; ");
         }
+
     }
 
     public class InventoryQueryCondition

@@ -473,6 +473,11 @@ namespace Business
         }
 
         protected abstract int GetLargestStatus();
+
+        public static int ExcuteWithTransaction(string sql)
+        {
+            return DbHelper.ExcuteWithTransaction(sql, out string _);
+        }
     }
 
     public class DeliveryBarcodeLocation

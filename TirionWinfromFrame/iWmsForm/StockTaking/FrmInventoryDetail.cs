@@ -47,6 +47,22 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                 refreshTimer.Tick -= RefreshTimer_Tick;
                 refreshTimer.Dispose();
             }
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (var item in WorkOrderBarcodes)
+                {
+                    if (item.IsChanged)
+                    {
+                        sb.AppendLine($"UPDATE Wms_InventoryBarcode set RealQuantity = {item.RealQuantity}, OrderStatus = {item.OrderStatus} where BusinessId = '{item.BusinessId}';");
+                    }
+                }
+                _ = BaseDeliveryBll.ExcuteWithTransaction(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ShowError();
+            }
         }
 
         private Timer refreshTimer;

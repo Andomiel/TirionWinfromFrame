@@ -44,12 +44,16 @@ namespace Entity.Dto
                 if (_realQuantity != value)
                 {
                     _realQuantity = value;
+                    IsChanged = true;
+                    OrderStatus = (int)InventoryBarcodeStatusEnum.Executed;
                     RaisePropertyChange(nameof(RealQuantity));
                     RaisePropertyChange(nameof(OrderStatusDisplay));
                     RaisePropertyChange(nameof(InventoryResult));
                 }
             }
         }
+
+        public bool IsChanged { get; set; } = false;
 
         /// <summary>
         /// 原储位
