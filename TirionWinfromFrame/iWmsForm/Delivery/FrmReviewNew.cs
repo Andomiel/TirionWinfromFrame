@@ -582,7 +582,7 @@ namespace iWms.Form
                             try
                             {
                                 //尤其注意，这里使用的是出库单的Id
-                                var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.BusinessId, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId);
+                                var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.BusinessId, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId.ToUpper());
                                 feedback.Message.ShowTips();
                             }
                             finally
