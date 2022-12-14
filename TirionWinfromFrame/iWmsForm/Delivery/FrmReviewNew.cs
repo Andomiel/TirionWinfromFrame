@@ -204,8 +204,8 @@ namespace iWms.Form
             }
 
             reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
-            reviewRecord.BoxNo = txtBoxScan.Text;
-            reviewRecord.OriginalCode = tbOriginal.Text;
+            reviewRecord.BoxNo = txtBoxScan.Text.Trim();
+            reviewRecord.OriginalCode = tbOriginal.Text.Trim();
             reviewRecord.ScanTime = DateTime.Now;
             if (!reviewRecord.IsOk)
             {
@@ -273,7 +273,7 @@ namespace iWms.Form
             {
                 matchRow.Match = (int)PrepareReviewMatchEnum.Done;
                 matchRow.RealQty = reviewRecord.Qty;
-                matchRow.ContainerNo = txtBoxScan.Text;
+                matchRow.ContainerNo = txtBoxScan.Text.Trim();
             }
             else
             {
@@ -293,7 +293,7 @@ namespace iWms.Form
                     RealQty = reviewRecord.Qty,
                     Match = (int)PrepareReviewMatchEnum.Done,
                     Source = (int)PrepareSourceEnum.ReviewNew,
-                    ContainerNo = txtBoxScan.Text,
+                    ContainerNo = txtBoxScan.Text.Trim(),
                     QRCode = reviewRecord.QRCode
                 };
 
@@ -477,7 +477,7 @@ namespace iWms.Form
                             TowerNo = barcode.DeliveryAreaId,
                             AllocateQty = barcode.DeliveryQuantity,
                             RealQty = barcode.DeliveryQuantity,
-                            ContainerNo = txtBoxScan.Text,
+                            ContainerNo = barcode.BoxNo,
                             QRCode = string.Empty,
                         };
                         newReview.OrderNo = SelectedOrder.DeliveryNo;
