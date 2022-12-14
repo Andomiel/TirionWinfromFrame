@@ -312,11 +312,11 @@ namespace Business
                 }
             }
 
-            int refundStatus = GetExecuteStatus();
-            var refundBarcodes = barcodes.Where(p => p.BarcodeStatus == refundStatus).Select(p => p.Barcode).Distinct().ToList();
+            int refundStatus = GetFinishedStatus();
+            var refundBarcodes = barcodes.Where(p => p.BarcodeStatus < refundStatus).Select(p => p.Barcode).Distinct().ToList();
             sb.AppendLine(GetReleaseBarcodeSql(deliveryId, userName, refundBarcodes));
 
-            sb.AppendLine(ExtraBarcodeSql(deliveryId, userName, barcodes.Where(p => p.BarcodeStatus > refundStatus).Select(p => p.Barcode).ToList()));
+            sb.AppendLine(ExtraBarcodeSql(deliveryId, userName, barcodes.Where(p => p.BarcodeStatus == refundStatus).Select(p => p.Barcode).ToList()));
 
             sb.AppendLine(GetFinshedUpdateSql(deliveryId, userName));
             sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));
