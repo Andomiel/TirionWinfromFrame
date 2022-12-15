@@ -236,6 +236,7 @@ namespace Business
                 if (barcode == null)
                 {
                     //TODO:盘盈？
+                    //不存在此场景
                     sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                 }
                 else
@@ -243,14 +244,17 @@ namespace Business
                     if (barcode.OriginQuantity == 0)
                     {
                         //TODO:盘盈
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTake = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                     }
                     else if (barcode.RealQuantity == 0)
                     {
                         //TOTO:盘亏
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Delivered}, LockTowerNo = 0, LockLocation = '', isTakeCheck = 1, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                     }
                     else if (barcode.OriginQuantity != barcode.RealQuantity)
                     {
                         //数量不等
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTake = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                     }
                     else
                     {
