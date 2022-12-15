@@ -164,7 +164,7 @@ namespace iWms.Form
                     var records = ReviewRecords.Where(p => p.CanLoss);
                     if (!records.Any())
                     {
-                        "没有可盘亏的".ShowTips();
+                        "没有可盘亏的物料".ShowTips();
                         return;
                     }
                     ProfitAndLossBusiness.LossBarcodes(records, AppInfo.LoginUserInfo.account);
