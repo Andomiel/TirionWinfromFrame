@@ -215,7 +215,7 @@ namespace iWms.Form
             // colIndex
             // 
             this.colIndex.Caption = "序号";
-            this.colIndex.FieldName = "id";
+            this.colIndex.FieldName = "Index";
             this.colIndex.Name = "colIndex";
             this.colIndex.Visible = true;
             this.colIndex.VisibleIndex = 0;
@@ -224,7 +224,7 @@ namespace iWms.Form
             // colUpn
             // 
             this.colUpn.Caption = "UPN";
-            this.colUpn.FieldName = "pid";
+            this.colUpn.FieldName = "Barcode";
             this.colUpn.Name = "colUpn";
             this.colUpn.Visible = true;
             this.colUpn.VisibleIndex = 1;
@@ -233,7 +233,7 @@ namespace iWms.Form
             // colTower
             // 
             this.colTower.Caption = "库位";
-            this.colTower.FieldName = "name";
+            this.colTower.FieldName = "TowerDisplay";
             this.colTower.Name = "colTower";
             this.colTower.Visible = true;
             this.colTower.VisibleIndex = 2;
@@ -242,7 +242,7 @@ namespace iWms.Form
             // colLocation
             // 
             this.colLocation.Caption = "储位";
-            this.colLocation.FieldName = "functionCode";
+            this.colLocation.FieldName = "Location";
             this.colLocation.Name = "colLocation";
             this.colLocation.Visible = true;
             this.colLocation.VisibleIndex = 3;
@@ -251,6 +251,7 @@ namespace iWms.Form
             // colQuantity
             // 
             this.colQuantity.Caption = "数量";
+            this.colQuantity.FieldName = "Quantity";
             this.colQuantity.Name = "colQuantity";
             this.colQuantity.Visible = true;
             this.colQuantity.VisibleIndex = 4;
@@ -259,6 +260,7 @@ namespace iWms.Form
             // colRemark
             // 
             this.colRemark.Caption = "备注";
+            this.colRemark.FieldName = "Remark";
             this.colRemark.Name = "colRemark";
             this.colRemark.Visible = true;
             this.colRemark.VisibleIndex = 5;
