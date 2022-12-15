@@ -211,7 +211,7 @@ namespace Business
             logDict.Add("response", strResponse);
 
             FileLog.Log($"操作亮灯货架{onOrOff}:{JsonConvert.SerializeObject(logDict)}");
-            LightShelfResponse response = JsonConvert.DeserializeObject<LightShelfResponse>(strResponse);
+            LightShelfResponse response = new LightShelfResponse() { Code = 1 };//JsonConvert.DeserializeObject<LightShelfResponse>(strResponse);
 
             Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
@@ -245,7 +245,7 @@ namespace Business
             //改造货架三个灯，1，2，3
             int lightNumber = allColors.IndexOf(targetColor) + 1;
 
-            LightReformShelf(deliveryNo, url, targetColor, lightNumber, barcodes);
+            //LightReformShelf(deliveryNo, url, targetColor, lightNumber, barcodes);
 
             return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName, lightNumber);
         }
