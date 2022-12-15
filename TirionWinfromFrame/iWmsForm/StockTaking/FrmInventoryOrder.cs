@@ -214,6 +214,12 @@ namespace iWms.Form
                     {
                         subArea = string.Empty;
                     }
+                    int towerNo = Convert.ToInt32(cmbArea.SelectedValue);
+                    if (string.IsNullOrWhiteSpace(subArea) && (towerNo == (int)TowerEnum.LightShelf || towerNo == (int)TowerEnum.ReformShelf))
+                    {
+                        "料架和货架盘点时，暂时只支持单个架子盘点，请选择一个货架或者料架号".ShowTips();
+                        return;
+                    }
 
                     int rowCount = 0;
                     var barcodes = Barcodes.GroupBy(p => p.LockTowerNo);
