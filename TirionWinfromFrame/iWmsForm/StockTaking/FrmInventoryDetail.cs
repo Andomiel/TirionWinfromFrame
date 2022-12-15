@@ -92,6 +92,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                     Interval = 30 * 1000
                 };
                 refreshTimer.Tick += RefreshTimer_Tick;
+                refreshTimer.Start();
             }
         }
 
