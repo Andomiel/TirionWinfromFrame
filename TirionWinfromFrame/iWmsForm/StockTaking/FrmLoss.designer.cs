@@ -274,7 +274,7 @@ namespace iWms.Form
             this.MinimizeBox = false;
             this.Name = "FrmLoss";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "出库复核";
+            this.Text = "盘亏";
             this.Load += new System.EventHandler(this.FrmReview_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
