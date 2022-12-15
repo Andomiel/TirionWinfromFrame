@@ -528,7 +528,8 @@ namespace iWms.Form
             {
                 lock (lockFinishObj)
                 {
-
+                    FrmLoss loss = new FrmLoss();
+                    loss.ShowDialog();
                 }
             }
             catch (Exception ex)
