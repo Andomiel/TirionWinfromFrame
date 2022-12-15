@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "iWms"
-#define MyAppVersion "1.0.19"
+#define MyAppVersion "1.0.20"
 #define MyAppPublisher "Passioniot, Inc."
 #define MyAppURL "http://www.passioniot.com/"
 #define MyAppExeName "TirionWinfromFrame.Start.exe"
@@ -25,7 +25,7 @@ LicenseFile=D:\Code\TirionWinfromFrame\Installer\License.rtf
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=D:\Code\TirionWinfromFrame\Installer
-OutputBaseFilename=iWmsSetup-1.0.19
+OutputBaseFilename=iWmsSetup-1.0.20
 SetupIconFile=D:\Code\TirionWinfromFrame\Installer\picon.ico
 Compression=lzma
 SolidCompression=yes
