@@ -50,9 +50,12 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             try
             {
                 StringBuilder sb = new StringBuilder();
+
+                var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
                 foreach (var item in WorkOrderBarcodes)
                 {
-                    if (item.IsChanged)
+                    var barcode = barcodes.First(p => p.BusinessId == item.BusinessId);
+                    if (item.IsChanged && item.OrderStatus > barcode.OrderStatus)
                     {
                         sb.AppendLine($"UPDATE Wms_InventoryBarcode set RealQuantity = {item.RealQuantity}, OrderStatus = {item.OrderStatus} where BusinessId = '{item.BusinessId}';");
                     }
