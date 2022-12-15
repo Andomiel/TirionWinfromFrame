@@ -55,6 +55,7 @@
     <Compile Include="ManualCounting.cs" />
     <Compile Include="OrderReviewCallApi.cs" />
     <Compile Include="OutStockReview.cs" />
+    <Compile Include="ProfitAndLossBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferBll.cs" />
     <Compile Include="TransferStoregeBll.cs" />

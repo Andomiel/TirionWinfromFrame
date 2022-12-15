@@ -506,5 +506,35 @@ namespace iWms.Form
 
             return strResponse;
         }
+
+        private void BtnProfit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (lockFinishObj)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void BtnLoss_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (lockFinishObj)
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
     }
 }
