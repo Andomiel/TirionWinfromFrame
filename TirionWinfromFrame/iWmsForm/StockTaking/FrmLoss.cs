@@ -120,6 +120,10 @@ namespace iWms.Form
                         {
                             continue;
                         }
+                        if (ReviewRecords.Any(p => p.Barcode == upn))
+                        {
+                            continue;
+                        }
                         var inventoryBarcode = GeneralBusiness.GetInventoryBarcode(upn);
                         if (inventoryBarcode == null || inventoryBarcode.Rows.Count == 0)
                         {

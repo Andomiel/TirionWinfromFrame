@@ -57,7 +57,6 @@ namespace iWms.Form
             // btnExport
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExport.Enabled = false;
             this.btnExport.Location = new System.Drawing.Point(1180, 33);
             this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
@@ -70,7 +69,6 @@ namespace iWms.Form
             // btnClear
             // 
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Enabled = false;
             this.btnClear.Location = new System.Drawing.Point(760, 33);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
@@ -140,7 +138,6 @@ namespace iWms.Form
             // btnLoss
             // 
             this.btnLoss.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoss.Enabled = false;
             this.btnLoss.Location = new System.Drawing.Point(1041, 34);
             this.btnLoss.Name = "btnLoss";
             this.tlpConditions.SetRowSpan(this.btnLoss, 2);
