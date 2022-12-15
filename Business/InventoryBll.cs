@@ -225,11 +225,48 @@ namespace Business
         protected override string ExtraBarcodeSql(string deliveryId, string userName, List<string> barcodes)
         {
             StringBuilder sb = new StringBuilder();
+            var stockTakingBarcodes = GetFinshedBarcode(deliveryId);
             foreach (var item in barcodes)
             {
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($@" update a set a.OrderStatus = {(int)InventoryBarcodeStatusEnum.Confirmed}, a.LastUpdateTime=getdate(), a.LastUpdateUser='{userName}'
+                    from Wms_InventoryBarcode a
+                    where a.InventoryOrderId = '{deliveryId}' and a.Barcode = '{item}';");
+
+                var barcode = stockTakingBarcodes.FirstOrDefault(p => p.Barcode == item);
+                if (barcode == null)
+                {
+                    //TODO:盘盈？
+                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                }
+                else
+                {
+                    if (barcode.OriginQuantity == 0)
+                    {
+                        //TODO:盘盈
+                    }
+                    else if (barcode.RealQuantity == 0)
+                    {
+                        //TOTO:盘亏
+                    }
+                    else if (barcode.OriginQuantity != barcode.RealQuantity)
+                    {
+                        //数量不等
+                    }
+                    else
+                    {
+                        //do nothing;
+                    }
+                }
             }
             return sb.ToString();
+        }
+
+        private IEnumerable<Wms_InventoryBarcode> GetFinshedBarcode(string stockTakingId)
+        {
+            StringBuilder sb = new StringBuilder(Wms_InventoryBarcode.GetSelectSql());
+            sb.AppendLine($" AND OrderStatus = {(int)InventoryBarcodeStatusEnum.Executed} ");
+
+            return DbHelper.GetDataTable(sb.ToString()).DataTableToList<Wms_InventoryBarcode>();
         }
 
         protected override int GetLargestStatus()
