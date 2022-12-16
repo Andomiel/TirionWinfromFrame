@@ -94,6 +94,10 @@ namespace iWms.Form
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDetails = new System.Windows.Forms.DataGridView();
+            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInventoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,10 +126,6 @@ namespace iWms.Form
             this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
             this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
-            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInventoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -831,6 +831,37 @@ namespace iWms.Form
             this.dgvDetails.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDetails_RowPostPaint);
             this.dgvDetails.SelectionChanged += new System.EventHandler(this.DgvDetails_SelectionChanged);
             // 
+            // colMaterialNo
+            // 
+            this.colMaterialNo.DataPropertyName = "MaterialNo";
+            this.colMaterialNo.HeaderText = "物料代码";
+            this.colMaterialNo.MinimumWidth = 9;
+            this.colMaterialNo.Name = "colMaterialNo";
+            this.colMaterialNo.ReadOnly = true;
+            // 
+            // colDeliveryCount
+            // 
+            this.colDeliveryCount.DataPropertyName = "RequireCount";
+            this.colDeliveryCount.HeaderText = "需求数量";
+            this.colDeliveryCount.MinimumWidth = 9;
+            this.colDeliveryCount.Name = "colDeliveryCount";
+            this.colDeliveryCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实际出库";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
+            // 
+            // colInventoryStatus
+            // 
+            this.colInventoryStatus.DataPropertyName = "DeliveryStatusDisplay";
+            this.colInventoryStatus.HeaderText = "库存状态";
+            this.colInventoryStatus.MinimumWidth = 9;
+            this.colInventoryStatus.Name = "colInventoryStatus";
+            this.colInventoryStatus.ReadOnly = true;
+            // 
             // dgvUpns
             // 
             this.dgvUpns.AllowUserToAddRows = false;
@@ -1305,37 +1336,6 @@ namespace iWms.Form
             this.LightTwentieth.Tag = "SWHY020";
             this.LightTwentieth.Text = "●";
             this.LightTwentieth.ToolTip = "SWHY020";
-            // 
-            // colMaterialNo
-            // 
-            this.colMaterialNo.DataPropertyName = "MaterialNo";
-            this.colMaterialNo.HeaderText = "物料代码";
-            this.colMaterialNo.MinimumWidth = 9;
-            this.colMaterialNo.Name = "colMaterialNo";
-            this.colMaterialNo.ReadOnly = true;
-            // 
-            // colDeliveryCount
-            // 
-            this.colDeliveryCount.DataPropertyName = "RequireCount";
-            this.colDeliveryCount.HeaderText = "需求数量";
-            this.colDeliveryCount.MinimumWidth = 9;
-            this.colDeliveryCount.Name = "colDeliveryCount";
-            this.colDeliveryCount.ReadOnly = true;
-            // 
-            // colActual
-            // 
-            this.colActual.DataPropertyName = "ActualCount";
-            this.colActual.HeaderText = "实际出库";
-            this.colActual.Name = "colActual";
-            this.colActual.ReadOnly = true;
-            // 
-            // colInventoryStatus
-            // 
-            this.colInventoryStatus.DataPropertyName = "DeliveryStatusDisplay";
-            this.colInventoryStatus.HeaderText = "库存状态";
-            this.colInventoryStatus.MinimumWidth = 9;
-            this.colInventoryStatus.Name = "colInventoryStatus";
-            this.colInventoryStatus.ReadOnly = true;
             // 
             // FrmOutstocks
             // 

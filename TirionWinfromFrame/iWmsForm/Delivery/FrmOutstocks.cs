@@ -452,12 +452,13 @@ namespace iWms.Form
                         "请选中一行数据！".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
                     {
                         "当前单据尚未计算，没有要出库的物料信息！".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "不可重复执行出库！".ShowTips();
                         return;
@@ -554,8 +555,8 @@ namespace iWms.Form
                         "请选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus != (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus != (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "【正在出库】状态的工单才能【拣料完成】！".ShowTips();
                         return;
@@ -563,7 +564,8 @@ namespace iWms.Form
 
                     int asrsArea = (int)TowerEnum.ASRS;
                     int unfinishStatus = (int)DeliveryBarcodeStatusEnum.Undeliver;
-                    if (OrderBarcodes.Any(p => p.DeliveryAreaId == asrsArea && p.OrderStatus == unfinishStatus))
+                    var barcodes = DeliveryBll.GetDeliveryBarcodes(selectedOrder.BusinessId);
+                    if (barcodes.Any(p => p.DeliveryAreaId == asrsArea && p.OrderStatus == unfinishStatus))
                     {
                         "智能仓中仍然有未出完的料，不可拣料完成".ShowTips();
                         return;
@@ -767,13 +769,13 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单在发料中，无法取消，可以在发料完成后取消出库，释放物料".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
                     {
                         "工单已复核或关闭，无法取消".ShowTips();
                         return;
@@ -815,12 +817,13 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "已发料的工单不可重新计算发料".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Calculating)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Calculating)
                     {
                         var dialogResult = "当前工单已经经过计算，是否重新计算".ShowYesNoAndTips();
                         if (dialogResult != DialogResult.Yes)
@@ -926,8 +929,8 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单已开始发料，无法进行有料出库".ShowTips();
                         return;
