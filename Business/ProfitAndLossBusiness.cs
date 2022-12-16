@@ -41,7 +41,8 @@ VALUES('{detailId}', '{orderId}', '', '', 0, '{item.Key}', {item.Sum(p => p.Quan
 (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, DeliveryLocation, ExecuteResult)
 VALUES('{Guid.NewGuid():D}', '{orderId}', '{detailId}', '', '{barcode.Barcode}', '', {barcode.Tower}, {barcode.Quantity}, {(int)DeliveryBarcodeStatusEnum.Delivered}, getdate(), '{userName}', getdate(), '{userName}', '{barcode.Location}', 0);");
 
-                    sb.AppendLine($@"update smt_zd_material set Status={(int)BarcodeStatusEnum.Delivered}; ");
+                    sb.AppendLine($@"update smt_zd_material set isTakeCheck =1, isReturnCheck = 0,
+                isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' where reelid = '{barcode.Barcode}'; ");
                 }
             }
 
