@@ -2,6 +2,7 @@
 using Entity;
 using Entity.Enums;
 using Entity.Enums.Instock;
+using Entity.Enums.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +24,18 @@ namespace Business
 
             string orderId = Guid.NewGuid().ToString("D");
             string orderNo = $"Loss{DateTime.Now:yyyyMMddHHmmssfff}{barcodes.Count()}";
-            sb.AppendLine($@"INSERT INTO Wms_DeliveryOrder
-(BusinessId, DeliveryNo, WorkOrderId, SortingId, ProductNo, LineId, OrderType, DeliveryType, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-VALUES('{orderId}', '{orderNo}', '', '', '', '', {(int)OutOrderTypeEnum.盘点模式}, {(int)DeliveryOrderTypeEnum.TotalSet}, {(int)DeliveryOrderStatusEnum.Delivered}, '盘亏创建', getdate(), '{userName}', getdate(), '{userName}');");
+            sb.AppendLine($@"INSERT INTO Wms_InventoryOrder
+(BusinessId, InventoryNo, InventoryType, InventoryQuantity, InventoryArea, SubArea, SortingId, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+VALUES('{orderId}', '{orderNo}', {(int)InventoryOrderTypeEnum.Numeric}, 0, 0, 'mixed', '', {(int)InventoryOrderStatusEnum.Finished}, '盘亏创建', getdate(), '{userName}', getdate(), '{userName}');");
 
-            var barcodeGroup = barcodes.GroupBy(p => p.MaterialNo);
-            foreach (var item in barcodeGroup)
+            foreach (var barcode in barcodes)
             {
-                string detailId = Guid.NewGuid().ToString("D");
-                sb.AppendLine($@"INSERT INTO Wms_DeliveryDetail
-(BusinessId, DeliveryId, WorkOrderDetailId, SlotNo, RowNum, MaterialNo, RequireCount, DetailStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-VALUES('{detailId}', '{orderId}', '', '', 0, '{item.Key}', {item.Sum(p => p.Quantity)}, {(int)DeliveryDetailStatusEnum.Delivered}, getdate(), '{userName}', getdate(), '{userName}');");
+                sb.AppendLine($@"INSERT INTO ASRS.dbo.Wms_InventoryBarcode
+(BusinessId, InventoryOrderId, MaterialNo, Barcode, OriginQuantity, RealQuantity, OriginLocation, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult)
+VALUES('{Guid.NewGuid():D}', '{orderId}', '{barcode.MaterialNo}', '{barcode.Barcode}', {barcode.Quantity}, 0, '{barcode.Location}', {(int)InventoryBarcodeStatusEnum.Confirmed}, getdate(), '{userName}', getdate(), '{userName}', 0);");
 
-                foreach (var barcode in item)
-                {
-                    sb.AppendLine($@"INSERT INTO Wms_DeliveryBarcode
-(BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, DeliveryLocation, ExecuteResult)
-VALUES('{Guid.NewGuid():D}', '{orderId}', '{detailId}', '', '{barcode.Barcode}', '', {barcode.Tower}, {barcode.Quantity}, {(int)DeliveryBarcodeStatusEnum.Delivered}, getdate(), '{userName}', getdate(), '{userName}', '{barcode.Location}', 0);");
-
-                    sb.AppendLine($@"update smt_zd_material set isTakeCheck =1, isReturnCheck = 0,
+                sb.AppendLine($@"update smt_zd_material set isTakeCheck =1, isReturnCheck = 0,
                 isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' where reelid = '{barcode.Barcode}'; ");
-                }
             }
 
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
@@ -60,30 +52,20 @@ VALUES('{Guid.NewGuid():D}', '{orderId}', '{detailId}', '', '{barcode.Barcode}',
 
             string orderId = Guid.NewGuid().ToString("D");
             string orderNo = $"Profit{DateTime.Now:yyyyMMddHHmmssfff}{barcodes.Count()}";
-            sb.AppendLine($@"INSERT INTO Wms_InstockOrder
-(BusinessId, InstockNo, InstockType, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-VALUES('{orderId}', '{orderNo}', {(int)InOrderTypeEnum.Excel导入}, {(int)InstockOrderStatusEnum.Finished}, '盘盈创建', getdate(), '{userName}', getdate(), '{userName}');");
+            sb.AppendLine($@"INSERT INTO Wms_InventoryOrder
+(BusinessId, InventoryNo, InventoryType, InventoryQuantity, InventoryArea, SubArea, SortingId, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+VALUES('{orderId}', '{orderNo}', {(int)InventoryOrderTypeEnum.Numeric}, 0, 0, 'mixed', '', {(int)InventoryOrderStatusEnum.Finished}, '盘盈创建', getdate(), '{userName}', getdate(), '{userName}');");
 
-            var barcodeGroup = barcodes.GroupBy(p => p.PartNumber);
-            foreach (var item in barcodeGroup)
+            foreach (var barcode in barcodes)
             {
-                string detailId = Guid.NewGuid().ToString("D");
-                sb.AppendLine($@"INSERT INTO Wms_InstockDetail
-(BusinessId, InstockId, MaterialNo, RequireCount, DetailStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-VALUES('{detailId}', '{orderId}', '{item.Key}', {item.Sum(p => p.Qty)}, {(int)InstockDetailStatusEnum.Received}, getdate(), '{userName}', getdate(), '{userName}');");
+                sb.AppendLine($@"INSERT INTO ASRS.dbo.Wms_InventoryBarcode
+(BusinessId, InventoryOrderId, MaterialNo, Barcode, OriginQuantity, RealQuantity, OriginLocation, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult)
+VALUES('{Guid.NewGuid():D}', '{orderId}', '{barcode.PartNumber}', '{barcode.UPN}', 0, {barcode.Qty}, '', {(int)InventoryBarcodeStatusEnum.Confirmed}, getdate(), '{userName}', getdate(), '{userName}', 0);");
 
-                foreach (var barcode in item)
-                {
-                    sb.AppendLine($@"INSERT INTO Wms_InstockBarcode
-(BusinessId, InstockId, InstockDetailId, InstockAreaId, Barcode, InstockQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-VALUES('{Guid.NewGuid():D}', '{orderId}', '{detailId}', 0, '{barcode.UPN}', {barcode.Qty}, {(int)InstockBarcodeStatusEnum.Received}, getdate(), '{userName}', getdate(), '{userName}');");
-
-                    sb.AppendLine($"DELETE FROM smt_zd_material WHERE ReelID = '{barcode.UPN}';");
-                    sb.AppendLine($@"insert into smt_zd_material(Reelid, Part_Number, Qty, DateCode, Lot, FactoryCode, WZ_SCCJ, MSD, ReelType, SerialNo, QRCode, CameraString, MinPacking, isSave, isTake, isTakeCheck, Status, LockTowerNo)
+                sb.AppendLine($"DELETE FROM smt_zd_material WHERE ReelID = '{barcode.UPN}';");
+                sb.AppendLine($@"insert into smt_zd_material(Reelid, Part_Number, Qty, DateCode, Lot, FactoryCode, WZ_SCCJ, MSD, ReelType, SerialNo, QRCode, CameraString, MinPacking, isSave, isTake, isTakeCheck, Status, LockTowerNo)
                                             values('{barcode.UPN}', '{barcode.PartNumber}', {barcode.Qty}, '{barcode.DataCode}', '{barcode.SerialNo}', '{barcode.Supplier}', '{barcode.Supplier}', '{barcode.MSD}', '{barcode.ReelType}', '{barcode.SerialNo}', '{barcode.QRCode}', '', '{barcode.MiniPacking}', 1, 0, 0, { (int)BarcodeStatusEnum.Saved}, { (int)TowerEnum.SortingArea}); ");
-                }
             }
-
         }
     }
 
