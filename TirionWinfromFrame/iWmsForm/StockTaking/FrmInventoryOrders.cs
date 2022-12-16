@@ -516,7 +516,8 @@ namespace iWms.Form
             {
                 lock (lockFinishObj)
                 {
-
+                    FrmProfit profit = new FrmProfit();
+                    profit.ShowDialog();
                 }
             }
             catch (Exception ex)
