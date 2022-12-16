@@ -796,7 +796,8 @@ namespace iWms.Form
 
         private void CancelDeliveryOrderBarcodes(int targetStatus)
         {
-            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).Distinct().ToList());
+            var barcodes = DeliveryBll.GetDeliveryBarcodes(selectedOrder.BusinessId);
+            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, barcodes.Select(p => p.Barcode).Distinct().ToList());
             OrderBarcodes.Clear();
             foreach (var item in WorkOrderDetails)
             {
