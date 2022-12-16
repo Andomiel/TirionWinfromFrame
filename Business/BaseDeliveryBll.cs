@@ -476,6 +476,10 @@ namespace Business
 
         public static int ExcuteWithTransaction(string sql)
         {
+            if (string.IsNullOrWhiteSpace(sql))
+            {
+                return 0;
+            }
             return DbHelper.ExcuteWithTransaction(sql, out string _);
         }
     }
