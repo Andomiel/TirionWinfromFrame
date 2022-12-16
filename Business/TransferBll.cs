@@ -76,6 +76,21 @@ namespace Business
             return orders.DataTableToList<Wms_TransferOrder>();
         }
 
+        public static Wms_TransferOrder GetTransferOrderByNo(string transferNo)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_TransferOrder.GetSelectSql());
+            sb.AppendLine(" AND TransferNo = @TransferNo ");
+
+            var orders = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@TransferNo", transferNo));
+            if (orders == null || orders.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            return orders.DataTableToList<Wms_TransferOrder>().First();
+        }
+
         public static List<Wms_TransferBarcode> GetTransferBarcodes(string transferId)
         {
             string sql = $@"SELECT wtb.*

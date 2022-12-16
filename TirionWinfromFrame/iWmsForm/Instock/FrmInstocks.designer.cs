@@ -84,16 +84,16 @@ namespace iWms.Form
             this.tbDetails = new System.Windows.Forms.GroupBox();
             this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
             this.dgvMaterials = new System.Windows.Forms.DataGridView();
+            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaterialCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReceiveStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvBarcodes = new System.Windows.Forms.DataGridView();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaterialCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceiveStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -685,6 +685,36 @@ namespace iWms.Form
             this.dgvMaterials.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterials_RowPostPaint);
             this.dgvMaterials.SelectionChanged += new System.EventHandler(this.dgvMaterials_SelectionChanged);
             // 
+            // colMaterialNo
+            // 
+            this.colMaterialNo.DataPropertyName = "MaterialNo";
+            this.colMaterialNo.HeaderText = "物料代码";
+            this.colMaterialNo.MinimumWidth = 9;
+            this.colMaterialNo.Name = "colMaterialNo";
+            this.colMaterialNo.ReadOnly = true;
+            // 
+            // colMaterialCount
+            // 
+            this.colMaterialCount.DataPropertyName = "RequireCount";
+            this.colMaterialCount.HeaderText = "计划数量";
+            this.colMaterialCount.MinimumWidth = 9;
+            this.colMaterialCount.Name = "colMaterialCount";
+            this.colMaterialCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实收数量";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
+            // 
+            // colReceiveStatus
+            // 
+            this.colReceiveStatus.DataPropertyName = "ReceiveStatusDisplay";
+            this.colReceiveStatus.HeaderText = "入库状态";
+            this.colReceiveStatus.Name = "colReceiveStatus";
+            this.colReceiveStatus.ReadOnly = true;
+            // 
             // dgvBarcodes
             // 
             this.dgvBarcodes.AllowUserToAddRows = false;
@@ -755,36 +785,6 @@ namespace iWms.Form
             this.colOperator.MinimumWidth = 9;
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
-            // 
-            // colMaterialNo
-            // 
-            this.colMaterialNo.DataPropertyName = "MaterialNo";
-            this.colMaterialNo.HeaderText = "物料代码";
-            this.colMaterialNo.MinimumWidth = 9;
-            this.colMaterialNo.Name = "colMaterialNo";
-            this.colMaterialNo.ReadOnly = true;
-            // 
-            // colMaterialCount
-            // 
-            this.colMaterialCount.DataPropertyName = "RequireCount";
-            this.colMaterialCount.HeaderText = "计划数量";
-            this.colMaterialCount.MinimumWidth = 9;
-            this.colMaterialCount.Name = "colMaterialCount";
-            this.colMaterialCount.ReadOnly = true;
-            // 
-            // colActual
-            // 
-            this.colActual.DataPropertyName = "ActualCount";
-            this.colActual.HeaderText = "实收数量";
-            this.colActual.Name = "colActual";
-            this.colActual.ReadOnly = true;
-            // 
-            // colReceiveStatus
-            // 
-            this.colReceiveStatus.DataPropertyName = "ReceiveStatusDisplay";
-            this.colReceiveStatus.HeaderText = "入库状态";
-            this.colReceiveStatus.Name = "colReceiveStatus";
-            this.colReceiveStatus.ReadOnly = true;
             // 
             // FrmInstocks
             // 
