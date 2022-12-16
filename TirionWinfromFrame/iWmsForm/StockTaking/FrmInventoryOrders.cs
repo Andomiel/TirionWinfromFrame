@@ -174,12 +174,13 @@ namespace iWms.Form
                         "请至少选中一个盘点单".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus > (int)TransferOrderStatusEnum.Executing)
+                    var order = InventoryBll.GetInventoryOrderByNo(selectedOrder.InventoryNo);
+                    if (order.OrderStatus > (int)TransferOrderStatusEnum.Executing)
                     {
                         "当前盘点单状态不可执行".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus == (int)TransferOrderStatusEnum.Saved)
+                    if (order.OrderStatus == (int)TransferOrderStatusEnum.Saved)
                     {
                         new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, (int)OperateTypeEnum.InstockTaking);
 
@@ -211,15 +212,16 @@ namespace iWms.Form
                         "请至少选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus != (int)InventoryOrderStatusEnum.Executing)
+                    var order = InventoryBll.GetInventoryOrderByNo(selectedOrder.InventoryNo);
+                    if (order.OrderStatus != (int)InventoryOrderStatusEnum.Executing)
                     {
                         "【执行中】状态的盘点单才能【完成】！".ShowTips();
                         return;
                     }
 
                     int finished = (int)InventoryBarcodeStatusEnum.Executed;
-                    if (WorkOrderBarcodes.Any(p => p.OrderStatus < finished))
+                    var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
+                    if (barcodes.Any(p => p.OrderStatus < finished))
                     {
                         if ("盘点单中存在未盘点的upn，是否结束盘点，未盘点的料盘将会取消盘点".ShowYesNoAndWarning() != DialogResult.Yes)
                         {
@@ -355,15 +357,16 @@ namespace iWms.Form
                         "请至少选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
+                    var order = InventoryBll.GetInventoryOrderByNo(selectedOrder.InventoryNo);
+                    if (order.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
                     {
                         $"当前盘点单{EnumHelper.GetDescription(typeof(InventoryOrderStatusEnum), selectedOrder.OrderStatus)}，无法取消！".ShowTips();
                         return;
                     }
 
                     int unfinished = (int)InventoryBarcodeStatusEnum.Executed;
-                    var unfinishedBarcodes = WorkOrderBarcodes.Where(p => p.OrderStatus < unfinished).Select(p => p.Barcode).Distinct().ToList();
+                    var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
+                    var unfinishedBarcodes = barcodes.Where(p => p.OrderStatus < unfinished).Select(p => p.Barcode).Distinct().ToList();
                     //if (unfinishedBarcodes.Count > 0)
                     //{
                     //    if ("存在未完成盘点的upn，是否确认取消".ShowYesNoAndTips() != DialogResult.Yes)

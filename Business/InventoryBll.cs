@@ -78,6 +78,21 @@ namespace Business
             return orders.DataTableToList<Wms_InventoryOrder>();
         }
 
+        public static Wms_InventoryOrder GetInventoryOrderByNo(string inventoryNo)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_InventoryOrder.GetSelectSql());
+            sb.AppendLine(" AND InventoryNo = @InventoryNo ");
+
+            var orders = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@InventoryNo", inventoryNo));
+            if (orders == null || orders.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            return orders.DataTableToList<Wms_InventoryOrder>().First();
+        }
+
         public static List<Wms_InventoryBarcode> GetInventoryBarcodes(string inventoryId)
         {
             string sql = $@"SELECT wib.*

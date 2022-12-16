@@ -29,8 +29,8 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.gbConditions = new System.Windows.Forms.GroupBox();
             this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
@@ -55,6 +55,8 @@ namespace iWms.Form
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnReset = new DevExpress.XtraEditors.SimpleButton();
+            this.btnProfit = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLoss = new DevExpress.XtraEditors.SimpleButton();
             this.tlbTables = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,8 +71,6 @@ namespace iWms.Form
             this.colDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnProfit = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLoss = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
@@ -371,6 +371,26 @@ namespace iWms.Form
             this.btnReset.Text = "一键复位";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // btnProfit
+            // 
+            this.btnProfit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnProfit.Location = new System.Drawing.Point(1177, 38);
+            this.btnProfit.Name = "btnProfit";
+            this.btnProfit.Size = new System.Drawing.Size(87, 29);
+            this.btnProfit.TabIndex = 28;
+            this.btnProfit.Text = "盘盈";
+            this.btnProfit.Click += new System.EventHandler(this.BtnProfit_Click);
+            // 
+            // btnLoss
+            // 
+            this.btnLoss.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLoss.Location = new System.Drawing.Point(1177, 73);
+            this.btnLoss.Name = "btnLoss";
+            this.btnLoss.Size = new System.Drawing.Size(87, 29);
+            this.btnLoss.TabIndex = 29;
+            this.btnLoss.Text = "盘亏";
+            this.btnLoss.Click += new System.EventHandler(this.BtnLoss_Click);
+            // 
             // tlbTables
             // 
             this.tlbTables.ColumnCount = 2;
@@ -400,14 +420,14 @@ namespace iWms.Form
             this.colQty,
             this.colActualQuantity,
             this.colResult});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvUpns.Location = new System.Drawing.Point(714, 3);
@@ -476,14 +496,14 @@ namespace iWms.Form
             this.colDestination,
             this.colOrderTime,
             this.colCreateUser});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvOrders.Location = new System.Drawing.Point(3, 3);
@@ -553,26 +573,6 @@ namespace iWms.Form
             this.colCreateUser.MinimumWidth = 9;
             this.colCreateUser.Name = "colCreateUser";
             this.colCreateUser.ReadOnly = true;
-            // 
-            // btnProfit
-            // 
-            this.btnProfit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnProfit.Location = new System.Drawing.Point(1177, 38);
-            this.btnProfit.Name = "btnProfit";
-            this.btnProfit.Size = new System.Drawing.Size(87, 29);
-            this.btnProfit.TabIndex = 28;
-            this.btnProfit.Text = "盘盈";
-            this.btnProfit.Click += new System.EventHandler(this.BtnProfit_Click);
-            // 
-            // btnLoss
-            // 
-            this.btnLoss.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoss.Location = new System.Drawing.Point(1177, 73);
-            this.btnLoss.Name = "btnLoss";
-            this.btnLoss.Size = new System.Drawing.Size(87, 29);
-            this.btnLoss.TabIndex = 29;
-            this.btnLoss.Text = "盘亏";
-            this.btnLoss.Click += new System.EventHandler(this.BtnLoss_Click);
             // 
             // FrmInventoryOrders
             // 
