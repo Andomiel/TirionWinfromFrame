@@ -61,16 +61,6 @@ namespace iWms.Form
             CompareMaterialQty();
         }
 
-        /// <summary>
-        /// 定时刷新
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            CompareMaterialQty();
-        }
-
         private void BindDefaultTower()
         {
             var areas = WareHouseBLL.GetBoundAreas();
@@ -236,16 +226,6 @@ namespace iWms.Form
                 WareHouseBLL.UnlockTowerByOrder(CurrentOrder.BusinessId, AppInfo.LoginUserInfo.account);
                 DialogResult = DialogResult.OK;
             }
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            if (timer != null)
-            {
-                timer.Stop();
-                timer.Dispose();
-            }
-            base.OnClosed(e);
         }
 
         private bool isPostBack = false;
