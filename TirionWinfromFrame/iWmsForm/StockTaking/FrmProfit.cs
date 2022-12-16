@@ -34,7 +34,7 @@ namespace iWms.Form
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
-            dialog.FileName = $"盘亏-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            dialog.FileName = $"盘盈-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -48,13 +48,11 @@ namespace iWms.Form
 
             List<HeadColumn> headColumns = new List<HeadColumn>
             {
-                new HeadColumn("Index","序号",1200),
-                new HeadColumn("MaterialNo","物料代码",2200),
-                new HeadColumn("Barcode","UPN",7168),
-                new HeadColumn("Quantity","数量" ,2200),
-                new HeadColumn("TowerDisplay","库区",2600),
-                new HeadColumn("Location","库位",2600),
-                new HeadColumn("Remark","结果",2400),
+                new HeadColumn("QRCode","二维码",12600),
+                new HeadColumn("PartNumber","物料代码",2200),
+                new HeadColumn("UPN","UPN",7168),
+                new HeadColumn("Qty","数量" ,2200),
+                new HeadColumn("Success","结果",2400),
             };
             string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, ReviewRecords.ToList(), headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
