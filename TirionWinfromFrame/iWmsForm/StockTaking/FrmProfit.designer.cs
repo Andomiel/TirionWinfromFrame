@@ -148,7 +148,7 @@ namespace iWms.Form
             this.tlpConditions.SetRowSpan(this.btnProfit, 2);
             this.btnProfit.Size = new System.Drawing.Size(134, 56);
             this.btnProfit.TabIndex = 42;
-            this.btnProfit.Text = "盘亏";
+            this.btnProfit.Text = "盘盈";
             this.btnProfit.Click += new System.EventHandler(this.BtnProfit_Click);
             // 
             // groupBox1
