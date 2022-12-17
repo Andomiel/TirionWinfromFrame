@@ -148,6 +148,7 @@ namespace iWms.Form
                     continue;
                 }
                 detail.Barcodes.Add(barcode);
+                detail.ActualCount = detail.Barcodes.Sum(p => p.InnerQty);
             }
             CurrentOrder.Details = WorkOrderDetails.ToList();
 

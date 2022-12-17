@@ -86,11 +86,19 @@ namespace Entity.Dto
             }
         }
 
+        private int _actualCount = 0;
+
         public int ActualCount
         {
-            get
+            get { return _actualCount; }
+            set
             {
-                return Barcodes.Sum(p => p.InnerQty);
+                if (_actualCount != value)
+                {
+                    _actualCount = value;
+                    RaisePropertyChange(nameof(ActualCount));
+                    RaisePropertyChange(nameof(ReceiveStatusDisplay));
+                }
             }
         }
 
@@ -105,8 +113,6 @@ namespace Entity.Dto
                 {
                     _barcodes = value;
                     RaisePropertyChange(nameof(Barcodes));
-                    RaisePropertyChange(nameof(ActualCount));
-                    RaisePropertyChange(nameof(ReceiveStatusDisplay));
                 }
             }
         }
