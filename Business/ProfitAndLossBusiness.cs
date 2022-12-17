@@ -66,6 +66,8 @@ VALUES('{Guid.NewGuid():D}', '{orderId}', '{barcode.PartNumber}', '{barcode.UPN}
                 sb.AppendLine($@"insert into smt_zd_material(Reelid, Part_Number, Qty, DateCode, Lot, FactoryCode, WZ_SCCJ, MSD, ReelType, SerialNo, QRCode, CameraString, MinPacking, isSave, isTake, isTakeCheck, Status, LockTowerNo)
                                             values('{barcode.UPN}', '{barcode.PartNumber}', {barcode.Qty}, '{barcode.DataCode}', '{barcode.SerialNo}', '{barcode.Supplier}', '{barcode.Supplier}', '{barcode.MSD}', '{barcode.ReelType}', '{barcode.SerialNo}', '{barcode.QRCode}', '', '{barcode.MiniPacking}', 1, 0, 0, { (int)BarcodeStatusEnum.Saved}, { (int)TowerEnum.SortingArea}); ");
             }
+
+            DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
     }
 
