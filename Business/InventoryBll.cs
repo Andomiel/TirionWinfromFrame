@@ -3,6 +3,7 @@ using Entity;
 using Entity.DataContext;
 using Entity.Dto;
 using Entity.Enums;
+using Entity.Enums.General;
 using Entity.Enums.Inventory;
 using System;
 using System.Collections.Generic;
@@ -166,7 +167,9 @@ namespace Business
             string sql = $@"
                 UPDATE Wms_InventoryBarcode SET OrderStatus = {(int)InventoryBarcodeStatusEnum.Cancelled}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' 
                 WHERE InventoryOrderId = '{stockTakingId}' AND OrderStatus < {(int)InventoryBarcodeStatusEnum.Executed} AND Barcode IN({condition});
-                UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelID  in({condition}); ";
+                UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelID  in({condition});
+                DELETE FROM tower01A_smt_materialoperate WHERE OperateType ={(int)OperateTypeEnum.InstockTaking} AND  ReelID IN ({condition});
+                DELETE FROM tower01B_smt_materialoperate WHERE OperateType ={(int)OperateTypeEnum.InstockTaking} AND  ReelID IN ({condition});";
 
             return DbHelper.ExcuteWithTransaction(sql, out _);
         }
