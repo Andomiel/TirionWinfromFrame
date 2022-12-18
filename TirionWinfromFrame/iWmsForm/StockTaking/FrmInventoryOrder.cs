@@ -1,5 +1,6 @@
 ﻿using Business;
 using Commons;
+using Entity;
 using Entity.Dto;
 using Entity.Enums;
 using Entity.Enums.Inventory;
@@ -219,6 +220,20 @@ namespace iWms.Form
                     {
                         "料架和货架盘点时，暂时只支持单个架子盘点，请选择一个货架或者料架号".ShowTips();
                         return;
+                    }
+
+                    if (towerNo != (int)TowerEnum.SortingArea)
+                    {
+                        int asrsArea = (int)TowerEnum.ASRS;
+                        var orders = InventoryBll.GetAvailableInventoryOrders();
+                        var validateOrders = orders.Where(p => p.InventoryArea == asrsArea || (p.InventoryArea == towerNo && p.SubArea == subArea));
+                        if (validateOrders.Any())
+                        {
+                            var inventoryNos = validateOrders.Select(p => p.InventoryNo).Distinct();
+                            string notifyString = string.Join(",", inventoryNos.ToArray());
+                            $"当前要盘点的库区 {EnumHelper.GetDescription(typeof(TowerEnum), towerNo)}-{subArea} 已存在盘点单 {notifyString}，当前盘点单完成后才可以创建新的盘点".ShowTips();
+                            return;
+                        }
                     }
 
                     int rowCount = 0;

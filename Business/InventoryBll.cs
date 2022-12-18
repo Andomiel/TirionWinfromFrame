@@ -93,6 +93,12 @@ namespace Business
             return orders.DataTableToList<Wms_InventoryOrder>().First();
         }
 
+        public static List<Wms_InventoryOrder> GetAvailableInventoryOrders()
+        {
+            string sql = $"SELECT * FROM OrderStatus < {(int)InventoryOrderStatusEnum.Finished} ";
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_InventoryOrder>();
+        }
+
         public static List<Wms_InventoryBarcode> GetInventoryBarcodes(string inventoryId)
         {
             string sql = $@"SELECT wib.*
