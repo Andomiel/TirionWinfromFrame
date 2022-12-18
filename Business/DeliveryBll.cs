@@ -229,7 +229,7 @@ namespace Business
         {
             string sql = $@"SELECT szm.*  from smt_zd_material szm 
                      LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen) smf ON szm.ReelID = smf.UPN
-                        WHERE szm.Status ={(int)BarcodeStatusEnum.Saved} AND szm.isSave = 1 AND  szm.isTake = 0 AND szm.BakeState =0
+                        WHERE szm.Status ={(int)BarcodeStatusEnum.Saved} AND szm.isSave = 1 AND  szm.isTakeCheck = 0 AND szm.BakeState =0
                          AND smf.UPN is NULL 
                                 AND szm.Part_Number = '{materialNo}' 
                         ORDER BY szm.LockTowerNo DESC, szm.SaveTime, szm.Qty ASC; ";

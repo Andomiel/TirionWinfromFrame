@@ -109,7 +109,7 @@ namespace Business
                                         FROM smt_zd_material szm 
                                         WHERE szm.Status = {(int)BarcodeStatusEnum.Saved}
                                                  AND szm.isSave = 1 
-                                                 AND szm.isTake = 0
+                                                 AND szm.isTakeCheck = 0
                                                  AND szm.Qty > 0");
             if (condition != null)
             {
