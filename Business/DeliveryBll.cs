@@ -95,6 +95,37 @@ namespace Business
             return orders.DataTableToList<Wms_DeliveryOrder>().First();
         }
 
+        public static List<Wms_DeliveryOrder> GetInventoryValidateOrders()
+        {
+            string sql = $@"SELECT DISTINCT wdo .*
+FROM Wms_DeliveryBarcode wdb 
+left join Wms_DeliveryOrder wdo on wdb.DeliveryId = wdo.BusinessId 
+WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
+        }
+
+        public static List<Wms_DeliveryOrder> GetInventoryValidateOrders(IEnumerable<string> ids)
+        {
+            if (!ids.Any())
+            {
+                return new List<Wms_DeliveryOrder>();
+            }
+            IEnumerable<string> formatIds = ids.Select(p => $"'{p}'");
+            string sql = $"SELECT * FROM Wms_DeliveryOrder wdo WHERE BusinessId IN ({string.Join(",", formatIds.ToArray())}) ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
+        }
+
+        public static List<Wms_DeliveryBarcode> GetInventoryValidateBarcode()
+        {
+            string sql = $@"SELECT wdb .*
+FROM Wms_DeliveryBarcode wdb 
+WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryBarcode>();
+        }
+
         public static List<Wms_DeliveryDetail> GetDeliveryDetails(string deliveryId)
         {
             StringBuilder sb = new StringBuilder();

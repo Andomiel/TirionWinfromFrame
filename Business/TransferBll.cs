@@ -99,6 +99,13 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferBarcode>();
         }
 
+        public static List<Wms_TransferOrder> GetInventoryValidateOrders()
+        {
+            string sql = $"SELECT * FROM Wms_TransferOrder wto  WHERE OrderStatus < {(int)TransferOrderStatusEnum.Finished} ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferOrder>();
+        }
+
         public static int ModifyTransferOrderStatus(string transferId, int targetStatus, string userName)
         {
             string sql = $@"UPDATE Wms_TransferOrder

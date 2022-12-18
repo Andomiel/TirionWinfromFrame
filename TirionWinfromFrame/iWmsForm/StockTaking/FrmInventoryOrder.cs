@@ -222,16 +222,38 @@ namespace iWms.Form
                         return;
                     }
 
+                    int asrsArea = (int)TowerEnum.ASRS;
                     if (towerNo != (int)TowerEnum.SortingArea)
                     {
-                        int asrsArea = (int)TowerEnum.ASRS;
                         var orders = InventoryBll.GetAvailableInventoryOrders();
                         var validateOrders = orders.Where(p => p.InventoryArea == asrsArea || (p.InventoryArea == towerNo && p.SubArea == subArea));
                         if (validateOrders.Any())
                         {
                             var inventoryNos = validateOrders.Select(p => p.InventoryNo).Distinct();
                             string notifyString = string.Join(",", inventoryNos.ToArray());
-                            $"当前要盘点的库区 {EnumHelper.GetDescription(typeof(TowerEnum), towerNo)}-{subArea} 已存在盘点单 {notifyString}，当前盘点单完成后才可以创建新的盘点".ShowTips();
+                            $"当前要盘点的库区 {EnumHelper.GetDescription(typeof(TowerEnum), towerNo)}-{subArea} 已存在盘点单 {notifyString}，将其完成后才可以创建新的盘点".ShowTips();
+                            return;
+                        }
+
+                        var validateBarcodes = DeliveryBll.GetInventoryValidateBarcode();
+                        var validatedBarcodes = validateBarcodes.Where(p => p.DeliveryAreaId == asrsArea || p.DeliveryAreaId == towerNo);
+                        if (validatedBarcodes.Any())
+                        {
+                            var deliveryIds = validatedBarcodes.Select(p => p.DeliveryId).Distinct();
+                            var deliveryOrders = DeliveryBll.GetInventoryValidateOrders(deliveryIds);
+                            var deliveryNos = deliveryOrders.Select(p => p.DeliveryNo);
+                            var notifyString = string.Join(",", deliveryNos.ToArray());
+                            $"当前要盘点的库区 {EnumHelper.GetDescription(typeof(TowerEnum), towerNo)}-{subArea} 已存在出库单 {notifyString}，将其完成后才可以创建新的盘点".ShowTips();
+                            return;
+                        }
+
+                        var transferOrders = TransferBll.GetInventoryValidateOrders();
+                        var validateTransferOrders = transferOrders.Where(p => p.SourceAreaId == asrsArea || p.SourceAreaId == towerNo);
+                        if (validateTransferOrders.Any())
+                        {
+                            var transferNos = validateTransferOrders.Select(p => p.TransferNo).Distinct();
+                            var notifyString = string.Join(",", transferNos);
+                            $"当前要盘点的库区 {EnumHelper.GetDescription(typeof(TowerEnum), towerNo)}-{subArea} 已存在移库单 {notifyString}，将其完成后才可以创建新的盘点".ShowTips();
                             return;
                         }
                     }
