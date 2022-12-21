@@ -121,7 +121,6 @@ namespace iWms.Form
             LoadPagedOrders();
         }
 
-        private InstockOrderDto selectedOrder = null;
         private void dgvOrders_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -132,7 +131,6 @@ namespace iWms.Form
                 }
                 var row = dgvOrders.SelectedCells[0].OwningRow;
                 var order = row.DataBoundItem as InstockOrderDto;
-                selectedOrder = order;
 
                 var details = WareHouseBLL.GetInstockDetails(order.BusinessId);
                 var barcodes = WareHouseBLL.GetInstockBarcodes(order.BusinessId);
@@ -173,6 +171,7 @@ namespace iWms.Form
                     if (OrderBarcodes.ContainsKey(detail.BusinessId))
                     {
                         detail.Barcodes = OrderBarcodes[detail.BusinessId];
+                        detail.ActualCount = detail.Barcodes.Sum(p => p.InnerQty);
                     }
                     WorkOrderDetails.Add(detail);
                 }
