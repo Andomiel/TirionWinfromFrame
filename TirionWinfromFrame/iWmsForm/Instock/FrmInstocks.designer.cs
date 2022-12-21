@@ -766,7 +766,7 @@ namespace iWms.Form
             // 
             // colTowerNo
             // 
-            this.colTowerNo.DataPropertyName = "TowerNo";
+            this.colTowerNo.DataPropertyName = "TowerDisplay";
             this.colTowerNo.HeaderText = "库区";
             this.colTowerNo.Name = "colTowerNo";
             this.colTowerNo.ReadOnly = true;
@@ -859,11 +859,6 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton btnNext;
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsSelected;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
@@ -875,5 +870,10 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
         private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
     }
 }
