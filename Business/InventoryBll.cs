@@ -96,7 +96,7 @@ namespace Business
 
         public static List<Wms_InventoryOrder> GetAvailableInventoryOrders()
         {
-            string sql = $"SELECT * FROM OrderStatus < {(int)InventoryOrderStatusEnum.Finished} ";
+            string sql = $"SELECT * FROM Wms_InventoryOrder WHERE OrderStatus < {(int)InventoryOrderStatusEnum.Finished} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InventoryOrder>();
         }
 
