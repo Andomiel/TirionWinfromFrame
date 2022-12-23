@@ -96,6 +96,7 @@ namespace iWms.Form
             this.dgvDetails = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -805,6 +806,7 @@ namespace iWms.Form
             this.dgvDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
             this.colDeliveryCount,
+            this.colActual,
             this.colInventoryStatus});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -844,6 +846,13 @@ namespace iWms.Form
             this.colDeliveryCount.MinimumWidth = 9;
             this.colDeliveryCount.Name = "colDeliveryCount";
             this.colDeliveryCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实际出库";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
             // 
             // colInventoryStatus
             // 
@@ -1408,9 +1417,6 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnCalculate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
         private DevExpress.XtraEditors.SimpleButton btnSpecial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
@@ -1451,5 +1457,9 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
     }
 }

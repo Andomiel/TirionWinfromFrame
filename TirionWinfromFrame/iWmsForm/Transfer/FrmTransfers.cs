@@ -155,13 +155,14 @@ namespace iWms.Form
                         "请至少选中一个移库单".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus > (int)TransferOrderStatusEnum.Executing)
+                    var order = TransferBll.GetTransferOrderByNo(selectedOrder.TransferNo);
+                    if (order.OrderStatus > (int)TransferOrderStatusEnum.Executing)
                     {
                         "当前移库单状态不可执行".ShowTips();
                         return;
                     }
 
-                    if (selectedOrder.TargetAreaId == (int)TowerEnum.SortingArea)//移出判定亮灯
+                    if (order.TargetAreaId == (int)TowerEnum.SortingArea)//移出判定亮灯
                     {
                         ValidateDeliveryOrderLimit();
                         //ValidateInstockOrderLimit();
@@ -266,13 +267,14 @@ namespace iWms.Form
                     //}
                     int asrsArea = (int)TowerEnum.ASRS;
                     int unfinished = (int)TransferBarcodeStatusEnum.Unfinished;
-                    if (selectedOrder.SourceAreaId == asrsArea && WorkOrderBarcodes.Any(p => p.BarcodeStatus == unfinished))
+                    var barcodes = TransferBll.GetTransferBarcodes(selectedOrder.BusinessId);
+                    if (selectedOrder.SourceAreaId == asrsArea && barcodes.Any(p => p.OrderStatus == unfinished))
                     {
                         "此移库单是从智能仓移出，目前仍然有未出完的料，不可移库完成".ShowTips();
                         return;
                     }
 
-                    if (WorkOrderBarcodes.Any(p => p.BarcodeStatus == unfinished))
+                    if (barcodes.Any(p => p.OrderStatus == unfinished))
                     {
                         if ("移库单中存在未移库的upn，确认完成将未移库的upn释放".ShowYesNoAndTips() != DialogResult.Yes)
                         {

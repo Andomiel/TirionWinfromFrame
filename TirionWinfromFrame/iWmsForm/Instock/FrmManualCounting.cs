@@ -153,7 +153,10 @@ namespace iWms.Form
                     }
                     string[] upnArr = record.UPN.Split('-');
                     record.PartNumber = upnArr[0];
-                    record.SerialNo = upnArr[3];
+                    if (upnArr.Length >= 4)
+                    {
+                        record.SerialNo = upnArr[3];
+                    }
 
                     string[] qrcodeArr = record.QRCode.Split('*');
                     if (qrcodeArr.Length >= 3)
@@ -182,7 +185,7 @@ namespace iWms.Form
 
                     record.IsTypeT = cbIsTypeT.Checked;
                     //直接同步
-                    var syncResult = ManualCounting.SyncCounting(record);
+                    var syncResult = ManualCounting.SyncCounting(record, AppInfo.LoginUserInfo.account);
                     ManualCounting.SaveCounting(record);
                     record.MSD = syncResult.MSD;
                     record.MsdOverdue = syncResult.MsdOverdue == "Y" ? "Y" : "N";

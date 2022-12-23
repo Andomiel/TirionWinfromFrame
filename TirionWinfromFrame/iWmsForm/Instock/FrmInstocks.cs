@@ -80,7 +80,7 @@ namespace iWms.Form
 
         private BindingList<InstockBarcodeDto> WorkOrderBarcodes = new BindingList<InstockBarcodeDto>();
 
-        private List<InstockBarcodeDto> OrderBarcodes = new List<InstockBarcodeDto>();
+        private Dictionary<string, BindingList<InstockBarcodeDto>> OrderBarcodes = new Dictionary<string, BindingList<InstockBarcodeDto>>();
 
         private object lockQueryObj = new object();
 
@@ -121,7 +121,6 @@ namespace iWms.Form
             LoadPagedOrders();
         }
 
-        private InstockOrderDto selectedOrder = null;
         private void dgvOrders_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -132,7 +131,6 @@ namespace iWms.Form
                 }
                 var row = dgvOrders.SelectedCells[0].OwningRow;
                 var order = row.DataBoundItem as InstockOrderDto;
-                selectedOrder = order;
 
                 var details = WareHouseBLL.GetInstockDetails(order.BusinessId);
                 var barcodes = WareHouseBLL.GetInstockBarcodes(order.BusinessId);
@@ -142,7 +140,7 @@ namespace iWms.Form
                 OrderBarcodes.Clear();
                 foreach (DataRow item in barcodes.Rows)
                 {
-                    OrderBarcodes.Add(new InstockBarcodeDto()
+                    var barcode = new InstockBarcodeDto()
                     {
                         OrderNo = order.InstockNo,
                         MaterialNo = Convert.ToString(item["MaterialNo"]),
@@ -151,8 +149,17 @@ namespace iWms.Form
                         TowerNo = TypeParse.StrToInt(Convert.ToString(item["TowerNo"]), -1),
                         CreateTime = TypeParse.StrToDateTime(Convert.ToString(item["CreateTime"]), new DateTime(1900, 1, 1)),
                         InnerQty = TypeParse.StrToInt(Convert.ToString(item["InnerQty"]), 0),
-                        Operator = Convert.ToString(item["Operator"])
-                    });
+                        Operator = Convert.ToString(item["Operator"]),
+                        InstockDetailId = Convert.ToString(item["InstockDetailId"])
+                    };
+                    if (OrderBarcodes.ContainsKey(barcode.InstockDetailId))
+                    {
+                        OrderBarcodes[barcode.InstockDetailId].Add(barcode);
+                    }
+                    else
+                    {
+                        OrderBarcodes.Add(barcode.InstockDetailId, new BindingList<InstockBarcodeDto>() { barcode });
+                    }
                 }
                 foreach (Wms_InstockDetail item in details)
                 {
@@ -161,7 +168,11 @@ namespace iWms.Form
                         continue;
                     }
                     var detail = item.Adapt<InstockDetailDto>();
-                    detail.Barcodes = OrderBarcodes.Where(p => p.MaterialNo == detail.MaterialNo).ToList();
+                    if (OrderBarcodes.ContainsKey(detail.BusinessId))
+                    {
+                        detail.Barcodes = OrderBarcodes[detail.BusinessId];
+                        detail.ActualCount = detail.Barcodes.Sum(p => p.InnerQty);
+                    }
                     WorkOrderDetails.Add(detail);
                 }
                 order.Details = WorkOrderDetails.ToList();

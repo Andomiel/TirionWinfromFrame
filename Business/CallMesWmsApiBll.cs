@@ -456,6 +456,10 @@ namespace Business
 
         [JsonProperty("lock")]
         public string _lock { get; set; }
+        /// <summary>
+        /// 提交人，默认点料机
+        /// </summary>
+        public string Submitter { get; set; } = "X-Ray";
     }
 
     public class MesIqcCompareRequest

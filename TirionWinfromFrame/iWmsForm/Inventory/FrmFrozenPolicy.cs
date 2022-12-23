@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using Entity;
 using Entity.Dto;
 using Entity.Enums;
@@ -252,7 +253,7 @@ namespace iWms.Form
             List<PolicyView> items = new List<PolicyView>(dataGridViewPolicy.DataSource as BindingList<PolicyView>);
             var selectedItems = items.Where(p => p.SelectFlag).ToList();
             FrozenOperateType operateEnum = FrozenOperateType.Unable;
-            Button btn = sender as Button;
+            SimpleButton btn = sender as SimpleButton;
             switch (btn.Name)
             {
                 case "btnEnable":
@@ -292,7 +293,7 @@ namespace iWms.Form
             bool opearteResult = FrozenPolicyBll.OperatePolicyEnable(selectedItems, operateEnum, AppInfo.LoginUserInfo.account);
             if (opearteResult)
             {
-                $"冻结策略{EnumHelper.GetDescription(operateEnum)}成功".ShowTips();
+                $"冻结策略{btn.Text}成功".ShowTips();
                 QueryPolicies();
             }
             else

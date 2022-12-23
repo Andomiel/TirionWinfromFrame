@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TirionWinfromFrame.Commons;
 
@@ -100,16 +101,16 @@ namespace Business
             sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, barcodes.Select(p => p.Barcode).Distinct().ToList(), new List<string>()));
 
             //料仓也记录发料库区记录
-            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName));
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName, 0));
 
             return sb.ToString();
         }
 
-        protected string InsertDeliveryRecord(string deliveryId, string deliveryNo, int towerNo, int targetColor, string userName)
+        protected string InsertDeliveryRecord(string deliveryId, string deliveryNo, int towerNo, int targetColor, string userName, int lightSerialNo)
         {
             return $@"INSERT INTO Wms_LightColorRecord
-                (OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-                VALUES({(int)OrderType}, {towerNo}, {targetColor}, '{deliveryId}', '{deliveryNo}', {(int)LightRecordStatusEnum.LightOn}, '', getdate(), '{userName}', getdate(), '{userName}');";
+                (OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, LightSerialNo)
+                VALUES({(int)OrderType}, {towerNo}, {targetColor}, '{deliveryId}', '{deliveryNo}', {(int)LightRecordStatusEnum.LightOn}, '', getdate(), '{userName}', getdate(), '{userName}', {lightSerialNo});";
         }
 
         private string DeliveryLightShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -150,7 +151,7 @@ namespace Business
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, succeedBarcodes, failedBarcodes));
 
-            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName));
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName, 0));
 
             return sb.ToString();
         }
@@ -206,6 +207,7 @@ namespace Business
             logDict.Add("request", requestString);
 
             string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+            strResponse = Regex.Unescape(strResponse);
             logDict.Add("response", strResponse);
 
             FileLog.Log($"操作亮灯货架{onOrOff}:{JsonConvert.SerializeObject(logDict)}");
@@ -213,12 +215,12 @@ namespace Business
 
             Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
+            if (response == null || response.Code > 1)
+            {
+                string formattedMessage = Regex.Unescape(response.Msg);
+                throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
+            }
             return response;
-            //if (response == null || response.Code != 1)
-            //{
-            //    string formattedMessage = Uri.UnescapeDataString(response.Msg);
-            //    //throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
-            //}
         }
 
         private string DeliveryReformShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -245,7 +247,7 @@ namespace Business
 
             LightReformShelf(deliveryNo, url, targetColor, lightNumber, barcodes);
 
-            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName);
+            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName, lightNumber);
         }
 
         private static void LightReformShelf(string deliveryNo, string url, int lightColor, int lightNumber, List<DeliveryBarcodeLocation> barcodes)
@@ -310,11 +312,11 @@ namespace Business
                 }
             }
 
-            int refundStatus = GetExecuteStatus();
-            var refundBarcodes = barcodes.Where(p => p.BarcodeStatus == refundStatus).Select(p => p.Barcode).Distinct().ToList();
+            int refundStatus = GetFinishedStatus();
+            var refundBarcodes = barcodes.Where(p => p.BarcodeStatus < refundStatus).Select(p => p.Barcode).Distinct().ToList();
             sb.AppendLine(GetReleaseBarcodeSql(deliveryId, userName, refundBarcodes));
 
-            sb.AppendLine(ExtraBarcodeSql(deliveryId, userName, barcodes.Where(p => p.BarcodeStatus > refundStatus).Select(p => p.Barcode).ToList()));
+            sb.AppendLine(ExtraBarcodeSql(deliveryId, userName, barcodes.Where(p => p.BarcodeStatus == refundStatus).Select(p => p.Barcode).ToList()));
 
             sb.AppendLine(GetFinshedUpdateSql(deliveryId, userName));
             sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));
@@ -365,7 +367,7 @@ namespace Business
 
             int targetColor = currentRecord.LightColor;
             //改造货架三个灯，1，2，3
-            int lightNumber = allColors.IndexOf(targetColor) + 1;
+            int lightNumber = GetLightSerialNo(deliveryId, (int)TowerEnum.ReformShelf);
 
             try
             {
@@ -378,6 +380,13 @@ namespace Business
 
             return $@"UPDATE Wms_LightColorRecord
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
+        }
+
+        private static int GetLightSerialNo(string deliveryId, int areaId)
+        {
+            //AND RecordStatus = {(int)LightRecordStatusEnum.LightOn}
+            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
+            return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), 0);
         }
 
         protected static string LightOffLightShelf(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -464,6 +473,15 @@ namespace Business
         }
 
         protected abstract int GetLargestStatus();
+
+        public static int ExcuteWithTransaction(string sql)
+        {
+            if (string.IsNullOrWhiteSpace(sql))
+            {
+                return 0;
+            }
+            return DbHelper.ExcuteWithTransaction(sql, out string _);
+        }
     }
 
     public class DeliveryBarcodeLocation

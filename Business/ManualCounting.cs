@@ -106,7 +106,7 @@ namespace Business
             return materialType;
         }
 
-        public static ManualCountResult SyncCounting(ManualCountingRecord record)
+        public static ManualCountResult SyncCounting(ManualCountingRecord record, string userName)
         {
             MaterialInfoResponse materialInfo = new MaterialInfoResponse();
             if (!string.IsNullOrWhiteSpace(record.materialJson))
@@ -128,6 +128,7 @@ namespace Business
             request.msd = record.MSD;
             request.msdOverdue = string.Empty;
             request._lock = materialInfo.HoldFlag;
+            request.Submitter = userName;
             XtaryBackQtyResponse response = CallMesWmsApiBll.CallXtrayBackQty(request);
             ManualCountResult result = new ManualCountResult();
             if (response != null && !string.IsNullOrWhiteSpace(response.Result))

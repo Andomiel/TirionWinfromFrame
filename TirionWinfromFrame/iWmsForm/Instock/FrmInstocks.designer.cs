@@ -74,18 +74,6 @@ namespace iWms.Form
             this.btnNoSource = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
-            this.tbDetails = new System.Windows.Forms.GroupBox();
-            this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvMaterials = new System.Windows.Forms.DataGridView();
-            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaterialCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colReceiveStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvBarcodes = new System.Windows.Forms.DataGridView();
-            this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +81,19 @@ namespace iWms.Form
             this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFinishedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperate = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.tbDetails = new System.Windows.Forms.GroupBox();
+            this.tlpDetails = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvMaterials = new System.Windows.Forms.DataGridView();
+            this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaterialCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReceiveStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvBarcodes = new System.Windows.Forms.DataGridView();
+            this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colInnerCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -562,161 +563,6 @@ namespace iWms.Form
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.dgvOrders_SelectionChanged);
             this.dgvOrders.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvOrders_KeyUp);
             // 
-            // tbDetails
-            // 
-            this.tbDetails.Controls.Add(this.tlpDetails);
-            this.tbDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDetails.Location = new System.Drawing.Point(3, 323);
-            this.tbDetails.Name = "tbDetails";
-            this.tbDetails.Size = new System.Drawing.Size(1218, 347);
-            this.tbDetails.TabIndex = 2;
-            this.tbDetails.TabStop = false;
-            this.tbDetails.Text = "入库明细";
-            // 
-            // tlpDetails
-            // 
-            this.tlpDetails.ColumnCount = 2;
-            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tlpDetails.Controls.Add(this.dgvMaterials, 0, 0);
-            this.tlpDetails.Controls.Add(this.dgvBarcodes, 1, 0);
-            this.tlpDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpDetails.Location = new System.Drawing.Point(3, 18);
-            this.tlpDetails.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpDetails.Name = "tlpDetails";
-            this.tlpDetails.RowCount = 1;
-            this.tlpDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDetails.Size = new System.Drawing.Size(1212, 326);
-            this.tlpDetails.TabIndex = 4;
-            // 
-            // dgvMaterials
-            // 
-            this.dgvMaterials.AllowUserToAddRows = false;
-            this.dgvMaterials.AllowUserToDeleteRows = false;
-            this.dgvMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMaterials.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMaterials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMaterialNo,
-            this.colMaterialCount,
-            this.colReceiveStatus});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMaterials.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvMaterials.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMaterials.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvMaterials.Location = new System.Drawing.Point(3, 3);
-            this.dgvMaterials.MultiSelect = false;
-            this.dgvMaterials.Name = "dgvMaterials";
-            this.dgvMaterials.ReadOnly = true;
-            this.dgvMaterials.RowHeadersWidth = 40;
-            this.dgvMaterials.RowTemplate.Height = 23;
-            this.dgvMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMaterials.Size = new System.Drawing.Size(478, 320);
-            this.dgvMaterials.TabIndex = 0;
-            this.dgvMaterials.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
-            this.dgvMaterials.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterials_RowPostPaint);
-            this.dgvMaterials.SelectionChanged += new System.EventHandler(this.dgvMaterials_SelectionChanged);
-            // 
-            // colMaterialNo
-            // 
-            this.colMaterialNo.DataPropertyName = "MaterialNo";
-            this.colMaterialNo.HeaderText = "物料代码";
-            this.colMaterialNo.MinimumWidth = 9;
-            this.colMaterialNo.Name = "colMaterialNo";
-            this.colMaterialNo.ReadOnly = true;
-            // 
-            // colMaterialCount
-            // 
-            this.colMaterialCount.DataPropertyName = "RequireCount";
-            this.colMaterialCount.HeaderText = "入库数量";
-            this.colMaterialCount.MinimumWidth = 9;
-            this.colMaterialCount.Name = "colMaterialCount";
-            this.colMaterialCount.ReadOnly = true;
-            // 
-            // colReceiveStatus
-            // 
-            this.colReceiveStatus.DataPropertyName = "ReceiveStatusDisplay";
-            this.colReceiveStatus.HeaderText = "入库状态";
-            this.colReceiveStatus.Name = "colReceiveStatus";
-            this.colReceiveStatus.ReadOnly = true;
-            // 
-            // dgvBarcodes
-            // 
-            this.dgvBarcodes.AllowUserToAddRows = false;
-            this.dgvBarcodes.AllowUserToDeleteRows = false;
-            this.dgvBarcodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvBarcodes.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvBarcodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBarcodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colBarcode,
-            this.colInnerCount,
-            this.colTowerNo,
-            this.colLocation,
-            this.colOperator});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBarcodes.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvBarcodes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvBarcodes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvBarcodes.Location = new System.Drawing.Point(487, 3);
-            this.dgvBarcodes.MultiSelect = false;
-            this.dgvBarcodes.Name = "dgvBarcodes";
-            this.dgvBarcodes.ReadOnly = true;
-            this.dgvBarcodes.RowHeadersWidth = 40;
-            this.dgvBarcodes.RowTemplate.Height = 23;
-            this.dgvBarcodes.Size = new System.Drawing.Size(722, 320);
-            this.dgvBarcodes.TabIndex = 1;
-            this.dgvBarcodes.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBarcodes_RowPostPaint);
-            // 
-            // colBarcode
-            // 
-            this.colBarcode.DataPropertyName = "Upn";
-            this.colBarcode.HeaderText = "UPN";
-            this.colBarcode.MinimumWidth = 9;
-            this.colBarcode.Name = "colBarcode";
-            this.colBarcode.ReadOnly = true;
-            // 
-            // colInnerCount
-            // 
-            this.colInnerCount.DataPropertyName = "InnerQty";
-            this.colInnerCount.HeaderText = "盘内数量";
-            this.colInnerCount.MinimumWidth = 9;
-            this.colInnerCount.Name = "colInnerCount";
-            this.colInnerCount.ReadOnly = true;
-            // 
-            // colTowerNo
-            // 
-            this.colTowerNo.DataPropertyName = "TowerNo";
-            this.colTowerNo.HeaderText = "库区";
-            this.colTowerNo.Name = "colTowerNo";
-            this.colTowerNo.ReadOnly = true;
-            // 
-            // colLocation
-            // 
-            this.colLocation.DataPropertyName = "Location";
-            this.colLocation.HeaderText = "库位";
-            this.colLocation.Name = "colLocation";
-            this.colLocation.ReadOnly = true;
-            // 
-            // colOperator
-            // 
-            this.colOperator.DataPropertyName = "Operator";
-            this.colOperator.HeaderText = "操作账号";
-            this.colOperator.MinimumWidth = 9;
-            this.colOperator.Name = "colOperator";
-            this.colOperator.ReadOnly = true;
-            // 
             // colIsSelected
             // 
             this.colIsSelected.DataPropertyName = "IsSelected";
@@ -776,6 +622,169 @@ namespace iWms.Form
             this.colOperate.Name = "colOperate";
             this.colOperate.ReadOnly = true;
             this.colOperate.Text = "入库";
+            // 
+            // tbDetails
+            // 
+            this.tbDetails.Controls.Add(this.tlpDetails);
+            this.tbDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDetails.Location = new System.Drawing.Point(3, 323);
+            this.tbDetails.Name = "tbDetails";
+            this.tbDetails.Size = new System.Drawing.Size(1218, 347);
+            this.tbDetails.TabIndex = 2;
+            this.tbDetails.TabStop = false;
+            this.tbDetails.Text = "入库明细";
+            // 
+            // tlpDetails
+            // 
+            this.tlpDetails.ColumnCount = 2;
+            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
+            this.tlpDetails.Controls.Add(this.dgvMaterials, 0, 0);
+            this.tlpDetails.Controls.Add(this.dgvBarcodes, 1, 0);
+            this.tlpDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpDetails.Location = new System.Drawing.Point(3, 18);
+            this.tlpDetails.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpDetails.Name = "tlpDetails";
+            this.tlpDetails.RowCount = 1;
+            this.tlpDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpDetails.Size = new System.Drawing.Size(1212, 326);
+            this.tlpDetails.TabIndex = 4;
+            // 
+            // dgvMaterials
+            // 
+            this.dgvMaterials.AllowUserToAddRows = false;
+            this.dgvMaterials.AllowUserToDeleteRows = false;
+            this.dgvMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvMaterials.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMaterials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMaterialNo,
+            this.colMaterialCount,
+            this.colActual,
+            this.colReceiveStatus});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMaterials.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvMaterials.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMaterials.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvMaterials.Location = new System.Drawing.Point(3, 3);
+            this.dgvMaterials.MultiSelect = false;
+            this.dgvMaterials.Name = "dgvMaterials";
+            this.dgvMaterials.ReadOnly = true;
+            this.dgvMaterials.RowHeadersWidth = 40;
+            this.dgvMaterials.RowTemplate.Height = 23;
+            this.dgvMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMaterials.Size = new System.Drawing.Size(539, 320);
+            this.dgvMaterials.TabIndex = 0;
+            this.dgvMaterials.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
+            this.dgvMaterials.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterials_RowPostPaint);
+            this.dgvMaterials.SelectionChanged += new System.EventHandler(this.dgvMaterials_SelectionChanged);
+            // 
+            // colMaterialNo
+            // 
+            this.colMaterialNo.DataPropertyName = "MaterialNo";
+            this.colMaterialNo.HeaderText = "物料代码";
+            this.colMaterialNo.MinimumWidth = 9;
+            this.colMaterialNo.Name = "colMaterialNo";
+            this.colMaterialNo.ReadOnly = true;
+            // 
+            // colMaterialCount
+            // 
+            this.colMaterialCount.DataPropertyName = "RequireCount";
+            this.colMaterialCount.HeaderText = "计划数量";
+            this.colMaterialCount.MinimumWidth = 9;
+            this.colMaterialCount.Name = "colMaterialCount";
+            this.colMaterialCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实收数量";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
+            // 
+            // colReceiveStatus
+            // 
+            this.colReceiveStatus.DataPropertyName = "ReceiveStatusDisplay";
+            this.colReceiveStatus.HeaderText = "入库状态";
+            this.colReceiveStatus.Name = "colReceiveStatus";
+            this.colReceiveStatus.ReadOnly = true;
+            // 
+            // dgvBarcodes
+            // 
+            this.dgvBarcodes.AllowUserToAddRows = false;
+            this.dgvBarcodes.AllowUserToDeleteRows = false;
+            this.dgvBarcodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvBarcodes.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvBarcodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBarcodes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colBarcode,
+            this.colInnerCount,
+            this.colTowerNo,
+            this.colLocation,
+            this.colOperator});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBarcodes.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvBarcodes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBarcodes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.dgvBarcodes.Location = new System.Drawing.Point(548, 3);
+            this.dgvBarcodes.MultiSelect = false;
+            this.dgvBarcodes.Name = "dgvBarcodes";
+            this.dgvBarcodes.ReadOnly = true;
+            this.dgvBarcodes.RowHeadersWidth = 40;
+            this.dgvBarcodes.RowTemplate.Height = 23;
+            this.dgvBarcodes.Size = new System.Drawing.Size(661, 320);
+            this.dgvBarcodes.TabIndex = 1;
+            this.dgvBarcodes.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBarcodes_RowPostPaint);
+            // 
+            // colBarcode
+            // 
+            this.colBarcode.DataPropertyName = "Upn";
+            this.colBarcode.HeaderText = "UPN";
+            this.colBarcode.MinimumWidth = 9;
+            this.colBarcode.Name = "colBarcode";
+            this.colBarcode.ReadOnly = true;
+            // 
+            // colInnerCount
+            // 
+            this.colInnerCount.DataPropertyName = "InnerQty";
+            this.colInnerCount.HeaderText = "盘内数量";
+            this.colInnerCount.MinimumWidth = 9;
+            this.colInnerCount.Name = "colInnerCount";
+            this.colInnerCount.ReadOnly = true;
+            // 
+            // colTowerNo
+            // 
+            this.colTowerNo.DataPropertyName = "TowerDisplay";
+            this.colTowerNo.HeaderText = "库区";
+            this.colTowerNo.Name = "colTowerNo";
+            this.colTowerNo.ReadOnly = true;
+            // 
+            // colLocation
+            // 
+            this.colLocation.DataPropertyName = "Location";
+            this.colLocation.HeaderText = "库位";
+            this.colLocation.Name = "colLocation";
+            this.colLocation.ReadOnly = true;
+            // 
+            // colOperator
+            // 
+            this.colOperator.DataPropertyName = "Operator";
+            this.colOperator.HeaderText = "操作账号";
+            this.colOperator.MinimumWidth = 9;
+            this.colOperator.Name = "colOperator";
+            this.colOperator.ReadOnly = true;
             // 
             // FrmInstocks
             // 
@@ -850,14 +859,6 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton btnNext;
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveStatus;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsSelected;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
@@ -865,5 +866,14 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colOperate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
     }
 }

@@ -154,7 +154,7 @@ namespace Business
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(@"
                 SELECT wib.Barcode as Upn, szm.Part_Number as MaterialNo, wib.InstockQuantity as InnerQty, wib.LastUpdateUser as Operator, 
-                szm.LockLocation as Location, wib.InstockAreaId as TowerNo, wib.CreateTime   
+                szm.LockLocation as Location, wib.InstockAreaId as TowerNo, wib.CreateTime, wib.InstockDetailId 
                 FROM Wms_InstockBarcode wib 
                 left join smt_zd_material szm on wib.Barcode = szm.ReelID ");
             sb.AppendLine(" WHERE wib.InstockId = @InstockId ");

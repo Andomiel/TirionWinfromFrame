@@ -126,11 +126,6 @@ namespace Entity.DataContext
         /// <summary>
         /// 
         /// </summary>
-        public int LightColor { get; set; } = 0;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public string SerialNo { get; set; }
 
         /// <summary>
