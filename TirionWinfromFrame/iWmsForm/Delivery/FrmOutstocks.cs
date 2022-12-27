@@ -991,7 +991,7 @@ namespace iWms.Form
                 var barcodeDto = row.DataBoundItem as DeliveryBarcodeDto;
                 if (barcodeDto.ExecuteResult == (int)ExecuteResultEnum.Failed)
                 {
-                    row.Cells["colInventoryStatus"].Style.BackColor = Color.Orange;
+                    row.Cells["colLocation"].Style.BackColor = Color.Orange;
                 }
                 else
                 {
