@@ -71,6 +71,7 @@
     <Compile Include="Dto\Delivery\DeliveryBarcodeDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryDetailDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryOrderDto.cs" />
+    <Compile Include="Dto\Frozen\FrozenMaterial.cs" />
     <Compile Include="Dto\Frozen\FrozenNoUpnRelation.cs" />
     <Compile Include="Dto\Frozen\FrozenQueryItem.cs" />
     <Compile Include="Dto\InstockTaking\InventoryBarcodeDto.cs" />

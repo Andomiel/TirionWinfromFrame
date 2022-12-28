@@ -204,9 +204,9 @@ namespace TirionWinfromFrame.Commons
         /// <param name="headerNameDic">表头和属性对应关系</param>
         /// <param name="sheetName">sheet名称</param>
         /// <returns></returns>
-        public static string ExportToExcel<T>(string filePath, List<T> data, List<HeadColumn> headColumnList, string sheetName = "result") where T : class
+        public static string ExportToExcel<T>(string filePath, IEnumerable<T> data, List<HeadColumn> headColumnList, string sheetName = "result") where T : class
         {
-            if (data.Count <= 0) return null;
+            if (!data.Any()) return null;
 
             if (string.IsNullOrEmpty(filePath))
             {

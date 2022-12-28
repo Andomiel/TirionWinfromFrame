@@ -111,7 +111,7 @@ namespace iWms.Form
             //供货厂家
             condition.Supplier = this.TextSupply.Text;
 
-            List<TransferQueryResult> transferQueryResults = TransferStoregeBll.QueryTransferDetail(condition);
+            IEnumerable<TransferQueryResult> transferQueryResults = TransferStoregeBll.QueryTransferDetail(condition);
             TargetBarcodes.Clear();
             foreach (var item in transferQueryResults)
             {

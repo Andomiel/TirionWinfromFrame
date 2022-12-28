@@ -168,17 +168,6 @@ namespace Business
             return DbHelper.Update(sb.ToString());
         }
 
-        private static void InsertBaseData(List<string> deleteUpns, List<string> insertValues)
-        {
-            string sqlDelete = $@" DELETE FROM smt_BasicInfoByMes WHERE ReelId IN ('{string.Join("','", deleteUpns)}');";
-            string sqlInsert = $@" INSERT INTO smt_BasicInfoByMes(ReelId,Part_Number,WZ_MC,WZ_GGXH,WZ_JLDW,WZ_JSZB,
-                                                    WZ_SCCJ,WZ_HGSL,WZ_SFJY,WZ_JYZT,WZ_JYFS,WZ_SCPCH,WZ_YXRQ,WZ_ZSXBH,type2,Qty,SSXM) 
-                                               VALUES {string.Join(",", insertValues)}";
-
-            DbHelper.Delete(sqlDelete);
-            DbHelper.Insert(sqlInsert);
-        }
-
         private static string BuildInventoryFullSql(string condition, int startRow, int endRow, string orderBy)
         {
             return $@"With Barcodes AS
@@ -190,13 +179,13 @@ namespace Business
                 s.lot,s.XM_DH,s.WZ_SCCJ as Supplier,
                 s.SerialNo, s.ReelType as UpnCate, s.DateCode,
                 s.MinPacking, s.MSD, s.Status,
-                tm.Description as TowerDes,
+                s.LockTowerNo AS Tower,
                 isnull(s.ABSide,'')+isnull(s.LockMachineID,'') as ABSide,s.SaveTime,
                 s.LockLocation AS Location, 
-                CASE WHEN smf.UPN is not null THEN '冻结' ELSE CASE s.BakeState WHEN 0 THEN '正常' WHEN 1 THEN '待烘烤' WHEN 2 THEN '烘烤中' END  END AS HoldState
+                CASE WHEN smf.UPN is not null THEN '冻结' ELSE CASE s.BakeState WHEN 0 THEN '正常' WHEN 1 THEN '待烘烤' WHEN 2 THEN '烘烤中' END  END AS HoldState,
+                '' AS HoldNo
             FROM smt_zd_material s
                 LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen) smf ON s.ReelID = smf.UPN
-                LEFT JOIN smt_TowerMap tm on tm.TowerNo = s.LockTowerNo 
             WHERE s.isTakeCheck=0 AND s.Status>0 {condition}
               ) 
             SELECT * FROM Barcodes
@@ -206,7 +195,13 @@ namespace Business
         /// <summary>
         /// 查询正常物资信息
         /// </summary>
-        public static List<InventoryEntity> GetSmt_zd_MaterialInfo(MaterialQueryCondition condition, int startRow, int endRow, string orderBy)
+        public static IEnumerable<InventoryEntity> GetSmt_zd_MaterialInfo(MaterialQueryCondition condition, int startRow, int endRow, string orderBy)
+        {
+            string sql = BuildInventoryFullSql(BuildConditionSql(condition), startRow, endRow, orderBy);
+            return DbHelper.GetDataTable(sql).DataTableToList<InventoryEntity>();
+        }
+
+        private static string BuildConditionSql(MaterialQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(condition.Supplier))
@@ -297,116 +292,29 @@ namespace Business
                     sb.Append($" AND s.SaveTime BETWEEN '{condition.SaveTimeStart}' AND '{condition.SaveTimeEnd}' ");
                 }
             }
-            //sb.Append(" ORDER BY s.LockTowerNo ");
-
-            string sql = BuildInventoryFullSql(sb.ToString(), startRow, endRow, orderBy);
-            List<InventoryEntity> queryResult = DbHelper.GetDataTable(sql).DataTableToList<InventoryEntity>();
-            //if (condition.haveCycleQuery)
-            //{
-            //    queryResult = queryResult.Where(p => (DateTime.Compare(p.DateCodeDate, condition.CycleStart) >= 0
-            //                                      && DateTime.Compare(p.DateCodeDate, condition.CycleEnd) <= 0)
-            //                                      || p.DateCodeDate.Year == 1900).ToList();
-            //}
-
-            return queryResult;
+            return sb.ToString();
         }
 
-        public static int UpdateSmt_zd_MaterialPanDian(string pdCode, string strReelid)
+        public static IEnumerable<InventoryEntity> GetMaterialInfoExport(MaterialQueryCondition condition)
         {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_zd_material set PandianCode='{0}' where ReelID in {1}", pdCode, strReelid);
-            return DbHelper.Update(sql);
-        }
+            string conditionSql = BuildConditionSql(condition);
 
-        //盘点下达
-        public static int UpdatePandianDan(string pdCode, string strReelid)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_pandianDan set State='1' where PDCode='{0}' and  WZ_TM = '{1}'", pdCode, strReelid);
-            return DbHelper.Update(sql);
-        }
+            string sql = $@"SELECT
+                1 TotalCount,
+                s.qty as Qty,s.Part_Number as PartNumber,s.reelid as UPN,
+                s.lot,s.XM_DH,s.WZ_SCCJ as Supplier,
+                s.SerialNo, s.ReelType as UpnCate, s.DateCode,
+                s.MinPacking, s.MSD, s.Status,
+                s.LockTowerNo AS Tower,
+                isnull(s.ABSide,'')+isnull(s.LockMachineID,'') as ABSide,s.SaveTime,
+                s.LockLocation AS Location, 
+                CASE WHEN smf.UPN is not null THEN '冻结' ELSE CASE s.BakeState WHEN 0 THEN '正常' WHEN 1 THEN '待烘烤' WHEN 2 THEN '烘烤中' END  END AS HoldState,
+                smf.FrozenNo AS HoldNo
+            FROM smt_zd_material s
+                LEFT JOIN  smt_Material_Frozen smf ON s.ReelID = smf.UPN
+            WHERE s.isTakeCheck=0 AND s.Status>0 {conditionSql}";
 
-        //盘点取消
-        public static int CancelPandianDan(string pdCode, string strReelid)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_pandianDan set State='0' where PDCode='{0}' and  WZ_TM = '{1}'", pdCode, strReelid);
-            return DbHelper.Update(sql);
-        }
-
-        //盘点执行中
-        public static int ExecutePandianDan(string pdCode, string strReelid)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_pandianDan set State='1',checkState='0' where PDCode='{0}' and  WZ_TM = '{1}'", pdCode, strReelid);
-            return DbHelper.Update(sql);
-        }
-
-        //盘点审核
-        public static int checkPandianDan(string pdCode, string strReelid)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_pandianDan set checkState='1', State='2' where PDCode='{0}' and  WZ_TM = '{1}'", pdCode, strReelid);
-            return DbHelper.Update(sql);
-        }
-        //盘点审核完成，数据插入material_NewNum
-        public static int Insertmaterial_NewNum(int qty, string strReelid, string type = "")
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = "delete from material_NewNum where ReelID='" + strReelid + "'";
-            DbHelper.Delete(sql);
-            if (string.IsNullOrEmpty(type))
-            {
-                sql = "insert into material_NewNum (ReelID,Num,addtime) values ('" + strReelid + "'," + qty + ",'" + updateTime + "')";
-                return DbHelper.Insert(sql);
-            }
-            else
-            {
-                sql = "insert into material_NewNum (ReelID,Num,addtime,type) values ('" + strReelid + "'," + qty + ",'" + updateTime + "','" + type + "')";
-                return DbHelper.Insert(sql);
-            }
-
-
-        }
-
-        //盘点复盘
-        public static int FuPandianDan(string pdCode, string strReelid)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_pandianDan set PDCount=PDCount+1,State='0' where PDCode='{0}' and  WZ_TM = '{1}'", pdCode, strReelid);
-            return DbHelper.Update(sql);
-        }
-
-        //修改盘点的账面数量
-        public static int ModifyPandianDan(string strReelid, string qty, int resultType, string ID)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_pandianDan set Qty='{0}',PDCount=1,PDState=1,resultType={1} where ID = '{2}'", qty, resultType, ID);
-            return DbHelper.Update(sql);
-        }
-
-        //修改库存数量
-        public static int ModifySmt_zd_Material(string strReelid, string Quality)
-        {
-            //时间
-            string updateTime = System.DateTime.Now.ToString();
-            string sql = string.Format("update smt_zd_material set qty='{0}' where reelid = '{1}' and issave=1 and istake=0", Quality, strReelid);
-            return DbHelper.Update(sql);
-        }
-
-        //校验库存是否有重复的
-        public static DataTable getCFData(string RK_RKDHArray)
-        {
-            string sql = "select distinct RK_RKDH from smt_InStockOrder where RK_RKDH in (" + RK_RKDHArray + ") order by RK_RKDH";
-            return DbHelper.GetDataTable(sql);
+            return DbHelper.GetDataTable(sql).DataTableToList<InventoryEntity>();
         }
 
         public static DataTable GetAllMaterial()

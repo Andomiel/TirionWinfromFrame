@@ -82,7 +82,7 @@ namespace Business
 
         protected abstract int GetExecuteStatus();
 
-        protected abstract List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus);
+        protected abstract IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus);
 
         protected abstract string GetDeliveredUpdateSql(string deliveryId, int sortingNo, string userName);
 
@@ -427,13 +427,13 @@ namespace Business
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
         }
 
-        public static List<Wms_LightColorRecord> GetExecutingRecords()
+        public static IEnumerable<Wms_LightColorRecord> GetExecutingRecords()
         {
             string sql = $"{Wms_LightColorRecord.GetSelectSql()} AND RecordStatus = {(int)LightRecordStatusEnum.LightOn} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_LightColorRecord>();
         }
 
-        public static List<Wms_InstockArea> GetExecutingAreas()
+        public static IEnumerable<Wms_InstockArea> GetExecutingAreas()
         {
             string sql = $"{Wms_InstockArea.GetSelectSql()} AND DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InstockArea>();

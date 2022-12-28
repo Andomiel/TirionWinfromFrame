@@ -274,7 +274,7 @@ namespace iWms.Form
                 condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
             }
 
-            WorkOrders = DeliveryBll.GetDeliveryOrders(condition);
+            WorkOrders = DeliveryBll.GetDeliveryOrders(condition).ToList();
 
             currentPage = 1;
             recordCount = WorkOrders.Count;
@@ -368,7 +368,7 @@ namespace iWms.Form
             selectedOrder = order;
 
             var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
-            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId).ToList();
 
             WorkOrderDetails.Clear();
             WorkOrderBarcodes.Clear();
@@ -490,7 +490,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -518,7 +518,7 @@ namespace iWms.Form
         private void ValidateInstockOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -863,7 +863,7 @@ namespace iWms.Form
             foreach (DeliveryDetailDto item in WorkOrderDetails)
             {
                 int remainCount = item.RequireCount;
-                var inventoryBarcodes = DeliveryBll.GetBarcodesByMaterialNo(item.MaterialNo);
+                var inventoryBarcodes = DeliveryBll.GetBarcodesByMaterialNo(item.MaterialNo).ToList();
                 //TODO:here there should be a private method for certain purpose
                 inventoryBarcodes.RemoveAll(p => alreadyInBarcodes.Contains(p.ReelID));
                 if (!isContainSorting)

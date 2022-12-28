@@ -60,7 +60,7 @@ namespace iWms.Form
                 response = new List<WMSInventory>();
             }
 
-            var materials = WareHouseBLL.CensusMaterials();
+            var materials = WareHouseBLL.CensusMaterials().ToList();
             foreach (var item in response)
             {
                 var material = materials.FirstOrDefault(p => p.MaterialNo == item.SKU);

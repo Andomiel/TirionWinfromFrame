@@ -65,7 +65,7 @@ namespace iWms.Form
         private void btnSearch_Click(object sender, EventArgs e)
         {
             var condition = BuildConditions();
-            List<FrozenQueryItem> inventories = FrozenPolicyBll.GetInventory(condition);
+            List<FrozenQueryItem> inventories = FrozenPolicyBll.GetInventory(condition).ToList();
             this.dataGridViewSelect.DataSource = new BindingList<FrozenQueryItem>(inventories);
         }
 

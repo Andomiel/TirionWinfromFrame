@@ -15,7 +15,7 @@ namespace Business
     public class OutStockReview
     {
 
-        public static List<OrderNeedMaterial> GetMaterialsByOutOrderNo(string orderNo)
+        public static IEnumerable<OrderNeedMaterial> GetMaterialsByOutOrderNo(string orderNo)
         {
             string sql = $@" SELECT wdo.DeliveryNo as OrderNo, wdd.MaterialNo as PartNumber,wdd.RequireCount as NeedQty,
 	                    wdd.RowNum as LineNumber, wdd.SlotNo 
@@ -26,7 +26,7 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<OrderNeedMaterial>();
         }
 
-        public static List<ReviewSummary> GetSpareMaterial(string orderNo)
+        public static IEnumerable<ReviewSummary> GetSpareMaterial(string orderNo)
         {
             string sql = $@" SELECT wdb.Barcode as UPN, wdd.MaterialNo as PartNumber,
 	                wdo.DeliveryNo as OrderNo, wdb.DeliveryQuantity as AllocateQty,
@@ -38,8 +38,7 @@ namespace Business
                 LEFT JOIN Wms_DeliveryOrder wdo on wdd.DeliveryId = wdo.BusinessId 
                WHERE wdo.DeliveryNo ='{orderNo}' AND wdb.OrderStatus = {(int)DeliveryBarcodeStatusEnum.Delivered} ";
             DataTable dt = DbHelper.GetDataTable(sql);
-            List<ReviewSummary> dtList = dt.DataTableToList<ReviewSummary>();
-            return dtList;
+            return dt.DataTableToList<ReviewSummary>();
         }
 
         public static ReviewRecord GetUpnInfoInZd(string upn)
@@ -57,8 +56,8 @@ namespace Business
             DataTable dt = DbHelper.GetDataTable(sql);
             if (dt.Rows.Count > 0)
             {
-                List<ReviewRecord> dtList = dt.DataTableToList<ReviewRecord>();
-                return dtList[0];
+                IEnumerable<ReviewRecord> dtList = dt.DataTableToList<ReviewRecord>();
+                return dtList.First();
             }
             else
             {
@@ -148,7 +147,7 @@ namespace Business
 
         public static int TempDeliveyOrderReview(string deliveryNo, string userName, List<ReviewSummary> barcodes)
         {
-            var allBarcodes = GetDeliveryBarcodes(deliveryNo);
+            var allBarcodes = GetDeliveryBarcodes(deliveryNo).ToList();
             var details = GetDeliveryDetails(deliveryNo);
 
             StringBuilder sb = new StringBuilder();
@@ -193,7 +192,7 @@ namespace Business
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
-        private static List<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryNo)
+        private static IEnumerable<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryNo)
         {
             string sql = $@"SELECT wdb.* FROM Wms_DeliveryBarcode wdb 
               LEFT JOIN Wms_DeliveryOrder wdo ON wdb.DeliveryId = wdo.BusinessId 
@@ -201,7 +200,7 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryBarcode>();
         }
 
-        private static List<Wms_DeliveryDetail> GetDeliveryDetails(string deliveryNo)
+        private static IEnumerable<Wms_DeliveryDetail> GetDeliveryDetails(string deliveryNo)
         {
             string sql = $@"SELECT wdd.* FROM Wms_DeliveryDetail wdd 
               LEFT JOIN Wms_DeliveryOrder wdo ON wdd.DeliveryId = wdo.BusinessId 
@@ -213,7 +212,7 @@ namespace Business
         {
             string outStockOrderSql = $@" {Wms_DeliveryOrder.GetSelectSql()} AND DeliveryNo ='{orderNo}' ";
             var orders = DbHelper.GetDataTable(outStockOrderSql).DataTableToList<Wms_DeliveryOrder>();
-            if (orders == null || orders.Count == 0)
+            if (orders == null || !orders.Any())
             {
                 return;
             }

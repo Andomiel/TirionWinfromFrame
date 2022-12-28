@@ -187,7 +187,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -203,7 +203,7 @@ namespace iWms.Form
         private void ValidateInstockOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -218,7 +218,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderForTranferIn()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -234,7 +234,7 @@ namespace iWms.Form
         private void ValidateInstockOrderForTransferIn()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }

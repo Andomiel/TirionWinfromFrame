@@ -64,7 +64,7 @@ namespace iWms.Form
         private void BindDefaultTower()
         {
             var areas = WareHouseBLL.GetBoundAreas();
-            if (areas == null || areas.Count == 0)
+            if (areas == null || !areas.Any())
             {
                 return;
             }
@@ -279,7 +279,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit(int tower)
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -295,7 +295,7 @@ namespace iWms.Form
         private void ValidateTransferOrderLimit(int tower)
         {
             var transferOrders = new TransferBll().GetExecutingOrders();
-            if (transferOrders == null || transferOrders.Count == 0)
+            if (transferOrders == null || !transferOrders.Any())
             {
                 return;
             }

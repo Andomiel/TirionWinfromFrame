@@ -18,7 +18,7 @@ namespace Business
     {
         protected override LightRecordTypeEnum OrderType => LightRecordTypeEnum.Inventory;
 
-        public static List<Wms_InventoryOrder> GetInventoryOrders(InventoryQueryCondition condition)
+        public static IEnumerable<Wms_InventoryOrder> GetInventoryOrders(InventoryQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -94,13 +94,13 @@ namespace Business
             return orders.DataTableToList<Wms_InventoryOrder>().First();
         }
 
-        public static List<Wms_InventoryOrder> GetAvailableInventoryOrders()
+        public static IEnumerable<Wms_InventoryOrder> GetAvailableInventoryOrders()
         {
             string sql = $"SELECT * FROM Wms_InventoryOrder WHERE OrderStatus < {(int)InventoryOrderStatusEnum.Finished} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InventoryOrder>();
         }
 
-        public static List<Wms_InventoryBarcode> GetInventoryBarcodes(string inventoryId)
+        public static IEnumerable<Wms_InventoryBarcode> GetInventoryBarcodes(string inventoryId)
         {
             string sql = $@"SELECT wib.*
                         FROM Wms_InventoryBarcode wib WHERE wib.InventoryOrderId = '{inventoryId}' ";
@@ -108,7 +108,7 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InventoryBarcode>();
         }
 
-        public static List<AvailableBarcode> GetAvailableBarcodesForInventory(MaterialQueryCondition condition)
+        public static IEnumerable<AvailableBarcode> GetAvailableBarcodesForInventory(MaterialQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder($@"SELECT szm.ReelID as Barcode, szm.Part_Number as MaterialNo, szm.SerialNo, szm.WZ_SCCJ as Manufacturer,
                                                      szm.LockTowerNo, szm.LockMachineId, szm.LockLocation, szm.ABSide, szm.DateCode,
@@ -140,7 +140,7 @@ namespace Business
             return DbHelper.GetDataTable(sb.ToString()).DataTableToList<AvailableBarcode>();
         }
 
-        public static List<Wms_InventoryOrder> GetDeliveryOrdersByStatus(int inventoryStatus)
+        public static IEnumerable<Wms_InventoryOrder> GetDeliveryOrdersByStatus(int inventoryStatus)
         {
             string sql = $"{Wms_InventoryOrder.GetSelectSql()} AND OrderStatus = {inventoryStatus} ";
 
@@ -174,7 +174,7 @@ namespace Business
             return DbHelper.ExcuteWithTransaction(sql, out _);
         }
 
-        protected override List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
+        protected override IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
             string sql = $@"SELECT wib.Barcode, wio.InventoryArea as DeliveryAreaId, wib.OriginLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wib.OriginQuantity as DeliveryQuantity, wib.OrderStatus  as BarcodeStatus
                         FROM Wms_InventoryBarcode wib 

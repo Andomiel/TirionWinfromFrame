@@ -75,7 +75,7 @@ namespace Business
             return DbHelper.Update(sql) > 0;
         }
 
-        public static List<Wms_InstockOrder> GetInstockOrders(string orderNo, string upn, string materialNo, int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime)
+        public static IEnumerable<Wms_InstockOrder> GetInstockOrders(string orderNo, string upn, string materialNo, int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -138,7 +138,7 @@ namespace Business
             return orders.DataTableToList<Wms_InstockOrder>();
         }
 
-        public static List<Wms_InstockDetail> GetInstockDetails(string instockId)
+        public static IEnumerable<Wms_InstockDetail> GetInstockDetails(string instockId)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Wms_InstockDetail.GetSelectSql());
@@ -188,7 +188,7 @@ namespace Business
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
-        public static List<InstockAreaDto> GetBoundAreas()
+        public static IEnumerable<InstockAreaDto> GetBoundAreas()
         {
             string sql = $@"SELECT wia.*, wio.InstockNo 
                     FROM Wms_InstockArea wia 
@@ -197,7 +197,7 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<InstockAreaDto>();
         }
 
-        public static List<MaterialCensusDto> CensusMaterials()
+        public static IEnumerable<MaterialCensusDto> CensusMaterials()
         {
             string sql = @"select Part_Number as MaterialNo,SUM(qty) as TotalCount from smt_zd_material
                 where Status>0 and Status<3

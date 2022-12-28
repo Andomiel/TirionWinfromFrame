@@ -15,7 +15,7 @@ namespace Business
     {
         protected override LightRecordTypeEnum OrderType => LightRecordTypeEnum.Transfer;
 
-        public static List<Wms_TransferOrder> GetTransferOrders(TransferQueryCondition condition)
+        public static IEnumerable<Wms_TransferOrder> GetTransferOrders(TransferQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -91,7 +91,7 @@ namespace Business
             return orders.DataTableToList<Wms_TransferOrder>().First();
         }
 
-        public static List<Wms_TransferBarcode> GetTransferBarcodes(string transferId)
+        public static IEnumerable<Wms_TransferBarcode> GetTransferBarcodes(string transferId)
         {
             string sql = $@"SELECT wtb.*
                         FROM Wms_TransferBarcode wtb WHERE wtb.TransferOrderId = '{transferId}' ";
@@ -99,7 +99,7 @@ namespace Business
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferBarcode>();
         }
 
-        public static List<Wms_TransferOrder> GetInventoryValidateOrders()
+        public static IEnumerable<Wms_TransferOrder> GetInventoryValidateOrders()
         {
             string sql = $"SELECT * FROM Wms_TransferOrder wto  WHERE OrderStatus < {(int)TransferOrderStatusEnum.Finished} ";
 
@@ -130,7 +130,7 @@ namespace Business
             return 1;//紧急出料口
         }
 
-        protected override List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
+        protected override IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
             string sql = $@"SELECT wtb.Barcode, wto.SourceAreaId as DeliveryAreaId, wtb.TransferLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wtb.TransferQuantity as DeliveryQuantity, wtb.OrderStatus as BarcodeStatus 
                         FROM Wms_TransferBarcode wtb 
@@ -179,7 +179,7 @@ namespace Business
             return sb.ToString();
         }
 
-        public List<Wms_TransferOrder> GetExecutingOrders()
+        public IEnumerable<Wms_TransferOrder> GetExecutingOrders()
         {
             string sql = $"{Wms_TransferOrder.GetSelectSql()} AND OrderStatus = {(int)TransferOrderStatusEnum.Executing} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferOrder>();

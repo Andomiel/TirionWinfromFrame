@@ -115,7 +115,7 @@ namespace Business
             return sb.ToString();
         }
 
-        public static List<FrozenQueryItem> GetInventory(MaterialQueryCondition condition)
+        public static IEnumerable<FrozenQueryItem> GetInventory(MaterialQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(QueryInventoryBaseSql);
@@ -170,7 +170,7 @@ namespace Business
             PolicyCreateResult createResult = new PolicyCreateResult();
             try
             {
-                List<FrozenQueryItem> inventories = GetInventory(condition);
+                IEnumerable<FrozenQueryItem> inventories = GetInventory(condition);
                 List<string> upns = inventories.Select(p => p.ReelID).ToList();
                 createResult.Policy = new FrozenPolicy(DateTime.Now, PolicyTypeEnum.Conditions, remark);
                 createResult.Policy.ConditionJson = JsonConvert.SerializeObject(condition);
@@ -565,7 +565,7 @@ namespace Business
                         }).ToList();
         }
 
-        private static List<FrozenNoUpnRelation> GetRelationsByUpnPolicy(List<PolicyView> policyViews)
+        private static IEnumerable<FrozenNoUpnRelation> GetRelationsByUpnPolicy(List<PolicyView> policyViews)
         {
             //批量UPN冻结的部分
             List<string> frozenNoForUpn = policyViews.Where(p => p.PolicyType == (int)PolicyTypeEnum.UPNs).Select(p => p.FrozenNo).ToList();
@@ -599,5 +599,6 @@ namespace Business
             }
             return relations;
         }
+
     }
 }

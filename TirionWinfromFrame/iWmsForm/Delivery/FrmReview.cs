@@ -219,7 +219,7 @@ namespace iWms.Form
                 return;
             }
 
-            List<OrderNeedMaterial> needMaterials = OutStockReview.GetMaterialsByOutOrderNo(selectItem.OrderNo);
+            List<OrderNeedMaterial> needMaterials = OutStockReview.GetMaterialsByOutOrderNo(selectItem.OrderNo).ToList();
             List<OrderNeedMaterial> needAndThisPn = needMaterials.Where(p => p.PartNumber == reviewRecord.Part_Number).ToList();
             var needMaterial = needAndThisPn.FirstOrDefault();
             if (needMaterial == null)
@@ -462,7 +462,7 @@ namespace iWms.Form
                 HideBoxScan();
             }
 
-            List<ReviewSummary> summaryList = OutStockReview.GetSpareMaterial(selectOrderNo);
+            List<ReviewSummary> summaryList = OutStockReview.GetSpareMaterial(selectOrderNo).ToList();
             var details = DeliveryBll.GetDeliveryDetails(selectedItem.DeliveryId);
             foreach (Wms_DeliveryDetail item in details)
             {

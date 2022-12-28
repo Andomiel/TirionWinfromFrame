@@ -78,7 +78,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    Barcodes = GetBarcodesByCondition();
+                    Barcodes = GetBarcodesByCondition().ToList();
 
                     currentPage = 1;
                     recordCount = Barcodes.Count;
@@ -96,7 +96,7 @@ namespace iWms.Form
             }
         }
 
-        private List<AvailableBarcode> GetBarcodesByCondition()
+        private IEnumerable<AvailableBarcode> GetBarcodesByCondition()
         {
             MaterialQueryCondition condition = new MaterialQueryCondition
             {
@@ -135,26 +135,27 @@ namespace iWms.Form
             return BuildRandomBarcodes(allBarcodes);
         }
 
-        private List<AvailableBarcode> BuildRandomBarcodes(List<AvailableBarcode> originBarcodes)
+        private IEnumerable<AvailableBarcode> BuildRandomBarcodes(IEnumerable<AvailableBarcode> originBarcodes)
         {
             var result = new List<AvailableBarcode>();
-            if (originBarcodes == null || originBarcodes.Count == 0)
+            if (originBarcodes == null || !originBarcodes.Any())
             {
                 return result;
             }
             int percent = (int)nupPercent.Value;
-            int pickCount = (percent * originBarcodes.Count / 100) + 1;
+            int barcodesCount = originBarcodes.Count();
+            int pickCount = (percent * barcodesCount / 100) + 1;
             Random rnd = new Random();
             List<int> indexList = new List<int>();
             for (int i = 0; i < pickCount; i++)
             {
-                int index = rnd.Next(originBarcodes.Count);
+                int index = rnd.Next(barcodesCount);
                 if (indexList.Contains(index))
                 {
                     i--;
                     continue;
                 }
-                result.Add(originBarcodes[index]);
+                result.Add(originBarcodes.ElementAt(i));
             }
             return result;
         }

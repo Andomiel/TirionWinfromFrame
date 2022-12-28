@@ -29,7 +29,7 @@ namespace Business
                                                  AND szm.isTakeCheck = 0 
                                                  AND szm.LockTowerNo <> 3 ";
 
-        public static List<TransferQueryResult> QueryTransferDetail(MaterialQueryCondition condition)
+        public static IEnumerable<TransferQueryResult> QueryTransferDetail(MaterialQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(DetailSql);
@@ -130,7 +130,7 @@ namespace Business
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out _);
         }
 
-        public static List<TransferQueryResult> GetBarcodesByImportUpns(List<string> barcodes)
+        public static IEnumerable<TransferQueryResult> GetBarcodesByImportUpns(List<string> barcodes)
         {
             string sql = $@"SELECT szm.ReelID,szm.Part_Number as PartNumber, szm.SerialNo, szm.WZ_SCCJ as Manufacturer,
                                                      szm.LockTowerNo,'' as Tower,szm.LockMachineId,szm.LockLocation,szm.ABSide,szm.DateCode,
