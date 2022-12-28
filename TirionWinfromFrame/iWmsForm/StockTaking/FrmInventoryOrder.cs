@@ -1,5 +1,6 @@
 ﻿using Business;
 using Commons;
+using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.Dto;
 using Entity.Enums;
@@ -294,19 +295,23 @@ namespace iWms.Form
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.BuildAbSide();
                     cbType.Enabled = true;
+                    btnSyncLightShelf.Visible = false;
                     break;
                 case 2:
                     lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "货架：";
+                    lblShelfSide.Text = "料架：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.BuildLightShelf();
                     SetTypeComboxToDefault();
+
+                    btnSyncLightShelf.Visible = true;
                     break;
                 case 3:
                     lblShelfSide.Visible = false;
                     cbShelfSide.Visible = false;
                     cbShelfSide.SelectedIndex = -1;
                     SetTypeComboxToDefault();
+                    btnSyncLightShelf.Visible = false;
                     break;
                 case 4:
                     lblShelfSide.Visible = true;
@@ -314,12 +319,14 @@ namespace iWms.Form
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.BuildTransformationShelf();
                     SetTypeComboxToDefault();
+                    btnSyncLightShelf.Visible = false;
                     break;
                 default:
                     lblShelfSide.Visible = false;
                     cbShelfSide.Visible = false;
                     cbShelfSide.SelectedIndex = -1;
                     SetTypeComboxToDefault();
+                    btnSyncLightShelf.Visible = false;
                     break;
             }
         }
@@ -362,6 +369,28 @@ namespace iWms.Form
         {
             currentPage = pageCount;
             LoadPagedWorkOrder();
+        }
+
+        private void BtnSyncLightShelf_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockBuildObj)
+                {
+                    CallMesWmsApiBll.SyncLightShelf();
+
+                    "同步成功，请检查数据和日志".ShowTips();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
         }
     }
 }
