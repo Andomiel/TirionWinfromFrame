@@ -245,7 +245,7 @@ namespace iWms.Form
             try
             {
                 MaterialQueryCondition condition = BuildConditions();
-                var inventory = InOutStockStorageData.GetSmt_zd_MaterialInfo(condition, 0, 100000000, orderBy);
+                var inventory = InOutStockStorageData.GetMaterialInfoExport(condition);
                 ExportToExcel(inventory);
             }
             catch (Exception ex)
