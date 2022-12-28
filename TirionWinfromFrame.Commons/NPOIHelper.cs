@@ -334,21 +334,22 @@ namespace TirionWinfromFrame.Commons
             normalCellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
 
 
+            ISheet sheet = workbook.CreateSheet("汇总");
+            IRow headerRow = sheet.CreateRow(0);
+
+            for (int i = 0; i < headColumnList.Count; i++)
+            {
+                ICell cell = headerRow.CreateCell(i);
+                cell.SetCellValue(headColumnList[i].ColumnDes);
+                cell.CellStyle = headCellStyle;
+                sheet.SetColumnWidth(i, headColumnList[i].ColumnWeight);
+            }
+
+            Type t = typeof(T);
+            int rowIndex = 1;
+
             foreach (var element in data)
             {
-                ISheet sheet = workbook.CreateSheet(element.Key);
-                IRow headerRow = sheet.CreateRow(0);
-
-                for (int i = 0; i < headColumnList.Count; i++)
-                {
-                    ICell cell = headerRow.CreateCell(i);
-                    cell.SetCellValue(headColumnList[i].ColumnDes);
-                    cell.CellStyle = headCellStyle;
-                    sheet.SetColumnWidth(i, headColumnList[i].ColumnWeight);
-                }
-
-                Type t = typeof(T);
-                int rowIndex = 1;
                 foreach (T item in element.Value)
                 {
                     IRow dataRow = sheet.CreateRow(rowIndex);
