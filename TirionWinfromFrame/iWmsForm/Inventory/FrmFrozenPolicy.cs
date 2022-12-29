@@ -225,7 +225,7 @@ namespace iWms.Form
                 {
                     return;
                 }
-                createResult = FrozenPolicyBll.SavePolicy(condition, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                createResult = FrozenPolicyBll.SavePolicy(condition, frmBuildRemind.TxtRemark, AppInfo.LoginUserInfo.account);
             }
             //选择UPN
             else if (dialogResult == DialogResult.Yes)
@@ -242,7 +242,7 @@ namespace iWms.Form
                     return;
                 }
                 List<string> upns = selectedItems.Select(p => p.ReelID).ToList();
-                createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.TxtRemark, AppInfo.LoginUserInfo.account);
             }
 
             AfterSavePolicy(createResult);
@@ -328,7 +328,7 @@ namespace iWms.Form
                         var dialogResult = frmBuildRemind.ShowDialog();
                         if (dialogResult == DialogResult.Cancel)
                         { return; }
-                        PolicyCreateResult createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                        PolicyCreateResult createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.TxtRemark, AppInfo.LoginUserInfo.account);
                         AfterSavePolicy(createResult);
                     }
                 }
