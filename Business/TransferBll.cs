@@ -121,7 +121,7 @@ namespace Business
                 return 0;
             }
             string condition = string.Join(",", barcodes.Select(p => $"'{p}'").ToArray());
-            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0  WHERE ReelID  in({condition}) ";
+            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}  WHERE ReelID  in({condition}) ";
             return DbHelper.ExecuteNonQuery(sql);
         }
 

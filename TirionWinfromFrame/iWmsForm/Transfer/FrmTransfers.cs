@@ -24,8 +24,8 @@ namespace iWms.Form
             InitializeComponent();
             BindCombox();
 
-            dtOrderTime.Value = DateTime.Now.Date;
-            dtFinishedTime.Value = DateTime.Now.Date;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
 
             dgvOrders.ScrollBars = ScrollBars.Both;
             dgvOrders.Dock = DockStyle.Fill;
@@ -96,13 +96,19 @@ namespace iWms.Form
             condition.MaterialNo = tbMaterialNo.Text.Trim();
             condition.Upn = tbUpn.Text.Trim();
 
-            condition.HaveOrderTimeQuery = true;
-            condition.OrderTimeStart = dtOrderTime.Value.Date;
-            condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
+            {
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
+            }
 
-            condition.HaveFinishedTimeQuery = true;
-            condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-            condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
+            {
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
+            }
 
             var orders = TransferBll.GetTransferOrders(condition);
 
@@ -386,8 +392,8 @@ namespace iWms.Form
             tbUpn.Text = string.Empty;
             tbMaterialNo.Text = string.Empty;
             cbType.SelectedIndex = 0;
-            dtOrderTime.Value = DateTime.Today;
-            dtFinishedTime.Value = DateTime.Today;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 
