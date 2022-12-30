@@ -22,7 +22,7 @@ namespace Business
 
             if ((!string.IsNullOrWhiteSpace(condition.Upn)) || (!string.IsNullOrWhiteSpace(condition.MaterialNo)))
             {
-                sb.AppendLine(@"SELECT wto.*
+                sb.AppendLine(@"SELECT TOP 100 wto.*
                         FROM Wms_TransferBarcode wtb 
                         left join Wms_TransferOrder wto on wtb.TransferOrderId = wto.BusinessId 
                         WHERE 1=1");
@@ -39,7 +39,7 @@ namespace Business
             }
             else
             {
-                sb.AppendLine(@" SELECT wto.*
+                sb.AppendLine(@" SELECT TOP 100 wto.*
 	                FROM  Wms_TransferOrder wto WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
@@ -121,7 +121,7 @@ namespace Business
                 return 0;
             }
             string condition = string.Join(",", barcodes.Select(p => $"'{p}'").ToArray());
-            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}  WHERE ReelID  in({condition}) ";
+            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}  WHERE ReelID  in({condition}) AND Status < {(int)BarcodeStatusEnum.Delivered} AND isTakeCheck =0 ";
             return DbHelper.ExecuteNonQuery(sql);
         }
 
