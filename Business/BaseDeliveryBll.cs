@@ -413,7 +413,11 @@ namespace Business
             //    throw new OppoCoreException("当前出库单的亮灯货架亮灯记录异常，无法关闭");
             //}
 
-            int targetColor = currentRecord.LightColor;
+            int targetColor = allColors[0];
+            if (currentRecord != null)
+            {
+                targetColor = currentRecord.LightColor;
+            }
             try
             {
                 LightShelfColor(deliveryNo, false, url, targetColor, barcodes);
