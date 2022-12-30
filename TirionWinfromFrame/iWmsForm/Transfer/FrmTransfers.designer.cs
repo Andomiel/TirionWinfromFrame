@@ -319,7 +319,7 @@ namespace iWms.Form
             this.btnClear.Size = new System.Drawing.Size(87, 29);
             this.btnClear.TabIndex = 24;
             this.btnClear.Text = "清空";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnCancel
             // 

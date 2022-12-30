@@ -385,7 +385,7 @@ namespace iWms.Form
             }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void BtnClear_Click(object sender, EventArgs e)
         {
             cbOrderStatus.SelectedIndex = 0;
             tbOrderNo.Text = string.Empty;
@@ -437,6 +437,7 @@ namespace iWms.Form
                     {
                         $"【{selectedOrder.TransferNo}】取消成功".ShowTips();
                     }
+                    GetOrders();
                 }
             }
             catch (Exception ex)
