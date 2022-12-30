@@ -411,7 +411,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    if (selectedOrder.OrderStatus < (int)TransferOrderStatusEnum.Finished)
+                    if (selectedOrder.OrderStatus >= (int)TransferOrderStatusEnum.Finished)
                     {
                         "未完成的移库单才能【取消】！".ShowTips();
                         return;
