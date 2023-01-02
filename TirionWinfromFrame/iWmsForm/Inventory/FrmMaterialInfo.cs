@@ -94,7 +94,7 @@ namespace iWms.Form
                 Barcodes.Add(item);
             }
             recordCount = 0;
-            if (inventory != null && !inventory.Any())
+            if (inventory != null && inventory.Any())
             {
                 recordCount = inventory.First().TotalCount;
             }
