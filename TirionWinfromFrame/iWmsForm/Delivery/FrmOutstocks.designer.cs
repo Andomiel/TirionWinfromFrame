@@ -69,8 +69,6 @@ namespace iWms.Form
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbDestination = new System.Windows.Forms.TextBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
-            this.dtOrderTime = new System.Windows.Forms.DateTimePicker();
-            this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
             this.tbOperator = new System.Windows.Forms.TextBox();
             this.tbUpn = new System.Windows.Forms.TextBox();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
@@ -81,6 +79,8 @@ namespace iWms.Form
             this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -130,6 +130,10 @@ namespace iWms.Form
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.gbDetails.SuspendLayout();
             this.tlpDetails.SuspendLayout();
@@ -342,8 +346,6 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
             this.tlpConditions.Controls.Add(this.tbDestination, 5, 1);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 1);
-            this.tlpConditions.Controls.Add(this.dtOrderTime, 1, 2);
-            this.tlpConditions.Controls.Add(this.dtFinishedTime, 3, 2);
             this.tlpConditions.Controls.Add(this.tbOperator, 5, 2);
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
             this.tlpConditions.Controls.Add(this.btnClear, 9, 0);
@@ -354,6 +356,8 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
             this.tlpConditions.Controls.Add(this.btnLack, 13, 0);
             this.tlpConditions.Controls.Add(this.btnClearAlarm, 18, 1);
+            this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -536,30 +540,6 @@ namespace iWms.Form
             this.tbMaterialNo.Size = new System.Drawing.Size(134, 22);
             this.tbMaterialNo.TabIndex = 18;
             // 
-            // dtOrderTime
-            // 
-            this.dtOrderTime.CustomFormat = "yyyy-MM-dd";
-            this.dtOrderTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtOrderTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderTime.Location = new System.Drawing.Point(83, 73);
-            this.dtOrderTime.Name = "dtOrderTime";
-            this.dtOrderTime.Size = new System.Drawing.Size(134, 22);
-            this.dtOrderTime.TabIndex = 20;
-            this.dtOrderTime.Value = new System.DateTime(2022, 2, 22, 12, 4, 52, 0);
-            this.dtOrderTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtp_MouseUp);
-            // 
-            // dtFinishedTime
-            // 
-            this.dtFinishedTime.CustomFormat = "yyyy-MM-dd";
-            this.dtFinishedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinishedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishedTime.Location = new System.Drawing.Point(303, 73);
-            this.dtFinishedTime.Name = "dtFinishedTime";
-            this.dtFinishedTime.Size = new System.Drawing.Size(134, 22);
-            this.dtFinishedTime.TabIndex = 21;
-            this.dtFinishedTime.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtFinishedTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtp_MouseUp);
-            // 
             // tbOperator
             // 
             this.tbOperator.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -655,6 +635,33 @@ namespace iWms.Form
             this.btnClearAlarm.TabIndex = 30;
             this.btnClearAlarm.Text = "清除报警";
             this.btnClearAlarm.Click += new System.EventHandler(this.btnClearAlarm_Click);
+            // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(83, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(134, 20);
+            this.dtCreate.TabIndex = 31;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(303, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 32;
             // 
             // dgvOrders
             // 
@@ -1355,6 +1362,10 @@ namespace iWms.Form
             this.gbConditions.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
             this.tlpConditions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.gbDetails.ResumeLayout(false);
             this.tlpDetails.ResumeLayout(false);
@@ -1391,8 +1402,6 @@ namespace iWms.Form
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbDestination;
         private System.Windows.Forms.TextBox tbMaterialNo;
-        private System.Windows.Forms.DateTimePicker dtOrderTime;
-        private System.Windows.Forms.DateTimePicker dtFinishedTime;
         private System.Windows.Forms.TextBox tbOperator;
         private System.Windows.Forms.TableLayoutPanel tlpDetails;
         private System.Windows.Forms.DataGridView dgvDetails;
@@ -1461,5 +1470,7 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }

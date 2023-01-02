@@ -29,8 +29,8 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.gbConditions = new System.Windows.Forms.GroupBox();
             this.tlpConditions = new System.Windows.Forms.TableLayoutPanel();
@@ -47,8 +47,6 @@ namespace iWms.Form
             this.tbOrderNo = new System.Windows.Forms.TextBox();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
-            this.dtOrderTime = new System.Windows.Forms.DateTimePicker();
-            this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
             this.tbUpn = new System.Windows.Forms.TextBox();
             this.cbType = new System.Windows.Forms.ComboBox();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
@@ -71,12 +69,18 @@ namespace iWms.Form
             this.colDestination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCreateUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.tlpLayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
             this.tlbTables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpLayout
@@ -137,8 +141,6 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.tbOrderNo, 1, 0);
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 0);
-            this.tlpConditions.Controls.Add(this.dtOrderTime, 1, 2);
-            this.tlpConditions.Controls.Add(this.dtFinishedTime, 3, 2);
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
             this.tlpConditions.Controls.Add(this.cbType, 3, 1);
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
@@ -147,6 +149,8 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnReset, 10, 0);
             this.tlpConditions.Controls.Add(this.btnProfit, 12, 1);
             this.tlpConditions.Controls.Add(this.btnLoss, 12, 2);
+            this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -290,30 +294,6 @@ namespace iWms.Form
             this.tbMaterialNo.Size = new System.Drawing.Size(134, 22);
             this.tbMaterialNo.TabIndex = 18;
             // 
-            // dtOrderTime
-            // 
-            this.dtOrderTime.CustomFormat = "yyyy-MM-dd";
-            this.dtOrderTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtOrderTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderTime.Location = new System.Drawing.Point(96, 73);
-            this.dtOrderTime.Name = "dtOrderTime";
-            this.dtOrderTime.Size = new System.Drawing.Size(134, 22);
-            this.dtOrderTime.TabIndex = 20;
-            this.dtOrderTime.Value = new System.DateTime(2022, 2, 22, 12, 4, 52, 0);
-            this.dtOrderTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
-            // dtFinishedTime
-            // 
-            this.dtFinishedTime.CustomFormat = "yyyy-MM-dd";
-            this.dtFinishedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinishedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishedTime.Location = new System.Drawing.Point(329, 73);
-            this.dtFinishedTime.Name = "dtFinishedTime";
-            this.dtFinishedTime.Size = new System.Drawing.Size(134, 22);
-            this.dtFinishedTime.TabIndex = 21;
-            this.dtFinishedTime.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtFinishedTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
             // tbUpn
             // 
             this.tbUpn.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -420,14 +400,14 @@ namespace iWms.Form
             this.colQty,
             this.colActualQuantity,
             this.colResult});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvUpns.Location = new System.Drawing.Point(714, 3);
@@ -496,14 +476,14 @@ namespace iWms.Form
             this.colDestination,
             this.colOrderTime,
             this.colCreateUser});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dgvOrders.Location = new System.Drawing.Point(3, 3);
@@ -574,6 +554,32 @@ namespace iWms.Form
             this.colCreateUser.Name = "colCreateUser";
             this.colCreateUser.ReadOnly = true;
             // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(96, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(134, 20);
+            this.dtCreate.TabIndex = 30;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(329, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 31;
+            // 
             // FrmInventoryOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -591,6 +597,10 @@ namespace iWms.Form
             this.tlbTables.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -614,8 +624,6 @@ namespace iWms.Form
         private System.Windows.Forms.TextBox tbOrderNo;
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbMaterialNo;
-        private System.Windows.Forms.DateTimePicker dtOrderTime;
-        private System.Windows.Forms.DateTimePicker dtFinishedTime;
         private System.Windows.Forms.DataGridView dgvUpns;
         private System.Windows.Forms.TextBox tbUpn;
         private DevExpress.XtraEditors.SimpleButton btnClear;
@@ -637,5 +645,7 @@ namespace iWms.Form
         private DevExpress.XtraEditors.SimpleButton btnReset;
         private DevExpress.XtraEditors.SimpleButton btnProfit;
         private DevExpress.XtraEditors.SimpleButton btnLoss;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }

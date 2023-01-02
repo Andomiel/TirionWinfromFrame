@@ -66,8 +66,6 @@ namespace iWms.Form
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
             this.tbUser = new System.Windows.Forms.TextBox();
-            this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
-            this.dtFinishDate = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
@@ -94,6 +92,8 @@ namespace iWms.Form
             this.colTowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
@@ -103,6 +103,10 @@ namespace iWms.Form
             this.tlpDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpLayout
@@ -296,13 +300,13 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 1);
             this.tlpConditions.Controls.Add(this.tbUser, 5, 1);
-            this.tlpConditions.Controls.Add(this.dtOrderDate, 1, 2);
-            this.tlpConditions.Controls.Add(this.dtFinishDate, 3, 2);
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 1);
             this.tlpConditions.Controls.Add(this.btnExport, 8, 1);
             this.tlpConditions.Controls.Add(this.btnClear, 8, 2);
             this.tlpConditions.Controls.Add(this.btnNoSource, 8, 0);
             this.tlpConditions.Controls.Add(this.btnCancel, 9, 1);
+            this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -452,30 +456,6 @@ namespace iWms.Form
             this.tbUser.Name = "tbUser";
             this.tbUser.Size = new System.Drawing.Size(134, 22);
             this.tbUser.TabIndex = 13;
-            // 
-            // dtOrderDate
-            // 
-            this.dtOrderDate.CustomFormat = "yyyy-MM-dd";
-            this.dtOrderDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderDate.Location = new System.Drawing.Point(96, 73);
-            this.dtOrderDate.Name = "dtOrderDate";
-            this.dtOrderDate.Size = new System.Drawing.Size(157, 22);
-            this.dtOrderDate.TabIndex = 14;
-            this.dtOrderDate.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtOrderDate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
-            // dtFinishDate
-            // 
-            this.dtFinishDate.CustomFormat = "yyyy-MM-dd";
-            this.dtFinishDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishDate.Location = new System.Drawing.Point(352, 73);
-            this.dtFinishDate.Name = "dtFinishDate";
-            this.dtFinishDate.Size = new System.Drawing.Size(134, 22);
-            this.dtFinishDate.TabIndex = 15;
-            this.dtFinishDate.Value = new System.DateTime(2022, 2, 22, 11, 54, 41, 0);
-            this.dtFinishDate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
             // 
             // btnQuery
             // 
@@ -786,6 +766,32 @@ namespace iWms.Form
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
             // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(96, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(157, 20);
+            this.dtCreate.TabIndex = 21;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(352, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 22;
+            // 
             // FrmInstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -808,6 +814,10 @@ namespace iWms.Form
             this.tlpDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -831,8 +841,6 @@ namespace iWms.Form
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbMaterialNo;
         private System.Windows.Forms.TextBox tbUser;
-        private System.Windows.Forms.DateTimePicker dtOrderDate;
-        private System.Windows.Forms.DateTimePicker dtFinishDate;
         private DevExpress.XtraEditors.SimpleButton btnQuery;
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.DataGridView dgvOrders;
@@ -875,5 +883,7 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }

@@ -41,15 +41,6 @@ namespace iWms.Form
             dgvBarcodes.AutoGenerateColumns = false;
             dgvBarcodes.DataSource = WorkOrderBarcodes;
             dgvBarcodes.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderDate.Value = DateTime.Now.AddDays(-2);
-            dtFinishDate.Value = DateTime.Now.AddDays(1);
-        }
-
-        private void Dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private void InitCombox(ComboBox cb, Type enumType)
@@ -101,10 +92,19 @@ namespace iWms.Form
 
         private void GetOrders()
         {
+            DateTime? startTime = null, finishTime = null;
+            if (dtCreate.EditValue != null)
+            {
+                startTime = dtCreate.DateTime.Date;
+            }
+            if (dtFinish.EditValue != null)
+            {
+                finishTime = dtFinish.DateTime.Date;
+            }
             // 获取入库单列表
             var warehouses = WareHouseBLL.GetInstockOrders(tbOrderNo.Text.Trim(), tbUpn.Text.Trim(), tbMaterialNo.Text.Trim(),
                 Convert.ToInt32(cbOrderType.SelectedValue),
-                Convert.ToInt32(cbOrderStatus.SelectedValue), tbUser.Text.Trim(), dtOrderDate.Value, dtFinishDate.Value);
+                Convert.ToInt32(cbOrderStatus.SelectedValue), tbUser.Text.Trim(), startTime, finishTime);
 
             WorkOrders = warehouses.Adapt<List<InstockOrderDto>>();
             //.Select(s => new InstockOrder(s.First()))
@@ -385,10 +385,8 @@ namespace iWms.Form
             tbUpn.Clear();
             tbMaterialNo.Clear();
             tbUser.Clear();
-            dtOrderDate.CustomFormat = " ";
-            dtOrderDate.Value = DateTime.Today;
-            dtFinishDate.CustomFormat = " ";
-            dtFinishDate.Value = DateTime.Today;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             cbOrderType.SelectedIndex = 0;
             cbOrderStatus.SelectedIndex = 0;
             GetOrders();

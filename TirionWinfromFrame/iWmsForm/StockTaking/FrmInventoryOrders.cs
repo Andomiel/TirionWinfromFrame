@@ -42,16 +42,6 @@ namespace iWms.Form
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
             dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.CustomFormat = " ";
-        }
-
-
-        private void Dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private BindingList<InventoryOrderDto> WorkOrders = new BindingList<InventoryOrderDto>();
@@ -110,17 +100,18 @@ namespace iWms.Form
             condition.MaterialNo = tbMaterialNo.Text.Trim();
             condition.Upn = tbUpn.Text.Trim();
 
-            if (!string.IsNullOrWhiteSpace(dtOrderTime.CustomFormat))
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
             {
-                condition.HaveOrderTimeQuery = true;
-                condition.OrderTimeStart = dtOrderTime.Value.Date;
-                condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
             }
-            if (!string.IsNullOrWhiteSpace(dtFinishedTime.CustomFormat))
+
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
             {
-                condition.HaveFinishedTimeQuery = true;
-                condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-                condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
             }
 
             var orders = InventoryBll.GetInventoryOrders(condition);
@@ -337,10 +328,8 @@ namespace iWms.Form
             tbUpn.Text = string.Empty;
             tbMaterialNo.Text = string.Empty;
             cbType.SelectedIndex = 0;
-            dtOrderTime.Value = DateTime.Today;
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.Value = DateTime.Today;
-            dtFinishedTime.CustomFormat = " ";
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 

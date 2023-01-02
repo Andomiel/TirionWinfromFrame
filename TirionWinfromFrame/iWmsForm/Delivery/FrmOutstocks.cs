@@ -56,16 +56,6 @@ namespace iWms.Form
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
             dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.CustomFormat = " ";
-        }
-
-
-        private void dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private List<Wms_DeliveryOrder> WorkOrders = new List<Wms_DeliveryOrder>();
@@ -261,17 +251,19 @@ namespace iWms.Form
                 Upn = tbUpn.Text.Trim(),
                 Operator = tbOperator.Text.Trim()
             };
-            if (!string.IsNullOrWhiteSpace(dtOrderTime.CustomFormat))
+
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
             {
-                condition.HaveOrderTimeQuery = true;
-                condition.OrderTimeStart = dtOrderTime.Value.Date;
-                condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
             }
-            if (!string.IsNullOrWhiteSpace(dtFinishedTime.CustomFormat))
+
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
             {
-                condition.HaveFinishedTimeQuery = true;
-                condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-                condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
             }
 
             WorkOrders = DeliveryBll.GetDeliveryOrders(condition).ToList();
@@ -725,10 +717,8 @@ namespace iWms.Form
             tbMaterialNo.Text = string.Empty;
             tbDestination.Text = string.Empty;
             tbOperator.Text = string.Empty;
-            dtOrderTime.Value = DateTime.Today;
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.Value = DateTime.Today;
-            dtFinishedTime.CustomFormat = " ";
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 
