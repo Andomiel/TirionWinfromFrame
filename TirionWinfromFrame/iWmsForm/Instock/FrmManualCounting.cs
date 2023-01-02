@@ -34,7 +34,7 @@ namespace iWms.Form
                 {
                     ValidateBarcode();
                     txtMaterialInfo.Text = string.Empty;
-                    var result = CallMesWmsApiBll.CallMaterialInfoByUPN(tbScan.Text);
+                    var result = CallMesWmsApiBll.CallMaterialInfoByUPN(tbScan.Text.Trim());
                     if (result != null && !string.IsNullOrWhiteSpace(result.InvQty))
                     {
                         tbQty.Text = Convert.ToDecimal(result.InvQty).ToString("0");
@@ -119,13 +119,13 @@ namespace iWms.Form
                     {
                         ValidateBarcode();
                     }
-                    if (string.IsNullOrWhiteSpace(tbScan.Text))
+                    if (string.IsNullOrWhiteSpace(tbScan.Text.Trim()))
                     {
                         return;
                     }
 
                     ManualCountingRecord record = new ManualCountingRecord();
-                    record.QRCode = tbScan.Text;
+                    record.QRCode = tbScan.Text.Trim();
                     record.Qty = TypeParse.StrToInt(tbQty.Text, 0);
 
                     int starCount = record.QRCode.ToCharArray().Count(p => p.Equals('*'));

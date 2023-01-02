@@ -79,7 +79,7 @@ namespace iWms.Form
         {
             if (e.KeyChar == 13)
             {
-                string boxNo = txtBoxScan.Text;
+                string boxNo = txtBoxScan.Text.Trim();
                 if (string.IsNullOrWhiteSpace(boxNo))
                 {
                     return;
@@ -99,7 +99,7 @@ namespace iWms.Form
             {
                 if (e.KeyChar == 13)
                 {
-                    string scanText = tbScan.Text;
+                    string scanText = tbScan.Text.Trim();
                     tbScan.Text = BarcodeFormatter.FormatBarcode(scanText);
                     if (cbOriginal.Visible && cbOriginal.Checked)
                     {
