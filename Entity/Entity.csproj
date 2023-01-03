@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext\Cfg_Register.cs" />
     <Compile Include="DataContext\Cfg_SortingConfig.cs" />
     <Compile Include="DataContext\FrozenPolicy.cs" />
     <Compile Include="DataContext\FrozenPolicyDetail.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Dto\Frozen\FrozenQueryItem.cs" />
     <Compile Include="Dto\InstockTaking\InventoryBarcodeDto.cs" />
     <Compile Include="Dto\InstockTaking\InventoryOrderDto.cs" />
+    <Compile Include="Dto\Instock\CfgRegisterDto.cs" />
     <Compile Include="Dto\Instock\InstockAreaDto.cs" />
     <Compile Include="Dto\Instock\InstockBarcodeDto.cs" />
     <Compile Include="Dto\Instock\InstockDetailDto.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Enums\General\LightRecordTypeEnum.cs" />
     <Compile Include="Enums\General\OperateTypeEnum.cs" />
     <Compile Include="Enums\General\ReelTypeEnum.cs" />
+    <Compile Include="Enums\General\RegisterStatusEnum.cs" />
     <Compile Include="Enums\General\SortNoEnum.cs" />
     <Compile Include="Enums\General\TowerEnum.cs" />
     <Compile Include="Enums\Instock\InOrderTypeEnum.cs" />

@@ -330,6 +330,12 @@
     <Compile Include="iWmsForm\ErrorHandle\FrmLogs.designer.cs">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterAdd.Designer.cs">
+      <DependentUpon>FrmRegisterAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Instock\FrmInStockNotice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,6 +347,12 @@
     </Compile>
     <Compile Include="iWmsForm\Instock\FrmInstocks.designer.cs">
       <DependentUpon>FrmInstocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterCfg.designer.cs">
+      <DependentUpon>FrmRegisterCfg.cs</DependentUpon>
     </Compile>
     <Compile Include="iWmsForm\Instock\FrmManualCounting.cs">
       <SubType>Form</SubType>
@@ -562,11 +574,17 @@
     <EmbeddedResource Include="iWmsForm\ErrorHandle\FrmLogs.resx">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmRegisterAdd.resx">
+      <DependentUpon>FrmRegisterAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmInStockNotice.resx">
       <DependentUpon>FrmInStockNotice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmInstocks.resx">
       <DependentUpon>FrmInstocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmRegisterCfg.resx">
+      <DependentUpon>FrmRegisterCfg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmManualCounting.resx">
       <DependentUpon>FrmManualCounting.cs</DependentUpon>
