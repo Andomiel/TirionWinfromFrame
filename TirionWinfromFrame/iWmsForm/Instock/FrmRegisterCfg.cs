@@ -48,6 +48,13 @@ namespace iWms.Form
 
             cbeStatus.Properties.Items.AddRange(enumItems.Select(p => p.Description).ToList());
             cbeStatus.SelectedIndex = 0;
+
+            Load += FrmRegisterCfg_Load;
+        }
+
+        private void FrmRegisterCfg_Load(object sender, EventArgs e)
+        {
+            GetConfigs();
         }
 
         private BindingList<CfgRegisterDto> Configs = new BindingList<CfgRegisterDto>();
