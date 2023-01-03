@@ -29,11 +29,12 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPause = new DevExpress.XtraEditors.SimpleButton();
             this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExchange = new DevExpress.XtraEditors.SimpleButton();
             this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cbSorting = new System.Windows.Forms.CheckBox();
@@ -90,6 +91,7 @@ namespace iWms.Form
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnExchange);
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Controls.Add(this.lblTypeName);
@@ -104,6 +106,16 @@ namespace iWms.Form
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1248, 85);
             this.panel1.TabIndex = 10;
+            // 
+            // btnExchange
+            // 
+            this.btnExchange.Location = new System.Drawing.Point(1044, 45);
+            this.btnExchange.Name = "btnExchange";
+            this.btnExchange.Size = new System.Drawing.Size(75, 23);
+            this.btnExchange.TabIndex = 20;
+            this.btnExchange.Text = "立即回传";
+            this.btnExchange.Visible = false;
+            this.btnExchange.Click += new System.EventHandler(this.BtnExchange_Click);
             // 
             // btnRefresh
             // 
@@ -251,14 +263,14 @@ namespace iWms.Form
             this.RK_RKSL,
             this.colActualCount,
             this.State});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridWMS.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridWMS.DefaultCellStyle = dataGridViewCellStyle3;
             this.gridWMS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridWMS.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridWMS.Location = new System.Drawing.Point(3, 3);
@@ -317,14 +329,14 @@ namespace iWms.Form
             this.Qty,
             this.TowerNo,
             this.CreateTime});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridIWMS.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridIWMS.DefaultCellStyle = dataGridViewCellStyle4;
             this.gridIWMS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridIWMS.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridIWMS.Location = new System.Drawing.Point(502, 3);
@@ -377,8 +389,7 @@ namespace iWms.Form
             this.btnForceFinish.Size = new System.Drawing.Size(114, 33);
             this.btnForceFinish.TabIndex = 13;
             this.btnForceFinish.Text = "强制入库";
-            this.btnForceFinish.Visible = false;
-            this.btnForceFinish.Click += new System.EventHandler(this.btnForceFinish_Click);
+            this.btnForceFinish.Click += new System.EventHandler(this.BtnForceFinish_Click);
             // 
             // tlpLayout
             // 
@@ -475,5 +486,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn RK_RKSL;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActualCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
+        private DevExpress.XtraEditors.SimpleButton btnExchange;
     }
 }

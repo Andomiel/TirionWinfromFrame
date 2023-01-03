@@ -15,6 +15,12 @@ namespace Entity.Enums.Instock
         /// 已入库
         /// </summary>
         [Description("已入库")]
-        Received = 1
+        Received = 1,
+
+        /// <summary>
+        /// 已回传
+        /// </summary>
+        [Description("已回传")]
+        Exchanged = 2
     }
 }

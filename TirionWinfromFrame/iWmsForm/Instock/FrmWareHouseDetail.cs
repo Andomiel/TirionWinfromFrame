@@ -8,6 +8,7 @@ using Entity.Dto;
 using Entity.Enums;
 using Entity.Enums.Transfer;
 using Mapster;
+using MES;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,6 +60,30 @@ namespace iWms.Form
         {
             BindDefaultTower();
             CompareMaterialQty();
+            SetHighPrivilege();
+        }
+
+        private void SetHighPrivilege()
+        {
+            using (var db = new MESDB())
+            {
+                var roles = db.Database.SqlQuery<int>($@"SELECT distinct roleId 
+                FROM[dbo].[sysUserRole] c 
+                where c.userId = {AppInfo.LoginUserInfo.id}").ToListAsync().Result;
+
+                if (roles == null || roles.Count == 0)
+                {
+                    btnForceFinish.Visible = false;
+                }
+                else if (roles.Contains(1) || roles.Contains(7))
+                {
+                    btnForceFinish.Visible = true;
+                }
+                else
+                {
+                    btnForceFinish.Visible = false;
+                }
+            }
         }
 
         private void BindDefaultTower()
@@ -218,7 +243,7 @@ namespace iWms.Form
             DialogResult = DialogResult.Cancel;
         }
 
-        private void btnForceFinish_Click(object sender, EventArgs e)
+        private void BtnForceFinish_Click(object sender, EventArgs e)
         {
             FrmWareHouseWarn frmWareHouseWarn = new FrmWareHouseWarn() { OrderNo = lblOrderNo.Text };
             if (frmWareHouseWarn.ShowDialog() == DialogResult.OK)
@@ -339,6 +364,26 @@ namespace iWms.Form
         private readonly object lockButtonObj = new object();
 
         private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockButtonObj)
+                {
+                    CompareMaterialQty();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+        }
+
+        private void BtnExchange_Click(object sender, EventArgs e)
         {
             SplashScreenManager.ShowForm(typeof(WaitForm1));
             try

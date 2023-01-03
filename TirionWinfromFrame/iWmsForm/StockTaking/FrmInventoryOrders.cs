@@ -356,13 +356,6 @@ namespace iWms.Form
                     int unfinished = (int)InventoryBarcodeStatusEnum.Executed;
                     var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
                     var unfinishedBarcodes = barcodes.Where(p => p.OrderStatus < unfinished).Select(p => p.Barcode).Distinct().ToList();
-                    //if (unfinishedBarcodes.Count > 0)
-                    //{
-                    //    if ("存在未完成盘点的upn，是否确认取消".ShowYesNoAndTips() != DialogResult.Yes)
-                    //    {
-                    //        return;
-                    //    }
-                    //}
 
                     int result = InventoryBll.ModifyInventoryOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Cancelled, AppInfo.LoginUserInfo.account);
                     result += InventoryBll.ReleaseInventoryOrderBarcodes(selectedOrder.BusinessId, unfinishedBarcodes, AppInfo.LoginUserInfo.account);

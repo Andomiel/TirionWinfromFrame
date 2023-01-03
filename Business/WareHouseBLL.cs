@@ -181,11 +181,18 @@ namespace Business
             sb.AppendLine($@"UPDATE Wms_InstockOrder
                         SET OrderStatus={finishStatus}, LastUpdateTime=getdate(), LastUpdateUser='{userName}'
                         WHERE BusinessId='{instockId}'; ");
-            sb.AppendLine($@"INSERT INTO smt_InStockOrder_feedback
-                        (OrderNo, Status, OrderType)
-                        VALUES('{instockId}', 0, '{(InOrderTypeEnum)instockType}');");
+            sb.AppendLine(GetFeedBackSql(instockId, instockType));
 
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
+        }
+
+        public static void 
+
+        private static string GetFeedBackSql(string instockId, int instockType)
+        {
+            return $@"INSERT INTO smt_InStockOrder_feedback
+                        (OrderNo, Status, OrderType)
+                        VALUES('{instockId}', 0, '{(InOrderTypeEnum)instockType}');";
         }
 
         public static IEnumerable<InstockAreaDto> GetBoundAreas()
