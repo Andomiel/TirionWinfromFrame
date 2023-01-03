@@ -963,7 +963,7 @@ namespace iWms.Form
                     FrmReviewNew reviewNew = new FrmReviewNew(order);
                     if (reviewNew.ShowDialog() == DialogResult.OK)
                     {
-                        LoadOrderDetails();
+                        GetOrders();
                     }
                 }
             }

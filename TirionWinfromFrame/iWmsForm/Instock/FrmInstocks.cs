@@ -215,13 +215,7 @@ namespace iWms.Form
 
                     if (formDetail.ShowDialog() == DialogResult.OK)
                     {
-                        var details = WareHouseBLL.GetInstockDetails(order.BusinessId).ToList();
-                        WorkOrderDetails.Clear();
-                        foreach (Wms_InstockDetail item in details)
-                        {
-                            WorkOrderDetails.Add(item.Adapt<InstockDetailDto>());
-                        }
-                        dgvOrders.UpdateCellValue(e.ColumnIndex - 3, e.RowIndex);
+                        GetOrders();
                     }
                 }
             }
