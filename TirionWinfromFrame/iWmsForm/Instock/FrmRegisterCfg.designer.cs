@@ -198,44 +198,47 @@ namespace iWms.Form
             // 
             // colMaterialNo
             // 
-            this.colMaterialNo.DataPropertyName = "LogTitle";
+            this.colMaterialNo.DataPropertyName = "MaterialNo";
             this.colMaterialNo.HeaderText = "料号";
             this.colMaterialNo.Name = "colMaterialNo";
             this.colMaterialNo.ReadOnly = true;
             // 
             // colRemark
             // 
-            this.colRemark.DataPropertyName = "LogTime";
+            this.colRemark.DataPropertyName = "Remark";
             this.colRemark.HeaderText = "备注";
             this.colRemark.Name = "colRemark";
             this.colRemark.ReadOnly = true;
             // 
             // colStatus
             // 
+            this.colStatus.DataPropertyName = "RecordStatusDisplay";
             this.colStatus.HeaderText = "状态";
             this.colStatus.Name = "colStatus";
             this.colStatus.ReadOnly = true;
             // 
             // colUpdateUser
             // 
-            this.colUpdateUser.DataPropertyName = "RequestLimit";
+            this.colUpdateUser.DataPropertyName = "LastUpdateUser";
             this.colUpdateUser.HeaderText = "最后修改人";
             this.colUpdateUser.Name = "colUpdateUser";
             this.colUpdateUser.ReadOnly = true;
             // 
             // colUpdateTime
             // 
-            this.colUpdateTime.DataPropertyName = "ResponseLimit";
+            this.colUpdateTime.DataPropertyName = "LastUpdateTime";
             this.colUpdateTime.HeaderText = "最后修改时间";
             this.colUpdateTime.Name = "colUpdateTime";
             this.colUpdateTime.ReadOnly = true;
             // 
             // colDel
             // 
+            this.colDel.DataPropertyName = "Id";
             this.colDel.HeaderText = "操作";
             this.colDel.Name = "colDel";
             this.colDel.ReadOnly = true;
             this.colDel.Text = "删除";
+            this.colDel.UseColumnTextForButtonValue = true;
             // 
             // FrmRegisterCfg
             // 
