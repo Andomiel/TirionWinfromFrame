@@ -1,4 +1,5 @@
 ﻿using Business;
+using Commons;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity;
@@ -13,6 +14,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -41,6 +43,25 @@ namespace iWms.Form
             gridViewSummary.MergeFocusNames.AddRange(new List<string> { "LineNumber" });
             gridViewSummary.DataSource = ReviewSummaries;
             gridViewSummary.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
+
+            Load += FrmReviewNew_Load;
+            FormClosing += FrmReviewNew_FormClosing;
+        }
+
+        private void FrmReviewNew_Load(object sender, EventArgs e)
+        {
+            if (SelectedOrder != null)
+            {
+                DeliveryBll.LockDeliveryOrder(SelectedOrder.BusinessId, DnsHelper.GetIP(), AppInfo.LoginUserInfo.username);
+            }
+        }
+
+        private void FrmReviewNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (SelectedOrder != null)
+            {
+                DeliveryBll.ReleaseDeliveryOrder(SelectedOrder.BusinessId);
+            }
         }
 
         private readonly DeliveryOrderDto SelectedOrder;

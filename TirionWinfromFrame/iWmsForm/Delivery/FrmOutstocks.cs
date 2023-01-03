@@ -1,4 +1,5 @@
 ﻿using Business;
+using Commons;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity;
@@ -957,6 +958,18 @@ namespace iWms.Form
                     var order = row.DataBoundItem as DeliveryOrderDto;
                     if (string.IsNullOrWhiteSpace(order.OperationText))
                     {
+                        return;
+                    }
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    {
+                        $"出库单{order.DeliveryNo}{order.OrderStatusDisplay}，不可复核".ShowTips();
+                        return;
+                    }
+                    string reviewLock = DeliveryBll.GetDeliveryOrderLock(order.BusinessId);
+                    //string ip = DnsHelper.GetIP();
+                    if (!string.IsNullOrWhiteSpace(reviewLock))
+                    {
+                        $"出库单{order.DeliveryNo}已在被其他人在{reviewLock}复核，请与其确认".ShowTips();
                         return;
                     }
 

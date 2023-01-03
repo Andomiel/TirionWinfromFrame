@@ -359,6 +359,26 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
         {
             return (int)DeliveryBarcodeStatusEnum.Cancelled;
         }
+
+        public static void LockDeliveryOrder(string deliveryId, string ip, string userName)
+        {
+            string sql = $@"update Wms_DeliveryOrder set ReviewLock = '{ip}@{userName}' where BusinessId = '{deliveryId}' ";
+
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
+        public static void ReleaseDeliveryOrder(string deliveryId)
+        {
+            string sql = $@"update Wms_DeliveryOrder set ReviewLock = '' where BusinessId = '{deliveryId}' ";
+
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
+        public static string GetDeliveryOrderLock(string deliveryId)
+        {
+            string sql = $"select ReviewLock from Wms_DeliveryOrder where BusinessId = '{deliveryId}' ";
+            return Convert.ToString(DbHelper.ExecuteScalar(sql));
+        }
     }
 
     public class DeliveryQueryCondition
