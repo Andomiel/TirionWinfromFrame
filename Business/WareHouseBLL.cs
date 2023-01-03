@@ -186,8 +186,6 @@ namespace Business
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
-        public static void 
-
         private static string GetFeedBackSql(string instockId, int instockType)
         {
             return $@"INSERT INTO smt_InStockOrder_feedback
