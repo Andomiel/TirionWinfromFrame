@@ -72,14 +72,14 @@ namespace TirionWinfromFrame
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(518, 9, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(412, 259);
+            this.layoutControl1.Size = new System.Drawing.Size(412, 277);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // btnCanel
             // 
             this.btnCanel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCanel.Location = new System.Drawing.Point(208, 225);
+            this.btnCanel.Location = new System.Drawing.Point(208, 242);
             this.btnCanel.Name = "btnCanel";
             this.btnCanel.Size = new System.Drawing.Size(192, 22);
             this.btnCanel.StyleController = this.layoutControl1;
@@ -89,7 +89,7 @@ namespace TirionWinfromFrame
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(12, 225);
+            this.btnOk.Location = new System.Drawing.Point(12, 242);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(192, 22);
             this.btnOk.StyleController = this.layoutControl1;
@@ -99,23 +99,23 @@ namespace TirionWinfromFrame
             // 
             // teRemark
             // 
-            this.teRemark.Location = new System.Drawing.Point(51, 46);
+            this.teRemark.Location = new System.Drawing.Point(67, 50);
             this.teRemark.Name = "teRemark";
-            this.teRemark.Size = new System.Drawing.Size(349, 20);
+            this.teRemark.Size = new System.Drawing.Size(333, 22);
             this.teRemark.StyleController = this.layoutControl1;
             this.teRemark.TabIndex = 5;
             // 
             // teMaterialNo
             // 
-            this.teMaterialNo.Location = new System.Drawing.Point(51, 12);
+            this.teMaterialNo.Location = new System.Drawing.Point(67, 13);
             this.teMaterialNo.Name = "teMaterialNo";
-            this.teMaterialNo.Size = new System.Drawing.Size(349, 20);
+            this.teMaterialNo.Size = new System.Drawing.Size(333, 22);
             this.teMaterialNo.StyleController = this.layoutControl1;
             this.teMaterialNo.TabIndex = 4;
             // 
             // ceStatus
             // 
-            this.ceStatus.Location = new System.Drawing.Point(12, 80);
+            this.ceStatus.Location = new System.Drawing.Point(12, 87);
             this.ceStatus.Name = "ceStatus";
             this.ceStatus.Properties.Caption = "有效";
             this.ceStatus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -137,7 +137,7 @@ namespace TirionWinfromFrame
             this.emptySpaceItem3,
             this.layoutControlItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(412, 259);
+            this.Root.Size = new System.Drawing.Size(412, 277);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -146,23 +146,23 @@ namespace TirionWinfromFrame
             this.layoutControlItem1.CustomizationFormText = "用户名：";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(392, 24);
-            this.layoutControlItem1.Text = "料号：";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(36, 14);
+            this.layoutControlItem1.Size = new System.Drawing.Size(392, 26);
+            this.layoutControlItem1.Text = "表达式：";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(52, 15);
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.teRemark;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 34);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 37);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(392, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(392, 26);
             this.layoutControlItem2.Text = "备注：";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(36, 14);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(52, 15);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.btnOk;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 213);
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 229);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(196, 26);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
@@ -171,7 +171,7 @@ namespace TirionWinfromFrame
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnCanel;
-            this.layoutControlItem9.Location = new System.Drawing.Point(196, 213);
+            this.layoutControlItem9.Location = new System.Drawing.Point(196, 229);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(196, 26);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
@@ -180,32 +180,32 @@ namespace TirionWinfromFrame
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 58);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 63);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(392, 10);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(392, 11);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 24);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 26);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(392, 10);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(392, 11);
             this.emptySpaceItem1.Text = "状态：";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 92);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(0, 98);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(392, 121);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(392, 131);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.ceStatus;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 68);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 74);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(392, 24);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
@@ -214,10 +214,10 @@ namespace TirionWinfromFrame
             // FrmRegisterAdd
             // 
             this.AcceptButton = this.btnOk;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCanel;
-            this.ClientSize = new System.Drawing.Size(412, 259);
+            this.ClientSize = new System.Drawing.Size(412, 277);
             this.Controls.Add(this.layoutControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

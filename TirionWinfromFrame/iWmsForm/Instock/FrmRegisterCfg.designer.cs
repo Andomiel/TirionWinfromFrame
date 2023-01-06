@@ -60,12 +60,12 @@ namespace iWms.Form
             this.tlpLoayout.Controls.Add(this.gbConditions, 0, 0);
             this.tlpLoayout.Controls.Add(this.dgvConfigs, 0, 1);
             this.tlpLoayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLoayout.Location = new System.Drawing.Point(0, 34);
+            this.tlpLoayout.Location = new System.Drawing.Point(0, 36);
             this.tlpLoayout.Name = "tlpLoayout";
             this.tlpLoayout.RowCount = 2;
-            this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLoayout.Size = new System.Drawing.Size(1210, 595);
+            this.tlpLoayout.Size = new System.Drawing.Size(1210, 638);
             this.tlpLoayout.TabIndex = 0;
             // 
             // gbConditions
@@ -74,7 +74,7 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1204, 134);
+            this.gbConditions.Size = new System.Drawing.Size(1204, 144);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
@@ -98,22 +98,22 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.cbeStatus, 5, 1);
             this.tlpConditions.Controls.Add(this.btnAdd, 8, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpConditions.Location = new System.Drawing.Point(3, 18);
+            this.tlpConditions.Location = new System.Drawing.Point(3, 19);
             this.tlpConditions.Name = "tlpConditions";
             this.tlpConditions.RowCount = 3;
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpConditions.Size = new System.Drawing.Size(1198, 113);
+            this.tlpConditions.Size = new System.Drawing.Size(1198, 122);
             this.tlpConditions.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(50, 41);
+            this.label1.Location = new System.Drawing.Point(50, 45);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 30);
+            this.label1.Size = new System.Drawing.Size(87, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "料号";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -122,17 +122,17 @@ namespace iWms.Form
             // 
             this.tlpConditions.SetColumnSpan(this.tbMaterialNo, 2);
             this.tbMaterialNo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMaterialNo.Location = new System.Drawing.Point(143, 44);
+            this.tbMaterialNo.Location = new System.Drawing.Point(143, 48);
             this.tbMaterialNo.Name = "tbMaterialNo";
-            this.tbMaterialNo.Size = new System.Drawing.Size(274, 22);
+            this.tbMaterialNo.Size = new System.Drawing.Size(274, 23);
             this.tbMaterialNo.TabIndex = 1;
             // 
             // btnQuery
             // 
             this.btnQuery.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnQuery.Location = new System.Drawing.Point(703, 44);
+            this.btnQuery.Location = new System.Drawing.Point(703, 48);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(134, 24);
+            this.btnQuery.Size = new System.Drawing.Size(134, 26);
             this.btnQuery.TabIndex = 2;
             this.btnQuery.Text = "查询";
             this.btnQuery.Click += new System.EventHandler(this.BtnQuery_Click);
@@ -141,9 +141,9 @@ namespace iWms.Form
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(423, 41);
+            this.label2.Location = new System.Drawing.Point(423, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 30);
+            this.label2.Size = new System.Drawing.Size(87, 32);
             this.label2.TabIndex = 3;
             this.label2.Text = "状态";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -151,21 +151,21 @@ namespace iWms.Form
             // cbeStatus
             // 
             this.cbeStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbeStatus.Location = new System.Drawing.Point(516, 44);
+            this.cbeStatus.Location = new System.Drawing.Point(516, 48);
             this.cbeStatus.Name = "cbeStatus";
             this.cbeStatus.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cbeStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbeStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbeStatus.Size = new System.Drawing.Size(134, 20);
+            this.cbeStatus.Size = new System.Drawing.Size(134, 22);
             this.cbeStatus.TabIndex = 4;
             // 
             // btnAdd
             // 
             this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAdd.Location = new System.Drawing.Point(843, 44);
+            this.btnAdd.Location = new System.Drawing.Point(843, 48);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(134, 24);
+            this.btnAdd.Size = new System.Drawing.Size(134, 26);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "新增";
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
@@ -185,12 +185,12 @@ namespace iWms.Form
             this.colUpdateTime,
             this.colDel});
             this.dgvConfigs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvConfigs.Location = new System.Drawing.Point(3, 143);
+            this.dgvConfigs.Location = new System.Drawing.Point(3, 153);
             this.dgvConfigs.MultiSelect = false;
             this.dgvConfigs.Name = "dgvConfigs";
             this.dgvConfigs.ReadOnly = true;
             this.dgvConfigs.RowTemplate.Height = 23;
-            this.dgvConfigs.Size = new System.Drawing.Size(1204, 449);
+            this.dgvConfigs.Size = new System.Drawing.Size(1204, 482);
             this.dgvConfigs.TabIndex = 1;
             this.dgvConfigs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConfigs_CellContentClick);
             this.dgvConfigs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConfigs_CellDoubleClick);
@@ -199,7 +199,7 @@ namespace iWms.Form
             // colMaterialNo
             // 
             this.colMaterialNo.DataPropertyName = "MaterialNo";
-            this.colMaterialNo.HeaderText = "料号";
+            this.colMaterialNo.HeaderText = "料号表达式";
             this.colMaterialNo.Name = "colMaterialNo";
             this.colMaterialNo.ReadOnly = true;
             // 
@@ -242,9 +242,9 @@ namespace iWms.Form
             // 
             // FrmRegisterCfg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1210, 629);
+            this.ClientSize = new System.Drawing.Size(1210, 674);
             this.Controls.Add(this.tlpLoayout);
             this.Name = "FrmRegisterCfg";
             this.Text = "入库注册配置";
