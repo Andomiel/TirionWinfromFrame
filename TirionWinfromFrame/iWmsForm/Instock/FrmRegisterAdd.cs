@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
@@ -84,17 +85,19 @@ namespace TirionWinfromFrame
         {
             if (string.IsNullOrEmpty(teMaterialNo.Text))
             {
-                "料号不能为空".ShowWarning();
+                "料号表达式不能为空".ShowWarning();
                 teMaterialNo.Focus();
                 return false;
             }
-            int materialLength = teMaterialNo.Text.Trim().Length;
-            if (materialLength != 7 && materialLength != 12)
-            {
-                "必须为7位老料号或者12位新料号".ShowWarning();
-                teMaterialNo.Focus();
-                return false;
-            }
+            //int materialLength = teMaterialNo.Text.Trim().Length;
+            //if (materialLength != 7 && materialLength != 12)
+            //{
+            //    "必须为7位老料号或者12位新料号".ShowWarning();
+            //    teMaterialNo.Focus();
+            //    return false;
+            //}
+            //Regex regex = new Regex(teMaterialNo.Text.Trim());
+            //regex.
             return true;
         }
 
