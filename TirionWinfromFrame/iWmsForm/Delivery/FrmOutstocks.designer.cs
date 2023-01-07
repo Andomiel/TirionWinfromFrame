@@ -667,6 +667,7 @@ namespace iWms.Form
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AllowUserToResizeRows = false;
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeight = 29;
@@ -696,7 +697,8 @@ namespace iWms.Form
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.RowHeadersWidth = 40;
             this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvOrders.RowTemplate.Height = 23;
+            this.dgvOrders.RowTemplate.Height = 24;
+            this.dgvOrders.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1332, 195);
             this.dgvOrders.TabIndex = 1;

@@ -71,6 +71,8 @@ namespace iWms.Form
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnNoSource = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,21 +94,19 @@ namespace iWms.Form
             this.colTowerNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
-            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.tbDetails.SuspendLayout();
             this.tlpDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpLayout
@@ -504,13 +504,40 @@ namespace iWms.Form
             this.btnCancel.Text = "取消入库";
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(96, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(157, 20);
+            this.dtCreate.TabIndex = 21;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(352, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 22;
+            // 
             // dgvOrders
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AllowUserToResizeRows = false;
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrders.ColumnHeadersHeight = 24;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIsSelected,
             this.colOrderNo,
@@ -533,7 +560,8 @@ namespace iWms.Form
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.RowHeadersWidth = 40;
-            this.dgvOrders.RowTemplate.Height = 23;
+            this.dgvOrders.RowTemplate.Height = 24;
+            this.dgvOrders.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1218, 144);
             this.dgvOrders.TabIndex = 1;
@@ -766,32 +794,6 @@ namespace iWms.Form
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
             // 
-            // dtCreate
-            // 
-            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtCreate.EditValue = null;
-            this.dtCreate.Location = new System.Drawing.Point(96, 73);
-            this.dtCreate.Name = "dtCreate";
-            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtCreate.Size = new System.Drawing.Size(157, 20);
-            this.dtCreate.TabIndex = 21;
-            // 
-            // dtFinish
-            // 
-            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinish.EditValue = null;
-            this.dtFinish.Location = new System.Drawing.Point(352, 73);
-            this.dtFinish.Name = "dtFinish";
-            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtFinish.Size = new System.Drawing.Size(134, 20);
-            this.dtFinish.TabIndex = 22;
-            // 
             // FrmInstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -809,15 +811,15 @@ namespace iWms.Form
             this.gbConditions.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
             this.tlpConditions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.tbDetails.ResumeLayout(false);
             this.tlpDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBarcodes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
