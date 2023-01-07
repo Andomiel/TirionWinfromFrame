@@ -12,7 +12,7 @@ using TirionWinfromFrame.Commons;
 
 namespace Business
 {
-    public class OutStockReview
+    public class ReviewBusiness
     {
 
         public static IEnumerable<OrderNeedMaterial> GetMaterialsByOutOrderNo(string orderNo)
@@ -76,67 +76,17 @@ namespace Business
                 {
                     continue;
                 }
-                var reviewedBarcode = barcodes.FirstOrDefault(p => p.UPN == item.Barcode);
-                if (reviewedBarcode == null)
+                else if (item.OrderStatus == (int)DeliveryBarcodeStatusEnum.Undeliver || item.OrderStatus == (int)DeliveryBarcodeStatusEnum.Delivered)
                 {
-                    //不存在
-                    if (item.OrderStatus == (int)DeliveryBarcodeStatusEnum.Undeliver)
-                    {
-                        sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                    sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
                         SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{item.BusinessId}' ;");
 
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0,  Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
-                    }
-                    else if (item.OrderStatus == (int)DeliveryBarcodeStatusEnum.Delivered)
-                    {
-                        //未复核，此时移入理料区
-                        sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
-                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{item.BusinessId}' ;");
-
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0,  Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
-                    }
-                    else
-                    {
-                        //已复核，do nothing
-                    }
+                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, isTakeCheck =0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
                 }
                 else
                 {
-                    if (reviewedBarcode.Match == 0)
-                    {
-                        //未复核，此时移入理料区
-                        sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
-                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{item.BusinessId}' ;");
-
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
-                    }
-                    else
-                    {
-                        //已复核
-                        sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
-                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Reviewed}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{item.BusinessId}' ;");
-
-                        sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1, isReturnCheck = 0,
-                           isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' where reelid = '{item.Barcode}'; ");
-                    }
-                    barcodes.Remove(reviewedBarcode);
+                    //已复核，do nothing
                 }
-            }
-            //剩余的记录，只剩本次复核新增的
-            var details = GetDeliveryDetails(deliveryNo);
-            foreach (var item in barcodes)
-            {
-                var detail = details.FirstOrDefault(p => p.MaterialNo == item.PartNumber && p.RowNum == TypeParse.StrToInt(item.LineNumber, 0));
-                if (detail == null)
-                {
-                    throw new OppoCoreException($"复核的物料{item.UPN}对应的料号{item.PartNumber}和行号{item.LineNumber}在出库单明细中找不到对应项");
-                }
-                sb.AppendLine($@"INSERT INTO Wms_DeliveryBarcode
-                (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-                VALUES('{Guid.NewGuid():D}', '{detail.DeliveryId}', '{detail.BusinessId}', '{item.ContainerNo}', '{item.UPN}', '', {item.TowerNo}, {item.RealQty}, {(int)DeliveryBarcodeStatusEnum.Reviewed}, getdate(), '{userName}', getdate(), '{userName}');");
-
-                sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1, isReturnCheck = 0,
-                isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' where reelid = '{item.UPN}'; ");
             }
 
             sb.AppendLine($@"update Wms_DeliveryOrder set OrderStatus = {(int)DeliveryOrderStatusEnum.Reviewed}, 
@@ -223,6 +173,61 @@ namespace Business
                                        (OrderNo,Status,OrderType,DestinationNo) VALUES 
                                        ('{order.BusinessId}',0,'{type}','{destNo}')";
             DbHelper.Insert(feedBackInsert);
+        }
+
+        public static void ReviewBarcode(string deliveryNo, string userName, ReviewSummary barcode)
+        {
+            var allBarcodes = GetDeliveryBarcodes(deliveryNo);
+
+            StringBuilder sb = new StringBuilder();
+            int cancelledStatus = (int)DeliveryBarcodeStatusEnum.Cancelled;
+            var currentBarcodes = allBarcodes.Where(p => p.Barcode == barcode.UPN && p.OrderStatus < cancelledStatus);
+            if (currentBarcodes.Any())
+            {
+                var currentBarcode = currentBarcodes.First();
+                foreach (var item in currentBarcodes)
+                {
+                    if (item.BusinessId != currentBarcode.BusinessId)
+                    {
+                        //多余的取消掉
+                        sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{currentBarcode.BusinessId}' ;");
+                    }
+                }
+                //已复核
+                sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Reviewed}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{currentBarcode.BusinessId}' ;");
+
+                sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1,
+                           isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' where reelid = '{currentBarcode.Barcode}'; ");
+            }
+            else
+            {
+                var details = GetDeliveryDetails(deliveryNo);
+                var detail = details.FirstOrDefault(p => p.MaterialNo == barcode.PartNumber && p.RowNum == TypeParse.StrToInt(barcode.LineNumber, 0));
+                if (detail == null)
+                {
+                    throw new OppoCoreException($"复核的物料{barcode.UPN}对应的料号{barcode.PartNumber}和行号{barcode.LineNumber}在出库单明细中找不到对应项");
+                }
+                //新增
+                sb.AppendLine($@"INSERT INTO Wms_DeliveryBarcode
+                (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+                VALUES('{Guid.NewGuid():D}', '{detail.DeliveryId}', '{detail.BusinessId}', '{barcode.ContainerNo}', '{barcode.UPN}', '', { barcode.TowerNo}, { barcode.RealQty}, { (int)DeliveryBarcodeStatusEnum.Reviewed}, getdate(), '{userName}', getdate(), '{userName}'); ");
+
+                sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1, isReturnCheck = 0,
+                isSave = 1, taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' where reelid = '{barcode.UPN}'; ");
+            }
+            DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
+        }
+
+        public static void ReleaseReviewedBarcode(string deliveryId, string userName, string barcode)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
+                        SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE DeliveryId ='{deliveryId}' and  Barcode = '{barcode}' ;");
+
+            sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, isTakeCheck =0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{barcode}'; ");
+            DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
     }
 
@@ -415,6 +420,24 @@ namespace Business
         /// 需求数量
         /// </summary>
         public int NeedQty { get; set; }
+
+        private int _reviewedQuantity = 0;
+        /// <summary>
+        /// 已复核数量
+        /// </summary>
+        public int ReviewedQuantity
+        {
+            get { return _reviewedQuantity; }
+            set
+            {
+                if (_reviewedQuantity != value)
+                {
+                    _reviewedQuantity = value;
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ReviewedQuantity)));
+                }
+            }
+        }
 
         private string _upn = string.Empty;
         /// <summary>

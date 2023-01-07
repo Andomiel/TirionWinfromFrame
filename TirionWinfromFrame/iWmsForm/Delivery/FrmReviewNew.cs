@@ -197,7 +197,7 @@ namespace iWms.Form
         {
             CollapseWarning();
 
-            string scanText = tbScan.Text;
+            string scanText = tbScan.Text.Trim();
             int starCount = scanText.ToCharArray().Count(p => p.Equals('*'));
             if (starCount < 6 || starCount > 9)
             {
@@ -224,7 +224,7 @@ namespace iWms.Form
                 return;
             }
 
-            reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
+            reviewRecord = ReviewBusiness.GetUpnInfoInZd(upn);
             reviewRecord.BoxNo = txtBoxScan.Text.Trim();
             reviewRecord.OriginalCode = tbOriginal.Text.Trim();
             reviewRecord.ScanTime = DateTime.Now;
@@ -295,6 +295,8 @@ namespace iWms.Form
                 matchRow.Match = (int)PrepareReviewMatchEnum.Done;
                 matchRow.RealQty = reviewRecord.Qty;
                 matchRow.ContainerNo = txtBoxScan.Text.Trim();
+
+                ReviewBusiness.ReviewBarcode(SelectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account, matchRow);
             }
             else
             {
@@ -331,6 +333,7 @@ namespace iWms.Form
                     ReviewSummaries.Remove(item);
                 }
                 ReviewSummaries.Add(newReview);
+                ReviewBusiness.ReviewBarcode(SelectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account, newReview);
             }
             AddBindRecord(reviewRecord);
             ResetBarcodeText();
@@ -466,13 +469,14 @@ namespace iWms.Form
             var barcodes = DeliveryBll.GetDeliveryBarcodes(SelectedOrder.BusinessId);
             foreach (Wms_DeliveryDetail item in details)
             {
-                var detailBarcodes = barcodes.Where(p => p.DeliveryDetailId == item.BusinessId && p.OrderStatus > (int)DeliveryBarcodeStatusEnum.Undeliver).ToList();
-                if (detailBarcodes == null || detailBarcodes.Count == 0)
+                var detailBarcodes = barcodes.Where(p => p.DeliveryDetailId == item.BusinessId && p.OrderStatus > (int)DeliveryBarcodeStatusEnum.Undeliver);
+                if (detailBarcodes == null || !detailBarcodes.Any())
                 {
                     var summary = new ReviewSummary()
                     {
                         AllocateQty = 0,
                         NeedQty = item.RequireCount,
+                        ReviewedQuantity = 0,
                         ContainerNo = string.Empty,
                         LineNumber = item.RowNum.ToString(),
                         Match = 0,
@@ -489,6 +493,8 @@ namespace iWms.Form
                 }
                 else
                 {
+                    int reviewedStatus = (int)DeliveryBarcodeStatusEnum.Reviewed;
+                    int reviewedQuantity = detailBarcodes.Where(p => p.OrderStatus == reviewedStatus).Sum(p => p.DeliveryQuantity);
                     foreach (var barcode in detailBarcodes)
                     {
                         ReviewSummary newReview = new ReviewSummary
@@ -499,6 +505,7 @@ namespace iWms.Form
                             RealQty = barcode.DeliveryQuantity,
                             ContainerNo = barcode.BoxNo,
                             QRCode = string.Empty,
+                            ReviewedQuantity = reviewedQuantity,
                         };
                         newReview.OrderNo = SelectedOrder.DeliveryNo;
                         newReview.PartNumber = item.MaterialNo;
@@ -590,7 +597,7 @@ namespace iWms.Form
                     {
                         string orderNo = SelectedOrder.DeliveryNo;
                         var finishedList = ReviewSummaries.Where(p => !string.IsNullOrWhiteSpace(p.UPN)).ToList();
-                        if (OutStockReview.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
+                        if (ReviewBusiness.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
                         {
                             "更新数据异常，请重新提交".ShowTips();
                         }
@@ -846,20 +853,30 @@ namespace iWms.Form
                         "当前条目不是已复核的记录，无法删除".ShowTips();
                         return;
                     }
+                    string currentUPN = record.UPN;
                     var otherRecords = ReviewSummaries.Where(p => p.PartNumber == record.PartNumber && p.LineNumber == record.LineNumber).ToList();
                     if (otherRecords.Count > 1)
                     {
                         ReviewSummaries.Remove(record);
+                        foreach (var item in otherRecords)
+                        {
+                            if (item.UPN != record.UPN)
+                            {
+                                item.ReviewedQuantity -= record.RealQty;
+                            }
+                        }
                     }
                     else
                     {
                         record.UPN = string.Empty;
+                        record.ReviewedQuantity = 0;
                         record.Match = (int)PrepareReviewMatchEnum.Not;
                         record.RealQty = 0;
                         record.ContainerNo = txtBoxScan.Text;
                         record.QRCode = string.Empty;
                         record.AllocateQty = 0;
                     }
+                    ReviewBusiness.ReleaseReviewedBarcode(SelectedOrder.BusinessId, AppInfo.LoginUserInfo.account, currentUPN);
                 };
                 contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
 
@@ -896,13 +913,12 @@ namespace iWms.Form
                             return;
                         }
                     }
-
-                    string orderNo = SelectedOrder.DeliveryNo;
-                    var reviewList = ReviewSummaries.Where(p => (!string.IsNullOrWhiteSpace(p.UPN)) && p.Match == 1).ToList();
-                    if (reviewList.Count > 0)
-                    {
-                        OutStockReview.TempDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, reviewList);
-                    }
+                    //string orderNo = SelectedOrder.DeliveryNo;
+                    //var reviewList = ReviewSummaries.Where(p => (!string.IsNullOrWhiteSpace(p.UPN)) && p.Match == 1).ToList();
+                    //if (reviewList.Count > 0)
+                    //{
+                    //    OutStockReview.TempDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, reviewList);
+                    //}
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

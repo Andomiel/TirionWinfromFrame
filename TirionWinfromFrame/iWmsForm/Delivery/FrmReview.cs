@@ -190,7 +190,7 @@ namespace iWms.Form
                         PlayResultWaves(false);
                         return;
                     }
-                    reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
+                    reviewRecord = ReviewBusiness.GetUpnInfoInZd(upn);
                     reviewRecord.ScanTime = DateTime.Now;
                     int index = records.FindIndex(p => p.UPN == reviewRecord.UPN);
                     if (index >= 0 && index < records.Count)
@@ -202,7 +202,7 @@ namespace iWms.Form
 
             if (reviewRecord == null)
             {
-                reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
+                reviewRecord = ReviewBusiness.GetUpnInfoInZd(upn);
                 reviewRecord.BoxNo = txtBoxScan.Text;
                 reviewRecord.OriginalCode = tbOriginal.Text;
                 if (!reviewRecord.IsOk)
@@ -219,7 +219,7 @@ namespace iWms.Form
                 return;
             }
 
-            List<OrderNeedMaterial> needMaterials = OutStockReview.GetMaterialsByOutOrderNo(selectItem.OrderNo).ToList();
+            List<OrderNeedMaterial> needMaterials = ReviewBusiness.GetMaterialsByOutOrderNo(selectItem.OrderNo).ToList();
             List<OrderNeedMaterial> needAndThisPn = needMaterials.Where(p => p.PartNumber == reviewRecord.Part_Number).ToList();
             var needMaterial = needAndThisPn.FirstOrDefault();
             if (needMaterial == null)
@@ -462,7 +462,7 @@ namespace iWms.Form
                 HideBoxScan();
             }
 
-            List<ReviewSummary> summaryList = OutStockReview.GetSpareMaterial(selectOrderNo).ToList();
+            List<ReviewSummary> summaryList = ReviewBusiness.GetSpareMaterial(selectOrderNo).ToList();
             var details = DeliveryBll.GetDeliveryDetails(selectedItem.DeliveryId);
             foreach (Wms_DeliveryDetail item in details)
             {
@@ -568,7 +568,7 @@ namespace iWms.Form
                     {
                         string orderNo = selectItem.OrderNo;
                         var finishedList = summaryList.Where(p => !string.IsNullOrWhiteSpace(p.UPN)).ToList();
-                        if (OutStockReview.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
+                        if (ReviewBusiness.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
                         {
                             "更新数据异常，请重新提交".ShowTips();
                         }
@@ -576,7 +576,7 @@ namespace iWms.Form
                         {
                             "复核完成".ShowTips();
                             //出库完成后，插入mes反馈队列
-                            OutStockReview.InsertOutStockFeedBack(orderNo);
+                            ReviewBusiness.InsertOutStockFeedBack(orderNo);
                             FrmReviewResult frm = new FrmReviewResult(orderNo);
                             frm.ShowDialog();
                             gridViewRecord.DataSource = null;
