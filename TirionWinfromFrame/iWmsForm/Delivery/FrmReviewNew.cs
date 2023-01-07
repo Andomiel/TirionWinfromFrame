@@ -393,18 +393,17 @@ namespace iWms.Form
                 return result;
             }
 
-            if (orderType == (int)OutOrderTypeEnum.JLDCK || orderType == (int)OutOrderTypeEnum.DBCK)
+            //验证物料是否散料测试
+            //if (orderType == (int)OutOrderTypeEnum.JLDCK)//&& record.UPN.StartsWith("96")
+            //{
+            //    FileLog.Log($"当前UPN{{{record.UPN}}}为96开头的物料，不做散料测试");
+            //}
+            //else
+            //{
+            if (orderType == (int)OutOrderTypeEnum.DBCK) //orderType == (int)OutOrderTypeEnum.JLDCK ||
             {
-                //验证物料是否散料测试
-                if (orderType == (int)OutOrderTypeEnum.JLDCK && record.UPN.StartsWith("96"))
-                {
-                    FileLog.Log($"当前UPN{{{record.UPN}}}为96开头的物料，不做散料测试");
-                }
-                else
-                {
-                    result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
-                    result.ApiTitle = $"散料测试失败";
-                }
+                result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
+                result.ApiTitle = $"散料测试失败";
             }
 
             if (!result.Result)
