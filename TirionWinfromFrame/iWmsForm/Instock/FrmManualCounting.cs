@@ -80,7 +80,7 @@ namespace iWms.Form
                 tbScan.Text = string.Empty;
                 return;
             }
-            if (!tbScan.Text.EndsWith("*"))
+            if (ceNotStar.Checked && !tbScan.Text.EndsWith("*"))
             {
                 "二维码结尾不是*号，请确认二维码完整性".ShowTips();
                 //tbScan.Text = string.Empty;
