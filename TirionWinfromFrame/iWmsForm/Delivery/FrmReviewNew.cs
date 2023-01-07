@@ -39,7 +39,7 @@ namespace iWms.Form
             gridViewRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             gridViewSummary.AutoGenerateColumns = false;
-            gridViewSummary.MergeColumnNames.AddRange(new List<string> { "LineNumber", "PartNumber", "NeedQty" });
+            gridViewSummary.MergeColumnNames.AddRange(new List<string> { "LineNumber", "PartNumber", "NeedQty", "ReviewedQuantity" });
             gridViewSummary.MergeFocusNames.AddRange(new List<string> { "LineNumber" });
             gridViewSummary.DataSource = ReviewSummaries;
             gridViewSummary.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
