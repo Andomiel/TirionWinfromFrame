@@ -23,8 +23,8 @@ namespace Business
             if ((!string.IsNullOrWhiteSpace(condition.Upn)) || (!string.IsNullOrWhiteSpace(condition.MaterialNo)))
             {
                 sb.AppendLine(@"SELECT TOP 100 wto.*
-                        FROM Wms_TransferBarcode wtb 
-                        left join Wms_TransferOrder wto on wtb.TransferOrderId = wto.BusinessId 
+                        FROM Wms_TransferBarcode wtb  WITH(NOLock) 
+                        left join Wms_TransferOrder wto  WITH(NOLock) on wtb.TransferOrderId = wto.BusinessId 
                         WHERE 1=1");
                 if (!string.IsNullOrWhiteSpace(condition.Upn))
                 {
@@ -94,14 +94,14 @@ namespace Business
         public static IEnumerable<Wms_TransferBarcode> GetTransferBarcodes(string transferId)
         {
             string sql = $@"SELECT wtb.*
-                        FROM Wms_TransferBarcode wtb WHERE wtb.TransferOrderId = '{transferId}' ";
+                        FROM Wms_TransferBarcode wtb  WITH(NOLock) WHERE wtb.TransferOrderId = '{transferId}' ";
 
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferBarcode>();
         }
 
         public static IEnumerable<Wms_TransferOrder> GetInventoryValidateOrders()
         {
-            string sql = $"SELECT * FROM Wms_TransferOrder wto  WHERE OrderStatus < {(int)TransferOrderStatusEnum.Finished} ";
+            string sql = $"SELECT * FROM Wms_TransferOrder wto   WITH(NOLock) WHERE OrderStatus < {(int)TransferOrderStatusEnum.Finished} ";
 
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferOrder>();
         }
@@ -133,9 +133,9 @@ namespace Business
         protected override IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
             string sql = $@"SELECT wtb.Barcode, wto.SourceAreaId as DeliveryAreaId, wtb.TransferLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wtb.TransferQuantity as DeliveryQuantity, wtb.OrderStatus as BarcodeStatus 
-                        FROM Wms_TransferBarcode wtb 
-                        LEFT JOIN smt_zd_material szm  on wtb.Barcode = szm.ReelID 
-                        LEFT JOIN  Wms_TransferOrder wto on wtb.TransferOrderId = wto.BusinessId 
+                        FROM Wms_TransferBarcode wtb  WITH(NOLock) 
+                        LEFT JOIN smt_zd_material szm   WITH(NOLock) on wtb.Barcode = szm.ReelID 
+                        LEFT JOIN  Wms_TransferOrder wto WITH(NOLock)  on wtb.TransferOrderId = wto.BusinessId 
                         WHERE wtb.TransferOrderId = '{deliveryId}' AND wtb.OrderStatus <= {targetStatus} ;";
 
             return DbHelper.GetDataTable(sql).DataTableToList<DeliveryBarcodeLocation>();

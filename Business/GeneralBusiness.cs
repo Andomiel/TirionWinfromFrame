@@ -23,7 +23,7 @@ namespace Business
             }
 
             string[] currentElements = currentVersion.Split('.');
-            string sql = $@"SELECT LastestVersion  FROM Cfg_GeneralConfig ";
+            string sql = $@"SELECT LastestVersion  FROM Cfg_GeneralConfig  WITH(NOLock) ";
 
             string lastestVersion = Convert.ToString(DbHelper.ExecuteScalar(sql));
 
@@ -57,7 +57,7 @@ namespace Business
 
         public static DataTable GetInventoryBarcode(string barcode)
         {
-            string newBarcodeSql = $"select * from smt_zd_material where ReelID = '{barcode}' and Status < {(int)BarcodeStatusEnum.Delivered}  ";
+            string newBarcodeSql = $"select * from smt_zd_material WITH(NOLock)  where ReelID = '{barcode}' and Status < {(int)BarcodeStatusEnum.Delivered}  ";
             return DbHelper.GetDataTable(newBarcodeSql);
         }
 

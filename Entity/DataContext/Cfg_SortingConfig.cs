@@ -71,7 +71,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, BusinessId, SortingNo, Remark, SortingStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Cfg_SortingConfig WHERE 1=1 ";
+            return "SELECT Id, BusinessId, SortingNo, Remark, SortingStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Cfg_SortingConfig WITH(NOLock)  WHERE 1=1 ";
         }
 
         #endregion

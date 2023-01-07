@@ -27,8 +27,8 @@ namespace Business
             if (areaId != (int)TowerEnum.SortingArea)
             {
                 string existSql = $@"SELECT wia.*, wio.InstockNo 
-                    FROM Wms_InstockArea wia 
-                    left join Wms_InstockOrder wio on wia.InstockId = wio.BusinessId 
+                    FROM Wms_InstockArea wia  WITH(NOLock) 
+                    left join Wms_InstockOrder wio  WITH(NOLock) on wia.InstockId = wio.BusinessId 
                     WHERE  wia.AreaId = {areaId} AND wia.DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
                 var existOrders = DbHelper.GetDataTable(existSql);
                 if (existOrders != null && existOrders.Rows.Count > 0)
@@ -83,16 +83,16 @@ namespace Business
             if (!string.IsNullOrWhiteSpace(upn))
             {
                 sb.AppendLine(@"SELECT wio.*
-                    FROM Wms_InstockBarcode wib  
-                    left join Wms_InstockOrder wio on wib.InstockId = wio.BusinessId WHERE 1=1 ");
+                    FROM Wms_InstockBarcode wib   WITH(NOLock) 
+                    left join Wms_InstockOrder wio  WITH(NOLock) on wib.InstockId = wio.BusinessId WHERE 1=1 ");
                 sb.AppendLine(" AND wib.Barcode = @Barcode ");
                 parameters.Add(new SqlParameter("@Barcode", upn));
             }
             else if (!string.IsNullOrWhiteSpace(materialNo))
             {
                 sb.AppendLine(@"SELECT wio.*
-	                FROM Wms_InstockDetail wid   
-	                left join Wms_InstockOrder wio on wid.InstockId = wio.BusinessId  WHERE 1=1 ");
+	                FROM Wms_InstockDetail wid  WITH(NOLock)   
+	                left join Wms_InstockOrder wio  WITH(NOLock) on wid.InstockId = wio.BusinessId  WHERE 1=1 ");
                 sb.AppendLine(" AND wid.MaterialNo = @MaterialNo ");
                 parameters.Add(new SqlParameter("@MaterialNo", materialNo));
             }
@@ -196,15 +196,15 @@ namespace Business
         public static IEnumerable<InstockAreaDto> GetBoundAreas()
         {
             string sql = $@"SELECT wia.*, wio.InstockNo 
-                    FROM Wms_InstockArea wia 
-                    left join Wms_InstockOrder wio on wia.InstockId = wio.BusinessId 
+                    FROM Wms_InstockArea wia  WITH(NOLock) 
+                    left join Wms_InstockOrder wio WITH(NOLock)  on wia.InstockId = wio.BusinessId 
                     WHERE  wia.DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<InstockAreaDto>();
         }
 
         public static IEnumerable<MaterialCensusDto> CensusMaterials()
         {
-            string sql = @"select Part_Number as MaterialNo,SUM(qty) as TotalCount from smt_zd_material
+            string sql = @"select Part_Number as MaterialNo,SUM(qty) as TotalCount from smt_zd_material WITH(NOLock) 
                 where Status>0 and Status<3
                 group by Part_Number";
             return DbHelper.GetDataTable(sql).DataTableToList<MaterialCensusDto>();

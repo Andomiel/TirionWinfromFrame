@@ -94,7 +94,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, BusinessId, TransferOrderId, Barcode, MaterialNo, TransferQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult, TransferLocation FROM Wms_TransferBarcode WHERE 1=1 ";
+            return "SELECT Id, BusinessId, TransferOrderId, Barcode, MaterialNo, TransferQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, ExecuteResult, TransferLocation FROM Wms_TransferBarcode WITH(NOLock)  WHERE 1=1 ";
         }
 
         #endregion

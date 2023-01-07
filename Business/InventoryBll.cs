@@ -26,8 +26,8 @@ namespace Business
             if ((!string.IsNullOrWhiteSpace(condition.Upn)) || (!string.IsNullOrWhiteSpace(condition.MaterialNo)))
             {
                 sb.AppendLine(@"SELECT wio.*
-                        FROM Wms_InventoryBarcode wib 
-                        LEFT JOIN Wms_InventoryOrder wio ON wib.InventoryOrderId = wio.BusinessId 
+                        FROM Wms_InventoryBarcode wib  WITH(NOLock) 
+                        LEFT JOIN Wms_InventoryOrder wio  WITH(NOLock) ON wib.InventoryOrderId = wio.BusinessId 
                         WHERE 1=1");
                 if (!string.IsNullOrWhiteSpace(condition.Upn))
                 {
@@ -96,14 +96,14 @@ namespace Business
 
         public static IEnumerable<Wms_InventoryOrder> GetAvailableInventoryOrders()
         {
-            string sql = $"SELECT * FROM Wms_InventoryOrder WHERE OrderStatus < {(int)InventoryOrderStatusEnum.Finished} ";
+            string sql = $"SELECT * FROM Wms_InventoryOrder WITH(NOLock)  WHERE OrderStatus < {(int)InventoryOrderStatusEnum.Finished} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InventoryOrder>();
         }
 
         public static IEnumerable<Wms_InventoryBarcode> GetInventoryBarcodes(string inventoryId)
         {
             string sql = $@"SELECT wib.*
-                        FROM Wms_InventoryBarcode wib WHERE wib.InventoryOrderId = '{inventoryId}' ";
+                        FROM Wms_InventoryBarcode wib WITH(NOLock)  WHERE wib.InventoryOrderId = '{inventoryId}' ";
 
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InventoryBarcode>();
         }
@@ -113,7 +113,7 @@ namespace Business
             StringBuilder sb = new StringBuilder($@"SELECT szm.ReelID as Barcode, szm.Part_Number as MaterialNo, szm.SerialNo, szm.WZ_SCCJ as Manufacturer,
                                                      szm.LockTowerNo, szm.LockMachineId, szm.LockLocation, szm.ABSide, szm.DateCode,
                                                      szm.SaveTime, szm.Qty as Quantity, szm.ReelType 
-                                        FROM smt_zd_material szm 
+                                        FROM smt_zd_material szm  WITH(NOLock) 
                                         WHERE szm.Status = {(int)BarcodeStatusEnum.Saved}
                                                  AND szm.isSave = 1 
                                                  AND szm.isTakeCheck = 0
@@ -177,9 +177,9 @@ namespace Business
         protected override IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
             string sql = $@"SELECT wib.Barcode, wio.InventoryArea as DeliveryAreaId, wib.OriginLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wib.OriginQuantity as DeliveryQuantity, wib.OrderStatus  as BarcodeStatus
-                        FROM Wms_InventoryBarcode wib 
-                        left join Wms_InventoryOrder wio on wib.InventoryOrderId = wio.BusinessId 
-                        left join smt_zd_material szm  on wib.Barcode = szm.ReelID 
+                        FROM Wms_InventoryBarcode wib  WITH(NOLock) 
+                        left join Wms_InventoryOrder wio WITH(NOLock)  on wib.InventoryOrderId = wio.BusinessId 
+                        left join smt_zd_material szm  WITH(NOLock)  on wib.Barcode = szm.ReelID 
                         WHERE wib.InventoryOrderId = '{deliveryId}' AND wib.OrderStatus <= {targetStatus} ;";
 
             return DbHelper.GetDataTable(sql).DataTableToList<DeliveryBarcodeLocation>();

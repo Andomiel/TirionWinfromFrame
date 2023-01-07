@@ -32,16 +32,16 @@ namespace Business
                                szm.ReelType,
                                szm.SaveTime,
                                szm.Qty
-                          FROM smt_zd_material szm 
-                     LEFT JOIN smt_TowerMap stm
+                          FROM smt_zd_material szm  WITH(NOLock) 
+                     LEFT JOIN smt_TowerMap stm WITH(NOLock) 
                             ON szm.LockTowerNo = stm.TowerNo
-                     LEFT JOIN smt_bake sb
+                     LEFT JOIN smt_bake sb WITH(NOLock) 
                             ON szm.ReelID = sb.UPN
                          WHERE szm.Qty > 0
                            AND sb.UPN is null
                            AND szm.isTakeCheck = 0 ";
 
-        private static string QueryUpnBaseSql => @" SELECT szm.ReelID,szm.DateCode FROM smt_zd_material szm WHERE 1=1 ";
+        private static string QueryUpnBaseSql => @" SELECT szm.ReelID,szm.DateCode FROM smt_zd_material szm  WITH(NOLock) WHERE 1=1 ";
 
         public static string BuildWhereCondition(MaterialQueryCondition condition)
         {

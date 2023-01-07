@@ -79,7 +79,7 @@ namespace Entity.DataContext
 		/// </summary> 
 		public static string GetSelectSql()
 		{
-			return "SELECT Id, BusinessId, InstockNo, InstockType, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_InstockOrder WHERE 1=1 ";
+			return "SELECT Id, BusinessId, InstockNo, InstockType, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_InstockOrder WITH(NOLock)  WHERE 1=1 ";
 		}
 
 		#endregion

@@ -70,7 +70,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, MaterialNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Cfg_Register WHERE 1=1 ";
+            return "SELECT Id, MaterialNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Cfg_Register WITH(NOLock)  WHERE 1=1 ";
         }
 
         #endregion

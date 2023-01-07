@@ -194,16 +194,16 @@ namespace Business
 
         private static IEnumerable<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryNo)
         {
-            string sql = $@"SELECT wdb.* FROM Wms_DeliveryBarcode wdb 
-              LEFT JOIN Wms_DeliveryOrder wdo ON wdb.DeliveryId = wdo.BusinessId 
+            string sql = $@"SELECT wdb.* FROM Wms_DeliveryBarcode wdb  WITH(NOLock) 
+              LEFT JOIN Wms_DeliveryOrder wdo  WITH(NOLock) ON wdb.DeliveryId = wdo.BusinessId 
               WHERE wdo.DeliveryNo = '{deliveryNo}' ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryBarcode>();
         }
 
         private static IEnumerable<Wms_DeliveryDetail> GetDeliveryDetails(string deliveryNo)
         {
-            string sql = $@"SELECT wdd.* FROM Wms_DeliveryDetail wdd 
-              LEFT JOIN Wms_DeliveryOrder wdo ON wdd.DeliveryId = wdo.BusinessId 
+            string sql = $@"SELECT wdd.* FROM Wms_DeliveryDetail wdd  WITH(NOLock) 
+              LEFT JOIN Wms_DeliveryOrder wdo WITH(NOLock)  ON wdd.DeliveryId = wdo.BusinessId 
               WHERE wdo.DeliveryNo = '{deliveryNo}' ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryDetail>();
         }

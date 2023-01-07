@@ -159,7 +159,7 @@ namespace Business
         private static int GetLightColor(int towerNo, List<int> allColors)
         {
             string sql = $@"SELECT LightColor 
-                  FROM Wms_LightColorRecord wlcr WHERE RecordStatus ={(int)LightRecordStatusEnum.LightOn} AND LightArea = {towerNo}; ";
+                  FROM Wms_LightColorRecord wlcr WITH(NOLock) WHERE RecordStatus ={(int)LightRecordStatusEnum.LightOn} AND LightArea = {towerNo}; ";
 
             DataTable dt = DbHelper.GetDataTable(sql);
             if (dt != null && dt.Rows.Count > 0)
@@ -385,7 +385,7 @@ namespace Business
         private static int GetLightSerialNo(string deliveryId, int areaId)
         {
             //AND RecordStatus = {(int)LightRecordStatusEnum.LightOn}
-            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
+            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WITH(NOLock) WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
             return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), 0);
         }
 

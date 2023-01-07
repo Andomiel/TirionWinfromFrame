@@ -319,7 +319,7 @@ namespace Business
 
         public static DataTable GetAllMaterial()
         {
-            string sql = "select * from smt_zd_material where isTakeCheck=0 ";
+            string sql = "select * from smt_zd_material WITH(NOLock)  where isTakeCheck=0 ";
             return DbHelper.GetDataTable(sql);
         }
 

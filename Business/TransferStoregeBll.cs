@@ -17,10 +17,10 @@ namespace Business
         private static string DetailSql => $@"SELECT szm.ReelID,szm.Part_Number as PartNumber, szm.SerialNo, szm.WZ_SCCJ as Manufacturer,
                                                      szm.LockTowerNo,szm.LockMachineId,szm.LockLocation,szm.ABSide,szm.DateCode,
                                                      szm.SaveTime,szm.Qty,szm.ReelType 
-                                                FROM smt_zd_material szm 
+                                                FROM smt_zd_material szm  WITH(NOLock) 
 	                                       LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen) smf 
                                                   ON szm.ReelID = smf.UPN
-                                           LEFT JOIN smt_bake sb
+                                           LEFT JOIN smt_bake sb WITH(NOLock) 
                                                   ON szm.ReelID = sb.UPN
                                                WHERE szm.isSave = 1 
                                                  AND szm.Qty > 0
@@ -135,7 +135,7 @@ namespace Business
             string sql = $@"SELECT szm.ReelID,szm.Part_Number as PartNumber, szm.SerialNo, szm.WZ_SCCJ as Manufacturer,
                                                      szm.LockTowerNo,'' as Tower,szm.LockMachineId,szm.LockLocation,szm.ABSide,szm.DateCode,
                                                      szm.SaveTime,szm.Qty,szm.ReelType 
-                                                FROM smt_zd_material szm  where ReelID in ( {string.Join(",", barcodes.Select(p => $"'{p}'"))} )";
+                                                FROM smt_zd_material szm  WITH(NOLock)  where ReelID in ( {string.Join(",", barcodes.Select(p => $"'{p}'"))} )";
 
             return DbHelper.GetDataTable(sql).DataTableToList<TransferQueryResult>();
         }
