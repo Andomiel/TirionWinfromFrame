@@ -79,7 +79,9 @@ namespace iWms.Form
                 CompareResults.Add(new WMSInventory()
                 {
                     Difference = (-item.TotalCount).ToString(),
-                    SKU = item.MaterialNo
+                    SKU = item.MaterialNo,
+                    IWMS_QTY = item.TotalCount.ToString(),
+                    QTY = "0",
                 });
             }
         }
