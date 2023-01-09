@@ -588,6 +588,7 @@ namespace iWms.Form
             // colReviewed
             // 
             this.colReviewed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colReviewed.DataPropertyName = "ReviewedQuantity";
             this.colReviewed.HeaderText = "已复核数量";
             this.colReviewed.MinimumWidth = 100;
             this.colReviewed.Name = "colReviewed";

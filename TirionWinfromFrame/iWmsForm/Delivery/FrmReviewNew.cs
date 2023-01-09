@@ -295,6 +295,7 @@ namespace iWms.Form
                 matchRow.Match = (int)PrepareReviewMatchEnum.Done;
                 matchRow.RealQty = reviewRecord.Qty;
                 matchRow.ContainerNo = txtBoxScan.Text.Trim();
+                matchRow.ReviewedQuantity += matchRow.RealQty;
 
                 ReviewBusiness.ReviewBarcode(SelectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account, matchRow);
             }
@@ -326,6 +327,7 @@ namespace iWms.Form
                 newReview.NeedQty = currentMaterial.NeedQty;
                 newReview.LineNumber = currentMaterial.LineNumber;
                 newReview.SlotNo = currentMaterial.SlotNo;
+                newReview.ReviewedQuantity = currentMaterial.ReviewedQuantity + newReview.RealQty;
 
                 var removeItems = ReviewSummaries.Where(p => p.PartNumber == newReview.PartNumber && p.LineNumber == newReview.LineNumber && string.IsNullOrWhiteSpace(p.UPN)).ToList();
                 foreach (var item in removeItems)
@@ -333,7 +335,13 @@ namespace iWms.Form
                     ReviewSummaries.Remove(item);
                 }
                 ReviewSummaries.Add(newReview);
+
                 ReviewBusiness.ReviewBarcode(SelectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account, newReview);
+
+                foreach (var item in needMaterials)
+                {
+                    item.ReviewedQuantity = newReview.ReviewedQuantity;
+                }
             }
             AddBindRecord(reviewRecord);
             ResetBarcodeText();
