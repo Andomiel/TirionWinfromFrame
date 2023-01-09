@@ -338,9 +338,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.label3, 4, 0);
             this.tlpConditions.Controls.Add(this.label2, 2, 0);
             this.tlpConditions.Controls.Add(this.label1, 0, 0);
-            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 2);
-            this.tlpConditions.Controls.Add(this.btnFinish, 11, 2);
-            this.tlpConditions.Controls.Add(this.btnExport, 11, 0);
+            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 1);
             this.tlpConditions.Controls.Add(this.tbOrderNo, 1, 0);
             this.tlpConditions.Controls.Add(this.cbOrderType, 3, 0);
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
@@ -348,16 +346,18 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 1);
             this.tlpConditions.Controls.Add(this.tbOperator, 5, 2);
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
-            this.tlpConditions.Controls.Add(this.btnClear, 9, 0);
+            this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
             this.tlpConditions.Controls.Add(this.btnCancel, 13, 2);
-            this.tlpConditions.Controls.Add(this.btnCalculate, 7, 2);
-            this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
-            this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
-            this.tlpConditions.Controls.Add(this.btnLack, 13, 0);
             this.tlpConditions.Controls.Add(this.btnClearAlarm, 18, 1);
             this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
             this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
+            this.tlpConditions.Controls.Add(this.btnExport, 7, 2);
+            this.tlpConditions.Controls.Add(this.btnCalculate, 9, 0);
+            this.tlpConditions.Controls.Add(this.btnFinish, 9, 2);
+            this.tlpConditions.Controls.Add(this.btnSpecial, 11, 2);
+            this.tlpConditions.Controls.Add(this.btnReset, 18, 2);
+            this.tlpConditions.Controls.Add(this.btnLack, 13, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -471,7 +471,7 @@ namespace iWms.Form
             // btnOutstock
             // 
             this.btnOutstock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOutstock.Location = new System.Drawing.Point(810, 73);
+            this.btnOutstock.Location = new System.Drawing.Point(810, 38);
             this.btnOutstock.Name = "btnOutstock";
             this.btnOutstock.Size = new System.Drawing.Size(74, 29);
             this.btnOutstock.TabIndex = 9;
@@ -481,7 +481,7 @@ namespace iWms.Form
             // btnFinish
             // 
             this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFinish.Location = new System.Drawing.Point(910, 73);
+            this.btnFinish.Location = new System.Drawing.Point(810, 73);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(74, 29);
             this.btnFinish.TabIndex = 12;
@@ -491,7 +491,7 @@ namespace iWms.Form
             // btnExport
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExport.Location = new System.Drawing.Point(910, 3);
+            this.btnExport.Location = new System.Drawing.Point(710, 73);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(74, 29);
             this.btnExport.TabIndex = 13;
@@ -559,7 +559,7 @@ namespace iWms.Form
             // btnClear
             // 
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Location = new System.Drawing.Point(810, 3);
+            this.btnClear.Location = new System.Drawing.Point(710, 38);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 29);
             this.btnClear.TabIndex = 24;
@@ -589,7 +589,7 @@ namespace iWms.Form
             // btnCalculate
             // 
             this.btnCalculate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCalculate.Location = new System.Drawing.Point(710, 73);
+            this.btnCalculate.Location = new System.Drawing.Point(810, 3);
             this.btnCalculate.Name = "btnCalculate";
             this.btnCalculate.Size = new System.Drawing.Size(74, 29);
             this.btnCalculate.TabIndex = 26;
@@ -599,7 +599,7 @@ namespace iWms.Form
             // btnSpecial
             // 
             this.btnSpecial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSpecial.Location = new System.Drawing.Point(910, 38);
+            this.btnSpecial.Location = new System.Drawing.Point(910, 73);
             this.btnSpecial.Name = "btnSpecial";
             this.btnSpecial.Size = new System.Drawing.Size(74, 29);
             this.btnSpecial.TabIndex = 27;
@@ -609,7 +609,7 @@ namespace iWms.Form
             // btnReset
             // 
             this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.Location = new System.Drawing.Point(1010, 38);
+            this.btnReset.Location = new System.Drawing.Point(1249, 73);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(74, 29);
             this.btnReset.TabIndex = 28;
@@ -619,7 +619,7 @@ namespace iWms.Form
             // btnLack
             // 
             this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLack.Location = new System.Drawing.Point(1010, 3);
+            this.btnLack.Location = new System.Drawing.Point(1010, 38);
             this.btnLack.Name = "btnLack";
             this.btnLack.Size = new System.Drawing.Size(74, 29);
             this.btnLack.TabIndex = 29;
