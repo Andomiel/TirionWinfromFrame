@@ -51,7 +51,7 @@ namespace iWms.Form
             string reason = tbReason.Text.Trim();
             if (!string.IsNullOrWhiteSpace(reason))
             {
-                list = list.Where(p => p.Remark.Contains(reason)).ToList();
+                list = list.Where(p => p.Remark.Contains(reason) || p.FrozenNo == reason).ToList();
             }
             dataGridViewPolicy.DataSource = new BindingList<PolicyView>(list);
         }
