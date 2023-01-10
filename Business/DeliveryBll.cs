@@ -4,6 +4,7 @@ using Entity.Enums;
 using Entity.Enums.General;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -289,24 +290,28 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
 
         protected override int GetSortNo(int deliveryType)
         {
-            string sql = $@" SELECT TOP 1 wdo.SortingId FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering}; ";
-            int currentNo = TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), -1);
-            if (deliveryType == (int)DeliveryOrderTypeEnum.FirstSet)
-            {
-                if (currentNo == (int)SortNoEnum.FirstSet)
-                {
-                    throw new OppoCoreException("当前工单为首盘料工单，首盘料出料口当前被占用，无法出库，请等待");
-                }
-                return (int)SortNoEnum.FirstSet;
-            }
-            if (currentNo == (int)SortNoEnum.FreeFirst)
-            {
-                return (int)SortNoEnum.FreeSecond;
-            }
-            else
+            string sql = $@" SELECT wdo.SortingId FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering} ";
+            var currentSortNos = DbHelper.GetDataTable(sql);
+            if (currentSortNos == null || currentSortNos.Rows.Count == 0)
             {
                 return (int)SortNoEnum.FreeFirst;
             }
+            var allSortNos = new List<int>() { (int)SortNoEnum.FirstSet, (int)SortNoEnum.FreeSecond, (int)SortNoEnum.FreeFirst };
+
+            foreach (DataRow item in currentSortNos.Rows)
+            {
+                string sortNo = Convert.ToString(item["SortingId"]);
+                if (string.IsNullOrWhiteSpace(sortNo))
+                {
+                    continue;
+                }
+                allSortNos.Remove(Convert.ToInt32(sortNo));
+            }
+            if (allSortNos.Count == 0)
+            {
+                throw new OppoCoreException("所有出料口当前都被占用，无法出库，请等待");
+            }
+            return allSortNos.First();
         }
 
 

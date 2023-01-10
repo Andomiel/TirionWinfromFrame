@@ -465,9 +465,10 @@ namespace iWms.Form
 
                     new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, sortDiag.SortNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivering;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
                     "出库任务下达成功！".ShowTips();
+
+                    GetOrders();
                 }
             }
             catch (Exception ex)
@@ -497,14 +498,14 @@ namespace iWms.Form
                     continue;
                 }
                 var currentRecords = recordGroup.FirstOrDefault(p => p.Key == item);
-                if (currentRecords == null || currentRecords.Count() < 2)
+                if (currentRecords == null || currentRecords.Count() < 3)
                 {
                     continue;
                 }
 
                 string area = EnumHelper.GetDescription(typeof(TowerEnum), item);
                 List<string> orderNos = currentRecords.Select(p => p.OrderNo).Distinct().ToList();
-                throw new OppoCoreException($"当前已有两个出库单据({string.Join(",", orderNos)})在库区{area}中执行，请等待");
+                throw new OppoCoreException($"当前已有3个出库单据({string.Join(",", orderNos)})在库区{area}中执行，请等待");
             }
         }
 
@@ -566,7 +567,6 @@ namespace iWms.Form
 
                     new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
                     $"出库单:{selectedOrder.DeliveryNo}捡料完成".ShowTips();
                 }
