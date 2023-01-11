@@ -98,6 +98,7 @@ namespace iWms.Form
             {
                 switch (item.AreaId)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //ResetCheckBoxStatus(item, cbSorting);
                         break;

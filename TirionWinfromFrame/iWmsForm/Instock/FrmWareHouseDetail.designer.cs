@@ -61,6 +61,7 @@ namespace iWms.Form
             this.btnForceFinish = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLayout = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbPallet = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridWMS)).BeginInit();
@@ -132,6 +133,7 @@ namespace iWms.Form
             this.flowLayoutPanel1.Controls.Add(this.cbAsrs);
             this.flowLayoutPanel1.Controls.Add(this.cbLightShelf);
             this.flowLayoutPanel1.Controls.Add(this.cbReform);
+            this.flowLayoutPanel1.Controls.Add(this.cbPallet);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(83, 41);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 33);
@@ -429,6 +431,17 @@ namespace iWms.Form
             this.tableLayoutPanel1.Size = new System.Drawing.Size(749, 35);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // cbPallet
+            // 
+            this.cbPallet.AutoSize = true;
+            this.cbPallet.Location = new System.Drawing.Point(299, 3);
+            this.cbPallet.Name = "cbPallet";
+            this.cbPallet.Size = new System.Drawing.Size(62, 18);
+            this.cbPallet.TabIndex = 17;
+            this.cbPallet.Text = "栈板区";
+            this.cbPallet.UseVisualStyleBackColor = true;
+            this.cbPallet.CheckedChanged += new System.EventHandler(this.cbReform_CheckedChanged);
+            // 
             // FrmWareHouseDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -487,5 +500,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colActualCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private DevExpress.XtraEditors.SimpleButton btnExchange;
+        private System.Windows.Forms.CheckBox cbPallet;
     }
 }

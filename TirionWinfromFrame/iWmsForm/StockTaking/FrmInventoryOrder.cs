@@ -294,7 +294,7 @@ namespace iWms.Form
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "巷道：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildAbSide();
+                    cbShelfSide.DataSource = BuildComboxHelper.AbSide;
                     cbType.Enabled = true;
                     btnSyncLightShelf.Visible = false;
                     break;
@@ -302,15 +302,16 @@ namespace iWms.Form
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "料架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildLightShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
                     SetTypeComboxToDefault();
 
                     btnSyncLightShelf.Visible = true;
                     break;
                 case 3:
-                    lblShelfSide.Visible = false;
-                    cbShelfSide.Visible = false;
-                    cbShelfSide.SelectedIndex = -1;
+                    lblShelfSide.Visible = true;
+                    lblShelfSide.Text = "栈板：";
+                    cbShelfSide.Visible = true;
+                    cbShelfSide.DataSource = BuildComboxHelper.PalletAreas;
                     SetTypeComboxToDefault();
                     btnSyncLightShelf.Visible = false;
                     break;
@@ -318,7 +319,7 @@ namespace iWms.Form
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildTransformationShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.TransformationShelf;
                     SetTypeComboxToDefault();
                     btnSyncLightShelf.Visible = false;
                     break;

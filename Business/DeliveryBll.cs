@@ -170,6 +170,7 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
                 {
                     switch (item.Key)
                     {
+                        case (int)TowerEnum.PalletArea:
                         case (int)TowerEnum.SortingArea:
                             //do nothing
                             break;

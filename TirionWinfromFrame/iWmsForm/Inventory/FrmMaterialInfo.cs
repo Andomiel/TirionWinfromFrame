@@ -138,6 +138,7 @@ namespace iWms.Form
             //巷道、货架
             switch (condition.TowerNo)
             {
+                case (int)TowerEnum.PalletArea:
                 case (int)TowerEnum.SortingArea:
                 default:
                     break;
@@ -307,24 +308,25 @@ namespace iWms.Form
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "巷道：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildAbSide();
+                    cbShelfSide.DataSource = BuildComboxHelper.AbSide;
                     break;
                 case 2:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildLightShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
                     break;
                 case 3:
-                    lblShelfSide.Visible = false;
-                    cbShelfSide.Visible = false;
-                    cbShelfSide.SelectedIndex = -1;
+                    lblShelfSide.Visible = true;
+                    lblShelfSide.Text = "栈板：";
+                    cbShelfSide.Visible = true;
+                    cbShelfSide.DataSource = BuildComboxHelper.PalletAreas;
                     break;
                 case 4:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildTransformationShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.TransformationShelf;
                     break;
                 default:
                     lblShelfSide.Visible = false;
