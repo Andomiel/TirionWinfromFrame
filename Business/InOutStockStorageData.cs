@@ -117,7 +117,7 @@ namespace Business
             int quantity = TypeParse.StrToInt(row["数量"], 0);
             barcode.Quantity = quantity;
 
-            return $@"DELETE FROM smt_zd_material WHERE ReelID = '{barcode.Barcode}' AND isTake = 1;
+            return $@"DELETE FROM smt_zd_material WHERE ReelID = '{barcode.Barcode}';
                 INSERT INTO smt_zd_material
                 (ReelID, Part_Number, DateCode, lot, Qty, Work_Order_No, FactoryCode, SaveTime, LockTowerNo, isSave, isTake, BATCH, BatchNo, Status, WZ_SCCJ, MSD, InStockOrderNo, MinPacking, CameraString, ReelType, ReelSize, SerialNo, QRCode, BakeState)
                 VALUES('{barcode.Barcode}', '{barcode.MaterialNo}', '{barcode.Dc}', '{barcode.Lot}', {barcode.Quantity}, '', '{barcode.Supplier}', getdate(), {(int)TowerEnum.SortingArea}, 1, 0, '{barcode.Lot}', '{row["流水号"]}', {(int)BarcodeStatusEnum.Saved}, '{barcode.Supplier}', '{barcode.Msd}', '{instockOrderNo}', {barcode.MiniPacking}, '{barcode.Qrcode}', '{barcode.ReelType}', '7', '{row["流水号"]}', '{barcode.Qrcode}', 0);";
