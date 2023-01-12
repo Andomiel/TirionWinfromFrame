@@ -418,5 +418,63 @@ namespace iWms.Form
                 SplashScreenManager.CloseForm();
             }
         }
+
+        private void GridIWMS_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {    //右键弹出菜单
+                if (e.Button != MouseButtons.Right)
+                {
+                    return;
+                }
+                //容许用户添加行时，最后一行为未实际添加的行，所以不需考虑弹出菜单
+                if (e.RowIndex < 0 || (gridIWMS.AllowUserToAddRows && e.RowIndex == gridIWMS.Rows.Count - 1))
+                {
+                    return;
+                }
+                //只有upn上允许弹窗
+                if (e.ColumnIndex != 3)
+                {
+                    return;
+                }
+                gridIWMS.ClearSelection();
+                gridIWMS.Rows[e.RowIndex].Selected = true;
+                //创建快捷菜单
+                ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+                //删除当前行
+                ToolStripMenuItem tsmiRemoveCurrentRow = new ToolStripMenuItem("删除本行");
+                tsmiRemoveCurrentRow.Click += (obj, arg) =>
+                {
+                    var row = gridIWMS.Rows[e.RowIndex];
+                    var record = row.DataBoundItem as InstockBarcodeDto;
+                    if (record.InnerQty > 0)
+                    {
+                        if ("当前条目不是数量异常条目，确认删除？".ShowYesNoAndTips() != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                    }
+
+                    WareHouseBLL.ClearReceivedBarcode(CurrentOrder.BusinessId, record.Upn);
+                    WorkOrderBarcodes.Remove(record);
+                };
+                contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
+
+                ////清空全部数据
+                //ToolStripMenuItem tsmiRemoveAll = new ToolStripMenuItem("清空数据");
+                //tsmiRemoveAll.Click += (obj, arg) =>
+                //{
+                //    gridViewSummary.Rows.Clear();
+                //};
+                //contextMenuStrip.Items.Add(tsmiRemoveAll);
+
+                contextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
     }
 }

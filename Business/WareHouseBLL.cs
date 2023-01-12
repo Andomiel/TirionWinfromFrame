@@ -174,6 +174,15 @@ namespace Business
             return DbHelper.GetDataTable(sb.ToString()).DataTableToList<Wms_InstockBarcode>();
         }
 
+        public static void ClearReceivedBarcode(string instockId, string barcode)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"DELETE FROM Wms_InstockBarcode WHERE InstockId ='{instockId}' AND Barcode ='{barcode}';");
+            sb.AppendLine($"DELETE FROM smt_zd_material WHERE ReelID = '{barcode}'; ");
+
+            DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
+        }
+
         public static bool UpdateOrderRemark(string orderNo, string remark, string operater)
         {
             string sql = "UPDATE Wms_InstockOrder SET LastUpdateUser = @LastUpdateUser, LastUpdateTime = GETDATE(), Remark =@Remark WHERE InstockNo =@InstockNo ";

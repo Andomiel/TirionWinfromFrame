@@ -361,6 +361,7 @@ namespace iWms.Form
             this.gridIWMS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.gridIWMS.Size = new System.Drawing.Size(743, 712);
             this.gridIWMS.TabIndex = 12;
+            this.gridIWMS.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridIWMS_CellMouseClick);
             // 
             // ReelID
             // 
