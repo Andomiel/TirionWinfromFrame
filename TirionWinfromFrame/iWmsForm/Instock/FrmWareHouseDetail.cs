@@ -211,11 +211,26 @@ namespace iWms.Form
 
         private void BtnFinish_Click(object sender, EventArgs e)
         {
+            var unrefreshBarcodes = WareHouseBLL.GetUnrefreshQuantityBarcodes(CurrentOrder.BusinessId);
+            if (unrefreshBarcodes != null && unrefreshBarcodes.Any())
+            {
+                "当前单据存在收料UPN的盘内数量小于0，不可完成".ShowTips();
+                return;
+            }
+
+            if (WorkOrderDetails.Any(p => p.ReceiveStatusDisplay == "超收"))
+            {
+                "当前单据存在超收项，不可完成".ShowTips();
+                return;
+            }
+
             bool isShowWarn = WorkOrderDetails.Any(p => p.ReceiveStatusDisplay.Equals("未入库") || p.ReceiveStatusDisplay.Equals("短收"));
             if (isShowWarn)
             {
-                "当前单据存在短收项，不可完成".ShowTips();
-                return;
+                if ("当前单据存在短收项，确定完成入库？".ShowYesNoAndTips() != DialogResult.Yes)
+                {
+                    return;
+                }
             }
 
             //bool isOk;

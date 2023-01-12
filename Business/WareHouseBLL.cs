@@ -164,6 +164,16 @@ namespace Business
             return details;
         }
 
+        public static IEnumerable<Wms_InstockBarcode> GetUnrefreshQuantityBarcodes(string instockId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_InstockBarcode.GetSelectSql());
+            sb.AppendLine($" AND InstockId = '{instockId}' ");
+            sb.AppendLine($" AND InstockQuantity <= 0 ");
+
+            return DbHelper.GetDataTable(sb.ToString()).DataTableToList<Wms_InstockBarcode>();
+        }
+
         public static bool UpdateOrderRemark(string orderNo, string remark, string operater)
         {
             string sql = "UPDATE Wms_InstockOrder SET LastUpdateUser = @LastUpdateUser, LastUpdateTime = GETDATE(), Remark =@Remark WHERE InstockNo =@InstockNo ";
