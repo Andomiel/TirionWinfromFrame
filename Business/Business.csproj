@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BalanceBusiness.cs" />
     <Compile Include="BaseDeliveryBll.cs" />
     <Compile Include="CallMesWmsApiBll.cs" />
     <Compile Include="DeliveryBll.cs" />

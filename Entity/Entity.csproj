@@ -56,6 +56,8 @@
     <Compile Include="DataContext\SMTPrepareMaterial.cs" />
     <Compile Include="DataContext\SMTZDMaterial.cs" />
     <Compile Include="DataContext\WmsLog.cs" />
+    <Compile Include="DataContext\Wms_BalanceBarcode.cs" />
+    <Compile Include="DataContext\Wms_BalanceOrder.cs" />
     <Compile Include="DataContext\Wms_DeliveryBarcode.cs" />
     <Compile Include="DataContext\Wms_DeliveryDetail.cs" />
     <Compile Include="DataContext\Wms_DeliveryOrder.cs" />
@@ -69,6 +71,11 @@
     <Compile Include="DataContext\Wms_LightColorRecord.cs" />
     <Compile Include="DataContext\Wms_TransferBarcode.cs" />
     <Compile Include="DataContext\Wms_TransferOrder.cs" />
+    <Compile Include="Dto\Balance\BalanceBarcodeDto.cs" />
+    <Compile Include="Dto\Balance\BalanceMaterialDto.cs" />
+    <Compile Include="Dto\Balance\BalanceOrderDto.cs" />
+    <Compile Include="Dto\Balance\BalanceOrderMaterialDto.cs" />
+    <Compile Include="Dto\Balance\BalanceReportDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryBarcodeDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryDetailDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryOrderDto.cs" />
@@ -92,6 +99,8 @@
     <Compile Include="Dto\Transfer\TransferBarcodeDto.cs" />
     <Compile Include="Dto\Transfer\TransferOrderDto.cs" />
     <Compile Include="Common\EnumHelper.cs" />
+    <Compile Include="Enums\Balance\BalanceBarcodeStatusEnum.cs" />
+    <Compile Include="Enums\Balance\BalanceOrderStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryDetailStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryOrderStatusEnum.cs" />

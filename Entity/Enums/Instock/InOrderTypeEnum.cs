@@ -69,5 +69,9 @@ namespace Entity.Enums
         /// </summary>
         [Description("转移入库")]
         ZYRK = 17,
+        /// 手工点料
+        /// </summary>
+        [Description("手工点料")]
+        ManualCount = 99,
     }
 }
