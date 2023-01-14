@@ -349,7 +349,7 @@ namespace iWms.Form
             if (orderType != (int)OutOrderTypeEnum.FLCK)
             {
                 //UPN同步接口
-                result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text);
+                result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text, quantity);
             }
             else
             {

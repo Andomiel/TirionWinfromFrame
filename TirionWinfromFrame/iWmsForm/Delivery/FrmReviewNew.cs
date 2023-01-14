@@ -366,7 +366,7 @@ namespace iWms.Form
             if (orderType != (int)OutOrderTypeEnum.FLCK)
             {
                 //UPN同步接口
-                result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text);
+                result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text, record.Qty);
                 result.ApiTitle = $"物料查询校验失败";
             }
             else
