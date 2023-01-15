@@ -31,7 +31,7 @@ namespace iWms.Form
         public int pageSize = 10;      //每页记录数
         public int recordCount = 0;    //总记录数
         public int pageCount = 0;      //总页数
-        public int currentPage = 0;    //当前页
+        public int currentPage = 1;    //当前页
 
         private Timer statusTimer;
 
@@ -85,12 +85,12 @@ namespace iWms.Form
 
             ReleaseTimer();
 
-            statusTimer = new Timer
-            {
-                Interval = 30 * 1000
-            };
-            statusTimer.Tick += StatusTimer_Tick;
-            statusTimer.Start();
+            //statusTimer = new Timer
+            //{
+            //    Interval = 30 * 1000
+            //};
+            //statusTimer.Tick += StatusTimer_Tick;
+            //statusTimer.Start();
 
             GetOrders();
         }
@@ -272,18 +272,14 @@ namespace iWms.Form
 
             foreach (var item in orders)
             {
-                PagedWorkOrders.Add(item.Adapt<DeliveryOrderDto>());
+                PagedWorkOrders.Add(item);
             }
 
-            if (PagedWorkOrders.Count < pageSize)
+            recordCount = 0;
+            if (orders != null && orders.Any())
             {
-                recordCount = PagedWorkOrders.Count;
+                recordCount = orders.First().TotalCount;
             }
-            else
-            {
-                recordCount = DeliveryBll.GetDeliveryOrderCount(condition);
-            }
-
             pageCount = (recordCount / pageSize);
             if (recordCount % pageSize > 0)
             {
@@ -729,25 +725,25 @@ namespace iWms.Form
         private void BtnFrist_ButtonClick(object sender, EventArgs e)
         {
             currentPage = 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnPre_ButtonClick(object sender, EventArgs e)
         {
             currentPage -= 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnNext_ButtonClick(object sender, EventArgs e)
         {
             currentPage += 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnLast_ButtonClick(object sender, EventArgs e)
         {
             currentPage = pageCount;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private readonly object lockCancelObj = new object();

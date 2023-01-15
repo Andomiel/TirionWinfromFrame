@@ -8,6 +8,8 @@ namespace Entity.Dto.Delivery
 
         public bool IsSelected { get; set; } = false;
 
+        public int TotalCount { get; set; } = 0;
+
         /// <summary>
         /// 出库单业务Id
         /// </summary>
@@ -17,11 +19,6 @@ namespace Entity.Dto.Delivery
         /// 出库单号
         /// </summary>
         public string DeliveryNo { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 产品料号
-        /// </summary>
-        public string ProductNo { get; set; } = string.Empty;
 
         /// <summary>
         /// 产线(目的地)
@@ -55,29 +52,14 @@ namespace Entity.Dto.Delivery
         public string OrderStatusDisplay => EnumHelper.GetDescription(typeof(DeliveryOrderStatusEnum), OrderStatus);
 
         /// <summary>
-        /// 备注
-        /// </summary>
-        public string Remark { get; set; } = string.Empty;
-
-        /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; } = new DateTime(1900, 1, 1);
 
         /// <summary>
-        /// 创建人
-        /// </summary>
-        public string CreateUser { get; set; } = string.Empty;
-
-        /// <summary>
         /// 最后更新时间
         /// </summary>
         public DateTime LastUpdateTime { get; set; } = new DateTime(1900, 1, 1);
-
-        /// <summary>
-        /// 最后更新人
-        /// </summary>
-        public string LastUpdateUser { get; set; } = string.Empty;
 
         public string OperationText => OrderStatus == (int)DeliveryOrderStatusEnum.Delivered ? "复核" : string.Empty;
     }

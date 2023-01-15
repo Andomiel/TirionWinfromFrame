@@ -1,5 +1,6 @@
 ﻿using DataBase;
 using Entity.DataContext;
+using Entity.Dto.Delivery;
 using Entity.Enums;
 using Entity.Enums.General;
 using System;
@@ -16,55 +17,47 @@ namespace Business
     {
         protected override LightRecordTypeEnum OrderType => LightRecordTypeEnum.Delivery;
 
-        public static IEnumerable<Wms_DeliveryOrder> GetDeliveryOrders(DeliveryQueryCondition condition, int startRow, int pageSize)
+        public static IEnumerable<DeliveryOrderDto> GetDeliveryOrders(DeliveryQueryCondition condition, int startRow, int endRow)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
-
-            sb.AppendLine(BuildMainQuerySql(condition, parameters, false));
-            sb.AppendLine("	ORDER BY wdo.CreateTime DESC  ");
-            sb.AppendLine($@"OFFSET {startRow} ROWS 
-FETCH NEXT {pageSize} ROWS ONLY ");
+            sb.AppendLine($@"With Orders AS
+              (
+            SELECT
+                ROW_NUMBER() OVER(ORDER BY wdo.CreateTime DESC) RowNumber,  
+                COUNT(1) OVER() AS TotalCount,
+                wdo.* 
+             {BuildMainQuerySql(condition, parameters)}
+              ) 
+            SELECT * FROM Orders
+             WHERE Orders.RowNumber > {startRow} AND Orders.RowNumber <= {endRow} ");
 
             var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
 
-            return orders.DataTableToList<Wms_DeliveryOrder>();
+            return orders.DataTableToList<DeliveryOrderDto>();
         }
 
-        public static int GetDeliveryOrderCount(DeliveryQueryCondition condition)
-        {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            string sql = BuildMainQuerySql(condition, parameters, true);
-
-            return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql, parameters.ToArray())), 0);
-        }
-
-        private static string BuildMainQuerySql(DeliveryQueryCondition condition, List<SqlParameter> parameters, bool isCount)
+        private static string BuildMainQuerySql(DeliveryQueryCondition condition, List<SqlParameter> parameters)
         {
             StringBuilder sb = new StringBuilder();
 
-            string selectString = isCount ? " Count(1) " : " wdo.* ";
-
             if (!string.IsNullOrWhiteSpace(condition.Upn))
             {
-                sb.AppendLine($@"SELECT {selectString}
-                        FROM Wms_DeliveryBarcode wdb WITH(NOLock) 
+                sb.AppendLine($@" FROM Wms_DeliveryBarcode wdb WITH(NOLock) 
                         left join Wms_DeliveryOrder wdo WITH(NOLock) on wdb.DeliveryId = wdo.BusinessId 
                         WHERE wdb.Barcode  = @Barcode ");
                 parameters.Add(new SqlParameter("@Barcode", condition.Upn));
             }
             else if (!string.IsNullOrWhiteSpace(condition.MaterialNo))
             {
-                sb.AppendLine($@"SELECT {selectString}
-                        FROM Wms_DeliveryDetail wdd  WITH(NOLock) 
+                sb.AppendLine($@" FROM Wms_DeliveryDetail wdd  WITH(NOLock) 
                         left join Wms_DeliveryOrder wdo  WITH(NOLock) on wdd.DeliveryId = wdo.BusinessId 
                         WHERE wdd.MaterialNo = @MaterialNo ");
                 parameters.Add(new SqlParameter("@MaterialNo", condition.MaterialNo));
             }
             else
             {
-                sb.AppendLine($@" SELECT {selectString}
-                        FROM Wms_DeliveryOrder wdo WITH(NOLock)  WHERE 1=1 ");
+                sb.AppendLine($@" FROM Wms_DeliveryOrder wdo WITH(NOLock)  WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
             {
