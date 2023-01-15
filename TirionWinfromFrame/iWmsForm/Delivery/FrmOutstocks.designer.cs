@@ -62,8 +62,6 @@ namespace iWms.Form
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOutstock = new DevExpress.XtraEditors.SimpleButton();
-            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.tbOrderNo = new System.Windows.Forms.TextBox();
             this.cbOrderType = new System.Windows.Forms.ComboBox();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
@@ -74,13 +72,15 @@ namespace iWms.Form
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
-            this.btnSpecial = new DevExpress.XtraEditors.SimpleButton();
-            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
-            this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
             this.dtCreate = new DevExpress.XtraEditors.DateEdit();
             this.dtFinish = new DevExpress.XtraEditors.DateEdit();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSpecial = new DevExpress.XtraEditors.SimpleButton();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -478,26 +478,6 @@ namespace iWms.Form
             this.btnOutstock.Text = "执行出库";
             this.btnOutstock.Click += new System.EventHandler(this.BtnOutstock_Click);
             // 
-            // btnFinish
-            // 
-            this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFinish.Location = new System.Drawing.Point(810, 73);
-            this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(74, 29);
-            this.btnFinish.TabIndex = 12;
-            this.btnFinish.Text = "拣料完成";
-            this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExport.Location = new System.Drawing.Point(710, 73);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(74, 29);
-            this.btnExport.TabIndex = 13;
-            this.btnExport.Text = "导出明细";
-            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
-            // 
             // tbOrderNo
             // 
             this.tbOrderNo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -586,46 +566,6 @@ namespace iWms.Form
             this.btnCancel.Text = "取消出库";
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnCalculate
-            // 
-            this.btnCalculate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCalculate.Location = new System.Drawing.Point(810, 3);
-            this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(74, 29);
-            this.btnCalculate.TabIndex = 26;
-            this.btnCalculate.Text = "出库计算";
-            this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
-            // 
-            // btnSpecial
-            // 
-            this.btnSpecial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSpecial.Location = new System.Drawing.Point(910, 73);
-            this.btnSpecial.Name = "btnSpecial";
-            this.btnSpecial.Size = new System.Drawing.Size(74, 29);
-            this.btnSpecial.TabIndex = 27;
-            this.btnSpecial.Text = "有料出库";
-            this.btnSpecial.Click += new System.EventHandler(this.BtnSpecial_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.Location = new System.Drawing.Point(1249, 73);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(74, 29);
-            this.btnReset.TabIndex = 28;
-            this.btnReset.Text = "一键复位";
-            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
-            // 
-            // btnLack
-            // 
-            this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLack.Location = new System.Drawing.Point(1010, 38);
-            this.btnLack.Name = "btnLack";
-            this.btnLack.Size = new System.Drawing.Size(74, 29);
-            this.btnLack.TabIndex = 29;
-            this.btnLack.Text = "欠料分析";
-            this.btnLack.Click += new System.EventHandler(this.BtnLack_Click);
-            // 
             // btnClearAlarm
             // 
             this.btnClearAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -662,6 +602,66 @@ namespace iWms.Form
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dtFinish.Size = new System.Drawing.Size(134, 20);
             this.dtFinish.TabIndex = 32;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnExport.Location = new System.Drawing.Point(710, 73);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(74, 29);
+            this.btnExport.TabIndex = 13;
+            this.btnExport.Text = "导出明细";
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
+            // 
+            // btnCalculate
+            // 
+            this.btnCalculate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnCalculate.Location = new System.Drawing.Point(810, 3);
+            this.btnCalculate.Name = "btnCalculate";
+            this.btnCalculate.Size = new System.Drawing.Size(74, 29);
+            this.btnCalculate.TabIndex = 26;
+            this.btnCalculate.Text = "出库计算";
+            this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
+            // 
+            // btnFinish
+            // 
+            this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFinish.Location = new System.Drawing.Point(810, 73);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(74, 29);
+            this.btnFinish.TabIndex = 12;
+            this.btnFinish.Text = "拣料完成";
+            this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
+            // 
+            // btnSpecial
+            // 
+            this.btnSpecial.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSpecial.Location = new System.Drawing.Point(910, 73);
+            this.btnSpecial.Name = "btnSpecial";
+            this.btnSpecial.Size = new System.Drawing.Size(74, 29);
+            this.btnSpecial.TabIndex = 27;
+            this.btnSpecial.Text = "有料出库";
+            this.btnSpecial.Click += new System.EventHandler(this.BtnSpecial_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.Location = new System.Drawing.Point(1249, 73);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(74, 29);
+            this.btnReset.TabIndex = 28;
+            this.btnReset.Text = "一键复位";
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
+            // 
+            // btnLack
+            // 
+            this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLack.Location = new System.Drawing.Point(1010, 38);
+            this.btnLack.Name = "btnLack";
+            this.btnLack.Size = new System.Drawing.Size(74, 29);
+            this.btnLack.TabIndex = 29;
+            this.btnLack.Text = "欠料分析";
+            this.btnLack.Click += new System.EventHandler(this.BtnLack_Click);
             // 
             // dgvOrders
             // 

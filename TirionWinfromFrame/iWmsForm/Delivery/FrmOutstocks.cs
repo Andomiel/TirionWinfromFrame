@@ -85,12 +85,12 @@ namespace iWms.Form
 
             ReleaseTimer();
 
-            //statusTimer = new Timer
-            //{
-            //    Interval = 30 * 1000
-            //};
-            //statusTimer.Tick += StatusTimer_Tick;
-            //statusTimer.Start();
+            statusTimer = new Timer
+            {
+                Interval = 30 * 1000
+            };
+            statusTimer.Tick += StatusTimer_Tick;
+            statusTimer.Start();
 
             GetOrders();
         }
@@ -274,8 +274,6 @@ namespace iWms.Form
             {
                 PagedWorkOrders.Add(item);
             }
-            WorkOrderDetails.Clear();
-            WorkOrderBarcodes.Clear();
 
             recordCount = 0;
             if (orders != null && orders.Any())
