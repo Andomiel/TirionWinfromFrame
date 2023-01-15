@@ -16,14 +16,38 @@ namespace Business
     {
         protected override LightRecordTypeEnum OrderType => LightRecordTypeEnum.Delivery;
 
-        public static IEnumerable<Wms_DeliveryOrder> GetDeliveryOrders(DeliveryQueryCondition condition)
+        public static IEnumerable<Wms_DeliveryOrder> GetDeliveryOrders(DeliveryQueryCondition condition, int startRow, int pageSize)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
 
+            sb.AppendLine(BuildMainQuerySql(condition, parameters, false));
+            sb.AppendLine("	ORDER BY wdo.CreateTime DESC  ");
+            sb.AppendLine($@"OFFSET {startRow} ROWS 
+FETCH NEXT {pageSize} ROWS ONLY ");
+
+            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
+
+            return orders.DataTableToList<Wms_DeliveryOrder>();
+        }
+
+        public static int GetDeliveryOrderCount(DeliveryQueryCondition condition)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            string sql = BuildMainQuerySql(condition, parameters, true);
+
+            return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql, parameters.ToArray())), 0);
+        }
+
+        private static string BuildMainQuerySql(DeliveryQueryCondition condition, List<SqlParameter> parameters, bool isCount)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string selectString = isCount ? " Count(1) " : " wdo.* ";
+
             if (!string.IsNullOrWhiteSpace(condition.Upn))
             {
-                sb.AppendLine(@"SELECT wdo.*
+                sb.AppendLine($@"SELECT {selectString}
                         FROM Wms_DeliveryBarcode wdb WITH(NOLock) 
                         left join Wms_DeliveryOrder wdo WITH(NOLock) on wdb.DeliveryId = wdo.BusinessId 
                         WHERE wdb.Barcode  = @Barcode ");
@@ -31,7 +55,7 @@ namespace Business
             }
             else if (!string.IsNullOrWhiteSpace(condition.MaterialNo))
             {
-                sb.AppendLine(@"SELECT wdo.*
+                sb.AppendLine($@"SELECT {selectString}
                         FROM Wms_DeliveryDetail wdd  WITH(NOLock) 
                         left join Wms_DeliveryOrder wdo  WITH(NOLock) on wdd.DeliveryId = wdo.BusinessId 
                         WHERE wdd.MaterialNo = @MaterialNo ");
@@ -39,7 +63,7 @@ namespace Business
             }
             else
             {
-                sb.AppendLine(@" SELECT wdo.*
+                sb.AppendLine($@" SELECT {selectString}
                         FROM Wms_DeliveryOrder wdo WITH(NOLock)  WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
@@ -74,11 +98,7 @@ namespace Business
                 parameters.Add(new SqlParameter("@FinishStartTime", condition.FinishedTimeStart));
                 parameters.Add(new SqlParameter("@FinishEndTime", condition.FinishedTimeEnd));
             }
-            sb.AppendLine("	ORDER BY wdo.CreateTime DESC  ");
-
-            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
-
-            return orders.DataTableToList<Wms_DeliveryOrder>();
+            return sb.ToString();
         }
 
         public static Wms_DeliveryOrder GetDeliveryOrderByNo(string deliveryNo)

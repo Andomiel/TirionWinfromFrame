@@ -59,8 +59,6 @@ namespace iWms.Form
             dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
         }
 
-        private List<Wms_DeliveryOrder> WorkOrders = new List<Wms_DeliveryOrder>();
-
         private BindingList<DeliveryOrderDto> PagedWorkOrders = new BindingList<DeliveryOrderDto>();
 
         private BindingList<DeliveryDetailDto> WorkOrderDetails = new BindingList<DeliveryDetailDto>();
@@ -267,10 +265,25 @@ namespace iWms.Form
                 condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
             }
 
-            WorkOrders = DeliveryBll.GetDeliveryOrders(condition).ToList();
+            PagedWorkOrders.Clear();
 
-            currentPage = 1;
-            recordCount = WorkOrders.Count;
+            int startRow = (currentPage - 1) * pageSize;
+            var orders = DeliveryBll.GetDeliveryOrders(condition, startRow, startRow + pageSize);
+
+            foreach (var item in orders)
+            {
+                PagedWorkOrders.Add(item.Adapt<DeliveryOrderDto>());
+            }
+
+            if (PagedWorkOrders.Count < pageSize)
+            {
+                recordCount = PagedWorkOrders.Count;
+            }
+            else
+            {
+                recordCount = DeliveryBll.GetDeliveryOrderCount(condition);
+            }
+
             pageCount = (recordCount / pageSize);
             if (recordCount % pageSize > 0)
             {
@@ -283,7 +296,6 @@ namespace iWms.Form
         {
             if (pageCount == 0)
             {
-                PagedWorkOrders.Clear();
                 tpscurrentPage.Text = "0";//当前页
                 tpspageCount.Text = "0";//总页数
                 tpsrecordCount.Text = "0";//总记录数
@@ -292,15 +304,6 @@ namespace iWms.Form
             if (currentPage < 1) currentPage = 1;
             if (currentPage > pageCount) currentPage = pageCount;
 
-            int beginRecord = pageSize * (currentPage - 1) + 1;
-            int endRecord = pageSize * currentPage;
-
-            if (currentPage >= pageCount) endRecord = recordCount;
-            PagedWorkOrders.Clear();
-            for (int i = beginRecord - 1; i < endRecord; i++)
-            {
-                PagedWorkOrders.Add(WorkOrders[i].Adapt<DeliveryOrderDto>());
-            }
             tpscurrentPage.Text = currentPage.ToString();//当前页
             tpspageCount.Text = pageCount.ToString();//总页数
             tpsrecordCount.Text = recordCount.ToString();//总记录数
