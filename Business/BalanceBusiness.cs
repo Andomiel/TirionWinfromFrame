@@ -22,7 +22,7 @@ namespace Business
 
             if ((!string.IsNullOrWhiteSpace(condition.Upn)) || (!string.IsNullOrWhiteSpace(condition.MaterialNo)))
             {
-                sb.AppendLine(@"SELECT wbo.*
+                sb.AppendLine(@"SELECT TOP 100 wbo.*
 FROM Wms_BalanceBarcode wbb WITH(NOLock) 
 LEFT JOIN Wms_BalanceOrder wbo WITH(NOLock) ON wbb.BalanceId = wbo.BusinessId 
 WHERE 1=1");
@@ -39,7 +39,7 @@ WHERE 1=1");
             }
             else
             {
-                sb.AppendLine(@" SELECT wbo.*
+                sb.AppendLine(@" SELECT TOP 100 wbo.*
 	                FROM  Wms_BalanceOrder wbo WITH(NOLock) WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
