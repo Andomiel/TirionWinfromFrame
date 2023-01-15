@@ -16,8 +16,6 @@ namespace TirionWinfromFrame.Start
         [STAThread]
         static void Main()
         {
-            string str = EncodeHelper.AES_Encrypt("Data Source=123.60.77.182:1433;Initial Catalog=iWmsTest;User ID=sa;Password=p@ssw0rd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
-            string str1 = EncodeHelper.AES_Decrypt(str);//
             DevExpress.Skins.SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("Office 2007 Silver");
             BonusSkins.Register();
