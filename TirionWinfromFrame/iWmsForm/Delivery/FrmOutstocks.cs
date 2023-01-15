@@ -274,6 +274,8 @@ namespace iWms.Form
             {
                 PagedWorkOrders.Add(item);
             }
+            WorkOrderDetails.Clear();
+            WorkOrderBarcodes.Clear();
 
             recordCount = 0;
             if (orders != null && orders.Any())
