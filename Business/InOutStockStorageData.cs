@@ -248,12 +248,28 @@ namespace Business
 
             if (!string.IsNullOrWhiteSpace(condition.UPN))
             {
-                sb.Append($" AND s.reelid like '%{condition.UPN}%' ");
+                string[] elements = condition.UPN.Split('-');
+                if (elements.Length >= 4)
+                {
+                    sb.Append($" AND s.reelid = '{condition.UPN}' ");
+                }
+                else
+                {
+                    sb.Append($" AND s.reelid like '%{condition.UPN}%' ");
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(condition.PartNumber))
             {
-                sb.Append($" AND s.Part_Number like '%{condition.PartNumber}%'");
+                int materialNoLength = condition.PartNumber.Trim().Length;
+                if (materialNoLength == 7 || materialNoLength == 12)
+                {
+                    sb.Append($" AND s.Part_Number = '{condition.PartNumber}'");
+                }
+                else
+                {
+                    sb.Append($" AND s.Part_Number like '%{condition.PartNumber}%'");
+                }
             }
             if (!string.IsNullOrWhiteSpace(condition.SerialNoStart))
             {
