@@ -75,31 +75,48 @@ namespace Business
             return DbHelper.Update(sql) > 0;
         }
 
-        public static IEnumerable<Wms_InstockOrder> GetInstockOrders(string orderNo, string upn, string materialNo, int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime)
+        public static IEnumerable<InstockOrderDto> GetInstockOrders(string orderNo, string upn, string materialNo,
+            int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime, int startRow, int endRow)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
+            sb.AppendLine($@"With Orders AS
+              (
+            SELECT
+                ROW_NUMBER() OVER(ORDER BY wio.CreateTime DESC) RowNumber,  
+                COUNT(1) OVER() AS TotalCount,
+                  wio.*
+             {BuildMainQuerySql(orderNo, upn, materialNo, orderType, orderStatus, operatorUser, startTime, endTime, parameters)}
+              ) 
+            SELECT * FROM Orders
+             WHERE Orders.RowNumber > {startRow} AND Orders.RowNumber <= {endRow} ");
 
+            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
+
+            return orders.DataTableToList<InstockOrderDto>();
+        }
+
+        private static string BuildMainQuerySql(string orderNo, string upn, string materialNo,
+            int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime, List<SqlParameter> parameters)
+        {
+            StringBuilder sb = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(upn))
             {
-                sb.AppendLine(@"SELECT wio.*
-                    FROM Wms_InstockBarcode wib   WITH(NOLock) 
+                sb.AppendLine(@" FROM Wms_InstockBarcode wib   WITH(NOLock) 
                     left join Wms_InstockOrder wio  WITH(NOLock) on wib.InstockId = wio.BusinessId WHERE 1=1 ");
                 sb.AppendLine(" AND wib.Barcode = @Barcode ");
                 parameters.Add(new SqlParameter("@Barcode", upn));
             }
             else if (!string.IsNullOrWhiteSpace(materialNo))
             {
-                sb.AppendLine(@"SELECT wio.*
-	                FROM Wms_InstockDetail wid  WITH(NOLock)   
+                sb.AppendLine(@" FROM Wms_InstockDetail wid  WITH(NOLock)   
 	                left join Wms_InstockOrder wio  WITH(NOLock) on wid.InstockId = wio.BusinessId  WHERE 1=1 ");
                 sb.AppendLine(" AND wid.MaterialNo = @MaterialNo ");
                 parameters.Add(new SqlParameter("@MaterialNo", materialNo));
             }
             else
             {
-                sb.AppendLine(@" SELECT wio.*
-	                FROM  Wms_InstockOrder wio WHERE 1=1 ");
+                sb.AppendLine(@"FROM  Wms_InstockOrder wio WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(orderNo))
             {
@@ -131,11 +148,7 @@ namespace Business
                 sb.AppendLine(" AND wio.LastUpdateTime <= @EndTime ");
                 parameters.Add(new SqlParameter("@EndTime", endTime.Value.Date.AddDays(1).AddSeconds(-1)));
             }
-            sb.AppendLine("	ORDER BY wio.CreateTime DESC  ");
-
-            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
-
-            return orders.DataTableToList<Wms_InstockOrder>();
+            return sb.ToString();
         }
 
         public static IEnumerable<Wms_InstockDetail> GetInstockDetails(string instockId)
