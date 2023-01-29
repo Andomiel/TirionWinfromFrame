@@ -148,6 +148,7 @@ namespace iWms.Form
                 {
                     dict.Add(detail.BusinessId, detail);
                 }
+                detail.Barcodes.Clear();
             }
 
             foreach (DataRow item in barcodes.Rows)
@@ -433,7 +434,7 @@ namespace iWms.Form
                     return;
                 }
                 //只有upn上允许弹窗
-                if (e.ColumnIndex != 3)
+                if (e.ColumnIndex != 0)
                 {
                     return;
                 }
@@ -458,6 +459,7 @@ namespace iWms.Form
 
                     WareHouseBLL.ClearReceivedBarcode(CurrentOrder.BusinessId, record.Upn);
                     WorkOrderBarcodes.Remove(record);
+                    
                 };
                 contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
 
