@@ -344,7 +344,7 @@ namespace iWms.Form
         public void ExportToExcel<T>(Dictionary<string, List<T>> data, List<HeadColumn> headColumns) where T : class
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
+            dialog.Filter = "Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
