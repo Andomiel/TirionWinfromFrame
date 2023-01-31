@@ -217,6 +217,11 @@ namespace iWms.Form
             {
                 return;
             }
+            if (SelectedOrder.LineId.EndsWith("10") && upn.Count(p => p == '-') != 3)
+            {
+                "仓10出库强制校验UPN只支持4段内容".ShowTips();
+                return;
+            }
             tbScan.SelectAll();
 
             //重复扫码验证
