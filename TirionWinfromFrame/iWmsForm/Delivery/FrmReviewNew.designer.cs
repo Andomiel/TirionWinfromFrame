@@ -257,7 +257,7 @@ namespace iWms.Form
             this.txtBoxScan.ShortcutsEnabled = false;
             this.txtBoxScan.Size = new System.Drawing.Size(325, 21);
             this.txtBoxScan.TabIndex = 30;
-            this.txtBoxScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxScan_KeyPress);
+            this.txtBoxScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBoxScan_KeyPress);
             // 
             // lblScan
             // 
@@ -281,7 +281,7 @@ namespace iWms.Form
             this.tbScan.ShortcutsEnabled = false;
             this.tbScan.Size = new System.Drawing.Size(325, 21);
             this.tbScan.TabIndex = 0;
-            this.tbScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScan_KeyPress);
+            this.tbScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbScan_KeyPress);
             // 
             // cbOriginal
             // 
@@ -304,7 +304,7 @@ namespace iWms.Form
             this.tbOriginal.Name = "tbOriginal";
             this.tbOriginal.Size = new System.Drawing.Size(325, 21);
             this.tbOriginal.TabIndex = 32;
-            this.tbOriginal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOriginal_KeyPress);
+            this.tbOriginal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbOriginal_KeyPress);
             // 
             // btnAlarm
             // 

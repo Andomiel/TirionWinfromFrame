@@ -96,7 +96,7 @@ namespace iWms.Form
             tbOriginal.Enabled = false;
         }
 
-        private void txtBoxScan_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtBoxScan_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -110,11 +110,16 @@ namespace iWms.Form
                     txtBoxScan.Text = string.Empty;
                     return;
                 }
+                if ((!boxNo.StartsWith("OP")) || (!int.TryParse(boxNo.Replace("OP", string.Empty), out int _)))
+                {
+                    "组箱箱号必须以OP开头，且后缀为8位数字".ShowTips();
+                    return;
+                }
                 tbScan.Focus();
             }
         }
 
-        private void tbScan_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbScan_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
@@ -172,7 +177,7 @@ namespace iWms.Form
         private const int SND_ASYNC = 0x0001;
 
 
-        private void tbOriginal_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbOriginal_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
