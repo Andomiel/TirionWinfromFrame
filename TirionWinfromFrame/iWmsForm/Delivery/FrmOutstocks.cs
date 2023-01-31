@@ -465,6 +465,7 @@ namespace iWms.Form
                     new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, sortDiag.SortNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivering;
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "执行出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     "出库任务下达成功！".ShowTips();
 
                     GetOrders();
@@ -567,6 +568,7 @@ namespace iWms.Form
                     new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "标记完成出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     $"出库单:{selectedOrder.DeliveryNo}捡料完成".ShowTips();
                 }
             }
@@ -775,6 +777,8 @@ namespace iWms.Form
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Closed;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "取消工单发料", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     _ = "工单取消成功".ShowTips();
                 }
             }
@@ -836,6 +840,8 @@ namespace iWms.Form
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Calculated;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "执行发料计算", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     _ = "工单计算发料成功".ShowTips();
                 }
             }
@@ -930,6 +936,9 @@ namespace iWms.Form
                     new DeliveryBll().SpecialFinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).ToList());
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(selectedOrder.DeliveryNo, "标记有料出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
+                    "工单有料出库完成".ShowTips();
                 }
             }
             catch (Exception ex)
@@ -1060,6 +1069,7 @@ namespace iWms.Form
                         CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
                     }
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(selectedOrder.DeliveryNo, "执行工单复位", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     "复位成功，请检查料架和工单操作日志".ShowTips();
                 }
             }

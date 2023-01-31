@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -53,6 +54,7 @@ namespace iWms.Form
             if (SelectedOrder != null)
             {
                 DeliveryBll.LockDeliveryOrder(SelectedOrder.BusinessId, DnsHelper.GetIP(), AppInfo.LoginUserInfo.username);
+                Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "对工单进行出库复核", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
             }
         }
 
@@ -622,6 +624,7 @@ namespace iWms.Form
                         else
                         {
                             "复核完成，即将进行单据回传".ShowTips();
+                            Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，执行回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
 
                             SplashScreenManager.ShowForm(typeof(WaitForm1));
                             try
@@ -643,6 +646,7 @@ namespace iWms.Form
                     }
                     else
                     {
+                        Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，由于校验执行发料接口反馈失败，暂不回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                         "MES接口校验执行发料失败，请查看调用日志".ShowTips();
                     }
                 }
@@ -937,6 +941,7 @@ namespace iWms.Form
                     //{
                     //    OutStockReview.TempDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, reviewList);
                     //}
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "暂停复核", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
