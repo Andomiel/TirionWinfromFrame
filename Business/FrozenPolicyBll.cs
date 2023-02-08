@@ -32,16 +32,16 @@ namespace Business
                                szm.ReelType,
                                szm.SaveTime,
                                szm.Qty
-                          FROM smt_zd_material szm 
-                     LEFT JOIN smt_TowerMap stm
+                          FROM smt_zd_material szm  WITH(NOLock) 
+                     LEFT JOIN smt_TowerMap stm WITH(NOLock) 
                             ON szm.LockTowerNo = stm.TowerNo
-                     LEFT JOIN smt_bake sb
+                     LEFT JOIN smt_bake sb WITH(NOLock) 
                             ON szm.ReelID = sb.UPN
                          WHERE szm.Qty > 0
                            AND sb.UPN is null
                            AND szm.isTakeCheck = 0 ";
 
-        private static string QueryUpnBaseSql => @" SELECT szm.ReelID,szm.DateCode FROM smt_zd_material szm WHERE 1=1 ";
+        private static string QueryUpnBaseSql => @" SELECT szm.ReelID,szm.DateCode FROM smt_zd_material szm  WITH(NOLock) WHERE 1=1 ";
 
         public static string BuildWhereCondition(MaterialQueryCondition condition)
         {
@@ -115,7 +115,7 @@ namespace Business
             return sb.ToString();
         }
 
-        public static List<FrozenQueryItem> GetInventory(MaterialQueryCondition condition)
+        public static IEnumerable<FrozenQueryItem> GetInventory(MaterialQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(QueryInventoryBaseSql);
@@ -170,7 +170,7 @@ namespace Business
             PolicyCreateResult createResult = new PolicyCreateResult();
             try
             {
-                List<FrozenQueryItem> inventories = GetInventory(condition);
+                IEnumerable<FrozenQueryItem> inventories = GetInventory(condition);
                 List<string> upns = inventories.Select(p => p.ReelID).ToList();
                 createResult.Policy = new FrozenPolicy(DateTime.Now, PolicyTypeEnum.Conditions, remark);
                 createResult.Policy.ConditionJson = JsonConvert.SerializeObject(condition);
@@ -565,7 +565,7 @@ namespace Business
                         }).ToList();
         }
 
-        private static List<FrozenNoUpnRelation> GetRelationsByUpnPolicy(List<PolicyView> policyViews)
+        private static IEnumerable<FrozenNoUpnRelation> GetRelationsByUpnPolicy(List<PolicyView> policyViews)
         {
             //批量UPN冻结的部分
             List<string> frozenNoForUpn = policyViews.Where(p => p.PolicyType == (int)PolicyTypeEnum.UPNs).Select(p => p.FrozenNo).ToList();
@@ -599,5 +599,6 @@ namespace Business
             }
             return relations;
         }
+
     }
 }

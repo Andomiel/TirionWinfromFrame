@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="BarcodeFormatter.cs" />
     <Compile Include="ConvertHelper.cs" />
+    <Compile Include="DnsHelper.cs" />
     <Compile Include="Encrypt\Base64Util.cs" />
     <Compile Include="Encrypt\EncodeHelper.cs" />
     <Compile Include="Encrypt\QQEncryptUtil.cs" />

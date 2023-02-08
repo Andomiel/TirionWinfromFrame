@@ -336,7 +336,8 @@ namespace iWms.Form
             // 
             // btnSelectReverse
             // 
-            this.btnSelectReverse.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnSelectReverse.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnSelectReverse.Appearance.Options.UseFont = true;
             this.btnSelectReverse.Location = new System.Drawing.Point(176, 5);
             this.btnSelectReverse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSelectReverse.Name = "btnSelectReverse";
@@ -347,7 +348,8 @@ namespace iWms.Form
             // 
             // btnSelectAll
             // 
-            this.btnSelectAll.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnSelectAll.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnSelectAll.Appearance.Options.UseFont = true;
             this.btnSelectAll.Location = new System.Drawing.Point(94, 5);
             this.btnSelectAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSelectAll.Name = "btnSelectAll";
@@ -682,7 +684,8 @@ namespace iWms.Form
             // 
             // btnEnable
             // 
-            this.btnEnable.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnEnable.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnEnable.Appearance.Options.UseFont = true;
             this.btnEnable.Location = new System.Drawing.Point(88, 5);
             this.btnEnable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEnable.Name = "btnEnable";
@@ -693,7 +696,8 @@ namespace iWms.Form
             // 
             // btnUnable
             // 
-            this.btnUnable.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnUnable.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnUnable.Appearance.Options.UseFont = true;
             this.btnUnable.Location = new System.Drawing.Point(167, 5);
             this.btnUnable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnUnable.Name = "btnUnable";
@@ -704,7 +708,8 @@ namespace iWms.Form
             // 
             // btnDel
             // 
-            this.btnDel.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnDel.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnDel.Appearance.Options.UseFont = true;
             this.btnDel.Location = new System.Drawing.Point(249, 5);
             this.btnDel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDel.Name = "btnDel";

@@ -5,6 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity.DataContext;
 using Entity.Dto;
+using Entity.Enums;
 using Entity.Enums.Inventory;
 using Mapster;
 using System;
@@ -35,16 +36,35 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             this.gcGeneral.Text = $"{order.InventoryNo}-{order.InventoryAreaDisplay}-{order.SubArea}";
 
             this.Load += FrmInventoryDetail_Load;
-            this.Disposed += FrmInventoryDetail_Disposed;
+            this.FormClosing += FrmInventoryDetail_FormClosing;
         }
 
-        private void FrmInventoryDetail_Disposed(object sender, EventArgs e)
+        private void FrmInventoryDetail_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (refreshTimer != null)
             {
                 refreshTimer.Stop();
                 refreshTimer.Tick -= RefreshTimer_Tick;
                 refreshTimer.Dispose();
+            }
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+
+                var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
+                foreach (var item in WorkOrderBarcodes)
+                {
+                    var barcode = barcodes.First(p => p.BusinessId == item.BusinessId);
+                    if (item.IsChanged && item.OrderStatus > barcode.OrderStatus)
+                    {
+                        sb.AppendLine($"UPDATE Wms_InventoryBarcode set RealQuantity = {item.RealQuantity}, OrderStatus = {item.OrderStatus} where BusinessId = '{item.BusinessId}';");
+                    }
+                }
+                _ = BaseDeliveryBll.ExcuteWithTransaction(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ShowError();
             }
         }
 
@@ -56,7 +76,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
         {
             RefreshBarcodes();
 
-            if (order.OrderStatus >= (int)InventoryOrderStatusEnum.Executing)
+            if (order.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
             {
                 this.tbBarcode.Text = string.Empty;
                 this.tbBarcode.Enabled = false;
@@ -75,6 +95,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                     Interval = 30 * 1000
                 };
                 refreshTimer.Tick += RefreshTimer_Tick;
+                refreshTimer.Start();
             }
         }
 
@@ -87,10 +108,21 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
         {
             var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
 
-            WorkOrderBarcodes.Clear();
             foreach (Wms_InventoryBarcode item in barcodes)
             {
-                WorkOrderBarcodes.Add(item.Adapt<InventoryBarcodeDto>());
+                var barcode = WorkOrderBarcodes.FirstOrDefault(p => p.BusinessId == item.BusinessId);
+                if (barcode == null)
+                {
+                    WorkOrderBarcodes.Add(item.Adapt<InventoryBarcodeDto>());
+                }
+                else if (item.OrderStatus >= barcode.OrderStatus)
+                {
+                    item.Adapt(barcode);
+                }
+                else
+                {
+                    //do nothing;
+                }
             }
         }
 
@@ -147,7 +179,34 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                     var barcode = WorkOrderBarcodes.FirstOrDefault(p => p.Barcode == upn);
                     if (barcode == null)
                     {
+                        var newBarcode = GeneralBusiness.GetInventoryBarcode(upn);
+                        if (newBarcode == null || newBarcode.Rows.Count == 0)
+                        {
+                            throw new Exception($"找不到当前盘点扫描出来的{upn}对应的库存信息");
+                        }
+                        DataRow dr = newBarcode.Rows[0];
+                        //TODO:如果这个时候，此料已经被算料到移库单或者发料单了呢
+                        string materialNo = Convert.ToString(dr["Part_Number"]);
+                        int quantity = TypeParse.StrToInt(Convert.ToString(dr["Qty"]), 0);
+                        string location = $"{Convert.ToString(dr["ABSide"])}{Convert.ToString(dr["LockMachineID"])}-{Convert.ToString(dr["LockLocation"])}";
 
+                        InventoryBll.MaterialInstockTakingNew(order.BusinessId, materialNo, upn, quantity, location, AppInfo.LoginUserInfo.account);
+
+                        barcode = new InventoryBarcodeDto()
+                        {
+                            Barcode = upn,
+                            CreateTime = DateTime.Now,
+                            CreateUser = AppInfo.LoginUserInfo.account,
+                            InventoryOrderId = order.BusinessId,
+                            LastUpdateTime = DateTime.Now,
+                            LastUpdateUser = AppInfo.LoginUserInfo.account,
+                            MaterialNo = materialNo,
+                            OrderStatus = (int)InventoryBarcodeStatusEnum.Executed,
+                            OriginLocation = location,
+                            OriginQuantity = 0,
+                            RealQuantity = quantity,
+                        };
+                        WorkOrderBarcodes.Add(barcode);
                     }
                     else
                     {
@@ -156,7 +215,14 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                             $"当前物料{upn}已经被盘点，无须再次扫描".ShowTips();
                             return;
                         }
+                        InventoryBll.MaterialInstockTakingSuccess(barcode.Barcode, barcode.OriginLocation, AppInfo.LoginUserInfo.account);
+
+                        barcode.OrderStatus = (int)InventoryBarcodeStatusEnum.Executed;
+                        barcode.RealQuantity = barcode.OriginQuantity;
                     }
+
+                    tbBarcode.Text = string.Empty;
+                    tbBarcode.Focus();
                 }
             }
             catch (Exception ex)
@@ -183,6 +249,53 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
                 return;
             }
             tbBarcode.Text = BarcodeFormatter.FormatBarcode(tbBarcode.Text.Trim());
+        }
+
+        private void GvBarcodes_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            try
+            {    //右键弹出菜单
+                if (e.Button != MouseButtons.Right)
+                {
+                    return;
+                }
+                //容许用户添加行时，最后一行为未实际添加的行，所以不需考虑弹出菜单
+                if (e.RowHandle < 0)
+                {
+                    return;
+                }
+                //只有upn上允许弹窗
+                if (e.Column.AbsoluteIndex != 0)
+                {
+                    return;
+                }
+                //创建快捷菜单
+                ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+                //删除当前行
+                ToolStripMenuItem tsmiRemoveCurrentRow = new ToolStripMenuItem("盘亏");
+                tsmiRemoveCurrentRow.Click += (obj, arg) =>
+                {
+                    var row = WorkOrderBarcodes.ElementAt(e.RowHandle);
+
+                    row.OrderStatus = (int)InventoryBarcodeStatusEnum.Executed;
+                };
+                contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
+
+                ////清空全部数据
+                //ToolStripMenuItem tsmiRemoveAll = new ToolStripMenuItem("清空数据");
+                //tsmiRemoveAll.Click += (obj, arg) =>
+                //{
+                //    gridViewSummary.Rows.Clear();
+                //};
+                //contextMenuStrip.Items.Add(tsmiRemoveAll);
+
+                contextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
         }
     }
 }

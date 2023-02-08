@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.Dto
 {
-    public class InstockDetailDto
+    public class InstockDetailDto : INotifyPropertyChanged
     {
         /// <summary>
         /// 主键
@@ -68,7 +69,7 @@ namespace Entity.Dto
                 }
                 else
                 {
-                    int totalCount = Barcodes.Sum(p => p.InnerQty);
+                    int totalCount = ActualCount;
                     if (RequireCount > totalCount)
                     {
                         return "短收";
@@ -85,6 +86,43 @@ namespace Entity.Dto
             }
         }
 
-        public List<InstockBarcodeDto> Barcodes { get; set; } = new List<InstockBarcodeDto>();
+        private int _actualCount = 0;
+
+        public int ActualCount
+        {
+            get { return _actualCount; }
+            set
+            {
+                if (_actualCount != value)
+                {
+                    _actualCount = value;
+                    RaisePropertyChange(nameof(ActualCount));
+                    RaisePropertyChange(nameof(ReceiveStatusDisplay));
+                }
+            }
+        }
+
+        private BindingList<InstockBarcodeDto> _barcodes = new BindingList<InstockBarcodeDto>();
+
+        public BindingList<InstockBarcodeDto> Barcodes
+        {
+            get { return _barcodes; }
+            set
+            {
+                if (_barcodes != value)
+                {
+                    _barcodes = value;
+                    RaisePropertyChange(nameof(Barcodes));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChange(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

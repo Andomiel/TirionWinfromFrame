@@ -92,7 +92,7 @@ namespace Entity.DataContext
         /// </summary> 
         public static string GetSelectSql()
         {
-            return "SELECT Id, BusinessId, ExchangeType, RelatedOrderNo, Barcode, ExchangeStatus, ExchangeUrl, ExchangeRequest, ExchangeLog, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_Exchange WHERE 1=1 ";
+            return "SELECT Id, BusinessId, ExchangeType, RelatedOrderNo, Barcode, ExchangeStatus, ExchangeUrl, ExchangeRequest, ExchangeLog, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_Exchange WITH(NOLock)  WHERE 1=1 ";
         }
 
         #endregion

@@ -330,6 +330,12 @@
     <Compile Include="iWmsForm\ErrorHandle\FrmLogs.designer.cs">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterAdd.Designer.cs">
+      <DependentUpon>FrmRegisterAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Instock\FrmInStockNotice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,6 +347,12 @@
     </Compile>
     <Compile Include="iWmsForm\Instock\FrmInstocks.designer.cs">
       <DependentUpon>FrmInstocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Instock\FrmRegisterCfg.designer.cs">
+      <DependentUpon>FrmRegisterCfg.cs</DependentUpon>
     </Compile>
     <Compile Include="iWmsForm\Instock\FrmManualCounting.cs">
       <SubType>Form</SubType>
@@ -384,6 +396,18 @@
     <Compile Include="iWmsForm\Inventory\FrmMaterialInfo.designer.cs">
       <DependentUpon>FrmMaterialInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Report\FrmBalanceOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Report\FrmBalanceOrders.designer.cs">
+      <DependentUpon>FrmBalanceOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Report\FrmBalanceDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Report\FrmBalanceDetail.Designer.cs">
+      <DependentUpon>FrmBalanceDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\StockTaking\FrmInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -407,6 +431,18 @@
     </Compile>
     <Compile Include="iWmsForm\StockTaking\FrmInventoryOrders.designer.cs">
       <DependentUpon>FrmInventoryOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmProfit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmProfit.designer.cs">
+      <DependentUpon>FrmProfit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmLoss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\StockTaking\FrmLoss.designer.cs">
+      <DependentUpon>FrmLoss.cs</DependentUpon>
     </Compile>
     <Compile Include="iWmsForm\Transfer\FrmTransfer.cs">
       <SubType>Form</SubType>
@@ -550,11 +586,17 @@
     <EmbeddedResource Include="iWmsForm\ErrorHandle\FrmLogs.resx">
       <DependentUpon>FrmLogs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmRegisterAdd.resx">
+      <DependentUpon>FrmRegisterAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmInStockNotice.resx">
       <DependentUpon>FrmInStockNotice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmInstocks.resx">
       <DependentUpon>FrmInstocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Instock\FrmRegisterCfg.resx">
+      <DependentUpon>FrmRegisterCfg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Instock\FrmManualCounting.resx">
       <DependentUpon>FrmManualCounting.cs</DependentUpon>
@@ -577,6 +619,12 @@
     <EmbeddedResource Include="iWmsForm\Inventory\FrmMaterialInfo.resx">
       <DependentUpon>FrmMaterialInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Report\FrmBalanceOrders.resx">
+      <DependentUpon>FrmBalanceOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Report\FrmBalanceDetail.resx">
+      <DependentUpon>FrmBalanceDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventory.resx">
       <DependentUpon>FrmInventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -588,6 +636,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\StockTaking\FrmInventoryOrders.resx">
       <DependentUpon>FrmInventoryOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\StockTaking\FrmProfit.resx">
+      <DependentUpon>FrmProfit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\StockTaking\FrmLoss.resx">
+      <DependentUpon>FrmLoss.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Transfer\FrmTransfer.resx">
       <DependentUpon>FrmTransfer.cs</DependentUpon>

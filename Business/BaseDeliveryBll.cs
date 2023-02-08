@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TirionWinfromFrame.Commons;
 
@@ -50,6 +51,7 @@ namespace Business
             {
                 switch (item.Key)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -81,7 +83,7 @@ namespace Business
 
         protected abstract int GetExecuteStatus();
 
-        protected abstract List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus);
+        protected abstract IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus);
 
         protected abstract string GetDeliveredUpdateSql(string deliveryId, int sortingNo, string userName);
 
@@ -100,16 +102,16 @@ namespace Business
             sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, barcodes.Select(p => p.Barcode).Distinct().ToList(), new List<string>()));
 
             //料仓也记录发料库区记录
-            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName));
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ASRS, sortNo, userName, 0));
 
             return sb.ToString();
         }
 
-        protected string InsertDeliveryRecord(string deliveryId, string deliveryNo, int towerNo, int targetColor, string userName)
+        protected string InsertDeliveryRecord(string deliveryId, string deliveryNo, int towerNo, int targetColor, string userName, int lightSerialNo)
         {
             return $@"INSERT INTO Wms_LightColorRecord
-                (OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-                VALUES({(int)OrderType}, {towerNo}, {targetColor}, '{deliveryId}', '{deliveryNo}', {(int)LightRecordStatusEnum.LightOn}, '', getdate(), '{userName}', getdate(), '{userName}');";
+                (OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, LightSerialNo)
+                VALUES({(int)OrderType}, {towerNo}, {targetColor}, '{deliveryId}', '{deliveryNo}', {(int)LightRecordStatusEnum.LightOn}, '', getdate(), '{userName}', getdate(), '{userName}', {lightSerialNo});";
         }
 
         private string DeliveryLightShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -150,7 +152,7 @@ namespace Business
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(GetBarcodeLightResultSql(deliveryId, deliveryNo, userName, succeedBarcodes, failedBarcodes));
 
-            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName));
+            sb.AppendLine(InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.LightShelf, targetColor, userName, 0));
 
             return sb.ToString();
         }
@@ -158,7 +160,7 @@ namespace Business
         private static int GetLightColor(int towerNo, List<int> allColors)
         {
             string sql = $@"SELECT LightColor 
-                  FROM Wms_LightColorRecord wlcr WHERE RecordStatus ={(int)LightRecordStatusEnum.LightOn} AND LightArea = {towerNo}; ";
+                  FROM Wms_LightColorRecord wlcr WITH(NOLock) WHERE RecordStatus ={(int)LightRecordStatusEnum.LightOn} AND LightArea = {towerNo}; ";
 
             DataTable dt = DbHelper.GetDataTable(sql);
             if (dt != null && dt.Rows.Count > 0)
@@ -206,6 +208,7 @@ namespace Business
             logDict.Add("request", requestString);
 
             string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
+            strResponse = Regex.Unescape(strResponse);
             logDict.Add("response", strResponse);
 
             FileLog.Log($"操作亮灯货架{onOrOff}:{JsonConvert.SerializeObject(logDict)}");
@@ -213,12 +216,12 @@ namespace Business
 
             Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架{onOrOff}", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
+            if (response == null || response.Code > 1)
+            {
+                string formattedMessage = Regex.Unescape(response.Msg);
+                throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
+            }
             return response;
-            //if (response == null || response.Code != 1)
-            //{
-            //    string formattedMessage = Uri.UnescapeDataString(response.Msg);
-            //    //throw new OppoCoreException($"亮灯货架发料{onOrOff}失败:{formattedMessage}");
-            //}
         }
 
         private string DeliveryReformShelfBarcodes(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -245,7 +248,7 @@ namespace Business
 
             LightReformShelf(deliveryNo, url, targetColor, lightNumber, barcodes);
 
-            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName);
+            return InsertDeliveryRecord(deliveryId, deliveryNo, (int)TowerEnum.ReformShelf, targetColor, userName, lightNumber);
         }
 
         private static void LightReformShelf(string deliveryNo, string url, int lightColor, int lightNumber, List<DeliveryBarcodeLocation> barcodes)
@@ -293,6 +296,7 @@ namespace Business
             {
                 switch (item.Key)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -310,11 +314,11 @@ namespace Business
                 }
             }
 
-            int refundStatus = GetExecuteStatus();
-            var refundBarcodes = barcodes.Where(p => p.BarcodeStatus == refundStatus).Select(p => p.Barcode).Distinct().ToList();
+            int refundStatus = GetFinishedStatus();
+            var refundBarcodes = barcodes.Where(p => p.BarcodeStatus < refundStatus).Select(p => p.Barcode).Distinct().ToList();
             sb.AppendLine(GetReleaseBarcodeSql(deliveryId, userName, refundBarcodes));
 
-            sb.AppendLine(ExtraBarcodeSql(deliveryId, userName, barcodes.Where(p => p.BarcodeStatus > refundStatus).Select(p => p.Barcode).ToList()));
+            sb.AppendLine(ExtraBarcodeSql(deliveryId, userName, barcodes.Where(p => p.BarcodeStatus == refundStatus).Select(p => p.Barcode).ToList()));
 
             sb.AppendLine(GetFinshedUpdateSql(deliveryId, userName));
             sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));
@@ -365,7 +369,7 @@ namespace Business
 
             int targetColor = currentRecord.LightColor;
             //改造货架三个灯，1，2，3
-            int lightNumber = allColors.IndexOf(targetColor) + 1;
+            int lightNumber = GetLightSerialNo(deliveryId, (int)TowerEnum.ReformShelf);
 
             try
             {
@@ -378,6 +382,13 @@ namespace Business
 
             return $@"UPDATE Wms_LightColorRecord
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
+        }
+
+        private static int GetLightSerialNo(string deliveryId, int areaId)
+        {
+            //AND RecordStatus = {(int)LightRecordStatusEnum.LightOn}
+            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WITH(NOLock) WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
+            return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), 0);
         }
 
         protected static string LightOffLightShelf(string deliveryId, string deliveryNo, string userName, List<DeliveryBarcodeLocation> barcodes)
@@ -404,7 +415,11 @@ namespace Business
             //    throw new OppoCoreException("当前出库单的亮灯货架亮灯记录异常，无法关闭");
             //}
 
-            int targetColor = currentRecord.LightColor;
+            int targetColor = allColors[0];
+            if (currentRecord != null)
+            {
+                targetColor = currentRecord.LightColor;
+            }
             try
             {
                 LightShelfColor(deliveryNo, false, url, targetColor, barcodes);
@@ -418,13 +433,13 @@ namespace Business
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
         }
 
-        public static List<Wms_LightColorRecord> GetExecutingRecords()
+        public static IEnumerable<Wms_LightColorRecord> GetExecutingRecords()
         {
             string sql = $"{Wms_LightColorRecord.GetSelectSql()} AND RecordStatus = {(int)LightRecordStatusEnum.LightOn} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_LightColorRecord>();
         }
 
-        public static List<Wms_InstockArea> GetExecutingAreas()
+        public static IEnumerable<Wms_InstockArea> GetExecutingAreas()
         {
             string sql = $"{Wms_InstockArea.GetSelectSql()} AND DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InstockArea>();
@@ -434,13 +449,14 @@ namespace Business
         {
             StringBuilder sb = new StringBuilder();
 
-            var barcodes = GetDeliveryBarcodesDetail(deliveryId, GetFinishedStatus());
+            var barcodes = GetDeliveryBarcodesDetail(deliveryId, GetLargestStatus());
 
             var group = barcodes.GroupBy(p => p.DeliveryAreaId);
             foreach (var item in group)
             {
                 switch (item.Key)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -461,6 +477,17 @@ namespace Business
             sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));
 
             return DbHelper.ExcuteWithTransaction(sb.ToString(), out string _) > 0;
+        }
+
+        protected abstract int GetLargestStatus();
+
+        public static int ExcuteWithTransaction(string sql)
+        {
+            if (string.IsNullOrWhiteSpace(sql))
+            {
+                return 0;
+            }
+            return DbHelper.ExcuteWithTransaction(sql, out string _);
         }
     }
 

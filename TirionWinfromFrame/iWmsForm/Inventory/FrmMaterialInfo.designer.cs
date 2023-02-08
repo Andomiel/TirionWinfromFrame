@@ -540,7 +540,7 @@
             this.button3.Size = new System.Drawing.Size(134, 41);
             this.button3.TabIndex = 19;
             this.button3.Text = "导出";
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // button2
             // 

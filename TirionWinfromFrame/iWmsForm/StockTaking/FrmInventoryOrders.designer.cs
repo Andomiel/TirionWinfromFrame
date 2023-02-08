@@ -47,13 +47,16 @@ namespace iWms.Form
             this.tbOrderNo = new System.Windows.Forms.TextBox();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
-            this.dtOrderTime = new System.Windows.Forms.DateTimePicker();
-            this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
             this.tbUpn = new System.Windows.Forms.TextBox();
             this.cbType = new System.Windows.Forms.ComboBox();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnReset = new DevExpress.XtraEditors.SimpleButton();
+            this.btnProfit = new DevExpress.XtraEditors.SimpleButton();
+            this.btnLoss = new DevExpress.XtraEditors.SimpleButton();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.tlbTables = new System.Windows.Forms.TableLayoutPanel();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +74,10 @@ namespace iWms.Form
             this.tlpLayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             this.tlbTables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
@@ -91,7 +98,7 @@ namespace iWms.Form
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tlpLayout.Size = new System.Drawing.Size(1203, 673);
+            this.tlpLayout.Size = new System.Drawing.Size(1299, 673);
             this.tlpLayout.TabIndex = 0;
             // 
             // gbConditions
@@ -100,13 +107,13 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1197, 134);
+            this.gbConditions.Size = new System.Drawing.Size(1293, 134);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
             // tlpConditions
             // 
-            this.tlpConditions.ColumnCount = 12;
+            this.tlpConditions.ColumnCount = 14;
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
@@ -119,6 +126,8 @@ namespace iWms.Form
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpConditions.Controls.Add(this.label8, 2, 2);
             this.tlpConditions.Controls.Add(this.label7, 0, 2);
             this.tlpConditions.Controls.Add(this.label6, 2, 1);
@@ -126,19 +135,22 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.label4, 0, 1);
             this.tlpConditions.Controls.Add(this.label3, 4, 0);
             this.tlpConditions.Controls.Add(this.label1, 0, 0);
-            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 2);
-            this.tlpConditions.Controls.Add(this.btnFinish, 10, 2);
             this.tlpConditions.Controls.Add(this.btnExport, 7, 2);
             this.tlpConditions.Controls.Add(this.tbOrderNo, 1, 0);
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 0);
-            this.tlpConditions.Controls.Add(this.dtOrderTime, 1, 2);
-            this.tlpConditions.Controls.Add(this.dtFinishedTime, 3, 2);
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
             this.tlpConditions.Controls.Add(this.cbType, 3, 1);
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
             this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
-            this.tlpConditions.Controls.Add(this.btnCancel, 10, 1);
+            this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
+            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 0);
+            this.tlpConditions.Controls.Add(this.btnFinish, 9, 1);
+            this.tlpConditions.Controls.Add(this.btnCancel, 9, 2);
+            this.tlpConditions.Controls.Add(this.btnProfit, 10, 1);
+            this.tlpConditions.Controls.Add(this.btnLoss, 10, 2);
+            this.tlpConditions.Controls.Add(this.btnReset, 12, 2);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -147,7 +159,7 @@ namespace iWms.Form
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.Size = new System.Drawing.Size(1191, 113);
+            this.tlpConditions.Size = new System.Drawing.Size(1287, 113);
             this.tlpConditions.TabIndex = 0;
             // 
             // label8
@@ -230,7 +242,7 @@ namespace iWms.Form
             // btnOutstock
             // 
             this.btnOutstock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOutstock.Location = new System.Drawing.Point(935, 73);
+            this.btnOutstock.Location = new System.Drawing.Point(935, 3);
             this.btnOutstock.Name = "btnOutstock";
             this.btnOutstock.Size = new System.Drawing.Size(87, 29);
             this.btnOutstock.TabIndex = 9;
@@ -240,7 +252,7 @@ namespace iWms.Form
             // btnFinish
             // 
             this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFinish.Location = new System.Drawing.Point(1028, 73);
+            this.btnFinish.Location = new System.Drawing.Point(935, 38);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(87, 29);
             this.btnFinish.TabIndex = 12;
@@ -282,30 +294,6 @@ namespace iWms.Form
             this.tbMaterialNo.Size = new System.Drawing.Size(134, 22);
             this.tbMaterialNo.TabIndex = 18;
             // 
-            // dtOrderTime
-            // 
-            this.dtOrderTime.CustomFormat = "yyyy-MM-dd";
-            this.dtOrderTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtOrderTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderTime.Location = new System.Drawing.Point(96, 73);
-            this.dtOrderTime.Name = "dtOrderTime";
-            this.dtOrderTime.Size = new System.Drawing.Size(134, 22);
-            this.dtOrderTime.TabIndex = 20;
-            this.dtOrderTime.Value = new System.DateTime(2022, 2, 22, 12, 4, 52, 0);
-            this.dtOrderTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
-            // dtFinishedTime
-            // 
-            this.dtFinishedTime.CustomFormat = "yyyy-MM-dd";
-            this.dtFinishedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinishedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishedTime.Location = new System.Drawing.Point(329, 73);
-            this.dtFinishedTime.Name = "dtFinishedTime";
-            this.dtFinishedTime.Size = new System.Drawing.Size(134, 22);
-            this.dtFinishedTime.TabIndex = 21;
-            this.dtFinishedTime.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtFinishedTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
             // tbUpn
             // 
             this.tbUpn.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -346,12 +334,68 @@ namespace iWms.Form
             // btnCancel
             // 
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCancel.Location = new System.Drawing.Point(1028, 38);
+            this.btnCancel.Location = new System.Drawing.Point(935, 73);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 29);
             this.btnCancel.TabIndex = 26;
             this.btnCancel.Text = "取消盘点";
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.Location = new System.Drawing.Point(1177, 73);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(87, 29);
+            this.btnReset.TabIndex = 27;
+            this.btnReset.Text = "一键复位";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnProfit
+            // 
+            this.btnProfit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnProfit.Location = new System.Drawing.Point(1028, 38);
+            this.btnProfit.Name = "btnProfit";
+            this.btnProfit.Size = new System.Drawing.Size(87, 29);
+            this.btnProfit.TabIndex = 28;
+            this.btnProfit.Text = "盘盈";
+            this.btnProfit.Click += new System.EventHandler(this.BtnProfit_Click);
+            // 
+            // btnLoss
+            // 
+            this.btnLoss.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLoss.Location = new System.Drawing.Point(1028, 73);
+            this.btnLoss.Name = "btnLoss";
+            this.btnLoss.Size = new System.Drawing.Size(87, 29);
+            this.btnLoss.TabIndex = 29;
+            this.btnLoss.Text = "盘亏";
+            this.btnLoss.Click += new System.EventHandler(this.BtnLoss_Click);
+            // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(96, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(134, 20);
+            this.dtCreate.TabIndex = 30;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(329, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 31;
             // 
             // tlbTables
             // 
@@ -365,7 +409,7 @@ namespace iWms.Form
             this.tlbTables.Name = "tlbTables";
             this.tlbTables.RowCount = 1;
             this.tlbTables.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlbTables.Size = new System.Drawing.Size(1197, 527);
+            this.tlbTables.Size = new System.Drawing.Size(1293, 527);
             this.tlbTables.TabIndex = 3;
             // 
             // dgvUpns
@@ -392,7 +436,7 @@ namespace iWms.Form
             this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvUpns.Location = new System.Drawing.Point(661, 3);
+            this.dgvUpns.Location = new System.Drawing.Point(714, 3);
             this.dgvUpns.MultiSelect = false;
             this.dgvUpns.Name = "dgvUpns";
             this.dgvUpns.ReadOnly = true;
@@ -400,7 +444,7 @@ namespace iWms.Form
             this.dgvUpns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvUpns.RowTemplate.Height = 23;
             this.dgvUpns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvUpns.Size = new System.Drawing.Size(533, 521);
+            this.dgvUpns.Size = new System.Drawing.Size(576, 521);
             this.dgvUpns.TabIndex = 2;
             this.dgvUpns.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.Dgv_DataBindingComplete);
             this.dgvUpns.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvUpns_RowPostPaint);
@@ -476,7 +520,7 @@ namespace iWms.Form
             this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(652, 521);
+            this.dgvOrders.Size = new System.Drawing.Size(705, 521);
             this.dgvOrders.TabIndex = 1;
             this.dgvOrders.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.Dgv_DataBindingComplete);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrders_RowPostPaint);
@@ -540,7 +584,7 @@ namespace iWms.Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1203, 707);
+            this.ClientSize = new System.Drawing.Size(1299, 707);
             this.Controls.Add(this.tlpLayout);
             this.Name = "FrmInventoryOrders";
             this.Text = "盘点单列表";
@@ -550,6 +594,10 @@ namespace iWms.Form
             this.gbConditions.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
             this.tlpConditions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             this.tlbTables.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
@@ -576,8 +624,6 @@ namespace iWms.Form
         private System.Windows.Forms.TextBox tbOrderNo;
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbMaterialNo;
-        private System.Windows.Forms.DateTimePicker dtOrderTime;
-        private System.Windows.Forms.DateTimePicker dtFinishedTime;
         private System.Windows.Forms.DataGridView dgvUpns;
         private System.Windows.Forms.TextBox tbUpn;
         private DevExpress.XtraEditors.SimpleButton btnClear;
@@ -596,5 +642,10 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn colActualQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn colResult;
+        private DevExpress.XtraEditors.SimpleButton btnReset;
+        private DevExpress.XtraEditors.SimpleButton btnProfit;
+        private DevExpress.XtraEditors.SimpleButton btnLoss;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }

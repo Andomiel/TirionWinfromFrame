@@ -1,4 +1,6 @@
 ﻿using Business;
+using Commons;
+using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity;
 using Entity.DataContext;
@@ -15,6 +17,7 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,7 +31,9 @@ namespace iWms.Form
         public int pageSize = 10;      //每页记录数
         public int recordCount = 0;    //总记录数
         public int pageCount = 0;      //总页数
-        public int currentPage = 0;    //当前页
+        public int currentPage = 1;    //当前页
+
+        private Timer statusTimer;
 
         public FrmOutstocks()
         {
@@ -52,19 +57,7 @@ namespace iWms.Form
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
             dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.CustomFormat = " ";
         }
-
-
-        private void dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
-        }
-
-        private List<Wms_DeliveryOrder> WorkOrders = new List<Wms_DeliveryOrder>();
 
         private BindingList<DeliveryOrderDto> PagedWorkOrders = new BindingList<DeliveryOrderDto>();
 
@@ -90,8 +83,130 @@ namespace iWms.Form
             cbOrderType.SelectedIndex = 0;
             cbOrderStatus.SelectedIndex = 0;
 
+            ReleaseTimer();
+
+            statusTimer = new Timer
+            {
+                Interval = 30 * 1000
+            };
+            statusTimer.Tick += StatusTimer_Tick;
+            statusTimer.Start();
+
             GetOrders();
         }
+
+        private delegate void RefreshLightStatusDelegate(List<LightShelfStatus> statusList);
+
+        private void RefreshLightStatus(List<LightShelfStatus> statusList)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new RefreshLightStatusDelegate(RefreshLightStatus));
+            }
+            else
+            {
+                foreach (Control item in tlpLight.Controls)
+                {
+                    if (item is LabelControl)
+                    {
+                        var label = item as LabelControl;
+                        string labelIndex = Convert.ToString(label.Tag);
+                        var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
+                        if (statusItem != null)
+                        {
+                            label.ToolTip = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
+                            if (statusItem.state == (int)LightShelfStatusEnum.Normal)
+                            {
+                                label.ForeColor = Color.Green;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
+                            {
+                                label.ForeColor = Color.Yellow;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Error)
+                            {
+                                label.ForeColor = Color.Red;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
+                            {
+                                label.ForeColor = Color.Blue;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                            {
+                                label.ForeColor = Color.Purple;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
+                            {
+                                label.ForeColor = Color.Gray;
+                            }
+                            else
+                            {
+                                label.ForeColor = Color.Black;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void StatusTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                var statusList = GetLightShelfStatus();
+                if (statusList == null || statusList.Count == 0)
+                {
+                    return;
+                }
+                RefreshLightStatus(statusList);
+            }
+            catch (Exception ex)
+            {
+                FileLog.Log($"刷新料架状态出错:{ex.GetDeepException()}");
+            }
+        }
+
+        private List<LightShelfStatus> GetLightShelfStatus()
+        {
+            string url = ConfigurationManager.AppSettings["lightShelfStatusUrl"];
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                throw new OppoCoreException("缺少亮灯货架的状态明细服务地址配置");
+            }
+
+            //Ping pingSender = new Ping();
+            //PingReply reply = pingSender.Send(new Uri(url).Host, 10);//第一个参数为ip地址，第二个参数为ping的时间
+            //if (reply.Status != IPStatus.Success)
+            //{
+            //    return new List<LightShelfStatus>();
+            //}
+            //Dictionary<string, string> logDict = new Dictionary<string, string>(3);
+            //logDict.Add("url", url);
+
+            var request = new LightShelfBaseRequest();
+            string requestString = JsonConvert.SerializeObject(request);
+            //logDict.Add("request", requestString);
+
+            string strResponse = WebClientHelper.Post(requestString, url, null);
+            //logDict.Add("response", strResponse);
+
+            //FileLog.Log($"读取亮灯货架状态:{JsonConvert.SerializeObject(logDict)}");
+
+            LightShelfStatusResponse response = JsonConvert.DeserializeObject<LightShelfStatusResponse>(strResponse);
+            return response?.data;
+        }
+
+        private void ReleaseTimer()
+        {
+            if (statusTimer != null)
+            {
+                statusTimer.Stop();
+                //statusTimer.Tick -= StatusTimer_Tick;
+                statusTimer.Dispose();
+                statusTimer = null;
+            }
+        }
+
 
         private readonly object lockQueryObj = new object();
 
@@ -135,23 +250,36 @@ namespace iWms.Form
                 Upn = tbUpn.Text.Trim(),
                 Operator = tbOperator.Text.Trim()
             };
-            if (!string.IsNullOrWhiteSpace(dtOrderTime.CustomFormat))
+
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
             {
-                condition.HaveOrderTimeQuery = true;
-                condition.OrderTimeStart = dtOrderTime.Value.Date;
-                condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
-            }
-            if (!string.IsNullOrWhiteSpace(dtFinishedTime.CustomFormat))
-            {
-                condition.HaveFinishedTimeQuery = true;
-                condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-                condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
             }
 
-            WorkOrders = DeliveryBll.GetDeliveryOrders(condition);
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
+            {
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
+            }
 
-            currentPage = 1;
-            recordCount = WorkOrders.Count;
+            PagedWorkOrders.Clear();
+
+            int startRow = (currentPage - 1) * pageSize;
+            var orders = DeliveryBll.GetDeliveryOrders(condition, startRow, startRow + pageSize);
+
+            foreach (var item in orders)
+            {
+                PagedWorkOrders.Add(item);
+            }
+
+            recordCount = 0;
+            if (orders != null && orders.Any())
+            {
+                recordCount = orders.First().TotalCount;
+            }
             pageCount = (recordCount / pageSize);
             if (recordCount % pageSize > 0)
             {
@@ -164,7 +292,6 @@ namespace iWms.Form
         {
             if (pageCount == 0)
             {
-                PagedWorkOrders.Clear();
                 tpscurrentPage.Text = "0";//当前页
                 tpspageCount.Text = "0";//总页数
                 tpsrecordCount.Text = "0";//总记录数
@@ -173,15 +300,6 @@ namespace iWms.Form
             if (currentPage < 1) currentPage = 1;
             if (currentPage > pageCount) currentPage = pageCount;
 
-            int beginRecord = pageSize * (currentPage - 1) + 1;
-            int endRecord = pageSize * currentPage;
-
-            if (currentPage >= pageCount) endRecord = recordCount;
-            PagedWorkOrders.Clear();
-            for (int i = beginRecord - 1; i < endRecord; i++)
-            {
-                PagedWorkOrders.Add(WorkOrders[i].Adapt<DeliveryOrderDto>());
-            }
             tpscurrentPage.Text = currentPage.ToString();//当前页
             tpspageCount.Text = pageCount.ToString();//总页数
             tpsrecordCount.Text = recordCount.ToString();//总记录数
@@ -235,10 +353,14 @@ namespace iWms.Form
             }
             var row = dgvOrders.SelectedCells[0].OwningRow;
             var order = row.DataBoundItem as DeliveryOrderDto;
+            if (order.DeliveryNo == selectedOrder?.DeliveryNo)
+            {
+                return;
+            }
             selectedOrder = order;
 
             var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
-            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId).ToList();
 
             WorkOrderDetails.Clear();
             WorkOrderBarcodes.Clear();
@@ -319,15 +441,16 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据！".ShowTips();
+                        "请选中一行数据！".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
                     {
                         "当前单据尚未计算，没有要出库的物料信息！".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "不可重复执行出库！".ShowTips();
                         return;
@@ -341,9 +464,11 @@ namespace iWms.Form
 
                     new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, sortDiag.SortNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivering;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "执行出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     "出库任务下达成功！".ShowTips();
+
+                    GetOrders();
                 }
             }
             catch (Exception ex)
@@ -359,7 +484,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -373,21 +498,21 @@ namespace iWms.Form
                     continue;
                 }
                 var currentRecords = recordGroup.FirstOrDefault(p => p.Key == item);
-                if (currentRecords == null || currentRecords.Count() < 2)
+                if (currentRecords == null || currentRecords.Count() < 3)
                 {
                     continue;
                 }
 
                 string area = EnumHelper.GetDescription(typeof(TowerEnum), item);
                 List<string> orderNos = currentRecords.Select(p => p.OrderNo).Distinct().ToList();
-                throw new OppoCoreException($"当前已有两个出库单据({string.Join(",", orderNos)})在库区{area}中执行，请等待");
+                throw new OppoCoreException($"当前已有3个出库单据({string.Join(",", orderNos)})在库区{area}中执行，请等待");
             }
         }
 
         private void ValidateInstockOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -411,24 +536,6 @@ namespace iWms.Form
             }
         }
 
-        private readonly object lockJumpObj = new object();
-
-        private void BtnJump_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                lock (lockJumpObj)
-                {
-
-                    "出库任务下达成功！".ShowTips();
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.GetDeepException().ShowError();
-            }
-        }
-
         private readonly object lockFinishObj = new object();
 
         private void BtnFinish_Click(object sender, EventArgs e)
@@ -439,11 +546,11 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据！".ShowTips();
+                        "请选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus != (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus != (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "【正在出库】状态的工单才能【拣料完成】！".ShowTips();
                         return;
@@ -451,7 +558,8 @@ namespace iWms.Form
 
                     int asrsArea = (int)TowerEnum.ASRS;
                     int unfinishStatus = (int)DeliveryBarcodeStatusEnum.Undeliver;
-                    if (OrderBarcodes.Any(p => p.DeliveryAreaId == asrsArea && p.OrderStatus == unfinishStatus))
+                    var barcodes = DeliveryBll.GetDeliveryBarcodes(selectedOrder.BusinessId);
+                    if (barcodes.Any(p => p.DeliveryAreaId == asrsArea && p.OrderStatus == unfinishStatus))
                     {
                         "智能仓中仍然有未出完的料，不可拣料完成".ShowTips();
                         return;
@@ -459,8 +567,8 @@ namespace iWms.Form
 
                     new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "标记完成出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     $"出库单:{selectedOrder.DeliveryNo}捡料完成".ShowTips();
                 }
             }
@@ -482,56 +590,73 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
-                    if (selectedOrder == null)
+                    var workOrders = PagedWorkOrders.Where(p => p.IsSelected).ToList();
+                    if (workOrders.Count == 0)
                     {
                         "请选择要导出明细的出库单".ShowTips();
                         return;
                     }
-                    if (WorkOrderDetails.Count == 0)
-                    {
-                        "暂无数据可导出，请查询后导出".ShowTips();
-                        return;
-                    }
 
-                    var data = OrderBarcodes.Join(WorkOrderDetails, p => p.DeliveryDetailId, p => p.BusinessId, (b, d) => new
+                    Dictionary<string, List<ExportOrder>> data = new Dictionary<string, List<ExportOrder>>();
+                    foreach (var order in workOrders)
                     {
-                        OrderNo = selectedOrder.DeliveryNo,
-                        OrderTime = selectedOrder.CreateTime,
-                        OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
-                        FinishedTime = selectedOrder.LastUpdateTime,
-                        OrderStatus = selectedOrder.OrderStatusDisplay,
-                        DestinationNo = selectedOrder.LineId,
-                        MaterialNo = d.MaterialNo,
-                        DeliveryCount = d.RequireCount,
-                        MaterialName = string.Empty,
-                        InventoryStatus = d.DeliveryStatusDisplay,
-                        Barcode = b.Barcode,
-                        InnerCount = b.DeliveryQuantity,
-                        DeliveryOperator = b.CreateUser,
-                    }).ToList();
+                        List<ExportOrder> dataItem = new List<ExportOrder>();
 
-                    var lackDetails = WorkOrderDetails.Where(p => p.Barcodes.Count == 0).ToList();
-                    if (WorkOrderDetails.Any(p => p.Barcodes.Count == 0))
-                    {
-                        foreach (var item in lackDetails)
+                        var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
+                        var barcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+                        var barcodesGroup = barcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.ToList());
+                        foreach (var detail in details)
                         {
-                            data.Add(new
+                            var detailDto = detail.Adapt<DeliveryDetailDto>();
+                            detailDto.OrderStatus = order.OrderStatus;
+
+                            if (barcodesGroup.ContainsKey(detail.BusinessId))
                             {
-                                OrderNo = selectedOrder.DeliveryNo,
-                                OrderTime = selectedOrder.CreateTime,
-                                OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
-                                FinishedTime = selectedOrder.LastUpdateTime,
-                                OrderStatus = selectedOrder.OrderStatusDisplay,
-                                DestinationNo = selectedOrder.LineId,
-                                MaterialNo = item.MaterialNo,
-                                DeliveryCount = item.RequireCount,
-                                MaterialName = string.Empty,
-                                InventoryStatus = item.DeliveryStatusDisplay,
-                                Barcode = string.Empty,
-                                InnerCount = 0,
-                                DeliveryOperator = string.Empty,
-                            });
+                                var detailBarcodes = barcodesGroup[detail.BusinessId];
+                                detailDto.Barcodes = detailBarcodes;
+
+                                foreach (var barcode in detailBarcodes)
+                                {
+                                    dataItem.Add(new ExportOrder
+                                    {
+                                        OrderNo = selectedOrder.DeliveryNo,
+                                        OrderTime = selectedOrder.CreateTime,
+                                        OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
+                                        FinishedTime = selectedOrder.LastUpdateTime,
+                                        OrderStatus = selectedOrder.OrderStatusDisplay,
+                                        DestinationNo = selectedOrder.LineId,
+                                        MaterialNo = detail.MaterialNo,
+                                        DeliveryCount = detail.RequireCount,
+                                        MaterialName = string.Empty,
+                                        InventoryStatus = detailDto.DeliveryStatusDisplay,
+                                        Barcode = barcode.Barcode,
+                                        InnerCount = barcode.DeliveryQuantity,
+                                        DeliveryOperator = barcode.CreateUser,
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                dataItem.Add(new ExportOrder
+                                {
+                                    OrderNo = selectedOrder.DeliveryNo,
+                                    OrderTime = selectedOrder.CreateTime,
+                                    OrderTypeDes = selectedOrder.DeliveryTypeDisplay,
+                                    FinishedTime = selectedOrder.LastUpdateTime,
+                                    OrderStatus = selectedOrder.OrderStatusDisplay,
+                                    DestinationNo = selectedOrder.LineId,
+                                    MaterialNo = detail.MaterialNo,
+                                    DeliveryCount = detail.RequireCount,
+                                    MaterialName = string.Empty,
+                                    InventoryStatus = detailDto.DeliveryStatusDisplay,
+                                    Barcode = string.Empty,
+                                    InnerCount = 0,
+                                    DeliveryOperator = string.Empty,
+                                });
+                            }
                         }
+
+                        data.Add(order.DeliveryNo, dataItem);
                     }
 
                     List<HeadColumn> headColumns = new List<HeadColumn>
@@ -559,14 +684,21 @@ namespace iWms.Form
             }
         }
 
-        public void ExportToExcel<T>(List<T> data, List<HeadColumn> headColumns) where T : class
+        public void ExportToExcel<T>(Dictionary<string, List<T>> data, List<HeadColumn> headColumns) where T : class
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
-            dialog.FileName = $"出库单{selectedOrder.DeliveryNo}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            if (data.Count == 1)
+            {
+                dialog.FileName = $"出库单{data.First().Key}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
+            else
+            {
+                dialog.FileName = $"出库单-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -587,35 +719,33 @@ namespace iWms.Form
             tbMaterialNo.Text = string.Empty;
             tbDestination.Text = string.Empty;
             tbOperator.Text = string.Empty;
-            dtOrderTime.Value = DateTime.Today;
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.Value = DateTime.Today;
-            dtFinishedTime.CustomFormat = " ";
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 
         private void BtnFrist_ButtonClick(object sender, EventArgs e)
         {
             currentPage = 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnPre_ButtonClick(object sender, EventArgs e)
         {
             currentPage -= 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnNext_ButtonClick(object sender, EventArgs e)
         {
             currentPage += 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnLast_ButtonClick(object sender, EventArgs e)
         {
             currentPage = pageCount;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private readonly object lockCancelObj = new object();
@@ -628,16 +758,16 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据".ShowTips();
+                        "请选中一行数据".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单在发料中，无法取消，可以在发料完成后取消出库，释放物料".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
                     {
                         "工单已复核或关闭，无法取消".ShowTips();
                         return;
@@ -647,6 +777,8 @@ namespace iWms.Form
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Closed;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "取消工单发料", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     _ = "工单取消成功".ShowTips();
                 }
             }
@@ -658,7 +790,8 @@ namespace iWms.Form
 
         private void CancelDeliveryOrderBarcodes(int targetStatus)
         {
-            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).Distinct().ToList());
+            var barcodes = DeliveryBll.GetDeliveryBarcodes(selectedOrder.BusinessId);
+            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, barcodes.Select(p => p.Barcode).Distinct().ToList());
             OrderBarcodes.Clear();
             foreach (var item in WorkOrderDetails)
             {
@@ -676,15 +809,16 @@ namespace iWms.Form
                 {
                     if (selectedOrder == null)
                     {
-                        "请至少选中一行数据".ShowTips();
+                        "请选中一行数据".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "已发料的工单不可重新计算发料".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Calculating)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Calculating)
                     {
                         var dialogResult = "当前工单已经经过计算，是否重新计算".ShowYesNoAndTips();
                         if (dialogResult != DialogResult.Yes)
@@ -706,6 +840,8 @@ namespace iWms.Form
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Calculated;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "执行发料计算", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     _ = "工单计算发料成功".ShowTips();
                 }
             }
@@ -723,7 +859,7 @@ namespace iWms.Form
             foreach (DeliveryDetailDto item in WorkOrderDetails)
             {
                 int remainCount = item.RequireCount;
-                var inventoryBarcodes = DeliveryBll.GetBarcodesByMaterialNo(item.MaterialNo);
+                var inventoryBarcodes = DeliveryBll.GetBarcodesByMaterialNo(item.MaterialNo).ToList();
                 //TODO:here there should be a private method for certain purpose
                 inventoryBarcodes.RemoveAll(p => alreadyInBarcodes.Contains(p.ReelID));
                 if (!isContainSorting)
@@ -790,8 +926,8 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单已开始发料，无法进行有料出库".ShowTips();
                         return;
@@ -800,6 +936,9 @@ namespace iWms.Form
                     new DeliveryBll().SpecialFinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).ToList());
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(selectedOrder.DeliveryNo, "标记有料出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
+                    "工单有料出库完成".ShowTips();
                 }
             }
             catch (Exception ex)
@@ -829,11 +968,23 @@ namespace iWms.Form
                     {
                         return;
                     }
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    {
+                        $"出库单{order.DeliveryNo}{order.OrderStatusDisplay}，不可复核".ShowTips();
+                        return;
+                    }
+                    string reviewLock = DeliveryBll.GetDeliveryOrderLock(order.BusinessId);
+                    //string ip = DnsHelper.GetIP();
+                    if (!string.IsNullOrWhiteSpace(reviewLock))
+                    {
+                        $"出库单{order.DeliveryNo}已在被其他人在{reviewLock}复核，请与其确认".ShowTips();
+                        return;
+                    }
 
                     FrmReviewNew reviewNew = new FrmReviewNew(order);
                     if (reviewNew.ShowDialog() == DialogResult.OK)
                     {
-                        LoadOrderDetails();
+                        GetOrders();
                     }
                 }
             }
@@ -851,7 +1002,7 @@ namespace iWms.Form
                 var barcodeDto = row.DataBoundItem as DeliveryBarcodeDto;
                 if (barcodeDto.ExecuteResult == (int)ExecuteResultEnum.Failed)
                 {
-                    row.Cells["colInventoryStatus"].Style.BackColor = Color.Orange;
+                    row.Cells["colLocation"].Style.BackColor = Color.Orange;
                 }
                 else
                 {
@@ -918,6 +1069,7 @@ namespace iWms.Form
                         CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
                     }
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(selectedOrder.DeliveryNo, "执行工单复位", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     "复位成功，请检查料架和工单操作日志".ShowTips();
                 }
             }
@@ -982,31 +1134,42 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
-                    if (selectedOrder == null)
+                    var workOrders = PagedWorkOrders.Where(p => p.IsSelected).ToList();
+                    if (workOrders.Count == 0)
                     {
                         "请选择要导出明细的出库单".ShowTips();
                         return;
                     }
-                    if (WorkOrderDetails.Count == 0)
+
+                    Dictionary<string, List<LackDetail>> data = new Dictionary<string, List<LackDetail>>();
+
+                    foreach (var order in workOrders)
                     {
-                        "暂无数据可导出，请查询后导出".ShowTips();
-                        return;
+                        List<LackDetail> dataItem = new List<LackDetail>();
+
+                        var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
+                        var barcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+
+                        var detailCount = barcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.Sum(b => b.DeliveryQuantity));
+
+                        foreach (var detail in details)
+                        {
+                            dataItem.Add(new LackDetail()
+                            {
+                                RowNum = detail.RowNum,
+                                OrderNo = selectedOrder.DeliveryNo,
+                                MaterialNo = detail.MaterialNo,
+                                RequireCount = detail.RequireCount,
+                                DeliveryCount = detailCount.ContainsKey(detail.BusinessId) ? detailCount[detail.BusinessId] : 0,
+                            });
+                        }
+
+                        data.Add(order.DeliveryNo, dataItem);
                     }
-
-                    var detailCount = OrderBarcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.Sum(b => b.DeliveryQuantity));
-
-                    var data = WorkOrderDetails.Select(p => new LackDetail()
-                    {
-                        RowNum = p.RowNum,
-                        OrderNo = selectedOrder.DeliveryNo,
-                        MaterialNo = p.MaterialNo,
-                        RequireCount = p.RequireCount,
-                        DeliveryCount = detailCount.ContainsKey(p.BusinessId) ? detailCount[p.BusinessId] : 0,
-                    }).ToList();
 
                     List<HeadColumn> headColumns = new List<HeadColumn>
                         {
-                            new HeadColumn("LineNumber","序号", 2200),
+                            new HeadColumn("RowNum","序号", 2200),
                             new HeadColumn("OrderNo","出库单号", 4200),
                             new HeadColumn("MaterialNo","物料代码", 2200),
                             new HeadColumn("RequireCount","需求数量", 2200),
@@ -1021,6 +1184,43 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
+        }
+
+        private void btnClearAlarm_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockSpecialObj)
+                {
+                    //额外做一次取消报警
+                    string url = ConfigurationManager.AppSettings["lightShelfCancelAlarmUrl"];
+                    if (string.IsNullOrWhiteSpace(url))
+                    {
+                        throw new OppoCoreException("缺少亮灯货架的取消报警服务地址配置");
+                    }
+                    string logKey = "clearAlarm";
+                    foreach (string shelfNo in ShelfNos)
+                    {
+                        CancelAlarm(logKey, url, shelfNo);
+                    }
+
+                    "取消报警成功，请等待30s刷新状态".ShowTips();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+        }
+
+        private void FrmOutstocks_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ReleaseTimer();
         }
     }
 
@@ -1040,5 +1240,22 @@ namespace iWms.Form
 
         public int LackCount => DeliveryCount >= RequireCount ? 0 : DeliveryCount - RequireCount;
 
+    }
+
+    public class ExportOrder
+    {
+        public string OrderNo { get; set; } = string.Empty;
+        public DateTime OrderTime { get; set; } = new DateTime(1900, 1, 1);
+        public string OrderTypeDes { get; set; } = string.Empty;
+        public DateTime FinishedTime { get; set; } = new DateTime(1900, 1, 1);
+        public string OrderStatus { get; set; } = string.Empty;
+        public string DestinationNo { get; set; } = string.Empty;
+        public string MaterialNo { get; set; } = string.Empty;
+        public int DeliveryCount { get; set; } = 0;
+        public string MaterialName { get; set; } = string.Empty;
+        public string InventoryStatus { get; set; } = string.Empty;
+        public string Barcode { get; set; } = string.Empty;
+        public int InnerCount { get; set; } = 0;
+        public string DeliveryOperator { get; set; } = string.Empty;
     }
 }

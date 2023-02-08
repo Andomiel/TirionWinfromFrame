@@ -98,7 +98,7 @@ namespace iWms.Form
                 Barcodes.Add(item);
             }
             recordCount = 0;
-            if (inventory != null && inventory.Count > 0)
+            if (inventory != null && inventory.Any())
             {
                 recordCount = inventory.First().TotalCount;
             }
@@ -243,13 +243,13 @@ namespace iWms.Form
             dtpicker.CustomFormat = " ";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void BtnExport_Click(object sender, EventArgs e)
         {
             SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
                 MaterialQueryCondition condition = BuildConditions();
-                var inventory = InOutStockStorageData.GetSmt_zd_MaterialInfo(condition, 0, 100000000, orderBy);
+                var inventory = InOutStockStorageData.GetMaterialInfoExport(condition);
                 ExportToExcel(inventory);
             }
             catch (Exception ex)
@@ -259,7 +259,7 @@ namespace iWms.Form
             SplashScreenManager.CloseForm();
         }
 
-        public void ExportToExcel(List<InventoryEntity> data)
+        public void ExportToExcel(IEnumerable<InventoryEntity> data)
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
@@ -285,7 +285,7 @@ namespace iWms.Form
                 new HeadColumn("Qty","数量", 2200),
                 new HeadColumn("Lot","批次", 2200),
                 new HeadColumn("MinPacking","最小包装", 2200),
-                new HeadColumn("MSD","MSD", 2200),
+                new HeadColumn("MSD","MSD", 1000),
                 new HeadColumn("TowerDes","库区", 3000),
                 new HeadColumn("ABSide","巷道货架", 3000),
                 new HeadColumn("Location","库位", 2200),
@@ -293,6 +293,7 @@ namespace iWms.Form
                 new HeadColumn("StatusDisplay","库存状态", 3000),
                 new HeadColumn("HoldState","冻烘状态", 3000),
                 new HeadColumn("SaveTime","入库时间", 7168),
+                new HeadColumn("HoldNo","冻结单号", 4000),
             };
             string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, data, headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
@@ -310,24 +311,25 @@ namespace iWms.Form
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "巷道：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildAbSide();
+                    cbShelfSide.DataSource = BuildComboxHelper.AbSide;
                     break;
                 case 2:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "料架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildLightShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
                     break;
                 case 3:
-                    lblShelfSide.Visible = false;
-                    cbShelfSide.Visible = false;
-                    cbShelfSide.SelectedIndex = -1;
+                    lblShelfSide.Visible = true;
+                    lblShelfSide.Text = "栈板：";
+                    cbShelfSide.Visible = true;
+                    cbShelfSide.DataSource = BuildComboxHelper.PalletAreas;
                     break;
                 case 4:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildTransformationShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.TransformationShelf;
                     break;
                 default:
                     lblShelfSide.Visible = false;

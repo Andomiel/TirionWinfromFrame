@@ -54,6 +54,8 @@ namespace TirionWinfromFrame
             SkinHelper.InitSkinGallery(ribbonGalleryBarItem1);
             Init();
             barUserName.Caption = $"用户名:{AppInfo.LoginUserInfo.username}";
+
+            bsiVersion.Caption = $"V{Application.ProductVersion}";
         }
 
 

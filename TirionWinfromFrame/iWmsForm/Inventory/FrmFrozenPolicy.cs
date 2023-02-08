@@ -1,4 +1,5 @@
 ﻿using Business;
+using DevExpress.XtraEditors;
 using Entity;
 using Entity.Dto;
 using Entity.Enums;
@@ -50,7 +51,7 @@ namespace iWms.Form
             string reason = tbReason.Text.Trim();
             if (!string.IsNullOrWhiteSpace(reason))
             {
-                list = list.Where(p => p.Remark.Contains(reason)).ToList();
+                list = list.Where(p => p.Remark.Contains(reason) || p.FrozenNo == reason).ToList();
             }
             dataGridViewPolicy.DataSource = new BindingList<PolicyView>(list);
         }
@@ -64,7 +65,7 @@ namespace iWms.Form
         private void btnSearch_Click(object sender, EventArgs e)
         {
             var condition = BuildConditions();
-            List<FrozenQueryItem> inventories = FrozenPolicyBll.GetInventory(condition);
+            List<FrozenQueryItem> inventories = FrozenPolicyBll.GetInventory(condition).ToList();
             this.dataGridViewSelect.DataSource = new BindingList<FrozenQueryItem>(inventories);
         }
 
@@ -179,24 +180,25 @@ namespace iWms.Form
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "巷道：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildAbSide();
+                    cbShelfSide.DataSource = BuildComboxHelper.AbSide;
                     break;
                 case 2:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildLightShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
                     break;
                 case 3:
-                    lblShelfSide.Visible = false;
-                    cbShelfSide.Visible = false;
-                    cbShelfSide.SelectedIndex = -1;
+                    lblShelfSide.Visible = true;
+                    lblShelfSide.Text = "栈板：";
+                    cbShelfSide.Visible = true;
+                    cbShelfSide.DataSource = BuildComboxHelper.PalletAreas;
                     break;
                 case 4:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.BuildTransformationShelf();
+                    cbShelfSide.DataSource = BuildComboxHelper.TransformationShelf;
                     break;
                 default:
                     lblShelfSide.Visible = false;
@@ -224,7 +226,7 @@ namespace iWms.Form
                 {
                     return;
                 }
-                createResult = FrozenPolicyBll.SavePolicy(condition, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                createResult = FrozenPolicyBll.SavePolicy(condition, frmBuildRemind.TxtRemark, AppInfo.LoginUserInfo.account);
             }
             //选择UPN
             else if (dialogResult == DialogResult.Yes)
@@ -241,7 +243,7 @@ namespace iWms.Form
                     return;
                 }
                 List<string> upns = selectedItems.Select(p => p.ReelID).ToList();
-                createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.TxtRemark, AppInfo.LoginUserInfo.account);
             }
 
             AfterSavePolicy(createResult);
@@ -252,7 +254,7 @@ namespace iWms.Form
             List<PolicyView> items = new List<PolicyView>(dataGridViewPolicy.DataSource as BindingList<PolicyView>);
             var selectedItems = items.Where(p => p.SelectFlag).ToList();
             FrozenOperateType operateEnum = FrozenOperateType.Unable;
-            Button btn = sender as Button;
+            SimpleButton btn = sender as SimpleButton;
             switch (btn.Name)
             {
                 case "btnEnable":
@@ -292,7 +294,7 @@ namespace iWms.Form
             bool opearteResult = FrozenPolicyBll.OperatePolicyEnable(selectedItems, operateEnum, AppInfo.LoginUserInfo.account);
             if (opearteResult)
             {
-                $"冻结策略{EnumHelper.GetDescription(operateEnum)}成功".ShowTips();
+                $"冻结策略{btn.Text}成功".ShowTips();
                 QueryPolicies();
             }
             else
@@ -327,7 +329,7 @@ namespace iWms.Form
                         var dialogResult = frmBuildRemind.ShowDialog();
                         if (dialogResult == DialogResult.Cancel)
                         { return; }
-                        PolicyCreateResult createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.txtRemark, AppInfo.LoginUserInfo.account);
+                        PolicyCreateResult createResult = FrozenPolicyBll.SavePolicy(upns, frmBuildRemind.TxtRemark, AppInfo.LoginUserInfo.account);
                         AfterSavePolicy(createResult);
                     }
                 }

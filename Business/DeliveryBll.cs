@@ -1,9 +1,11 @@
 ﻿using DataBase;
 using Entity.DataContext;
+using Entity.Dto.Delivery;
 using Entity.Enums;
 using Entity.Enums.General;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,31 +17,47 @@ namespace Business
     {
         protected override LightRecordTypeEnum OrderType => LightRecordTypeEnum.Delivery;
 
-        public static List<Wms_DeliveryOrder> GetDeliveryOrders(DeliveryQueryCondition condition)
+        public static IEnumerable<DeliveryOrderDto> GetDeliveryOrders(DeliveryQueryCondition condition, int startRow, int endRow)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
+            sb.AppendLine($@"With Orders AS
+              (
+            SELECT
+                ROW_NUMBER() OVER(ORDER BY wdo.CreateTime DESC) RowNumber,  
+                COUNT(1) OVER() AS TotalCount,
+                wdo.* 
+             {BuildMainQuerySql(condition, parameters)}
+              ) 
+            SELECT * FROM Orders
+             WHERE Orders.RowNumber > {startRow} AND Orders.RowNumber <= {endRow} ");
+
+            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
+
+            return orders.DataTableToList<DeliveryOrderDto>();
+        }
+
+        private static string BuildMainQuerySql(DeliveryQueryCondition condition, List<SqlParameter> parameters)
+        {
+            StringBuilder sb = new StringBuilder();
 
             if (!string.IsNullOrWhiteSpace(condition.Upn))
             {
-                sb.AppendLine(@"SELECT wdo.*
-                        FROM Wms_DeliveryBarcode wdb 
-                        left join Wms_DeliveryOrder wdo on wdb.DeliveryId = wdo.BusinessId 
+                sb.AppendLine($@" FROM Wms_DeliveryBarcode wdb WITH(NOLock) 
+                        left join Wms_DeliveryOrder wdo WITH(NOLock) on wdb.DeliveryId = wdo.BusinessId 
                         WHERE wdb.Barcode  = @Barcode ");
                 parameters.Add(new SqlParameter("@Barcode", condition.Upn));
             }
             else if (!string.IsNullOrWhiteSpace(condition.MaterialNo))
             {
-                sb.AppendLine(@"SELECT wdo.*
-                        FROM Wms_DeliveryDetail wdd 
-                        left join Wms_DeliveryOrder wdo on wdd.DeliveryId = wdo.BusinessId 
+                sb.AppendLine($@" FROM Wms_DeliveryDetail wdd  WITH(NOLock) 
+                        left join Wms_DeliveryOrder wdo  WITH(NOLock) on wdd.DeliveryId = wdo.BusinessId 
                         WHERE wdd.MaterialNo = @MaterialNo ");
                 parameters.Add(new SqlParameter("@MaterialNo", condition.MaterialNo));
             }
             else
             {
-                sb.AppendLine(@" SELECT wdo.*
-                        FROM Wms_DeliveryOrder wdo  WHERE 1=1 ");
+                sb.AppendLine($@" FROM Wms_DeliveryOrder wdo WITH(NOLock)  WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
             {
@@ -73,11 +91,7 @@ namespace Business
                 parameters.Add(new SqlParameter("@FinishStartTime", condition.FinishedTimeStart));
                 parameters.Add(new SqlParameter("@FinishEndTime", condition.FinishedTimeEnd));
             }
-            sb.AppendLine("	ORDER BY wdo.CreateTime DESC  ");
-
-            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
-
-            return orders.DataTableToList<Wms_DeliveryOrder>();
+            return sb.ToString();
         }
 
         public static Wms_DeliveryOrder GetDeliveryOrderByNo(string deliveryNo)
@@ -95,7 +109,38 @@ namespace Business
             return orders.DataTableToList<Wms_DeliveryOrder>().First();
         }
 
-        public static List<Wms_DeliveryDetail> GetDeliveryDetails(string deliveryId)
+        public static IEnumerable<Wms_DeliveryOrder> GetInventoryValidateOrders()
+        {
+            string sql = $@"SELECT DISTINCT wdo .*
+FROM Wms_DeliveryBarcode wdb  WITH(NOLock) 
+left join Wms_DeliveryOrder wdo WITH(NOLock)  on wdb.DeliveryId = wdo.BusinessId 
+WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
+        }
+
+        public static IEnumerable<Wms_DeliveryOrder> GetInventoryValidateOrders(IEnumerable<string> ids)
+        {
+            if (!ids.Any())
+            {
+                return new List<Wms_DeliveryOrder>();
+            }
+            IEnumerable<string> formatIds = ids.Select(p => $"'{p}'");
+            string sql = $"SELECT * FROM Wms_DeliveryOrder wdo WITH(NOLock) WHERE BusinessId IN ({string.Join(",", formatIds.ToArray())}) ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
+        }
+
+        public static IEnumerable<Wms_DeliveryBarcode> GetInventoryValidateBarcode()
+        {
+            string sql = $@"SELECT wdb .*
+FROM Wms_DeliveryBarcode wdb  WITH(NOLock) 
+WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryBarcode>();
+        }
+
+        public static IEnumerable<Wms_DeliveryDetail> GetDeliveryDetails(string deliveryId)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Wms_DeliveryDetail.GetSelectSql());
@@ -107,7 +152,7 @@ namespace Business
             return details.DataTableToList<Wms_DeliveryDetail>();
         }
 
-        public static List<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryId)
+        public static IEnumerable<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryId)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Wms_DeliveryBarcode.GetSelectSql());
@@ -118,7 +163,7 @@ namespace Business
             return details.DataTableToList<Wms_DeliveryBarcode>();
         }
 
-        public static List<Wms_DeliveryOrder> GetDeliveryOrderByStatus(int deliveryStatus)
+        public static IEnumerable<Wms_DeliveryOrder> GetDeliveryOrderByStatus(int deliveryStatus)
         {
             string sql = $"{Wms_DeliveryOrder.GetSelectSql()} AND OrderStatus = {deliveryStatus} ";
 
@@ -138,6 +183,7 @@ namespace Business
                 {
                     switch (item.Key)
                     {
+                        case (int)TowerEnum.PalletArea:
                         case (int)TowerEnum.SortingArea:
                             //do nothing
                             break;
@@ -225,11 +271,11 @@ namespace Business
             return DbHelper.Update(sql) > 0;
         }
 
-        public static List<SMTZDMaterial> GetBarcodesByMaterialNo(string materialNo)
+        public static IEnumerable<SMTZDMaterial> GetBarcodesByMaterialNo(string materialNo)
         {
-            string sql = $@"SELECT szm.*  from smt_zd_material szm 
-                     LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen) smf ON szm.ReelID = smf.UPN
-                        WHERE szm.Status ={(int)BarcodeStatusEnum.Saved} AND szm.isSave = 1 AND  szm.isTake = 0 AND szm.BakeState =0
+            string sql = $@"SELECT szm.*  from smt_zd_material szm  WITH(NOLock) 
+                     LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen WITH(NOLock) ) smf ON szm.ReelID = smf.UPN
+                        WHERE szm.Status ={(int)BarcodeStatusEnum.Saved} AND szm.isSave = 1 AND  szm.isTakeCheck = 0 AND szm.BakeState =0
                          AND smf.UPN is NULL 
                                 AND szm.Part_Number = '{materialNo}' 
                         ORDER BY szm.LockTowerNo DESC, szm.SaveTime, szm.Qty ASC; ";
@@ -258,32 +304,36 @@ namespace Business
 
         protected override int GetSortNo(int deliveryType)
         {
-            string sql = $@" SELECT TOP 1 wdo.SortingId FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering}; ";
-            int currentNo = TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), -1);
-            if (deliveryType == (int)DeliveryOrderTypeEnum.FirstSet)
-            {
-                if (currentNo == (int)SortNoEnum.FirstSet)
-                {
-                    throw new OppoCoreException("当前工单为首盘料工单，首盘料出料口当前被占用，无法出库，请等待");
-                }
-                return (int)SortNoEnum.FirstSet;
-            }
-            if (currentNo == (int)SortNoEnum.FreeFirst)
-            {
-                return (int)SortNoEnum.FreeSecond;
-            }
-            else
+            string sql = $@" SELECT wdo.SortingId FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering} ";
+            var currentSortNos = DbHelper.GetDataTable(sql);
+            if (currentSortNos == null || currentSortNos.Rows.Count == 0)
             {
                 return (int)SortNoEnum.FreeFirst;
             }
+            var allSortNos = new List<int>() { (int)SortNoEnum.FirstSet, (int)SortNoEnum.FreeSecond, (int)SortNoEnum.FreeFirst };
+
+            foreach (DataRow item in currentSortNos.Rows)
+            {
+                string sortNo = Convert.ToString(item["SortingId"]);
+                if (string.IsNullOrWhiteSpace(sortNo))
+                {
+                    continue;
+                }
+                allSortNos.Remove(Convert.ToInt32(sortNo));
+            }
+            if (allSortNos.Count == 0)
+            {
+                throw new OppoCoreException("所有出料口当前都被占用，无法出库，请等待");
+            }
+            return allSortNos.First();
         }
 
 
-        protected override List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
+        protected override IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
             string sql = $@"SELECT wdb.Barcode, wdb.DeliveryAreaId, wdb.DeliveryLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wdb.DeliveryQuantity, wdb.OrderStatus as BarcodeStatus   
-                        FROM Wms_DeliveryBarcode wdb 
-                        left join smt_zd_material szm on wdb.Barcode = szm.ReelID 
+                        FROM Wms_DeliveryBarcode wdb  WITH(NOLock) 
+                        left join smt_zd_material szm WITH(NOLock)  on wdb.Barcode = szm.ReelID 
                         WHERE wdb.DeliveryId = '{deliveryId}' AND wdb.OrderStatus <= {targetStatus}";
 
             return DbHelper.GetDataTable(sql).DataTableToList<DeliveryBarcodeLocation>();
@@ -312,16 +362,41 @@ namespace Business
             return (int)DeliveryBarcodeStatusEnum.Delivered;
         }
 
-        public static List<Wms_DeliveryOrder> GetOrdersForReview(int deliveryType)
+        public static IEnumerable<Wms_DeliveryOrder> GetOrdersForReview(int deliveryType)
         {
-            string sql = $"SELECT * FROM Wms_DeliveryOrder wdo WHERE wdo.OrderStatus = {(int)DeliveryOrderStatusEnum.Delivered} AND DeliveryType = {deliveryType}";
+            string sql = $"SELECT * FROM Wms_DeliveryOrder wdo WITH(NOLock)  WHERE wdo.OrderStatus = {(int)DeliveryOrderStatusEnum.Delivered} AND DeliveryType = {deliveryType}";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
         }
 
-        public static List<Wms_DeliveryOrder> GetDeliveringOrders()
+        public static IEnumerable<Wms_DeliveryOrder> GetDeliveringOrders()
         {
             string sql = $@" SELECT TOP 2 * FROM Wms_DeliveryOrder wdo WHERE OrderStatus = {(int)DeliveryOrderStatusEnum.Delivering}; ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_DeliveryOrder>();
+        }
+
+        protected override int GetLargestStatus()
+        {
+            return (int)DeliveryBarcodeStatusEnum.Cancelled;
+        }
+
+        public static void LockDeliveryOrder(string deliveryId, string ip, string userName)
+        {
+            string sql = $@"update Wms_DeliveryOrder set ReviewLock = '{ip}@{userName}' where BusinessId = '{deliveryId}' ";
+
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
+        public static void ReleaseDeliveryOrder(string deliveryId)
+        {
+            string sql = $@"update Wms_DeliveryOrder set ReviewLock = '' where BusinessId = '{deliveryId}' ";
+
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
+        public static string GetDeliveryOrderLock(string deliveryId)
+        {
+            string sql = $"select ReviewLock from Wms_DeliveryOrder  WITH(NOLock) where BusinessId = '{deliveryId}' ";
+            return Convert.ToString(DbHelper.ExecuteScalar(sql));
         }
     }
 

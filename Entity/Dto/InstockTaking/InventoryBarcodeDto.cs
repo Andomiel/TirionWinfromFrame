@@ -1,9 +1,10 @@
 ﻿using Entity.Enums.Inventory;
 using System;
+using System.ComponentModel;
 
 namespace Entity.Dto
 {
-    public class InventoryBarcodeDto
+    public class InventoryBarcodeDto : INotifyPropertyChanged
     {
         /// <summary>
         /// 明细业务Id
@@ -30,20 +31,52 @@ namespace Entity.Dto
         /// </summary>
         public int OriginQuantity { get; set; } = 0;
 
+        private int _realQuantity = 0;
+
         /// <summary>
         /// 盘后数量，盘后数量为0时，标识缺料
         /// </summary>
-        public int RealQuantity { get; set; } = 0;
+        public int RealQuantity
+        {
+            get { return _realQuantity; }
+            set
+            {
+                if (_realQuantity != value)
+                {
+                    _realQuantity = value;
+                    IsChanged = true;
+                    OrderStatus = (int)InventoryBarcodeStatusEnum.Executed;
+                    RaisePropertyChange(nameof(RealQuantity));
+                    RaisePropertyChange(nameof(InventoryResult));
+                }
+            }
+        }
+
+        public bool IsChanged { get; set; } = false;
 
         /// <summary>
         /// 原储位
         /// </summary>
         public string OriginLocation { get; set; } = string.Empty;
 
+        private int _orderStatus = 0;
         /// <summary>
         /// 状态,0 待盘点，1 已盘点，2已确认
         /// </summary>
-        public int OrderStatus { get; set; } = 0;
+        public int OrderStatus
+        {
+            get { return _orderStatus; }
+            set
+            {
+                if (_orderStatus != value)
+                {
+                    _orderStatus = value;
+                    IsChanged = true;
+                    RaisePropertyChange(nameof(OrderStatusDisplay));
+                    RaisePropertyChange(nameof(InventoryResult));
+                }
+            }
+        }
 
         public string OrderStatusDisplay => EnumHelper.GetDescription(typeof(InventoryOrderStatusEnum), OrderStatus);
 
@@ -99,6 +132,13 @@ namespace Entity.Dto
                     }
                 }
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChange(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

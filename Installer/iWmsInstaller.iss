@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "iWms"
-#define MyAppVersion "1.0.14"
+#define MyAppVersion "1.0.29"
 #define MyAppPublisher "Passioniot, Inc."
 #define MyAppURL "http://www.passioniot.com/"
 #define MyAppExeName "TirionWinfromFrame.Start.exe"

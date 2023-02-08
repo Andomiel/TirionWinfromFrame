@@ -29,8 +29,8 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInventoryOrder));
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.label12 = new System.Windows.Forms.Label();
@@ -75,6 +75,8 @@ namespace iWms.Form
             this.nupPercent = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
+            this.btnIlegal = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSyncLightShelf = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSelect)).BeginInit();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
@@ -142,14 +144,14 @@ namespace iWms.Form
             this.dataGridViewSelect.AllowUserToResizeRows = false;
             this.dataGridViewSelect.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewSelect.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSelect.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSelect.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewSelect.ColumnHeadersHeight = 24;
             this.dataGridViewSelect.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewSelect.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -163,14 +165,14 @@ namespace iWms.Form
             this.colLocation,
             this.料盘类型,
             this.入库时间});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSelect.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSelect.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewSelect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewSelect.EnableHeadersVisualStyles = false;
             this.dataGridViewSelect.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
@@ -478,6 +480,8 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.nupPercent, 3, 2);
             this.tlpConditions.Controls.Add(this.label3, 0, 1);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 1, 1);
+            this.tlpConditions.Controls.Add(this.btnIlegal, 13, 1);
+            this.tlpConditions.Controls.Add(this.btnSyncLightShelf, 13, 2);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 3);
             this.tlpConditions.Name = "tlpConditions";
@@ -571,6 +575,27 @@ namespace iWms.Form
             this.tbMaterialNo.Size = new System.Drawing.Size(134, 22);
             this.tbMaterialNo.TabIndex = 77;
             // 
+            // btnIlegal
+            // 
+            this.btnIlegal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnIlegal.Enabled = false;
+            this.btnIlegal.Location = new System.Drawing.Point(1285, 11);
+            this.btnIlegal.Name = "btnIlegal";
+            this.btnIlegal.Size = new System.Drawing.Size(111, 29);
+            this.btnIlegal.TabIndex = 78;
+            this.btnIlegal.Text = "非法物料查询";
+            // 
+            // btnSyncLightShelf
+            // 
+            this.btnSyncLightShelf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSyncLightShelf.Location = new System.Drawing.Point(1285, 46);
+            this.btnSyncLightShelf.Name = "btnSyncLightShelf";
+            this.btnSyncLightShelf.Size = new System.Drawing.Size(111, 29);
+            this.btnSyncLightShelf.TabIndex = 79;
+            this.btnSyncLightShelf.Text = "库存同步";
+            this.btnSyncLightShelf.Visible = false;
+            this.btnSyncLightShelf.Click += new System.EventHandler(this.BtnSyncLightShelf_Click);
+            // 
             // FrmInventoryOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -639,5 +664,7 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn 料盘类型;
         private System.Windows.Forms.DataGridViewTextBoxColumn 入库时间;
+        private DevExpress.XtraEditors.SimpleButton btnIlegal;
+        private DevExpress.XtraEditors.SimpleButton btnSyncLightShelf;
     }
 }

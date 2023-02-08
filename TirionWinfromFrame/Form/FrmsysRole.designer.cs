@@ -296,7 +296,7 @@ namespace MES.Form
             // 
             this.tabDataList.Controls.Add(this.grdList);
             this.tabDataList.Name = "tabDataList";
-            this.tabDataList.Size = new System.Drawing.Size(732, 616);
+            this.tabDataList.Size = new System.Drawing.Size(746, 625);
             this.tabDataList.Text = "数据列表";
             // 
             // grdList
@@ -305,7 +305,7 @@ namespace MES.Form
             this.grdList.Location = new System.Drawing.Point(0, 0);
             this.grdList.MainView = this.grdListView;
             this.grdList.Name = "grdList";
-            this.grdList.Size = new System.Drawing.Size(732, 616);
+            this.grdList.Size = new System.Drawing.Size(746, 625);
             this.grdList.TabIndex = 0;
             this.grdList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdListView});
@@ -330,7 +330,7 @@ namespace MES.Form
             // 
             this.tabDataDetail.Controls.Add(this.panelControl2);
             this.tabDataDetail.Name = "tabDataDetail";
-            this.tabDataDetail.Size = new System.Drawing.Size(743, 625);
+            this.tabDataDetail.Size = new System.Drawing.Size(746, 625);
             this.tabDataDetail.Text = "数据编辑";
             // 
             // panelControl2
@@ -339,7 +339,7 @@ namespace MES.Form
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(743, 625);
+            this.panelControl2.Size = new System.Drawing.Size(746, 625);
             this.panelControl2.TabIndex = 0;
             // 
             // xtraTabControl2
@@ -348,7 +348,7 @@ namespace MES.Form
             this.xtraTabControl2.Location = new System.Drawing.Point(2, 2);
             this.xtraTabControl2.Name = "xtraTabControl2";
             this.xtraTabControl2.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl2.Size = new System.Drawing.Size(739, 621);
+            this.xtraTabControl2.Size = new System.Drawing.Size(742, 621);
             this.xtraTabControl2.TabIndex = 7;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -359,7 +359,7 @@ namespace MES.Form
             // 
             this.xtraTabPage1.Controls.Add(this.layoutControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(734, 595);
+            this.xtraTabPage1.Size = new System.Drawing.Size(740, 595);
             this.xtraTabPage1.Text = "角色基础信息";
             // 
             // layoutControl1
@@ -375,7 +375,7 @@ namespace MES.Form
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(734, 595);
+            this.layoutControl1.Size = new System.Drawing.Size(740, 595);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -383,21 +383,21 @@ namespace MES.Form
             // 
             this.txtid.Location = new System.Drawing.Point(63, 12);
             this.txtid.Name = "txtid";
-            this.txtid.Size = new System.Drawing.Size(302, 20);
+            this.txtid.Size = new System.Drawing.Size(305, 20);
             this.txtid.StyleController = this.layoutControl1;
             this.txtid.TabIndex = 1;
             // 
             // txtcompanyId
             // 
             this.txtcompanyId.EditValue = "";
-            this.txtcompanyId.Location = new System.Drawing.Point(420, 12);
+            this.txtcompanyId.Location = new System.Drawing.Point(423, 12);
             this.txtcompanyId.Name = "txtcompanyId";
             this.txtcompanyId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcompanyId.Properties.DisplayMember = "Name";
             this.txtcompanyId.Properties.TreeList = this.txtcompanyIdTreeList;
             this.txtcompanyId.Properties.ValueMember = "ID";
-            this.txtcompanyId.Size = new System.Drawing.Size(302, 20);
+            this.txtcompanyId.Size = new System.Drawing.Size(305, 20);
             this.txtcompanyId.StyleController = this.layoutControl1;
             this.txtcompanyId.TabIndex = 2;
             // 
@@ -414,7 +414,7 @@ namespace MES.Form
             // 
             this.txtname.Location = new System.Drawing.Point(63, 36);
             this.txtname.Name = "txtname";
-            this.txtname.Size = new System.Drawing.Size(659, 20);
+            this.txtname.Size = new System.Drawing.Size(665, 20);
             this.txtname.StyleController = this.layoutControl1;
             this.txtname.TabIndex = 4;
             // 
@@ -429,7 +429,7 @@ namespace MES.Form
             this.txtcreatorId.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txtcreatorId.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txtcreatorId.Properties.ValueMember = "ID";
-            this.txtcreatorId.Size = new System.Drawing.Size(302, 20);
+            this.txtcreatorId.Size = new System.Drawing.Size(305, 20);
             this.txtcreatorId.StyleController = this.layoutControl1;
             this.txtcreatorId.TabIndex = 5;
             // 
@@ -437,7 +437,7 @@ namespace MES.Form
             // 
             this.txtcreateTime.EditValue = null;
             this.txtcreateTime.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txtcreateTime.Location = new System.Drawing.Point(420, 60);
+            this.txtcreateTime.Location = new System.Drawing.Point(423, 60);
             this.txtcreateTime.Name = "txtcreateTime";
             this.txtcreateTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -446,7 +446,7 @@ namespace MES.Form
             this.txtcreateTime.Properties.DisplayFormat.FormatString = "G";
             this.txtcreateTime.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txtcreateTime.Properties.Mask.EditMask = "G";
-            this.txtcreateTime.Size = new System.Drawing.Size(302, 20);
+            this.txtcreateTime.Size = new System.Drawing.Size(305, 20);
             this.txtcreateTime.StyleController = this.layoutControl1;
             this.txtcreateTime.TabIndex = 6;
             // 
@@ -461,7 +461,7 @@ namespace MES.Form
             this.txteditorId.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.txteditorId.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.txteditorId.Properties.ValueMember = "ID";
-            this.txteditorId.Size = new System.Drawing.Size(302, 20);
+            this.txteditorId.Size = new System.Drawing.Size(305, 20);
             this.txteditorId.StyleController = this.layoutControl1;
             this.txteditorId.TabIndex = 7;
             // 
@@ -469,7 +469,7 @@ namespace MES.Form
             // 
             this.txteditTime.EditValue = null;
             this.txteditTime.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.txteditTime.Location = new System.Drawing.Point(420, 84);
+            this.txteditTime.Location = new System.Drawing.Point(423, 84);
             this.txteditTime.Name = "txteditTime";
             this.txteditTime.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -478,7 +478,7 @@ namespace MES.Form
             this.txteditTime.Properties.DisplayFormat.FormatString = "G";
             this.txteditTime.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txteditTime.Properties.Mask.EditMask = "G";
-            this.txteditTime.Size = new System.Drawing.Size(302, 20);
+            this.txteditTime.Size = new System.Drawing.Size(305, 20);
             this.txteditTime.StyleController = this.layoutControl1;
             this.txteditTime.TabIndex = 8;
             // 
@@ -496,7 +496,7 @@ namespace MES.Form
             this.emptySpaceItem1,
             this.layoutControlItem8});
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(734, 595);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(740, 595);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -505,7 +505,7 @@ namespace MES.Form
             this.layoutControlItem1.CustomizationFormText = "ID";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(357, 24);
+            this.layoutControlItem1.Size = new System.Drawing.Size(360, 24);
             this.layoutControlItem1.Text = "ID";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -515,7 +515,7 @@ namespace MES.Form
             this.layoutControlItem4.CustomizationFormText = "角色名称";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(714, 24);
+            this.layoutControlItem4.Size = new System.Drawing.Size(720, 24);
             this.layoutControlItem4.Text = "角色名称";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -525,7 +525,7 @@ namespace MES.Form
             this.layoutControlItem5.CustomizationFormText = "创建人";
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 48);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(357, 24);
+            this.layoutControlItem5.Size = new System.Drawing.Size(360, 24);
             this.layoutControlItem5.Text = "创建人";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -535,7 +535,7 @@ namespace MES.Form
             this.layoutControlItem7.CustomizationFormText = "编辑人";
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(357, 24);
+            this.layoutControlItem7.Size = new System.Drawing.Size(360, 24);
             this.layoutControlItem7.Text = "编辑人";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -543,9 +543,9 @@ namespace MES.Form
             // 
             this.layoutControlItem2.Control = this.txtcompanyId;
             this.layoutControlItem2.CustomizationFormText = "公司";
-            this.layoutControlItem2.Location = new System.Drawing.Point(357, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(360, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(357, 24);
+            this.layoutControlItem2.Size = new System.Drawing.Size(360, 24);
             this.layoutControlItem2.Text = "公司";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -553,9 +553,9 @@ namespace MES.Form
             // 
             this.layoutControlItem6.Control = this.txtcreateTime;
             this.layoutControlItem6.CustomizationFormText = "创建时间";
-            this.layoutControlItem6.Location = new System.Drawing.Point(357, 48);
+            this.layoutControlItem6.Location = new System.Drawing.Point(360, 48);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(357, 24);
+            this.layoutControlItem6.Size = new System.Drawing.Size(360, 24);
             this.layoutControlItem6.Text = "创建时间";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -564,16 +564,16 @@ namespace MES.Form
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 96);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(714, 479);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(720, 479);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.txteditTime;
             this.layoutControlItem8.CustomizationFormText = "编辑时间";
-            this.layoutControlItem8.Location = new System.Drawing.Point(357, 72);
+            this.layoutControlItem8.Location = new System.Drawing.Point(360, 72);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(357, 24);
+            this.layoutControlItem8.Size = new System.Drawing.Size(360, 24);
             this.layoutControlItem8.Text = "编辑时间";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(48, 14);
             // 
@@ -581,7 +581,7 @@ namespace MES.Form
             // 
             this.xtraTabPage2.Controls.Add(this.panelControl3);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(722, 583);
+            this.xtraTabPage2.Size = new System.Drawing.Size(740, 595);
             this.xtraTabPage2.Text = "可操作功能";
             // 
             // panelControl3
@@ -591,7 +591,7 @@ namespace MES.Form
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(722, 583);
+            this.panelControl3.Size = new System.Drawing.Size(740, 595);
             this.panelControl3.TabIndex = 0;
             // 
             // panelControl4
@@ -600,7 +600,7 @@ namespace MES.Form
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl4.Location = new System.Drawing.Point(2, 2);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(718, 36);
+            this.panelControl4.Size = new System.Drawing.Size(736, 36);
             this.panelControl4.TabIndex = 1;
             // 
             // btnRefrsh
@@ -621,14 +621,14 @@ namespace MES.Form
             this.treeList1.Name = "treeList1";
             this.treeList1.OptionsBehavior.Editable = false;
             this.treeList1.ParentFieldName = "PID";
-            this.treeList1.Size = new System.Drawing.Size(720, 544);
+            this.treeList1.Size = new System.Drawing.Size(738, 556);
             this.treeList1.TabIndex = 0;
             // 
             // xtraTabPage3
             // 
             this.xtraTabPage3.Controls.Add(this.panelControl5);
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(722, 583);
+            this.xtraTabPage3.Size = new System.Drawing.Size(740, 595);
             this.xtraTabPage3.Text = "用户";
             // 
             // panelControl5
@@ -638,7 +638,7 @@ namespace MES.Form
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(722, 583);
+            this.panelControl5.Size = new System.Drawing.Size(740, 595);
             this.panelControl5.TabIndex = 0;
             // 
             // panelControl7
@@ -647,7 +647,7 @@ namespace MES.Form
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelControl7.Location = new System.Drawing.Point(2, 2);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(245, 579);
+            this.panelControl7.Size = new System.Drawing.Size(245, 591);
             this.panelControl7.TabIndex = 1;
             // 
             // gridControl1
@@ -658,7 +658,7 @@ namespace MES.Form
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemLookUpEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(241, 575);
+            this.gridControl1.Size = new System.Drawing.Size(241, 587);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -723,7 +723,7 @@ namespace MES.Form
             this.panelControl6.Controls.Add(this.layoutControl2);
             this.panelControl6.Location = new System.Drawing.Point(247, 2);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(474, 581);
+            this.panelControl6.Size = new System.Drawing.Size(492, 593);
             this.panelControl6.TabIndex = 0;
             // 
             // layoutControl2
@@ -736,15 +736,15 @@ namespace MES.Form
             this.layoutControl2.Location = new System.Drawing.Point(2, 2);
             this.layoutControl2.Name = "layoutControl2";
             this.layoutControl2.Root = this.Root;
-            this.layoutControl2.Size = new System.Drawing.Size(470, 577);
+            this.layoutControl2.Size = new System.Drawing.Size(488, 589);
             this.layoutControl2.TabIndex = 1;
             this.layoutControl2.Text = "layoutControl2";
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(12, 543);
+            this.simpleButton2.Location = new System.Drawing.Point(12, 555);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(446, 22);
+            this.simpleButton2.Size = new System.Drawing.Size(464, 22);
             this.simpleButton2.StyleController = this.layoutControl2;
             this.simpleButton2.TabIndex = 10;
             this.simpleButton2.Text = "确定";
@@ -759,7 +759,7 @@ namespace MES.Form
             this.treeListColumn4});
             this.treeList2.Location = new System.Drawing.Point(12, 38);
             this.treeList2.Name = "treeList2";
-            this.treeList2.Size = new System.Drawing.Size(446, 501);
+            this.treeList2.Size = new System.Drawing.Size(464, 513);
             this.treeList2.TabIndex = 9;
             // 
             // treeListColumn1
@@ -792,9 +792,9 @@ namespace MES.Form
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(371, 12);
+            this.simpleButton1.Location = new System.Drawing.Point(385, 12);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(87, 22);
+            this.simpleButton1.Size = new System.Drawing.Size(91, 22);
             this.simpleButton1.StyleController = this.layoutControl2;
             this.simpleButton1.TabIndex = 8;
             this.simpleButton1.Text = "搜索";
@@ -804,7 +804,7 @@ namespace MES.Form
             // 
             this.textEdit1.Location = new System.Drawing.Point(39, 12);
             this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(328, 20);
+            this.textEdit1.Size = new System.Drawing.Size(342, 20);
             this.textEdit1.StyleController = this.layoutControl2;
             this.textEdit1.TabIndex = 3;
             // 
@@ -818,7 +818,7 @@ namespace MES.Form
             this.layoutControlItem3,
             this.layoutControlItem11});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(470, 577);
+            this.Root.Size = new System.Drawing.Size(488, 589);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem9
@@ -826,16 +826,16 @@ namespace MES.Form
             this.layoutControlItem9.Control = this.textEdit1;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(359, 26);
+            this.layoutControlItem9.Size = new System.Drawing.Size(373, 26);
             this.layoutControlItem9.Text = "工号";
             this.layoutControlItem9.TextSize = new System.Drawing.Size(24, 14);
             // 
             // layoutControlItem10
             // 
             this.layoutControlItem10.Control = this.simpleButton1;
-            this.layoutControlItem10.Location = new System.Drawing.Point(359, 0);
+            this.layoutControlItem10.Location = new System.Drawing.Point(373, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(91, 26);
+            this.layoutControlItem10.Size = new System.Drawing.Size(95, 26);
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
             // 
@@ -844,16 +844,16 @@ namespace MES.Form
             this.layoutControlItem3.Control = this.treeList2;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 26);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(450, 505);
+            this.layoutControlItem3.Size = new System.Drawing.Size(468, 517);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.simpleButton2;
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 531);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 543);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(450, 26);
+            this.layoutControlItem11.Size = new System.Drawing.Size(468, 26);
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
             // 

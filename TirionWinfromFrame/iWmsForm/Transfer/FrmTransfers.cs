@@ -24,8 +24,8 @@ namespace iWms.Form
             InitializeComponent();
             BindCombox();
 
-            dtOrderTime.Value = DateTime.Now.Date;
-            dtFinishedTime.Value = DateTime.Now.Date;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
 
             dgvOrders.ScrollBars = ScrollBars.Both;
             dgvOrders.Dock = DockStyle.Fill;
@@ -96,13 +96,19 @@ namespace iWms.Form
             condition.MaterialNo = tbMaterialNo.Text.Trim();
             condition.Upn = tbUpn.Text.Trim();
 
-            condition.HaveOrderTimeQuery = true;
-            condition.OrderTimeStart = dtOrderTime.Value.Date;
-            condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
+            {
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
+            }
 
-            condition.HaveFinishedTimeQuery = true;
-            condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-            condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
+            {
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
+            }
 
             var orders = TransferBll.GetTransferOrders(condition);
 
@@ -155,13 +161,14 @@ namespace iWms.Form
                         "请至少选中一个移库单".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus > (int)TransferOrderStatusEnum.Executing)
+                    var order = TransferBll.GetTransferOrderByNo(selectedOrder.TransferNo);
+                    if (order.OrderStatus > (int)TransferOrderStatusEnum.Executing)
                     {
                         "当前移库单状态不可执行".ShowTips();
                         return;
                     }
 
-                    if (selectedOrder.TargetAreaId == (int)TowerEnum.SortingArea)//移出判定亮灯
+                    if (order.TargetAreaId == (int)TowerEnum.SortingArea)//移出判定亮灯
                     {
                         ValidateDeliveryOrderLimit();
                         //ValidateInstockOrderLimit();
@@ -186,7 +193,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -202,7 +209,7 @@ namespace iWms.Form
         private void ValidateInstockOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -217,7 +224,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderForTranferIn()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -233,7 +240,7 @@ namespace iWms.Form
         private void ValidateInstockOrderForTransferIn()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -266,15 +273,16 @@ namespace iWms.Form
                     //}
                     int asrsArea = (int)TowerEnum.ASRS;
                     int unfinished = (int)TransferBarcodeStatusEnum.Unfinished;
-                    if (selectedOrder.SourceAreaId == asrsArea && WorkOrderBarcodes.Any(p => p.BarcodeStatus == unfinished))
+                    var barcodes = TransferBll.GetTransferBarcodes(selectedOrder.BusinessId);
+                    if (selectedOrder.SourceAreaId == asrsArea && barcodes.Any(p => p.OrderStatus == unfinished))
                     {
                         "此移库单是从智能仓移出，目前仍然有未出完的料，不可移库完成".ShowTips();
                         return;
                     }
 
-                    if (WorkOrderBarcodes.Any(p => p.BarcodeStatus == unfinished))
+                    if (barcodes.Any(p => p.OrderStatus == unfinished))
                     {
-                        if ("移库单中存在未移库的upn，确认完成将未移库的upn释放".ShowYesNoAndTips() != DialogResult.OK)
+                        if ("移库单中存在未移库的upn，确认完成将未移库的upn释放".ShowYesNoAndTips() != DialogResult.Yes)
                         {
                             return;
                         }
@@ -377,15 +385,15 @@ namespace iWms.Form
             }
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void BtnClear_Click(object sender, EventArgs e)
         {
             cbOrderStatus.SelectedIndex = 0;
             tbOrderNo.Text = string.Empty;
             tbUpn.Text = string.Empty;
             tbMaterialNo.Text = string.Empty;
             cbType.SelectedIndex = 0;
-            dtOrderTime.Value = DateTime.Today;
-            dtFinishedTime.Value = DateTime.Today;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 
@@ -403,7 +411,7 @@ namespace iWms.Form
                         return;
                     }
 
-                    if (selectedOrder.OrderStatus < (int)TransferOrderStatusEnum.Finished)
+                    if (selectedOrder.OrderStatus >= (int)TransferOrderStatusEnum.Finished)
                     {
                         "未完成的移库单才能【取消】！".ShowTips();
                         return;
@@ -429,6 +437,7 @@ namespace iWms.Form
                     {
                         $"【{selectedOrder.TransferNo}】取消成功".ShowTips();
                     }
+                    GetOrders();
                 }
             }
             catch (Exception ex)

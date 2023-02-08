@@ -29,18 +29,19 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnPause = new DevExpress.XtraEditors.SimpleButton();
             this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExchange = new DevExpress.XtraEditors.SimpleButton();
+            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.cbSorting = new System.Windows.Forms.CheckBox();
             this.cbAsrs = new System.Windows.Forms.CheckBox();
             this.cbLightShelf = new System.Windows.Forms.CheckBox();
             this.cbReform = new System.Windows.Forms.CheckBox();
+            this.cbPallet = new System.Windows.Forms.CheckBox();
             this.lblTypeName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblLock = new System.Windows.Forms.Label();
@@ -51,6 +52,7 @@ namespace iWms.Form
             this.gridWMS = new System.Windows.Forms.DataGridView();
             this.WZ_BM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RK_RKSL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActualCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridIWMS = new System.Windows.Forms.DataGridView();
             this.ReelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,14 +90,10 @@ namespace iWms.Form
             this.btnFinish.Text = "完成入库";
             this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
             // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 45000;
-            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnExchange);
+            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Controls.Add(this.lblTypeName);
             this.panel1.Controls.Add(this.panel2);
@@ -110,15 +108,35 @@ namespace iWms.Form
             this.panel1.Size = new System.Drawing.Size(1248, 85);
             this.panel1.TabIndex = 10;
             // 
+            // btnExchange
+            // 
+            this.btnExchange.Location = new System.Drawing.Point(1044, 45);
+            this.btnExchange.Name = "btnExchange";
+            this.btnExchange.Size = new System.Drawing.Size(75, 23);
+            this.btnExchange.TabIndex = 20;
+            this.btnExchange.Text = "立即回传";
+            this.btnExchange.Visible = false;
+            this.btnExchange.Click += new System.EventHandler(this.BtnExchange_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(936, 45);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 19;
+            this.btnRefresh.Text = "刷新";
+            this.btnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.cbSorting);
             this.flowLayoutPanel1.Controls.Add(this.cbAsrs);
             this.flowLayoutPanel1.Controls.Add(this.cbLightShelf);
             this.flowLayoutPanel1.Controls.Add(this.cbReform);
+            this.flowLayoutPanel1.Controls.Add(this.cbPallet);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(83, 41);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1086, 33);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(801, 33);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // cbSorting
@@ -164,6 +182,17 @@ namespace iWms.Form
             this.cbReform.Text = "改造货架";
             this.cbReform.UseVisualStyleBackColor = true;
             this.cbReform.CheckedChanged += new System.EventHandler(this.cbReform_CheckedChanged);
+            // 
+            // cbPallet
+            // 
+            this.cbPallet.AutoSize = true;
+            this.cbPallet.Location = new System.Drawing.Point(299, 3);
+            this.cbPallet.Name = "cbPallet";
+            this.cbPallet.Size = new System.Drawing.Size(62, 18);
+            this.cbPallet.TabIndex = 17;
+            this.cbPallet.Text = "栈板区";
+            this.cbPallet.UseVisualStyleBackColor = true;
+            this.cbPallet.CheckedChanged += new System.EventHandler(this.cbReform_CheckedChanged);
             // 
             // lblTypeName
             // 
@@ -245,6 +274,7 @@ namespace iWms.Form
             this.gridWMS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.WZ_BM,
             this.RK_RKSL,
+            this.colActualCount,
             this.State});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -283,6 +313,13 @@ namespace iWms.Form
             this.RK_RKSL.MinimumWidth = 10;
             this.RK_RKSL.Name = "RK_RKSL";
             this.RK_RKSL.ReadOnly = true;
+            // 
+            // colActualCount
+            // 
+            this.colActualCount.DataPropertyName = "ActualCount";
+            this.colActualCount.HeaderText = "实收数量";
+            this.colActualCount.Name = "colActualCount";
+            this.colActualCount.ReadOnly = true;
             // 
             // State
             // 
@@ -324,6 +361,7 @@ namespace iWms.Form
             this.gridIWMS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.gridIWMS.Size = new System.Drawing.Size(743, 712);
             this.gridIWMS.TabIndex = 12;
+            this.gridIWMS.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridIWMS_CellMouseClick);
             // 
             // ReelID
             // 
@@ -365,8 +403,7 @@ namespace iWms.Form
             this.btnForceFinish.Size = new System.Drawing.Size(114, 33);
             this.btnForceFinish.TabIndex = 13;
             this.btnForceFinish.Text = "强制入库";
-            this.btnForceFinish.Visible = false;
-            this.btnForceFinish.Click += new System.EventHandler(this.btnForceFinish_Click);
+            this.btnForceFinish.Click += new System.EventHandler(this.BtnForceFinish_Click);
             // 
             // tlpLayout
             // 
@@ -436,7 +473,6 @@ namespace iWms.Form
 
         private DevExpress.XtraEditors.SimpleButton btnPause;
         private DevExpress.XtraEditors.SimpleButton btnFinish;
-        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTypeTitle;
         private System.Windows.Forms.Label lblOrderNoTitle;
@@ -448,9 +484,6 @@ namespace iWms.Form
         public System.Windows.Forms.Label lblOrderNo;
         public System.Windows.Forms.Label lblTypeName;
         private DevExpress.XtraEditors.SimpleButton btnForceFinish;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WZ_BM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RK_RKSL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn State;
         private System.Windows.Forms.TableLayoutPanel tlpLayout;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox cbLightShelf;
@@ -462,5 +495,12 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn TowerNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreateTime;
+        private DevExpress.XtraEditors.SimpleButton btnRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WZ_BM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RK_RKSL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActualCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn State;
+        private DevExpress.XtraEditors.SimpleButton btnExchange;
+        private System.Windows.Forms.CheckBox cbPallet;
     }
 }

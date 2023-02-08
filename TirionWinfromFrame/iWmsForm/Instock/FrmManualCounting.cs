@@ -16,6 +16,9 @@ namespace iWms.Form
         public FrmManualCounting()
         {
             InitializeComponent();
+
+            cbEnable.Checked = true;
+
             gridViewRecord.AutoGenerateColumns = false;
             gridViewRecord.DataSource = RefundRecord;
             gridViewRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
@@ -31,7 +34,7 @@ namespace iWms.Form
                 {
                     ValidateBarcode();
                     txtMaterialInfo.Text = string.Empty;
-                    var result = CallMesWmsApiBll.CallMaterialInfoByUPN(tbScan.Text);
+                    var result = CallMesWmsApiBll.CallMaterialInfoByUPN(tbScan.Text.Trim());
                     if (result != null && !string.IsNullOrWhiteSpace(result.InvQty))
                     {
                         tbQty.Text = Convert.ToDecimal(result.InvQty).ToString("0");
@@ -52,9 +55,13 @@ namespace iWms.Form
                             upn = arr[0];
                         }
                     }
-                    if (RefundRecord.Any(p => p.UPN == upn) || "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes)
+                    if ((!cbEnable.Checked) || RefundRecord.Any(p => p.UPN == upn))//|| "是否无需修改立即退料?".ShowYesNoAndTips() == DialogResult.Yes
                     {
                         BtnSubmit_Click(btnSubmit, null);
+                    }
+                    else
+                    {
+                        tbQty.Focus();
                     }
                 }
                 catch (Exception ex)
@@ -73,7 +80,7 @@ namespace iWms.Form
                 tbScan.Text = string.Empty;
                 return;
             }
-            if (!tbScan.Text.EndsWith("*"))
+            if (ceNotStar.Checked && !tbScan.Text.EndsWith("*"))
             {
                 "二维码结尾不是*号，请确认二维码完整性".ShowTips();
                 //tbScan.Text = string.Empty;
@@ -112,13 +119,13 @@ namespace iWms.Form
                     {
                         ValidateBarcode();
                     }
-                    if (string.IsNullOrWhiteSpace(tbScan.Text))
+                    if (string.IsNullOrWhiteSpace(tbScan.Text.Trim()))
                     {
                         return;
                     }
 
                     ManualCountingRecord record = new ManualCountingRecord();
-                    record.QRCode = tbScan.Text;
+                    record.QRCode = tbScan.Text.Trim();
                     record.Qty = TypeParse.StrToInt(tbQty.Text, 0);
 
                     int starCount = record.QRCode.ToCharArray().Count(p => p.Equals('*'));
@@ -146,7 +153,10 @@ namespace iWms.Form
                     }
                     string[] upnArr = record.UPN.Split('-');
                     record.PartNumber = upnArr[0];
-                    record.SerialNo = upnArr[3];
+                    if (upnArr.Length >= 4)
+                    {
+                        record.SerialNo = upnArr[3];
+                    }
 
                     string[] qrcodeArr = record.QRCode.Split('*');
                     if (qrcodeArr.Length >= 3)
@@ -175,7 +185,7 @@ namespace iWms.Form
 
                     record.IsTypeT = cbIsTypeT.Checked;
                     //直接同步
-                    var syncResult = ManualCounting.SyncCounting(record);
+                    var syncResult = ManualCounting.SyncCounting(record, AppInfo.LoginUserInfo.account);
                     ManualCounting.SaveCounting(record);
                     record.MSD = syncResult.MSD;
                     record.MsdOverdue = syncResult.MsdOverdue == "Y" ? "Y" : "N";
@@ -204,11 +214,15 @@ namespace iWms.Form
             tbScan.Focus();
         }
 
-        private void tbQty_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbQty_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+            if (e.KeyChar == 13)
+            {
+                BtnSubmit_Click(btnSubmit, null);
             }
         }
 
@@ -265,6 +279,18 @@ namespace iWms.Form
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void CbEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEnable.Checked)
+            {
+                tbQty.Enabled = true;
+            }
+            else
+            {
+                tbQty.Enabled = false;
             }
         }
     }

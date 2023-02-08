@@ -24,6 +24,66 @@ namespace Entity.Enums
         [Description("盘点模式")]
         盘点模式 = 7,
         [Description("Excel导入")]
-        Excel导入 = 8
+        Excel导入 = 8,
+        /// <summary>
+        /// 补货出库
+        /// </summary>
+        [Description("补货出库")]
+        BHCK = 9,
+        /// <summary>
+        /// 部门领料
+        /// </summary>
+        [Description("部门领料")]
+        BMLL = 10,
+        /// <summary>
+        /// 超市发料
+        /// </summary>
+        [Description("超市发料")]
+        CSFL = 11,
+        /// <summary>
+        /// 换料出库
+        /// </summary>
+        [Description("换料出库")]
+        HLCK = 12,
+        /// <summary>
+        /// 品检退货
+        /// </summary>
+        [Description("品检退货")]
+        PJTH = 13,
+        /// <summary>
+        /// 生产备料
+        /// </summary>
+        [Description("生产备料")]
+        SCBL = 14,
+        /// <summary>
+        /// 外购退货PO
+        /// </summary>
+        [Description("外购退货PO")]
+        WGTH_PO = 15,
+        /// <summary>
+        /// 外购退货SO
+        /// </summary>
+        [Description("外购退货SO")]
+        WGTH_SO = 16,
+        /// <summary>
+        /// 外协领料
+        /// </summary>
+        [Description("外协领料")]
+        WXLL = 17,
+        /// <summary>
+        /// 销售出库
+        /// </summary>
+        [Description("销售出库")]
+        XSCK = 18,
+        /// <summary>
+        /// 质检出库
+        /// </summary>
+        [Description("质检出库")]
+        ZJCK = 19,
+        /// <summary>
+        /// 转移出库
+        /// </summary>
+        [Description("转移出库")]
+        ZYCK = 20,
     }
 }

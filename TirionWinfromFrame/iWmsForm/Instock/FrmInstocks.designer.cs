@@ -66,13 +66,13 @@ namespace iWms.Form
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
             this.tbUser = new System.Windows.Forms.TextBox();
-            this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
-            this.dtFinishDate = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnNoSource = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colIsSelected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +86,7 @@ namespace iWms.Form
             this.dgvMaterials = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMaterialCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colReceiveStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvBarcodes = new System.Windows.Forms.DataGridView();
             this.colBarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +98,10 @@ namespace iWms.Form
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.tbDetails.SuspendLayout();
             this.tlpDetails.SuspendLayout();
@@ -276,9 +281,9 @@ namespace iWms.Form
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
-            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
@@ -295,13 +300,13 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 1);
             this.tlpConditions.Controls.Add(this.tbUser, 5, 1);
-            this.tlpConditions.Controls.Add(this.dtOrderDate, 1, 2);
-            this.tlpConditions.Controls.Add(this.dtFinishDate, 3, 2);
-            this.tlpConditions.Controls.Add(this.btnQuery, 7, 1);
-            this.tlpConditions.Controls.Add(this.btnExport, 8, 1);
-            this.tlpConditions.Controls.Add(this.btnClear, 8, 2);
-            this.tlpConditions.Controls.Add(this.btnNoSource, 8, 0);
+            this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
+            this.tlpConditions.Controls.Add(this.btnExport, 7, 2);
+            this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
+            this.tlpConditions.Controls.Add(this.btnNoSource, 9, 0);
             this.tlpConditions.Controls.Add(this.btnCancel, 9, 1);
+            this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -452,33 +457,9 @@ namespace iWms.Form
             this.tbUser.Size = new System.Drawing.Size(134, 22);
             this.tbUser.TabIndex = 13;
             // 
-            // dtOrderDate
-            // 
-            this.dtOrderDate.CustomFormat = "yyyy-MM-dd";
-            this.dtOrderDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderDate.Location = new System.Drawing.Point(96, 73);
-            this.dtOrderDate.Name = "dtOrderDate";
-            this.dtOrderDate.Size = new System.Drawing.Size(157, 22);
-            this.dtOrderDate.TabIndex = 14;
-            this.dtOrderDate.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtOrderDate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
-            // dtFinishDate
-            // 
-            this.dtFinishDate.CustomFormat = "yyyy-MM-dd";
-            this.dtFinishDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishDate.Location = new System.Drawing.Point(352, 73);
-            this.dtFinishDate.Name = "dtFinishDate";
-            this.dtFinishDate.Size = new System.Drawing.Size(134, 22);
-            this.dtFinishDate.TabIndex = 15;
-            this.dtFinishDate.Value = new System.DateTime(2022, 2, 22, 11, 54, 41, 0);
-            this.dtFinishDate.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Dtp_MouseUp);
-            // 
             // btnQuery
             // 
-            this.btnQuery.Location = new System.Drawing.Point(818, 38);
+            this.btnQuery.Location = new System.Drawing.Point(765, 3);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(86, 27);
             this.btnQuery.TabIndex = 16;
@@ -487,7 +468,7 @@ namespace iWms.Form
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(911, 38);
+            this.btnExport.Location = new System.Drawing.Point(765, 73);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(86, 27);
             this.btnExport.TabIndex = 17;
@@ -497,7 +478,7 @@ namespace iWms.Form
             // btnClear
             // 
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Location = new System.Drawing.Point(911, 73);
+            this.btnClear.Location = new System.Drawing.Point(765, 38);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(87, 29);
             this.btnClear.TabIndex = 18;
@@ -507,7 +488,7 @@ namespace iWms.Form
             // btnNoSource
             // 
             this.btnNoSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnNoSource.Location = new System.Drawing.Point(911, 3);
+            this.btnNoSource.Location = new System.Drawing.Point(898, 3);
             this.btnNoSource.Name = "btnNoSource";
             this.btnNoSource.Size = new System.Drawing.Size(87, 29);
             this.btnNoSource.TabIndex = 19;
@@ -516,19 +497,47 @@ namespace iWms.Form
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(1004, 38);
+            this.btnCancel.Location = new System.Drawing.Point(898, 38);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(86, 27);
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "取消入库";
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(96, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(157, 20);
+            this.dtCreate.TabIndex = 21;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(352, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 22;
+            // 
             // dgvOrders
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AllowUserToResizeRows = false;
+            this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrders.ColumnHeadersHeight = 24;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIsSelected,
             this.colOrderNo,
@@ -550,8 +559,9 @@ namespace iWms.Form
             this.dgvOrders.Location = new System.Drawing.Point(3, 143);
             this.dgvOrders.MultiSelect = false;
             this.dgvOrders.Name = "dgvOrders";
-            this.dgvOrders.RowHeadersWidth = 50;
-            this.dgvOrders.RowTemplate.Height = 23;
+            this.dgvOrders.RowHeadersWidth = 40;
+            this.dgvOrders.RowTemplate.Height = 24;
+            this.dgvOrders.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1218, 144);
             this.dgvOrders.TabIndex = 1;
@@ -565,17 +575,18 @@ namespace iWms.Form
             // 
             this.colIsSelected.DataPropertyName = "IsSelected";
             this.colIsSelected.FalseValue = "False";
+            this.colIsSelected.FillWeight = 20F;
             this.colIsSelected.HeaderText = "选择";
+            this.colIsSelected.MinimumWidth = 40;
             this.colIsSelected.Name = "colIsSelected";
             this.colIsSelected.ToolTipText = "只在取消入库时生效";
             this.colIsSelected.TrueValue = "True";
             // 
             // colOrderNo
             // 
-            this.colOrderNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colOrderNo.DataPropertyName = "InstockNo";
             this.colOrderNo.HeaderText = "入库单号";
-            this.colOrderNo.MinimumWidth = 9;
+            this.colOrderNo.MinimumWidth = 180;
             this.colOrderNo.Name = "colOrderNo";
             this.colOrderNo.ReadOnly = true;
             // 
@@ -583,23 +594,20 @@ namespace iWms.Form
             // 
             this.colOrderType.DataPropertyName = "OrderTypeDisplay";
             this.colOrderType.HeaderText = "单据类型";
-            this.colOrderType.MinimumWidth = 9;
+            this.colOrderType.MinimumWidth = 100;
             this.colOrderType.Name = "colOrderType";
             this.colOrderType.ReadOnly = true;
-            this.colOrderType.Width = 175;
             // 
             // colOrderStatus
             // 
             this.colOrderStatus.DataPropertyName = "OrderStatusDisplay";
             this.colOrderStatus.HeaderText = "单据状态";
-            this.colOrderStatus.MinimumWidth = 9;
+            this.colOrderStatus.MinimumWidth = 80;
             this.colOrderStatus.Name = "colOrderStatus";
             this.colOrderStatus.ReadOnly = true;
-            this.colOrderStatus.Width = 175;
             // 
             // colOrderTime
             // 
-            this.colOrderTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colOrderTime.DataPropertyName = "CreateTime";
             this.colOrderTime.HeaderText = "下达时间";
             this.colOrderTime.MinimumWidth = 9;
@@ -608,7 +616,6 @@ namespace iWms.Form
             // 
             // colFinishedTime
             // 
-            this.colFinishedTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colFinishedTime.DataPropertyName = "LastUpdateTime";
             this.colFinishedTime.HeaderText = "完成时间";
             this.colFinishedTime.MinimumWidth = 9;
@@ -623,7 +630,6 @@ namespace iWms.Form
             this.colOperate.Name = "colOperate";
             this.colOperate.ReadOnly = true;
             this.colOperate.Text = "入库";
-            this.colOperate.Width = 175;
             // 
             // tbDetails
             // 
@@ -639,8 +645,8 @@ namespace iWms.Form
             // tlpDetails
             // 
             this.tlpDetails.ColumnCount = 2;
-            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tlpDetails.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
             this.tlpDetails.Controls.Add(this.dgvMaterials, 0, 0);
             this.tlpDetails.Controls.Add(this.dgvBarcodes, 1, 0);
             this.tlpDetails.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -662,6 +668,7 @@ namespace iWms.Form
             this.dgvMaterials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
             this.colMaterialCount,
+            this.colActual,
             this.colReceiveStatus});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -677,10 +684,10 @@ namespace iWms.Form
             this.dgvMaterials.MultiSelect = false;
             this.dgvMaterials.Name = "dgvMaterials";
             this.dgvMaterials.ReadOnly = true;
-            this.dgvMaterials.RowHeadersWidth = 50;
+            this.dgvMaterials.RowHeadersWidth = 40;
             this.dgvMaterials.RowTemplate.Height = 23;
             this.dgvMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMaterials.Size = new System.Drawing.Size(478, 320);
+            this.dgvMaterials.Size = new System.Drawing.Size(539, 320);
             this.dgvMaterials.TabIndex = 0;
             this.dgvMaterials.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_DataBindingComplete);
             this.dgvMaterials.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterials_RowPostPaint);
@@ -697,10 +704,17 @@ namespace iWms.Form
             // colMaterialCount
             // 
             this.colMaterialCount.DataPropertyName = "RequireCount";
-            this.colMaterialCount.HeaderText = "入库数量";
+            this.colMaterialCount.HeaderText = "计划数量";
             this.colMaterialCount.MinimumWidth = 9;
             this.colMaterialCount.Name = "colMaterialCount";
             this.colMaterialCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实收数量";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
             // 
             // colReceiveStatus
             // 
@@ -732,13 +746,13 @@ namespace iWms.Form
             this.dgvBarcodes.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBarcodes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBarcodes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvBarcodes.Location = new System.Drawing.Point(487, 3);
+            this.dgvBarcodes.Location = new System.Drawing.Point(548, 3);
             this.dgvBarcodes.MultiSelect = false;
             this.dgvBarcodes.Name = "dgvBarcodes";
             this.dgvBarcodes.ReadOnly = true;
-            this.dgvBarcodes.RowHeadersWidth = 50;
+            this.dgvBarcodes.RowHeadersWidth = 40;
             this.dgvBarcodes.RowTemplate.Height = 23;
-            this.dgvBarcodes.Size = new System.Drawing.Size(722, 320);
+            this.dgvBarcodes.Size = new System.Drawing.Size(661, 320);
             this.dgvBarcodes.TabIndex = 1;
             this.dgvBarcodes.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBarcodes_RowPostPaint);
             // 
@@ -760,7 +774,7 @@ namespace iWms.Form
             // 
             // colTowerNo
             // 
-            this.colTowerNo.DataPropertyName = "TowerNo";
+            this.colTowerNo.DataPropertyName = "TowerDisplay";
             this.colTowerNo.HeaderText = "库区";
             this.colTowerNo.Name = "colTowerNo";
             this.colTowerNo.ReadOnly = true;
@@ -797,6 +811,10 @@ namespace iWms.Form
             this.gbConditions.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
             this.tlpConditions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.tbDetails.ResumeLayout(false);
             this.tlpDetails.ResumeLayout(false);
@@ -825,8 +843,6 @@ namespace iWms.Form
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbMaterialNo;
         private System.Windows.Forms.TextBox tbUser;
-        private System.Windows.Forms.DateTimePicker dtOrderDate;
-        private System.Windows.Forms.DateTimePicker dtFinishDate;
         private DevExpress.XtraEditors.SimpleButton btnQuery;
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private System.Windows.Forms.DataGridView dgvOrders;
@@ -853,14 +869,6 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton btnNext;
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveStatus;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colIsSelected;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
@@ -868,5 +876,16 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colOperate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReceiveStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBarcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTowerNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }

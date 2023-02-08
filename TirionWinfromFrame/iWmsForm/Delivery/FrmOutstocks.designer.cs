@@ -62,25 +62,27 @@ namespace iWms.Form
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnOutstock = new DevExpress.XtraEditors.SimpleButton();
-            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.tbOrderNo = new System.Windows.Forms.TextBox();
             this.cbOrderType = new System.Windows.Forms.ComboBox();
             this.cbOrderStatus = new System.Windows.Forms.ComboBox();
             this.tbDestination = new System.Windows.Forms.TextBox();
             this.tbMaterialNo = new System.Windows.Forms.TextBox();
-            this.dtOrderTime = new System.Windows.Forms.DateTimePicker();
-            this.dtFinishedTime = new System.Windows.Forms.DateTimePicker();
             this.tbOperator = new System.Windows.Forms.TextBox();
             this.tbUpn = new System.Windows.Forms.TextBox();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnClearAlarm = new DevExpress.XtraEditors.SimpleButton();
+            this.dtCreate = new DevExpress.XtraEditors.DateEdit();
+            this.dtFinish = new DevExpress.XtraEditors.DateEdit();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.btnCalculate = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFinish = new DevExpress.XtraEditors.SimpleButton();
             this.btnSpecial = new DevExpress.XtraEditors.SimpleButton();
             this.btnReset = new DevExpress.XtraEditors.SimpleButton();
             this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +96,7 @@ namespace iWms.Form
             this.dgvDetails = new System.Windows.Forms.DataGridView();
             this.colMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDeliveryCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colActual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colInventoryStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvUpns = new System.Windows.Forms.DataGridView();
             this.colUpn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,25 +104,54 @@ namespace iWms.Form
             this.colTower = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLocation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tlpLight = new System.Windows.Forms.TableLayoutPanel();
+            this.LightSeventeenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightSixteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightFifteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightForteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightTwelfth = new DevExpress.XtraEditors.LabelControl();
+            this.LightThirteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightEleventh = new DevExpress.XtraEditors.LabelControl();
+            this.LightTenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightNinth = new DevExpress.XtraEditors.LabelControl();
+            this.LightEighth = new DevExpress.XtraEditors.LabelControl();
+            this.LightSeventh = new DevExpress.XtraEditors.LabelControl();
+            this.LightSixth = new DevExpress.XtraEditors.LabelControl();
+            this.LightFifth = new DevExpress.XtraEditors.LabelControl();
+            this.LightForth = new DevExpress.XtraEditors.LabelControl();
+            this.LightThird = new DevExpress.XtraEditors.LabelControl();
+            this.LightSecond = new DevExpress.XtraEditors.LabelControl();
+            this.LightFirst = new DevExpress.XtraEditors.LabelControl();
+            this.LightEighteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightNineteenth = new DevExpress.XtraEditors.LabelControl();
+            this.LightTwentyFirst = new DevExpress.XtraEditors.LabelControl();
+            this.LightTwentieth = new DevExpress.XtraEditors.LabelControl();
             this.tlpLayout.SuspendLayout();
             this.statusStrip2.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.gbDetails.SuspendLayout();
             this.tlpDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).BeginInit();
+            this.tlpLight.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpLayout
             // 
-            this.tlpLayout.ColumnCount = 1;
+            this.tlpLayout.ColumnCount = 2;
             this.tlpLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpLayout.Controls.Add(this.statusStrip2, 0, 2);
             this.tlpLayout.Controls.Add(this.gbConditions, 0, 0);
             this.tlpLayout.Controls.Add(this.dgvOrders, 0, 1);
             this.tlpLayout.Controls.Add(this.gbDetails, 0, 3);
+            this.tlpLayout.Controls.Add(this.tlpLight, 1, 0);
             this.tlpLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpLayout.Location = new System.Drawing.Point(0, 34);
             this.tlpLayout.Margin = new System.Windows.Forms.Padding(3, 34, 3, 3);
@@ -129,8 +161,7 @@ namespace iWms.Form
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tlpLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tlpLayout.Size = new System.Drawing.Size(1227, 673);
+            this.tlpLayout.Size = new System.Drawing.Size(1378, 673);
             this.tlpLayout.TabIndex = 0;
             // 
             // statusStrip2
@@ -272,13 +303,13 @@ namespace iWms.Form
             this.gbConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbConditions.Location = new System.Drawing.Point(3, 3);
             this.gbConditions.Name = "gbConditions";
-            this.gbConditions.Size = new System.Drawing.Size(1221, 134);
+            this.gbConditions.Size = new System.Drawing.Size(1332, 134);
             this.gbConditions.TabIndex = 0;
             this.gbConditions.TabStop = false;
             // 
             // tlpConditions
             // 
-            this.tlpConditions.ColumnCount = 17;
+            this.tlpConditions.ColumnCount = 19;
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
@@ -296,6 +327,8 @@ namespace iWms.Form
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpConditions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpConditions.Controls.Add(this.label9, 4, 2);
             this.tlpConditions.Controls.Add(this.label8, 2, 2);
             this.tlpConditions.Controls.Add(this.label7, 0, 2);
@@ -305,25 +338,26 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.label3, 4, 0);
             this.tlpConditions.Controls.Add(this.label2, 2, 0);
             this.tlpConditions.Controls.Add(this.label1, 0, 0);
-            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 2);
-            this.tlpConditions.Controls.Add(this.btnFinish, 11, 2);
-            this.tlpConditions.Controls.Add(this.btnExport, 11, 0);
+            this.tlpConditions.Controls.Add(this.btnOutstock, 9, 1);
             this.tlpConditions.Controls.Add(this.tbOrderNo, 1, 0);
             this.tlpConditions.Controls.Add(this.cbOrderType, 3, 0);
             this.tlpConditions.Controls.Add(this.cbOrderStatus, 5, 0);
             this.tlpConditions.Controls.Add(this.tbDestination, 5, 1);
             this.tlpConditions.Controls.Add(this.tbMaterialNo, 3, 1);
-            this.tlpConditions.Controls.Add(this.dtOrderTime, 1, 2);
-            this.tlpConditions.Controls.Add(this.dtFinishedTime, 3, 2);
             this.tlpConditions.Controls.Add(this.tbOperator, 5, 2);
             this.tlpConditions.Controls.Add(this.tbUpn, 1, 1);
-            this.tlpConditions.Controls.Add(this.btnClear, 9, 0);
+            this.tlpConditions.Controls.Add(this.btnClear, 7, 1);
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 0);
             this.tlpConditions.Controls.Add(this.btnCancel, 13, 2);
-            this.tlpConditions.Controls.Add(this.btnCalculate, 7, 2);
-            this.tlpConditions.Controls.Add(this.btnSpecial, 11, 1);
-            this.tlpConditions.Controls.Add(this.btnReset, 13, 1);
-            this.tlpConditions.Controls.Add(this.btnLack, 13, 0);
+            this.tlpConditions.Controls.Add(this.btnClearAlarm, 18, 1);
+            this.tlpConditions.Controls.Add(this.dtCreate, 1, 2);
+            this.tlpConditions.Controls.Add(this.dtFinish, 3, 2);
+            this.tlpConditions.Controls.Add(this.btnExport, 7, 2);
+            this.tlpConditions.Controls.Add(this.btnCalculate, 9, 0);
+            this.tlpConditions.Controls.Add(this.btnFinish, 9, 2);
+            this.tlpConditions.Controls.Add(this.btnSpecial, 11, 2);
+            this.tlpConditions.Controls.Add(this.btnReset, 18, 2);
+            this.tlpConditions.Controls.Add(this.btnLack, 13, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -332,7 +366,7 @@ namespace iWms.Form
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tlpConditions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpConditions.Size = new System.Drawing.Size(1215, 113);
+            this.tlpConditions.Size = new System.Drawing.Size(1326, 113);
             this.tlpConditions.TabIndex = 0;
             // 
             // label9
@@ -437,32 +471,12 @@ namespace iWms.Form
             // btnOutstock
             // 
             this.btnOutstock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOutstock.Location = new System.Drawing.Point(810, 73);
+            this.btnOutstock.Location = new System.Drawing.Point(810, 38);
             this.btnOutstock.Name = "btnOutstock";
             this.btnOutstock.Size = new System.Drawing.Size(74, 29);
             this.btnOutstock.TabIndex = 9;
             this.btnOutstock.Text = "执行出库";
             this.btnOutstock.Click += new System.EventHandler(this.BtnOutstock_Click);
-            // 
-            // btnFinish
-            // 
-            this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnFinish.Location = new System.Drawing.Point(910, 73);
-            this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(74, 29);
-            this.btnFinish.TabIndex = 12;
-            this.btnFinish.Text = "拣料完成";
-            this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnExport.Location = new System.Drawing.Point(910, 3);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(74, 29);
-            this.btnExport.TabIndex = 13;
-            this.btnExport.Text = "导出明细";
-            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // tbOrderNo
             // 
@@ -506,30 +520,6 @@ namespace iWms.Form
             this.tbMaterialNo.Size = new System.Drawing.Size(134, 22);
             this.tbMaterialNo.TabIndex = 18;
             // 
-            // dtOrderTime
-            // 
-            this.dtOrderTime.CustomFormat = "yyyy-MM-dd";
-            this.dtOrderTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtOrderTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtOrderTime.Location = new System.Drawing.Point(83, 73);
-            this.dtOrderTime.Name = "dtOrderTime";
-            this.dtOrderTime.Size = new System.Drawing.Size(134, 22);
-            this.dtOrderTime.TabIndex = 20;
-            this.dtOrderTime.Value = new System.DateTime(2022, 2, 22, 12, 4, 52, 0);
-            this.dtOrderTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtp_MouseUp);
-            // 
-            // dtFinishedTime
-            // 
-            this.dtFinishedTime.CustomFormat = "yyyy-MM-dd";
-            this.dtFinishedTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dtFinishedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFinishedTime.Location = new System.Drawing.Point(303, 73);
-            this.dtFinishedTime.Name = "dtFinishedTime";
-            this.dtFinishedTime.Size = new System.Drawing.Size(134, 22);
-            this.dtFinishedTime.TabIndex = 21;
-            this.dtFinishedTime.Value = new System.DateTime(2022, 2, 22, 0, 0, 0, 0);
-            this.dtFinishedTime.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dtp_MouseUp);
-            // 
             // tbOperator
             // 
             this.tbOperator.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -549,7 +539,7 @@ namespace iWms.Form
             // btnClear
             // 
             this.btnClear.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClear.Location = new System.Drawing.Point(810, 3);
+            this.btnClear.Location = new System.Drawing.Point(710, 38);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 29);
             this.btnClear.TabIndex = 24;
@@ -576,20 +566,77 @@ namespace iWms.Form
             this.btnCancel.Text = "取消出库";
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // btnClearAlarm
+            // 
+            this.btnClearAlarm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearAlarm.Location = new System.Drawing.Point(1249, 38);
+            this.btnClearAlarm.Name = "btnClearAlarm";
+            this.btnClearAlarm.Size = new System.Drawing.Size(74, 29);
+            this.btnClearAlarm.TabIndex = 30;
+            this.btnClearAlarm.Text = "清除报警";
+            this.btnClearAlarm.Click += new System.EventHandler(this.btnClearAlarm_Click);
+            // 
+            // dtCreate
+            // 
+            this.dtCreate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtCreate.EditValue = null;
+            this.dtCreate.Location = new System.Drawing.Point(83, 73);
+            this.dtCreate.Name = "dtCreate";
+            this.dtCreate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.dtCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtCreate.Size = new System.Drawing.Size(134, 20);
+            this.dtCreate.TabIndex = 31;
+            // 
+            // dtFinish
+            // 
+            this.dtFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtFinish.EditValue = null;
+            this.dtFinish.Location = new System.Drawing.Point(303, 73);
+            this.dtFinish.Name = "dtFinish";
+            this.dtFinish.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dtFinish.Size = new System.Drawing.Size(134, 20);
+            this.dtFinish.TabIndex = 32;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnExport.Location = new System.Drawing.Point(710, 73);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(74, 29);
+            this.btnExport.TabIndex = 13;
+            this.btnExport.Text = "导出明细";
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
+            // 
             // btnCalculate
             // 
             this.btnCalculate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCalculate.Location = new System.Drawing.Point(710, 73);
+            this.btnCalculate.Location = new System.Drawing.Point(810, 3);
             this.btnCalculate.Name = "btnCalculate";
             this.btnCalculate.Size = new System.Drawing.Size(74, 29);
             this.btnCalculate.TabIndex = 26;
             this.btnCalculate.Text = "出库计算";
             this.btnCalculate.Click += new System.EventHandler(this.BtnCalculate_Click);
             // 
+            // btnFinish
+            // 
+            this.btnFinish.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnFinish.Location = new System.Drawing.Point(810, 73);
+            this.btnFinish.Name = "btnFinish";
+            this.btnFinish.Size = new System.Drawing.Size(74, 29);
+            this.btnFinish.TabIndex = 12;
+            this.btnFinish.Text = "拣料完成";
+            this.btnFinish.Click += new System.EventHandler(this.BtnFinish_Click);
+            // 
             // btnSpecial
             // 
             this.btnSpecial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSpecial.Location = new System.Drawing.Point(910, 38);
+            this.btnSpecial.Location = new System.Drawing.Point(910, 73);
             this.btnSpecial.Name = "btnSpecial";
             this.btnSpecial.Size = new System.Drawing.Size(74, 29);
             this.btnSpecial.TabIndex = 27;
@@ -599,7 +646,7 @@ namespace iWms.Form
             // btnReset
             // 
             this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnReset.Location = new System.Drawing.Point(1010, 38);
+            this.btnReset.Location = new System.Drawing.Point(1249, 73);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(74, 29);
             this.btnReset.TabIndex = 28;
@@ -609,7 +656,7 @@ namespace iWms.Form
             // btnLack
             // 
             this.btnLack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLack.Location = new System.Drawing.Point(1010, 3);
+            this.btnLack.Location = new System.Drawing.Point(1010, 38);
             this.btnLack.Name = "btnLack";
             this.btnLack.Size = new System.Drawing.Size(74, 29);
             this.btnLack.TabIndex = 29;
@@ -620,11 +667,13 @@ namespace iWms.Form
             // 
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
+            this.dgvOrders.AllowUserToResizeRows = false;
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrders.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOrders.ColumnHeadersHeight = 29;
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvOrders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSelect,
             this.colOrderNo,
             this.colOrderType,
             this.colOrderStatus,
@@ -648,13 +697,25 @@ namespace iWms.Form
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.RowHeadersWidth = 40;
             this.dgvOrders.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvOrders.RowTemplate.Height = 23;
+            this.dgvOrders.RowTemplate.Height = 24;
+            this.dgvOrders.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvOrders.Size = new System.Drawing.Size(1221, 195);
+            this.dgvOrders.Size = new System.Drawing.Size(1332, 195);
             this.dgvOrders.TabIndex = 1;
             this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
+            // 
+            // colSelect
+            // 
+            this.colSelect.DataPropertyName = "IsSelected";
+            this.colSelect.FalseValue = "False";
+            this.colSelect.FillWeight = 20F;
+            this.colSelect.HeaderText = "选择";
+            this.colSelect.MinimumWidth = 40;
+            this.colSelect.Name = "colSelect";
+            this.colSelect.ToolTipText = "仅用于导出场景";
+            this.colSelect.TrueValue = "True";
             // 
             // colOrderNo
             // 
@@ -723,7 +784,7 @@ namespace iWms.Form
             this.gbDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbDetails.Location = new System.Drawing.Point(3, 374);
             this.gbDetails.Name = "gbDetails";
-            this.gbDetails.Size = new System.Drawing.Size(1221, 296);
+            this.gbDetails.Size = new System.Drawing.Size(1332, 296);
             this.gbDetails.TabIndex = 2;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "出库明细";
@@ -741,7 +802,7 @@ namespace iWms.Form
             this.tlpDetails.Name = "tlpDetails";
             this.tlpDetails.RowCount = 1;
             this.tlpDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpDetails.Size = new System.Drawing.Size(1215, 275);
+            this.tlpDetails.Size = new System.Drawing.Size(1326, 275);
             this.tlpDetails.TabIndex = 0;
             // 
             // dgvDetails
@@ -754,6 +815,7 @@ namespace iWms.Form
             this.dgvDetails.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMaterialNo,
             this.colDeliveryCount,
+            this.colActual,
             this.colInventoryStatus});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -773,7 +835,7 @@ namespace iWms.Form
             this.dgvDetails.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetails.RowTemplate.Height = 23;
             this.dgvDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDetails.Size = new System.Drawing.Size(598, 269);
+            this.dgvDetails.Size = new System.Drawing.Size(654, 269);
             this.dgvDetails.TabIndex = 1;
             this.dgvDetails.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvDetails_RowPostPaint);
             this.dgvDetails.SelectionChanged += new System.EventHandler(this.DgvDetails_SelectionChanged);
@@ -793,6 +855,13 @@ namespace iWms.Form
             this.colDeliveryCount.MinimumWidth = 9;
             this.colDeliveryCount.Name = "colDeliveryCount";
             this.colDeliveryCount.ReadOnly = true;
+            // 
+            // colActual
+            // 
+            this.colActual.DataPropertyName = "ActualCount";
+            this.colActual.HeaderText = "实际出库";
+            this.colActual.Name = "colActual";
+            this.colActual.ReadOnly = true;
             // 
             // colInventoryStatus
             // 
@@ -825,7 +894,7 @@ namespace iWms.Form
             this.dgvUpns.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUpns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUpns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dgvUpns.Location = new System.Drawing.Point(613, 3);
+            this.dgvUpns.Location = new System.Drawing.Point(669, 3);
             this.dgvUpns.MultiSelect = false;
             this.dgvUpns.Name = "dgvUpns";
             this.dgvUpns.ReadOnly = true;
@@ -833,7 +902,7 @@ namespace iWms.Form
             this.dgvUpns.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvUpns.RowTemplate.Height = 23;
             this.dgvUpns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvUpns.Size = new System.Drawing.Size(599, 269);
+            this.dgvUpns.Size = new System.Drawing.Size(654, 269);
             this.dgvUpns.TabIndex = 2;
             this.dgvUpns.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvUpns_RowPostPaint);
             // 
@@ -875,14 +944,417 @@ namespace iWms.Form
             this.colOperator.Name = "colOperator";
             this.colOperator.ReadOnly = true;
             // 
+            // tlpLight
+            // 
+            this.tlpLight.ColumnCount = 1;
+            this.tlpLight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpLight.Controls.Add(this.LightSeventeenth, 0, 16);
+            this.tlpLight.Controls.Add(this.LightSixteenth, 0, 15);
+            this.tlpLight.Controls.Add(this.LightFifteenth, 0, 14);
+            this.tlpLight.Controls.Add(this.LightForteenth, 0, 13);
+            this.tlpLight.Controls.Add(this.LightTwelfth, 0, 11);
+            this.tlpLight.Controls.Add(this.LightThirteenth, 0, 12);
+            this.tlpLight.Controls.Add(this.LightEleventh, 0, 10);
+            this.tlpLight.Controls.Add(this.LightTenth, 0, 9);
+            this.tlpLight.Controls.Add(this.LightNinth, 0, 8);
+            this.tlpLight.Controls.Add(this.LightEighth, 0, 7);
+            this.tlpLight.Controls.Add(this.LightSeventh, 0, 6);
+            this.tlpLight.Controls.Add(this.LightSixth, 0, 5);
+            this.tlpLight.Controls.Add(this.LightFifth, 0, 4);
+            this.tlpLight.Controls.Add(this.LightForth, 0, 3);
+            this.tlpLight.Controls.Add(this.LightThird, 0, 2);
+            this.tlpLight.Controls.Add(this.LightSecond, 0, 1);
+            this.tlpLight.Controls.Add(this.LightFirst, 0, 0);
+            this.tlpLight.Controls.Add(this.LightEighteenth, 0, 17);
+            this.tlpLight.Controls.Add(this.LightNineteenth, 0, 18);
+            this.tlpLight.Controls.Add(this.LightTwentyFirst, 0, 20);
+            this.tlpLight.Controls.Add(this.LightTwentieth, 0, 19);
+            this.tlpLight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpLight.Location = new System.Drawing.Point(1338, 0);
+            this.tlpLight.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpLight.Name = "tlpLight";
+            this.tlpLight.RowCount = 21;
+            this.tlpLayout.SetRowSpan(this.tlpLight, 4);
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.761906F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpLight.Size = new System.Drawing.Size(40, 673);
+            this.tlpLight.TabIndex = 8;
+            // 
+            // LightSeventeenth
+            // 
+            this.LightSeventeenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSeventeenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSeventeenth.Appearance.Options.UseFont = true;
+            this.LightSeventeenth.Appearance.Options.UseForeColor = true;
+            this.LightSeventeenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSeventeenth.Location = new System.Drawing.Point(0, 512);
+            this.LightSeventeenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSeventeenth.Name = "LightSeventeenth";
+            this.LightSeventeenth.Size = new System.Drawing.Size(40, 32);
+            this.LightSeventeenth.TabIndex = 40;
+            this.LightSeventeenth.Tag = "SWHY017";
+            this.LightSeventeenth.Text = "●";
+            this.LightSeventeenth.ToolTip = "SWHY017";
+            // 
+            // LightSixteenth
+            // 
+            this.LightSixteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSixteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSixteenth.Appearance.Options.UseFont = true;
+            this.LightSixteenth.Appearance.Options.UseForeColor = true;
+            this.LightSixteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSixteenth.Location = new System.Drawing.Point(0, 480);
+            this.LightSixteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSixteenth.Name = "LightSixteenth";
+            this.LightSixteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightSixteenth.TabIndex = 39;
+            this.LightSixteenth.Tag = "SWHY016";
+            this.LightSixteenth.Text = "●";
+            this.LightSixteenth.ToolTip = "SWHY016";
+            // 
+            // LightFifteenth
+            // 
+            this.LightFifteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFifteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFifteenth.Appearance.Options.UseFont = true;
+            this.LightFifteenth.Appearance.Options.UseForeColor = true;
+            this.LightFifteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFifteenth.Location = new System.Drawing.Point(0, 448);
+            this.LightFifteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFifteenth.Name = "LightFifteenth";
+            this.LightFifteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightFifteenth.TabIndex = 38;
+            this.LightFifteenth.Tag = "SWHY015";
+            this.LightFifteenth.Text = "●";
+            this.LightFifteenth.ToolTip = "SWHY015";
+            // 
+            // LightForteenth
+            // 
+            this.LightForteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightForteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightForteenth.Appearance.Options.UseFont = true;
+            this.LightForteenth.Appearance.Options.UseForeColor = true;
+            this.LightForteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightForteenth.Location = new System.Drawing.Point(0, 416);
+            this.LightForteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightForteenth.Name = "LightForteenth";
+            this.LightForteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightForteenth.TabIndex = 37;
+            this.LightForteenth.Tag = "SWHY014";
+            this.LightForteenth.Text = "●";
+            this.LightForteenth.ToolTip = "SWHY014";
+            // 
+            // LightTwelfth
+            // 
+            this.LightTwelfth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTwelfth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTwelfth.Appearance.Options.UseFont = true;
+            this.LightTwelfth.Appearance.Options.UseForeColor = true;
+            this.LightTwelfth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTwelfth.Location = new System.Drawing.Point(0, 352);
+            this.LightTwelfth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTwelfth.Name = "LightTwelfth";
+            this.LightTwelfth.Size = new System.Drawing.Size(40, 32);
+            this.LightTwelfth.TabIndex = 36;
+            this.LightTwelfth.Tag = "SWHY012";
+            this.LightTwelfth.Text = "●";
+            this.LightTwelfth.ToolTip = "SWHY012";
+            // 
+            // LightThirteenth
+            // 
+            this.LightThirteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightThirteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightThirteenth.Appearance.Options.UseFont = true;
+            this.LightThirteenth.Appearance.Options.UseForeColor = true;
+            this.LightThirteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightThirteenth.Location = new System.Drawing.Point(0, 384);
+            this.LightThirteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightThirteenth.Name = "LightThirteenth";
+            this.LightThirteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightThirteenth.TabIndex = 35;
+            this.LightThirteenth.Tag = "SWHY013";
+            this.LightThirteenth.Text = "●";
+            this.LightThirteenth.ToolTip = "SWHY013";
+            // 
+            // LightEleventh
+            // 
+            this.LightEleventh.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightEleventh.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightEleventh.Appearance.Options.UseFont = true;
+            this.LightEleventh.Appearance.Options.UseForeColor = true;
+            this.LightEleventh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightEleventh.Location = new System.Drawing.Point(0, 320);
+            this.LightEleventh.Margin = new System.Windows.Forms.Padding(0);
+            this.LightEleventh.Name = "LightEleventh";
+            this.LightEleventh.Size = new System.Drawing.Size(40, 32);
+            this.LightEleventh.TabIndex = 34;
+            this.LightEleventh.Tag = "SWHY011";
+            this.LightEleventh.Text = "●";
+            this.LightEleventh.ToolTip = "SWHY011";
+            // 
+            // LightTenth
+            // 
+            this.LightTenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTenth.Appearance.Options.UseFont = true;
+            this.LightTenth.Appearance.Options.UseForeColor = true;
+            this.LightTenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTenth.Location = new System.Drawing.Point(0, 288);
+            this.LightTenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTenth.Name = "LightTenth";
+            this.LightTenth.Size = new System.Drawing.Size(40, 32);
+            this.LightTenth.TabIndex = 33;
+            this.LightTenth.Tag = "SWHY010";
+            this.LightTenth.Text = "●";
+            this.LightTenth.ToolTip = "SWHY010";
+            // 
+            // LightNinth
+            // 
+            this.LightNinth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightNinth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightNinth.Appearance.Options.UseFont = true;
+            this.LightNinth.Appearance.Options.UseForeColor = true;
+            this.LightNinth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightNinth.Location = new System.Drawing.Point(0, 256);
+            this.LightNinth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightNinth.Name = "LightNinth";
+            this.LightNinth.Size = new System.Drawing.Size(40, 32);
+            this.LightNinth.TabIndex = 32;
+            this.LightNinth.Tag = "SWHY009";
+            this.LightNinth.Text = "●";
+            this.LightNinth.ToolTip = "SWHY009";
+            // 
+            // LightEighth
+            // 
+            this.LightEighth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightEighth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightEighth.Appearance.Options.UseFont = true;
+            this.LightEighth.Appearance.Options.UseForeColor = true;
+            this.LightEighth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightEighth.Location = new System.Drawing.Point(0, 224);
+            this.LightEighth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightEighth.Name = "LightEighth";
+            this.LightEighth.Size = new System.Drawing.Size(40, 32);
+            this.LightEighth.TabIndex = 31;
+            this.LightEighth.Tag = "SWHY008";
+            this.LightEighth.Text = "●";
+            this.LightEighth.ToolTip = "SWHY008";
+            // 
+            // LightSeventh
+            // 
+            this.LightSeventh.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSeventh.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSeventh.Appearance.Options.UseFont = true;
+            this.LightSeventh.Appearance.Options.UseForeColor = true;
+            this.LightSeventh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSeventh.Location = new System.Drawing.Point(0, 192);
+            this.LightSeventh.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSeventh.Name = "LightSeventh";
+            this.LightSeventh.Size = new System.Drawing.Size(40, 32);
+            this.LightSeventh.TabIndex = 30;
+            this.LightSeventh.Tag = "SWHY007";
+            this.LightSeventh.Text = "●";
+            this.LightSeventh.ToolTip = "SWHY007";
+            // 
+            // LightSixth
+            // 
+            this.LightSixth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSixth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSixth.Appearance.Options.UseFont = true;
+            this.LightSixth.Appearance.Options.UseForeColor = true;
+            this.LightSixth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSixth.Location = new System.Drawing.Point(0, 160);
+            this.LightSixth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSixth.Name = "LightSixth";
+            this.LightSixth.Size = new System.Drawing.Size(40, 32);
+            this.LightSixth.TabIndex = 29;
+            this.LightSixth.Tag = "SWHY006";
+            this.LightSixth.Text = "●";
+            this.LightSixth.ToolTip = "SWHY006";
+            // 
+            // LightFifth
+            // 
+            this.LightFifth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFifth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFifth.Appearance.Options.UseFont = true;
+            this.LightFifth.Appearance.Options.UseForeColor = true;
+            this.LightFifth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFifth.Location = new System.Drawing.Point(0, 128);
+            this.LightFifth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFifth.Name = "LightFifth";
+            this.LightFifth.Size = new System.Drawing.Size(40, 32);
+            this.LightFifth.TabIndex = 28;
+            this.LightFifth.Tag = "SWHY005";
+            this.LightFifth.Text = "●";
+            this.LightFifth.ToolTip = "SWHY005";
+            // 
+            // LightForth
+            // 
+            this.LightForth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightForth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightForth.Appearance.Options.UseFont = true;
+            this.LightForth.Appearance.Options.UseForeColor = true;
+            this.LightForth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightForth.Location = new System.Drawing.Point(0, 96);
+            this.LightForth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightForth.Name = "LightForth";
+            this.LightForth.Size = new System.Drawing.Size(40, 32);
+            this.LightForth.TabIndex = 27;
+            this.LightForth.Tag = "SWHY004";
+            this.LightForth.Text = "●";
+            this.LightForth.ToolTip = "SWHY004";
+            // 
+            // LightThird
+            // 
+            this.LightThird.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightThird.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightThird.Appearance.Options.UseFont = true;
+            this.LightThird.Appearance.Options.UseForeColor = true;
+            this.LightThird.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightThird.Location = new System.Drawing.Point(0, 64);
+            this.LightThird.Margin = new System.Windows.Forms.Padding(0);
+            this.LightThird.Name = "LightThird";
+            this.LightThird.Size = new System.Drawing.Size(40, 32);
+            this.LightThird.TabIndex = 26;
+            this.LightThird.Tag = "SWHY003";
+            this.LightThird.Text = "●";
+            this.LightThird.ToolTip = "SWHY003";
+            // 
+            // LightSecond
+            // 
+            this.LightSecond.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightSecond.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightSecond.Appearance.Options.UseFont = true;
+            this.LightSecond.Appearance.Options.UseForeColor = true;
+            this.LightSecond.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightSecond.Location = new System.Drawing.Point(0, 32);
+            this.LightSecond.Margin = new System.Windows.Forms.Padding(0);
+            this.LightSecond.Name = "LightSecond";
+            this.LightSecond.Size = new System.Drawing.Size(40, 32);
+            this.LightSecond.TabIndex = 25;
+            this.LightSecond.Tag = "SWHY002";
+            this.LightSecond.Text = "●";
+            this.LightSecond.ToolTip = "SWHY002";
+            // 
+            // LightFirst
+            // 
+            this.LightFirst.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightFirst.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightFirst.Appearance.Options.UseFont = true;
+            this.LightFirst.Appearance.Options.UseForeColor = true;
+            this.LightFirst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightFirst.Location = new System.Drawing.Point(0, 0);
+            this.LightFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.LightFirst.Name = "LightFirst";
+            this.LightFirst.Size = new System.Drawing.Size(40, 32);
+            this.LightFirst.TabIndex = 24;
+            this.LightFirst.Tag = "SWHY001";
+            this.LightFirst.Text = "●";
+            this.LightFirst.ToolTip = "SWHY001";
+            // 
+            // LightEighteenth
+            // 
+            this.LightEighteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightEighteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightEighteenth.Appearance.Options.UseFont = true;
+            this.LightEighteenth.Appearance.Options.UseForeColor = true;
+            this.LightEighteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightEighteenth.Location = new System.Drawing.Point(0, 544);
+            this.LightEighteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightEighteenth.Name = "LightEighteenth";
+            this.LightEighteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightEighteenth.TabIndex = 23;
+            this.LightEighteenth.Tag = "SWHY018";
+            this.LightEighteenth.Text = "●";
+            this.LightEighteenth.ToolTip = "SWHY018";
+            // 
+            // LightNineteenth
+            // 
+            this.LightNineteenth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightNineteenth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightNineteenth.Appearance.Options.UseFont = true;
+            this.LightNineteenth.Appearance.Options.UseForeColor = true;
+            this.LightNineteenth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightNineteenth.Location = new System.Drawing.Point(0, 576);
+            this.LightNineteenth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightNineteenth.Name = "LightNineteenth";
+            this.LightNineteenth.Size = new System.Drawing.Size(40, 32);
+            this.LightNineteenth.TabIndex = 22;
+            this.LightNineteenth.Tag = "SWHY019";
+            this.LightNineteenth.Text = "●";
+            this.LightNineteenth.ToolTip = "SWHY019";
+            // 
+            // LightTwentyFirst
+            // 
+            this.LightTwentyFirst.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTwentyFirst.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTwentyFirst.Appearance.Options.UseFont = true;
+            this.LightTwentyFirst.Appearance.Options.UseForeColor = true;
+            this.LightTwentyFirst.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTwentyFirst.Location = new System.Drawing.Point(0, 640);
+            this.LightTwentyFirst.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTwentyFirst.Name = "LightTwentyFirst";
+            this.LightTwentyFirst.Size = new System.Drawing.Size(40, 33);
+            this.LightTwentyFirst.TabIndex = 21;
+            this.LightTwentyFirst.Tag = "SWHY021";
+            this.LightTwentyFirst.Text = "●";
+            this.LightTwentyFirst.ToolTip = "SWHY021";
+            // 
+            // LightTwentieth
+            // 
+            this.LightTwentieth.Appearance.Font = new System.Drawing.Font("宋体", 20F);
+            this.LightTwentieth.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.LightTwentieth.Appearance.Options.UseFont = true;
+            this.LightTwentieth.Appearance.Options.UseForeColor = true;
+            this.LightTwentieth.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LightTwentieth.Location = new System.Drawing.Point(0, 608);
+            this.LightTwentieth.Margin = new System.Windows.Forms.Padding(0);
+            this.LightTwentieth.Name = "LightTwentieth";
+            this.LightTwentieth.Size = new System.Drawing.Size(40, 32);
+            this.LightTwentieth.TabIndex = 20;
+            this.LightTwentieth.Tag = "SWHY020";
+            this.LightTwentieth.Text = "●";
+            this.LightTwentieth.ToolTip = "SWHY020";
+            // 
             // FrmOutstocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 707);
+            this.ClientSize = new System.Drawing.Size(1378, 707);
             this.Controls.Add(this.tlpLayout);
             this.Name = "FrmOutstocks";
             this.Text = "出库单列表";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmOutstocks_FormClosing);
             this.Load += new System.EventHandler(this.FrmOutstocks_Load);
             this.Controls.SetChildIndex(this.tlpLayout, 0);
             this.tlpLayout.ResumeLayout(false);
@@ -892,11 +1364,17 @@ namespace iWms.Form
             this.gbConditions.ResumeLayout(false);
             this.tlpConditions.ResumeLayout(false);
             this.tlpConditions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtCreate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtFinish.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.gbDetails.ResumeLayout(false);
             this.tlpDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUpns)).EndInit();
+            this.tlpLight.ResumeLayout(false);
+            this.tlpLight.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -926,8 +1404,6 @@ namespace iWms.Form
         private System.Windows.Forms.ComboBox cbOrderStatus;
         private System.Windows.Forms.TextBox tbDestination;
         private System.Windows.Forms.TextBox tbMaterialNo;
-        private System.Windows.Forms.DateTimePicker dtOrderTime;
-        private System.Windows.Forms.DateTimePicker dtFinishedTime;
         private System.Windows.Forms.TextBox tbOperator;
         private System.Windows.Forms.TableLayoutPanel tlpDetails;
         private System.Windows.Forms.DataGridView dgvDetails;
@@ -952,15 +1428,38 @@ namespace iWms.Form
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnCalculate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
         private DevExpress.XtraEditors.SimpleButton btnSpecial;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUpn;
         private System.Windows.Forms.DataGridViewTextBoxColumn colInnerCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTower;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocation;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOperator;
+        private DevExpress.XtraEditors.SimpleButton btnReset;
+        private DevExpress.XtraEditors.SimpleButton btnLack;
+        private System.Windows.Forms.TableLayoutPanel tlpLight;
+        private DevExpress.XtraEditors.LabelControl LightTwentieth;
+        private DevExpress.XtraEditors.LabelControl LightSeventeenth;
+        private DevExpress.XtraEditors.LabelControl LightSixteenth;
+        private DevExpress.XtraEditors.LabelControl LightFifteenth;
+        private DevExpress.XtraEditors.LabelControl LightForteenth;
+        private DevExpress.XtraEditors.LabelControl LightTwelfth;
+        private DevExpress.XtraEditors.LabelControl LightThirteenth;
+        private DevExpress.XtraEditors.LabelControl LightEleventh;
+        private DevExpress.XtraEditors.LabelControl LightTenth;
+        private DevExpress.XtraEditors.LabelControl LightNinth;
+        private DevExpress.XtraEditors.LabelControl LightEighth;
+        private DevExpress.XtraEditors.LabelControl LightSeventh;
+        private DevExpress.XtraEditors.LabelControl LightSixth;
+        private DevExpress.XtraEditors.LabelControl LightFifth;
+        private DevExpress.XtraEditors.LabelControl LightForth;
+        private DevExpress.XtraEditors.LabelControl LightThird;
+        private DevExpress.XtraEditors.LabelControl LightSecond;
+        private DevExpress.XtraEditors.LabelControl LightFirst;
+        private DevExpress.XtraEditors.LabelControl LightEighteenth;
+        private DevExpress.XtraEditors.LabelControl LightNineteenth;
+        private DevExpress.XtraEditors.LabelControl LightTwentyFirst;
+        private DevExpress.XtraEditors.SimpleButton btnClearAlarm;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
@@ -969,7 +1468,11 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
-        private DevExpress.XtraEditors.SimpleButton btnReset;
-        private DevExpress.XtraEditors.SimpleButton btnLack;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }

@@ -10,7 +10,7 @@ namespace Business
     public class OrderReviewCallApi
     {
         #region Mes物料信息接口 验证
-        public static CheckResultResponse CheckFromMaterialInfo(string qrcode)
+        public static CheckResultResponse CheckFromMaterialInfo(string qrcode, int originQuantity)
         {
             CheckResultResponse checkResult = new CheckResultResponse() { Result = true };
             MaterialInfoResponse response = CallMesWmsApiBll.CallMaterialInfoByUPN(qrcode);
@@ -28,6 +28,11 @@ namespace Business
             {
                 checkResult.Result = false;
                 checkResult.ErrMessage = "锁定料";
+            }
+            else if ((int)TypeParse.StrToDecimal(response.InvQty, 0) != originQuantity)
+            {
+                checkResult.Result = false;
+                checkResult.ErrMessage = "本地数量与MES不一致";
             }
             else
             {

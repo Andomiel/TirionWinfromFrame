@@ -43,6 +43,7 @@ namespace iWms.Form
             this.colRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pgLog = new System.Windows.Forms.PropertyGrid();
+            this.btnTxt = new DevExpress.XtraEditors.SimpleButton();
             this.tlpLoayout.SuspendLayout();
             this.gbConditions.SuspendLayout();
             this.tlpConditions.SuspendLayout();
@@ -95,6 +96,7 @@ namespace iWms.Form
             this.tlpConditions.Controls.Add(this.btnQuery, 7, 1);
             this.tlpConditions.Controls.Add(this.label2, 4, 1);
             this.tlpConditions.Controls.Add(this.dtpTime, 5, 1);
+            this.tlpConditions.Controls.Add(this.btnTxt, 8, 1);
             this.tlpConditions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpConditions.Location = new System.Drawing.Point(3, 18);
             this.tlpConditions.Name = "tlpConditions";
@@ -217,6 +219,15 @@ namespace iWms.Form
             this.pgLog.Size = new System.Drawing.Size(478, 449);
             this.pgLog.TabIndex = 2;
             // 
+            // btnTxt
+            // 
+            this.btnTxt.Location = new System.Drawing.Point(843, 44);
+            this.btnTxt.Name = "btnTxt";
+            this.btnTxt.Size = new System.Drawing.Size(75, 23);
+            this.btnTxt.TabIndex = 5;
+            this.btnTxt.Text = "导出到文件";
+            this.btnTxt.Click += new System.EventHandler(this.BtnTxt_Click);
+            // 
             // FrmLogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -251,5 +262,6 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colResult;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dtpTime;
+        private DevExpress.XtraEditors.SimpleButton btnTxt;
     }
 }

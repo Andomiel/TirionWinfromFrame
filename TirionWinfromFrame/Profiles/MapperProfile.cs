@@ -2,7 +2,9 @@
 using Entity.DataContext;
 using Entity.DataContext.DbContext;
 using Entity.Dto;
+using Entity.Dto.Balance;
 using Entity.Dto.Delivery;
+using Entity.Dto.Instock;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -67,6 +69,14 @@ namespace TirionWinfromFrame.Profiles
             .Map(dest => dest.RequestBody, src => src.RequestBody)
             .Map(dest => dest.ResponseBody, src => src.ResponseBody);
 
+            TypeAdapterConfig<Cfg_Register, CfgRegisterDto>
+                .NewConfig();
+
+
+            TypeAdapterConfig<Wms_BalanceOrder, BalanceOrderDto>
+                .NewConfig();
+            TypeAdapterConfig<Wms_BalanceBarcode, BalanceBarcodeDto>
+                .NewConfig();
         }
 
     }

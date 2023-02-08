@@ -109,12 +109,14 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             this.gvBarcodes.IndicatorWidth = 50;
             this.gvBarcodes.Name = "gvBarcodes";
             this.gvBarcodes.OptionsView.ShowGroupPanel = false;
+            this.gvBarcodes.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.GvBarcodes_RowCellClick);
             this.gvBarcodes.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.GvBarcodes_CustomDrawRowIndicator);
             this.gvBarcodes.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.GvBarcodes_RowCellStyle);
             // 
             // colUpn
             // 
             this.colUpn.Caption = "UPN";
+            this.colUpn.FieldName = "Barcode";
             this.colUpn.Name = "colUpn";
             this.colUpn.OptionsColumn.AllowEdit = false;
             this.colUpn.Visible = true;
@@ -123,6 +125,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             // colMaterialNo
             // 
             this.colMaterialNo.Caption = "物料代码";
+            this.colMaterialNo.FieldName = "MaterialNo";
             this.colMaterialNo.Name = "colMaterialNo";
             this.colMaterialNo.OptionsColumn.AllowEdit = false;
             this.colMaterialNo.Visible = true;
@@ -131,6 +134,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             // colOriginQuantity
             // 
             this.colOriginQuantity.Caption = "原始数量";
+            this.colOriginQuantity.FieldName = "OriginQuantity";
             this.colOriginQuantity.Name = "colOriginQuantity";
             this.colOriginQuantity.OptionsColumn.AllowEdit = false;
             this.colOriginQuantity.Visible = true;
@@ -139,6 +143,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             // colActualQuantity
             // 
             this.colActualQuantity.Caption = "盘点数量";
+            this.colActualQuantity.FieldName = "RealQuantity";
             this.colActualQuantity.Name = "colActualQuantity";
             this.colActualQuantity.Visible = true;
             this.colActualQuantity.VisibleIndex = 3;
@@ -146,6 +151,7 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             // colResult
             // 
             this.colResult.Caption = "盘点结论";
+            this.colResult.FieldName = "InventoryResult";
             this.colResult.Name = "colResult";
             this.colResult.OptionsColumn.AllowEdit = false;
             this.colResult.Visible = true;
@@ -240,7 +246,6 @@ namespace TirionWinfromFrame.iWmsForm.StockTaking
             // 
             // FrmInventoryDetail
             // 
-            this.AcceptButton = this.btnConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1018, 581);

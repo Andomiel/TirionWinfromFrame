@@ -31,7 +31,7 @@ namespace iWms.Form
                 return;
             }
             //保存填写的信息，然后执行接下来的完成逻辑
-            bool result = WareHouseBLL.UpdateOrderRemark(OrderNo, txtRemark.Text, AppInfo.LoginUserInfo.account);
+            bool result = WareHouseBLL.UpdateOrderRemark(OrderNo, $"{AppInfo.LoginUserInfo.account}:{txtRemark.Text}", AppInfo.LoginUserInfo.account);
             if (result)
             {
                 DialogResult = DialogResult.OK;

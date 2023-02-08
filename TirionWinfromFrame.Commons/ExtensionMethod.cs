@@ -413,13 +413,12 @@ namespace TirionWinfromFrame.Commons
         /// </summary> 
         /// <param name="dt">DataTable 对象</param> 
         /// <returns>List<T>集合</returns> 
-        public static List<T> DataTableToList<T>(this DataTable dt) where T : class, new()
+        public static IEnumerable<T> DataTableToList<T>(this DataTable dt) where T : class, new()
         {
             // 定义集合 
-            List<T> ts = new List<T>();
             if (dt == null || dt.Rows.Count == 0)
             {
-                return ts;
+                yield break;
             }
             var plist = new List<PropertyInfo>(typeof(T).GetProperties());
             foreach (DataRow item in dt.Rows)
@@ -454,10 +453,10 @@ namespace TirionWinfromFrame.Commons
                         throw new Exception($"字段[{info.Name}]转换出错:{ex.Message}");
                     }
                 }
-                ts.Add(s);
+                yield return s;
             }
-            return ts;
         }
+
         public static string GetDateTimeCode(this DateTime dt)
         {
             return DateTime.Now.Year + DateTime.Now.Month.ToString("D2") + DateTime.Now.Day.ToString("D2") +

@@ -9,7 +9,7 @@ namespace Entity.Dto
 
         public bool IsSelected { get; set; } = false;
 
-        public long Id { get; set; } = 0;
+        public int TotalCount { get; set; } = 0;
 
         /// <summary>
         /// 入库单业务Id
@@ -40,11 +40,6 @@ namespace Entity.Dto
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; } = new DateTime(1900, 1, 1);
-
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public string CreateUser { get; set; } = string.Empty;
 
         /// <summary>
         /// 最后更新时间

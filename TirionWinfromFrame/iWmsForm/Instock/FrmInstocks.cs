@@ -41,15 +41,6 @@ namespace iWms.Form
             dgvBarcodes.AutoGenerateColumns = false;
             dgvBarcodes.DataSource = WorkOrderBarcodes;
             dgvBarcodes.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderDate.Value = DateTime.Now.AddDays(-2);
-            dtFinishDate.Value = DateTime.Now.AddDays(1);
-        }
-
-        private void Dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private void InitCombox(ComboBox cb, Type enumType)
@@ -72,17 +63,15 @@ namespace iWms.Form
             cb.SelectedIndex = 0;
         }
 
-        private List<InstockOrderDto> WorkOrders = new List<InstockOrderDto>();
-
         private BindingList<InstockOrderDto> PagedWorkOrders = new BindingList<InstockOrderDto>();
 
         private BindingList<InstockDetailDto> WorkOrderDetails = new BindingList<InstockDetailDto>();
 
         private BindingList<InstockBarcodeDto> WorkOrderBarcodes = new BindingList<InstockBarcodeDto>();
 
-        private List<InstockBarcodeDto> OrderBarcodes = new List<InstockBarcodeDto>();
+        private Dictionary<string, BindingList<InstockBarcodeDto>> OrderBarcodes = new Dictionary<string, BindingList<InstockBarcodeDto>>();
 
-        private object lockQueryObj = new object();
+        private readonly object lockQueryObj = new object();
 
         private void BtnQuery_Click(object sender, EventArgs e)
         {
@@ -91,6 +80,18 @@ namespace iWms.Form
                 lock (lockQueryObj)
                 {
                     GetOrders();
+                    if (PagedWorkOrders.Count == 0)
+                    {
+                        WorkOrderDetails.Clear();
+                    }
+                    if (WorkOrderDetails.Count == 0)
+                    {
+                        WorkOrderBarcodes.Clear();
+                    }
+
+                    dgvOrders.ClearSelection();
+                    dgvMaterials.ClearSelection();
+                    dgvBarcodes.ClearSelection();
                 }
             }
             catch (Exception ex)
@@ -101,18 +102,32 @@ namespace iWms.Form
 
         private void GetOrders()
         {
+            DateTime? startTime = null, finishTime = null;
+            if (dtCreate.EditValue != null)
+            {
+                startTime = dtCreate.DateTime.Date;
+            }
+            if (dtFinish.EditValue != null)
+            {
+                finishTime = dtFinish.DateTime.Date;
+            }
+            int startRow = (currentPage - 1) * pageSize;
             // 获取入库单列表
             var warehouses = WareHouseBLL.GetInstockOrders(tbOrderNo.Text.Trim(), tbUpn.Text.Trim(), tbMaterialNo.Text.Trim(),
                 Convert.ToInt32(cbOrderType.SelectedValue),
-                Convert.ToInt32(cbOrderStatus.SelectedValue), tbUser.Text.Trim(), dtOrderDate.Value, dtFinishDate.Value);
+                Convert.ToInt32(cbOrderStatus.SelectedValue), tbUser.Text.Trim(), startTime, finishTime, startRow, startRow + pageSize);
 
-            WorkOrders = warehouses.Adapt<List<InstockOrderDto>>();
-            //.Select(s => new InstockOrder(s.First()))
-            //.OrderByDescending(p => p.ADD_TIME)
-            //.ToList();
+            PagedWorkOrders.Clear();
+            foreach (var item in warehouses)
+            {
+                PagedWorkOrders.Add(item);
+            }
 
-            currentPage = 1;
-            recordCount = WorkOrders.Count;
+            recordCount = 0;
+            if (warehouses != null && warehouses.Any())
+            {
+                recordCount = warehouses.First().TotalCount;
+            }
             pageCount = (recordCount / pageSize);
             if (recordCount % pageSize > 0)
             {
@@ -121,7 +136,6 @@ namespace iWms.Form
             LoadPagedOrders();
         }
 
-        private InstockOrderDto selectedOrder = null;
         private void dgvOrders_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -132,7 +146,6 @@ namespace iWms.Form
                 }
                 var row = dgvOrders.SelectedCells[0].OwningRow;
                 var order = row.DataBoundItem as InstockOrderDto;
-                selectedOrder = order;
 
                 var details = WareHouseBLL.GetInstockDetails(order.BusinessId);
                 var barcodes = WareHouseBLL.GetInstockBarcodes(order.BusinessId);
@@ -142,7 +155,7 @@ namespace iWms.Form
                 OrderBarcodes.Clear();
                 foreach (DataRow item in barcodes.Rows)
                 {
-                    OrderBarcodes.Add(new InstockBarcodeDto()
+                    var barcode = new InstockBarcodeDto()
                     {
                         OrderNo = order.InstockNo,
                         MaterialNo = Convert.ToString(item["MaterialNo"]),
@@ -151,8 +164,17 @@ namespace iWms.Form
                         TowerNo = TypeParse.StrToInt(Convert.ToString(item["TowerNo"]), -1),
                         CreateTime = TypeParse.StrToDateTime(Convert.ToString(item["CreateTime"]), new DateTime(1900, 1, 1)),
                         InnerQty = TypeParse.StrToInt(Convert.ToString(item["InnerQty"]), 0),
-                        Operator = Convert.ToString(item["Operator"])
-                    });
+                        Operator = Convert.ToString(item["Operator"]),
+                        InstockDetailId = Convert.ToString(item["InstockDetailId"])
+                    };
+                    if (OrderBarcodes.ContainsKey(barcode.InstockDetailId))
+                    {
+                        OrderBarcodes[barcode.InstockDetailId].Add(barcode);
+                    }
+                    else
+                    {
+                        OrderBarcodes.Add(barcode.InstockDetailId, new BindingList<InstockBarcodeDto>() { barcode });
+                    }
                 }
                 foreach (Wms_InstockDetail item in details)
                 {
@@ -161,7 +183,11 @@ namespace iWms.Form
                         continue;
                     }
                     var detail = item.Adapt<InstockDetailDto>();
-                    detail.Barcodes = OrderBarcodes.Where(p => p.MaterialNo == detail.MaterialNo).ToList();
+                    if (OrderBarcodes.ContainsKey(detail.BusinessId))
+                    {
+                        detail.Barcodes = OrderBarcodes[detail.BusinessId];
+                        detail.ActualCount = detail.Barcodes.Sum(p => p.InnerQty);
+                    }
                     WorkOrderDetails.Add(detail);
                 }
                 order.Details = WorkOrderDetails.ToList();
@@ -204,13 +230,7 @@ namespace iWms.Form
 
                     if (formDetail.ShowDialog() == DialogResult.OK)
                     {
-                        var details = WareHouseBLL.GetInstockDetails(order.BusinessId).ToList();
-                        WorkOrderDetails.Clear();
-                        foreach (Wms_InstockDetail item in details)
-                        {
-                            WorkOrderDetails.Add(item.Adapt<InstockDetailDto>());
-                        }
-                        dgvOrders.UpdateCellValue(e.ColumnIndex - 3, e.RowIndex);
+                        GetOrders();
                     }
                 }
             }
@@ -265,13 +285,54 @@ namespace iWms.Form
             {
                 lock (lockExportObj)
                 {
-                    if (WorkOrderDetails.Count == 0)
+                    var workOrders = PagedWorkOrders.Where(p => p.IsSelected).ToList();
+                    if (workOrders.Count == 0)
                     {
-                        "暂无数据可导出，请查询后导出".ShowTips();
+                        "请选择要导出明细的入库单".ShowTips();
                         return;
                     }
+                    Dictionary<string, List<InstockBarcode>> data = new Dictionary<string, List<InstockBarcode>>();
+                    foreach (var order in workOrders)
+                    {
+                        var barcodes = WareHouseBLL.GetInstockBarcodes(order.BusinessId);
 
-                    ExportToExcel();
+                        List<InstockBarcode> dataItem = new List<InstockBarcode>();
+                        foreach (DataRow item in barcodes.Rows)
+                        {
+                            dataItem.Add(new InstockBarcode()
+                            {
+                                OrderNo = order.InstockNo,
+                                OrderTime = order.CreateTime,
+                                OrderTypeDes = order.OrderTypeDisplay,
+                                OrderStatus = order.OrderStatusDisplay,
+                                MaterialNo = Convert.ToString(item["MaterialNo"]),
+                                Barcode = Convert.ToString(item["Upn"]),
+                                InnerCount = TypeParse.StrToInt(Convert.ToString(item["InnerQty"]), 0),
+                                DeliveryOperator = order.LastUpdateUser,
+                            });
+                        }
+
+                        data.Add(order.InstockNo, dataItem);
+                    }
+
+                    List<HeadColumn> headColumns = new List<HeadColumn>
+                        {
+                            new HeadColumn("OrderNo","入库单号", 4200),
+                            new HeadColumn("OrderTime","下达时间", 4000),
+                            new HeadColumn("OrderTypeDes","单据类型", 3000),
+                            //new HeadColumn("FinishedTime","完成时间", 4000),
+                            new HeadColumn("OrderStatus","单据状态", 3000),
+                            //new HeadColumn("DestinationNo","目的地", 2200),
+                            new HeadColumn("MaterialNo","物料代码", 2200),
+                            //new HeadColumn("MaterialName","物料名称", 4000),
+                            //new HeadColumn("DeliveryCount","需求数量", 2200),
+                            //new HeadColumn("InventoryStatus","库存状态", 3000),
+                            new HeadColumn("Barcode","UPN", 7168),
+                            new HeadColumn("InnerCount","盘内数量", 2200),
+                            new HeadColumn("DeliveryOperator","操作人", 3000),
+                        };
+
+                    ExportToExcel(data, headColumns);
                 }
             }
             catch (Exception ex)
@@ -280,52 +341,25 @@ namespace iWms.Form
             }
         }
 
-        public void ExportToExcel()
+        public void ExportToExcel<T>(Dictionary<string, List<T>> data, List<HeadColumn> headColumns) where T : class
         {
-            if (selectedOrder == null)
-            {
-                return;
-            }
-
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
+            dialog.Filter = "Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
-            dialog.FileName = $"导出入库单{selectedOrder.InstockNo}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            if (data.Count == 1)
+            {
+                dialog.FileName = $"入库单{data.First().Key}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
+            else
+            {
+                dialog.FileName = $"入库单-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+            }
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
-
-            var data = OrderBarcodes.Select(p => new
-            {
-                p.OrderNo,
-                OrderTime = selectedOrder.CreateTime,
-                OrderTypeDes = selectedOrder.OrderTypeDisplay,
-                OrderStatus = selectedOrder.OrderStatusDisplay,
-                p.MaterialNo,
-                Barcode = p.Upn,
-                InnerCount = p.InnerQty,
-                DeliveryOperator = selectedOrder.LastUpdateUser,
-            }).ToList();
-
-            List<HeadColumn> headColumns = new List<HeadColumn>
-            {
-                new HeadColumn("OrderNo","入库单号", 4200),
-                new HeadColumn("OrderTime","下达时间", 4000),
-                new HeadColumn("OrderTypeDes","单据类型", 3000),
-                //new HeadColumn("FinishedTime","完成时间", 4000),
-                new HeadColumn("OrderStatus","单据状态", 3000),
-                //new HeadColumn("DestinationNo","目的地", 2200),
-                new HeadColumn("MaterialNo","物料代码", 2200),
-                //new HeadColumn("MaterialName","物料名称", 4000),
-                //new HeadColumn("DeliveryCount","需求数量", 2200),
-                //new HeadColumn("InventoryStatus","库存状态", 3000),
-                new HeadColumn("Barcode","UPN", 7168),
-                new HeadColumn("InnerCount","盘内数量", 2200),
-                new HeadColumn("DeliveryOperator","操作人", 3000),
-            };
             string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, data, headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
             {
@@ -360,10 +394,8 @@ namespace iWms.Form
             tbUpn.Clear();
             tbMaterialNo.Clear();
             tbUser.Clear();
-            dtOrderDate.CustomFormat = " ";
-            dtOrderDate.Value = DateTime.Today;
-            dtFinishDate.CustomFormat = " ";
-            dtFinishDate.Value = DateTime.Today;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             cbOrderType.SelectedIndex = 0;
             cbOrderStatus.SelectedIndex = 0;
             GetOrders();
@@ -432,7 +464,7 @@ namespace iWms.Form
         public int pageSize = 10;      //每页记录数
         public int recordCount = 0;    //总记录数
         public int pageCount = 0;      //总页数
-        public int currentPage = 0;    //当前页
+        public int currentPage = 1;    //当前页
 
         private void LoadPagedOrders()
         {
@@ -450,18 +482,6 @@ namespace iWms.Form
             if (currentPage < 1) currentPage = 1;
             if (currentPage > pageCount) currentPage = pageCount;
 
-            int beginRecord = pageSize * (currentPage - 1) + 1;
-            int endRecord = pageSize * currentPage;
-
-            if (currentPage == pageCount) endRecord = recordCount;
-            PagedWorkOrders.Clear();
-            for (int i = beginRecord - 1; i < endRecord; i++)
-            {
-                PagedWorkOrders.Add(WorkOrders[i]);
-            }
-            WorkOrderDetails.Clear();
-            WorkOrderBarcodes.Clear();
-
             tpscurrentPage.Text = currentPage.ToString();//当前页
             tpspageCount.Text = pageCount.ToString();//总页数
             tpsrecordCount.Text = recordCount.ToString();//总记录数
@@ -470,25 +490,25 @@ namespace iWms.Form
         private void btnFrist_ButtonClick(object sender, EventArgs e)
         {
             currentPage = 1;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void btnPre_ButtonClick(object sender, EventArgs e)
         {
             currentPage -= 1;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void btnNext_ButtonClick(object sender, EventArgs e)
         {
             currentPage += 1;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void BtnLast_ButtonClick(object sender, EventArgs e)
         {
             currentPage = pageCount;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -532,5 +552,17 @@ namespace iWms.Form
                 ex.GetDeepException().ShowError();
             }
         }
+    }
+
+    public class InstockBarcode
+    {
+        public string OrderNo { get; set; } = string.Empty;
+        public DateTime OrderTime { get; set; } = new DateTime(1900, 1, 1);
+        public string OrderTypeDes { get; set; } = string.Empty;
+        public string OrderStatus { get; set; } = string.Empty;
+        public string MaterialNo { get; set; } = string.Empty;
+        public string Barcode { get; set; } = string.Empty;
+        public int InnerCount { get; set; } = 0;
+        public string DeliveryOperator { get; set; } = string.Empty;
     }
 }
