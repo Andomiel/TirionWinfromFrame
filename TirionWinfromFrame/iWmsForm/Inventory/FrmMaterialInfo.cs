@@ -40,10 +40,6 @@ namespace iWms.Form
             cmbArea.DisplayMember = "Description";
             cmbArea.ValueMember = "Value";
 
-            cbMateType.DataSource = BuildComboxHelper.BuildComboxWithEmptyFromEnum(typeof(ReelTypeEnum));
-            cbMateType.DisplayMember = "Description";
-            cbMateType.ValueMember = "Name";
-
             //dtpCycleStart.Format = DateTimePickerFormat.Custom;
             //dtpCycleStart.CustomFormat = " ";
             //dtpCycleEnd.Format = DateTimePickerFormat.Custom;
@@ -120,15 +116,15 @@ namespace iWms.Form
                 //CycleStart = Convert.ToDateTime(dtpCycleStart.Value.ToString("yyyy-MM-dd")),
                 //CycleEnd = Convert.ToDateTime(dtpCycleEnd.Value.ToString("yyyy-MM-dd")),
                 //料盘类型
-                MateType = (this.cbMateType.SelectedItem as EnumItem).Name,
+                MateType = string.Empty,//(this.cbMateType.SelectedItem as EnumItem).Name,
                 //MSD
-                MSD = this.cbMSD.Text,
+                MSD = string.Empty,// this.cbMSD.Text,
                 //流水号
-                SerialNoStart = this.txtSerialNoStart.Text,
-                SerialNoEnd = this.txtSerialNoEnd.Text,
+                SerialNoStart = string.Empty,// this.txtSerialNoStart.Text,
+                SerialNoEnd = string.Empty,// this.txtSerialNoEnd.Text,
                 //超期
-                ExceedStart = TypeParse.StrToInt(this.txtExceedStart.Text, 0),
-                ExceedEnd = TypeParse.StrToInt(this.txtExceedEnd.Text, 0),
+                ExceedStart = 0,// TypeParse.StrToInt(this.txtExceedStart.Text, 0),
+                ExceedEnd = 0,//TypeParse.StrToInt(this.txtExceedEnd.Text, 0),
                 //入库时间
                 haveSaveTimeQuery = dtpStart.Format != DateTimePickerFormat.Custom
                                        && dtpEnd.Format != DateTimePickerFormat.Custom,
@@ -158,7 +154,7 @@ namespace iWms.Form
             //状态
             condition.HoldState = this.BoxStatus.Text;
             //供货厂家
-            condition.Supplier = this.TextSupply.Text;
+            condition.Supplier = string.Empty;// this.TextSupply.Text;
             condition.UPN = this.txtReelid.Text.ToString().Trim();
             //料号
             condition.PartNumber = this.txtPn.Text.ToString();
@@ -218,20 +214,11 @@ namespace iWms.Form
         {
             txtReelid.Text = "";
             txtPn.Text = "";
-            txtExceedStart.Text = "";
-            txtExceedEnd.Text = "";
-            txtSerialNoStart.Text = "";
-            txtSerialNoEnd.Text = "";
-            TextSupply.Text = "";
             lblShelfSide.Visible = false;
-            cbMateType.SelectedIndex = 0;
             cmbArea.SelectedValue = -1;
             cbShelfSide.SelectedIndex = -1;
             cbShelfSide.Visible = false;
-            cbMSD.SelectedIndex = -1;
             BoxStatus.SelectedIndex = -1;
-            //DateTimePickerReset(dtpCycleStart);
-            //DateTimePickerReset(dtpCycleEnd);
             DateTimePickerReset(dtpStart);
             DateTimePickerReset(dtpEnd);
             Barcodes.Clear();
