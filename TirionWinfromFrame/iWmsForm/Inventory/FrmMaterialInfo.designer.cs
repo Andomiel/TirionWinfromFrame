@@ -35,25 +35,13 @@
             this.数据导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbMSD = new System.Windows.Forms.ComboBox();
             this.BoxStatus = new System.Windows.Forms.ComboBox();
-            this.TextSupply = new System.Windows.Forms.TextBox();
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cbMateType = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtSerialNoStart = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtSerialNoEnd = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -61,15 +49,25 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txtPn = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtExceedStart = new System.Windows.Forms.TextBox();
-            this.txtExceedEnd = new System.Windows.Forms.TextBox();
             this.button3 = new DevExpress.XtraEditors.SimpleButton();
             this.button2 = new DevExpress.XtraEditors.SimpleButton();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.lblShelfSide = new System.Windows.Forms.Label();
             this.cbShelfSide = new System.Windows.Forms.ComboBox();
             this.btnSync = new DevExpress.XtraEditors.SimpleButton();
+            this.btnTrancate = new DevExpress.XtraEditors.SimpleButton();
             this.dataGridViewX1 = new System.Windows.Forms.DataGridView();
+            this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpBottom = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -87,22 +85,6 @@
             this.btnPre = new System.Windows.Forms.ToolStripSplitButton();
             this.btnNext = new System.Windows.Forms.ToolStripSplitButton();
             this.BtnLast = new System.Windows.Forms.ToolStripSplitButton();
-            this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.供货厂家 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMiniPacking = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaterialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -163,38 +145,25 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.cbMSD, 9, 1);
-            this.tableLayoutPanel2.Controls.Add(this.BoxStatus, 11, 1);
-            this.tableLayoutPanel2.Controls.Add(this.TextSupply, 5, 2);
-            this.tableLayoutPanel2.Controls.Add(this.cmbArea, 11, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 10, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 4, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label17, 8, 1);
-            this.tableLayoutPanel2.Controls.Add(this.cbMateType, 9, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 6, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label16, 8, 0);
+            this.tableLayoutPanel2.Controls.Add(this.BoxStatus, 9, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cmbArea, 5, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.label12, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.dtpStart, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label11, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.dtpEnd, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtSerialNoStart, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.txtSerialNoEnd, 3, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 10, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtExceedStart, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.txtExceedEnd, 7, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button3, 13, 2);
-            this.tableLayoutPanel2.Controls.Add(this.button2, 11, 2);
-            this.tableLayoutPanel2.Controls.Add(this.btnSearch, 9, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lblShelfSide, 12, 0);
-            this.tableLayoutPanel2.Controls.Add(this.cbShelfSide, 13, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 8, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button3, 11, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button2, 11, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnSearch, 11, 2);
+            this.tableLayoutPanel2.Controls.Add(this.lblShelfSide, 8, 1);
+            this.tableLayoutPanel2.Controls.Add(this.cbShelfSide, 9, 1);
             this.tableLayoutPanel2.Controls.Add(this.btnSync, 13, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnTrancate, 13, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
@@ -208,23 +177,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1361, 136);
             this.tableLayoutPanel2.TabIndex = 49;
             // 
-            // cbMSD
-            // 
-            this.cbMSD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbMSD.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMSD.FormattingEnabled = true;
-            this.cbMSD.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "2A",
-            "3",
-            "3A"});
-            this.cbMSD.Location = new System.Drawing.Point(747, 48);
-            this.cbMSD.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.cbMSD.Name = "cbMSD";
-            this.cbMSD.Size = new System.Drawing.Size(140, 22);
-            this.cbMSD.TabIndex = 43;
-            // 
             // BoxStatus
             // 
             this.BoxStatus.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -235,32 +187,23 @@
             "待烘烤",
             "烘烤中",
             "正常"});
-            this.BoxStatus.Location = new System.Drawing.Point(970, 48);
+            this.BoxStatus.Location = new System.Drawing.Point(747, 8);
             this.BoxStatus.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
             this.BoxStatus.Name = "BoxStatus";
             this.BoxStatus.Size = new System.Drawing.Size(140, 22);
             this.BoxStatus.TabIndex = 20;
             this.BoxStatus.Visible = false;
             // 
-            // TextSupply
-            // 
-            this.tableLayoutPanel2.SetColumnSpan(this.TextSupply, 3);
-            this.TextSupply.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextSupply.Location = new System.Drawing.Point(425, 88);
-            this.TextSupply.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.TextSupply.Name = "TextSupply";
-            this.TextSupply.Size = new System.Drawing.Size(239, 22);
-            this.TextSupply.TabIndex = 22;
-            // 
             // cmbArea
             // 
+            this.tableLayoutPanel2.SetColumnSpan(this.cmbArea, 3);
             this.cmbArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cmbArea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbArea.FormattingEnabled = true;
-            this.cmbArea.Location = new System.Drawing.Point(970, 8);
+            this.cmbArea.Location = new System.Drawing.Point(425, 48);
             this.cmbArea.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
             this.cmbArea.Name = "cmbArea";
-            this.cmbArea.Size = new System.Drawing.Size(140, 22);
+            this.cmbArea.Size = new System.Drawing.Size(239, 22);
             this.cmbArea.TabIndex = 11;
             this.cmbArea.SelectionChangeCommitted += new System.EventHandler(this.CmbArea_SelectionChangeCommitted);
             // 
@@ -268,82 +211,12 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(890, 0);
+            this.label1.Location = new System.Drawing.Point(345, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 40);
             this.label1.TabIndex = 0;
             this.label1.Text = "库区：";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label13.Location = new System.Drawing.Point(345, 40);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(77, 40);
-            this.label13.TabIndex = 35;
-            this.label13.Text = "超期：";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(345, 80);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 40);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "供货厂家：";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label17.Location = new System.Drawing.Point(667, 40);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(77, 40);
-            this.label17.TabIndex = 42;
-            this.label17.Text = "MSD等级：";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // cbMateType
-            // 
-            this.cbMateType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cbMateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMateType.FormattingEnabled = true;
-            this.cbMateType.Items.AddRange(new object[] {
-            "整盘料",
-            "尾数料",
-            "两节物料"});
-            this.cbMateType.Location = new System.Drawing.Point(747, 8);
-            this.cbMateType.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.cbMateType.Name = "cbMateType";
-            this.cbMateType.Size = new System.Drawing.Size(140, 22);
-            this.cbMateType.TabIndex = 41;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(538, 40);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(13, 40);
-            this.label14.TabIndex = 37;
-            this.label14.Text = "-";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label16.Location = new System.Drawing.Point(667, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(77, 40);
-            this.label16.TabIndex = 40;
-            this.label16.Text = "料盘类型：";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
@@ -387,46 +260,6 @@
             this.dtpEnd.Size = new System.Drawing.Size(120, 22);
             this.dtpEnd.TabIndex = 33;
             this.dtpEnd.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(3, 80);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 40);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "流水号：";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSerialNoStart
-            // 
-            this.txtSerialNoStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSerialNoStart.Location = new System.Drawing.Point(83, 88);
-            this.txtSerialNoStart.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.txtSerialNoStart.Name = "txtSerialNoStart";
-            this.txtSerialNoStart.Size = new System.Drawing.Size(120, 22);
-            this.txtSerialNoStart.TabIndex = 28;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(206, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(13, 40);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "-";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSerialNoEnd
-            // 
-            this.txtSerialNoEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSerialNoEnd.Location = new System.Drawing.Point(222, 88);
-            this.txtSerialNoEnd.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.txtSerialNoEnd.Name = "txtSerialNoEnd";
-            this.txtSerialNoEnd.Size = new System.Drawing.Size(120, 22);
-            this.txtSerialNoEnd.TabIndex = 29;
             // 
             // label2
             // 
@@ -502,7 +335,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(890, 40);
+            this.label6.Location = new System.Drawing.Point(667, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 40);
             this.label6.TabIndex = 19;
@@ -510,34 +343,13 @@
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label6.Visible = false;
             // 
-            // txtExceedStart
-            // 
-            this.txtExceedStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExceedStart.Location = new System.Drawing.Point(425, 48);
-            this.txtExceedStart.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.txtExceedStart.Name = "txtExceedStart";
-            this.txtExceedStart.Size = new System.Drawing.Size(110, 22);
-            this.txtExceedStart.TabIndex = 51;
-            this.txtExceedStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtExceed_KeyPress);
-            // 
-            // txtExceedEnd
-            // 
-            this.txtExceedEnd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtExceedEnd.Location = new System.Drawing.Point(554, 48);
-            this.txtExceedEnd.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
-            this.txtExceedEnd.Name = "txtExceedEnd";
-            this.txtExceedEnd.Size = new System.Drawing.Size(110, 22);
-            this.txtExceedEnd.TabIndex = 52;
-            this.txtExceedEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtExceed_KeyPress);
-            // 
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(1196, 83);
+            this.button3.Location = new System.Drawing.Point(973, 43);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.button3.Name = "button3";
-            this.tableLayoutPanel2.SetRowSpan(this.button3, 2);
-            this.button3.Size = new System.Drawing.Size(134, 41);
+            this.button3.Size = new System.Drawing.Size(134, 27);
             this.button3.TabIndex = 19;
             this.button3.Text = "导出";
             this.button3.Click += new System.EventHandler(this.BtnExport_Click);
@@ -545,11 +357,10 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(973, 83);
+            this.button2.Location = new System.Drawing.Point(973, 3);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.button2.Name = "button2";
-            this.tableLayoutPanel2.SetRowSpan(this.button2, 2);
-            this.button2.Size = new System.Drawing.Size(134, 41);
+            this.button2.Size = new System.Drawing.Size(134, 27);
             this.button2.TabIndex = 14;
             this.button2.Text = "清空";
             this.button2.Click += new System.EventHandler(this.Button2_Click);
@@ -557,7 +368,7 @@
             // btnSearch
             // 
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.Location = new System.Drawing.Point(750, 83);
+            this.btnSearch.Location = new System.Drawing.Point(973, 83);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.btnSearch.Name = "btnSearch";
             this.tableLayoutPanel2.SetRowSpan(this.btnSearch, 2);
@@ -570,7 +381,7 @@
             // 
             this.lblShelfSide.AutoSize = true;
             this.lblShelfSide.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblShelfSide.Location = new System.Drawing.Point(1112, 0);
+            this.lblShelfSide.Location = new System.Drawing.Point(666, 40);
             this.lblShelfSide.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblShelfSide.Name = "lblShelfSide";
             this.lblShelfSide.Size = new System.Drawing.Size(79, 40);
@@ -583,7 +394,7 @@
             // 
             this.cbShelfSide.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbShelfSide.FormattingEnabled = true;
-            this.cbShelfSide.Location = new System.Drawing.Point(1193, 8);
+            this.cbShelfSide.Location = new System.Drawing.Point(747, 48);
             this.cbShelfSide.Margin = new System.Windows.Forms.Padding(0, 8, 0, 0);
             this.cbShelfSide.Name = "cbShelfSide";
             this.cbShelfSide.Size = new System.Drawing.Size(140, 22);
@@ -600,6 +411,16 @@
             this.btnSync.Text = "发料点亮";
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
+            // btnTrancate
+            // 
+            this.btnTrancate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTrancate.Location = new System.Drawing.Point(1196, 83);
+            this.btnTrancate.Name = "btnTrancate";
+            this.btnTrancate.Size = new System.Drawing.Size(134, 34);
+            this.btnTrancate.TabIndex = 56;
+            this.btnTrancate.Text = "清空库存";
+            this.btnTrancate.Click += new System.EventHandler(this.BtnTrancate_Click);
+            // 
             // dataGridViewX1
             // 
             this.dataGridViewX1.AllowUserToAddRows = false;
@@ -611,17 +432,12 @@
             this.UPN,
             this.状态,
             this.料号,
-            this.供货厂家,
             this.colPeriod,
-            this.colSerialNo,
             this.数量,
             this.colLot,
-            this.colMiniPacking,
-            this.colMsd,
             this.库区,
             this.ABSide,
             this.货位,
-            this.colMaterialType,
             this.colStatus,
             this.入库时间});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -647,6 +463,112 @@
             this.dataGridViewX1.Tag = "9999";
             this.dataGridViewX1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewX1_ColumnHeaderMouseClick);
             this.dataGridViewX1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewX1_RowPostPaint);
+            // 
+            // UPN
+            // 
+            this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UPN.DataPropertyName = "UPN";
+            this.UPN.FillWeight = 88.36256F;
+            this.UPN.HeaderText = "ReelId";
+            this.UPN.MinimumWidth = 160;
+            this.UPN.Name = "UPN";
+            this.UPN.ReadOnly = true;
+            // 
+            // 状态
+            // 
+            this.状态.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.状态.DataPropertyName = "WorkOrderNo";
+            this.状态.FillWeight = 65.98986F;
+            this.状态.HeaderText = "工单号";
+            this.状态.MinimumWidth = 80;
+            this.状态.Name = "状态";
+            this.状态.ReadOnly = true;
+            // 
+            // 料号
+            // 
+            this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.料号.DataPropertyName = "PartNumber";
+            this.料号.FillWeight = 88.36256F;
+            this.料号.HeaderText = "物料料号";
+            this.料号.MinimumWidth = 130;
+            this.料号.Name = "料号";
+            this.料号.ReadOnly = true;
+            this.料号.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // colPeriod
+            // 
+            this.colPeriod.DataPropertyName = "DateCode";
+            this.colPeriod.HeaderText = "生产日期";
+            this.colPeriod.MinimumWidth = 9;
+            this.colPeriod.Name = "colPeriod";
+            this.colPeriod.ReadOnly = true;
+            this.colPeriod.Width = 120;
+            // 
+            // 数量
+            // 
+            this.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.数量.DataPropertyName = "Qty";
+            this.数量.FillWeight = 88.36256F;
+            this.数量.HeaderText = "数量";
+            this.数量.MinimumWidth = 80;
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            this.数量.Width = 80;
+            // 
+            // colLot
+            // 
+            this.colLot.DataPropertyName = "Lot";
+            this.colLot.HeaderText = "批次";
+            this.colLot.Name = "colLot";
+            this.colLot.ReadOnly = true;
+            // 
+            // 库区
+            // 
+            this.库区.DataPropertyName = "TowerDes";
+            this.库区.HeaderText = "库区";
+            this.库区.MinimumWidth = 80;
+            this.库区.Name = "库区";
+            this.库区.ReadOnly = true;
+            this.库区.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ABSide
+            // 
+            this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ABSide.DataPropertyName = "ABSide";
+            this.ABSide.HeaderText = "货架";
+            this.ABSide.MinimumWidth = 60;
+            this.ABSide.Name = "ABSide";
+            this.ABSide.ReadOnly = true;
+            this.ABSide.Width = 80;
+            // 
+            // 货位
+            // 
+            this.货位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.货位.DataPropertyName = "Location";
+            this.货位.FillWeight = 88.36256F;
+            this.货位.HeaderText = "货位";
+            this.货位.MinimumWidth = 80;
+            this.货位.Name = "货位";
+            this.货位.ReadOnly = true;
+            this.货位.Width = 120;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "StatusDisplay";
+            this.colStatus.HeaderText = "库存状态";
+            this.colStatus.MinimumWidth = 80;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // 入库时间
+            // 
+            this.入库时间.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.入库时间.DataPropertyName = "SaveTime";
+            this.入库时间.FillWeight = 186.3569F;
+            this.入库时间.HeaderText = "入库时间";
+            this.入库时间.MinimumWidth = 130;
+            this.入库时间.Name = "入库时间";
+            this.入库时间.ReadOnly = true;
             // 
             // tlpBottom
             // 
@@ -797,155 +719,6 @@
             this.BtnLast.Text = "最后一页";
             this.BtnLast.ButtonClick += new System.EventHandler(this.BtnLast_ButtonClick);
             // 
-            // UPN
-            // 
-            this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UPN.DataPropertyName = "UPN";
-            this.UPN.FillWeight = 88.36256F;
-            this.UPN.HeaderText = "ReelId";
-            this.UPN.MinimumWidth = 160;
-            this.UPN.Name = "UPN";
-            this.UPN.ReadOnly = true;
-            // 
-            // 状态
-            // 
-            this.状态.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.状态.DataPropertyName = "WorkOrderNo";
-            this.状态.FillWeight = 65.98986F;
-            this.状态.HeaderText = "工单号";
-            this.状态.MinimumWidth = 80;
-            this.状态.Name = "状态";
-            this.状态.ReadOnly = true;
-            // 
-            // 料号
-            // 
-            this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.料号.DataPropertyName = "PartNumber";
-            this.料号.FillWeight = 88.36256F;
-            this.料号.HeaderText = "物料料号";
-            this.料号.MinimumWidth = 130;
-            this.料号.Name = "料号";
-            this.料号.ReadOnly = true;
-            this.料号.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // 供货厂家
-            // 
-            this.供货厂家.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.供货厂家.DataPropertyName = "Supplier";
-            this.供货厂家.HeaderText = "供货厂家";
-            this.供货厂家.MinimumWidth = 80;
-            this.供货厂家.Name = "供货厂家";
-            this.供货厂家.ReadOnly = true;
-            this.供货厂家.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.供货厂家.Width = 90;
-            // 
-            // colPeriod
-            // 
-            this.colPeriod.DataPropertyName = "DateCode";
-            this.colPeriod.HeaderText = "生产日期";
-            this.colPeriod.MinimumWidth = 9;
-            this.colPeriod.Name = "colPeriod";
-            this.colPeriod.ReadOnly = true;
-            this.colPeriod.Width = 120;
-            // 
-            // colSerialNo
-            // 
-            this.colSerialNo.DataPropertyName = "SerialNo";
-            this.colSerialNo.HeaderText = "流水号";
-            this.colSerialNo.MinimumWidth = 9;
-            this.colSerialNo.Name = "colSerialNo";
-            this.colSerialNo.ReadOnly = true;
-            this.colSerialNo.Width = 120;
-            // 
-            // 数量
-            // 
-            this.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.数量.DataPropertyName = "Qty";
-            this.数量.FillWeight = 88.36256F;
-            this.数量.HeaderText = "数量";
-            this.数量.MinimumWidth = 80;
-            this.数量.Name = "数量";
-            this.数量.ReadOnly = true;
-            this.数量.Width = 80;
-            // 
-            // colLot
-            // 
-            this.colLot.DataPropertyName = "Lot";
-            this.colLot.HeaderText = "批次";
-            this.colLot.Name = "colLot";
-            this.colLot.ReadOnly = true;
-            // 
-            // colMiniPacking
-            // 
-            this.colMiniPacking.DataPropertyName = "MinPacking";
-            this.colMiniPacking.HeaderText = "最小包装";
-            this.colMiniPacking.Name = "colMiniPacking";
-            this.colMiniPacking.ReadOnly = true;
-            // 
-            // colMsd
-            // 
-            this.colMsd.DataPropertyName = "MSD";
-            this.colMsd.HeaderText = "MSD";
-            this.colMsd.Name = "colMsd";
-            this.colMsd.ReadOnly = true;
-            this.colMsd.Width = 80;
-            // 
-            // 库区
-            // 
-            this.库区.DataPropertyName = "TowerDes";
-            this.库区.HeaderText = "库区";
-            this.库区.MinimumWidth = 80;
-            this.库区.Name = "库区";
-            this.库区.ReadOnly = true;
-            this.库区.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ABSide
-            // 
-            this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ABSide.DataPropertyName = "ABSide";
-            this.ABSide.HeaderText = "仓/货架";
-            this.ABSide.MinimumWidth = 60;
-            this.ABSide.Name = "ABSide";
-            this.ABSide.ReadOnly = true;
-            this.ABSide.Width = 80;
-            // 
-            // 货位
-            // 
-            this.货位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.货位.DataPropertyName = "Location";
-            this.货位.FillWeight = 88.36256F;
-            this.货位.HeaderText = "货位";
-            this.货位.MinimumWidth = 80;
-            this.货位.Name = "货位";
-            this.货位.ReadOnly = true;
-            this.货位.Width = 120;
-            // 
-            // colMaterialType
-            // 
-            this.colMaterialType.DataPropertyName = "ReelTypeDes";
-            this.colMaterialType.HeaderText = "料盘类型";
-            this.colMaterialType.MinimumWidth = 9;
-            this.colMaterialType.Name = "colMaterialType";
-            this.colMaterialType.ReadOnly = true;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "StatusDisplay";
-            this.colStatus.HeaderText = "库存状态";
-            this.colStatus.MinimumWidth = 80;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // 入库时间
-            // 
-            this.入库时间.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.入库时间.DataPropertyName = "SaveTime";
-            this.入库时间.FillWeight = 186.3569F;
-            this.入库时间.HeaderText = "入库时间";
-            this.入库时间.MinimumWidth = 130;
-            this.入库时间.Name = "入库时间";
-            this.入库时间.ReadOnly = true;
-            // 
             // FrmMaterialInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -978,22 +751,10 @@
         private System.Windows.Forms.ToolStripMenuItem 数据导出ToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.XtraEditors.SimpleButton button3;
-        private System.Windows.Forms.ComboBox cbMSD;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox cbMateType;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtSerialNoEnd;
-        private System.Windows.Forms.TextBox txtSerialNoStart;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox TextSupply;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox BoxStatus;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtReelid;
@@ -1007,8 +768,6 @@
         private System.Windows.Forms.DataGridView dataGridViewX1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TextBox txtExceedStart;
-        private System.Windows.Forms.TextBox txtExceedEnd;
         private System.Windows.Forms.Label lblShelfSide;
         private System.Windows.Forms.ComboBox cbShelfSide;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -1033,18 +792,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UPN;
         private System.Windows.Forms.DataGridViewTextBoxColumn 状态;
         private System.Windows.Forms.DataGridViewTextBoxColumn 料号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 供货厂家;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSerialNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMiniPacking;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMsd;
         private System.Windows.Forms.DataGridViewTextBoxColumn 库区;
         private System.Windows.Forms.DataGridViewTextBoxColumn ABSide;
         private System.Windows.Forms.DataGridViewTextBoxColumn 货位;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn 入库时间;
+        private DevExpress.XtraEditors.SimpleButton btnTrancate;
     }
 }

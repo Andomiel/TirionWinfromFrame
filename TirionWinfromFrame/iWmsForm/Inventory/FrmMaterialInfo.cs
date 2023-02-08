@@ -506,6 +506,11 @@ namespace iWms.Form
             orderBy = sb.ToString();
             GetOrders();
         }
+
+        private void BtnTrancate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
