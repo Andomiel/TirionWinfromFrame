@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext\Cfg_Register.cs" />
     <Compile Include="DataContext\Cfg_SortingConfig.cs" />
     <Compile Include="DataContext\FrozenPolicy.cs" />
     <Compile Include="DataContext\FrozenPolicyDetail.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="DataContext\SMTPrepareMaterial.cs" />
     <Compile Include="DataContext\SMTZDMaterial.cs" />
     <Compile Include="DataContext\WmsLog.cs" />
+    <Compile Include="DataContext\Wms_BalanceBarcode.cs" />
+    <Compile Include="DataContext\Wms_BalanceOrder.cs" />
     <Compile Include="DataContext\Wms_DeliveryBarcode.cs" />
     <Compile Include="DataContext\Wms_DeliveryDetail.cs" />
     <Compile Include="DataContext\Wms_DeliveryOrder.cs" />
@@ -68,13 +71,20 @@
     <Compile Include="DataContext\Wms_LightColorRecord.cs" />
     <Compile Include="DataContext\Wms_TransferBarcode.cs" />
     <Compile Include="DataContext\Wms_TransferOrder.cs" />
+    <Compile Include="Dto\Balance\BalanceBarcodeDto.cs" />
+    <Compile Include="Dto\Balance\BalanceMaterialDto.cs" />
+    <Compile Include="Dto\Balance\BalanceOrderDto.cs" />
+    <Compile Include="Dto\Balance\BalanceOrderMaterialDto.cs" />
+    <Compile Include="Dto\Balance\BalanceReportDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryBarcodeDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryDetailDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryOrderDto.cs" />
+    <Compile Include="Dto\Frozen\FrozenMaterial.cs" />
     <Compile Include="Dto\Frozen\FrozenNoUpnRelation.cs" />
     <Compile Include="Dto\Frozen\FrozenQueryItem.cs" />
     <Compile Include="Dto\InstockTaking\InventoryBarcodeDto.cs" />
     <Compile Include="Dto\InstockTaking\InventoryOrderDto.cs" />
+    <Compile Include="Dto\Instock\CfgRegisterDto.cs" />
     <Compile Include="Dto\Instock\InstockAreaDto.cs" />
     <Compile Include="Dto\Instock\InstockBarcodeDto.cs" />
     <Compile Include="Dto\Instock\InstockDetailDto.cs" />
@@ -89,6 +99,8 @@
     <Compile Include="Dto\Transfer\TransferBarcodeDto.cs" />
     <Compile Include="Dto\Transfer\TransferOrderDto.cs" />
     <Compile Include="Common\EnumHelper.cs" />
+    <Compile Include="Enums\Balance\BalanceBarcodeStatusEnum.cs" />
+    <Compile Include="Enums\Balance\BalanceOrderStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryBarcodeStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryDetailStatusEnum.cs" />
     <Compile Include="Enums\Delivery\DeliveryOrderStatusEnum.cs" />
@@ -104,6 +116,7 @@
     <Compile Include="Enums\General\LightRecordTypeEnum.cs" />
     <Compile Include="Enums\General\OperateTypeEnum.cs" />
     <Compile Include="Enums\General\ReelTypeEnum.cs" />
+    <Compile Include="Enums\General\RegisterStatusEnum.cs" />
     <Compile Include="Enums\General\SortNoEnum.cs" />
     <Compile Include="Enums\General\TowerEnum.cs" />
     <Compile Include="Enums\Instock\InOrderTypeEnum.cs" />

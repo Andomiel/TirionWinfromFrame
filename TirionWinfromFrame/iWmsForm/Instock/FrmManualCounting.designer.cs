@@ -34,7 +34,6 @@
             this.tbScan = new System.Windows.Forms.TextBox();
             this.lblQty = new System.Windows.Forms.Label();
             this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
-            this.txtMaterialInfo = new System.Windows.Forms.TextBox();
             this.tbQty = new System.Windows.Forms.TextBox();
             this.cbIsTypeT = new System.Windows.Forms.CheckBox();
             this.lblTypeT = new System.Windows.Forms.Label();
@@ -53,11 +52,15 @@
             this.IsSuccess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelData = new System.Windows.Forms.Panel();
+            this.ceNotStar = new DevExpress.XtraEditors.CheckEdit();
             this.cbEnable = new System.Windows.Forms.CheckBox();
+            this.txtMaterialInfo = new DevExpress.XtraEditors.TextEdit();
             this.tlpLayout.SuspendLayout();
             this.gbRecord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRecord)).BeginInit();
             this.panelData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceNotStar.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMaterialInfo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lblScan
@@ -103,15 +106,6 @@
             this.btnSubmit.TabIndex = 25;
             this.btnSubmit.Text = "点料";
             this.btnSubmit.Click += new System.EventHandler(this.BtnSubmit_Click);
-            // 
-            // txtMaterialInfo
-            // 
-            this.txtMaterialInfo.Location = new System.Drawing.Point(839, 87);
-            this.txtMaterialInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.txtMaterialInfo.Name = "txtMaterialInfo";
-            this.txtMaterialInfo.Size = new System.Drawing.Size(60, 22);
-            this.txtMaterialInfo.TabIndex = 26;
-            this.txtMaterialInfo.Visible = false;
             // 
             // tbQty
             // 
@@ -301,6 +295,8 @@
             // 
             // panelData
             // 
+            this.panelData.Controls.Add(this.txtMaterialInfo);
+            this.panelData.Controls.Add(this.ceNotStar);
             this.panelData.Controls.Add(this.cbEnable);
             this.panelData.Controls.Add(this.btnSubmit);
             this.panelData.Controls.Add(this.cbIsTypeT);
@@ -309,12 +305,21 @@
             this.panelData.Controls.Add(this.lblScan);
             this.panelData.Controls.Add(this.tbQty);
             this.panelData.Controls.Add(this.lblQty);
-            this.panelData.Controls.Add(this.txtMaterialInfo);
             this.panelData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelData.Location = new System.Drawing.Point(3, 3);
             this.panelData.Name = "panelData";
             this.panelData.Size = new System.Drawing.Size(1116, 134);
             this.panelData.TabIndex = 1;
+            // 
+            // ceNotStar
+            // 
+            this.ceNotStar.EditValue = true;
+            this.ceNotStar.Location = new System.Drawing.Point(139, 88);
+            this.ceNotStar.Name = "ceNotStar";
+            this.ceNotStar.Properties.Caption = "二维码完整性校验";
+            this.ceNotStar.Size = new System.Drawing.Size(146, 20);
+            this.ceNotStar.TabIndex = 31;
+            this.ceNotStar.ToolTip = "勾选时：二维码末位必须为*\r\n不勾选：二维码末位可以不为*";
             // 
             // cbEnable
             // 
@@ -327,6 +332,14 @@
             this.cbEnable.TabIndex = 30;
             this.cbEnable.UseVisualStyleBackColor = true;
             this.cbEnable.CheckedChanged += new System.EventHandler(this.CbEnable_CheckedChanged);
+            // 
+            // txtMaterialInfo
+            // 
+            this.txtMaterialInfo.Location = new System.Drawing.Point(745, 84);
+            this.txtMaterialInfo.Name = "txtMaterialInfo";
+            this.txtMaterialInfo.Size = new System.Drawing.Size(100, 20);
+            this.txtMaterialInfo.TabIndex = 32;
+            this.txtMaterialInfo.Visible = false;
             // 
             // FrmManualCounting
             // 
@@ -343,6 +356,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRecord)).EndInit();
             this.panelData.ResumeLayout(false);
             this.panelData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceNotStar.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMaterialInfo.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -353,7 +368,6 @@
         private System.Windows.Forms.TextBox tbScan;
         private System.Windows.Forms.Label lblQty;
         private DevExpress.XtraEditors.SimpleButton btnSubmit;
-        private System.Windows.Forms.TextBox txtMaterialInfo;
         private System.Windows.Forms.TextBox tbQty;
         private System.Windows.Forms.CheckBox cbIsTypeT;
         private System.Windows.Forms.Label lblTypeT;
@@ -373,5 +387,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IsSuccess;
         private System.Windows.Forms.DataGridViewTextBoxColumn Message;
         private System.Windows.Forms.CheckBox cbEnable;
+        private DevExpress.XtraEditors.CheckEdit ceNotStar;
+        private DevExpress.XtraEditors.TextEdit txtMaterialInfo;
     }
 }

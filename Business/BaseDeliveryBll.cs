@@ -51,6 +51,7 @@ namespace Business
             {
                 switch (item.Key)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -82,7 +83,7 @@ namespace Business
 
         protected abstract int GetExecuteStatus();
 
-        protected abstract List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus);
+        protected abstract IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus);
 
         protected abstract string GetDeliveredUpdateSql(string deliveryId, int sortingNo, string userName);
 
@@ -159,7 +160,7 @@ namespace Business
         private static int GetLightColor(int towerNo, List<int> allColors)
         {
             string sql = $@"SELECT LightColor 
-                  FROM Wms_LightColorRecord wlcr WHERE RecordStatus ={(int)LightRecordStatusEnum.LightOn} AND LightArea = {towerNo}; ";
+                  FROM Wms_LightColorRecord wlcr WITH(NOLock) WHERE RecordStatus ={(int)LightRecordStatusEnum.LightOn} AND LightArea = {towerNo}; ";
 
             DataTable dt = DbHelper.GetDataTable(sql);
             if (dt != null && dt.Rows.Count > 0)
@@ -295,6 +296,7 @@ namespace Business
             {
                 switch (item.Key)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -385,7 +387,7 @@ namespace Business
         private static int GetLightSerialNo(string deliveryId, int areaId)
         {
             //AND RecordStatus = {(int)LightRecordStatusEnum.LightOn}
-            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
+            string sql = $"SELECT TOP 1 LightSerialNo  FROM Wms_LightColorRecord wlcr WITH(NOLock) WHERE OrderId = '{deliveryId}' AND LightArea = {areaId}  ORDER BY CreateTime DESC ";
             return TypeParse.StrToInt(Convert.ToString(DbHelper.ExecuteScalar(sql)), 0);
         }
 
@@ -413,7 +415,11 @@ namespace Business
             //    throw new OppoCoreException("当前出库单的亮灯货架亮灯记录异常，无法关闭");
             //}
 
-            int targetColor = currentRecord.LightColor;
+            int targetColor = allColors[0];
+            if (currentRecord != null)
+            {
+                targetColor = currentRecord.LightColor;
+            }
             try
             {
                 LightShelfColor(deliveryNo, false, url, targetColor, barcodes);
@@ -427,13 +433,13 @@ namespace Business
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
         }
 
-        public static List<Wms_LightColorRecord> GetExecutingRecords()
+        public static IEnumerable<Wms_LightColorRecord> GetExecutingRecords()
         {
             string sql = $"{Wms_LightColorRecord.GetSelectSql()} AND RecordStatus = {(int)LightRecordStatusEnum.LightOn} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_LightColorRecord>();
         }
 
-        public static List<Wms_InstockArea> GetExecutingAreas()
+        public static IEnumerable<Wms_InstockArea> GetExecutingAreas()
         {
             string sql = $"{Wms_InstockArea.GetSelectSql()} AND DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_InstockArea>();
@@ -450,6 +456,7 @@ namespace Business
             {
                 switch (item.Key)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -476,6 +483,10 @@ namespace Business
 
         public static int ExcuteWithTransaction(string sql)
         {
+            if (string.IsNullOrWhiteSpace(sql))
+            {
+                return 0;
+            }
             return DbHelper.ExcuteWithTransaction(sql, out string _);
         }
     }

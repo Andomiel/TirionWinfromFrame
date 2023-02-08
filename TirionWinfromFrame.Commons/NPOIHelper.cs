@@ -204,9 +204,9 @@ namespace TirionWinfromFrame.Commons
         /// <param name="headerNameDic">表头和属性对应关系</param>
         /// <param name="sheetName">sheet名称</param>
         /// <returns></returns>
-        public static string ExportToExcel<T>(string filePath, List<T> data, List<HeadColumn> headColumnList, string sheetName = "result") where T : class
+        public static string ExportToExcel<T>(string filePath, IEnumerable<T> data, List<HeadColumn> headColumnList, string sheetName = "result") where T : class
         {
-            if (data.Count <= 0) return null;
+            if (!data.Any()) return null;
 
             if (string.IsNullOrEmpty(filePath))
             {
@@ -334,21 +334,22 @@ namespace TirionWinfromFrame.Commons
             normalCellStyle.BorderTop = NPOI.SS.UserModel.BorderStyle.Thin;
 
 
+            ISheet sheet = workbook.CreateSheet("汇总");
+            IRow headerRow = sheet.CreateRow(0);
+
+            for (int i = 0; i < headColumnList.Count; i++)
+            {
+                ICell cell = headerRow.CreateCell(i);
+                cell.SetCellValue(headColumnList[i].ColumnDes);
+                cell.CellStyle = headCellStyle;
+                sheet.SetColumnWidth(i, headColumnList[i].ColumnWeight);
+            }
+
+            Type t = typeof(T);
+            int rowIndex = 1;
+
             foreach (var element in data)
             {
-                ISheet sheet = workbook.CreateSheet(element.Key);
-                IRow headerRow = sheet.CreateRow(0);
-
-                for (int i = 0; i < headColumnList.Count; i++)
-                {
-                    ICell cell = headerRow.CreateCell(i);
-                    cell.SetCellValue(headColumnList[i].ColumnDes);
-                    cell.CellStyle = headCellStyle;
-                    sheet.SetColumnWidth(i, headColumnList[i].ColumnWeight);
-                }
-
-                Type t = typeof(T);
-                int rowIndex = 1;
                 foreach (T item in element.Value)
                 {
                     IRow dataRow = sheet.CreateRow(rowIndex);

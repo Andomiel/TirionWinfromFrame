@@ -309,6 +309,27 @@ namespace Business
             }
 
         }
+
+        public static void SyncLightShelf()
+        {
+            StringBuilder sb = new StringBuilder("同步料架库存");
+            try
+            {
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Sync/SyncLightShelf";
+                sb.AppendLine($"url:{url}");
+                string strResponse = WebClientHelper.Get(url);
+                sb.AppendLine($"response:{strResponse}");
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine($"ex:{ex.GetDeepException()}");
+            }
+            finally
+            {
+                FileLog.Log(sb.ToString());
+            }
+
+        }
     }
     /// <summary>
     /// 分页列表

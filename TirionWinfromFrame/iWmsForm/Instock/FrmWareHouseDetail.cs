@@ -8,6 +8,7 @@ using Entity.Dto;
 using Entity.Enums;
 using Entity.Enums.Transfer;
 using Mapster;
+using MES;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,22 +60,36 @@ namespace iWms.Form
         {
             BindDefaultTower();
             CompareMaterialQty();
+            SetHighPrivilege();
         }
 
-        /// <summary>
-        /// 定时刷新
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Timer_Tick(object sender, EventArgs e)
+        private void SetHighPrivilege()
         {
-            CompareMaterialQty();
+            using (var db = new MESDB())
+            {
+                var roles = db.Database.SqlQuery<int>($@"SELECT distinct roleId 
+                FROM[dbo].[sysUserRole] c 
+                where c.userId = {AppInfo.LoginUserInfo.id}").ToListAsync().Result;
+
+                if (roles == null || roles.Count == 0)
+                {
+                    btnForceFinish.Visible = false;
+                }
+                else if (roles.Contains(1) || roles.Contains(7))
+                {
+                    btnForceFinish.Visible = true;
+                }
+                else
+                {
+                    btnForceFinish.Visible = false;
+                }
+            }
         }
 
         private void BindDefaultTower()
         {
             var areas = WareHouseBLL.GetBoundAreas();
-            if (areas == null || areas.Count == 0)
+            if (areas == null || !areas.Any())
             {
                 return;
             }
@@ -83,6 +98,7 @@ namespace iWms.Form
             {
                 switch (item.AreaId)
                 {
+                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //ResetCheckBoxStatus(item, cbSorting);
                         break;
@@ -132,6 +148,7 @@ namespace iWms.Form
                 {
                     dict.Add(detail.BusinessId, detail);
                 }
+                detail.Barcodes.Clear();
             }
 
             foreach (DataRow item in barcodes.Rows)
@@ -158,6 +175,7 @@ namespace iWms.Form
                     continue;
                 }
                 detail.Barcodes.Add(barcode);
+                detail.ActualCount = detail.Barcodes.Sum(p => p.InnerQty);
             }
             CurrentOrder.Details = WorkOrderDetails.ToList();
 
@@ -194,11 +212,26 @@ namespace iWms.Form
 
         private void BtnFinish_Click(object sender, EventArgs e)
         {
+            var unrefreshBarcodes = WareHouseBLL.GetUnrefreshQuantityBarcodes(CurrentOrder.BusinessId);
+            if (unrefreshBarcodes != null && unrefreshBarcodes.Any())
+            {
+                "当前单据存在收料UPN的盘内数量小于0，不可完成".ShowTips();
+                return;
+            }
+
+            if (WorkOrderDetails.Any(p => p.ReceiveStatusDisplay == "超收"))
+            {
+                "当前单据存在超收项，不可完成".ShowTips();
+                return;
+            }
+
             bool isShowWarn = WorkOrderDetails.Any(p => p.ReceiveStatusDisplay.Equals("未入库") || p.ReceiveStatusDisplay.Equals("短收"));
             if (isShowWarn)
             {
-                "当前单据存在短收项，不可完成".ShowTips();
-                return;
+                if ("当前单据存在短收项，确定完成入库？".ShowYesNoAndTips() != DialogResult.Yes)
+                {
+                    return;
+                }
             }
 
             //bool isOk;
@@ -227,7 +260,7 @@ namespace iWms.Form
             DialogResult = DialogResult.Cancel;
         }
 
-        private void btnForceFinish_Click(object sender, EventArgs e)
+        private void BtnForceFinish_Click(object sender, EventArgs e)
         {
             FrmWareHouseWarn frmWareHouseWarn = new FrmWareHouseWarn() { OrderNo = lblOrderNo.Text };
             if (frmWareHouseWarn.ShowDialog() == DialogResult.OK)
@@ -236,16 +269,6 @@ namespace iWms.Form
                 WareHouseBLL.UnlockTowerByOrder(CurrentOrder.BusinessId, AppInfo.LoginUserInfo.account);
                 DialogResult = DialogResult.OK;
             }
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            if (timer != null)
-            {
-                timer.Stop();
-                timer.Dispose();
-            }
-            base.OnClosed(e);
         }
 
         private bool isPostBack = false;
@@ -298,7 +321,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit(int tower)
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -314,7 +337,7 @@ namespace iWms.Form
         private void ValidateTransferOrderLimit(int tower)
         {
             var transferOrders = new TransferBll().GetExecutingOrders();
-            if (transferOrders == null || transferOrders.Count == 0)
+            if (transferOrders == null || !transferOrders.Any())
             {
                 return;
             }
@@ -374,6 +397,85 @@ namespace iWms.Form
             finally
             {
                 SplashScreenManager.CloseForm();
+            }
+        }
+
+        private void BtnExchange_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockButtonObj)
+                {
+                    CompareMaterialQty();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+        }
+
+        private void GridIWMS_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {    //右键弹出菜单
+                if (e.Button != MouseButtons.Right)
+                {
+                    return;
+                }
+                //容许用户添加行时，最后一行为未实际添加的行，所以不需考虑弹出菜单
+                if (e.RowIndex < 0 || (gridIWMS.AllowUserToAddRows && e.RowIndex == gridIWMS.Rows.Count - 1))
+                {
+                    return;
+                }
+                //只有upn上允许弹窗
+                if (e.ColumnIndex != 0)
+                {
+                    return;
+                }
+                gridIWMS.ClearSelection();
+                gridIWMS.Rows[e.RowIndex].Selected = true;
+                //创建快捷菜单
+                ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+
+                //删除当前行
+                ToolStripMenuItem tsmiRemoveCurrentRow = new ToolStripMenuItem("删除本行");
+                tsmiRemoveCurrentRow.Click += (obj, arg) =>
+                {
+                    var row = gridIWMS.Rows[e.RowIndex];
+                    var record = row.DataBoundItem as InstockBarcodeDto;
+                    if (record.InnerQty > 0)
+                    {
+                        if ("当前条目不是数量异常条目，确认删除？".ShowYesNoAndTips() != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                    }
+
+                    WareHouseBLL.ClearReceivedBarcode(CurrentOrder.BusinessId, record.Upn);
+                    WorkOrderBarcodes.Remove(record);
+                    
+                };
+                contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
+
+                ////清空全部数据
+                //ToolStripMenuItem tsmiRemoveAll = new ToolStripMenuItem("清空数据");
+                //tsmiRemoveAll.Click += (obj, arg) =>
+                //{
+                //    gridViewSummary.Rows.Clear();
+                //};
+                //contextMenuStrip.Items.Add(tsmiRemoveAll);
+
+                contextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
             }
         }
     }

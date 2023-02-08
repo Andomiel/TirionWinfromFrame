@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TirionWinfromFrame.Commons
 {
-    public class BuildComboxHelper
+    public static class BuildComboxHelper
     {
         public static List<EnumItem> BuildComboxWithoutEmptyFromEnum(Type enumType)
         {
@@ -30,9 +30,7 @@ namespace TirionWinfromFrame.Commons
             return enumItems;
         }
 
-        public static List<string> BuildTransformationShelf()
-        {
-            return new List<string>
+        public static List<string> TransformationShelf => new List<string>
             {
                 "",
                 "D1-1","D1-2","D1-3","D1-4",
@@ -41,11 +39,16 @@ namespace TirionWinfromFrame.Commons
                 "D4-1","D4-2","D4-3","D4-4",
                 "D5-1","D5-2","D5-3","D5-4",
             };
-        }
 
-        public static List<string> BuildLightShelf()
-        {
-            return new List<string>
+
+        public static List<string> PalletAreas => new List<string> {
+        "",
+        "ZB-01", "ZB-02", "ZB-03", "ZB-04", "ZB-05", "ZB-06", "ZB-07", "ZB-08",
+         "ZB-09", "ZB-10", "ZB-11", "ZB-12", "ZB-13", "ZB-14", "ZB-15", "ZB-16",
+         "ZB-17","ZB-18","ZB-19","ZB-20"
+        };
+
+        public static List<string> LightShelf => new List<string>
             {
                 "",
                 "01",
@@ -70,17 +73,14 @@ namespace TirionWinfromFrame.Commons
                 "20",
                 "21"
             };
-        }
 
-        public static List<string> BuildAbSide()
-        {
-            return new List<string>
+
+        public static List<string> AbSide => new List<string>
             {
                 "",
                 "A",
                 "B"
             };
 
-        }
     }
 }

@@ -28,7 +28,11 @@ namespace Entity.Dto
         /// <summary>
         /// 库区
         /// </summary>
-        public string TowerDes { get; set; }
+        public int Tower { get; set; }
+        /// <summary>
+        /// 库区
+        /// </summary>
+        public string TowerDes => EnumHelper.GetDescription(typeof(TowerEnum), Tower);
         /// <summary>
         /// 巷道
         /// </summary>
@@ -83,6 +87,11 @@ namespace Entity.Dto
         public string Lot { get; set; }
 
         public int MinPacking { get; set; }
+
+        /// <summary>
+        /// 冻结单号
+        /// </summary>
+        public string HoldNo { get; set; } = string.Empty;
 
     }
 }

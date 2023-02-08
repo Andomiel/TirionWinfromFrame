@@ -1,4 +1,5 @@
 ﻿using Business;
+using Commons;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity;
@@ -30,7 +31,7 @@ namespace iWms.Form
         public int pageSize = 10;      //每页记录数
         public int recordCount = 0;    //总记录数
         public int pageCount = 0;      //总页数
-        public int currentPage = 0;    //当前页
+        public int currentPage = 1;    //当前页
 
         private Timer statusTimer;
 
@@ -56,19 +57,7 @@ namespace iWms.Form
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
             dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.CustomFormat = " ";
         }
-
-
-        private void dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
-        }
-
-        private List<Wms_DeliveryOrder> WorkOrders = new List<Wms_DeliveryOrder>();
 
         private BindingList<DeliveryOrderDto> PagedWorkOrders = new BindingList<DeliveryOrderDto>();
 
@@ -261,23 +250,36 @@ namespace iWms.Form
                 Upn = tbUpn.Text.Trim(),
                 Operator = tbOperator.Text.Trim()
             };
-            if (!string.IsNullOrWhiteSpace(dtOrderTime.CustomFormat))
+
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
             {
-                condition.HaveOrderTimeQuery = true;
-                condition.OrderTimeStart = dtOrderTime.Value.Date;
-                condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
-            }
-            if (!string.IsNullOrWhiteSpace(dtFinishedTime.CustomFormat))
-            {
-                condition.HaveFinishedTimeQuery = true;
-                condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-                condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
             }
 
-            WorkOrders = DeliveryBll.GetDeliveryOrders(condition);
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
+            {
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
+            }
 
-            currentPage = 1;
-            recordCount = WorkOrders.Count;
+            PagedWorkOrders.Clear();
+
+            int startRow = (currentPage - 1) * pageSize;
+            var orders = DeliveryBll.GetDeliveryOrders(condition, startRow, startRow + pageSize);
+
+            foreach (var item in orders)
+            {
+                PagedWorkOrders.Add(item);
+            }
+
+            recordCount = 0;
+            if (orders != null && orders.Any())
+            {
+                recordCount = orders.First().TotalCount;
+            }
             pageCount = (recordCount / pageSize);
             if (recordCount % pageSize > 0)
             {
@@ -290,7 +292,6 @@ namespace iWms.Form
         {
             if (pageCount == 0)
             {
-                PagedWorkOrders.Clear();
                 tpscurrentPage.Text = "0";//当前页
                 tpspageCount.Text = "0";//总页数
                 tpsrecordCount.Text = "0";//总记录数
@@ -299,15 +300,6 @@ namespace iWms.Form
             if (currentPage < 1) currentPage = 1;
             if (currentPage > pageCount) currentPage = pageCount;
 
-            int beginRecord = pageSize * (currentPage - 1) + 1;
-            int endRecord = pageSize * currentPage;
-
-            if (currentPage >= pageCount) endRecord = recordCount;
-            PagedWorkOrders.Clear();
-            for (int i = beginRecord - 1; i < endRecord; i++)
-            {
-                PagedWorkOrders.Add(WorkOrders[i].Adapt<DeliveryOrderDto>());
-            }
             tpscurrentPage.Text = currentPage.ToString();//当前页
             tpspageCount.Text = pageCount.ToString();//总页数
             tpsrecordCount.Text = recordCount.ToString();//总记录数
@@ -368,7 +360,7 @@ namespace iWms.Form
             selectedOrder = order;
 
             var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
-            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
+            OrderBarcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId).ToList();
 
             WorkOrderDetails.Clear();
             WorkOrderBarcodes.Clear();
@@ -452,12 +444,13 @@ namespace iWms.Form
                         "请选中一行数据！".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus < (int)DeliveryOrderStatusEnum.Calculated)
                     {
                         "当前单据尚未计算，没有要出库的物料信息！".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "不可重复执行出库！".ShowTips();
                         return;
@@ -471,9 +464,11 @@ namespace iWms.Form
 
                     new DeliveryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.DeliveryNo, selectedOrder.OrderType, sortDiag.SortNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivering;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "执行出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     "出库任务下达成功！".ShowTips();
+
+                    GetOrders();
                 }
             }
             catch (Exception ex)
@@ -489,7 +484,7 @@ namespace iWms.Form
         private void ValidateDeliveryOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingRecords();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -503,21 +498,21 @@ namespace iWms.Form
                     continue;
                 }
                 var currentRecords = recordGroup.FirstOrDefault(p => p.Key == item);
-                if (currentRecords == null || currentRecords.Count() < 2)
+                if (currentRecords == null || currentRecords.Count() < 3)
                 {
                     continue;
                 }
 
                 string area = EnumHelper.GetDescription(typeof(TowerEnum), item);
                 List<string> orderNos = currentRecords.Select(p => p.OrderNo).Distinct().ToList();
-                throw new OppoCoreException($"当前已有两个出库单据({string.Join(",", orderNos)})在库区{area}中执行，请等待");
+                throw new OppoCoreException($"当前已有3个出库单据({string.Join(",", orderNos)})在库区{area}中执行，请等待");
             }
         }
 
         private void ValidateInstockOrderLimit()
         {
             var records = BaseDeliveryBll.GetExecutingAreas();
-            if (records == null || records.Count == 0)
+            if (records == null || !records.Any())
             {
                 return;
             }
@@ -554,8 +549,8 @@ namespace iWms.Form
                         "请选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus != (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus != (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "【正在出库】状态的工单才能【拣料完成】！".ShowTips();
                         return;
@@ -563,7 +558,8 @@ namespace iWms.Form
 
                     int asrsArea = (int)TowerEnum.ASRS;
                     int unfinishStatus = (int)DeliveryBarcodeStatusEnum.Undeliver;
-                    if (OrderBarcodes.Any(p => p.DeliveryAreaId == asrsArea && p.OrderStatus == unfinishStatus))
+                    var barcodes = DeliveryBll.GetDeliveryBarcodes(selectedOrder.BusinessId);
+                    if (barcodes.Any(p => p.DeliveryAreaId == asrsArea && p.OrderStatus == unfinishStatus))
                     {
                         "智能仓中仍然有未出完的料，不可拣料完成".ShowTips();
                         return;
@@ -571,8 +567,8 @@ namespace iWms.Form
 
                     new DeliveryBll().FinishDeliveryOrder(selectedOrder.BusinessId, selectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account);
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
-                    dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "标记完成出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     $"出库单:{selectedOrder.DeliveryNo}捡料完成".ShowTips();
                 }
             }
@@ -723,35 +719,33 @@ namespace iWms.Form
             tbMaterialNo.Text = string.Empty;
             tbDestination.Text = string.Empty;
             tbOperator.Text = string.Empty;
-            dtOrderTime.Value = DateTime.Today;
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.Value = DateTime.Today;
-            dtFinishedTime.CustomFormat = " ";
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 
         private void BtnFrist_ButtonClick(object sender, EventArgs e)
         {
             currentPage = 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnPre_ButtonClick(object sender, EventArgs e)
         {
             currentPage -= 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnNext_ButtonClick(object sender, EventArgs e)
         {
             currentPage += 1;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private void BtnLast_ButtonClick(object sender, EventArgs e)
         {
             currentPage = pageCount;
-            LoadPagedWorkOrder();
+            GetOrders();
         }
 
         private readonly object lockCancelObj = new object();
@@ -767,13 +761,13 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus == (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单在发料中，无法取消，可以在发料完成后取消出库，释放物料".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
                     {
                         "工单已复核或关闭，无法取消".ShowTips();
                         return;
@@ -783,6 +777,8 @@ namespace iWms.Form
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Closed;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "取消工单发料", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     _ = "工单取消成功".ShowTips();
                 }
             }
@@ -794,7 +790,8 @@ namespace iWms.Form
 
         private void CancelDeliveryOrderBarcodes(int targetStatus)
         {
-            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).Distinct().ToList());
+            var barcodes = DeliveryBll.GetDeliveryBarcodes(selectedOrder.BusinessId);
+            new DeliveryBll().ReleaseExistedDeliveryBarcode(selectedOrder.BusinessId, selectedOrder.DeliveryNo, targetStatus, AppInfo.LoginUserInfo.account, barcodes.Select(p => p.Barcode).Distinct().ToList());
             OrderBarcodes.Clear();
             foreach (var item in WorkOrderDetails)
             {
@@ -815,12 +812,13 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "已发料的工单不可重新计算发料".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Calculating)
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Calculating)
                     {
                         var dialogResult = "当前工单已经经过计算，是否重新计算".ShowYesNoAndTips();
                         if (dialogResult != DialogResult.Yes)
@@ -842,6 +840,8 @@ namespace iWms.Form
 
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Calculated;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "执行发料计算", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     _ = "工单计算发料成功".ShowTips();
                 }
             }
@@ -859,7 +859,7 @@ namespace iWms.Form
             foreach (DeliveryDetailDto item in WorkOrderDetails)
             {
                 int remainCount = item.RequireCount;
-                var inventoryBarcodes = DeliveryBll.GetBarcodesByMaterialNo(item.MaterialNo);
+                var inventoryBarcodes = DeliveryBll.GetBarcodesByMaterialNo(item.MaterialNo).ToList();
                 //TODO:here there should be a private method for certain purpose
                 inventoryBarcodes.RemoveAll(p => alreadyInBarcodes.Contains(p.ReelID));
                 if (!isContainSorting)
@@ -926,8 +926,8 @@ namespace iWms.Form
                         "请选中一行数据".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
+                    var order = DeliveryBll.GetDeliveryOrderByNo(selectedOrder.DeliveryNo);
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Delivering)
                     {
                         "工单已开始发料，无法进行有料出库".ShowTips();
                         return;
@@ -936,6 +936,9 @@ namespace iWms.Form
                     new DeliveryBll().SpecialFinishDeliveryOrder(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account, OrderBarcodes.Select(p => p.Barcode).ToList());
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Delivered;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
+
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(selectedOrder.DeliveryNo, "标记有料出库", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
+                    "工单有料出库完成".ShowTips();
                 }
             }
             catch (Exception ex)
@@ -965,11 +968,23 @@ namespace iWms.Form
                     {
                         return;
                     }
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    {
+                        $"出库单{order.DeliveryNo}{order.OrderStatusDisplay}，不可复核".ShowTips();
+                        return;
+                    }
+                    string reviewLock = DeliveryBll.GetDeliveryOrderLock(order.BusinessId);
+                    //string ip = DnsHelper.GetIP();
+                    if (!string.IsNullOrWhiteSpace(reviewLock))
+                    {
+                        $"出库单{order.DeliveryNo}已在被其他人在{reviewLock}复核，请与其确认".ShowTips();
+                        return;
+                    }
 
                     FrmReviewNew reviewNew = new FrmReviewNew(order);
                     if (reviewNew.ShowDialog() == DialogResult.OK)
                     {
-                        LoadOrderDetails();
+                        GetOrders();
                     }
                 }
             }
@@ -987,7 +1002,7 @@ namespace iWms.Form
                 var barcodeDto = row.DataBoundItem as DeliveryBarcodeDto;
                 if (barcodeDto.ExecuteResult == (int)ExecuteResultEnum.Failed)
                 {
-                    row.Cells["colInventoryStatus"].Style.BackColor = Color.Orange;
+                    row.Cells["colLocation"].Style.BackColor = Color.Orange;
                 }
                 else
                 {
@@ -1054,6 +1069,7 @@ namespace iWms.Form
                         CancelAlarm(selectedOrder.DeliveryNo, url, shelfNo);
                     }
 
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(selectedOrder.DeliveryNo, "执行工单复位", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     "复位成功，请检查料架和工单操作日志".ShowTips();
                 }
             }

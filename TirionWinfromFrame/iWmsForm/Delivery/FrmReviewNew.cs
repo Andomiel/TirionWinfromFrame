@@ -1,4 +1,5 @@
 ﻿using Business;
+using Commons;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using Entity;
@@ -13,7 +14,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -37,10 +40,30 @@ namespace iWms.Form
             gridViewRecord.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
 
             gridViewSummary.AutoGenerateColumns = false;
-            gridViewSummary.MergeColumnNames.AddRange(new List<string> { "LineNumber", "PartNumber", "NeedQty" });
+            gridViewSummary.MergeColumnNames.AddRange(new List<string> { "LineNumber", "PartNumber", "NeedQty", "ReviewedQuantity" });
             gridViewSummary.MergeFocusNames.AddRange(new List<string> { "LineNumber" });
             gridViewSummary.DataSource = ReviewSummaries;
             gridViewSummary.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
+
+            Load += FrmReviewNew_Load;
+            FormClosing += FrmReviewNew_FormClosing;
+        }
+
+        private void FrmReviewNew_Load(object sender, EventArgs e)
+        {
+            if (SelectedOrder != null)
+            {
+                DeliveryBll.LockDeliveryOrder(SelectedOrder.BusinessId, DnsHelper.GetIP(), AppInfo.LoginUserInfo.username);
+                Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "对工单进行出库复核", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
+            }
+        }
+
+        private void FrmReviewNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (SelectedOrder != null)
+            {
+                DeliveryBll.ReleaseDeliveryOrder(SelectedOrder.BusinessId);
+            }
         }
 
         private readonly DeliveryOrderDto SelectedOrder;
@@ -75,11 +98,11 @@ namespace iWms.Form
             tbOriginal.Enabled = false;
         }
 
-        private void txtBoxScan_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtBoxScan_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
-                string boxNo = txtBoxScan.Text;
+                string boxNo = txtBoxScan.Text.Trim();
                 if (string.IsNullOrWhiteSpace(boxNo))
                 {
                     return;
@@ -89,17 +112,22 @@ namespace iWms.Form
                     txtBoxScan.Text = string.Empty;
                     return;
                 }
+                if ((!boxNo.StartsWith("OP")) || (!int.TryParse(boxNo.Replace("OP", string.Empty), out int _)))
+                {
+                    "组箱箱号必须以OP开头，且后缀为8位数字".ShowTips();
+                    return;
+                }
                 tbScan.Focus();
             }
         }
 
-        private void tbScan_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbScan_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
                 if (e.KeyChar == 13)
                 {
-                    string scanText = tbScan.Text;
+                    string scanText = tbScan.Text.Trim();
                     tbScan.Text = BarcodeFormatter.FormatBarcode(scanText);
                     if (cbOriginal.Visible && cbOriginal.Checked)
                     {
@@ -151,7 +179,7 @@ namespace iWms.Form
         private const int SND_ASYNC = 0x0001;
 
 
-        private void tbOriginal_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbOriginal_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
@@ -176,7 +204,7 @@ namespace iWms.Form
         {
             CollapseWarning();
 
-            string scanText = tbScan.Text;
+            string scanText = tbScan.Text.Trim();
             int starCount = scanText.ToCharArray().Count(p => p.Equals('*'));
             if (starCount < 6 || starCount > 9)
             {
@@ -191,6 +219,11 @@ namespace iWms.Form
             {
                 return;
             }
+            if (SelectedOrder.LineId.EndsWith("10") && upn.Count(p => p == '-') != 3)
+            {
+                "仓10出库强制校验UPN只支持4段内容".ShowTips();
+                return;
+            }
             tbScan.SelectAll();
 
             //重复扫码验证
@@ -203,7 +236,7 @@ namespace iWms.Form
                 return;
             }
 
-            reviewRecord = OutStockReview.GetUpnInfoInZd(upn);
+            reviewRecord = ReviewBusiness.GetUpnInfoInZd(upn);
             reviewRecord.BoxNo = txtBoxScan.Text.Trim();
             reviewRecord.OriginalCode = tbOriginal.Text.Trim();
             reviewRecord.ScanTime = DateTime.Now;
@@ -274,6 +307,9 @@ namespace iWms.Form
                 matchRow.Match = (int)PrepareReviewMatchEnum.Done;
                 matchRow.RealQty = reviewRecord.Qty;
                 matchRow.ContainerNo = txtBoxScan.Text.Trim();
+                matchRow.ReviewedQuantity += matchRow.RealQty;
+
+                ReviewBusiness.ReviewBarcode(SelectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account, matchRow);
             }
             else
             {
@@ -303,6 +339,7 @@ namespace iWms.Form
                 newReview.NeedQty = currentMaterial.NeedQty;
                 newReview.LineNumber = currentMaterial.LineNumber;
                 newReview.SlotNo = currentMaterial.SlotNo;
+                newReview.ReviewedQuantity = currentMaterial.ReviewedQuantity + newReview.RealQty;
 
                 var removeItems = ReviewSummaries.Where(p => p.PartNumber == newReview.PartNumber && p.LineNumber == newReview.LineNumber && string.IsNullOrWhiteSpace(p.UPN)).ToList();
                 foreach (var item in removeItems)
@@ -310,6 +347,13 @@ namespace iWms.Form
                     ReviewSummaries.Remove(item);
                 }
                 ReviewSummaries.Add(newReview);
+
+                ReviewBusiness.ReviewBarcode(SelectedOrder.DeliveryNo, AppInfo.LoginUserInfo.account, newReview);
+
+                foreach (var item in needMaterials)
+                {
+                    item.ReviewedQuantity = newReview.ReviewedQuantity;
+                }
             }
             AddBindRecord(reviewRecord);
             ResetBarcodeText();
@@ -334,7 +378,7 @@ namespace iWms.Form
             if (orderType != (int)OutOrderTypeEnum.FLCK)
             {
                 //UPN同步接口
-                result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text);
+                result = OrderReviewCallApi.CheckFromMaterialInfo(tbScan.Text, record.Qty);
                 result.ApiTitle = $"物料查询校验失败";
             }
             else
@@ -372,18 +416,17 @@ namespace iWms.Form
                 return result;
             }
 
-            if (orderType == (int)OutOrderTypeEnum.JLDCK || orderType == (int)OutOrderTypeEnum.DBCK)
+            //验证物料是否散料测试
+            //if (orderType == (int)OutOrderTypeEnum.JLDCK)//&& record.UPN.StartsWith("96")
+            //{
+            //    FileLog.Log($"当前UPN{{{record.UPN}}}为96开头的物料，不做散料测试");
+            //}
+            //else
+            //{
+            if (orderType == (int)OutOrderTypeEnum.DBCK) //orderType == (int)OutOrderTypeEnum.JLDCK ||
             {
-                //验证物料是否散料测试
-                if (orderType == (int)OutOrderTypeEnum.JLDCK && record.UPN.StartsWith("96"))
-                {
-                    FileLog.Log($"当前UPN{{{record.UPN}}}为96开头的物料，不做散料测试");
-                }
-                else
-                {
-                    result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
-                    result.ApiTitle = $"散料测试失败";
-                }
+                result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
+                result.ApiTitle = $"散料测试失败";
             }
 
             if (!result.Result)
@@ -446,13 +489,14 @@ namespace iWms.Form
             var barcodes = DeliveryBll.GetDeliveryBarcodes(SelectedOrder.BusinessId);
             foreach (Wms_DeliveryDetail item in details)
             {
-                var detailBarcodes = barcodes.Where(p => p.DeliveryDetailId == item.BusinessId && p.OrderStatus > (int)DeliveryBarcodeStatusEnum.Undeliver).ToList();
-                if (detailBarcodes == null || detailBarcodes.Count == 0)
+                var detailBarcodes = barcodes.Where(p => p.DeliveryDetailId == item.BusinessId && p.OrderStatus > (int)DeliveryBarcodeStatusEnum.Undeliver);
+                if (detailBarcodes == null || !detailBarcodes.Any())
                 {
                     var summary = new ReviewSummary()
                     {
                         AllocateQty = 0,
                         NeedQty = item.RequireCount,
+                        ReviewedQuantity = 0,
                         ContainerNo = string.Empty,
                         LineNumber = item.RowNum.ToString(),
                         Match = 0,
@@ -469,6 +513,8 @@ namespace iWms.Form
                 }
                 else
                 {
+                    int reviewedStatus = (int)DeliveryBarcodeStatusEnum.Reviewed;
+                    int reviewedQuantity = detailBarcodes.Where(p => p.OrderStatus == reviewedStatus).Sum(p => p.DeliveryQuantity);
                     foreach (var barcode in detailBarcodes)
                     {
                         ReviewSummary newReview = new ReviewSummary
@@ -479,6 +525,7 @@ namespace iWms.Form
                             RealQty = barcode.DeliveryQuantity,
                             ContainerNo = barcode.BoxNo,
                             QRCode = string.Empty,
+                            ReviewedQuantity = reviewedQuantity,
                         };
                         newReview.OrderNo = SelectedOrder.DeliveryNo;
                         newReview.PartNumber = item.MaterialNo;
@@ -570,13 +617,14 @@ namespace iWms.Form
                     {
                         string orderNo = SelectedOrder.DeliveryNo;
                         var finishedList = ReviewSummaries.Where(p => !string.IsNullOrWhiteSpace(p.UPN)).ToList();
-                        if (OutStockReview.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
+                        if (ReviewBusiness.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
                         {
                             "更新数据异常，请重新提交".ShowTips();
                         }
                         else
                         {
                             "复核完成，即将进行单据回传".ShowTips();
+                            Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，执行回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
 
                             SplashScreenManager.ShowForm(typeof(WaitForm1));
                             try
@@ -598,6 +646,7 @@ namespace iWms.Form
                     }
                     else
                     {
+                        Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，由于校验执行发料接口反馈失败，暂不回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                         "MES接口校验执行发料失败，请查看调用日志".ShowTips();
                     }
                 }
@@ -826,20 +875,30 @@ namespace iWms.Form
                         "当前条目不是已复核的记录，无法删除".ShowTips();
                         return;
                     }
+                    string currentUPN = record.UPN;
                     var otherRecords = ReviewSummaries.Where(p => p.PartNumber == record.PartNumber && p.LineNumber == record.LineNumber).ToList();
                     if (otherRecords.Count > 1)
                     {
                         ReviewSummaries.Remove(record);
+                        foreach (var item in otherRecords)
+                        {
+                            if (item.UPN != record.UPN)
+                            {
+                                item.ReviewedQuantity -= record.RealQty;
+                            }
+                        }
                     }
                     else
                     {
                         record.UPN = string.Empty;
+                        record.ReviewedQuantity = 0;
                         record.Match = (int)PrepareReviewMatchEnum.Not;
                         record.RealQty = 0;
                         record.ContainerNo = txtBoxScan.Text;
                         record.QRCode = string.Empty;
                         record.AllocateQty = 0;
                     }
+                    ReviewBusiness.ReleaseReviewedBarcode(SelectedOrder.BusinessId, AppInfo.LoginUserInfo.account, currentUPN);
                 };
                 contextMenuStrip.Items.Add(tsmiRemoveCurrentRow);
 
@@ -876,13 +935,13 @@ namespace iWms.Form
                             return;
                         }
                     }
-
-                    string orderNo = SelectedOrder.DeliveryNo;
-                    var reviewList = ReviewSummaries.Where(p => (!string.IsNullOrWhiteSpace(p.UPN)) && p.Match == 1).ToList();
-                    if (reviewList.Count > 0)
-                    {
-                        OutStockReview.TempDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, reviewList);
-                    }
+                    //string orderNo = SelectedOrder.DeliveryNo;
+                    //var reviewList = ReviewSummaries.Where(p => (!string.IsNullOrWhiteSpace(p.UPN)) && p.Match == 1).ToList();
+                    //if (reviewList.Count > 0)
+                    //{
+                    //    OutStockReview.TempDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, reviewList);
+                    //}
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "暂停复核", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

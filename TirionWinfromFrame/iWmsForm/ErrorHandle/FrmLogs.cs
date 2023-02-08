@@ -6,7 +6,9 @@ using Mapster;
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -88,6 +90,71 @@ namespace iWms.Form
         private void DgvLogs_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             ShowRowIndex(dgvLogs, e);
+        }
+
+        private void BtnTxt_Click(object sender, EventArgs e)
+        {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockButtonObj)
+                {
+                    if (dgvLogs.SelectedRows.Count == 0)
+                    {
+                        "请选择一条要导出文件的日志".ShowTips();
+                        return;
+                    }
+                    var row = dgvLogs.SelectedRows[0];
+                    var log = row.DataBoundItem as LogDto;
+
+                    ExportToText(tbKey.Text.Trim(), log);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+
+        }
+
+        private void ExportToText(string title, LogDto log)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "文本文件(*.txt)|*.txt",
+                FilterIndex = 0,
+                OverwritePrompt = true,
+                InitialDirectory = "D:\\",
+                FileName = title
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            string fileFullName = dialog.FileName;
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(log.LogTitle);
+            sb.AppendLine(log.LogTime.ToString());
+            sb.AppendLine(log.RequestBody);
+            sb.AppendLine($"response:{log.ResponseBody}");
+
+            using (FileStream fs = new FileStream(fileFullName, FileMode.OpenOrCreate))
+            {
+                StreamWriter sw = new StreamWriter(fs);
+                sw.Write(sb.ToString());
+                sw.Close();
+            }
+
+            if (!string.IsNullOrWhiteSpace(fileFullName))
+            {
+                System.Diagnostics.Process.Start("explorer", "/select," + fileFullName);
+            }
         }
     }
 }

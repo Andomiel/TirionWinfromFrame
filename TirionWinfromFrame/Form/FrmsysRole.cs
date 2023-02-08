@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
@@ -14,16 +15,16 @@ using TirionWinfromFrame.Commons;
 namespace MES.Form
 {
     public partial class FrmsysRole : FrmBaseForm
-	{
+    {
         private Dictionary<string, string> fieldDictionary = new Dictionary<string, string>();
         private List<int> userids = new List<int>();
-		public FrmsysRole()
-		{
-			InitializeComponent();
-		}
-		private void FrmsysRole_Load(object sender, EventArgs e)
+        public FrmsysRole()
         {
-            InitFrom(xtraTabControl1,grdList,grdListView,new LayoutControlGroup[]{layoutControlGroup1},new sysRoleInfo());
+            InitializeComponent();
+        }
+        private void FrmsysRole_Load(object sender, EventArgs e)
+        {
+            InitFrom(xtraTabControl1, grdList, grdListView, new LayoutControlGroup[] { layoutControlGroup1 }, new sysRoleInfo());
             InitSearchDicData();
         }
         /// <summary>
@@ -31,19 +32,19 @@ namespace MES.Form
 		/// </summary>
 		/// <returns></returns>
 		private void Init()
-		{
-            txtcompanyId.Properties.DataSource = GetDataTableUtils.SqlTable("部门");     
-            repositoryItemTreeListtxtcompanyId.DataSource= GetDataTableUtils.SqlTable("部门");  
-            txtcreatorId.Properties.DataSource = GetDataTableUtils.SqlTable("用户");     
-            repositoryItemtxtcreatorId.DataSource= GetDataTableUtils.SqlTable("用户");  
-            txteditorId.Properties.DataSource = GetDataTableUtils.SqlTable("用户");     
-            repositoryItemtxteditorId.DataSource= GetDataTableUtils.SqlTable("用户");
+        {
+            txtcompanyId.Properties.DataSource = GetDataTableUtils.SqlTable("部门");
+            repositoryItemTreeListtxtcompanyId.DataSource = GetDataTableUtils.SqlTable("部门");
+            txtcreatorId.Properties.DataSource = GetDataTableUtils.SqlTable("用户");
+            repositoryItemtxtcreatorId.DataSource = GetDataTableUtils.SqlTable("用户");
+            txteditorId.Properties.DataSource = GetDataTableUtils.SqlTable("用户");
+            repositoryItemtxteditorId.DataSource = GetDataTableUtils.SqlTable("用户");
             repositoryItemLookUpEdit1.DataSource = GetDataTableUtils.SqlTable("部门");
 
             treeList1.DataSource = GetDataTableUtils.SqlTable("角色功能");
             treeList1.OptionsSelection.MultiSelect = true;
             treeList1.OptionsSelection.UseIndicatorForSelection = true;
-			treeList1.OptionsView.ShowCheckBoxes = true;
+            treeList1.OptionsView.ShowCheckBoxes = true;
             treeList1.ExpandAll();
 
 
@@ -56,11 +57,11 @@ namespace MES.Form
             using (var db = new MESDB())
             {
                 ///根据角色id获取用户
-                if(!string.IsNullOrEmpty(txtid.Text))
-                     userids = db.Database
-                    .SqlQuery<int>(
-                        $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text} and u.id is not null").ToListAsync()
-                    .Result;
+                if (!string.IsNullOrEmpty(txtid.Text))
+                    userids = db.Database
+                   .SqlQuery<int>(
+                       $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text} and u.id is not null").ToListAsync()
+                   .Result;
             }
             if (treeList2.Nodes.Count > 0)
             {
@@ -121,7 +122,7 @@ namespace MES.Form
                     }
                 }
             }
-            
+
         }
         /// <summary>
 		/// 搜索字段
@@ -129,14 +130,14 @@ namespace MES.Form
 		/// <returns></returns>
         private void InitSearchDicData()
         {
-			fieldDictionary.Add("ID","id");     
-			//fieldDictionary.Add("公司id","companyId");     
-			fieldDictionary.Add("公司名称","companyName");     
-			fieldDictionary.Add("角色名称","name");     
-			//fieldDictionary.Add("创建人","creatorId");     
-			fieldDictionary.Add("创建时间","createTime");     
-			//fieldDictionary.Add("编辑人","editorId");     
-			fieldDictionary.Add("编辑时间","editTime");     
+            fieldDictionary.Add("ID", "id");
+            //fieldDictionary.Add("公司id","companyId");     
+            fieldDictionary.Add("公司名称", "companyName");
+            fieldDictionary.Add("角色名称", "name");
+            //fieldDictionary.Add("创建人","creatorId");     
+            fieldDictionary.Add("创建时间", "createTime");
+            //fieldDictionary.Add("编辑人","editorId");     
+            fieldDictionary.Add("编辑时间", "editTime");
         }
         List<int> ids = new List<int>();//用来存储ID
         /// <summary>
@@ -156,7 +157,7 @@ namespace MES.Form
                     }
                 }
 
-                sysRoleInfo info= (sysRoleInfo)this.ControlDataToModel(new sysRoleInfo());
+                sysRoleInfo info = (sysRoleInfo)this.ControlDataToModel(new sysRoleInfo());
 
                 using (var db = new MESDB())
                 {
@@ -169,21 +170,25 @@ namespace MES.Form
                             db.Database.ExecuteSqlCommand($"delete from sysRoleFunction where roleId={info.id}");
                             db.Database.ExecuteSqlCommand($"delete from sysUserRole where roleId={info.id}");
 
-                            string sql = "";
-                            foreach (var item in ids)
+                            StringBuilder sql = new StringBuilder();
+                            if (ids != null && ids.Any())
                             {
-                                sql += $"INSERT INTO sysRoleFunction VALUES ({info.id},{item});";
+                                foreach (var item in ids)
+                                {
+                                    sql.AppendLine($"INSERT INTO sysRoleFunction VALUES ({info.id},{item});");
+                                }
                             }
-                            if (!string.IsNullOrEmpty(sql))
-                                db.Database.ExecuteSqlCommand(sql);
                             var dd = gridControl1.DataSource as IEnumerable<sysUserInfo>;
-                            string sql2 = "";
-                            foreach (sysUserInfo item in dd)
+                            if (dd != null && dd.Any())
                             {
-                                sql2 += $"INSERT INTO sysUserRole VALUES ({item.id},{info.id});";
+                                foreach (sysUserInfo item in dd)
+                                {
+                                    sql.AppendLine($"INSERT INTO sysUserRole VALUES ({item.id},{info.id});");
+                                }
                             }
-                            if(!string.IsNullOrEmpty(sql2))
-                                db.Database.ExecuteSqlCommand(sql2);
+                            string commitSql = sql.ToString();
+                            if (!string.IsNullOrEmpty(commitSql))
+                                db.Database.ExecuteSqlCommand(commitSql);
                             tran.Commit();
                         }
                         catch (Exception ex)
@@ -199,17 +204,17 @@ namespace MES.Form
                 }
             }
             catch (Exception ex)
-            {  
+            {
                 ex.Message.ShowError();
                 return false;
             }
             return true;
         }
-		public override void InitgrdListDataSource()
+        public override void InitgrdListDataSource()
         {
-            using (var con=new MESDB())
+            using (var con = new MESDB())
             {
-				grdList.DataSource=con.sysRoleInfo.ToList();
+                grdList.DataSource = con.sysRoleInfo.ToList();
             }
             Init();
             if (treeList1.Nodes.Count > 0)
@@ -221,55 +226,55 @@ namespace MES.Form
             }
         }
 
-	    /// <summary>
-		/// 字段为空校验
-		/// </summary>
-		/// <returns></returns>
+        /// <summary>
+        /// 字段为空校验
+        /// </summary>
+        /// <returns></returns>
         public override bool CheckInput()
         {
-			if(string.IsNullOrEmpty(txtcompanyId.EditValue.ToString()))
-			{
-				"公司id不能为空".ShowWarning();
-				txtcompanyId.Focus();
-				return false;
-			}
-			////if(string.IsNullOrEmpty(txtcompanyName.EditValue.ToString()))
-			////{
-			////	"公司名称不能为空".ShowWarning();
-			////	txtcompanyName.Focus();
-			////	return false;
-			////}
-			if(string.IsNullOrEmpty(txtname.EditValue.ToString()))
-			{
-				"角色名称不能为空".ShowWarning();
-				txtname.Focus();
-				return false;
-			}
-			if(string.IsNullOrEmpty(txtcreatorId.EditValue.ToString()))
-			{
-				"创建人不能为空".ShowWarning();
-				txtcreatorId.Focus();
-				return false;
-			}
-			if(string.IsNullOrEmpty(txtcreateTime.Text))
-			{
-				"创建时间不能为空".ShowWarning();
-				txtcreateTime.Focus();
-				return false;
-			}
-			if(string.IsNullOrEmpty(txteditorId.EditValue.ToString()))
-			{
-				"编辑人不能为空".ShowWarning();
-				txteditorId.Focus();
-				return false;
-			}
-			if(string.IsNullOrEmpty(txteditTime.Text))
-			{
-				"编辑时间不能为空".ShowWarning();
-				txteditTime.Focus();
-				return false;
-			}
-			return true;
+            if (string.IsNullOrEmpty(txtcompanyId.EditValue.ToString()))
+            {
+                "公司id不能为空".ShowWarning();
+                txtcompanyId.Focus();
+                return false;
+            }
+            ////if(string.IsNullOrEmpty(txtcompanyName.EditValue.ToString()))
+            ////{
+            ////	"公司名称不能为空".ShowWarning();
+            ////	txtcompanyName.Focus();
+            ////	return false;
+            ////}
+            if (string.IsNullOrEmpty(txtname.EditValue.ToString()))
+            {
+                "角色名称不能为空".ShowWarning();
+                txtname.Focus();
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtcreatorId.EditValue.ToString()))
+            {
+                "创建人不能为空".ShowWarning();
+                txtcreatorId.Focus();
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtcreateTime.Text))
+            {
+                "创建时间不能为空".ShowWarning();
+                txtcreateTime.Focus();
+                return false;
+            }
+            if (string.IsNullOrEmpty(txteditorId.EditValue.ToString()))
+            {
+                "编辑人不能为空".ShowWarning();
+                txteditorId.Focus();
+                return false;
+            }
+            if (string.IsNullOrEmpty(txteditTime.Text))
+            {
+                "编辑时间不能为空".ShowWarning();
+                txteditTime.Focus();
+                return false;
+            }
+            return true;
         }
         /// <summary>
 		/// 删除
@@ -282,7 +287,7 @@ namespace MES.Form
                 sysRoleInfo info = (sysRoleInfo)this.ControlDataToModel(new sysRoleInfo());
                 using (var db = new MESDB())
                 {
-                   
+
                     using (var tran = db.Database.BeginTransaction())
                     {
                         try
@@ -338,7 +343,7 @@ namespace MES.Form
         public override void SearchFunction()
         {
             FrmSearch frm = new FrmSearch(fieldDictionary);
-            if (frm.ShowDialog()==DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK)
             {
                 string sql = frm.sql;
                 using (var db = new MESDB())
@@ -370,7 +375,7 @@ namespace MES.Form
 
         private void GetCheckedID(TreeListNode parentNode)
         {
-           
+
             if (parentNode.Nodes.Count == 0) return;//递归终止
             foreach (TreeListNode node in parentNode.Nodes)
             {
@@ -393,7 +398,7 @@ namespace MES.Form
             foreach (TreeListNode node in parentNode.Nodes)
             {
                 DataRowView drv = treeList1.GetDataRecordByNode(node) as DataRowView;//强转选中状态的行
-                if (ids.Contains((int) drv["ID"]))
+                if (ids.Contains((int)drv["ID"]))
                 {
                     node.Checked = true;
                 }
@@ -404,7 +409,7 @@ namespace MES.Form
         {
             using (var db = new MESDB())
             {
-               treeList2.DataSource= db.sysUserInfo.OrderByDescending(p => p.account.Equals(textEdit1.Text)).ToList();
+                treeList2.DataSource = db.sysUserInfo.OrderByDescending(p => p.account.Equals(textEdit1.Text)).ToList();
             }
             using (var db = new MESDB())
             {
@@ -414,7 +419,7 @@ namespace MES.Form
                     .SqlQuery<int>(
                         $"select u.id from sysuserrole r left join sysuser u on r.userid=u.id where r.roleid={txtid.Text} and u.id is not null").ToListAsync()
                     .Result;
-               // gridControl1.DataSource = db.sysUserInfo.ToList().Exists(p => userids.Contains(p.id));
+                // gridControl1.DataSource = db.sysUserInfo.ToList().Exists(p => userids.Contains(p.id));
 
             }
             if (treeList2.Nodes.Count > 0)
@@ -439,7 +444,7 @@ namespace MES.Form
             {
                 if (node.Checked)
                 {
-                    
+
                     if (treeList2.GetDataRecordByNode(node).GetType() == typeof(DataRowView))
                     {
                         DataRowView drv = treeList2.GetDataRecordByNode(node) as DataRowView;
@@ -462,8 +467,8 @@ namespace MES.Form
                             deptId = drv.deptId,
                         });
                     }
-                    
-                    
+
+
                 }
             }
             gridControl1.DataSource = userInfos;

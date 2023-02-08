@@ -86,7 +86,7 @@ namespace Entity.DataContext
 		/// </summary> 
 		public static string GetSelectSql()
 		{
-			return "SELECT Id, OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_LightColorRecord WHERE 1=1 ";
+			return "SELECT Id, OrderType, LightArea, LightColor, OrderId, OrderNo, RecordStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser FROM Wms_LightColorRecord  WITH(NOLock) WHERE 1=1 ";
 		}
 
 		#endregion

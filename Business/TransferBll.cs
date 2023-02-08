@@ -15,16 +15,16 @@ namespace Business
     {
         protected override LightRecordTypeEnum OrderType => LightRecordTypeEnum.Transfer;
 
-        public static List<Wms_TransferOrder> GetTransferOrders(TransferQueryCondition condition)
+        public static IEnumerable<Wms_TransferOrder> GetTransferOrders(TransferQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             if ((!string.IsNullOrWhiteSpace(condition.Upn)) || (!string.IsNullOrWhiteSpace(condition.MaterialNo)))
             {
-                sb.AppendLine(@"SELECT wto.*
-                        FROM Wms_TransferBarcode wtb 
-                        left join Wms_TransferOrder wto on wtb.TransferOrderId = wto.BusinessId 
+                sb.AppendLine(@"SELECT TOP 100 wto.*
+                        FROM Wms_TransferBarcode wtb  WITH(NOLock) 
+                        left join Wms_TransferOrder wto  WITH(NOLock) on wtb.TransferOrderId = wto.BusinessId 
                         WHERE 1=1");
                 if (!string.IsNullOrWhiteSpace(condition.Upn))
                 {
@@ -39,7 +39,7 @@ namespace Business
             }
             else
             {
-                sb.AppendLine(@" SELECT wto.*
+                sb.AppendLine(@" SELECT TOP 100 wto.*
 	                FROM  Wms_TransferOrder wto WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(condition.OrderNo))
@@ -76,12 +76,34 @@ namespace Business
             return orders.DataTableToList<Wms_TransferOrder>();
         }
 
-        public static List<Wms_TransferBarcode> GetTransferBarcodes(string transferId)
+        public static Wms_TransferOrder GetTransferOrderByNo(string transferNo)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_TransferOrder.GetSelectSql());
+            sb.AppendLine(" AND TransferNo = @TransferNo ");
+
+            var orders = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@TransferNo", transferNo));
+            if (orders == null || orders.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            return orders.DataTableToList<Wms_TransferOrder>().First();
+        }
+
+        public static IEnumerable<Wms_TransferBarcode> GetTransferBarcodes(string transferId)
         {
             string sql = $@"SELECT wtb.*
-                        FROM Wms_TransferBarcode wtb WHERE wtb.TransferOrderId = '{transferId}' ";
+                        FROM Wms_TransferBarcode wtb  WITH(NOLock) WHERE wtb.TransferOrderId = '{transferId}' ";
 
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferBarcode>();
+        }
+
+        public static IEnumerable<Wms_TransferOrder> GetInventoryValidateOrders()
+        {
+            string sql = $"SELECT * FROM Wms_TransferOrder wto   WITH(NOLock) WHERE OrderStatus < {(int)TransferOrderStatusEnum.Finished} ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferOrder>();
         }
 
         public static int ModifyTransferOrderStatus(string transferId, int targetStatus, string userName)
@@ -99,7 +121,7 @@ namespace Business
                 return 0;
             }
             string condition = string.Join(",", barcodes.Select(p => $"'{p}'").ToArray());
-            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0  WHERE ReelID  in({condition}) ";
+            string sql = $@"UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}  WHERE ReelID  in({condition}) AND Status < {(int)BarcodeStatusEnum.Delivered} AND isTakeCheck =0 ";
             return DbHelper.ExecuteNonQuery(sql);
         }
 
@@ -108,12 +130,12 @@ namespace Business
             return 1;//紧急出料口
         }
 
-        protected override List<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
+        protected override IEnumerable<DeliveryBarcodeLocation> GetDeliveryBarcodesDetail(string deliveryId, int targetStatus)
         {
             string sql = $@"SELECT wtb.Barcode, wto.SourceAreaId as DeliveryAreaId, wtb.TransferLocation as LockLocation, szm.ABSide, szm.LockMachineID, szm.Part_Number, wtb.TransferQuantity as DeliveryQuantity, wtb.OrderStatus as BarcodeStatus 
-                        FROM Wms_TransferBarcode wtb 
-                        LEFT JOIN smt_zd_material szm  on wtb.Barcode = szm.ReelID 
-                        LEFT JOIN  Wms_TransferOrder wto on wtb.TransferOrderId = wto.BusinessId 
+                        FROM Wms_TransferBarcode wtb  WITH(NOLock) 
+                        LEFT JOIN smt_zd_material szm   WITH(NOLock) on wtb.Barcode = szm.ReelID 
+                        LEFT JOIN  Wms_TransferOrder wto WITH(NOLock)  on wtb.TransferOrderId = wto.BusinessId 
                         WHERE wtb.TransferOrderId = '{deliveryId}' AND wtb.OrderStatus <= {targetStatus} ;";
 
             return DbHelper.GetDataTable(sql).DataTableToList<DeliveryBarcodeLocation>();
@@ -157,7 +179,7 @@ namespace Business
             return sb.ToString();
         }
 
-        public List<Wms_TransferOrder> GetExecutingOrders()
+        public IEnumerable<Wms_TransferOrder> GetExecutingOrders()
         {
             string sql = $"{Wms_TransferOrder.GetSelectSql()} AND OrderStatus = {(int)TransferOrderStatusEnum.Executing} ";
             return DbHelper.GetDataTable(sql).DataTableToList<Wms_TransferOrder>();

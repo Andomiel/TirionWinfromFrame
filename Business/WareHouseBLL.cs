@@ -27,8 +27,8 @@ namespace Business
             if (areaId != (int)TowerEnum.SortingArea)
             {
                 string existSql = $@"SELECT wia.*, wio.InstockNo 
-                    FROM Wms_InstockArea wia 
-                    left join Wms_InstockOrder wio on wia.InstockId = wio.BusinessId 
+                    FROM Wms_InstockArea wia  WITH(NOLock) 
+                    left join Wms_InstockOrder wio  WITH(NOLock) on wia.InstockId = wio.BusinessId 
                     WHERE  wia.AreaId = {areaId} AND wia.DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
                 var existOrders = DbHelper.GetDataTable(existSql);
                 if (existOrders != null && existOrders.Rows.Count > 0)
@@ -75,31 +75,48 @@ namespace Business
             return DbHelper.Update(sql) > 0;
         }
 
-        public static List<Wms_InstockOrder> GetInstockOrders(string orderNo, string upn, string materialNo, int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime)
+        public static IEnumerable<InstockOrderDto> GetInstockOrders(string orderNo, string upn, string materialNo,
+            int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime, int startRow, int endRow)
         {
             StringBuilder sb = new StringBuilder();
             List<SqlParameter> parameters = new List<SqlParameter>();
+            sb.AppendLine($@"With Orders AS
+              (
+            SELECT
+                ROW_NUMBER() OVER(ORDER BY wio.CreateTime DESC) RowNumber,  
+                COUNT(1) OVER() AS TotalCount,
+                  wio.*
+             {BuildMainQuerySql(orderNo, upn, materialNo, orderType, orderStatus, operatorUser, startTime, endTime, parameters)}
+              ) 
+            SELECT * FROM Orders
+             WHERE Orders.RowNumber > {startRow} AND Orders.RowNumber <= {endRow} ");
 
+            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
+
+            return orders.DataTableToList<InstockOrderDto>();
+        }
+
+        private static string BuildMainQuerySql(string orderNo, string upn, string materialNo,
+            int orderType, int orderStatus, string operatorUser, DateTime? startTime, DateTime? endTime, List<SqlParameter> parameters)
+        {
+            StringBuilder sb = new StringBuilder();
             if (!string.IsNullOrWhiteSpace(upn))
             {
-                sb.AppendLine(@"SELECT wio.*
-                    FROM Wms_InstockBarcode wib  
-                    left join Wms_InstockOrder wio on wib.InstockId = wio.BusinessId WHERE 1=1 ");
+                sb.AppendLine(@" FROM Wms_InstockBarcode wib   WITH(NOLock) 
+                    left join Wms_InstockOrder wio  WITH(NOLock) on wib.InstockId = wio.BusinessId WHERE 1=1 ");
                 sb.AppendLine(" AND wib.Barcode = @Barcode ");
                 parameters.Add(new SqlParameter("@Barcode", upn));
             }
             else if (!string.IsNullOrWhiteSpace(materialNo))
             {
-                sb.AppendLine(@"SELECT wio.*
-	                FROM Wms_InstockDetail wid   
-	                left join Wms_InstockOrder wio on wid.InstockId = wio.BusinessId  WHERE 1=1 ");
+                sb.AppendLine(@" FROM Wms_InstockDetail wid  WITH(NOLock)   
+	                left join Wms_InstockOrder wio  WITH(NOLock) on wid.InstockId = wio.BusinessId  WHERE 1=1 ");
                 sb.AppendLine(" AND wid.MaterialNo = @MaterialNo ");
                 parameters.Add(new SqlParameter("@MaterialNo", materialNo));
             }
             else
             {
-                sb.AppendLine(@" SELECT wio.*
-	                FROM  Wms_InstockOrder wio WHERE 1=1 ");
+                sb.AppendLine(@"FROM  Wms_InstockOrder wio WHERE 1=1 ");
             }
             if (!string.IsNullOrWhiteSpace(orderNo))
             {
@@ -131,14 +148,10 @@ namespace Business
                 sb.AppendLine(" AND wio.LastUpdateTime <= @EndTime ");
                 parameters.Add(new SqlParameter("@EndTime", endTime.Value.Date.AddDays(1).AddSeconds(-1)));
             }
-            sb.AppendLine("	ORDER BY wio.CreateTime DESC  ");
-
-            var orders = DbHelper.GetDataTable(sb.ToString(), parameters.ToArray());
-
-            return orders.DataTableToList<Wms_InstockOrder>();
+            return sb.ToString();
         }
 
-        public static List<Wms_InstockDetail> GetInstockDetails(string instockId)
+        public static IEnumerable<Wms_InstockDetail> GetInstockDetails(string instockId)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Wms_InstockDetail.GetSelectSql());
@@ -164,6 +177,25 @@ namespace Business
             return details;
         }
 
+        public static IEnumerable<Wms_InstockBarcode> GetUnrefreshQuantityBarcodes(string instockId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_InstockBarcode.GetSelectSql());
+            sb.AppendLine($" AND InstockId = '{instockId}' ");
+            sb.AppendLine($" AND InstockQuantity <= 0 ");
+
+            return DbHelper.GetDataTable(sb.ToString()).DataTableToList<Wms_InstockBarcode>();
+        }
+
+        public static void ClearReceivedBarcode(string instockId, string barcode)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"DELETE FROM Wms_InstockBarcode WHERE InstockId ='{instockId}' AND Barcode ='{barcode}';");
+            sb.AppendLine($"DELETE FROM smt_zd_material WHERE ReelID = '{barcode}'; ");
+
+            DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
+        }
+
         public static bool UpdateOrderRemark(string orderNo, string remark, string operater)
         {
             string sql = "UPDATE Wms_InstockOrder SET LastUpdateUser = @LastUpdateUser, LastUpdateTime = GETDATE(), Remark =@Remark WHERE InstockNo =@InstockNo ";
@@ -181,25 +213,30 @@ namespace Business
             sb.AppendLine($@"UPDATE Wms_InstockOrder
                         SET OrderStatus={finishStatus}, LastUpdateTime=getdate(), LastUpdateUser='{userName}'
                         WHERE BusinessId='{instockId}'; ");
-            sb.AppendLine($@"INSERT INTO smt_InStockOrder_feedback
-                        (OrderNo, Status, OrderType)
-                        VALUES('{instockId}', 0, '{(InOrderTypeEnum)instockType}');");
+            sb.AppendLine(GetFeedBackSql(instockId, instockType));
 
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
-        public static List<InstockAreaDto> GetBoundAreas()
+        private static string GetFeedBackSql(string instockId, int instockType)
+        {
+            return $@"INSERT INTO smt_InStockOrder_feedback
+                        (OrderNo, Status, OrderType)
+                        VALUES('{instockId}', 0, '{(InOrderTypeEnum)instockType}');";
+        }
+
+        public static IEnumerable<InstockAreaDto> GetBoundAreas()
         {
             string sql = $@"SELECT wia.*, wio.InstockNo 
-                    FROM Wms_InstockArea wia 
-                    left join Wms_InstockOrder wio on wia.InstockId = wio.BusinessId 
+                    FROM Wms_InstockArea wia  WITH(NOLock) 
+                    left join Wms_InstockOrder wio WITH(NOLock)  on wia.InstockId = wio.BusinessId 
                     WHERE  wia.DetailStatus = {(int)InstockAreaBindingStatusEnum.Bound} ";
             return DbHelper.GetDataTable(sql).DataTableToList<InstockAreaDto>();
         }
 
-        public static List<MaterialCensusDto> CensusMaterials()
+        public static IEnumerable<MaterialCensusDto> CensusMaterials()
         {
-            string sql = @"select Part_Number as MaterialNo,SUM(qty) as TotalCount from smt_zd_material
+            string sql = @"select Part_Number as MaterialNo,SUM(qty) as TotalCount from smt_zd_material WITH(NOLock) 
                 where Status>0 and Status<3
                 group by Part_Number";
             return DbHelper.GetDataTable(sql).DataTableToList<MaterialCensusDto>();

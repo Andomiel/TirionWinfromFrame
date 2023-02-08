@@ -42,16 +42,6 @@ namespace iWms.Form
             dgvUpns.AutoGenerateColumns = false;
             dgvUpns.DataSource = WorkOrderBarcodes;
             dgvUpns.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.CustomFormat = " ";
-        }
-
-
-        private void Dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private BindingList<InventoryOrderDto> WorkOrders = new BindingList<InventoryOrderDto>();
@@ -110,17 +100,18 @@ namespace iWms.Form
             condition.MaterialNo = tbMaterialNo.Text.Trim();
             condition.Upn = tbUpn.Text.Trim();
 
-            if (!string.IsNullOrWhiteSpace(dtOrderTime.CustomFormat))
+            condition.HaveOrderTimeQuery = dtCreate.EditValue != null;
+            if (condition.HaveOrderTimeQuery)
             {
-                condition.HaveOrderTimeQuery = true;
-                condition.OrderTimeStart = dtOrderTime.Value.Date;
-                condition.OrderTimeEnd = dtOrderTime.Value.Date.AddDays(1);
+                condition.OrderTimeStart = dtCreate.DateTime.Date;
+                condition.OrderTimeEnd = dtCreate.DateTime.Date.AddDays(1);
             }
-            if (!string.IsNullOrWhiteSpace(dtFinishedTime.CustomFormat))
+
+            condition.HaveFinishedTimeQuery = dtFinish.EditValue != null; ;
+            if (condition.HaveFinishedTimeQuery)
             {
-                condition.HaveFinishedTimeQuery = true;
-                condition.FinishedTimeStart = dtFinishedTime.Value.Date;
-                condition.FinishedTimeEnd = dtFinishedTime.Value.Date.AddDays(1);
+                condition.FinishedTimeStart = dtFinish.DateTime.Date;
+                condition.FinishedTimeEnd = dtFinish.DateTime.Date.AddDays(1);
             }
 
             var orders = InventoryBll.GetInventoryOrders(condition);
@@ -174,12 +165,13 @@ namespace iWms.Form
                         "请至少选中一个盘点单".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus > (int)TransferOrderStatusEnum.Executing)
+                    var order = InventoryBll.GetInventoryOrderByNo(selectedOrder.InventoryNo);
+                    if (order.OrderStatus > (int)TransferOrderStatusEnum.Executing)
                     {
                         "当前盘点单状态不可执行".ShowTips();
                         return;
                     }
-                    if (selectedOrder.OrderStatus == (int)TransferOrderStatusEnum.Saved)
+                    if (order.OrderStatus == (int)TransferOrderStatusEnum.Saved)
                     {
                         new InventoryBll().DeliveryCalculatedBarcodes(selectedOrder.BusinessId, selectedOrder.InventoryNo, -1, -1, AppInfo.LoginUserInfo.account, (int)OperateTypeEnum.InstockTaking);
 
@@ -211,15 +203,16 @@ namespace iWms.Form
                         "请至少选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus != (int)InventoryOrderStatusEnum.Executing)
+                    var order = InventoryBll.GetInventoryOrderByNo(selectedOrder.InventoryNo);
+                    if (order.OrderStatus != (int)InventoryOrderStatusEnum.Executing)
                     {
                         "【执行中】状态的盘点单才能【完成】！".ShowTips();
                         return;
                     }
 
                     int finished = (int)InventoryBarcodeStatusEnum.Executed;
-                    if (WorkOrderBarcodes.Any(p => p.OrderStatus < finished))
+                    var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
+                    if (barcodes.Any(p => p.OrderStatus < finished))
                     {
                         if ("盘点单中存在未盘点的upn，是否结束盘点，未盘点的料盘将会取消盘点".ShowYesNoAndWarning() != DialogResult.Yes)
                         {
@@ -335,10 +328,8 @@ namespace iWms.Form
             tbUpn.Text = string.Empty;
             tbMaterialNo.Text = string.Empty;
             cbType.SelectedIndex = 0;
-            dtOrderTime.Value = DateTime.Today;
-            dtOrderTime.CustomFormat = " ";
-            dtFinishedTime.Value = DateTime.Today;
-            dtFinishedTime.CustomFormat = " ";
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             GetOrders();
         }
 
@@ -355,22 +346,16 @@ namespace iWms.Form
                         "请至少选中一行数据！".ShowTips();
                         return;
                     }
-
-                    if (selectedOrder.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
+                    var order = InventoryBll.GetInventoryOrderByNo(selectedOrder.InventoryNo);
+                    if (order.OrderStatus > (int)InventoryOrderStatusEnum.Executing)
                     {
                         $"当前盘点单{EnumHelper.GetDescription(typeof(InventoryOrderStatusEnum), selectedOrder.OrderStatus)}，无法取消！".ShowTips();
                         return;
                     }
 
                     int unfinished = (int)InventoryBarcodeStatusEnum.Executed;
-                    var unfinishedBarcodes = WorkOrderBarcodes.Where(p => p.OrderStatus < unfinished).Select(p => p.Barcode).Distinct().ToList();
-                    //if (unfinishedBarcodes.Count > 0)
-                    //{
-                    //    if ("存在未完成盘点的upn，是否确认取消".ShowYesNoAndTips() != DialogResult.Yes)
-                    //    {
-                    //        return;
-                    //    }
-                    //}
+                    var barcodes = InventoryBll.GetInventoryBarcodes(order.BusinessId);
+                    var unfinishedBarcodes = barcodes.Where(p => p.OrderStatus < unfinished).Select(p => p.Barcode).Distinct().ToList();
 
                     int result = InventoryBll.ModifyInventoryOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Cancelled, AppInfo.LoginUserInfo.account);
                     result += InventoryBll.ReleaseInventoryOrderBarcodes(selectedOrder.BusinessId, unfinishedBarcodes, AppInfo.LoginUserInfo.account);
@@ -505,6 +490,38 @@ namespace iWms.Form
             Task.Run(() => { CallMesWmsApiBll.SaveLogs(deliveryNo, $"操作亮灯货架取消报警", $"url:{url}{Environment.NewLine}request:{requestString}", strResponse); });
 
             return strResponse;
+        }
+
+        private void BtnProfit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (lockFinishObj)
+                {
+                    FrmProfit profit = new FrmProfit();
+                    profit.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void BtnLoss_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (lockFinishObj)
+                {
+                    FrmLoss loss = new FrmLoss();
+                    loss.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
         }
     }
 }

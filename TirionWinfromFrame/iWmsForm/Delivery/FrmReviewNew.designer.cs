@@ -29,9 +29,9 @@ namespace iWms.Form
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReviewNew));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnComplete = new DevExpress.XtraEditors.SimpleButton();
             this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -61,21 +61,21 @@ namespace iWms.Form
             this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridViewSummary = new iWms.Form.RowMergeDataGridView();
+            this.gbAlert = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblWarning = new System.Windows.Forms.Label();
+            this.lblWarningTitle = new System.Windows.Forms.Label();
             this.LineNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PartNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NeedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colReviewed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AllocateQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MatchDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Match = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RealQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SourceDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TowerDes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QRCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gbAlert = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lblWarning = new System.Windows.Forms.Label();
-            this.lblWarningTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tlpConditions.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -257,7 +257,7 @@ namespace iWms.Form
             this.txtBoxScan.ShortcutsEnabled = false;
             this.txtBoxScan.Size = new System.Drawing.Size(325, 21);
             this.txtBoxScan.TabIndex = 30;
-            this.txtBoxScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxScan_KeyPress);
+            this.txtBoxScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBoxScan_KeyPress);
             // 
             // lblScan
             // 
@@ -281,7 +281,7 @@ namespace iWms.Form
             this.tbScan.ShortcutsEnabled = false;
             this.tbScan.Size = new System.Drawing.Size(325, 21);
             this.tbScan.TabIndex = 0;
-            this.tbScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScan_KeyPress);
+            this.tbScan.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbScan_KeyPress);
             // 
             // cbOriginal
             // 
@@ -304,7 +304,7 @@ namespace iWms.Form
             this.tbOriginal.Name = "tbOriginal";
             this.tbOriginal.Size = new System.Drawing.Size(325, 21);
             this.tbOriginal.TabIndex = 32;
-            this.tbOriginal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOriginal_KeyPress);
+            this.tbOriginal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbOriginal_KeyPress);
             // 
             // btnAlarm
             // 
@@ -361,9 +361,10 @@ namespace iWms.Form
             // 
             this.gridViewRecord.AllowUserToAddRows = false;
             this.gridViewRecord.AllowUserToDeleteRows = false;
+            this.gridViewRecord.AllowUserToResizeRows = false;
             this.gridViewRecord.BackgroundColor = System.Drawing.SystemColors.Control;
             this.gridViewRecord.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridViewRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewRecord.ColumnHeadersHeight = 24;
             this.gridViewRecord.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.rUPN,
             this.BoxNo,
@@ -371,14 +372,14 @@ namespace iWms.Form
             this.rQty,
             this.rStatus,
             this.Barcode});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle1;
             this.gridViewRecord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridViewRecord.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridViewRecord.Location = new System.Drawing.Point(2, 17);
@@ -389,6 +390,7 @@ namespace iWms.Form
             this.gridViewRecord.Name = "gridViewRecord";
             this.gridViewRecord.RowHeadersWidth = 25;
             this.gridViewRecord.RowTemplate.Height = 30;
+            this.gridViewRecord.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridViewRecord.Size = new System.Drawing.Size(1030, 261);
             this.gridViewRecord.TabIndex = 22;
             this.gridViewRecord.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridViewRecord_RowPostPaint);
@@ -462,29 +464,30 @@ namespace iWms.Form
             // 
             this.gridViewSummary.AllowUserToAddRows = false;
             this.gridViewSummary.AllowUserToDeleteRows = false;
+            this.gridViewSummary.AllowUserToResizeRows = false;
             this.gridViewSummary.BackgroundColor = System.Drawing.SystemColors.Control;
             this.gridViewSummary.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridViewSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewSummary.ColumnHeadersHeight = 24;
             this.gridViewSummary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.LineNumber,
             this.PartNumber,
             this.NeedQty,
+            this.colReviewed,
             this.UPN,
-            this.AllocateQty,
             this.MatchDes,
             this.Match,
             this.RealQty,
             this.SourceDes,
             this.TowerDes,
             this.QRCode});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridViewSummary.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridViewSummary.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridViewSummary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridViewSummary.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridViewSummary.Location = new System.Drawing.Point(2, 17);
@@ -497,10 +500,61 @@ namespace iWms.Form
             this.gridViewSummary.RowHeadersVisible = false;
             this.gridViewSummary.RowHeadersWidth = 25;
             this.gridViewSummary.RowTemplate.Height = 30;
+            this.gridViewSummary.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridViewSummary.Size = new System.Drawing.Size(1316, 261);
             this.gridViewSummary.TabIndex = 23;
             this.gridViewSummary.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridViewSummary_CellMouseClick);
             this.gridViewSummary.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.gridViewSummary_RowPostPaint);
+            // 
+            // gbAlert
+            // 
+            this.gbAlert.Controls.Add(this.panel2);
+            this.gbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gbAlert.Location = new System.Drawing.Point(1040, 165);
+            this.gbAlert.Margin = new System.Windows.Forms.Padding(2);
+            this.gbAlert.Name = "gbAlert";
+            this.gbAlert.Padding = new System.Windows.Forms.Padding(2);
+            this.gbAlert.Size = new System.Drawing.Size(282, 280);
+            this.gbAlert.TabIndex = 40;
+            this.gbAlert.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblWarning);
+            this.panel2.Controls.Add(this.lblWarningTitle);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(2, 17);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(278, 261);
+            this.panel2.TabIndex = 39;
+            // 
+            // lblWarning
+            // 
+            this.lblWarning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblWarning.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblWarning.ForeColor = System.Drawing.Color.White;
+            this.lblWarning.Location = new System.Drawing.Point(2, 36);
+            this.lblWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWarning.Name = "lblWarning";
+            this.lblWarning.Size = new System.Drawing.Size(276, 126);
+            this.lblWarning.TabIndex = 24;
+            this.lblWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblWarning.Visible = false;
+            // 
+            // lblWarningTitle
+            // 
+            this.lblWarningTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblWarningTitle.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblWarningTitle.ForeColor = System.Drawing.Color.White;
+            this.lblWarningTitle.Location = new System.Drawing.Point(2, 8);
+            this.lblWarningTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWarningTitle.Name = "lblWarningTitle";
+            this.lblWarningTitle.Size = new System.Drawing.Size(276, 30);
+            this.lblWarningTitle.TabIndex = 25;
+            this.lblWarningTitle.Text = "警告";
+            this.lblWarningTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWarningTitle.Visible = false;
             // 
             // LineNumber
             // 
@@ -531,6 +585,15 @@ namespace iWms.Form
             this.NeedQty.ReadOnly = true;
             this.NeedQty.Width = 110;
             // 
+            // colReviewed
+            // 
+            this.colReviewed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colReviewed.DataPropertyName = "ReviewedQuantity";
+            this.colReviewed.HeaderText = "已复核数量";
+            this.colReviewed.MinimumWidth = 100;
+            this.colReviewed.Name = "colReviewed";
+            this.colReviewed.ReadOnly = true;
+            // 
             // UPN
             // 
             this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -539,16 +602,6 @@ namespace iWms.Form
             this.UPN.MinimumWidth = 200;
             this.UPN.Name = "UPN";
             this.UPN.ReadOnly = true;
-            // 
-            // AllocateQty
-            // 
-            this.AllocateQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.AllocateQty.DataPropertyName = "AllocateQty";
-            this.AllocateQty.HeaderText = "待分配数量";
-            this.AllocateQty.MinimumWidth = 150;
-            this.AllocateQty.Name = "AllocateQty";
-            this.AllocateQty.ReadOnly = true;
-            this.AllocateQty.Width = 150;
             // 
             // MatchDes
             // 
@@ -610,56 +663,6 @@ namespace iWms.Form
             this.QRCode.Name = "QRCode";
             this.QRCode.ReadOnly = true;
             // 
-            // gbAlert
-            // 
-            this.gbAlert.Controls.Add(this.panel2);
-            this.gbAlert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbAlert.Location = new System.Drawing.Point(1040, 165);
-            this.gbAlert.Margin = new System.Windows.Forms.Padding(2);
-            this.gbAlert.Name = "gbAlert";
-            this.gbAlert.Padding = new System.Windows.Forms.Padding(2);
-            this.gbAlert.Size = new System.Drawing.Size(282, 280);
-            this.gbAlert.TabIndex = 40;
-            this.gbAlert.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblWarning);
-            this.panel2.Controls.Add(this.lblWarningTitle);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(2, 17);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(278, 261);
-            this.panel2.TabIndex = 39;
-            // 
-            // lblWarning
-            // 
-            this.lblWarning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblWarning.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblWarning.ForeColor = System.Drawing.Color.White;
-            this.lblWarning.Location = new System.Drawing.Point(2, 36);
-            this.lblWarning.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblWarning.Name = "lblWarning";
-            this.lblWarning.Size = new System.Drawing.Size(276, 126);
-            this.lblWarning.TabIndex = 24;
-            this.lblWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblWarning.Visible = false;
-            // 
-            // lblWarningTitle
-            // 
-            this.lblWarningTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblWarningTitle.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblWarningTitle.ForeColor = System.Drawing.Color.White;
-            this.lblWarningTitle.Location = new System.Drawing.Point(2, 8);
-            this.lblWarningTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblWarningTitle.Name = "lblWarningTitle";
-            this.lblWarningTitle.Size = new System.Drawing.Size(276, 30);
-            this.lblWarningTitle.TabIndex = 25;
-            this.lblWarningTitle.Text = "警告";
-            this.lblWarningTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblWarningTitle.Visible = false;
-            // 
             // FrmReviewNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -717,21 +720,21 @@ namespace iWms.Form
         private System.Windows.Forms.Label lblOrderOrder;
         private System.Windows.Forms.Label lblDestination;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private DevExpress.XtraEditors.SimpleButton btnAlarm;
+        private DevExpress.XtraEditors.SimpleButton btnNotify;
+        private DevExpress.XtraEditors.LabelControl lblOrderType;
+        private DevExpress.XtraEditors.LabelControl lblOrderNo;
+        private DevExpress.XtraEditors.SimpleButton btnPause;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn PartNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn NeedQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colReviewed;
         private System.Windows.Forms.DataGridViewTextBoxColumn UPN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AllocateQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn MatchDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Match;
         private System.Windows.Forms.DataGridViewTextBoxColumn RealQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn SourceDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn TowerDes;
         private System.Windows.Forms.DataGridViewTextBoxColumn QRCode;
-        private DevExpress.XtraEditors.SimpleButton btnAlarm;
-        private DevExpress.XtraEditors.SimpleButton btnNotify;
-        private DevExpress.XtraEditors.LabelControl lblOrderType;
-        private DevExpress.XtraEditors.LabelControl lblOrderNo;
-        private DevExpress.XtraEditors.SimpleButton btnPause;
     }
 }

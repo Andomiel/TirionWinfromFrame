@@ -41,15 +41,6 @@ namespace iWms.Form
             dgvBarcodes.AutoGenerateColumns = false;
             dgvBarcodes.DataSource = WorkOrderBarcodes;
             dgvBarcodes.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
-
-            dtOrderDate.Value = DateTime.Now.AddDays(-2);
-            dtFinishDate.Value = DateTime.Now.AddDays(1);
-        }
-
-        private void Dtp_MouseUp(object sender, MouseEventArgs e)
-        {
-            var thisDateTimePicker = sender as DateTimePicker;
-            thisDateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         private void InitCombox(ComboBox cb, Type enumType)
@@ -72,8 +63,6 @@ namespace iWms.Form
             cb.SelectedIndex = 0;
         }
 
-        private List<InstockOrderDto> WorkOrders = new List<InstockOrderDto>();
-
         private BindingList<InstockOrderDto> PagedWorkOrders = new BindingList<InstockOrderDto>();
 
         private BindingList<InstockDetailDto> WorkOrderDetails = new BindingList<InstockDetailDto>();
@@ -82,7 +71,7 @@ namespace iWms.Form
 
         private Dictionary<string, BindingList<InstockBarcodeDto>> OrderBarcodes = new Dictionary<string, BindingList<InstockBarcodeDto>>();
 
-        private object lockQueryObj = new object();
+        private readonly object lockQueryObj = new object();
 
         private void BtnQuery_Click(object sender, EventArgs e)
         {
@@ -91,6 +80,18 @@ namespace iWms.Form
                 lock (lockQueryObj)
                 {
                     GetOrders();
+                    if (PagedWorkOrders.Count == 0)
+                    {
+                        WorkOrderDetails.Clear();
+                    }
+                    if (WorkOrderDetails.Count == 0)
+                    {
+                        WorkOrderBarcodes.Clear();
+                    }
+
+                    dgvOrders.ClearSelection();
+                    dgvMaterials.ClearSelection();
+                    dgvBarcodes.ClearSelection();
                 }
             }
             catch (Exception ex)
@@ -101,18 +102,32 @@ namespace iWms.Form
 
         private void GetOrders()
         {
+            DateTime? startTime = null, finishTime = null;
+            if (dtCreate.EditValue != null)
+            {
+                startTime = dtCreate.DateTime.Date;
+            }
+            if (dtFinish.EditValue != null)
+            {
+                finishTime = dtFinish.DateTime.Date;
+            }
+            int startRow = (currentPage - 1) * pageSize;
             // 获取入库单列表
             var warehouses = WareHouseBLL.GetInstockOrders(tbOrderNo.Text.Trim(), tbUpn.Text.Trim(), tbMaterialNo.Text.Trim(),
                 Convert.ToInt32(cbOrderType.SelectedValue),
-                Convert.ToInt32(cbOrderStatus.SelectedValue), tbUser.Text.Trim(), dtOrderDate.Value, dtFinishDate.Value);
+                Convert.ToInt32(cbOrderStatus.SelectedValue), tbUser.Text.Trim(), startTime, finishTime, startRow, startRow + pageSize);
 
-            WorkOrders = warehouses.Adapt<List<InstockOrderDto>>();
-            //.Select(s => new InstockOrder(s.First()))
-            //.OrderByDescending(p => p.ADD_TIME)
-            //.ToList();
+            PagedWorkOrders.Clear();
+            foreach (var item in warehouses)
+            {
+                PagedWorkOrders.Add(item);
+            }
 
-            currentPage = 1;
-            recordCount = WorkOrders.Count;
+            recordCount = 0;
+            if (warehouses != null && warehouses.Any())
+            {
+                recordCount = warehouses.First().TotalCount;
+            }
             pageCount = (recordCount / pageSize);
             if (recordCount % pageSize > 0)
             {
@@ -121,7 +136,6 @@ namespace iWms.Form
             LoadPagedOrders();
         }
 
-        private InstockOrderDto selectedOrder = null;
         private void dgvOrders_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -132,7 +146,6 @@ namespace iWms.Form
                 }
                 var row = dgvOrders.SelectedCells[0].OwningRow;
                 var order = row.DataBoundItem as InstockOrderDto;
-                selectedOrder = order;
 
                 var details = WareHouseBLL.GetInstockDetails(order.BusinessId);
                 var barcodes = WareHouseBLL.GetInstockBarcodes(order.BusinessId);
@@ -173,6 +186,7 @@ namespace iWms.Form
                     if (OrderBarcodes.ContainsKey(detail.BusinessId))
                     {
                         detail.Barcodes = OrderBarcodes[detail.BusinessId];
+                        detail.ActualCount = detail.Barcodes.Sum(p => p.InnerQty);
                     }
                     WorkOrderDetails.Add(detail);
                 }
@@ -216,13 +230,7 @@ namespace iWms.Form
 
                     if (formDetail.ShowDialog() == DialogResult.OK)
                     {
-                        var details = WareHouseBLL.GetInstockDetails(order.BusinessId).ToList();
-                        WorkOrderDetails.Clear();
-                        foreach (Wms_InstockDetail item in details)
-                        {
-                            WorkOrderDetails.Add(item.Adapt<InstockDetailDto>());
-                        }
-                        dgvOrders.UpdateCellValue(e.ColumnIndex - 3, e.RowIndex);
+                        GetOrders();
                     }
                 }
             }
@@ -336,7 +344,7 @@ namespace iWms.Form
         public void ExportToExcel<T>(Dictionary<string, List<T>> data, List<HeadColumn> headColumns) where T : class
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx";
+            dialog.Filter = "Excel Office2007及以上(*.xlsx)|*.xlsx";
             dialog.FilterIndex = 0;
             dialog.OverwritePrompt = true;
             dialog.InitialDirectory = "D:\\";
@@ -386,10 +394,8 @@ namespace iWms.Form
             tbUpn.Clear();
             tbMaterialNo.Clear();
             tbUser.Clear();
-            dtOrderDate.CustomFormat = " ";
-            dtOrderDate.Value = DateTime.Today;
-            dtFinishDate.CustomFormat = " ";
-            dtFinishDate.Value = DateTime.Today;
+            dtCreate.EditValue = null;
+            dtFinish.EditValue = null;
             cbOrderType.SelectedIndex = 0;
             cbOrderStatus.SelectedIndex = 0;
             GetOrders();
@@ -458,7 +464,7 @@ namespace iWms.Form
         public int pageSize = 10;      //每页记录数
         public int recordCount = 0;    //总记录数
         public int pageCount = 0;      //总页数
-        public int currentPage = 0;    //当前页
+        public int currentPage = 1;    //当前页
 
         private void LoadPagedOrders()
         {
@@ -476,18 +482,6 @@ namespace iWms.Form
             if (currentPage < 1) currentPage = 1;
             if (currentPage > pageCount) currentPage = pageCount;
 
-            int beginRecord = pageSize * (currentPage - 1) + 1;
-            int endRecord = pageSize * currentPage;
-
-            if (currentPage == pageCount) endRecord = recordCount;
-            PagedWorkOrders.Clear();
-            for (int i = beginRecord - 1; i < endRecord; i++)
-            {
-                PagedWorkOrders.Add(WorkOrders[i]);
-            }
-            WorkOrderDetails.Clear();
-            WorkOrderBarcodes.Clear();
-
             tpscurrentPage.Text = currentPage.ToString();//当前页
             tpspageCount.Text = pageCount.ToString();//总页数
             tpsrecordCount.Text = recordCount.ToString();//总记录数
@@ -496,25 +490,25 @@ namespace iWms.Form
         private void btnFrist_ButtonClick(object sender, EventArgs e)
         {
             currentPage = 1;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void btnPre_ButtonClick(object sender, EventArgs e)
         {
             currentPage -= 1;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void btnNext_ButtonClick(object sender, EventArgs e)
         {
             currentPage += 1;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void BtnLast_ButtonClick(object sender, EventArgs e)
         {
             currentPage = pageCount;
-            LoadPagedOrders();
+            GetOrders();
         }
 
         private void dgv_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
