@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMaterialInfo));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.数据导出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,17 +57,6 @@
             this.btnSync = new DevExpress.XtraEditors.SimpleButton();
             this.btnTrancate = new DevExpress.XtraEditors.SimpleButton();
             this.dataGridViewX1 = new System.Windows.Forms.DataGridView();
-            this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpBottom = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -85,6 +74,19 @@
             this.btnPre = new System.Windows.Forms.ToolStripSplitButton();
             this.btnNext = new System.Windows.Forms.ToolStripSplitButton();
             this.BtnLast = new System.Windows.Forms.ToolStripSplitButton();
+            this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOriginMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManufacturerDc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -121,7 +123,7 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1365, 547);
@@ -140,9 +142,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 83F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.BoxStatus, 9, 0);
@@ -157,24 +159,24 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.label6, 8, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button3, 11, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button3, 12, 1);
             this.tableLayoutPanel2.Controls.Add(this.button2, 11, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnSearch, 11, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnSearch, 11, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblShelfSide, 8, 1);
             this.tableLayoutPanel2.Controls.Add(this.cbShelfSide, 9, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnSync, 13, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnTrancate, 13, 2);
+            this.tableLayoutPanel2.Controls.Add(this.btnSync, 13, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnTrancate, 13, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 14F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1361, 136);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1361, 96);
             this.tableLayoutPanel2.TabIndex = 49;
             // 
             // BoxStatus
@@ -346,10 +348,9 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(973, 43);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.button3.Location = new System.Drawing.Point(1090, 43);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(134, 27);
+            this.button3.Size = new System.Drawing.Size(134, 34);
             this.button3.TabIndex = 19;
             this.button3.Text = "导出";
             this.button3.Click += new System.EventHandler(this.BtnExport_Click);
@@ -357,10 +358,9 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(973, 3);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.button2.Location = new System.Drawing.Point(950, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(134, 27);
+            this.button2.Size = new System.Drawing.Size(134, 34);
             this.button2.TabIndex = 14;
             this.button2.Text = "清空";
             this.button2.Click += new System.EventHandler(this.Button2_Click);
@@ -368,11 +368,9 @@
             // btnSearch
             // 
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.Location = new System.Drawing.Point(973, 83);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.btnSearch.Location = new System.Drawing.Point(950, 43);
             this.btnSearch.Name = "btnSearch";
-            this.tableLayoutPanel2.SetRowSpan(this.btnSearch, 2);
-            this.btnSearch.Size = new System.Drawing.Size(134, 41);
+            this.btnSearch.Size = new System.Drawing.Size(134, 34);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "查询";
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
@@ -404,7 +402,7 @@
             // btnSync
             // 
             this.btnSync.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSync.Location = new System.Drawing.Point(1196, 43);
+            this.btnSync.Location = new System.Drawing.Point(1230, 3);
             this.btnSync.Name = "btnSync";
             this.btnSync.Size = new System.Drawing.Size(134, 34);
             this.btnSync.TabIndex = 55;
@@ -414,7 +412,7 @@
             // btnTrancate
             // 
             this.btnTrancate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTrancate.Location = new System.Drawing.Point(1196, 83);
+            this.btnTrancate.Location = new System.Drawing.Point(1230, 43);
             this.btnTrancate.Name = "btnTrancate";
             this.btnTrancate.Size = new System.Drawing.Size(134, 34);
             this.btnTrancate.TabIndex = 56;
@@ -434,23 +432,25 @@
             this.料号,
             this.colPeriod,
             this.数量,
+            this.colOriginMaterialNo,
+            this.colManufacturerDc,
             this.colLot,
             this.库区,
             this.ABSide,
             this.货位,
             this.colStatus,
             this.入库时间});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(3, 156);
+            this.dataGridViewX1.Location = new System.Drawing.Point(3, 116);
             this.dataGridViewX1.Margin = new System.Windows.Forms.Padding(3, 16, 3, 3);
             this.dataGridViewX1.MultiSelect = false;
             this.dataGridViewX1.Name = "dataGridViewX1";
@@ -458,117 +458,11 @@
             this.dataGridViewX1.RowHeadersWidth = 40;
             this.dataGridViewX1.RowTemplate.Height = 23;
             this.dataGridViewX1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridViewX1.Size = new System.Drawing.Size(1359, 358);
+            this.dataGridViewX1.Size = new System.Drawing.Size(1359, 398);
             this.dataGridViewX1.TabIndex = 1;
             this.dataGridViewX1.Tag = "9999";
             this.dataGridViewX1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewX1_ColumnHeaderMouseClick);
             this.dataGridViewX1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewX1_RowPostPaint);
-            // 
-            // UPN
-            // 
-            this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UPN.DataPropertyName = "UPN";
-            this.UPN.FillWeight = 88.36256F;
-            this.UPN.HeaderText = "ReelId";
-            this.UPN.MinimumWidth = 160;
-            this.UPN.Name = "UPN";
-            this.UPN.ReadOnly = true;
-            // 
-            // 状态
-            // 
-            this.状态.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.状态.DataPropertyName = "WorkOrderNo";
-            this.状态.FillWeight = 65.98986F;
-            this.状态.HeaderText = "工单号";
-            this.状态.MinimumWidth = 80;
-            this.状态.Name = "状态";
-            this.状态.ReadOnly = true;
-            // 
-            // 料号
-            // 
-            this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.料号.DataPropertyName = "PartNumber";
-            this.料号.FillWeight = 88.36256F;
-            this.料号.HeaderText = "物料料号";
-            this.料号.MinimumWidth = 130;
-            this.料号.Name = "料号";
-            this.料号.ReadOnly = true;
-            this.料号.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // colPeriod
-            // 
-            this.colPeriod.DataPropertyName = "DateCode";
-            this.colPeriod.HeaderText = "生产日期";
-            this.colPeriod.MinimumWidth = 9;
-            this.colPeriod.Name = "colPeriod";
-            this.colPeriod.ReadOnly = true;
-            this.colPeriod.Width = 120;
-            // 
-            // 数量
-            // 
-            this.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.数量.DataPropertyName = "Qty";
-            this.数量.FillWeight = 88.36256F;
-            this.数量.HeaderText = "数量";
-            this.数量.MinimumWidth = 80;
-            this.数量.Name = "数量";
-            this.数量.ReadOnly = true;
-            this.数量.Width = 80;
-            // 
-            // colLot
-            // 
-            this.colLot.DataPropertyName = "Lot";
-            this.colLot.HeaderText = "批次";
-            this.colLot.Name = "colLot";
-            this.colLot.ReadOnly = true;
-            // 
-            // 库区
-            // 
-            this.库区.DataPropertyName = "TowerDes";
-            this.库区.HeaderText = "库区";
-            this.库区.MinimumWidth = 80;
-            this.库区.Name = "库区";
-            this.库区.ReadOnly = true;
-            this.库区.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ABSide
-            // 
-            this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ABSide.DataPropertyName = "ABSide";
-            this.ABSide.HeaderText = "货架";
-            this.ABSide.MinimumWidth = 60;
-            this.ABSide.Name = "ABSide";
-            this.ABSide.ReadOnly = true;
-            this.ABSide.Width = 80;
-            // 
-            // 货位
-            // 
-            this.货位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.货位.DataPropertyName = "Location";
-            this.货位.FillWeight = 88.36256F;
-            this.货位.HeaderText = "货位";
-            this.货位.MinimumWidth = 80;
-            this.货位.Name = "货位";
-            this.货位.ReadOnly = true;
-            this.货位.Width = 120;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "StatusDisplay";
-            this.colStatus.HeaderText = "库存状态";
-            this.colStatus.MinimumWidth = 80;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // 入库时间
-            // 
-            this.入库时间.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.入库时间.DataPropertyName = "SaveTime";
-            this.入库时间.FillWeight = 186.3569F;
-            this.入库时间.HeaderText = "入库时间";
-            this.入库时间.MinimumWidth = 130;
-            this.入库时间.Name = "入库时间";
-            this.入库时间.ReadOnly = true;
             // 
             // tlpBottom
             // 
@@ -719,6 +613,123 @@
             this.BtnLast.Text = "最后一页";
             this.BtnLast.ButtonClick += new System.EventHandler(this.BtnLast_ButtonClick);
             // 
+            // UPN
+            // 
+            this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UPN.DataPropertyName = "UPN";
+            this.UPN.FillWeight = 88.36256F;
+            this.UPN.HeaderText = "ReelId";
+            this.UPN.MinimumWidth = 160;
+            this.UPN.Name = "UPN";
+            this.UPN.ReadOnly = true;
+            // 
+            // 状态
+            // 
+            this.状态.DataPropertyName = "WorkOrderNo";
+            this.状态.FillWeight = 65.98986F;
+            this.状态.HeaderText = "工单号";
+            this.状态.MinimumWidth = 80;
+            this.状态.Name = "状态";
+            this.状态.ReadOnly = true;
+            // 
+            // 料号
+            // 
+            this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.料号.DataPropertyName = "PartNumber";
+            this.料号.FillWeight = 88.36256F;
+            this.料号.HeaderText = "物料料号";
+            this.料号.MinimumWidth = 130;
+            this.料号.Name = "料号";
+            this.料号.ReadOnly = true;
+            this.料号.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // colPeriod
+            // 
+            this.colPeriod.DataPropertyName = "DateCode";
+            this.colPeriod.HeaderText = "IC料号";
+            this.colPeriod.MinimumWidth = 9;
+            this.colPeriod.Name = "colPeriod";
+            this.colPeriod.ReadOnly = true;
+            this.colPeriod.Width = 120;
+            // 
+            // 数量
+            // 
+            this.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.数量.DataPropertyName = "Qty";
+            this.数量.FillWeight = 88.36256F;
+            this.数量.HeaderText = "数量";
+            this.数量.MinimumWidth = 80;
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            this.数量.Width = 80;
+            // 
+            // colOriginMaterialNo
+            // 
+            this.colOriginMaterialNo.HeaderText = "原物料料号";
+            this.colOriginMaterialNo.Name = "colOriginMaterialNo";
+            this.colOriginMaterialNo.ReadOnly = true;
+            // 
+            // colManufacturerDc
+            // 
+            this.colManufacturerDc.HeaderText = "供应商色块";
+            this.colManufacturerDc.Name = "colManufacturerDc";
+            this.colManufacturerDc.ReadOnly = true;
+            // 
+            // colLot
+            // 
+            this.colLot.DataPropertyName = "Lot";
+            this.colLot.HeaderText = "批次";
+            this.colLot.Name = "colLot";
+            this.colLot.ReadOnly = true;
+            // 
+            // 库区
+            // 
+            this.库区.DataPropertyName = "TowerDes";
+            this.库区.HeaderText = "库区";
+            this.库区.MinimumWidth = 80;
+            this.库区.Name = "库区";
+            this.库区.ReadOnly = true;
+            this.库区.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ABSide
+            // 
+            this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ABSide.DataPropertyName = "ABSide";
+            this.ABSide.HeaderText = "货架";
+            this.ABSide.MinimumWidth = 60;
+            this.ABSide.Name = "ABSide";
+            this.ABSide.ReadOnly = true;
+            this.ABSide.Width = 80;
+            // 
+            // 货位
+            // 
+            this.货位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.货位.DataPropertyName = "Location";
+            this.货位.FillWeight = 88.36256F;
+            this.货位.HeaderText = "货位";
+            this.货位.MinimumWidth = 80;
+            this.货位.Name = "货位";
+            this.货位.ReadOnly = true;
+            this.货位.Width = 120;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "StatusDisplay";
+            this.colStatus.HeaderText = "库存状态";
+            this.colStatus.MinimumWidth = 80;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // 入库时间
+            // 
+            this.入库时间.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.入库时间.DataPropertyName = "SaveTime";
+            this.入库时间.FillWeight = 186.3569F;
+            this.入库时间.HeaderText = "入库时间";
+            this.入库时间.MinimumWidth = 130;
+            this.入库时间.Name = "入库时间";
+            this.入库时间.ReadOnly = true;
+            // 
             // FrmMaterialInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -789,17 +800,19 @@
         private System.Windows.Forms.ToolStripSplitButton btnNext;
         private System.Windows.Forms.ToolStripSplitButton BtnLast;
         private System.Windows.Forms.TableLayoutPanel tlpBottom;
+        private DevExpress.XtraEditors.SimpleButton btnTrancate;
         private System.Windows.Forms.DataGridViewTextBoxColumn UPN;
         private System.Windows.Forms.DataGridViewTextBoxColumn 状态;
         private System.Windows.Forms.DataGridViewTextBoxColumn 料号;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPeriod;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOriginMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colManufacturerDc;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLot;
         private System.Windows.Forms.DataGridViewTextBoxColumn 库区;
         private System.Windows.Forms.DataGridViewTextBoxColumn ABSide;
         private System.Windows.Forms.DataGridViewTextBoxColumn 货位;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn 入库时间;
-        private DevExpress.XtraEditors.SimpleButton btnTrancate;
     }
 }

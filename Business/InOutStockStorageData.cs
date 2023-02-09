@@ -344,6 +344,12 @@ namespace Business
             string sql = $" update smt_zd_material set Qty = {qty}, ReelType = '{materialType}' where ReelID = '{barcode}' ";
             return DbHelper.Update(sql);
         }
+
+        public static void TruncateAllInventory()
+        {
+            string sql = $" truncate table smt_zd_material";
+            DbHelper.ExecuteNonQuery(sql);
+        }
     }
 
     public class AnalysisedBarcode

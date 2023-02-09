@@ -4,6 +4,7 @@ using Entity;
 using Entity.Dto;
 using Entity.Enums;
 using Entity.Facade;
+using MES;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -208,6 +209,8 @@ namespace iWms.Form
         {
             dataGridViewX1.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;  //奇数行颜色
             dataGridViewX1.AutoGenerateColumns = false;
+
+            SetHighPrivilege();
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -496,7 +499,53 @@ namespace iWms.Form
 
         private void BtnTrancate_Click(object sender, EventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            try
+            {
+                lock (lockOperateObj)
+                {
+                    var diagResult = "本操作将清空所有库存数据，是否确认进行?".ShowYesNoAndWarning();
+                    if (diagResult != DialogResult.Yes)
+                    {
+                        return;
+                    }
 
+                    InOutStockStorageData.TruncateAllInventory();
+
+                    "所有数据已清空".ShowTips();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+            finally
+            {
+                SplashScreenManager.CloseForm();
+            }
+        }
+
+        private void SetHighPrivilege()
+        {
+            using (var db = new MESDB())
+            {
+                var roles = db.Database.SqlQuery<int>($@"SELECT distinct roleId 
+                FROM[dbo].[sysUserRole] c 
+                where c.userId = {AppInfo.LoginUserInfo.id}").ToListAsync().Result;
+
+                if (roles == null || roles.Count == 0)
+                {
+                    btnTrancate.Visible = false;
+                }
+                else if (roles.Contains(1) || roles.Contains(7))
+                {
+                    btnTrancate.Visible = true;
+                }
+                else
+                {
+                    btnTrancate.Visible = false;
+                }
+            }
         }
     }
 }
