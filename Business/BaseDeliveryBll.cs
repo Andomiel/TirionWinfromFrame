@@ -51,7 +51,6 @@ namespace Business
             {
                 switch (item.Key)
                 {
-                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -296,7 +295,6 @@ namespace Business
             {
                 switch (item.Key)
                 {
-                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
@@ -456,7 +454,6 @@ namespace Business
             {
                 switch (item.Key)
                 {
-                    case (int)TowerEnum.PalletArea:
                     case (int)TowerEnum.SortingArea:
                         //do nothing
                         break;
