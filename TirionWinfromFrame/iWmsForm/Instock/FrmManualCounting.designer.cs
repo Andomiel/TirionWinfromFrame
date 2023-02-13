@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmManualCounting));
             this.lblScan = new System.Windows.Forms.Label();
             this.tbScan = new System.Windows.Forms.TextBox();
@@ -52,15 +52,15 @@
             this.IsSuccess = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Message = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelData = new System.Windows.Forms.Panel();
+            this.txtMaterialInfo = new DevExpress.XtraEditors.TextEdit();
             this.ceNotStar = new DevExpress.XtraEditors.CheckEdit();
             this.cbEnable = new System.Windows.Forms.CheckBox();
-            this.txtMaterialInfo = new DevExpress.XtraEditors.TextEdit();
             this.tlpLayout.SuspendLayout();
             this.gbRecord.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRecord)).BeginInit();
             this.panelData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ceNotStar.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaterialInfo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceNotStar.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // lblScan
@@ -77,7 +77,7 @@
             // tbScan
             // 
             this.tbScan.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbScan.ImeMode = System.Windows.Forms.ImeMode.Close;
+            this.tbScan.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.tbScan.Location = new System.Drawing.Point(85, 30);
             this.tbScan.Margin = new System.Windows.Forms.Padding(37, 3, 2, 3);
             this.tbScan.Name = "tbScan";
@@ -184,14 +184,14 @@
             this.Success,
             this.IsSuccess,
             this.Message});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridViewRecord.DefaultCellStyle = dataGridViewCellStyle1;
             this.gridViewRecord.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridViewRecord.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.gridViewRecord.Location = new System.Drawing.Point(3, 18);
@@ -311,6 +311,14 @@
             this.panelData.Size = new System.Drawing.Size(1116, 134);
             this.panelData.TabIndex = 1;
             // 
+            // txtMaterialInfo
+            // 
+            this.txtMaterialInfo.Location = new System.Drawing.Point(745, 84);
+            this.txtMaterialInfo.Name = "txtMaterialInfo";
+            this.txtMaterialInfo.Size = new System.Drawing.Size(100, 20);
+            this.txtMaterialInfo.TabIndex = 32;
+            this.txtMaterialInfo.Visible = false;
+            // 
             // ceNotStar
             // 
             this.ceNotStar.EditValue = true;
@@ -333,14 +341,6 @@
             this.cbEnable.UseVisualStyleBackColor = true;
             this.cbEnable.CheckedChanged += new System.EventHandler(this.CbEnable_CheckedChanged);
             // 
-            // txtMaterialInfo
-            // 
-            this.txtMaterialInfo.Location = new System.Drawing.Point(745, 84);
-            this.txtMaterialInfo.Name = "txtMaterialInfo";
-            this.txtMaterialInfo.Size = new System.Drawing.Size(100, 20);
-            this.txtMaterialInfo.TabIndex = 32;
-            this.txtMaterialInfo.Visible = false;
-            // 
             // FrmManualCounting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -356,8 +356,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRecord)).EndInit();
             this.panelData.ResumeLayout(false);
             this.panelData.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ceNotStar.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaterialInfo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceNotStar.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

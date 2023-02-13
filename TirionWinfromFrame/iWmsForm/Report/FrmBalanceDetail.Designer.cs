@@ -205,6 +205,7 @@ namespace TirionWinfromFrame.iWmsForm.Report
             // tbBarcode
             // 
             this.tpOperation.SetColumn(this.tbBarcode, 2);
+            this.tbBarcode.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.tbBarcode.Location = new System.Drawing.Point(99, 45);
             this.tbBarcode.Name = "tbBarcode";
             this.tpOperation.SetRow(this.tbBarcode, 1);
