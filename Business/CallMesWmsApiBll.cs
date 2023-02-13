@@ -18,9 +18,12 @@ namespace Business
             StringBuilder sb = new StringBuilder("请求MaterialInfo");
             try
             {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMaterial?qrcode={qrcode}";
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMaterialVice";
                 sb.AppendLine($"地址:{url}");
-                string responseStr = WebClientHelper.Get(url);
+                var request = new QrcodeRequest() { Qrcode = qrcode };
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string responseStr = WebClientHelper.Post(requestJson, url, null);
                 sb.AppendLine($"返回:{responseStr}");
                 response = JsonConvert.DeserializeObject<MaterialInfoResponse>(responseStr);
             }
@@ -40,9 +43,14 @@ namespace Business
             var result = new CheckResultResponse();
             try
             {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/CheckUpnMsdExpired/{upn}";
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/CheckUpnMsdExpired";
                 sb.AppendLine($"地址:{url}");
-                string responseStr = WebClientHelper.Get(url);
+                var request = new UpnRequest() { Upn = upn };
+
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string responseStr = WebClientHelper.Post(requestJson, url, null);
+
                 sb.AppendLine($"返回:{responseStr}");
                 result = JsonConvert.DeserializeObject<CheckResultResponse>(responseStr);
             }
@@ -127,11 +135,16 @@ namespace Business
             var result = new CheckResultResponse();
             try
             {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/CheckUpn/{WebUtility.UrlEncode(barcode)}?pickOrderId={orderNo}";
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/CheckUpn";
                 sb.AppendLine($"地址:{url}");
-                string strResponse = WebClientHelper.Get(url);
-                sb.AppendLine($"返回:{strResponse}");
-                result = JsonConvert.DeserializeObject<CheckResultResponse>(strResponse);
+                var request = new CheckUpnRequest() { Qrcode = barcode, OrderNo = orderNo };
+
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string responseStr = WebClientHelper.Post(requestJson, url, null);
+
+                sb.AppendLine($"返回:{responseStr}");
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(responseStr);
             }
             catch (Exception ex)
             {
@@ -199,11 +212,14 @@ namespace Business
             var result = new CheckResultResponse();
             try
             {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMatStatusAccordingUpn/{upn}";
-                sb.AppendLine($"地址:{url}");
-                string strResponse = WebClientHelper.Get(url);
-                sb.AppendLine($"返回:{strResponse}");
-                result = JsonConvert.DeserializeObject<CheckResultResponse>(strResponse);
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMatStatusAccordingUpn";
+                var request = new UpnRequest() { Upn = upn };
+
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string responseStr = WebClientHelper.Post(requestJson, url, null);
+
+                result = JsonConvert.DeserializeObject<CheckResultResponse>(responseStr);
             }
             catch (Exception ex)
             {

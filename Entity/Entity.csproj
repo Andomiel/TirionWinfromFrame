@@ -133,14 +133,17 @@
     <Compile Include="Enums\Transfer\TransferTypeEnum.cs" />
     <Compile Include="Facade\CancelAlarmRequest.cs" />
     <Compile Include="Facade\CheckResultResponse.cs" />
+    <Compile Include="Facade\CheckUpnRequest.cs" />
     <Compile Include="Facade\DeliveryOrderFeedback.cs" />
     <Compile Include="Facade\FeedbackResponse.cs" />
     <Compile Include="Facade\LightShelfBaseRequest.cs" />
     <Compile Include="Facade\LightShelfRequest.cs" />
     <Compile Include="Facade\LightShelfResponse.cs" />
     <Compile Include="Facade\LightShelfStatusResponse.cs" />
+    <Compile Include="Facade\QrcodeRequest.cs" />
     <Compile Include="Facade\ReformShelfRequest.cs" />
     <Compile Include="Facade\ReformShelfResponse.cs" />
+    <Compile Include="Facade\UpnRequest.cs" />
     <Compile Include="Facade\WMSInventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\PropertyGridRichText.cs" />
