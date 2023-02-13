@@ -115,7 +115,6 @@ namespace TirionWinfromFrame.iWmsForm.Report
 
         private void BtnConfirm_Click(object sender, EventArgs e)
         {
-            SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
                 lock (lockButtonObj)
@@ -137,10 +136,17 @@ namespace TirionWinfromFrame.iWmsForm.Report
                         DataRow dr = newBarcode.Rows[0];
                         //TODO:如果这个时候，此料已经被算料到移库单或者发料单了呢
                         string materialNo = Convert.ToString(dr["Part_Number"]);
+                        if (string.IsNullOrWhiteSpace(materialNo))
+                        {
+                            materialNo = upn.Split('-')[0];
+                        }
                         int quantity = TypeParse.StrToInt(Convert.ToString(dr["Qty"]), 0);
-                        string location = $"{Convert.ToString(dr["ABSide"])}{Convert.ToString(dr["LockMachineID"])}-{Convert.ToString(dr["LockLocation"])}";
-                        int tower = TypeParse.StrToInt(Convert.ToString(dr[""]), 0);
-
+                        int tower = TypeParse.StrToInt(Convert.ToString(dr["LockTowerNo"]), 0);
+                        string location = string.Empty;
+                        if (tower != (int)TowerEnum.SortingArea)
+                        {
+                            location = $"{Convert.ToString(dr["ABSide"])}{Convert.ToString(dr["LockMachineID"])}-{Convert.ToString(dr["LockLocation"])}";
+                        }
                         barcode = new BalanceBarcodeDto()
                         {
                             Barcode = upn,
@@ -149,7 +155,8 @@ namespace TirionWinfromFrame.iWmsForm.Report
                             BusinessId = Guid.NewGuid().ToString("D"),
                             BalanceLocation = location,
                             Quantity = quantity,
-                            OrderStatus = (int)BalanceBarcodeStatusEnum.Finished
+                            OrderStatus = (int)BalanceBarcodeStatusEnum.Finished,
+                            MaterialNo = materialNo,
                         };
 
                         BalanceBusiness.InsertBarcode(barcode, AppInfo.LoginUserInfo.username);
@@ -176,24 +183,18 @@ namespace TirionWinfromFrame.iWmsForm.Report
             {
                 ex.GetDeepException().ShowError();
             }
-            finally
-            {
-                SplashScreenManager.CloseForm();
-            }
         }
 
         private void ValidateBarcode()
         {
             if (!tbBarcode.Text.Contains("*"))
             {
-                "请扫二维码".ShowTips();
                 tbBarcode.Text = string.Empty;
-                return;
+                throw new ApplicationException("请扫二维码");
             }
             if (!tbBarcode.Text.EndsWith("*"))
             {
-                "二维码结尾不是*号，请确认二维码完整性".ShowTips();
-                return;
+                throw new ApplicationException("二维码结尾不是*号，请确认二维码完整性");
             }
             tbBarcode.Text = BarcodeFormatter.FormatBarcode(tbBarcode.Text.Trim());
         }
@@ -238,6 +239,25 @@ namespace TirionWinfromFrame.iWmsForm.Report
             catch (Exception ex)
             {
                 ex.GetDeepException().ShowError();
+            }
+        }
+
+        private void TbBarcode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                try
+                {
+                    ValidateBarcode();
+
+                    BtnConfirm_Click(btnConfirm, null);
+                }
+                catch (Exception ex)
+                {
+                    ex.GetDeepException().ShowError();
+                    tbBarcode.Text = string.Empty;
+                    tbBarcode.Focus();
+                }
             }
         }
     }

@@ -211,6 +211,7 @@ namespace TirionWinfromFrame.iWmsForm.Report
             this.tbBarcode.Size = new System.Drawing.Size(378, 20);
             this.tbBarcode.TabIndex = 1;
             this.tbBarcode.ToolTip = "请扫描要复核的二维码...";
+            this.tbBarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbBarcode_KeyPress);
             // 
             // labelControl1
             // 

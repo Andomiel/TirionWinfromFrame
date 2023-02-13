@@ -329,6 +329,7 @@ namespace iWms.Form
                     {
                         $"【{selectedOrder.BalanceNo}】取消失败".ShowTips();
                     }
+                    GetOrders();
                 }
             }
             catch (Exception ex)
@@ -375,6 +376,7 @@ namespace iWms.Form
                             LastUpdateUser = AppInfo.LoginUserInfo.account,
                             OrderStatus = (int)BalanceOrderStatusEnum.Executing,
                         };
+                        BalanceBusiness.InsertOrder(order);
                     }
 
                     FrmBalanceDetail detail = new FrmBalanceDetail(order);
@@ -401,6 +403,7 @@ namespace iWms.Form
                 {
                     $"请选择要生成对账报表的日期".ShowTips();
                     dtCreate.Focus();
+                    return;
                 }
 
                 SaveFileDialog dialog = new SaveFileDialog

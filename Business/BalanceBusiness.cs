@@ -94,6 +94,14 @@ WHERE 1=1");
             return orders.DataTableToList<Wms_BalanceOrder>().First();
         }
 
+        public static void InsertOrder(BalanceOrderDto order)
+        {
+            string sql = $@"INSERT INTO Wms_BalanceOrder
+(BusinessId, BalanceNo, OrderStatus, Remark, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
+VALUES('{order.BusinessId}', '{order.BalanceNo}', {order.OrderStatus}, '{order.Remark}', getdate(), '{order.CreateUser}', getdate(), '{order.LastUpdateUser}')";
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
         public static bool UpdateBalanceOrderStatus(string balanceId, int orderStatus, string userName)
         {
             string sql = $"UPDATE Wms_BalanceOrder set OrderStatus = {orderStatus}, LastUpdateTime = GETDATE(), LastUpdateUser ='{userName}' WHERE BusinessId = '{balanceId}' ";
@@ -103,8 +111,8 @@ WHERE 1=1");
         public static void InsertBarcode(BalanceBarcodeDto barcodeDto, string userName)
         {
             string sql = $@"INSERT INTO ASRSB.dbo.Wms_BalanceBarcode
-(BusinessId, BalanceId, Barcode, AreaId, BalanceLocation, Quantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
-VALUES('{barcodeDto.BusinessId}', '{barcodeDto.BalanceId}', '{barcodeDto.Barcode}', {barcodeDto.AreaId}, '{barcodeDto.BalanceLocation}', {barcodeDto.Quantity}, {barcodeDto.OrderStatus}, getdate(), '{userName}', getdate(), '{userName}')";
+(BusinessId, BalanceId, Barcode, AreaId, BalanceLocation, Quantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, MaterialNo)
+VALUES('{barcodeDto.BusinessId}', '{barcodeDto.BalanceId}', '{barcodeDto.Barcode}', {barcodeDto.AreaId}, '{barcodeDto.BalanceLocation}', {barcodeDto.Quantity}, {barcodeDto.OrderStatus}, getdate(), '{userName}', getdate(), '{userName}', '{barcodeDto.MaterialNo}')";
             DbHelper.ExecuteNonQuery(sql);
         }
 
