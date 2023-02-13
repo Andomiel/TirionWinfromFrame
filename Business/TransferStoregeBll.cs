@@ -26,8 +26,7 @@ namespace Business
                                                  AND szm.Qty > 0
                                                  AND sb.UPN is null
                                                  AND smf.UPN is null
-                                                 AND szm.isTakeCheck = 0 
-                                                 AND szm.LockTowerNo <> 3 ";
+                                                 AND szm.isTakeCheck = 0 ";
 
         public static IEnumerable<TransferQueryResult> QueryTransferDetail(MaterialQueryCondition condition)
         {
