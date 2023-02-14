@@ -226,6 +226,12 @@ namespace iWms.Form
             }
             tbScan.SelectAll();
 
+            //var barcodes = DeliveryBll.GetDeliveryBarcode(upn);
+            //if (barcodes.Any(p=>p.DeliveryId!=SelectedOrder.BusinessId&&p.order)
+            //{
+
+            //}
+
             //重复扫码验证
             ReviewRecord reviewRecord = ReviewRecords.FirstOrDefault(p => p.UPN.Equals(upn));
             if (reviewRecord != null && reviewRecord.Status.Equals("正常出库"))

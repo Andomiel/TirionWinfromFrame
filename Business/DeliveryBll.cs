@@ -152,6 +152,17 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
             return details.DataTableToList<Wms_DeliveryDetail>();
         }
 
+        public static IEnumerable<Wms_DeliveryBarcode> GetDeliveryBarcode(string barcode)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_DeliveryBarcode.GetSelectSql());
+            sb.AppendLine($" AND Barcode = @Barcode ");
+
+            var details = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@Barcode", barcode));
+
+            return details.DataTableToList<Wms_DeliveryBarcode>();
+        }
+
         public static IEnumerable<Wms_DeliveryBarcode> GetDeliveryBarcodes(string deliveryId)
         {
             StringBuilder sb = new StringBuilder();
