@@ -24,7 +24,7 @@ namespace Entity.Enums
         /// <summary>
         /// 亮灯料架
         /// </summary>
-        [Description("亮灯料架")]
+        [Description("烧录IC料架区")]
         LightShelf = 2,
 
         ///// <summary>
@@ -34,9 +34,15 @@ namespace Entity.Enums
         //PalletArea = 3,
 
         /// <summary>
-        /// 改造货架
+        /// 线边料架区
         /// </summary>
-        [Description("改造货架")]
+        [Description("线边料架区")]
+        Nearby = 3,
+
+        /// <summary>
+        /// BGA料架区
+        /// </summary>
+        [Description("BGA料架区")]
         ReformShelf = 4,
 
 

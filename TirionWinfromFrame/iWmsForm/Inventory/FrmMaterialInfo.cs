@@ -41,10 +41,6 @@ namespace iWms.Form
             cmbArea.DisplayMember = "Description";
             cmbArea.ValueMember = "Value";
 
-            //dtpCycleStart.Format = DateTimePickerFormat.Custom;
-            //dtpCycleStart.CustomFormat = " ";
-            //dtpCycleEnd.Format = DateTimePickerFormat.Custom;
-            //dtpCycleEnd.CustomFormat = " ";
             dtpStart.Format = DateTimePickerFormat.Custom;
             dtpStart.CustomFormat = " ";
             dtpEnd.Format = DateTimePickerFormat.Custom;
@@ -149,6 +145,7 @@ namespace iWms.Form
                     condition.MachineId = string.IsNullOrWhiteSpace(cbShelfSide.Text) ? string.Empty : $"SWHY0{this.cbShelfSide.Text}";
                     break;
                 case (int)TowerEnum.ReformShelf:
+                case (int)TowerEnum.Nearby:
                     condition.MachineId = this.cbShelfSide.Text;
                     break;
             }
@@ -267,23 +264,19 @@ namespace iWms.Form
 
             List<HeadColumn> headColumns = new List<HeadColumn>
             {
-                new HeadColumn("UPN","UPN", 7168),
-                new HeadColumn("PartNumber","物料代码", 4000),
-                new HeadColumn("Supplier","供货厂家", 3000),
-                new HeadColumn("DateCode","生产日期", 3000),
-                new HeadColumn("SerialNo","流水号", 2000),
+                new HeadColumn("UPN","ReelId", 7168),
+                new HeadColumn("Supplier","工单号", 3000),
+                new HeadColumn("PartNumber","物料料号", 4000),
+                new HeadColumn("Supplier","IC料号", 3000),
                 new HeadColumn("Qty","数量", 2200),
-                new HeadColumn("Lot","批次", 2200),
-                new HeadColumn("MinPacking","最小包装", 2200),
-                new HeadColumn("MSD","MSD", 1000),
+                new HeadColumn("Lot","原物料料号", 3000),
+                new HeadColumn("MinPacking","供应商色块", 2200),
+                new HeadColumn("MSD","批次", 1000),
                 new HeadColumn("TowerDes","库区", 3000),
-                new HeadColumn("ABSide","巷道货架", 3000),
+                new HeadColumn("ABSide","货架", 3000),
                 new HeadColumn("Location","库位", 2200),
-                new HeadColumn("ReelTypeDes","料盘类型", 1500),
                 new HeadColumn("StatusDisplay","库存状态", 3000),
-                new HeadColumn("HoldState","冻烘状态", 3000),
-                new HeadColumn("SaveTime","入库时间", 7168),
-                new HeadColumn("HoldNo","冻结单号", 4000),
+                new HeadColumn("SaveTime","入库时间", 7168)
             };
             string fileFullName = NpoiHelper.ExportToExcel(dialog.FileName, data, headColumns);
             if (!string.IsNullOrWhiteSpace(fileFullName))
@@ -305,13 +298,13 @@ namespace iWms.Form
                     break;
                 case 2:
                     lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "料架：";
+                    lblShelfSide.Text = "烧录料架：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
                     break;
                 case 3:
                     lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "栈板：";
+                    lblShelfSide.Text = "线边料架：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.PalletAreas;
                     break;
@@ -387,46 +380,6 @@ namespace iWms.Form
                         LightSingleBarcode(barcodeEntity.Location);
                     }
                     "发料亮灯成功！".ShowTips();
-
-                    //DataTable dtBarcode = InOutStockStorageData.GetAllMaterial();
-                    //foreach (DataRow row in dtBarcode.Rows)
-                    //{
-                    //    string barcode = Convert.ToString(row["ReelID"]);
-                    //    string qrCode = Convert.ToString(row["QRCode"]);
-                    //    if (string.IsNullOrWhiteSpace(qrCode))
-                    //    {
-                    //        continue;
-                    //    }
-                    //    int qty = 0;
-                    //    string materialType = "F";
-                    //    int miniPackage = 0;
-                    //    int.TryParse(Convert.ToString(row["MinPacking"]), out miniPackage);
-                    //    var material = CallMaterialInfoByUPN(qrCode);
-                    //    if (material != null && int.TryParse(material.InvQty, out qty) && qty > 0)
-                    //    {
-                    //        if (miniPackage > 0)
-                    //        {
-                    //            decimal offset = miniPackage - qty;
-                    //            if ((Math.Abs(offset) / miniPackage) * 1000 <= 3)
-                    //            {
-                    //                materialType = "F";
-                    //            }
-                    //            else if ((offset / miniPackage) * 1000 > 3)
-                    //            {
-                    //                materialType = "S";
-                    //            }
-                    //            else if (offset / miniPackage * 1000 < -3)
-                    //            {
-                    //                materialType = "T";
-                    //            }
-                    //            else
-                    //            {
-                    //                //do nothing
-                    //            }
-                    //        }
-                    //        InOutStockStorageData.UpdateQtyFromMes(barcode, qty, materialType);
-                    //    }
-                    //}
                 }
             }
             catch (Exception ex)
@@ -437,26 +390,6 @@ namespace iWms.Form
             {
                 SplashScreenManager.CloseForm();
             }
-        }
-
-        public static MaterialInfoResponse CallMaterialInfoByUPN(string qrcode)
-        {
-            MaterialInfoResponse response = new MaterialInfoResponse();
-            StringBuilder sb = new StringBuilder("请求MaterialInfo");
-            try
-            {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMaterial?qrcode={qrcode}";
-                sb.AppendLine($"地址:{url}");
-                string responseStr = WebClientHelper.Get(url);
-                sb.AppendLine($"返回:[{responseStr}]");
-                response = JsonConvert.DeserializeObject<MaterialInfoResponse>(responseStr);
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine($"获取物料明细异常:[{ex.GetDeepException()}]");
-            }
-            FileLog.Log(sb.ToString());
-            return response;
         }
 
         private void dataGridViewX1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -504,7 +437,7 @@ namespace iWms.Form
             {
                 lock (lockOperateObj)
                 {
-                    var diagResult = "本操作将清空所有库存数据，是否确认进行?".ShowYesNoAndWarning();
+                    var diagResult = "本操作将清空所有库存数据，确认是否继续?".ShowYesNoAndWarning();
                     if (diagResult != DialogResult.Yes)
                     {
                         return;
