@@ -21,7 +21,7 @@ using TirionWinfromFrame.Commons;
 
 namespace iWms.Form
 {
-    public partial class FrmMaterialInfo : FrmBaseForm
+    public partial class FrmNearbyInventory : FrmBaseForm
     {
         public int pageSize = 100;      //每页记录数
         public int recordCount = 0;    //总记录数
@@ -29,17 +29,11 @@ namespace iWms.Form
         public int currentPage = 0;    //当前页
         private BindingList<InventoryEntity> Barcodes = new BindingList<InventoryEntity>();
 
-        public FrmMaterialInfo()
+        public FrmNearbyInventory()
         {
             InitializeComponent();
-            var towerMaps = BuildComboxHelper.BuildComboxWithEmptyFromEnum(typeof(TowerEnum));
 
-            int lightShelf = (int)TowerEnum.LightShelf;
-            towerMaps.RemoveAll(p => p.Value > -1 && p.Value < lightShelf);
-            //towerMaps.Add(new EnumItem() { Value = 5, Description = "烘烤区" });
-            cmbArea.DataSource = towerMaps;
-            cmbArea.DisplayMember = "Description";
-            cmbArea.ValueMember = "Value";
+            cbShelfSide.DataSource = BuildComboxHelper.NearbyAreas;
 
             dtpStart.Format = DateTimePickerFormat.Custom;
             dtpStart.CustomFormat = " ";
@@ -129,7 +123,7 @@ namespace iWms.Form
                 SaveTimeEnd = Convert.ToDateTime(dtpEnd.Value.ToString("yyyy-MM-dd")).AddDays(1),
 
                 //库区
-                TowerNo = Convert.ToInt32(cmbArea.SelectedValue)
+                TowerNo = (int)TowerEnum.Nearby
             };
 
             //巷道、货架
@@ -149,10 +143,9 @@ namespace iWms.Form
                     condition.MachineId = this.cbShelfSide.Text;
                     break;
             }
-            //状态
-            condition.HoldState = this.BoxStatus.Text;
             //供货厂家
             condition.Supplier = string.Empty;// this.TextSupply.Text;
+
             condition.UPN = this.txtReelid.Text.ToString().Trim();
             //料号
             condition.PartNumber = this.txtPn.Text.ToString();
@@ -215,10 +208,8 @@ namespace iWms.Form
             txtReelid.Text = "";
             txtPn.Text = "";
             lblShelfSide.Visible = false;
-            cmbArea.SelectedValue = -1;
             cbShelfSide.SelectedIndex = -1;
             cbShelfSide.Visible = false;
-            BoxStatus.SelectedIndex = -1;
             DateTimePickerReset(dtpStart);
             DateTimePickerReset(dtpEnd);
             Barcodes.Clear();
@@ -287,51 +278,6 @@ namespace iWms.Form
             if (!string.IsNullOrWhiteSpace(fileFullName))
             {
                 System.Diagnostics.Process.Start("explorer", "/select," + fileFullName);
-            }
-        }
-
-        private void CmbArea_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            int towerNo = Convert.ToInt32(cmbArea.SelectedValue);
-            switch (towerNo)
-            {
-                case (int)TowerEnum.ASRS:
-                    lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "巷道：";
-                    cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.AbSide;
-                    break;
-                case (int)TowerEnum.LightShelf:
-                    lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "烧录料架：";
-                    cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
-                    break;
-                case (int)TowerEnum.Nearby:
-                    lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "线边料架：";
-                    cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.NearbyAreas;
-                    break;
-                case (int)TowerEnum.ReformShelf:
-                    lblShelfSide.Visible = true;
-                    lblShelfSide.Text = "货架：";
-                    cbShelfSide.Visible = true;
-                    cbShelfSide.DataSource = BuildComboxHelper.TransformationShelf;
-                    break;
-                default:
-                    lblShelfSide.Visible = false;
-                    cbShelfSide.Visible = false;
-                    cbShelfSide.SelectedIndex = -1;
-                    break;
-            }
-        }
-
-        private void txtExceed_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
             }
         }
 
