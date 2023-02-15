@@ -237,6 +237,11 @@ namespace iWms.Form
             {
                 MaterialQueryCondition condition = BuildConditions();
                 var inventory = InOutStockStorageData.GetMaterialInfoExport(condition);
+                if (inventory == null || !inventory.Any())
+                {
+                    "没有数据可以导出".ShowTips();
+                    return;
+                }
                 ExportToExcel(inventory);
             }
             catch (Exception ex)
@@ -250,7 +255,7 @@ namespace iWms.Form
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
-                Filter = "Excel Office97-2003(*.xls)|.xls|Excel Office2007及以上(*.xlsx)|*.xlsx",
+                Filter = "Excel Office2007及以上(*.xlsx)|*.xlsx",
                 FilterIndex = 0,
                 OverwritePrompt = true,
                 RestoreDirectory = true,
@@ -290,25 +295,25 @@ namespace iWms.Form
             int towerNo = Convert.ToInt32(cmbArea.SelectedValue);
             switch (towerNo)
             {
-                case 1:
+                case (int)TowerEnum.ASRS:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "巷道：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.AbSide;
                     break;
-                case 2:
+                case (int)TowerEnum.LightShelf:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "烧录料架：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.LightShelf;
                     break;
-                case 3:
+                case (int)TowerEnum.Nearby:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "线边料架：";
                     cbShelfSide.Visible = true;
                     cbShelfSide.DataSource = BuildComboxHelper.PalletAreas;
                     break;
-                case 4:
+                case (int)TowerEnum.ReformShelf:
                     lblShelfSide.Visible = true;
                     lblShelfSide.Text = "货架：";
                     cbShelfSide.Visible = true;
@@ -446,6 +451,8 @@ namespace iWms.Form
                     InOutStockStorageData.TruncateAllInventory();
 
                     "所有数据已清空".ShowTips();
+
+                    Barcodes.Clear();
                 }
             }
             catch (Exception ex)

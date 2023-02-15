@@ -5,16 +5,10 @@ namespace Entity.Dto
 {
     public class InventoryEntity
     {
-
         /// <summary>
         /// 总记录数
         /// </summary>
         public int TotalCount { get; set; }
-
-        /// <summary>
-        /// 规格型号
-        /// </summary>
-        public string Specification { get; set; }
 
         public string UPN { get; set; }
         /// <summary>
@@ -33,10 +27,12 @@ namespace Entity.Dto
         /// 库区
         /// </summary>
         public string TowerDes => EnumHelper.GetDescription(typeof(TowerEnum), Tower);
+
         /// <summary>
-        /// 巷道
+        /// 二级库区
         /// </summary>
-        public string ABSide { get; set; }
+        public string SubArea { get; set; } = string.Empty;
+
         /// <summary>
         /// 货位
         /// </summary>
@@ -56,44 +52,32 @@ namespace Entity.Dto
         }
 
         /// <summary>
-        /// 供货厂家
+        /// 原物料料号
         /// </summary>
-        public string Supplier { get; set; }
+        public string FactoryCode { get; set; } = string.Empty;
+        /// <summary>
+        /// IC料号
+        /// </summary>
+        public string BatchNo { get; set; } = string.Empty;
         /// <summary>
         /// 入库时间
         /// </summary>
         public string SaveTime { get; set; }
+
         /// <summary>
-        /// 料盘类型
+        /// 供应商色块
         /// </summary>
-        public string UpnCate { get; set; }
-        public string ReelTypeDes => EnumHelper.GetDescription(typeof(ReelTypeEnum), UpnCate);
-        public string MSD { get; set; }
         public string DateCode { get; set; } = string.Empty;
         /// <summary>
-        /// 流水号
+        /// 批次
         /// </summary>
-        public string SerialNo { get; set; }
-        /// <summary>
-        /// 冻结状态
-        /// </summary>
-        public string HoldState { get; set; }
-
-        /// <summary>
-        /// DateCode对应的日期
-        /// </summary>
-        public DateTime DateCodeDate => QueryConditionConvert.DateCdoeToCycleDate(DateCode, UPN);
-
         public string Lot { get; set; }
 
-        public int MinPacking { get; set; }
-
+        /// <summary>
+        /// 工单号
+        /// </summary>
         public string WorkOrderNo { get; set; } = string.Empty;
 
-        /// <summary>
-        /// 冻结单号
-        /// </summary>
-        public string HoldNo { get; set; } = string.Empty;
 
     }
 }

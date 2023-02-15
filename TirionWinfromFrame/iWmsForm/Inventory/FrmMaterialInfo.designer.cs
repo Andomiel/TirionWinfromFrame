@@ -496,7 +496,7 @@
             // 
             // colPeriod
             // 
-            this.colPeriod.DataPropertyName = "DateCode";
+            this.colPeriod.DataPropertyName = "BatchNo";
             this.colPeriod.HeaderText = "IC料号";
             this.colPeriod.MinimumWidth = 9;
             this.colPeriod.Name = "colPeriod";
@@ -516,12 +516,14 @@
             // 
             // colOriginMaterialNo
             // 
+            this.colOriginMaterialNo.DataPropertyName = "FactoryCode";
             this.colOriginMaterialNo.HeaderText = "原物料料号";
             this.colOriginMaterialNo.Name = "colOriginMaterialNo";
             this.colOriginMaterialNo.ReadOnly = true;
             // 
             // colManufacturerDc
             // 
+            this.colManufacturerDc.DataPropertyName = "DateCode";
             this.colManufacturerDc.HeaderText = "供应商色块";
             this.colManufacturerDc.Name = "colManufacturerDc";
             this.colManufacturerDc.ReadOnly = true;
@@ -545,7 +547,7 @@
             // ABSide
             // 
             this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ABSide.DataPropertyName = "ABSide";
+            this.ABSide.DataPropertyName = "SubArea";
             this.ABSide.HeaderText = "货架";
             this.ABSide.MinimumWidth = 60;
             this.ABSide.Name = "ABSide";

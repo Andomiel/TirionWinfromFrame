@@ -176,16 +176,16 @@ namespace Business
                 ROW_NUMBER() OVER(ORDER BY {orderBy}) RowNumber,  
                 COUNT(1) OVER() AS TotalCount,
                 s.qty as Qty,s.Part_Number as PartNumber,s.reelid as UPN,
-                s.lot,s.XM_DH,s.WZ_SCCJ as Supplier,
-                s.SerialNo, s.ReelType as UpnCate, s.DateCode,
-                s.MinPacking, s.MSD, s.Status,
+                s.lot,
+                 s.DateCode,
+                 s.Status,
                 s.LockTowerNo AS Tower,
-                isnull(s.ABSide,'')+isnull(s.LockMachineID,'') as ABSide,s.SaveTime,
-                s.LockLocation AS Location, 
-                CASE WHEN smf.UPN is not null THEN '冻结' ELSE CASE s.BakeState WHEN 0 THEN '正常' WHEN 1 THEN '待烘烤' WHEN 2 THEN '烘烤中' END  END AS HoldState,
-                '' AS HoldNo
+                s.LockMachineID as SubArea, s.SaveTime,
+                s.LockLocation AS Location,
+                s.FactoryCode,
+                s.BatchNo,
+                s.Work_Order_No as WorkOrderNo
             FROM smt_zd_material s
-                LEFT JOIN (SELECT DISTINCT UPN FROM smt_Material_Frozen) smf ON s.ReelID = smf.UPN
             WHERE s.isTakeCheck=0 AND s.Status>0 {condition}
               ) 
             SELECT * FROM Barcodes
@@ -204,42 +204,9 @@ namespace Business
         private static string BuildConditionSql(MaterialQueryCondition condition)
         {
             StringBuilder sb = new StringBuilder();
-            if (!string.IsNullOrWhiteSpace(condition.Supplier))
-            {
-                sb.Append($" AND s.WZ_SCCJ='{condition.Supplier}' ");
-            }
-            if (condition.HoldState == "冻结")
-            {
-                sb.Append(" AND smf.UPN is not null ");
-            }
-            else if (condition.HoldState == "正常")
-            {
-                sb.Append($" AND smf.UPN is null AND s.BakeState = {(int)BakeStateEnum.Normal} ");
-            }
-            else if (condition.HoldState == "待烘烤")
-            {
-                sb.Append($" AND smf.UPN is null AND s.BakeState = {(int)BakeStateEnum.WaitForBake} ");
-            }
-            else if (condition.HoldState == "烘烤中")
-            {
-                sb.Append($" AND smf.UPN is null AND s.BakeState = {(int)BakeStateEnum.Baking} ");
-            }
-            else
-            {
-                //do nothing
-            }
-
-            if (!string.IsNullOrWhiteSpace(condition.ABSide))
-            {
-                sb.Append($" AND s.ABSide='{condition.ABSide}'");
-            }
             if (!string.IsNullOrWhiteSpace(condition.MachineId))
             {
                 sb.Append($" AND s.LockMachineID='{condition.MachineId}'");
-            }
-            if (!string.IsNullOrWhiteSpace(condition.MSD))
-            {
-                sb.Append($" AND s.MSD='{condition.MSD}'");
             }
             if (condition.TowerNo != -1)
             {
@@ -248,65 +215,16 @@ namespace Business
 
             if (!string.IsNullOrWhiteSpace(condition.UPN))
             {
-                string[] elements = condition.UPN.Split('-');
-                if (elements.Length >= 4)
-                {
-                    sb.Append($" AND s.reelid = '{condition.UPN}' ");
-                }
-                else
-                {
-                    sb.Append($" AND s.reelid like '%{condition.UPN}%' ");
-                }
+                sb.Append($" AND s.reelid = '{condition.UPN}' ");
             }
 
             if (!string.IsNullOrWhiteSpace(condition.PartNumber))
             {
-                int materialNoLength = condition.PartNumber.Trim().Length;
-                if (materialNoLength == 7 || materialNoLength == 12)
-                {
-                    sb.Append($" AND s.Part_Number = '{condition.PartNumber}'");
-                }
-                else
-                {
-                    sb.Append($" AND s.Part_Number like '%{condition.PartNumber}%'");
-                }
+                sb.Append($" AND s.Part_Number = '{condition.PartNumber}'");
             }
-            if (!string.IsNullOrWhiteSpace(condition.SerialNoStart))
+            if (condition.haveSaveTimeQuery)
             {
-                sb.Append($" AND s.SerialNo >= '{condition.SerialNoStart}'");
-            }
-            if (!string.IsNullOrWhiteSpace(condition.SerialNoEnd))
-            {
-                sb.Append($" AND s.SerialNo <= '{condition.SerialNoEnd}'");
-            }
-            if (!string.IsNullOrWhiteSpace(condition.MateType))
-            {
-                sb.Append($" AND s.ReelType = '{condition.MateType}'");
-            }
-            if (condition.ExceedStart != 0 || condition.ExceedEnd != 0)
-            {
-                DateTime today = DateTime.Today;
-                DateTime exceedDt1;
-                DateTime exceedDt2;
-                if (condition.ExceedStart > condition.ExceedEnd)
-                {
-                    exceedDt1 = today.AddDays(-condition.ExceedStart);
-                    exceedDt2 = today.AddDays(-condition.ExceedEnd); ;
-                }
-                else
-                {
-                    exceedDt2 = today.AddDays(-condition.ExceedStart);
-                    exceedDt1 = today.AddDays(-condition.ExceedEnd); ;
-                }
-                exceedDt2 = exceedDt2.AddDays(1);
-                sb.Append($" AND s.SaveTime BETWEEN '{exceedDt1}' AND '{exceedDt2}' ");
-            }
-            else
-            {
-                if (condition.haveSaveTimeQuery)
-                {
-                    sb.Append($" AND s.SaveTime BETWEEN '{condition.SaveTimeStart}' AND '{condition.SaveTimeEnd}' ");
-                }
+                sb.Append($" AND s.SaveTime BETWEEN '{condition.SaveTimeStart}' AND '{condition.SaveTimeEnd}' ");
             }
             return sb.ToString();
         }
@@ -318,16 +236,16 @@ namespace Business
             string sql = $@"SELECT
                 1 TotalCount,
                 s.qty as Qty,s.Part_Number as PartNumber,s.reelid as UPN,
-                s.lot,s.XM_DH,s.WZ_SCCJ as Supplier,
-                s.SerialNo, s.ReelType as UpnCate, s.DateCode,
-                s.MinPacking, s.MSD, s.Status,
+                s.lot,
+                 s.DateCode,
+                 s.Status,
                 s.LockTowerNo AS Tower,
-                isnull(s.ABSide,'')+isnull(s.LockMachineID,'') as ABSide,s.SaveTime,
-                s.LockLocation AS Location, 
-                CASE WHEN smf.UPN is not null THEN '冻结' ELSE CASE s.BakeState WHEN 0 THEN '正常' WHEN 1 THEN '待烘烤' WHEN 2 THEN '烘烤中' END  END AS HoldState,
-                smf.FrozenNo AS HoldNo
+                s.LockMachineID as SubArea, s.SaveTime,
+                s.LockLocation AS Location,
+                s.FactoryCode,
+                s.BatchNo,
+                s.Work_Order_No as WorkOrderNo
             FROM smt_zd_material s
-                LEFT JOIN  smt_Material_Frozen smf ON s.ReelID = smf.UPN
             WHERE s.isTakeCheck=0 AND s.Status>0 {conditionSql}";
 
             return DbHelper.GetDataTable(sql).DataTableToList<InventoryEntity>();
