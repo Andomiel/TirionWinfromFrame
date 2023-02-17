@@ -226,11 +226,15 @@ namespace iWms.Form
             }
             tbScan.SelectAll();
 
-            //var barcodes = DeliveryBll.GetDeliveryBarcode(upn);
-            //if (barcodes.Any(p=>p.DeliveryId!=SelectedOrder.BusinessId&&p.order)
-            //{
+            var barcodes = DeliveryBll.GetReviewedBarcode(upn);
 
-            //}
+            Wms_DeliveryBarcode otherBarcode = barcodes.FirstOrDefault(p => p.DeliveryId != SelectedOrder.BusinessId);
+            if (otherBarcode != null)
+            {
+                Wms_DeliveryOrder otherOrder = DeliveryBll.GetDeliveryOrderById(otherBarcode.DeliveryId);
+                $"当前UPN:{upn}已在其他出库单[{otherOrder?.DeliveryNo}]中被复核，请检查料盘和数据".ShowError();
+                return;
+            }
 
             //重复扫码验证
             ReviewRecord reviewRecord = ReviewRecords.FirstOrDefault(p => p.UPN.Equals(upn));

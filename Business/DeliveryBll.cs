@@ -109,6 +109,21 @@ namespace Business
             return orders.DataTableToList<Wms_DeliveryOrder>().First();
         }
 
+        public static Wms_DeliveryOrder GetDeliveryOrderById(string deliveryId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Wms_DeliveryOrder.GetSelectSql());
+            sb.AppendLine(" AND BusinessId = @BusinessId ");
+
+            var orders = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@BusinessId", deliveryId));
+            if (orders == null || orders.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            return orders.DataTableToList<Wms_DeliveryOrder>().First();
+        }
+
         public static IEnumerable<Wms_DeliveryOrder> GetInventoryValidateOrders()
         {
             string sql = $@"SELECT DISTINCT wdo .*
@@ -152,11 +167,11 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
             return details.DataTableToList<Wms_DeliveryDetail>();
         }
 
-        public static IEnumerable<Wms_DeliveryBarcode> GetDeliveryBarcode(string barcode)
+        public static IEnumerable<Wms_DeliveryBarcode> GetReviewedBarcode(string barcode)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Wms_DeliveryBarcode.GetSelectSql());
-            sb.AppendLine($" AND Barcode = @Barcode ");
+            sb.AppendLine($" AND Barcode = @Barcode AND OrderStatus = {(int)DeliveryBarcodeStatusEnum.Reviewed} ");
 
             var details = DbHelper.GetDataTable(sb.ToString(), new SqlParameter("@Barcode", barcode));
 
