@@ -232,8 +232,11 @@ namespace iWms.Form
             if (otherBarcode != null)
             {
                 Wms_DeliveryOrder otherOrder = DeliveryBll.GetDeliveryOrderById(otherBarcode.DeliveryId);
-                $"当前UPN:{upn}已在其他出库单[{otherOrder?.DeliveryNo}]中被复核，请检查料盘和数据".ShowError();
-                return;
+                if (otherOrder.OrderStatus != (int)DeliveryOrderStatusEnum.Reviewed)
+                {
+                    $"当前UPN:{upn}已在其他出库单[{otherOrder?.DeliveryNo}]中被复核，请检查料盘和数据".ShowError();
+                    return;
+                }
             }
 
             //重复扫码验证
