@@ -1150,6 +1150,16 @@ namespace iWms.Form
                         var details = DeliveryBll.GetDeliveryDetails(order.BusinessId);
                         var barcodes = DeliveryBll.GetDeliveryBarcodes(order.BusinessId);
 
+                        int targetStatus = (int)DeliveryBarcodeStatusEnum.Reviewed;
+                        if (order.OrderStatus <= (int)DeliveryOrderStatusEnum.Delivered)
+                        {
+                            barcodes = barcodes.Where(p => p.OrderStatus < targetStatus);
+                        }
+                        else
+                        {
+                            barcodes = barcodes.Where(p => p.OrderStatus == targetStatus);
+                        }
+
                         var detailCount = barcodes.GroupBy(p => p.DeliveryDetailId).ToDictionary(p => p.Key, p => p.Sum(b => b.DeliveryQuantity));
 
                         foreach (var detail in details)
