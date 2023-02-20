@@ -110,7 +110,7 @@ VALUES('{order.BusinessId}', '{order.BalanceNo}', {order.OrderStatus}, '{order.R
 
         public static void InsertBarcode(BalanceBarcodeDto barcodeDto, string userName)
         {
-            string sql = $@"INSERT INTO ASRSB.dbo.Wms_BalanceBarcode
+            string sql = $@"INSERT INTO Wms_BalanceBarcode
 (BusinessId, BalanceId, Barcode, AreaId, BalanceLocation, Quantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser, MaterialNo)
 VALUES('{barcodeDto.BusinessId}', '{barcodeDto.BalanceId}', '{barcodeDto.Barcode}', {barcodeDto.AreaId}, '{barcodeDto.BalanceLocation}', {barcodeDto.Quantity}, {barcodeDto.OrderStatus}, getdate(), '{userName}', getdate(), '{userName}', '{barcodeDto.MaterialNo}')";
             DbHelper.ExecuteNonQuery(sql);
