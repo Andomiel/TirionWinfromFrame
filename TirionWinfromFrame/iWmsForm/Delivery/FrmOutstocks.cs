@@ -778,8 +778,17 @@ namespace iWms.Form
                     selectedOrder.OrderStatus = (int)DeliveryOrderStatusEnum.Closed;
                     dgvOrders.UpdateCellValue(2, dgvOrders.CurrentRow.Index);
 
-                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "取消工单发料", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
-                    _ = "工单取消成功".ShowTips();
+                    Task.Run(() => { CallMesWmsApiBll.SaveLogs(order.DeliveryNo, "取消工单发料", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); }); SplashScreenManager.ShowForm(typeof(WaitForm1));
+                    try
+                    {
+                        //尤其注意，这里使用的是出库单的Id
+                        var feedback = CallMesWmsApiBll.FeedbackOrder(order.BusinessId, ((OutOrderTypeEnum)order.DeliveryType).ToString(), order.LineId.ToUpper());
+                        feedback.Message.ShowTips();
+                    }
+                    finally
+                    {
+                        SplashScreenManager.CloseForm();
+                    }
                 }
             }
             catch (Exception ex)
