@@ -456,6 +456,31 @@ namespace iWms.Form
             orderBy = sb.ToString();
             GetOrders();
         }
+
+        private void dataGridViewX1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                {
+                    return;
+                }
+                if (dataGridViewX1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+                {
+                    return;
+                }
+                if (e.ColumnIndex == 0)
+                {
+                    var row = dataGridViewX1.SelectedCells[0].OwningRow;
+                    var barcode = row.DataBoundItem as InventoryEntity;
+                    System.Diagnostics.Process.Start($"http://172.16.255.19/iwms-79-8086/?logKey={barcode.UPN}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
+        }
     }
 }
 
