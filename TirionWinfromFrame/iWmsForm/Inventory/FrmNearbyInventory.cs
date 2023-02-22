@@ -286,7 +286,7 @@ namespace iWms.Form
             StringBuilder sb = new StringBuilder("请求发料亮灯");
             try
             {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/midea/api/lightshelf/light";
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/lightshelf/light";
                 sb.AppendLine($"地址:{url}");
                 LightShelfLocationRequest request = new LightShelfLocationRequest
                 {
