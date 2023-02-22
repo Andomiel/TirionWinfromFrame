@@ -958,49 +958,6 @@ namespace iWms.Form
 
         private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex == -1 || e.ColumnIndex == -1)
-                {
-                    return;
-                }
-                if (dgvOrders.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
-                {
-                    return;
-                }
-                string action = dgvOrders.Columns[e.ColumnIndex].Name;//操作类型
-                if (action == "colReview")
-                {
-                    var row = dgvOrders.SelectedCells[0].OwningRow;
-                    var order = row.DataBoundItem as DeliveryOrderDto;
-                    if (string.IsNullOrWhiteSpace(order.OperationText))
-                    {
-                        return;
-                    }
-                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
-                    {
-                        $"出库单{order.DeliveryNo}{order.OrderStatusDisplay}，不可复核".ShowTips();
-                        return;
-                    }
-                    string reviewLock = DeliveryBll.GetDeliveryOrderLock(order.BusinessId);
-                    //string ip = DnsHelper.GetIP();
-                    if (!string.IsNullOrWhiteSpace(reviewLock))
-                    {
-                        $"出库单{order.DeliveryNo}已在被其他人在{reviewLock}复核，请与其确认".ShowTips();
-                        return;
-                    }
-
-                    FrmReviewNew reviewNew = new FrmReviewNew(order);
-                    if (reviewNew.ShowDialog() == DialogResult.OK)
-                    {
-                        GetOrders();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.GetDeepException().ShowError();
-            }
         }
 
         private void dgvUpns_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -1240,6 +1197,59 @@ namespace iWms.Form
         private void FrmOutstocks_FormClosing(object sender, FormClosingEventArgs e)
         {
             ReleaseTimer();
+        }
+
+        private void dgvOrders_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                {
+                    return;
+                }
+                if (dgvOrders.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+                {
+                    return;
+                }
+                string action = dgvOrders.Columns[e.ColumnIndex].Name;//操作类型
+                if (action == "colReview")
+                {
+                    var row = dgvOrders.SelectedCells[0].OwningRow;
+                    var order = row.DataBoundItem as DeliveryOrderDto;
+                    if (string.IsNullOrWhiteSpace(order.OperationText))
+                    {
+                        return;
+                    }
+                    if (order.OrderStatus >= (int)DeliveryOrderStatusEnum.Reviewed)
+                    {
+                        $"出库单{order.DeliveryNo}{order.OrderStatusDisplay}，不可复核".ShowTips();
+                        return;
+                    }
+                    string reviewLock = DeliveryBll.GetDeliveryOrderLock(order.BusinessId);
+                    //string ip = DnsHelper.GetIP();
+                    if (!string.IsNullOrWhiteSpace(reviewLock))
+                    {
+                        $"出库单{order.DeliveryNo}已在被其他人在{reviewLock}复核，请与其确认".ShowTips();
+                        return;
+                    }
+
+                    FrmReviewNew reviewNew = new FrmReviewNew(order);
+                    if (reviewNew.ShowDialog() == DialogResult.OK)
+                    {
+                        GetOrders();
+                    }
+                }
+                else if (action == "colOrderNo")
+                {
+                    var row = dgvOrders.SelectedCells[0].OwningRow;
+                    var order = row.DataBoundItem as DeliveryOrderDto;
+                    System.Diagnostics.Process.Start($"http://172.16.255.19/iwms-79-8086/?logKey={order.DeliveryNo}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.GetDeepException().ShowError();
+            }
         }
     }
 

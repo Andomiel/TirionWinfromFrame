@@ -83,7 +83,7 @@ namespace iWms.Form
             this.btnLack = new DevExpress.XtraEditors.SimpleButton();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.colSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colOrderNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrderNo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colOrderType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOrderStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDestinationNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -702,7 +702,7 @@ namespace iWms.Form
             this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvOrders.Size = new System.Drawing.Size(1332, 195);
             this.dgvOrders.TabIndex = 1;
-            this.dgvOrders.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellClick);
+            this.dgvOrders.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellContentClick);
             this.dgvOrders.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.DgvOrders_RowPostPaint);
             this.dgvOrders.SelectionChanged += new System.EventHandler(this.DgvOrders_SelectionChanged);
             // 
@@ -724,6 +724,8 @@ namespace iWms.Form
             this.colOrderNo.MinimumWidth = 120;
             this.colOrderNo.Name = "colOrderNo";
             this.colOrderNo.ReadOnly = true;
+            this.colOrderNo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colOrderNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colOrderType
             // 
@@ -1459,8 +1461,14 @@ namespace iWms.Form
         private DevExpress.XtraEditors.LabelControl LightNineteenth;
         private DevExpress.XtraEditors.LabelControl LightTwentyFirst;
         private DevExpress.XtraEditors.SimpleButton btnClearAlarm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
+        private DevExpress.XtraEditors.DateEdit dtCreate;
+        private DevExpress.XtraEditors.DateEdit dtFinish;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colSelect;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colOrderNo;
+        private System.Windows.Forms.DataGridViewLinkColumn colOrderNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDestinationNo;
@@ -1468,11 +1476,5 @@ namespace iWms.Form
         private System.Windows.Forms.DataGridViewTextBoxColumn colOrderTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFinishedTime;
         private System.Windows.Forms.DataGridViewLinkColumn colReview;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaterialNo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDeliveryCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colActual;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colInventoryStatus;
-        private DevExpress.XtraEditors.DateEdit dtCreate;
-        private DevExpress.XtraEditors.DateEdit dtFinish;
     }
 }
