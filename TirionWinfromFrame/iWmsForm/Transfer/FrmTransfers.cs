@@ -428,7 +428,8 @@ namespace iWms.Form
                     }
 
                     int result = TransferBll.ModifyTransferOrderStatus(selectedOrder.BusinessId, (int)TransferOrderStatusEnum.Cancelled, AppInfo.LoginUserInfo.account);
-                    TransferBll.ReleaseTransferOrderBarcodes(unfinishedBarcodes);
+                    result += TransferBll.ReleaseTransferOrderBarcodes(unfinishedBarcodes);
+                    result += new TransferBll().ReleaseLightRecord(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account);
                     if (result == 0)
                     {
                         $"【{selectedOrder.TransferNo}】取消失败".ShowTips();

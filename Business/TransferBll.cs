@@ -125,6 +125,12 @@ namespace Business
             return DbHelper.ExecuteNonQuery(sql);
         }
 
+        public int ReleaseLightRecord(string transferId, string userName)
+        {
+            string sql = GetFinishedLightRecords(transferId, userName);
+            return DbHelper.ExecuteNonQuery(sql);
+        }
+
         protected override int GetSortNo(int deliveryType)
         {
             return 1;//紧急出料口
