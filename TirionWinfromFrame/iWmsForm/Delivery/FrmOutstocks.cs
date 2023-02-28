@@ -9,6 +9,7 @@ using Entity.Enums;
 using Entity.Enums.General;
 using Entity.Facade;
 using Mapster;
+using MES;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TirionWinfromFrame;
 using TirionWinfromFrame.Commons;
+using TirionWinfromFrame.iWmsForm;
 
 namespace iWms.Form
 {
@@ -92,12 +94,13 @@ namespace iWms.Form
             statusTimer.Tick += StatusTimer_Tick;
             statusTimer.Start();
 
+            SetHighPrivilege();
             GetOrders();
         }
 
-        private delegate void RefreshLightStatusDelegate(List<LightShelfStatus> statusList);
+        private delegate void RefreshLightStatusDelegate(LabelControl label, string tooltipText, Color foreColor);
 
-        private void RefreshLightStatus(List<LightShelfStatus> statusList)
+        private void RefreshLightStatus(LabelControl label, string tooltipText, Color foreColor)
         {
             if (this.InvokeRequired)
             {
@@ -105,47 +108,8 @@ namespace iWms.Form
             }
             else
             {
-                foreach (Control item in tlpLight.Controls)
-                {
-                    if (item is LabelControl)
-                    {
-                        var label = item as LabelControl;
-                        string labelIndex = Convert.ToString(label.Tag);
-                        var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
-                        if (statusItem != null)
-                        {
-                            label.ToolTip = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
-                            if (statusItem.state == (int)LightShelfStatusEnum.Normal)
-                            {
-                                label.ForeColor = Color.Green;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
-                            {
-                                label.ForeColor = Color.Yellow;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.Error)
-                            {
-                                label.ForeColor = Color.Red;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
-                            {
-                                label.ForeColor = Color.Blue;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
-                            {
-                                label.ForeColor = Color.Purple;
-                            }
-                            else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
-                            {
-                                label.ForeColor = Color.Gray;
-                            }
-                            else
-                            {
-                                label.ForeColor = Color.Black;
-                            }
-                        }
-                    }
-                }
+                label.ToolTip = tooltipText;
+                label.ForeColor = foreColor;
             }
         }
 
@@ -158,7 +122,51 @@ namespace iWms.Form
                 {
                     return;
                 }
-                RefreshLightStatus(statusList);
+
+                foreach (Control item in tlpLight.Controls)
+                {
+                    if (item is LabelControl)
+                    {
+                        var label = item as LabelControl;
+                        string labelIndex = Convert.ToString(label.Tag);
+                        var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
+                        if (statusItem != null)
+                        {
+                            string toolTipText = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
+                            Color foreColor = Color.Black;
+                            if (statusItem.state == (int)LightShelfStatusEnum.Normal)
+                            {
+                                foreColor = Color.Green;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
+                            {
+                                foreColor = Color.Yellow;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Error)
+                            {
+                                foreColor = Color.Red;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
+                            {
+                                foreColor = Color.Blue;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
+                            {
+                                foreColor = Color.Purple;
+                            }
+                            else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
+                            {
+                                foreColor = Color.Gray;
+                            }
+                            else
+                            {
+                                foreColor = Color.Black;
+                            }
+
+                            RefreshLightStatus(label, toolTipText, foreColor);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1250,6 +1258,37 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
+        }
+
+        private void SetHighPrivilege()
+        {
+            using (var db = new MESDB())
+            {
+                var roles = db.Database.SqlQuery<int>($@"SELECT distinct roleId 
+                FROM[dbo].[sysUserRole] c 
+                where c.userId = {AppInfo.LoginUserInfo.id}").ToListAsync().Result;
+
+                if (roles == null || roles.Count == 0)
+                {
+                    btnClearOrders.Visible = false;
+                }
+                else if (roles.Contains(1))
+                {
+                    btnClearOrders.Visible = true;
+                }
+                else
+                {
+                    btnClearOrders.Visible = false;
+                }
+            }
+        }
+
+        private void BtnClearOrders_Click(object sender, EventArgs e)
+        {
+            FrmClearOrders detail = new FrmClearOrders();
+            detail.ShowDialog();
+
+            GetOrders();
         }
     }
 

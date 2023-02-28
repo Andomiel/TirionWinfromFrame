@@ -266,7 +266,7 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
                     where a.DeliveryId = '{deliveryId}' and a.OrderStatus = {(int)DeliveryBarcodeStatusEnum.Undeliver};");
             foreach (var item in barcodes)
             {
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
             }
             return sb.ToString();
         }
@@ -282,7 +282,7 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
                     from Wms_DeliveryBarcode a
                     where a.DeliveryId = '{deliveryId}' and a.Barcode = '{item}';");
 
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
             }
 
             sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));
@@ -423,6 +423,30 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
         {
             string sql = $"select ReviewLock from Wms_DeliveryOrder  WITH(NOLock) where BusinessId = '{deliveryId}' ";
             return Convert.ToString(DbHelper.ExecuteScalar(sql));
+        }
+
+        public static IEnumerable<DeliveryOrderDto> GetClearableOrders(DateTime endTime, string deliveryNo)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"SELECT * FROM Wms_DeliveryOrder wdo WHERE OrderStatus < {(int)DeliveryOrderStatusEnum.Reviewed} AND  CreateTime < '{endTime:yyyy-MM-dd}' ");
+            if (!string.IsNullOrWhiteSpace(deliveryNo))
+            {
+                sb.AppendLine($" AND DeliveryNo = '{deliveryNo}' ");
+            }
+            sb.AppendLine(" ORDER BY CreateTime ");
+            return DbHelper.GetDataTable(sb.ToString()).DataTableToList<DeliveryOrderDto>();
+        }
+
+        public static void ClearDeliveryBarcode(Wms_DeliveryBarcode barcode, string userName)
+        {
+            string sql = $"UPDATE Wms_DeliveryBarcode set OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime  = GETDATE(), LastUpdateUser = '{userName}' WHERE Id = {barcode.Id}";
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
+        public static void ClearDeliveryOrder(Wms_DeliveryOrder order, string userName)
+        {
+            string sql = $"UPDATE Wms_DeliveryOrder set OrderStatus = {(int)DeliveryOrderStatusEnum.Closed}, LastUpdateTime  = GETDATE(), LastUpdateUser = '{userName}' WHERE Id = {order.Id}";
+            DbHelper.ExecuteNonQuery(sql);
         }
     }
 
