@@ -346,6 +346,29 @@ namespace Business
             }
 
         }
+
+        public static MaterialInfoResponse CallMaterialFromMes(string upn)
+        {
+            MaterialInfoResponse response = new MaterialInfoResponse();
+            StringBuilder sb = new StringBuilder("请求MaterialInfo");
+            try
+            {
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"].Replace("8080", "8086")}/api/Material/GetMaterialVice";
+                sb.AppendLine($"地址:{url}");
+                var request = new UpnRequest() { Upn = upn };
+                string requestJson = JsonConvert.SerializeObject(request);
+                sb.AppendLine($"request:{requestJson}");
+                string responseStr = WebClientHelper.Post(requestJson, url, null);
+                sb.AppendLine($"返回:{responseStr}");
+                response = JsonConvert.DeserializeObject<MaterialInfoResponse>(responseStr);
+            }
+            catch (Exception ex)
+            {
+                sb.AppendLine($"异常:{ex.Message}");
+            }
+            FileLog.Log(sb.ToString());
+            return response;
+        }
     }
     /// <summary>
     /// 分页列表
