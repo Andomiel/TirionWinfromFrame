@@ -180,7 +180,7 @@ namespace Business
                     from Wms_TransferBarcode a
                     where a.TransferOrderId = '{deliveryId}' and a.Barcode = '{item}';");
 
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
             }
             return sb.ToString();
         }

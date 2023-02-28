@@ -222,7 +222,7 @@ namespace Business
                     from Wms_InventoryBarcode a
                     where a.InventoryOrderId = '{deliveryId}' and a.Barcode = '{item}';");
 
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
             }
             return sb.ToString();
         }
@@ -261,14 +261,14 @@ namespace Business
                 {
                     //TODO:盘盈？
                     //不存在此场景
-                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                 }
                 else
                 {
                     if (barcode.OriginQuantity == 0)
                     {
                         //TODO:盘盈
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTake = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTakeCheck = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                     }
                     else if (barcode.RealQuantity == 0)
                     {
@@ -278,7 +278,7 @@ namespace Business
                     else if (barcode.OriginQuantity != barcode.RealQuantity)
                     {
                         //数量不等
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTake = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTakeCheck = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
                     }
                     else
                     {
