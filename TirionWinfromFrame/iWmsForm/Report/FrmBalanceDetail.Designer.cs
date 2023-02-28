@@ -256,7 +256,7 @@ namespace TirionWinfromFrame.iWmsForm.Report
             this.MinimizeBox = false;
             this.Name = "FrmBalanceDetail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmInventoryDetail";
+            this.Text = "清账扫码";
             ((System.ComponentModel.ISupportInitialize)(this.layout)).EndInit();
             this.layout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tlpLayout)).EndInit();
