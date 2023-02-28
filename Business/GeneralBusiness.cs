@@ -61,6 +61,24 @@ namespace Business
             return DbHelper.GetDataTable(newBarcodeSql);
         }
 
+        public static DataTable GetBarcode(string barcode)
+        {
+            string newBarcodeSql = $"select * from smt_zd_material WITH(NOLock)  where ReelID = '{barcode}'  ";
+            return DbHelper.GetDataTable(newBarcodeSql);
+        }
+
+        public static void DeliveryBarcode(string barcode)
+        {
+            string sql = $"update smt_zd_material set isTakeCheck=1, Status={(int)BarcodeStatusEnum.Delivered} where ReelID = '{barcode}' ";
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
+        public static void ReleaseBarcode(string barcode)
+        {
+            string sql = $" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0  where  ReelID = '{barcode}' ";
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
         public static IEnumerable<Cfg_Register> GetAllRegisterCfg(string materialNo, int cfgStatus)
         {
             StringBuilder sb = new StringBuilder();
