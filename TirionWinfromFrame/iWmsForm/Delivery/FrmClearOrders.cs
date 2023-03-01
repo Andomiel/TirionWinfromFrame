@@ -96,18 +96,20 @@ namespace TirionWinfromFrame.iWmsForm
                         ClearCertainOrder(row);
                     }
 
-                    "清理成功".ShowTips();
+                    SplashScreenManager.CloseForm(false);
 
-                    RefreshOrders();
+                    "清理成功".ShowTips();
                 }
             }
             catch (Exception ex)
             {
+                SplashScreenManager.CloseForm(false);
+
                 ex.GetDeepException().ShowError();
             }
             finally
             {
-                SplashScreenManager.CloseForm(false);
+                RefreshOrders();
             }
         }
 
@@ -135,23 +137,37 @@ namespace TirionWinfromFrame.iWmsForm
                     {
                         dict.Add(item.Barcode, ex.Message);
 
-                        Task.Run(() => { CallMesWmsApiBll.SaveLogs(item.Barcode, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", ex.Message); });
+                        //Task.Run(() =>
+                        //{
+                        CallMesWmsApiBll.SaveLogs(item.Barcode, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", ex.Message);
+                        //});
                     }
                     catch (Exception ex)
                     {
                         dict.Add(item.Barcode, ex.Message);
 
-                        Task.Run(() => { CallMesWmsApiBll.SaveLogs(item.Barcode, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", ex.GetDeepException()); });
+                        //Task.Run(() =>
+                        //{
+                        CallMesWmsApiBll.SaveLogs(item.Barcode, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", ex.GetDeepException());
+                        //}/*);*/
                     }
+
+                    DeliveryBll.ClearDeliveryBarcode(item, AppInfo.LoginUserInfo.account);
                 };
 
                 DeliveryBll.ClearDeliveryOrder(order, AppInfo.LoginUserInfo.account);
 
-                Task.Run(() => { CallMesWmsApiBll.SaveLogs(row.DeliveryNo, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", JsonConvert.SerializeObject(dict)); });
+                //Task.Run(() =>
+                //{
+                CallMesWmsApiBll.SaveLogs(row.DeliveryNo, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", JsonConvert.SerializeObject(dict));
+                //});
             }
             catch (Exception ex)
             {
-                Task.Run(() => { CallMesWmsApiBll.SaveLogs(row.DeliveryNo, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", $"关闭失败:{ex.GetDeepException()}"); });
+                //Task.Run(() =>
+                //{
+                CallMesWmsApiBll.SaveLogs(row.DeliveryNo, "关闭过期工单", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", $"关闭失败:{ex.GetDeepException()}");
+                //});
             }
         }
 
@@ -164,27 +180,26 @@ namespace TirionWinfromFrame.iWmsForm
             }
             var barcodeRow = dtBarcodes.Rows[0];
             string statusString = Convert.ToString(barcodeRow["Status"]);
-            string result;
             if (statusString != "3")
             {
                 var material = CallMesWmsApiBll.CallMaterialFromMes(barcode.Barcode);
                 if (material != null && material.StoreId != "361")
                 {
                     GeneralBusiness.DeliveryBarcode(barcode.Barcode);
-                    result = "站位不是361置为出库";
+                    throw new OppoCoreException("站位不是361置为出库");
+                }
+                else
+                {
+                    GeneralBusiness.ReleaseBarcode(barcode.Barcode);
+                    throw new OppoCoreException("站位为361释放UPN");
                 }
             }
-            GeneralBusiness.ReleaseBarcode(barcode.Barcode);
-            result = "站位为361释放UPN";
-
-            DeliveryBll.ClearDeliveryBarcode(barcode, AppInfo.LoginUserInfo.account);
-
-            throw new OppoCoreException(result);
+            throw new OppoCoreException("已经是出库状态");
         }
 
         private void BtnClearAll_Click(object sender, EventArgs e)
         {
-            SplashScreenManager.ShowForm(typeof(WaitForm1));
+            SplashScreenManager.ShowForm(this, typeof(WaitForm1), true, true, false);
             try
             {
                 lock (lockButtonObj)
@@ -194,18 +209,18 @@ namespace TirionWinfromFrame.iWmsForm
                         ClearCertainOrder(row);
                     }
 
+                    SplashScreenManager.CloseForm(false);
                     "清理成功".ShowTips();
-
-                    RefreshOrders();
                 }
             }
             catch (Exception ex)
             {
+                SplashScreenManager.CloseForm(false);
                 ex.GetDeepException().ShowError();
             }
             finally
             {
-                SplashScreenManager.CloseForm();
+                RefreshOrders();
             }
         }
     }
