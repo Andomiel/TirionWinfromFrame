@@ -98,24 +98,29 @@ namespace iWms.Form
             GetOrders();
         }
 
-        private delegate void RefreshLightStatusDelegate(LabelControl label, string tooltipText, Color foreColor);
+        //private delegate void RefreshLightStatusDelegate(LabelControl label, string tooltipText, Color foreColor);
 
-        private void RefreshLightStatus(LabelControl label, string tooltipText, Color foreColor)
+        //private void RefreshLightStatus(LabelControl label, string tooltipText, Color foreColor)
+        //{
+        //    if (this.InvokeRequired)
+        //    {
+        //        this.Invoke(new RefreshLightStatusDelegate(RefreshLightStatus));
+        //    }
+        //    else
+        //    {
+        //        label.ToolTip = tooltipText;
+        //        label.ForeColor = foreColor;
+        //    }
+        //}
+
+        private void InvokeMethod()
         {
+            Action invokeAction = new Action(InvokeMethod);
             if (this.InvokeRequired)
             {
-                this.Invoke(new RefreshLightStatusDelegate(RefreshLightStatus));
+                this.Invoke(invokeAction);
             }
             else
-            {
-                label.ToolTip = tooltipText;
-                label.ForeColor = foreColor;
-            }
-        }
-
-        private void StatusTimer_Tick(object sender, EventArgs e)
-        {
-            try
             {
                 var statusList = GetLightShelfStatus();
                 if (statusList == null || statusList.Count == 0)
@@ -132,41 +137,47 @@ namespace iWms.Form
                         var statusItem = statusList.FirstOrDefault(p => p.shelf_id == labelIndex);
                         if (statusItem != null)
                         {
-                            string toolTipText = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
+                            label.ToolTip = $"{statusItem.shelf_id}{EnumHelper.GetDescription(typeof(LightShelfStatusEnum), statusItem.state)}";
                             Color foreColor = Color.Black;
                             if (statusItem.state == (int)LightShelfStatusEnum.Normal)
                             {
-                                foreColor = Color.Green;
+                                label.ForeColor = Color.Green;
                             }
                             else if (statusItem.state == (int)LightShelfStatusEnum.TimeOut)
                             {
-                                foreColor = Color.Yellow;
+                                label.ForeColor = Color.Yellow;
                             }
                             else if (statusItem.state == (int)LightShelfStatusEnum.Error)
                             {
-                                foreColor = Color.Red;
+                                label.ForeColor = Color.Red;
                             }
                             else if (statusItem.state == (int)LightShelfStatusEnum.Appending)
                             {
-                                foreColor = Color.Blue;
+                                label.ForeColor = Color.Blue;
                             }
                             else if (statusItem.state == (int)LightShelfStatusEnum.Delivering)
                             {
-                                foreColor = Color.Purple;
+                                label.ForeColor = Color.Purple;
                             }
                             else if (statusItem.state == (int)LightShelfStatusEnum.OffLine)
                             {
-                                foreColor = Color.Gray;
+                                label.ForeColor = Color.Gray;
                             }
                             else
                             {
-                                foreColor = Color.Black;
+                                label.ForeColor = Color.Black;
                             }
-
-                            RefreshLightStatus(label, toolTipText, foreColor);
                         }
                     }
                 }
+            }
+        }
+
+        private void StatusTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                InvokeMethod();
             }
             catch (Exception ex)
             {
