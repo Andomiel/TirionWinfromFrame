@@ -86,7 +86,7 @@ namespace iWms.Form
                 //tbScan.Text = string.Empty;
                 return;
             }
-            tbScan.Text = BarcodeFormatter.FormatBarcode(tbScan.Text.Trim());
+            tbScan.Text = BarcodeFormatter.FormatBarcode(tbScan.Text.Trim()).ToUpper();
         }
 
         //需要删除的重写

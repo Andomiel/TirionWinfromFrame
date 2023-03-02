@@ -117,6 +117,7 @@ namespace iWms.Form
                     "组箱箱号必须以OP开头，且后缀为8位数字".ShowTips();
                     return;
                 }
+                txtBoxScan.Text = boxNo.Trim().ToUpper();
                 tbScan.Focus();
             }
         }
@@ -128,7 +129,7 @@ namespace iWms.Form
                 if (e.KeyChar == 13)
                 {
                     string scanText = tbScan.Text.Trim();
-                    tbScan.Text = BarcodeFormatter.FormatBarcode(scanText);
+                    tbScan.Text = BarcodeFormatter.FormatBarcode(scanText).ToUpper();
                     if (cbOriginal.Visible && cbOriginal.Checked)
                     {
                         tbOriginal.Focus();
