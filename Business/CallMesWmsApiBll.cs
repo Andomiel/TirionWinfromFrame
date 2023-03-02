@@ -353,7 +353,7 @@ namespace Business
             StringBuilder sb = new StringBuilder("请求MaterialInfo");
             try
             {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"].Replace("8080", "8086")}/api/Material/GetMaterialVice";
+                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMaterialFromMes";
                 sb.AppendLine($"地址:{url}");
                 var request = new UpnRequest() { Upn = upn };
                 string requestJson = JsonConvert.SerializeObject(request);
