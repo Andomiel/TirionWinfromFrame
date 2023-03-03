@@ -519,6 +519,29 @@ namespace iWms.Form
 
                 yield return report;
             }
+
+            foreach (BalanceMaterialDto item in currentMaterials)
+            {
+                var report = new BalanceReportDto() { LastDate = lastBalance.CreateTime.Date, MaterialNo = item.MaterialNo, LastQuantity = 0 };
+                var lastMaterial = lastMaterials.FirstOrDefault(p => p.MaterialNo == item.MaterialNo);
+                if (lastMaterial != null)
+                {
+                    continue;
+                }
+                report.ManualInQuantity = GetMaterialQuantity(instockMaterials, item.MaterialNo, (int)InOrderTypeEnum.ManualCount);
+                report.AllocateInQuantity = GetMaterialQuantity(instockMaterials, item.MaterialNo, (int)InOrderTypeEnum.DBRK);
+                report.SelfMadeInQuantity = GetMaterialQuantity(instockMaterials, item.MaterialNo, (int)InOrderTypeEnum.CPGD);
+                report.OtherInQuantity = GetMaterialQuantity(instockMaterials, item.MaterialNo, (int)InOrderTypeEnum.ZX);
+                report.RefundInQuantity = GetMaterialQuantity(instockMaterials, item.MaterialNo, (int)InOrderTypeEnum.SCTL);
+                report.JldOutQuantity = GetMaterialQuantity(outstockMaterials, item.MaterialNo, (int)OutOrderTypeEnum.JLDCK);
+                report.AllocateOutQuantity = GetMaterialQuantity(outstockMaterials, item.MaterialNo, (int)OutOrderTypeEnum.DBCK);
+                report.OtherOutQuantity = GetMaterialQuantity(outstockMaterials, item.MaterialNo, (int)OutOrderTypeEnum.ZF);
+                report.ProduceOutQuantity = GetMaterialQuantity(outstockMaterials, item.MaterialNo, (int)OutOrderTypeEnum.SCLL);
+                report.FlOutQuantity = GetMaterialQuantity(outstockMaterials, item.MaterialNo, (int)OutOrderTypeEnum.FLCK);
+                report.Remark = remark;
+
+                yield return report;
+            }
         }
 
         private int GetMaterialQuantity(IEnumerable<BalanceOrderMaterialDto> materials, string materialNo, int orderType)
