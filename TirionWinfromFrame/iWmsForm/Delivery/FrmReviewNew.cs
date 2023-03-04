@@ -128,8 +128,8 @@ namespace iWms.Form
             {
                 if (e.KeyChar == 13)
                 {
-                    string scanText = tbScan.Text.Trim();
-                    tbScan.Text = BarcodeFormatter.FormatBarcode(scanText).ToUpper();
+                    string scanText = tbScan.Text;
+                    tbScan.Text = BarcodeFormatter.FormatBarcode(scanText);
                     if (cbOriginal.Visible && cbOriginal.Checked)
                     {
                         tbOriginal.Focus();
@@ -254,6 +254,7 @@ namespace iWms.Form
             reviewRecord.BoxNo = txtBoxScan.Text.Trim();
             reviewRecord.OriginalCode = tbOriginal.Text.Trim();
             reviewRecord.ScanTime = DateTime.Now;
+            reviewRecord.QRCode = tbScan.Text.Trim();
             if (!reviewRecord.IsOk)
             {
                 AddBindRecord(reviewRecord);

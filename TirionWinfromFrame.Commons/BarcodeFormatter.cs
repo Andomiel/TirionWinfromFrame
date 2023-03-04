@@ -12,6 +12,8 @@ namespace TirionWinfromFrame.Commons
                 throw new OppoCoreException("要格式化的二维码为空");
             }
 
+            originBarcode = originBarcode.Trim();
+
             Regex reg = new Regex("^[0-9]");
             if (!reg.IsMatch(originBarcode))
             {
@@ -31,11 +33,11 @@ namespace TirionWinfromFrame.Commons
             {
                 throw new OppoCoreException($"UPN中第一段物料号必须为7位老料号或者12位新料号");
             }
-            for (int i = 0; i < elements.Length; i++)
-            {
-                elements[i] = elements[i].Trim();
-            }
-            return string.Join("*", elements);
+            //for (int i = 0; i < elements.Length; i++)
+            //{
+            //    elements[i] = elements[i].Trim();
+            //}
+            return originBarcode;//string.Join("*", elements);
         }
 
     }
