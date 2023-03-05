@@ -254,7 +254,10 @@ namespace iWms.Form
             reviewRecord.BoxNo = txtBoxScan.Text.Trim();
             reviewRecord.OriginalCode = tbOriginal.Text.Trim();
             reviewRecord.ScanTime = DateTime.Now;
-            reviewRecord.QRCode = tbScan.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(scanText))
+            {
+                reviewRecord.QRCode = scanText;
+            }
             if (!reviewRecord.IsOk)
             {
                 AddBindRecord(reviewRecord);

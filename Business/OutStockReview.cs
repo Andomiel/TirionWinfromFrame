@@ -151,8 +151,6 @@ namespace Business
                 sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
                         SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Reviewed}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{currentBarcode.BusinessId}' ;");
 
-                sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1,
-                 taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}', QRCode = '{barcode.QRCode}' where reelid = '{currentBarcode.Barcode}'; ");
             }
             else
             {
@@ -167,9 +165,12 @@ namespace Business
                 (BusinessId, DeliveryId, DeliveryDetailId, BoxNo, Barcode, OrigionBarcode, DeliveryAreaId, DeliveryQuantity, OrderStatus, CreateTime, CreateUser, LastUpdateTime, LastUpdateUser)
                 VALUES('{Guid.NewGuid():D}', '{detail.DeliveryId}', '{detail.BusinessId}', '{barcode.ContainerNo}', '{barcode.UPN}', '', { barcode.TowerNo}, { barcode.RealQty}, { (int)DeliveryBarcodeStatusEnum.Reviewed}, getdate(), '{userName}', getdate(), '{userName}'); ");
 
-                sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1, 
-                taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}', QRCode = '{barcode.QRCode}' where reelid = '{barcode.UPN}'; ");
             }
+            string qrcode = string.IsNullOrWhiteSpace(barcode.QRCode) ? string.Empty : $" , QRCode = '{barcode.QRCode}' ";
+
+            sb.AppendLine($@"update smt_zd_material set istake=1, isTakeCheck =1,
+                 taketime = getdate(), LockTowerNo = '0',LockLocation = '',LockMachineID = '',ABSide='', Status='{(int)BarcodeStatusEnum.Delivered}' {qrcode} where reelid = '{barcode.UPN}'; ");
+
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
 
