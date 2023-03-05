@@ -70,6 +70,22 @@
             this.cbShelfSide = new System.Windows.Forms.ComboBox();
             this.btnSync = new DevExpress.XtraEditors.SimpleButton();
             this.dataGridViewX1 = new System.Windows.Forms.DataGridView();
+            this.UPN = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.供货厂家 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMiniPacking = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMsd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaterialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpBottom = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -87,22 +103,6 @@
             this.btnPre = new System.Windows.Forms.ToolStripSplitButton();
             this.btnNext = new System.Windows.Forms.ToolStripSplitButton();
             this.BtnLast = new System.Windows.Forms.ToolStripSplitButton();
-            this.UPN = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.供货厂家 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSerialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMiniPacking = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMsd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaterialType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -595,7 +595,7 @@
             this.btnSync.Name = "btnSync";
             this.btnSync.Size = new System.Drawing.Size(134, 34);
             this.btnSync.TabIndex = 55;
-            this.btnSync.Text = "同步MES数量";
+            this.btnSync.Text = "从日志重建二维码";
             this.btnSync.Visible = false;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
@@ -646,155 +646,6 @@
             this.dataGridViewX1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellContentClick);
             this.dataGridViewX1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewX1_ColumnHeaderMouseClick);
             this.dataGridViewX1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewX1_RowPostPaint);
-            // 
-            // tlpBottom
-            // 
-            this.tlpBottom.ColumnCount = 3;
-            this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 933F));
-            this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpBottom.Controls.Add(this.statusStrip2, 1, 0);
-            this.tlpBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpBottom.Location = new System.Drawing.Point(0, 517);
-            this.tlpBottom.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpBottom.Name = "tlpBottom";
-            this.tlpBottom.RowCount = 1;
-            this.tlpBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpBottom.Size = new System.Drawing.Size(1365, 30);
-            this.tlpBottom.TabIndex = 51;
-            // 
-            // statusStrip2
-            // 
-            this.statusStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.tpsrecordCount,
-            this.toolStripStatusLabel3,
-            this.toolStripStatusLabel4,
-            this.tpscurrentPage,
-            this.toolStripStatusLabel6,
-            this.toolStripStatusLabel7,
-            this.tpspageCount,
-            this.toolStripStatusLabel9,
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabel5,
-            this.btnFrist,
-            this.btnPre,
-            this.btnNext,
-            this.BtnLast});
-            this.statusStrip2.Location = new System.Drawing.Point(216, 0);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip2.Size = new System.Drawing.Size(682, 23);
-            this.statusStrip2.TabIndex = 50;
-            this.statusStrip2.Text = "                                        ";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(20, 18);
-            this.toolStripStatusLabel1.Text = "共";
-            // 
-            // tpsrecordCount
-            // 
-            this.tpsrecordCount.Name = "tpsrecordCount";
-            this.tpsrecordCount.Size = new System.Drawing.Size(15, 18);
-            this.tpsrecordCount.Text = "0";
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(47, 18);
-            this.toolStripStatusLabel3.Text = "条记录,";
-            // 
-            // toolStripStatusLabel4
-            // 
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(44, 18);
-            this.toolStripStatusLabel4.Text = "当前第";
-            // 
-            // tpscurrentPage
-            // 
-            this.tpscurrentPage.Name = "tpscurrentPage";
-            this.tpscurrentPage.Size = new System.Drawing.Size(15, 18);
-            this.tpscurrentPage.Text = "0";
-            // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(23, 18);
-            this.toolStripStatusLabel6.Text = "页,";
-            // 
-            // toolStripStatusLabel7
-            // 
-            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
-            this.toolStripStatusLabel7.Size = new System.Drawing.Size(20, 18);
-            this.toolStripStatusLabel7.Text = "共";
-            // 
-            // tpspageCount
-            // 
-            this.tpspageCount.Name = "tpspageCount";
-            this.tpspageCount.Size = new System.Drawing.Size(15, 18);
-            this.tpspageCount.Text = "0";
-            // 
-            // toolStripStatusLabel9
-            // 
-            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
-            this.toolStripStatusLabel9.Size = new System.Drawing.Size(20, 18);
-            this.toolStripStatusLabel9.Text = "页";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(84, 18);
-            this.toolStripStatusLabel2.Text = "                   ";
-            // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(108, 18);
-            this.toolStripStatusLabel5.Text = "                         ";
-            // 
-            // btnFrist
-            // 
-            this.btnFrist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnFrist.Image = ((System.Drawing.Image)(resources.GetObject("btnFrist.Image")));
-            this.btnFrist.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFrist.Name = "btnFrist";
-            this.btnFrist.Size = new System.Drawing.Size(60, 21);
-            this.btnFrist.Text = "第一页";
-            this.btnFrist.ButtonClick += new System.EventHandler(this.BtnFrist_ButtonClick);
-            // 
-            // btnPre
-            // 
-            this.btnPre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnPre.Image = ((System.Drawing.Image)(resources.GetObject("btnPre.Image")));
-            this.btnPre.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPre.Name = "btnPre";
-            this.btnPre.Size = new System.Drawing.Size(60, 21);
-            this.btnPre.Text = "上一页";
-            this.btnPre.ButtonClick += new System.EventHandler(this.BtnPre_ButtonClick);
-            // 
-            // btnNext
-            // 
-            this.btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnNext.Image = ((System.Drawing.Image)(resources.GetObject("btnNext.Image")));
-            this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(60, 21);
-            this.btnNext.Text = "下一页";
-            this.btnNext.ButtonClick += new System.EventHandler(this.BtnNext_ButtonClick);
-            // 
-            // BtnLast
-            // 
-            this.BtnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BtnLast.Image = ((System.Drawing.Image)(resources.GetObject("BtnLast.Image")));
-            this.BtnLast.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BtnLast.Name = "BtnLast";
-            this.BtnLast.Size = new System.Drawing.Size(72, 21);
-            this.BtnLast.Text = "最后一页";
-            this.BtnLast.ButtonClick += new System.EventHandler(this.BtnLast_ButtonClick);
             // 
             // UPN
             // 
@@ -946,6 +797,155 @@
             this.入库时间.MinimumWidth = 130;
             this.入库时间.Name = "入库时间";
             this.入库时间.ReadOnly = true;
+            // 
+            // tlpBottom
+            // 
+            this.tlpBottom.ColumnCount = 3;
+            this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 933F));
+            this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpBottom.Controls.Add(this.statusStrip2, 1, 0);
+            this.tlpBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpBottom.Location = new System.Drawing.Point(0, 517);
+            this.tlpBottom.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpBottom.Name = "tlpBottom";
+            this.tlpBottom.RowCount = 1;
+            this.tlpBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBottom.Size = new System.Drawing.Size(1365, 30);
+            this.tlpBottom.TabIndex = 51;
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.statusStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.tpsrecordCount,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.tpscurrentPage,
+            this.toolStripStatusLabel6,
+            this.toolStripStatusLabel7,
+            this.tpspageCount,
+            this.toolStripStatusLabel9,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel5,
+            this.btnFrist,
+            this.btnPre,
+            this.btnNext,
+            this.BtnLast});
+            this.statusStrip2.Location = new System.Drawing.Point(216, 0);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip2.Size = new System.Drawing.Size(682, 23);
+            this.statusStrip2.TabIndex = 50;
+            this.statusStrip2.Text = "                                        ";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(20, 18);
+            this.toolStripStatusLabel1.Text = "共";
+            // 
+            // tpsrecordCount
+            // 
+            this.tpsrecordCount.Name = "tpsrecordCount";
+            this.tpsrecordCount.Size = new System.Drawing.Size(15, 18);
+            this.tpsrecordCount.Text = "0";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(47, 18);
+            this.toolStripStatusLabel3.Text = "条记录,";
+            // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(44, 18);
+            this.toolStripStatusLabel4.Text = "当前第";
+            // 
+            // tpscurrentPage
+            // 
+            this.tpscurrentPage.Name = "tpscurrentPage";
+            this.tpscurrentPage.Size = new System.Drawing.Size(15, 18);
+            this.tpscurrentPage.Text = "0";
+            // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(23, 18);
+            this.toolStripStatusLabel6.Text = "页,";
+            // 
+            // toolStripStatusLabel7
+            // 
+            this.toolStripStatusLabel7.Name = "toolStripStatusLabel7";
+            this.toolStripStatusLabel7.Size = new System.Drawing.Size(20, 18);
+            this.toolStripStatusLabel7.Text = "共";
+            // 
+            // tpspageCount
+            // 
+            this.tpspageCount.Name = "tpspageCount";
+            this.tpspageCount.Size = new System.Drawing.Size(15, 18);
+            this.tpspageCount.Text = "0";
+            // 
+            // toolStripStatusLabel9
+            // 
+            this.toolStripStatusLabel9.Name = "toolStripStatusLabel9";
+            this.toolStripStatusLabel9.Size = new System.Drawing.Size(20, 18);
+            this.toolStripStatusLabel9.Text = "页";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(84, 18);
+            this.toolStripStatusLabel2.Text = "                   ";
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(108, 18);
+            this.toolStripStatusLabel5.Text = "                         ";
+            // 
+            // btnFrist
+            // 
+            this.btnFrist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnFrist.Image = ((System.Drawing.Image)(resources.GetObject("btnFrist.Image")));
+            this.btnFrist.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFrist.Name = "btnFrist";
+            this.btnFrist.Size = new System.Drawing.Size(60, 21);
+            this.btnFrist.Text = "第一页";
+            this.btnFrist.ButtonClick += new System.EventHandler(this.BtnFrist_ButtonClick);
+            // 
+            // btnPre
+            // 
+            this.btnPre.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnPre.Image = ((System.Drawing.Image)(resources.GetObject("btnPre.Image")));
+            this.btnPre.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPre.Name = "btnPre";
+            this.btnPre.Size = new System.Drawing.Size(60, 21);
+            this.btnPre.Text = "上一页";
+            this.btnPre.ButtonClick += new System.EventHandler(this.BtnPre_ButtonClick);
+            // 
+            // btnNext
+            // 
+            this.btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnNext.Image = ((System.Drawing.Image)(resources.GetObject("btnNext.Image")));
+            this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(60, 21);
+            this.btnNext.Text = "下一页";
+            this.btnNext.ButtonClick += new System.EventHandler(this.BtnNext_ButtonClick);
+            // 
+            // BtnLast
+            // 
+            this.BtnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BtnLast.Image = ((System.Drawing.Image)(resources.GetObject("BtnLast.Image")));
+            this.BtnLast.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnLast.Name = "BtnLast";
+            this.BtnLast.Size = new System.Drawing.Size(72, 21);
+            this.BtnLast.Text = "最后一页";
+            this.BtnLast.ButtonClick += new System.EventHandler(this.BtnLast_ButtonClick);
             // 
             // FrmMaterialInfo
             // 

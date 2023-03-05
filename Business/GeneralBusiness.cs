@@ -79,6 +79,12 @@ namespace Business
             DbHelper.ExecuteNonQuery(sql);
         }
 
+        public static void UpdateQrcode(string barcode, string qrcode)
+        {
+            string sql = $" update smt_zd_material set QRCode = '{qrcode}' where  ReelID = '{barcode}' ";
+            DbHelper.ExecuteNonQuery(sql);
+        }
+
         public static IEnumerable<Cfg_Register> GetAllRegisterCfg(string materialNo, int cfgStatus)
         {
             StringBuilder sb = new StringBuilder();

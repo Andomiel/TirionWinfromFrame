@@ -357,39 +357,24 @@ namespace iWms.Form
                     {
                         string barcode = Convert.ToString(row["ReelID"]);
                         string qrCode = Convert.ToString(row["QRCode"]);
-                        if (string.IsNullOrWhiteSpace(qrCode))
+                        if (!string.IsNullOrWhiteSpace(qrCode))
                         {
                             continue;
                         }
-                        int qty = 0;
-                        string materialType = "F";
-                        int miniPackage = 0;
-                        int.TryParse(Convert.ToString(row["MinPacking"]), out miniPackage);
-                        var material = CallMaterialInfoByUPN(qrCode);
-                        if (material != null && int.TryParse(material.InvQty, out qty) && qty > 0)
+
+                        var logs = CallMesWmsApiBll.GetLogs(barcode, DateTime.Today.AddDays(-1));
+
+                        if (logs == null || logs.List == null || !logs.List.Any())
                         {
-                            if (miniPackage > 0)
-                            {
-                                decimal offset = miniPackage - qty;
-                                if ((Math.Abs(offset) / miniPackage) * 1000 <= 3)
-                                {
-                                    materialType = "F";
-                                }
-                                else if ((offset / miniPackage) * 1000 > 3)
-                                {
-                                    materialType = "S";
-                                }
-                                else if (offset / miniPackage * 1000 < -3)
-                                {
-                                    materialType = "T";
-                                }
-                                else
-                                {
-                                    //do nothing
-                                }
-                            }
-                            InOutStockStorageData.UpdateQtyFromMes(barcode, qty, materialType);
+                            continue;
                         }
+                        var log = logs.List.FirstOrDefault(p => p.Message == "【API】物料信息查询接口");
+                        if (log == null || string.IsNullOrWhiteSpace(log.RequestBody))
+                        {
+                            continue;
+                        }
+
+                        GeneralBusiness.UpdateQrcode(barcode, log.RequestBody);
                     }
                 }
             }

@@ -242,7 +242,7 @@ namespace Business
                     Level = "Info",
                     StartDate = dt.Date.ToString("yyyy-MM-dd"),
                     EndDate = dt.Date.AddDays(1).ToString("yyyy-MM-dd"),
-                    Pagination = new Pagination() { ItemsPerPage = 30, Page = 1 },
+                    Pagination = new Pagination() { ItemsPerPage = 300, Page = 1 },
                 };
                 string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Log/GetPagedList";
                 sb.AppendLine($"url:{url}");
