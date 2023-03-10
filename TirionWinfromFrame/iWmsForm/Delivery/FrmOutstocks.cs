@@ -450,13 +450,11 @@ namespace iWms.Form
             }
         }
 
-        private readonly object lockOutstockObj = new object();
-
         private void BtnOutstock_Click(object sender, EventArgs e)
         {
             try
             {
-                lock (lockOutstockObj)
+                lock (lockOrderObj)
                 {
                     if (selectedOrder == null)
                     {
@@ -555,13 +553,11 @@ namespace iWms.Form
             }
         }
 
-        private readonly object lockFinishObj = new object();
-
         private void BtnFinish_Click(object sender, EventArgs e)
         {
             try
             {
-                lock (lockFinishObj)
+                lock (lockOrderObj)
                 {
                     if (selectedOrder == null)
                     {
@@ -767,13 +763,11 @@ namespace iWms.Form
             GetOrders();
         }
 
-        private readonly object lockCancelObj = new object();
-
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             try
             {
-                lock (lockCancelObj)
+                lock (lockOrderObj)
                 {
                     if (selectedOrder == null)
                     {
@@ -827,13 +821,13 @@ namespace iWms.Form
             }
         }
 
-        private readonly object lockCalculateObj = new object();
+        private static readonly object lockOrderObj = new object();
 
         private void BtnCalculate_Click(object sender, EventArgs e)
         {
             try
             {
-                lock (lockCalculateObj)
+                lock (lockOrderObj)
                 {
                     if (selectedOrder == null)
                     {
@@ -941,13 +935,11 @@ namespace iWms.Form
             _ = DeliveryBll.CreateDeliveryBarcodes(selectedOrder.BusinessId, AppInfo.LoginUserInfo.account, OrderBarcodes);
         }
 
-        private readonly object lockSpecialObj = new object();
-
         private void BtnSpecial_Click(object sender, EventArgs e)
         {
             try
             {
-                lock (lockSpecialObj)
+                lock (lockOrderObj)
                 {
                     if (selectedOrder == null)
                     {
@@ -973,10 +965,6 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
-        }
-
-        private void dgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
         }
 
         private void dgvUpns_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -1006,7 +994,7 @@ namespace iWms.Form
             SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
-                lock (lockSpecialObj)
+                lock (lockOrderObj)
                 {
                     if (selectedOrder == null)
                     {
@@ -1186,7 +1174,7 @@ namespace iWms.Form
             SplashScreenManager.ShowForm(typeof(WaitForm1));
             try
             {
-                lock (lockSpecialObj)
+                lock (lockOrderObj)
                 {
                     //额外做一次取消报警
                     string url = ConfigurationManager.AppSettings["lightShelfCancelAlarmUrl"];
