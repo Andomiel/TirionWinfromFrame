@@ -429,6 +429,10 @@ namespace Business
                 //灭灯不看结果
             }
 
+            if (currentRecord == null)
+            {
+                return string.Empty;
+            }
             return $@"UPDATE Wms_LightColorRecord
                 SET RecordStatus = {(int)LightRecordStatusEnum.LightOff}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' WHERE Id = {currentRecord.Id};";
         }
