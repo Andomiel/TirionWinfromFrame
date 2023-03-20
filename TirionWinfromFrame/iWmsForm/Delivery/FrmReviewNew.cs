@@ -611,6 +611,18 @@ namespace iWms.Form
                             return;
                         }
                     }
+                    if (SelectedOrder.DeliveryType == (int)OutOrderTypeEnum.BMLL)
+                    {
+                        var outrangeMaterials = ReviewSummaries.Where(p => p.Match == 1 || (p.Match == 0 && string.IsNullOrWhiteSpace(p.UPN)))
+        .GroupBy(p => new { p.PartNumber, p.LineNumber, p.NeedQty })
+        .Where(p => p.Key.NeedQty < p.Sum(c => c.RealQty))
+        .Select(p => p.Key.PartNumber).Distinct().ToList();
+
+                        if ($"部门领料单据不能超发，本工单仍然有以下物料:{string.Join(",", remainMaterials)}处于超发状态，是否继续！".ShowYesNoAndTips() != DialogResult.Yes)
+                        {
+                            return;
+                        }
+                    }
 
                     var remainBarcodes = ReviewSummaries.Where(p => p.Match == 0 && !string.IsNullOrWhiteSpace(p.UPN)).Select(p => p.UPN).Distinct().ToList();
                     if (remainBarcodes.Count > 0)

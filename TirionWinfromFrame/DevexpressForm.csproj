@@ -318,12 +318,6 @@
     <Compile Include="iWmsForm\Delivery\FrmReviewNew.designer.cs">
       <DependentUpon>FrmReviewNew.cs</DependentUpon>
     </Compile>
-    <Compile Include="iWmsForm\Delivery\FrmReview.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="iWmsForm\Delivery\FrmReview.designer.cs">
-      <DependentUpon>FrmReview.cs</DependentUpon>
-    </Compile>
     <Compile Include="iWmsForm\Delivery\FrmReviewResult.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -585,9 +579,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Delivery\FrmReviewNew.resx">
       <DependentUpon>FrmReviewNew.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="iWmsForm\Delivery\FrmReview.resx">
-      <DependentUpon>FrmReview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Delivery\FrmReviewResult.resx">
       <DependentUpon>FrmReviewResult.cs</DependentUpon>
