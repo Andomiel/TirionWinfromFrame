@@ -362,19 +362,14 @@ namespace iWms.Form
                             continue;
                         }
 
-                        var logs = CallMesWmsApiBll.GetLogs(barcode, DateTime.Today.AddDays(-1));
+                        var info = CallMesWmsApiBll.CallMaterialInfoByUPN(qrCode);
 
-                        if (logs == null || logs.List == null || !logs.List.Any())
-                        {
-                            continue;
-                        }
-                        var log = logs.List.FirstOrDefault(p => p.Message == "【API】物料信息查询接口");
-                        if (log == null || string.IsNullOrWhiteSpace(log.RequestBody))
+                        if (info == null || string.IsNullOrWhiteSpace(info.StoreId) || info.StoreId == "361")
                         {
                             continue;
                         }
 
-                        GeneralBusiness.UpdateQrcode(barcode, log.RequestBody);
+                        GeneralBusiness.DeliveryBarcode(barcode);
                     }
                 }
             }
@@ -382,26 +377,6 @@ namespace iWms.Form
             {
                 ex.GetDeepException().ShowError();
             }
-        }
-
-        public static MaterialInfoResponse CallMaterialInfoByUPN(string qrcode)
-        {
-            MaterialInfoResponse response = new MaterialInfoResponse();
-            StringBuilder sb = new StringBuilder("请求MaterialInfo");
-            try
-            {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/GetMaterial?qrcode={qrcode}";
-                sb.AppendLine($"地址:{url}");
-                string responseStr = WebClientHelper.Get(url);
-                sb.AppendLine($"返回:[{responseStr}]");
-                response = JsonConvert.DeserializeObject<MaterialInfoResponse>(responseStr);
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine($"获取物料明细异常:[{ex.GetDeepException()}]");
-            }
-            FileLog.Log(sb.ToString());
-            return response;
         }
 
         private void dataGridViewX1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

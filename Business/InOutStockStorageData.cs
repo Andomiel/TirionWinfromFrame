@@ -335,7 +335,7 @@ namespace Business
 
         public static DataTable GetAllMaterial()
         {
-            string sql = "select * from smt_zd_material WITH(NOLock)  where QRCode='' ";
+            string sql = "select * from smt_zd_material WITH(NOLock)  where LockTowerNo=0 and isTakeCheck = 0  ";
             return DbHelper.GetDataTable(sql);
         }
 

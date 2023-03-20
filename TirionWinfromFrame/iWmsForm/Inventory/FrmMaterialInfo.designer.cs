@@ -595,7 +595,7 @@
             this.btnSync.Name = "btnSync";
             this.btnSync.Size = new System.Drawing.Size(134, 34);
             this.btnSync.TabIndex = 55;
-            this.btnSync.Text = "从日志重建二维码";
+            this.btnSync.Text = "消除异常料";
             this.btnSync.Visible = false;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
