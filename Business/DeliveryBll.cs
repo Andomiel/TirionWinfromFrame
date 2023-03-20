@@ -266,7 +266,7 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
                     where a.DeliveryId = '{deliveryId}' and a.OrderStatus = {(int)DeliveryBarcodeStatusEnum.Undeliver};");
             foreach (var item in barcodes)
             {
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
             }
             return sb.ToString();
         }
@@ -282,7 +282,7 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
                     from Wms_DeliveryBarcode a
                     where a.DeliveryId = '{deliveryId}' and a.Barcode = '{item}';");
 
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
             }
 
             sb.AppendLine(GetFinishedLightRecords(deliveryId, userName));

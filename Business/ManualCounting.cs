@@ -59,7 +59,7 @@ namespace Business
             }
             else
             {
-                string updateSql = $" UPDATE smt_zd_material SET LockTowerNo = {(int)TowerEnum.SortingArea}, LockLocation = '', LockMachineID = '', Qty = {record.Qty}, isSave = 1, isTake=0, isTakeCheck = 0, Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelId='{record.UPN}' ";
+                string updateSql = $" UPDATE smt_zd_material SET LockTowerNo = {(int)TowerEnum.SortingArea}, LockLocation = '', LockMachineID = '', Qty = {record.Qty}, isSave = 1, isTake=0, isTakeCheck = 0, Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelId='{record.UPN}' and isTakeCheck = 0 ";
                 return DbHelper.Update(updateSql) > 0;
             }
             return result;

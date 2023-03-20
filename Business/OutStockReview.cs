@@ -81,7 +81,7 @@ namespace Business
                     sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
                         SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE BusinessId ='{item.BusinessId}' ;");
 
-                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, isTakeCheck =0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item.Barcode}'; ");
+                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, isTakeCheck =0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item.Barcode}' and isTakeCheck = 0; ");
                 }
                 else
                 {
@@ -180,7 +180,7 @@ namespace Business
             sb.AppendLine($@" UPDATE Wms_DeliveryBarcode 
                         SET OrderStatus = {(int)DeliveryBarcodeStatusEnum.Cancelled}, LastUpdateTime = GETDATE(), LastUpdateUser = '{userName}' WHERE DeliveryId ='{deliveryId}' and  Barcode = '{barcode}' ;");
 
-            sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, isTakeCheck =0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{barcode}'; ");
+            sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTake = 0, isTakeCheck =0, LockTowerNo = 0, LockLocation = '', AbSide = '', Work_Order_No = '', LockRequestID = ''  where  ReelID = '{barcode}' and isTakeCheck = 0; ");
             DbHelper.ExcuteWithTransaction(sb.ToString(), out string _);
         }
     }

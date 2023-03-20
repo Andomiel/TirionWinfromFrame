@@ -167,7 +167,7 @@ namespace Business
             string sql = $@"
                 UPDATE Wms_InventoryBarcode SET OrderStatus = {(int)InventoryBarcodeStatusEnum.Cancelled}, LastUpdateTime = getdate(), LastUpdateUser = '{userName}' 
                 WHERE InventoryOrderId = '{stockTakingId}' AND OrderStatus < {(int)InventoryBarcodeStatusEnum.Executed} AND Barcode IN({condition});
-                UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE ReelID  in({condition});
+                UPDATE smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved} WHERE isTakeCheck = 0 and ReelID  in({condition});
                 DELETE FROM tower01A_smt_materialoperate WHERE OperateType ={(int)OperateTypeEnum.InstockTaking} AND  ReelID IN ({condition});
                 DELETE FROM tower01B_smt_materialoperate WHERE OperateType ={(int)OperateTypeEnum.InstockTaking} AND  ReelID IN ({condition});";
 
@@ -222,7 +222,7 @@ namespace Business
                     from Wms_InventoryBarcode a
                     where a.InventoryOrderId = '{deliveryId}' and a.Barcode = '{item}';");
 
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
             }
             return sb.ToString();
         }
@@ -261,14 +261,14 @@ namespace Business
                 {
                     //TODO:盘盈？
                     //不存在此场景
-                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                    sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
                 }
                 else
                 {
                     if (barcode.OriginQuantity == 0)
                     {
                         //TODO:盘盈
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTakeCheck = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTakeCheck = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
                     }
                     else if (barcode.RealQuantity == 0)
                     {
@@ -278,7 +278,7 @@ namespace Business
                     else if (barcode.OriginQuantity != barcode.RealQuantity)
                     {
                         //数量不等
-                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTakeCheck = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}'; ");
+                        sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, Qty={barcode.RealQuantity}, isTakeCheck = 0, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
                     }
                     else
                     {

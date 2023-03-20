@@ -75,7 +75,7 @@ namespace Business
 
         public static void ReleaseBarcode(string barcode)
         {
-            string sql = $" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0  where  ReelID = '{barcode}' ";
+            string sql = $" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0  where  ReelID = '{barcode}' and isTakeCheck = 0 ";
             DbHelper.ExecuteNonQuery(sql);
         }
 
