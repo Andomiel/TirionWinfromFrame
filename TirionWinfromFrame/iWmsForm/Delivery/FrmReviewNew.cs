@@ -618,9 +618,12 @@ namespace iWms.Form
         .Where(p => p.Key.NeedQty < p.Sum(c => c.RealQty))
         .Select(p => p.Key.PartNumber).Distinct().ToList();
 
-                        if ($"部门领料单据不能超发，本工单仍然有以下物料:{string.Join(",", remainMaterials)}处于超发状态，是否继续！".ShowYesNoAndTips() != DialogResult.Yes)
+                        if (outrangeMaterials.Count > 0)
                         {
-                            return;
+                            if ($"部门领料单据不能超发，本工单仍然有以下物料:{string.Join(",", remainMaterials)}处于超发状态，是否继续！".ShowYesNoAndTips() != DialogResult.Yes)
+                            {
+                                return;
+                            }
                         }
                     }
 
