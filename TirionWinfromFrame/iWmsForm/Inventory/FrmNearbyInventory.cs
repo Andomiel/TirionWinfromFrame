@@ -261,15 +261,15 @@ namespace iWms.Form
             List<HeadColumn> headColumns = new List<HeadColumn>
             {
                 new HeadColumn("UPN","ReelId", 7168),
-                new HeadColumn("Supplier","工单号", 3000),
+                new HeadColumn("WorkOrderNo","工单号", 3000),
                 new HeadColumn("PartNumber","物料料号", 4000),
-                new HeadColumn("Supplier","IC料号", 3000),
+                new HeadColumn("BatchNo","IC料号", 3000),
                 new HeadColumn("Qty","数量", 2200),
-                new HeadColumn("Lot","原物料料号", 3000),
-                new HeadColumn("MinPacking","供应商色块", 2200),
-                new HeadColumn("MSD","批次", 1000),
+                new HeadColumn("FactoryCode","原物料料号", 3000),
+                new HeadColumn("DateCode","供应商色块", 2200),
+                new HeadColumn("Lot","批次", 1000),
                 new HeadColumn("TowerDes","库区", 3000),
-                new HeadColumn("ABSide","货架", 3000),
+                new HeadColumn("SubArea","货架", 3000),
                 new HeadColumn("Location","库位", 2200),
                 new HeadColumn("StatusDisplay","库存状态", 3000),
                 new HeadColumn("SaveTime","入库时间", 7168)
