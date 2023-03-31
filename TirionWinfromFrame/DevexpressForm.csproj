@@ -390,6 +390,12 @@
     <Compile Include="iWmsForm\Inventory\FrmFrozenPolicy.designer.cs">
       <DependentUpon>FrmFrozenPolicy.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmDxMaterialInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmDxMaterialInfo.designer.cs">
+      <DependentUpon>FrmDxMaterialInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Inventory\FrmNearbyInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -621,6 +627,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Inventory\FrmFrozenPolicy.resx">
       <DependentUpon>FrmFrozenPolicy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Inventory\FrmDxMaterialInfo.resx">
+      <DependentUpon>FrmDxMaterialInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Inventory\FrmNearbyInventory.resx">
       <DependentUpon>FrmNearbyInventory.cs</DependentUpon>
