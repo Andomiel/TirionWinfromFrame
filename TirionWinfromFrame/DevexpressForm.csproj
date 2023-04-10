@@ -396,6 +396,12 @@
     <Compile Include="iWmsForm\Inventory\FrmDxMaterialInfo.designer.cs">
       <DependentUpon>FrmDxMaterialInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Inventory\FrmSummary.designer.cs">
+      <DependentUpon>FrmSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Inventory\FrmNearbyInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -630,6 +636,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Inventory\FrmDxMaterialInfo.resx">
       <DependentUpon>FrmDxMaterialInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Inventory\FrmSummary.resx">
+      <DependentUpon>FrmSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Inventory\FrmNearbyInventory.resx">
       <DependentUpon>FrmNearbyInventory.cs</DependentUpon>

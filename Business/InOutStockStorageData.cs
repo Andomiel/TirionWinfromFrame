@@ -1,7 +1,9 @@
 ﻿using DataBase;
+using Entity;
 using Entity.DataContext;
 using Entity.Dto;
 using Entity.Enums;
+using Entity.Enums.General;
 using Entity.Enums.Instock;
 using System;
 using System.Collections.Generic;
@@ -268,6 +270,16 @@ namespace Business
             string sql = $" truncate table smt_zd_material";
             DbHelper.ExecuteNonQuery(sql);
         }
+
+        public static IEnumerable<CensusMaterialType> GetMaterialCensus()
+        {
+            string sql = $@"SELECT Part_Number as MaterialNo,sort as MaterialType ,LockTowerNo as Tower,LockMachineID AS SubArea,SUM(Qty) as Quantity
+FROM smt_zd_material szm where isTakeCheck = 0 
+GROUP BY Part_Number ,sort ,LockTowerNo ,LockMachineID 
+ORDER BY LockTowerNo,LockMachineID,sort,Part_Number ";
+
+            return DbHelper.GetDataTable(sql).DataTableToList<CensusMaterialType>();
+        }
     }
 
     public class AnalysisedBarcode
@@ -319,5 +331,42 @@ namespace Business
                 return string.Empty;
             }
         }
+    }
+
+    public class CensusMaterialType
+    {
+        /// <summary>
+        /// 料号
+        /// </summary>
+        public string MaterialNo { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 物料类型
+        /// </summary>
+        public int MaterialType { get; set; } = 9;
+
+        public string MaterialTypeDisplay => EnumHelper.GetDescription(typeof(MaterialTypeEnum), MaterialType);
+
+        /// <summary>
+        /// 总数量
+        /// </summary>
+        public int TotalQuantity { get; set; } = 0;
+
+        /// <summary>
+        /// 库区
+        /// </summary>
+        public int Tower { get; set; } = -1;
+
+        public string TowerDisplay => EnumHelper.GetDescription(typeof(TowerEnum), Tower);
+
+        /// <summary>
+        /// 货架
+        /// </summary>
+        public string SubArea { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public int Quantity { get; set; } = 0;
     }
 }

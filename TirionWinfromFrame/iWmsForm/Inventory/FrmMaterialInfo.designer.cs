@@ -488,7 +488,7 @@
             this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.料号.DataPropertyName = "PartNumber";
             this.料号.FillWeight = 88.36256F;
-            this.料号.HeaderText = "物料料号";
+            this.料号.HeaderText = "群创料号";
             this.料号.MinimumWidth = 130;
             this.料号.Name = "料号";
             this.料号.ReadOnly = true;

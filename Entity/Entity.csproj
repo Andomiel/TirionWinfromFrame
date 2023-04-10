@@ -114,6 +114,7 @@
     <Compile Include="Enums\General\ExecuteResultEnum.cs" />
     <Compile Include="Enums\General\LightRecordStatusEnum.cs" />
     <Compile Include="Enums\General\LightRecordTypeEnum.cs" />
+    <Compile Include="Enums\General\MaterialTypeEnum.cs" />
     <Compile Include="Enums\General\OperateTypeEnum.cs" />
     <Compile Include="Enums\General\ReelTypeEnum.cs" />
     <Compile Include="Enums\General\RegisterStatusEnum.cs" />
