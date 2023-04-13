@@ -81,37 +81,6 @@ namespace Business
         }
         #endregion
 
-        #region 请求MES校验执行发料
-        public static CheckResultResponse CheckFromMesExecuteDispatch(List<ReviewSummary> summaryList, string userCode, string userName)
-        {
-            CheckResultResponse checkResult = new CheckResultResponse();
-            if (summaryList.Count == 0)
-            {
-                return checkResult;
-            }
-            MesExecuteDispatchRequest request = new MesExecuteDispatchRequest
-            {
-                pickOrderId = summaryList[0].OrderNo,
-                workName = userName,
-                workNmber = userCode,
-                upnInfoList = summaryList.Select(p => new MesExecuteDispatchUpnInfo
-                {
-                    invLotId = p.UPN,
-                    matId = p.PartNumber,
-                    qty = p.RealQty
-                }).ToList(),
-            };
-
-            checkResult.Result = CallMesWmsApiBll.CallMesExecuteDispatch(request);
-            if (!checkResult.Result)
-            {
-                checkResult.ErrMessage = "请求MES校验执行发料接口调用失败";
-            }
-            FileLog.Log($"请求MES校验执行发料【{JsonConvert.SerializeObject(checkResult)}】");
-            return checkResult;
-        }
-        #endregion
-
         #region 根据upn获取散料校验结果接口
         public static CheckResultResponse CheckMatStatusAccordingUpn(string upn)
         {

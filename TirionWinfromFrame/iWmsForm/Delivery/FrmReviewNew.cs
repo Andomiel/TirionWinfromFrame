@@ -636,51 +636,33 @@ namespace iWms.Form
                         }
                     }
 
-                    bool canOperate = true;
-                    if (SelectedOrder.DeliveryType == (int)OutOrderTypeEnum.FLCK)
+                    string orderNo = SelectedOrder.DeliveryNo;
+                    var finishedList = ReviewSummaries.Where(p => !string.IsNullOrWhiteSpace(p.UPN)).ToList();
+                    if (ReviewBusiness.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
                     {
-                        //辅料出库，MES接口校验执行发料（单号+所有UPN）
-                        var mesCheckList = ReviewSummaries.Where(p => p.Match == 1).ToList();
-
-                        CheckResultResponse result = OrderReviewCallApi.CheckFromMesExecuteDispatch(mesCheckList, AppInfo.LoginUserInfo.account, AppInfo.LoginUserInfo.account);
-                        canOperate = result.Result;
-                    }
-
-                    if (canOperate)
-                    {
-                        string orderNo = SelectedOrder.DeliveryNo;
-                        var finishedList = ReviewSummaries.Where(p => !string.IsNullOrWhiteSpace(p.UPN)).ToList();
-                        if (ReviewBusiness.FinishDeliveyOrderReview(orderNo, AppInfo.LoginUserInfo.account, finishedList) <= 0)
-                        {
-                            "更新数据异常，请重新提交".ShowTips();
-                        }
-                        else
-                        {
-                            "复核完成，即将进行单据回传".ShowTips();
-                            Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，执行回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
-
-                            SplashScreenManager.ShowForm(typeof(WaitForm1));
-                            try
-                            {
-                                //尤其注意，这里使用的是出库单的Id
-                                var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.BusinessId, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId.ToUpper());
-                                feedback.Message.ShowTips();
-                            }
-                            finally
-                            {
-                                SplashScreenManager.CloseForm();
-                            }
-
-                            this.DialogResult = DialogResult.OK;
-                            this.Close();
-                            FrmReviewResult frm = new FrmReviewResult(orderNo);
-                            frm.ShowDialog();
-                        }
+                        "更新数据异常，请重新提交".ShowTips();
                     }
                     else
                     {
-                        Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，由于校验执行发料接口反馈失败，暂不回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
-                        "MES接口校验执行发料失败，请查看调用日志".ShowTips();
+                        "复核完成，即将进行单据回传".ShowTips();
+                        Task.Run(() => { CallMesWmsApiBll.SaveLogs(SelectedOrder.DeliveryNo, "标记复核完成，执行回传", $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", string.Empty); });
+
+                        SplashScreenManager.ShowForm(typeof(WaitForm1));
+                        try
+                        {
+                            //尤其注意，这里使用的是出库单的Id
+                            var feedback = CallMesWmsApiBll.FeedbackOrder(SelectedOrder.BusinessId, ((OutOrderTypeEnum)SelectedOrder.DeliveryType).ToString(), SelectedOrder.LineId.ToUpper());
+                            feedback.Message.ShowTips();
+                        }
+                        finally
+                        {
+                            SplashScreenManager.CloseForm();
+                        }
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                        FrmReviewResult frm = new FrmReviewResult(orderNo);
+                        frm.ShowDialog();
                     }
                 }
             }

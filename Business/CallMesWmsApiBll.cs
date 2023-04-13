@@ -156,30 +156,6 @@ namespace Business
         }
         #endregion
 
-        #region 请求MES校验执行发料
-        public static bool CallMesExecuteDispatch(MesExecuteDispatchRequest request)
-        {
-            StringBuilder sb = new StringBuilder("请求MesExcuteDispatch");
-            bool result = false;
-            try
-            {
-                string url = $"{ConfigurationManager.AppSettings["iwms_api_url"]}/api/Material/ExecuteDispatchToMES";
-                sb.AppendLine($"地址:{url}");
-                string requestJson = JsonConvert.SerializeObject(request);
-                sb.AppendLine($"请求参数:{requestJson}");
-                string strResponse = WebClientHelper.Post(JsonConvert.SerializeObject(request), url, null);
-                sb.AppendLine($"返回:{strResponse}");
-                result = Convert.ToBoolean(strResponse);
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine($"异常:{ex.Message}");
-            }
-            FileLog.Log(sb.ToString());
-            return result;
-        }
-        #endregion
-
         #region 产线退料数量回传
         public static XtaryBackQtyResponse CallXtrayBackQty(XtaryBackQtyRequest request)
         {
