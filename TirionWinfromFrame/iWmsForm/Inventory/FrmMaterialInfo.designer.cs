@@ -57,19 +57,6 @@
             this.btnSync = new DevExpress.XtraEditors.SimpleButton();
             this.btnTrancate = new DevExpress.XtraEditors.SimpleButton();
             this.dataGridViewX1 = new System.Windows.Forms.DataGridView();
-            this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colOriginMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colManufacturerDc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tlpBottom = new System.Windows.Forms.TableLayoutPanel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -87,6 +74,19 @@
             this.btnPre = new System.Windows.Forms.ToolStripSplitButton();
             this.btnNext = new System.Windows.Forms.ToolStripSplitButton();
             this.BtnLast = new System.Windows.Forms.ToolStripSplitButton();
+            this.UPN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.料号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPeriod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOriginMaterialNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colManufacturerDc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.库区 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ABSide = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.货位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.入库时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -464,125 +464,6 @@
             this.dataGridViewX1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewX1_ColumnHeaderMouseClick);
             this.dataGridViewX1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridViewX1_RowPostPaint);
             // 
-            // UPN
-            // 
-            this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UPN.DataPropertyName = "UPN";
-            this.UPN.FillWeight = 88.36256F;
-            this.UPN.HeaderText = "ReelId";
-            this.UPN.MinimumWidth = 160;
-            this.UPN.Name = "UPN";
-            this.UPN.ReadOnly = true;
-            // 
-            // 状态
-            // 
-            this.状态.DataPropertyName = "WorkOrderNo";
-            this.状态.FillWeight = 65.98986F;
-            this.状态.HeaderText = "工单号";
-            this.状态.MinimumWidth = 80;
-            this.状态.Name = "状态";
-            this.状态.ReadOnly = true;
-            // 
-            // 料号
-            // 
-            this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.料号.DataPropertyName = "PartNumber";
-            this.料号.FillWeight = 88.36256F;
-            this.料号.HeaderText = "群创料号";
-            this.料号.MinimumWidth = 130;
-            this.料号.Name = "料号";
-            this.料号.ReadOnly = true;
-            this.料号.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // colPeriod
-            // 
-            this.colPeriod.DataPropertyName = "BatchNo";
-            this.colPeriod.HeaderText = "IC料号";
-            this.colPeriod.MinimumWidth = 9;
-            this.colPeriod.Name = "colPeriod";
-            this.colPeriod.ReadOnly = true;
-            this.colPeriod.Width = 120;
-            // 
-            // 数量
-            // 
-            this.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.数量.DataPropertyName = "Qty";
-            this.数量.FillWeight = 88.36256F;
-            this.数量.HeaderText = "数量";
-            this.数量.MinimumWidth = 80;
-            this.数量.Name = "数量";
-            this.数量.ReadOnly = true;
-            this.数量.Width = 80;
-            // 
-            // colOriginMaterialNo
-            // 
-            this.colOriginMaterialNo.DataPropertyName = "FactoryCode";
-            this.colOriginMaterialNo.HeaderText = "原物料料号";
-            this.colOriginMaterialNo.Name = "colOriginMaterialNo";
-            this.colOriginMaterialNo.ReadOnly = true;
-            // 
-            // colManufacturerDc
-            // 
-            this.colManufacturerDc.DataPropertyName = "DateCode";
-            this.colManufacturerDc.HeaderText = "供应商色块";
-            this.colManufacturerDc.Name = "colManufacturerDc";
-            this.colManufacturerDc.ReadOnly = true;
-            // 
-            // colLot
-            // 
-            this.colLot.DataPropertyName = "Lot";
-            this.colLot.HeaderText = "批次";
-            this.colLot.Name = "colLot";
-            this.colLot.ReadOnly = true;
-            // 
-            // 库区
-            // 
-            this.库区.DataPropertyName = "TowerDes";
-            this.库区.HeaderText = "库区";
-            this.库区.MinimumWidth = 80;
-            this.库区.Name = "库区";
-            this.库区.ReadOnly = true;
-            this.库区.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ABSide
-            // 
-            this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ABSide.DataPropertyName = "SubArea";
-            this.ABSide.HeaderText = "货架";
-            this.ABSide.MinimumWidth = 60;
-            this.ABSide.Name = "ABSide";
-            this.ABSide.ReadOnly = true;
-            this.ABSide.Width = 80;
-            // 
-            // 货位
-            // 
-            this.货位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.货位.DataPropertyName = "Location";
-            this.货位.FillWeight = 88.36256F;
-            this.货位.HeaderText = "货位";
-            this.货位.MinimumWidth = 80;
-            this.货位.Name = "货位";
-            this.货位.ReadOnly = true;
-            this.货位.Width = 120;
-            // 
-            // colStatus
-            // 
-            this.colStatus.DataPropertyName = "StatusDisplay";
-            this.colStatus.HeaderText = "库存状态";
-            this.colStatus.MinimumWidth = 80;
-            this.colStatus.Name = "colStatus";
-            this.colStatus.ReadOnly = true;
-            // 
-            // 入库时间
-            // 
-            this.入库时间.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.入库时间.DataPropertyName = "SaveTime";
-            this.入库时间.FillWeight = 186.3569F;
-            this.入库时间.HeaderText = "入库时间";
-            this.入库时间.MinimumWidth = 130;
-            this.入库时间.Name = "入库时间";
-            this.入库时间.ReadOnly = true;
-            // 
             // tlpBottom
             // 
             this.tlpBottom.ColumnCount = 3;
@@ -731,6 +612,125 @@
             this.BtnLast.Size = new System.Drawing.Size(72, 21);
             this.BtnLast.Text = "最后一页";
             this.BtnLast.ButtonClick += new System.EventHandler(this.BtnLast_ButtonClick);
+            // 
+            // UPN
+            // 
+            this.UPN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UPN.DataPropertyName = "UPN";
+            this.UPN.FillWeight = 88.36256F;
+            this.UPN.HeaderText = "ReelId";
+            this.UPN.MinimumWidth = 160;
+            this.UPN.Name = "UPN";
+            this.UPN.ReadOnly = true;
+            // 
+            // 状态
+            // 
+            this.状态.DataPropertyName = "WorkOrderNo";
+            this.状态.FillWeight = 65.98986F;
+            this.状态.HeaderText = "工单号";
+            this.状态.MinimumWidth = 80;
+            this.状态.Name = "状态";
+            this.状态.ReadOnly = true;
+            // 
+            // 料号
+            // 
+            this.料号.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.料号.DataPropertyName = "PartNumber";
+            this.料号.FillWeight = 88.36256F;
+            this.料号.HeaderText = "群创料号";
+            this.料号.MinimumWidth = 130;
+            this.料号.Name = "料号";
+            this.料号.ReadOnly = true;
+            this.料号.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // colPeriod
+            // 
+            this.colPeriod.DataPropertyName = "BatchNo";
+            this.colPeriod.HeaderText = "烧录IC料号";
+            this.colPeriod.MinimumWidth = 9;
+            this.colPeriod.Name = "colPeriod";
+            this.colPeriod.ReadOnly = true;
+            this.colPeriod.Width = 120;
+            // 
+            // 数量
+            // 
+            this.数量.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.数量.DataPropertyName = "Qty";
+            this.数量.FillWeight = 88.36256F;
+            this.数量.HeaderText = "数量";
+            this.数量.MinimumWidth = 80;
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            this.数量.Width = 80;
+            // 
+            // colOriginMaterialNo
+            // 
+            this.colOriginMaterialNo.DataPropertyName = "FactoryCode";
+            this.colOriginMaterialNo.HeaderText = "原物料料号";
+            this.colOriginMaterialNo.Name = "colOriginMaterialNo";
+            this.colOriginMaterialNo.ReadOnly = true;
+            // 
+            // colManufacturerDc
+            // 
+            this.colManufacturerDc.DataPropertyName = "DateCode";
+            this.colManufacturerDc.HeaderText = "供应商色块";
+            this.colManufacturerDc.Name = "colManufacturerDc";
+            this.colManufacturerDc.ReadOnly = true;
+            // 
+            // colLot
+            // 
+            this.colLot.DataPropertyName = "Lot";
+            this.colLot.HeaderText = "批次";
+            this.colLot.Name = "colLot";
+            this.colLot.ReadOnly = true;
+            // 
+            // 库区
+            // 
+            this.库区.DataPropertyName = "TowerDes";
+            this.库区.HeaderText = "库区";
+            this.库区.MinimumWidth = 80;
+            this.库区.Name = "库区";
+            this.库区.ReadOnly = true;
+            this.库区.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ABSide
+            // 
+            this.ABSide.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ABSide.DataPropertyName = "SubArea";
+            this.ABSide.HeaderText = "货架";
+            this.ABSide.MinimumWidth = 60;
+            this.ABSide.Name = "ABSide";
+            this.ABSide.ReadOnly = true;
+            this.ABSide.Width = 80;
+            // 
+            // 货位
+            // 
+            this.货位.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.货位.DataPropertyName = "Location";
+            this.货位.FillWeight = 88.36256F;
+            this.货位.HeaderText = "货位";
+            this.货位.MinimumWidth = 80;
+            this.货位.Name = "货位";
+            this.货位.ReadOnly = true;
+            this.货位.Width = 120;
+            // 
+            // colStatus
+            // 
+            this.colStatus.DataPropertyName = "StatusDisplay";
+            this.colStatus.HeaderText = "库存状态";
+            this.colStatus.MinimumWidth = 80;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.ReadOnly = true;
+            // 
+            // 入库时间
+            // 
+            this.入库时间.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.入库时间.DataPropertyName = "SaveTime";
+            this.入库时间.FillWeight = 186.3569F;
+            this.入库时间.HeaderText = "入库时间";
+            this.入库时间.MinimumWidth = 130;
+            this.入库时间.Name = "入库时间";
+            this.入库时间.ReadOnly = true;
             // 
             // FrmMaterialInfo
             // 
