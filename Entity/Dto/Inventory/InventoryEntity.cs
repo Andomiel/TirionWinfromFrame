@@ -84,8 +84,6 @@ namespace Entity.Dto
         /// </summary>
         public DateTime DateCodeDate => QueryConditionConvert.DateCdoeToCycleDate(DateCode, UPN);
 
-        public string Lot { get; set; }
-
         public int MinPacking { get; set; }
 
         /// <summary>

@@ -176,7 +176,7 @@ namespace Business
                 ROW_NUMBER() OVER(ORDER BY {orderBy}) RowNumber,  
                 COUNT(1) OVER() AS TotalCount,
                 s.qty as Qty,s.Part_Number as PartNumber,s.reelid as UPN,
-                s.lot,s.XM_DH,s.WZ_SCCJ as Supplier,
+                s.XM_DH,s.WZ_SCCJ as Supplier,
                 s.SerialNo, s.ReelType as UpnCate, s.DateCode,
                 s.MinPacking, s.MSD, s.Status,
                 s.LockTowerNo AS Tower,
