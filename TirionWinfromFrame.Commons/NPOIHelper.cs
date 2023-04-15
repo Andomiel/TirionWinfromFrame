@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -258,15 +259,25 @@ namespace TirionWinfromFrame.Commons
             }
 
             Type t = typeof(T);
+            PropertyInfo[] properties = t.GetProperties();
             int rowIndex = 1;
             foreach (T item in data)
             {
                 IRow dataRow = sheet.CreateRow(rowIndex);
                 for (int n = 0; n < headColumnList.Count; n++)
                 {
-                    object pValue = t.GetProperty(headColumnList[n].ColumnKey.Trim()).GetValue(item, null);
+                    string cellValue = string.Empty;
+                    PropertyInfo property = properties.FirstOrDefault(p => p.Name == headColumnList[n].ColumnKey.Trim());
+                    if (property != null)
+                    {
+                        object pValue = property.GetValue(item, null);
+                        if (pValue != null)
+                        {
+                            cellValue = Convert.ToString(pValue);
+                        }
+                    }
                     ICell cell = dataRow.CreateCell(n);
-                    cell.SetCellValue((pValue ?? "").ToString());
+                    cell.SetCellValue(cellValue);
                     cell.CellStyle = normalCellStyle;
                 }
                 rowIndex++;
