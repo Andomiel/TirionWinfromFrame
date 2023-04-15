@@ -280,7 +280,6 @@ namespace iWms.Form
                 new HeadColumn("DateCode","生产日期", 3000),
                 new HeadColumn("SerialNo","流水号", 2000),
                 new HeadColumn("Qty","数量", 2200),
-                new HeadColumn("Lot","批次", 2200),
                 new HeadColumn("MinPacking","最小包装", 2200),
                 new HeadColumn("MSD","MSD", 1000),
                 new HeadColumn("TowerDes","库区", 3000),
