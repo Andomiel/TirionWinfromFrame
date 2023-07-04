@@ -441,7 +441,7 @@ namespace iWms.Form
             //}
             //else
             //{
-            if (orderType == (int)OutOrderTypeEnum.DBCK) //orderType == (int)OutOrderTypeEnum.JLDCK ||
+            if (orderType == (int)OutOrderTypeEnum.JLDCK || orderType == (int)OutOrderTypeEnum.DBCK)
             {
                 result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
                 result.ApiTitle = $"散料测试失败";
