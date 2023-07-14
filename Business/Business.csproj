@@ -49,6 +49,7 @@
     <Compile Include="BaseDeliveryBll.cs" />
     <Compile Include="CallMesWmsApiBll.cs" />
     <Compile Include="DeliveryBll.cs" />
+    <Compile Include="DiscreteBusiness.cs" />
     <Compile Include="FrozenPolicyBll.cs" />
     <Compile Include="GeneralBusiness.cs" />
     <Compile Include="InOutStockStorageData.cs" />

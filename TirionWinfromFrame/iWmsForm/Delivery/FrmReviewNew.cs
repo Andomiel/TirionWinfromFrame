@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TirionWinfromFrame;
@@ -443,8 +444,21 @@ namespace iWms.Form
             //{
             if (orderType == (int)OutOrderTypeEnum.JLDCK || orderType == (int)OutOrderTypeEnum.DBCK)
             {
-                result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
-                result.ApiTitle = $"散料测试失败";
+                var discreteConfig = GetWhiteListDiscreteConfig(record.Part_Number);
+                if (discreteConfig == null)
+                {
+                    result = OrderReviewCallApi.CheckMatStatusAccordingUpn(record.UPN);
+                    result.ApiTitle = $"散料测试失败";
+                }
+                else
+                {
+                    Task.Run(() =>
+                    {
+                        CallMesWmsApiBll.SaveLogs(record.UPN,
+                               $"在出库单{SelectedOrder.DeliveryNo}复核中因命中散料测试白名单而略过散料测试",
+                               $"{AppInfo.LoginUserInfo.username}({AppInfo.LoginUserInfo.account})", discreteConfig.ToString());
+                    });
+                }
             }
 
             if (!result.Result)
@@ -462,6 +476,24 @@ namespace iWms.Form
                 return result;
             }
             return result;
+        }
+
+        private Cfg_Discrete GetWhiteListDiscreteConfig(string materialNo)
+        {
+            var discreteConfigs = DiscreteBusiness.GetValidDiscreteConfig();
+            if (discreteConfigs == null || !discreteConfigs.Any())
+            {
+                return null;
+            }
+            foreach (var item in discreteConfigs)
+            {
+                var match = Regex.Match(materialNo, item.MaterialNo);
+                if (match.Success)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         private void AddBindRecord(ReviewRecord record)

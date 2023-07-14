@@ -72,6 +72,8 @@ namespace TirionWinfromFrame.Profiles
             TypeAdapterConfig<Cfg_Register, CfgRegisterDto>
                 .NewConfig();
 
+            TypeAdapterConfig<Cfg_Discrete, CfgDiscreteDto>
+                .NewConfig();
 
             TypeAdapterConfig<Wms_BalanceOrder, BalanceOrderDto>
                 .NewConfig();

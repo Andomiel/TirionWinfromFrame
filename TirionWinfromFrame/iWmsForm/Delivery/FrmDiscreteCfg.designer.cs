@@ -1,7 +1,7 @@
 ﻿
 namespace iWms.Form
 {
-    partial class FrmRegisterCfg
+    partial class FrmDiscreteCfg
     {
         /// <summary>
         /// Required designer variable.
@@ -70,12 +70,12 @@ namespace iWms.Form
             this.tlpLoayout.Controls.Add(this.gbConditions, 0, 0);
             this.tlpLoayout.Controls.Add(this.dgvConfigs, 0, 1);
             this.tlpLoayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLoayout.Location = new System.Drawing.Point(0, 0);
+            this.tlpLoayout.Location = new System.Drawing.Point(0, 34);
             this.tlpLoayout.Name = "tlpLoayout";
             this.tlpLoayout.RowCount = 2;
             this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpLoayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLoayout.Size = new System.Drawing.Size(1210, 629);
+            this.tlpLoayout.Size = new System.Drawing.Size(1210, 595);
             this.tlpLoayout.TabIndex = 0;
             // 
             // gbConditions
@@ -200,7 +200,7 @@ namespace iWms.Form
             this.dgvConfigs.Name = "dgvConfigs";
             this.dgvConfigs.ReadOnly = true;
             this.dgvConfigs.RowTemplate.Height = 23;
-            this.dgvConfigs.Size = new System.Drawing.Size(1204, 483);
+            this.dgvConfigs.Size = new System.Drawing.Size(1204, 449);
             this.dgvConfigs.TabIndex = 1;
             this.dgvConfigs.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConfigs_CellContentClick);
             this.dgvConfigs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvConfigs_CellDoubleClick);
@@ -250,14 +250,14 @@ namespace iWms.Form
             this.colDel.Text = "删除";
             this.colDel.UseColumnTextForButtonValue = true;
             // 
-            // FrmRegisterCfg
+            // FrmDiscreteCfg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1210, 629);
             this.Controls.Add(this.tlpLoayout);
-            this.Name = "FrmRegisterCfg";
-            this.Text = "入库注册配置";
+            this.Name = "FrmDiscreteCfg";
+            this.Text = "散料测试白名单配置";
             this.Controls.SetChildIndex(this.tlpLoayout, 0);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.tlpLoayout.ResumeLayout(false);

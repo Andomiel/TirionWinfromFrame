@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext\Cfg_Discrete.cs" />
     <Compile Include="DataContext\Cfg_Register.cs" />
     <Compile Include="DataContext\Cfg_SortingConfig.cs" />
     <Compile Include="DataContext\FrozenPolicy.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Dto\Balance\BalanceOrderDto.cs" />
     <Compile Include="Dto\Balance\BalanceOrderMaterialDto.cs" />
     <Compile Include="Dto\Balance\BalanceReportDto.cs" />
+    <Compile Include="Dto\Delivery\CfgDiscreteDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryBarcodeDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryDetailDto.cs" />
     <Compile Include="Dto\Delivery\DeliveryOrderDto.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Enums\Frozen\FrozenEnums.cs" />
     <Compile Include="Enums\General\BakeStateEnum.cs" />
     <Compile Include="Enums\General\BarcodeStatusEnum.cs" />
+    <Compile Include="Enums\General\DiscreteStatusEnum.cs" />
     <Compile Include="Enums\General\ExecuteResultEnum.cs" />
     <Compile Include="Enums\General\LightRecordStatusEnum.cs" />
     <Compile Include="Enums\General\LightRecordTypeEnum.cs" />

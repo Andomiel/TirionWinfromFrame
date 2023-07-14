@@ -312,6 +312,18 @@
     <Compile Include="iWmsForm\Delivery\FrmOutstocks.designer.cs">
       <DependentUpon>FrmOutstocks.cs</DependentUpon>
     </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmDiscreteAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmDiscreteAdd.Designer.cs">
+      <DependentUpon>FrmDiscreteAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmDiscreteCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="iWmsForm\Delivery\FrmDiscreteCfg.designer.cs">
+      <DependentUpon>FrmDiscreteCfg.cs</DependentUpon>
+    </Compile>
     <Compile Include="iWmsForm\Delivery\FrmReviewNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -576,6 +588,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Delivery\FrmOutstocks.resx">
       <DependentUpon>FrmOutstocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Delivery\FrmDiscreteAdd.resx">
+      <DependentUpon>FrmDiscreteAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="iWmsForm\Delivery\FrmDiscreteCfg.resx">
+      <DependentUpon>FrmDiscreteCfg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="iWmsForm\Delivery\FrmReviewNew.resx">
       <DependentUpon>FrmReviewNew.cs</DependentUpon>
