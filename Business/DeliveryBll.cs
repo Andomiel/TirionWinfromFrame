@@ -266,7 +266,7 @@ WHERE wdb.OrderStatus ={(int)DeliveryBarcodeStatusEnum.Undeliver} ";
                     where a.DeliveryId = '{deliveryId}' and a.OrderStatus = {(int)DeliveryBarcodeStatusEnum.Undeliver};");
             foreach (var item in barcodes)
             {
-                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' and isTakeCheck = 0; ");
+                sb.AppendLine($" update smt_zd_material set Status = {(int)BarcodeStatusEnum.Saved}, isTakeCheck = 0, Work_Order_No = '', LockRequestID = ''  where  ReelID = '{item}' ; ");//and isTakeCheck = 0
             }
             return sb.ToString();
         }
